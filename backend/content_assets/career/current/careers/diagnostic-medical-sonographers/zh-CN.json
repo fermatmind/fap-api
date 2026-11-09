@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:infection-control": {
         "status": "pending_mapping"
       },
@@ -146,7 +143,13 @@
       "item:diagnostic-medical-sonographers.path.entry-role-comparison.current.v1": {
         "status": "pending_mapping"
       },
+      "item:diagnostic-medical-sonographers.path.entry-work-sample-data.current.v1": {
+        "status": "pending_mapping"
+      },
       "item:diagnostic-medical-sonographers.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:diagnostic-medical-sonographers.path.recruitment-sample.current.v1": {
         "status": "pending_mapping"
       },
       "item:diagnostic-medical-sonographers.profile.career-quick-answers-block.1": {
@@ -7264,7 +7267,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全小体验：只用本页提供的虚构工作列表、探头状态和文件名做纸面核对，输出异常清单、处理顺序与交接；不接触患者、不操作设备、不解释图像，也不作诊断。"
+              "打开目录「入行、证书与职业发展」，找到「US-09｜超声记录质量交接」。先做五文件与探头状态核对，再自看参考。只做纸面题。"
             ]
           },
           "id": "diagnostic-medical-sonographers.quick-decision.fermat-decision-card.3",
@@ -7278,7 +7281,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "复核标准：每个异常都能回到原始字段，身份、部位、文件归属和再处理状态分别核对；未知项保留未知，并明确谁确认后才能继续。"
+              "愿意反复核对身份、检查部位和标签，能在近距离与患者沟通，也能把异常说清的人，可以先了解这类工作。"
             ]
           },
           "id": "diagnostic-medical-sonographers.quick-decision.fermat-decision-card.4",
@@ -7578,7 +7581,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用条件包括经机构批准的系统、明确适用部位和人群、可靠设备集成、版本验证、审计日志以及受训人员能够复核。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "AI 可辅助整理技术记录或提示缺项，但不能确认患者身份、设备状态或诊断。未取得本职业实际采用率、任务效果量或替代率。只用虚构资料试做。"
             ]
           },
           "id": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.2",
@@ -7767,13 +7770,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该数字来自美国全国职业口径，只对应 Diagnostic Medical Sonographers 29-2032.00，不代表中国岗位或相邻实验室、眼科技术职业。"
+              "美国 2025 年 5 月 29-2032 工资中位数：96,590 美元/年、46.44 美元/小时。年薪 P10/P25/P50/P75/P90 为 67,820／80,430／96,590／106,930／129,370 美元。分位不等于资历或到手。 美国 BLS 29-2032：2025 年约 92,200 个岗位，2035 年预计 105,100 个，净增 12,900（13.9%）；年均约 6,000 个空缺含替补。2025 年自雇 1.1%，与工资覆盖口径不同。"
             ]
           },
           "id": "diagnostic-medical-sonographers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-sonographer-current",
-            "editorial-work"
+            "current-national-wages",
+            "bls-sonography-ep"
           ],
           "type": "prose"
         },
@@ -8053,7 +8056,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "现实入口：美国精确职业数据说明通常从获认可的副学士或高中后证书路径进入，一些工作者还需州执照或认证；课程、临床训练、州和雇主要求逐项核验。"
+              "医学超声技师怎样入行？"
             ]
           },
           "id": "diagnostic-medical-sonographers.path.career-path-block.1",
@@ -8067,12 +8070,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "跨法域边界：中国官方文件中的超声医师口径涉及持《医师执业证书》的专职诊疗医师，不与美国 29-2032.00 技术职业一一互认。"
+              "BLS 美国典型入行学历是副学士；职业手册也列高中后证书等路径。课程一般包含受监督临床训练。州执照与雇主要求或偏好的认证分开核，也可能涉及 BLS/CPR 急救证书。 中国《医疗机构检查检验结果互认管理办法》第 2 条区分超声图像或数据与医师诊断结论；第 20 条针对有条件的医疗机构开设的检查检验门诊，由医学影像和放射治疗专业或医学检验、病理专业执业医师出诊，独立提供疾病诊断报告。技术采集、科内复核和最终诊断责任按岗位与机构授权核。"
             ]
           },
           "id": "diagnostic-medical-sonographers.path.career-path-block.2",
           "source_refs": [
-            "nhc-quality-current"
+            "bls-sonographer-current",
+            "nhsa-art-2-20",
+            "shanghai-sonography",
+            "heyuan-ultrasound-2026018"
           ],
           "type": "prose"
         },
@@ -8081,7 +8087,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完整虚构材料：工作列表有 A-104 腹部检查、B-208 血管检查；两者身份和部位字段均已标为已核对。探头 P1 状态为“再处理完成”，P2 状态为“未知”。待归档文件共 5 个：A-104-腹部-01、A-104-腹部-02、A-140-腹部-03、B-208-血管-01、无身份-血管-02。没有图像内容、诊断结果或额外探头信息。"
+              "工作前先分清身份、检查项目和技术记录。"
             ]
           },
           "id": "diagnostic-medical-sonographers.path.career-path-block.3",
@@ -8096,7 +8102,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "作品任务：在 30 分钟内列出全部文件归属冲突和设备停止点，为每条记录写“可继续、暂停核对或不得使用”，再写一段交接；不得查看真实病历、解释图像或补造未知字段。"
+              "把缺项和待复核内容交给实际责任人。"
             ]
           },
           "id": "diagnostic-medical-sonographers.path.career-path-block.4",
@@ -8111,7 +8117,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参考答案：A-104-腹部-01 与 A-104-腹部-02 可进入后续质量复核；A-140-腹部-03 与工作列表身份不符，暂停并查原始记录；B-208-血管-01 可进入后续质量复核；无身份-血管-02 不得归档；P2 再处理状态未知，不得用于检查。交接应列出两项文件冲突和 P2 状态，指定由工作列表或感染控制责任人确认。"
+              "按机构授权记录采集质量和无法完成的事项，技术交接不代诊断。"
             ]
           },
           "id": "diagnostic-medical-sonographers.path.career-path-block.5",
@@ -8234,6 +8240,12 @@
               "possible_check",
               "escalation"
             ],
+            "column_labels": [
+              "阶段",
+              "可复核记录",
+              "检查什么",
+              "由谁确认"
+            ],
             "rows": [
               [
                 "面试与录用前的资格核验",
@@ -8288,46 +8300,46 @@
             ],
             "rows": [
               [
-                "副学士学位或高中后证书（超声方向）",
-                "通常需完成获认可院校的超声技术课程，含课堂与临床学时。",
+                "美国｜副学士学位或高中后证书（超声方向）",
+                "课程通常含课堂与受监督临床训练；具体课程、学时和项目认可由院校和雇主确认。",
                 "学历本身不等于自动取得认证或执业授权。",
-                "毕业证与成绩单、临床实习记录。",
-                "按工作地和雇主核验。",
+                "BLS 职业手册核入行路线；项目认可和学时看院校与雇主。",
+                "美国，按州、机构与雇主核。",
                 "核对目标机构对学历与课程的具体要求。",
                 "由教育机构与雇主确认。"
               ],
               [
-                "专业认证（原示例RDMS须另核机构规则）",
-                "BLS仅说明雇主可能要求或偏好专业认证；本轮未核RDMS具体报考、考试或维持条件。",
+                "美国｜专业认证示例：RDMS",
+                "Inteleos 的 RDMS 示例：按认证方先决条件申请，须通过 SPI 和对应专项考试。州执照及雇主是否要求该证分别查。",
                 "认证不替代州执照，也不代表可独立承担医师的诊断与签字责任。",
-                "认证证书与有效期记录。",
-                "按工作地和雇主核验。",
+                "Inteleos RDMS 先决条件、考试与证书记录。",
+                "美国，按州、机构与雇主核。",
                 "核对目标认证机构的报考条件与维持要求。",
                 "由认证机构确认。"
               ],
               [
-                "州执照（如适用）",
+                "美国｜州执照（如适用）",
                 "部分地区要求执照，条件与考试按该州规定。",
                 "执照要求因州而异，跨州执业需另行核对。",
-                "执照与更新记录。",
-                "按具体州核验。",
+                "BLS 职业手册入口、目标州执照与续期记录。",
+                "美国，按州、机构与雇主核。",
                 "核对目标州的执照要求与互认安排。",
                 "由州监管机构确认。"
               ],
               [
-                "专科认证（心脏或血管方向）",
-                "根据目标专科和雇主核课程、训练与认证；本轮未核统一法定必需条件。",
+                "美国｜专科认证（心脏或血管方向）",
+                "按美国目标专科核课程、临床训练和认证方条件；另查雇主要求。",
                 "专科认证与通用认证范围不同，不跨专科自动通用。",
-                "专科认证证书与专科检查记录。",
-                "按工作地和雇主核验。",
+                "BLS 认证说明及具体专科认证方要求。",
+                "美国，按州、机构与雇主核。",
                 "核对目标专科的报考与维持条件。",
                 "由认证机构确认。"
               ],
               [
                 "基础生命支持与急救训练（BLS/CPR）",
-                "按机构要求参加并定期复训。",
+                "部分工作者可能需要 BLS/CPR 证书；培训、续期和复训周期由雇主及培训机构确认。",
                 "急救训练不等于取得超声执业授权，也不能替代机构急救程序。",
-                "培训合格记录与有效期。",
+                "雇主或培训机构要求、培训记录与有效期。",
                 "按机构与工作地要求核验。",
                 "按机构安排定期复训。",
                 "由培训机构与雇主确认。"
@@ -8336,15 +8348,93 @@
                 "感染控制与探头再处理培训",
                 "按机构与指南要求学习探头清洁、消毒与再处理流程。",
                 "培训不替代机构感染控制制度，内腔探头须按要求高水平消毒。",
-                "培训记录与探头再处理台账。",
+                "CDC 探头再处理资料；机构培训和再处理记录。",
                 "按机构与工作地要求核验。",
                 "按机构安排复训并核对流程更新。",
                 "由感染控制负责人确认。"
+              ],
+              [
+                "大陆｜超声技师与诊断医师岗位",
+                "分别看雇主专业、学历、职称；医师另核执业和住培。",
+                "技术采集不代医师诊断报告。",
+                "上海与河源招聘原件、互认办法第 2、20 条及机构规定。",
+                "中国大陆",
+                "从下方上海和河源原件核岗位。",
+                "雇主及当地主管部门"
               ]
             ]
           },
           "id": "diagnostic-medical-sonographers.path.credential-decision.current.v1",
+          "source_refs": [
+            "bls-sonographer-current",
+            "inteleos-rdms",
+            "cdc-probe-current",
+            "nhsa-art-2-20",
+            "shanghai-sonography",
+            "heyuan-ultrasound-2026018"
+          ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "题面｜仅使用虚构记录",
+                  "US-09｜纸面记录交接。工作列表 A-104 腹部、B-208 血管，身份和部位均已在题内核对。探头 P1 标“再处理完成”，P2 标“未知”。五个文件：A-104-腹部-01、A-104-腹部-02、A-140-腹部-03、B-208-血管-01、无身份-血管-02。没有影像或临床结果。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "交付｜状态表和两句交接",
+                  "先按原工作列表逐一核对，为每个文件标“交质检、暂停核对、不得归档”；另列探头待确认项和负责人，写两句交接。只在纸面练习，不接触患者、设备或真实病历。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "参考核对｜做完再看",
+                  "参考：两个 A-104 文件和 B-208-血管-01 共三项可交质检；A-140-腹部-03 暂停查原工作列表；无身份文件不得归档。P2 状态未知，题内标暂停并请感染控制责任人确认。P1 只按题设记录状态，不推实际可用。",
+                  "两句交接示例：“三份匹配文件待质检，A-140 暂停查工作列表，无身份文件不得归档。P2 单独暂停，交感染控制责任人确认，文件状态不代表设备可用。”"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "边界｜不评价图像或临床能力",
+                  "按参考答案自行复核五文件和 P2。临床工作必须遵守机构制度、带教和授权。"
+                ]
+              }
+            ]
+          },
+          "id": "diagnostic-medical-sonographers.path.entry-work-sample-data.current.v1",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "title": "US-09｜超声记录质量交接",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "上海临床研究中心 2026 年 9 月 29 日公告：各级技师负责图像采集、设备维护、质控和辅助，要求医学影像技术等相关专业本科及以上、相应专业技术职称。医师招聘另外列诊断职责和各级条件；公告未给数字薪资。",
+              "河源市人民医院 2026 年第一批合同制剩余岗位表 2026018：超声医学科医师 1 人，本科及以上、学士及以上，须执业医师及相应住培证。该例是医师岗，不是超声技师入口；表内未列工资。",
+              "两个样本只支持各自岗位及当时条件。未取得大陆本职业全国可比工资分布；卫生和社会工作行业年均工资不能作为技术岗或医师岗报价。"
+            ]
+          },
+          "id": "diagnostic-medical-sonographers.path.recruitment-sample.current.v1",
+          "source_refs": [
+            "shanghai-sonography",
+            "heyuan-ultrasound-2026018"
+          ],
+          "title": "两则大陆招聘｜技师与医师分列",
+          "type": "notice"
         }
       ]
     },
@@ -8376,13 +8466,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国2025—2035预计从92200增至105100，净增12900、增长约14%；年均约6000空缺含增长与人员更替。全国预测不是当前招聘广告，也不证明个人录用或AI影响。"
+              "美国 BLS 29-2032：2025 年约 92,200 个岗位，2035 年预计 105,100 个，净增 12,900（13.9%）；年均约 6,000 个空缺含替补。2025 年自雇 1.1%，与工资覆盖口径不同。"
             ]
           },
           "id": "diagnostic-medical-sonographers.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-sonographer-current",
-            "current-national-trends"
+            "bls-sonography-ep"
           ],
           "type": "prose"
         },
@@ -8448,16 +8537,16 @@
               {
                 "answer": "日常从核对申请、身份和部位开始，解释程序并摆位，选择探头与设置完成扫查，复核图像和测量，再归档技术记录并交接异常。",
                 "id": "diagnostic-medical-sonographers.faq.1",
-                "question": "医学超声诊断师：日常工作如何形成闭环？",
+                "question": "医学超声技师：日常工作如何形成闭环？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.daily-work",
                 "source_refs": [
                   "bls-sonographer-current"
                 ]
               },
               {
-                "answer": "超声诊断师对患者采集体内图像和血流记录；临床实验室岗位处理体外标本，眼科医疗技术员围绕眼部检查。对象、设备和质量体系不能混写。",
+                "answer": "医学超声技师对患者采集体内图像和血流记录；临床实验室岗位处理体外标本，眼科医疗技术员围绕眼部检查。对象、设备和质量体系不能混写。",
                 "id": "diagnostic-medical-sonographers.faq.2",
-                "question": "医学超声诊断师：它与相邻职业有什么区别？",
+                "question": "医学超声技师：它与相邻职业有什么区别？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.role-comparison",
                 "source_refs": [
                   "adj-lab-technician",
@@ -8468,7 +8557,7 @@
               {
                 "answer": "适配看可观察表现：逐字段核对、手眼协调、患者沟通、重复体位耐受、图像质量复核和不确定时主动停止，而不是只看兴趣标签。",
                 "id": "diagnostic-medical-sonographers.faq.3",
-                "question": "医学超声诊断师：什么行为信号可以帮助判断适配？",
+                "question": "医学超声技师：什么行为信号可以帮助判断适配？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.fit",
                 "source_refs": [
                   "editorial-work"
@@ -8477,7 +8566,7 @@
               {
                 "answer": "AI 可辅助排序、测量提示、部分质量检查和记录草稿，但不能证明身份正确、扫查完整，也不能给出可靠的职业替代率或时间表。",
                 "id": "diagnostic-medical-sonographers.faq.4",
-                "question": "医学超声诊断师：AI 可以辅助哪些任务？",
+                "question": "医学超声技师：AI 可以辅助哪些任务？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.ai-impact",
                 "source_refs": [
                   "editorial-ai",
@@ -8487,7 +8576,7 @@
               {
                 "answer": "人员必须控制患者身份、部位、图像完整性、隐私、患者状态、探头再处理、异常升级和最终临床责任；未验证输出不能直接进入病历。",
                 "id": "diagnostic-medical-sonographers.faq.5",
-                "question": "医学超声诊断师：哪些判断必须由人负责？",
+                "question": "医学超声技师：哪些判断必须由人负责？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.human-control",
                 "source_refs": [
                   "editorial-ai",
@@ -8497,7 +8586,7 @@
               {
                 "answer": "当前中国大陆官方工资材料没有与美国 29-2032.00 一一对应的全国职业工资分布，因此不展示精确中位数、分位数、起薪或月薪，也不以行业均值填补。",
                 "id": "diagnostic-medical-sonographers.faq.6",
-                "question": "医学超声诊断师：中国大陆薪资应如何核对？",
+                "question": "医学超声技师：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.china-pay",
                 "source_refs": [
                   "nbs-wage"
@@ -8509,7 +8598,7 @@
                   "us-annual-wage"
                 ],
                 "id": "diagnostic-medical-sonographers.faq.7",
-                "question": "医学超声诊断师：美国工资数据应如何解释？",
+                "question": "医学超声技师：美国工资数据应如何解释？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.us-pay",
                 "source_refs": [
                   "bls-sonographer-current",
@@ -8517,12 +8606,12 @@
                 ]
               },
               {
-                "answer": "美国通常需副学士或高中后证书，部分工作者需州执照或认证；中国超声医师口径与美国技术职业不一一互认，具体课程、临床训练和权限需按所在地核验。",
+                "answer": "美国典型入行学历为副学士，也有高中后证书路径。州执照、认证和雇主条件分别核。大陆技师与医师见本节上海和河源样本，资格与报告责任各自核。",
                 "fact_refs": [
                   "us-entry-route"
                 ],
                 "id": "diagnostic-medical-sonographers.faq.8",
-                "question": "医学超声诊断师：入行通常需要什么教育或训练？",
+                "question": "医学超声技师：入行通常需要什么教育或训练？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.education-path",
                 "source_refs": [
                   "bls-sonographer-current",
@@ -8532,7 +8621,7 @@
               {
                 "answer": "身份或部位不一致、图像或文件缺失、患者状态变化、内腔探头再处理不明、设备异常和越权解释都应触发停止、核对或升级。",
                 "id": "diagnostic-medical-sonographers.faq.9",
-                "question": "医学超声诊断师：这份工作的主要风险和停止条件是什么？",
+                "question": "医学超声技师：这份工作的主要风险和停止条件是什么？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.risk-boundary",
                 "source_refs": [
                   "cdc-probe-current",
@@ -8541,12 +8630,12 @@
                 ]
               },
               {
-                "answer": "美国 29-2032 在 2025 年约有 92,200 个岗位，2025—2035 年预计增长 14%，年均空缺约 6,000；全国预测不代表个人录用。",
+                "answer": "美国 29-2032 从 2025 年约 92,200 个岗位到 2035 年预计 105,100 个，增长 13.9%（职业手册取整为 14%）。年均约 6,000 个空缺含替补，不能当当前招聘或个人录用率。",
                 "fact_refs": [
                   "us-workforce-outlook"
                 ],
                 "id": "diagnostic-medical-sonographers.faq.10",
-                "question": "医学超声诊断师：就业展望与相邻转向应如何理解？",
+                "question": "医学超声技师：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.outlook-transition",
                 "source_refs": [
                   "bls-sonographer-current"
@@ -8555,7 +8644,7 @@
               {
                 "answer": "如果你能长期保持身份与部位核对、细致操作、近距离沟通和清楚交接，并愿意通过正规训练承担体位与责任压力，这条路径值得继续验证。",
                 "id": "diagnostic-medical-sonographers.faq.11",
-                "question": "医学超声诊断师：如何判断这条职业路径是否值得继续验证？",
+                "question": "医学超声技师：如何判断这条职业路径是否值得继续验证？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.career-worth",
                 "source_refs": [
                   "editorial-work"
@@ -8672,67 +8761,67 @@
           "data": {
             "entries": [
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.1",
                 "relation": "career.section",
                 "url": "#career-content-quick-decision"
               },
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.2",
                 "relation": "career.section",
                 "url": "#career-content-profile"
               },
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.3",
                 "relation": "career.section",
                 "url": "#career-content-direction-comparison"
               },
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.4",
                 "relation": "career.section",
                 "url": "#career-content-ai-impact"
               },
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.5",
                 "relation": "career.section",
                 "url": "#career-content-china-salary"
               },
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.6",
                 "relation": "career.section",
                 "url": "#career-content-us-salary"
               },
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.7",
                 "relation": "career.section",
                 "url": "#career-content-fit"
               },
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.8",
                 "relation": "career.section",
                 "url": "#career-content-risk"
               },
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.9",
                 "relation": "career.section",
                 "url": "#career-content-path"
               },
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.10",
                 "relation": "career.section",
                 "url": "#career-content-market-signals"
               },
               {
-                "entity": "医学超声诊断师",
+                "entity": "医学超声技师",
                 "id": "diagnostic-medical-sonographers.navigation.11",
                 "relation": "career.section",
                 "url": "#career-content-sources"
@@ -8845,7 +8934,7 @@
                 "id": "editorial-ai",
                 "limitation": "不代表实际采用率或自动化率。",
                 "market": "全球",
-                "name": "医学超声诊断师 AI 控制点编辑综合",
+                "name": "医学超声技师 AI 控制点编辑综合",
                 "period": "2026-09-06",
                 "publisher": "FermatMind editorial synthesis",
                 "scope": "editorial_synthesis",
@@ -8861,7 +8950,7 @@
                 "id": "editorial-risk",
                 "limitation": "通用决策支持不替代机构程序、临床判断或紧急处置培训。",
                 "market": "全球",
-                "name": "医学超声诊断师风险控制编辑综合",
+                "name": "医学超声技师风险控制编辑综合",
                 "period": "2026-09-06",
                 "publisher": "FermatMind editorial synthesis",
                 "scope": "editorial_synthesis",
@@ -8877,7 +8966,7 @@
                 "id": "editorial-work",
                 "limitation": "不构成医疗建议、资格认证、临床培训或真实患者操作授权。",
                 "market": "全球",
-                "name": "医学超声诊断师工作与练习编辑综合",
+                "name": "医学超声技师工作与练习编辑综合",
                 "period": "2026-09-06",
                 "publisher": "FermatMind editorial synthesis",
                 "scope": "editorial_synthesis",
@@ -8902,7 +8991,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "2025卫生和社会工作非私营146266元、私营75631元/年，为行业单位就业人员平均工资。",
+                  "国家统计局 2025 年卫生和社会工作行业城镇单位就业人员税前年平均工资：非私营 146,266 元，私营 75,631 元。两者为行业背景。",
                   "5人以上城镇法人单位；非私营含机关事业和外商等，不等于国企；不含个体自由职业。",
                   "所读表未提供本职业工资分布，未据此断言全部官方资料从未提供。"
                 ],
@@ -8967,7 +9056,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "全国分位数非起薪；工资不含自雇收入。"
+                  "美国 2025 年 5 月 29-2032 工资中位数：96,590 美元/年、46.44 美元/小时。年薪 P10/P25/P50/P75/P90 为 67,820／80,430／96,590／106,930／129,370 美元。分位不等于资历或到手。"
                 ],
                 "evidence_type": "official occupation or safety source",
                 "id": "current-national-wages",
@@ -9055,21 +9144,92 @@
                 "url": "https://www.onetonline.org/link/details/29-2034.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "按方案完成扫查并检查图像质量 — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "完成测量并形成技术记录 — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "观察并照护患者在检查中的安全与舒适 — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "AI 可辅助整理技术记录或提示缺项，但不能确认患者身份、设备状态或诊断。未取得本职业实际采用率、任务效果量或替代率。只用虚构资料试做。",
+                  "定性说明，不做岗位评分。",
+                  "定性说明，不做岗位评分。",
+                  "定性说明，不做岗位评分。",
+                  "定性说明，不做岗位评分。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "原始公开资料",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "定性说明，不做岗位评分。",
+                "name": "费马测试：AI 与超声记录任务",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "#career-visual-group-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国《医疗机构检查检验结果互认管理办法》第 2 条区分超声图像或数据与医师诊断结论；第 20 条针对有条件的医疗机构开设的检查检验门诊，由医学影像和放射治疗专业或医学检验、病理专业执业医师出诊，独立提供疾病诊断报告。技术采集、科内复核和最终诊断责任按岗位与机构授权核。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "nhsa-art-2-20",
+                "limitation": "第20条限于适用的检查检验门诊，不能作所有岗位说明。",
+                "name": "医疗机构检查检验结果互认管理办法：第 2、20 条",
+                "period": "2022",
+                "publisher": "国家卫生健康委等部门",
+                "scope": "contextual",
+                "url": "https://www.nhsa.gov.cn/art/2022/2/21/art_37_7840.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "上海临床研究中心 2026 年 9 月 29 日公告：各级技师负责图像采集、设备维护、质控和辅助，要求医学影像技术等相关专业本科及以上、相应专业技术职称。医师招聘另外列诊断职责和各级条件；公告未给数字薪资。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "shanghai-sonography",
+                "limitation": "两个样本只支持各自岗位及当时条件。未取得大陆本职业全国可比工资分布；卫生和社会工作行业年均工资不能作为技术岗或医师岗报价。",
+                "name": "上海临床研究中心：超声医学科医师、技师",
+                "period": "2026-09-29",
+                "publisher": "上海临床研究中心",
+                "scope": "recruitment_proxy",
+                "url": "https://clinic.shanghaitech.edu.cn/jobs/105"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "河源市人民医院 2026 年第一批合同制剩余岗位表 2026018：超声医学科医师 1 人，本科及以上、学士及以上，须执业医师及相应住培证。该例是医师岗，不是超声技师入口；表内未列工资。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "heyuan-ultrasound-2026018",
+                "limitation": "两个样本只支持各自岗位及当时条件。未取得大陆本职业全国可比工资分布；卫生和社会工作行业年均工资不能作为技术岗或医师岗报价。",
+                "name": "河源市人民医院：合同制剩余岗位表 2026018",
+                "period": "2026",
+                "publisher": "河源市人民医院",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hyrmyy.com/upload/file/2026/02/13/6390660327867601908120907.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 BLS 29-2032：2025 年约 92,200 个岗位，2035 年预计 105,100 个，净增 12,900（13.9%）；年均约 6,000 个空缺含替补。2025 年自雇 1.1%，与工资覆盖口径不同。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "bls-sonography-ep",
+                "limitation": "美国精确 SOC 的十年预测，不代表国内招聘。",
+                "name": "BLS 就业预测表 1.2：29-2032",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Inteleos 的 RDMS 示例：按认证方先决条件申请，须通过 SPI 和对应专项考试。州执照及雇主是否要求该证分别查。"
+                ],
+                "evidence_type": "认证方原件",
+                "id": "inteleos-rdms",
+                "limitation": "RDMS 为认证路径示例，不是美国各州统一执照或中国大陆资格。",
+                "name": "Inteleos：RDMS 认证路径与考试",
+                "period": "2026",
+                "publisher": "Inteleos",
+                "scope": "contextual",
+                "url": "https://www.inteleos.org/certification/registered-diagnostic-medical-sonographer/"
               }
             ]
           },
@@ -9180,7 +9340,7 @@
             "关键区别": "本职业属超声技术职业；诊断与签字由医师负责。",
             "更适合什么选择": "若偏好设备操作与图像质量，可把超声技术作为主线。",
             "核心工作与产出": "操作超声设备生成内部器官与血流的图像与记录，完成测量与技术记录并交医师使用。",
-            "职业方向": "本职业方向：医学超声诊断师（29-2032.00）"
+            "职业方向": "本职业方向：医学超声技师（29-2032.00）"
           },
           {
             "关键区别": "资格与责任口径不同，须按所在地与机构核验。",
@@ -9605,7 +9765,7 @@
         "body": [
           "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
         ],
-        "heading": "医学超声诊断师的工作对象与 AI 边界"
+        "heading": "医学超声技师的工作对象与 AI 边界"
       },
       "career_path_block": {
         "boundary": "入口要求、执照、认证、训练与最终诊断责任由具体法域、机构或雇主核验。",
@@ -9711,6 +9871,36 @@
               "item": "diagnostic-medical-sonographers.source-register.published.1"
             },
             "scope": "仅支持该来源对应的对象、市场、时期；编辑建议不视为统计结果。"
+          },
+          {
+            "href": "https://www.nhsa.gov.cn/art/2022/2/21/art_37_7840.html",
+            "id": "nhsa-art-2-20",
+            "label": "医疗机构检查检验结果互认管理办法：第 2、20 条",
+            "scope": "第20条限于适用的检查检验门诊，不能作所有岗位说明。"
+          },
+          {
+            "href": "https://clinic.shanghaitech.edu.cn/jobs/105",
+            "id": "shanghai-sonography",
+            "label": "上海临床研究中心：超声医学科医师、技师",
+            "scope": "两个样本只支持各自岗位及当时条件。未取得大陆本职业全国可比工资分布；卫生和社会工作行业年均工资不能作为技术岗或医师岗报价。"
+          },
+          {
+            "href": "https://www.hyrmyy.com/upload/file/2026/02/13/6390660327867601908120907.pdf",
+            "id": "heyuan-ultrasound-2026018",
+            "label": "河源市人民医院：合同制剩余岗位表 2026018",
+            "scope": "两个样本只支持各自岗位及当时条件。未取得大陆本职业全国可比工资分布；卫生和社会工作行业年均工资不能作为技术岗或医师岗报价。"
+          },
+          {
+            "href": "https://www.inteleos.org/certification/registered-diagnostic-medical-sonographer/",
+            "id": "inteleos-rdms",
+            "label": "Inteleos：RDMS 认证路径与考试",
+            "scope": "RDMS 为认证路径示例，不是美国各州统一执照或中国大陆资格。"
+          },
+          {
+            "href": "https://www.cdc.gov/infection-control/hcp/disinfection-sterilization/healthcare-equipment.html",
+            "id": "cdc-probe-current",
+            "label": "Disinfection of Healthcare Equipment",
+            "scope": "设备再处理指引不是单一职业许可或机构操作规程。"
           }
         ],
         "tracks": [
@@ -9732,7 +9922,7 @@
                 "role": "独立常规检查"
               },
               {
-                "credentials": "核目标专科与雇主要求；本轮未核所有认证机构考试及维持规则。",
+                "credentials": "核目标专科与雇主要求；按认证方核考试与维持。",
                 "next_moves": "参加专科进阶培训并处理复杂病例。",
                 "readiness_evidence": "专科认证与复杂病例复核记录。",
                 "responsibility": "在目标专科受训并接受复核；心脏与血管等方向的课程、认证及权限分别核。",
@@ -9751,7 +9941,7 @@
                 "role": "带教与质量把关"
               }
             ],
-            "title": "从受监督实习到常规检查"
+            "title": "美国路径｜从受监督实习到常规检查"
           },
           {
             "id": "specialist",
@@ -9785,7 +9975,7 @@
                 "role": "技术规范与培训输出"
               }
             ],
-            "title": "专科深化与技术拓展"
+            "title": "美国路径｜专科深化与技术拓展"
           },
           {
             "id": "management",
@@ -9973,10 +10163,10 @@
         ],
         "direct_answer": "先识别身份与部位、图像完整性、患者状态、感染控制与授权边界五类风险。",
         "evidence_scope": "风险项按本职业内容与所列来源（O*NET 工作情境、CDC 与 FDA 设备与感染控制资料）边界解释。",
-        "heading": "医学超声诊断师的风险与控制点",
+        "heading": "医学超声技师的风险与控制点",
         "risks": [
           {
-            "affected_roles": "医学超声诊断师",
+            "affected_roles": "医学超声技师",
             "consequence": "可能使错误患者或部位信息进入检查和归档；本轮无该错误的职业发生率或损害概率。",
             "evidence_refs": [
               "onet-sonographer-current",
@@ -9993,7 +10183,7 @@
             }
           },
           {
-            "affected_roles": "医学超声诊断师",
+            "affected_roles": "医学超声技师",
             "consequence": "影响技术记录的可用性与医师判读，可能需要补做检查。",
             "evidence_refs": [
               "onet-sonographer-current",
@@ -10010,7 +10200,7 @@
             }
           },
           {
-            "affected_roles": "医学超声诊断师",
+            "affected_roles": "医学超声技师",
             "consequence": "可能危及患者安全。",
             "evidence_refs": [
               "onet-sonographer-current",
@@ -10027,7 +10217,7 @@
             }
           },
           {
-            "affected_roles": "医学超声诊断师",
+            "affected_roles": "医学超声技师",
             "consequence": "可能造成患者间交叉感染。",
             "evidence_refs": [
               "cdc-probe-current"
@@ -10043,7 +10233,7 @@
             }
           },
           {
-            "affected_roles": "医学超声诊断师",
+            "affected_roles": "医学超声技师",
             "consequence": "可能造成设备故障、图像不可用或越权责任。",
             "evidence_refs": [
               "fda-ultrasound-current",
@@ -10060,7 +10250,7 @@
             }
           },
           {
-            "affected_roles": "医学超声诊断师",
+            "affected_roles": "医学超声技师",
             "consequence": "可能产生患者安全及责任风险，具体后果依实际事件。",
             "evidence_refs": [
               "editorial-risk",
@@ -10170,12 +10360,12 @@
             },
             {
               "指标": "2025卫生和社会工作非私营行业年均",
-              "数值": "146266元/年",
+              "数值": "146,266 元/年",
               "说明": "5人以上城镇法人单位，非私营不限国企；行业代理背景。"
             },
             {
               "指标": "2025卫生和社会工作私营行业年均",
-              "数值": "75631元/年",
+              "数值": "75,631 元/年",
               "说明": "同一行业私营单位口径，非超声单职业。"
             }
           ],
@@ -10265,12 +10455,12 @@
               "月薪参考": "证据不足：未取得全国单职业口径"
             },
             {
-              "城市/区间": "全国单职业",
-              "月薪参考": "证据不足：未取得全国单职业口径"
+              "城市/区间": "上海临床研究中心：超声医学科医师、技师",
+              "月薪参考": "公告未列数字工资"
             },
             {
-              "城市/区间": "全国单职业",
-              "月薪参考": "证据不足：未取得全国单职业口径"
+              "城市/区间": "河源市人民医院：合同制剩余岗位表 2026018",
+              "月薪参考": "公告未列数字工资"
             }
           ],
           "china_soc_row": {
@@ -10282,7 +10472,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "nhc-quality-current",
+                "$source": "nbs-wage",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10290,7 +10480,7 @@
               },
               "｜",
               {
-                "$source": "nhc-quality-current",
+                "$source": "nbs-wage",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10481,7 +10671,7 @@
           },
           {
             "指标": "美国就业增长（2025—2035）",
-            "数值": "14%（远快于平均）",
+            "数值": "13.9%（手册取整 14%）",
             "说明": {
               "$join": [
                 {
@@ -10555,7 +10745,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "2025—2035 年预计增长 14%（远快于平均）",
+        "growth": "2025–2035 年增长预测 13.9%，职业手册取整 14%",
         "heading": {
           "$item": "diagnostic-medical-sonographers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10690,10 +10880,10 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "title": "医学超声诊断师适合什么样的人？"
+        "title": "医学超声技师适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "boundary": "长时间站立、重复体位、近距离沟通和高准确要求会带来负荷。若难以在不确定时暂停核对，先用纸面练习了解是否愿意养成这个习惯。",
         "how": {
           "$item": "diagnostic-medical-sonographers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10740,12 +10930,13 @@
         "outlook_evidence": [
           {
             "geography": "美国",
-            "horizon": "2025 年工资与 2025—2035 年预测",
+            "horizon": "2025–2035",
             "interpretation": "招聘样本、就业规模与职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
             "metric": "预测增长及净增",
-            "occupation_scope": "医学超声诊断师（29-2032.00）",
-            "value": "2025—2035增长约14%；净增12900，2035预计105100"
+            "occupation_scope": "美国 29-2032 医学超声技师",
+            "source_id": "bls-sonography-ep",
+            "value": "2025–2035：+13.9%，净增 12,900"
           },
           {
             "geography": "美国",
@@ -10753,7 +10944,7 @@
             "interpretation": "就业规模与空缺不是同一指标。",
             "limitation": "不能作为个人就业保证。",
             "metric": "就业规模",
-            "occupation_scope": "医学超声诊断师（29-2032.00）",
+            "occupation_scope": "美国 29-2032 医学超声技师",
             "value": "2025 年约 92,200 人"
           },
           {
@@ -10762,7 +10953,7 @@
             "interpretation": "年均约6000包含增长及转职、退出劳动力等更替；不是净增、实时岗位或十年合计。",
             "limitation": "不能作为个人就业保证。",
             "metric": "职位空缺",
-            "occupation_scope": "医学超声诊断师（29-2032.00）",
+            "occupation_scope": "美国 29-2032 医学超声技师",
             "value": "2025—2035 年年均约 6,000 个空缺"
           }
         ],
@@ -10923,6 +11114,12 @@
               "item": "diagnostic-medical-sonographers.source-register.published.1"
             },
             "scope": "仅支持该来源对应的对象、市场、时期；编辑建议不视为统计结果。"
+          },
+          {
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "id": "bls-sonography-ep",
+            "label": "BLS 就业预测表 1.2：29-2032",
+            "scope": "美国精确 SOC 的十年预测，不代表国内招聘。"
           }
         ],
         "transitions": [
@@ -11004,7 +11201,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_label": "探索我的职业兴趣",
             "evidence_level": "工作样本",
             "id": "riasec",
             "label": "兴趣与任务",
@@ -11022,8 +11219,8 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_label": "查看大五人格测评",
             "evidence_level": "工作样本",
             "id": "big-five",
             "label": "稳定执行",
@@ -11041,8 +11238,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "查看 MBTI 偏好测评",
             "evidence_level": "工作样本",
             "id": "mbti",
             "label": "偏好观察",
@@ -11055,8 +11252,8 @@
           },
           {
             "answer": "用实际观察与机构反馈核验，而不是靠测评判断。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_label": "查看九型人格测评",
             "evidence_level": "工作样本",
             "id": "enneagram",
             "label": "动机观察",
@@ -11069,8 +11266,8 @@
           },
           {
             "answer": "通过模拟或受监督场景观察其调整与请示方式。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "查看推理能力测评",
             "evidence_level": "工作样本",
             "id": "iq",
             "label": "问题解决",
@@ -11083,8 +11280,8 @@
           },
           {
             "answer": "用交接记录与团队反馈核验。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
+            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "查看情绪能力测评",
             "evidence_level": "工作样本",
             "id": "eq",
             "label": "协作边界",
@@ -11364,7 +11561,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "测我的职业兴趣是否适合医学超声诊断师",
+        "label": "测我的职业兴趣是否适合医学超声技师",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -11494,11 +11691,25 @@
         "id": "diagnostic-medical-sonographers.path.credential-decision.current.v1",
         "location": "entry_decisions",
         "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "diagnostic-medical-sonographers.path.entry-work-sample-data.current.v1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "diagnostic-medical-sonographers.path.recruitment-sample.current.v1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/zh/career/jobs/diagnostic-medical-sonographers",
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与记录核查",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -11529,26 +11740,26 @@
       },
       {
         "derivation": null,
-        "display_value": "$46.44/小时；$96,590/年（美国 29-2032，2025）",
+        "display_value": "96,590 美元/年；46.44 美元/小时",
         "fact_id": "us-annual-wage",
         "market": "美国",
         "measure": "hourly and annual median wage",
         "occupation_scope": "精确职业数据：Diagnostic Medical Sonographers 29-2032.00",
-        "period": "2025 wages; 2025-2035 projections; accessed 2026-09-06",
+        "period": "2025-05",
         "source_refs": [
-          "bls-sonographer-current"
+          "current-national-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "美国 29-2032：2025 岗位 92,200；2025—2035 增长 14%；年均空缺约 6,000",
+        "display_value": "92,200→105,100；增 13.9%；年均约 6,000 个",
         "fact_id": "us-workforce-outlook",
         "market": "美国",
         "measure": "employment and projection",
         "occupation_scope": "精确职业数据：Diagnostic Medical Sonographers 29-2032.00",
-        "period": "2025 wages; 2025-2035 projections; accessed 2026-09-06",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-sonographer-current"
+          "bls-sonography-ep"
         ]
       },
       {
@@ -11586,27 +11797,15 @@
         "source_refs": [
           "fda-ultrasound-current"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "医学超声诊断师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与记录核查"
     },
     "badges": [
       "超声设备操作 · 图像与测量复核 · 技术记录交接",
@@ -11618,25 +11817,25 @@
         "availability": "available",
         "fact_ref": "us-annual-wage",
         "key": "us_pay",
-        "label": "美国中位工资（2025 年，96,590 美元/年；46.44 美元/时）"
+        "label": "美国工资中位"
       },
       {
         "availability": "available",
         "fact_ref": "us-workforce-outlook",
         "key": "us_growth",
-        "label": "美国就业预测（2025—2035 年增长 14%，远快于平均）"
+        "label": "美国增长预测（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-workforce-outlook",
         "key": "us_employment",
-        "label": "美国在岗人数（2025 年，约 92,200 人）"
+        "label": "美国就业规模与预测"
       },
       {
         "availability": "available",
         "fact_ref": "us-workforce-outlook",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2025—2035 年，约 6,000 个）"
+        "label": "美国年均空缺"
       },
       {
         "availability": "missing",
@@ -11650,17 +11849,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "医学超声诊断师核对患者与检查部位，操作超声设备采集并复核图像、测量和技术记录，再把可追溯结果交给医师使用。判断是否适合这条路径，应同时验证细节准确、患者沟通、体位负荷、正规训练和授权边界。"
+      "text": "区分超声图像采集与医师诊断，核中美岗位条件和工资口径，并用 US-09 虚构记录试做质量核对与交接。"
     },
     "title": {
       "availability": "available",
-      "text": "医学超声诊断师"
+      "text": "医学超声技师做什么？技术职责、工资与入行"
     }
   },
-  "source_content_sha256": "5ee69545222868ae5cf34a8e3c7f185f797ef080f3db2b4e7cafc40eec55d375",
+  "source_content_sha256": "fd03f00e0511956e11c667552b86186984715453ec64dc6ce32f4583cdd5408f",
   "subject": {
     "canonical_slug": "diagnostic-medical-sonographers",
-    "name": "医学超声诊断师",
-    "summary": "医学超声诊断师核对患者与检查部位，操作超声设备采集并复核图像、测量和技术记录，再把可追溯结果交给医师使用。判断是否适合这条路径，应同时验证细节准确、患者沟通、体位负荷、正规训练和授权边界。"
+    "name": "医学超声技师",
+    "summary": "医学超声技师采集和复核超声图像、测量及技术记录，交给医师解释。这里对应美国 O*NET 29-2032.00。大陆的超声技师和超声诊断医师在招聘、资格与诊断责任上分列。"
   }
 }

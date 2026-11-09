@@ -2,9 +2,6 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:infection-control": {
         "status": "pending_mapping"
       },
@@ -146,7 +143,13 @@
       "item:diagnostic-medical-sonographers.path.entry-role-comparison.current.v1": {
         "status": "pending_mapping"
       },
+      "item:diagnostic-medical-sonographers.path.entry-work-sample-data.current.v1": {
+        "status": "pending_mapping"
+      },
       "item:diagnostic-medical-sonographers.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:diagnostic-medical-sonographers.path.recruitment-sample.current.v1": {
         "status": "pending_mapping"
       },
       "item:diagnostic-medical-sonographers.profile.career-quick-answers-block.1": {
@@ -7264,7 +7267,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Small safety experience: use only the fictional worklist, probe statuses and file names provided on this page for paper verification, and output an exception list, processing order and handover; do not contact patients, operate equipment, interpret images or make a diagnosis."
+              "Open “Getting started, certificates and career development,” then find “US-09 | Ultrasound record handoff.” Check the five files and probe statuses before reading the reference. Use paper records only."
             ]
           },
           "id": "diagnostic-medical-sonographers.quick-decision.fermat-decision-card.3",
@@ -7278,7 +7281,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Review standard: every exception can be traced back to the original field, with identity, site, file ownership and reprocessing status verified separately; unknown items remain unknown, and it is stated who must confirm before work can continue."
+              "Explore this role if you are comfortable repeatedly checking identifiers and labels, communicating with patients at close range and explaining exceptions to the team."
             ]
           },
           "id": "diagnostic-medical-sonographers.quick-decision.fermat-decision-card.4",
@@ -7578,7 +7581,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Conditions for adoption include an institutionally approved system, clearly defined applicable sites and populations, reliable equipment integration, version validation, audit logs, and trained personnel who can review the output. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "AI can help organize technical notes or flag missing fields. It does not confirm patient identity, equipment status or a diagnosis. No measured adoption, task effect or replacement rate was established for this occupation. Practice only with fictional records."
             ]
           },
           "id": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.2",
@@ -7767,13 +7770,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "This figure comes from the United States national occupational scope and corresponds only to Diagnostic Medical Sonographers 29-2032.00; it does not represent Chinese positions or the adjacent laboratory and ophthalmic technician occupations."
+              "May 2025 U.S. SOC 29-2032 median wages: $96,590/year and $46.44/hour. Annual P10/P25/P50/P75/P90 are $67,820/$80,430/$96,590/$106,930/$129,370. Percentiles are not experience bands or take-home pay. BLS U.S. SOC 29-2032: about 92,200 jobs in 2025 and 105,100 projected in 2035, up 12,900 (13.9%). About 6,000 annual openings include replacement. The 2025 self-employment share was 1.1%, which is separate from the wage survey coverage."
             ]
           },
           "id": "diagnostic-medical-sonographers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-sonographer-current",
-            "editorial-work"
+            "current-national-wages",
+            "bls-sonography-ep"
           ],
           "type": "prose"
         },
@@ -8053,7 +8056,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Realistic entry: precise United States occupational data indicate entry is usually through an accredited associate degree or postsecondary certificate path, and some workers also need a state licence or certification; courses, clinical training, and state and employer requirements are verified item by item."
+              "How do diagnostic medical sonographers enter the field?"
             ]
           },
           "id": "diagnostic-medical-sonographers.path.career-path-block.1",
@@ -8067,12 +8070,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Cross-jurisdiction boundary: the ultrasound physician scope in Chinese official documents involves full-time physicians providing diagnosis and treatment who hold a Physician Practice Certificate, and is not mutually recognized one-to-one with the United States technical occupation 29-2032.00."
+              "BLS lists an associate degree as typical U.S. entry education. Its handbook also describes postsecondary certificate routes and supervised clinical education. Check state licensure separately from employer certification preferences or requirements, which may include basic life support or CPR. Article 2 of China’s rules on mutual recognition of examination results separates ultrasound images or data from a physician’s diagnosis. Article 20 concerns examination and testing clinics set up by eligible medical institutions. It specifies independent diagnostic reports by licensed physicians in medical imaging and radiotherapy, medical laboratory medicine or pathology. Check the employer’s authorization for acquisition, review and final interpretation separately."
             ]
           },
           "id": "diagnostic-medical-sonographers.path.career-path-block.2",
           "source_refs": [
-            "nhc-quality-current"
+            "bls-sonographer-current",
+            "nhsa-art-2-20",
+            "shanghai-sonography",
+            "heyuan-ultrasound-2026018"
           ],
           "type": "prose"
         },
@@ -8081,7 +8087,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Complete fictional material: the worklist includes A-104 for an abdominal examination and B-208 for a vascular examination; both identity and site fields are marked as verified. Probe P1 is marked as reprocessing completed, and P2 as unknown. There are 5 files waiting to be archived: the abdominal file numbered -01 for A-104, the abdominal file numbered -02 for A-104, the abdominal file numbered -03 for A-140, the vascular file numbered -01 for B-208, and the vascular file numbered -02 with no identity. There is no image content, diagnostic result or additional probe information."
+              "Distinguish identity, the ordered study and the technical record."
             ]
           },
           "id": "diagnostic-medical-sonographers.path.career-path-block.3",
@@ -8096,7 +8102,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Portfolio task: within 30 minutes, list all file ownership conflicts and equipment stop points, write can continue, pause for verification or must not be used for each record, and then write a handover paragraph; do not view real medical records, interpret images or invent unknown fields."
+              "Route missing information and review items to the responsible person."
             ]
           },
           "id": "diagnostic-medical-sonographers.path.career-path-block.4",
@@ -8111,7 +8117,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Reference answers: the abdominal file numbered -01 for A-104 and the abdominal file numbered -02 for A-104 can proceed to subsequent quality review; the abdominal file numbered -03 for A-140 does not match the worklist identity, so pause and check the original record; the vascular file numbered -01 for B-208 can proceed to subsequent quality review; the vascular file numbered -02 with no identity must not be archived; probe P2 has an unknown reprocessing status and must not be used for examination. The handover should list the two file conflicts and P2's status, and specify confirmation by the worklist or infection control responsible person."
+              "Record acquisition quality and incomplete work within your authorization. A technical handoff does not establish a diagnosis."
             ]
           },
           "id": "diagnostic-medical-sonographers.path.career-path-block.5",
@@ -8234,6 +8240,12 @@
               "possible_check",
               "escalation"
             ],
+            "column_labels": [
+              "Stage",
+              "Evidence to review",
+              "What to check",
+              "Who should confirm"
+            ],
             "rows": [
               [
                 "Qualification verification before interview and hiring",
@@ -8288,46 +8300,46 @@
             ],
             "rows": [
               [
-                "Associate degree or postsecondary certificate (ultrasound)",
-                "Usually requires completing an ultrasound technology course at an accredited institution, including classroom and clinical hours.",
+                "U.S. | Associate degree or postsecondary certificate (ultrasound)",
+                "Programs typically include coursework and supervised clinical training. Check specific courses, hours and program recognition with the school and employer.",
                 "Education itself does not automatically confer certification or practice authorization.",
-                "Diploma and transcripts, clinical internship records.",
-                "Verify by work location and employer.",
+                "Use the BLS handbook for entry routes; check program recognition and hours with the school and employer.",
+                "United States; check the state, organization and employer.",
                 "Verify the target institution's specific requirements for education and courses.",
                 "Confirmed by the educational institution and the employer."
               ],
               [
-                "Professional certification (the original example RDMS requires separate verification of institutional rules)",
-                "BLS only states that employers may require or prefer professional certification; the specific registration, examination or maintenance conditions for RDMS were not verified in this round.",
+                "U.S. | Certification example: RDMS",
+                "For Inteleos RDMS, check prerequisites and pass SPI and the corresponding specialty exam. Check state licensure and whether the employer asks for this credential separately.",
                 "Certification does not replace a state licence, nor does it mean being able to independently bear the physician's diagnostic and signing responsibility.",
-                "Certification certificate and validity records.",
-                "Verify by work location and employer.",
+                "Inteleos RDMS prerequisites, examinations and credential records.",
+                "United States; check the state, organization and employer.",
                 "Verify the registration conditions and maintenance requirements of the target certifying body.",
                 "Confirmed by the certifying body."
               ],
               [
-                "State licence (where applicable)",
+                "U.S. | State licence (where applicable)",
                 "Some regions require a licence, with conditions and examinations according to that state's provisions.",
                 "Licensing requirements vary by state, and practising across states requires separate verification.",
-                "Licence and renewal records.",
-                "Verify by the specific state.",
+                "BLS handbook entry point; target state license and renewal records.",
+                "United States; check the state, organization and employer.",
                 "Verify the licence requirements and mutual recognition arrangements of the target state.",
                 "Confirmed by the state regulatory body."
               ],
               [
-                "Specialist certification (cardiac or vascular)",
-                "Verify courses, training and certification by target specialism and employer; no uniform statutory requirement was verified in this round.",
+                "U.S. | Specialist certification (cardiac or vascular)",
+                "Check U.S. coursework, clinical training and certifier prerequisites for the specialty, then check the employer’s requirements.",
                 "The scope of specialist certification differs from general certification and is not automatically transferable across specialisms.",
-                "Specialist certification certificate and specialised examination records.",
-                "Verify by work location and employer.",
+                "BLS certification overview and the specialty certifier’s requirements.",
+                "United States; check the state, organization and employer.",
                 "Verify the registration and maintenance conditions of the target specialism.",
                 "Confirmed by the certifying body."
               ],
               [
                 "Basic life support and first aid training (BLS/CPR)",
-                "Attend and retrain periodically as required by the institution.",
+                "Some workers may need BLS or CPR certification. Check training, renewal and refresher intervals with the employer and training provider.",
                 "First aid training does not confer ultrasound practice authorization and cannot replace institutional emergency procedures.",
-                "Records of passing the training and their validity.",
+                "Employer or training provider requirements, training records and expiry.",
                 "Verify according to institutional and work location requirements.",
                 "Retrain periodically as arranged by the institution.",
                 "Confirmed by the training provider and the employer."
@@ -8336,15 +8348,93 @@
                 "Infection control and probe reprocessing training",
                 "Learn probe cleaning, disinfection and reprocessing processes as required by the institution and guidelines.",
                 "Training does not replace institutional infection control systems, and endocavity probes must undergo high-level disinfection as required.",
-                "Training records and probe reprocessing logs.",
+                "CDC reprocessing guidance; institutional training and reprocessing records.",
                 "Verify according to institutional and work location requirements.",
                 "Retrain as arranged by the institution and verify process updates.",
                 "Confirmed by the infection control lead."
+              ],
+              [
+                "Mainland China | Technologist and physician positions",
+                "Check degree subject, level and title by posting. For physicians, check practice credentials and residency separately.",
+                "Technical acquisition does not confer physician reporting authority.",
+                "Shanghai and Heyuan notices, Articles 2 and 20 of the mutual recognition rules, and facility policy.",
+                "Mainland China",
+                "Use the Shanghai and Heyuan notices below to compare roles.",
+                "Employer and local authority"
               ]
             ]
           },
           "id": "diagnostic-medical-sonographers.path.credential-decision.current.v1",
+          "source_refs": [
+            "bls-sonographer-current",
+            "inteleos-rdms",
+            "cdc-probe-current",
+            "nhsa-art-2-20",
+            "shanghai-sonography",
+            "heyuan-ultrasound-2026018"
+          ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Inputs | Fictional records only",
+                  "US-09 | Paper record handoff. Worklist: A-104 abdominal and B-208 vascular; identity and body area are already checked in the exercise. Probe P1 is marked reprocessed; P2 is unknown. Five files: A-104-abdominal-01, A-104-abdominal-02, A-140-abdominal-03, B-208-vascular-01, and no-ID-vascular-02. No images or clinical findings are supplied."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Deliverable | Status table and two sentences",
+                  "Compare each file with the supplied worklist. Mark “send for quality review,” “hold for verification,” or “do not file.” List probe status issues and the person to check them, then write a two-sentence handoff. Work on paper only; do not use patients, equipment or real records."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Reference | Check after your attempt",
+                  "Reference: the two A-104 files and B-208-vascular-01, three in total, can go to quality review. Hold A-140-abdominal-03 for worklist verification. Do not file the no-ID image record. P2 is unknown: mark it on hold and ask the infection-control lead to confirm. P1’s fictional status does not establish real readiness.",
+                  "Two-sentence handoff: “Three matching files can go to quality review; hold A-140 for worklist verification and do not file the record without an ID. Separately, keep P2 on hold for infection-control confirmation; the file queue does not establish equipment readiness.”"
+                ]
+              },
+              {
+                "id": "exercise-boundary",
+                "values": [
+                  "Boundary | No image interpretation or clinical competency assessment",
+                  "Use the reference to check all five records and P2 independently. Clinical work requires institutional procedures, supervision and authorization."
+                ]
+              }
+            ]
+          },
+          "id": "diagnostic-medical-sonographers.path.entry-work-sample-data.current.v1",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "title": "US-09 | Ultrasound record handoff",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "The Shanghai Clinical Research Center’s September 29, 2026 notice lists image acquisition, equipment maintenance, quality control and support for technologists. It asks for a bachelor’s or higher in medical imaging technology or a related field and the relevant professional title. Physician duties and requirements are separate. No numeric wage is stated.",
+              "Heyuan People’s Hospital’s remaining posts in its first 2026 contract recruitment round list one ultrasound physician, code 2026018. It specifies a bachelor’s degree or higher, physician qualification and the relevant residency training certificate. This is a physician post, not an entry route for sonographers; no wage is listed.",
+              "The two examples establish their own roles and conditions at publication. No comparable mainland occupational wage distribution was obtained. Health and social work industry means are not wages for either technologists or physicians."
+            ]
+          },
+          "id": "diagnostic-medical-sonographers.path.recruitment-sample.current.v1",
+          "source_refs": [
+            "shanghai-sonography",
+            "heyuan-ultrasound-2026018"
+          ],
+          "title": "Mainland vacancies | Technologist and physician roles",
+          "type": "notice"
         }
       ]
     },
@@ -8376,13 +8466,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The United States projection for 2025—2035 is an increase from 92200 to 105100, a net increase of 12900 and growth of about 14%; about 6000 annual average openings include growth and replacement. A national projection is not a current job advertisement, nor does it prove individual hiring or AI impact."
+              "BLS U.S. SOC 29-2032: about 92,200 jobs in 2025 and 105,100 projected in 2035, up 12,900 (13.9%). About 6,000 annual openings include replacement. The 2025 self-employment share was 1.1%, which is separate from the wage survey coverage."
             ]
           },
           "id": "diagnostic-medical-sonographers.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-sonographer-current",
-            "current-national-trends"
+            "bls-sonography-ep"
           ],
           "type": "prose"
         },
@@ -8475,7 +8564,7 @@
                 ]
               },
               {
-                "answer": "AI can assist with ordering, measurement prompts, some quality checks and record drafts, but it cannot prove identity correctness or scanning completeness, nor can it give a reliable occupational substitution rate or timeline.",
+                "answer": "AI can assist with sorting worklist entries, measurement prompts, some quality checks and record drafts, but it cannot prove identity correctness or scanning completeness, nor can it give a reliable occupational substitution rate or timeline.",
                 "id": "diagnostic-medical-sonographers.faq.4",
                 "question": "Diagnostic medical sonographers: which tasks can AI assist with?",
                 "question_key": "career.faq.diagnostic-medical-sonographers.ai-impact",
@@ -8517,7 +8606,7 @@
                 ]
               },
               {
-                "answer": "In the United States an associate degree or postsecondary certificate is usually required, and some workers need a state licence or certification; the Chinese ultrasound physician scope and the United States technical occupation are not mutually recognized one-to-one, and specific courses, clinical training and authority must be verified by location.",
+                "answer": "The typical U.S. entry education is an associate degree; certificate routes also exist. Check state licensure, certification and employer requirements separately. In mainland China, use the Shanghai and Heyuan notices to compare technologist and physician responsibilities and credentials.",
                 "fact_refs": [
                   "us-entry-route"
                 ],
@@ -8541,7 +8630,7 @@
                 ]
               },
               {
-                "answer": "United States 29-2032 had about 92,200 positions in 2025, is projected to grow 14% over 2025—2035, with about 6,000 annual average openings; a national projection does not represent individual hiring.",
+                "answer": "U.S. 29-2032 grows from about 92,200 jobs in 2025 to 105,100 projected in 2035, up 13.9% (14% rounded in the handbook). About 6,000 annual openings include replacement; they are not current vacancies or personal hiring odds.",
                 "fact_refs": [
                   "us-workforce-outlook"
                 ],
@@ -8902,7 +8991,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "2025 health and social work non-private 146266 yuan and private 75631 yuan/year, being the average wage of employed persons in industry units.",
+                  "NBS 2025 gross mean annual wages for employees of urban units in health and social work: CNY 146,266 in non-private units and CNY 75,631 in private units. These figures cover the industry.",
                   "Urban legal entity units with 5 or more people; non-private includes government agencies, public institutions and foreign-funded units and does not equal state-owned enterprises; self-employed and freelance workers are not included.",
                   "The tables read do not provide the wage distribution for this occupation, and it is not asserted on that basis that all official material has never provided it."
                 ],
@@ -8967,7 +9056,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "National percentiles are not starting salaries; wages do not include self-employment income."
+                  "May 2025 U.S. SOC 29-2032 median wages: $96,590/year and $46.44/hour. Annual P10/P25/P50/P75/P90 are $67,820/$80,430/$96,590/$106,930/$129,370. Percentiles are not experience bands or take-home pay."
                 ],
                 "evidence_type": "official occupation or safety source",
                 "id": "current-national-wages",
@@ -9055,21 +9144,92 @@
                 "url": "https://www.onetonline.org/link/details/29-2034.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Complete the scan according to protocol and check image quality — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Complete measurements and produce technical records — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "Observe and care for the patient's safety and comfort during the examination — 0/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "AI can help organize technical notes or flag missing fields. It does not confirm patient identity, equipment status or a diagnosis. No measured adoption, task effect or replacement rate was established for this occupation. Practice only with fictional records.",
+                  "Qualitative discussion without a job score.",
+                  "Qualitative discussion without a job score.",
+                  "Qualitative discussion without a job score.",
+                  "Qualitative discussion without a job score."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "Primary public evidence",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "Qualitative discussion without a job score.",
+                "name": "FermatMind: AI and ultrasound records",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "#career-visual-group-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Article 2 of China’s rules on mutual recognition of examination results separates ultrasound images or data from a physician’s diagnosis. Article 20 concerns examination and testing clinics set up by eligible medical institutions. It specifies independent diagnostic reports by licensed physicians in medical imaging and radiotherapy, medical laboratory medicine or pathology. Check the employer’s authorization for acquisition, review and final interpretation separately."
+                ],
+                "evidence_type": "Primary public evidence",
+                "id": "nhsa-art-2-20",
+                "limitation": "Article 20 concerns eligible examination and testing clinics, not every job.",
+                "name": "China’s examination results rules: Articles 2 and 20",
+                "period": "2022",
+                "publisher": "National Health Commission and co-issuing agencies",
+                "scope": "contextual",
+                "url": "https://www.nhsa.gov.cn/art/2022/2/21/art_37_7840.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The Shanghai Clinical Research Center’s September 29, 2026 notice lists image acquisition, equipment maintenance, quality control and support for technologists. It asks for a bachelor’s or higher in medical imaging technology or a related field and the relevant professional title. Physician duties and requirements are separate. No numeric wage is stated."
+                ],
+                "evidence_type": "Primary public evidence",
+                "id": "shanghai-sonography",
+                "limitation": "The two examples establish their own roles and conditions at publication. No comparable mainland occupational wage distribution was obtained. Health and social work industry means are not wages for either technologists or physicians.",
+                "name": "Shanghai Clinical Research Center: ultrasound physicians and technologists",
+                "period": "2026-09-29",
+                "publisher": "Shanghai Clinical Research Center",
+                "scope": "recruitment_proxy",
+                "url": "https://clinic.shanghaitech.edu.cn/jobs/105"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Heyuan People’s Hospital’s remaining posts in its first 2026 contract recruitment round list one ultrasound physician, code 2026018. It specifies a bachelor’s degree or higher, physician qualification and the relevant residency training certificate. This is a physician post, not an entry route for sonographers; no wage is listed."
+                ],
+                "evidence_type": "Primary public evidence",
+                "id": "heyuan-ultrasound-2026018",
+                "limitation": "The two examples establish their own roles and conditions at publication. No comparable mainland occupational wage distribution was obtained. Health and social work industry means are not wages for either technologists or physicians.",
+                "name": "Heyuan People’s Hospital: remaining contract vacancy table 2026018",
+                "period": "2026",
+                "publisher": "Heyuan People’s Hospital",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hyrmyy.com/upload/file/2026/02/13/6390660327867601908120907.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS U.S. SOC 29-2032: about 92,200 jobs in 2025 and 105,100 projected in 2035, up 12,900 (13.9%). About 6,000 annual openings include replacement. The 2025 self-employment share was 1.1%, which is separate from the wage survey coverage."
+                ],
+                "evidence_type": "Primary public evidence",
+                "id": "bls-sonography-ep",
+                "limitation": "U.S. SOC projection; it does not measure mainland vacancies.",
+                "name": "BLS Employment Projections Table 1.2: 29-2032",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "For Inteleos RDMS, check prerequisites and pass SPI and the corresponding specialty exam. Check state licensure and whether the employer asks for this credential separately."
+                ],
+                "evidence_type": "Certifying organization",
+                "id": "inteleos-rdms",
+                "limitation": "RDMS is one certification route, not a universal state license or mainland China qualification.",
+                "name": "Inteleos: RDMS eligibility and examinations",
+                "period": "2026",
+                "publisher": "Inteleos",
+                "scope": "contextual",
+                "url": "https://www.inteleos.org/certification/registered-diagnostic-medical-sonographer/"
               }
             ]
           },
@@ -9711,6 +9871,36 @@
               "item": "diagnostic-medical-sonographers.source-register.published.1"
             },
             "scope": "Supports only the object, market and period corresponding to that source; editorial suggestions are not treated as statistical results."
+          },
+          {
+            "href": "https://www.nhsa.gov.cn/art/2022/2/21/art_37_7840.html",
+            "id": "nhsa-art-2-20",
+            "label": "China’s examination results rules: Articles 2 and 20",
+            "scope": "Article 20 concerns eligible examination and testing clinics, not every job."
+          },
+          {
+            "href": "https://clinic.shanghaitech.edu.cn/jobs/105",
+            "id": "shanghai-sonography",
+            "label": "Shanghai Clinical Research Center: ultrasound physicians and technologists",
+            "scope": "The two examples establish their own roles and conditions at publication. No comparable mainland occupational wage distribution was obtained. Health and social work industry means are not wages for either technologists or physicians."
+          },
+          {
+            "href": "https://www.hyrmyy.com/upload/file/2026/02/13/6390660327867601908120907.pdf",
+            "id": "heyuan-ultrasound-2026018",
+            "label": "Heyuan People’s Hospital: remaining contract vacancy table 2026018",
+            "scope": "The two examples establish their own roles and conditions at publication. No comparable mainland occupational wage distribution was obtained. Health and social work industry means are not wages for either technologists or physicians."
+          },
+          {
+            "href": "https://www.inteleos.org/certification/registered-diagnostic-medical-sonographer/",
+            "id": "inteleos-rdms",
+            "label": "Inteleos: RDMS eligibility and examinations",
+            "scope": "RDMS is one certification route, not a universal state license or mainland China qualification."
+          },
+          {
+            "href": "https://www.cdc.gov/infection-control/hcp/disinfection-sterilization/healthcare-equipment.html",
+            "id": "cdc-probe-current",
+            "label": "Disinfection of Healthcare Equipment",
+            "scope": "Device reprocessing guidance is not a single occupational licence or an institutional operating procedure."
           }
         ],
         "tracks": [
@@ -9751,7 +9941,7 @@
                 "role": "Mentoring and quality control"
               }
             ],
-            "title": "From supervised internship to routine examinations"
+            "title": "U.S. pathway | From supervised internship to routine examinations"
           },
           {
             "id": "specialist",
@@ -9785,7 +9975,7 @@
                 "role": "Technical specifications and training output"
               }
             ],
-            "title": "Specialist deepening and technical expansion"
+            "title": "U.S. pathway | Specialist deepening and technical expansion"
           },
           {
             "id": "management",
@@ -10170,12 +10360,12 @@
             },
             {
               "指标": "2025 health and social work non-private industry annual average",
-              "数值": "146266 yuan/year",
+              "数值": "CNY 146,266/year",
               "说明": "Urban legal entity units with 5 or more people, non-private is not limited to state-owned enterprises; industry proxy background."
             },
             {
               "指标": "2025 health and social work private industry annual average",
-              "数值": "75631 yuan/year",
+              "数值": "CNY 75,631/year",
               "说明": "Same private unit scope for the industry, not the single ultrasound occupation."
             }
           ],
@@ -10265,12 +10455,12 @@
               "月薪参考": "Insufficient evidence: no national single-occupation scope obtained"
             },
             {
-              "城市/区间": "National single occupation",
-              "月薪参考": "Insufficient evidence: no national single-occupation scope obtained"
+              "城市/区间": "Shanghai Clinical Research Center: ultrasound physicians and technologists",
+              "月薪参考": "No numeric wage in the notice"
             },
             {
-              "城市/区间": "National single occupation",
-              "月薪参考": "Insufficient evidence: no national single-occupation scope obtained"
+              "城市/区间": "Heyuan People’s Hospital: remaining contract vacancy table 2026018",
+              "月薪参考": "No numeric wage in the notice"
             }
           ],
           "china_soc_row": {
@@ -10282,7 +10472,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "nhc-quality-current",
+                "$source": "nbs-wage",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10290,7 +10480,7 @@
               },
               "｜",
               {
-                "$source": "nhc-quality-current",
+                "$source": "nbs-wage",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10481,7 +10671,7 @@
           },
           {
             "指标": "United States employment growth (2025—2035)",
-            "数值": "14% (much faster than average)",
+            "数值": "13.9% (14% rounded in the handbook)",
             "说明": {
               "$join": [
                 {
@@ -10555,7 +10745,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "Projected 14% growth over 2025—2035 (much faster than average)",
+        "growth": "Projected growth 2025–35: 13.9%; rounded to 14% in the handbook",
         "heading": {
           "$item": "diagnostic-medical-sonographers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10693,7 +10883,7 @@
         "title": "What kind of person is diagnostic medical sonography suited to?"
       },
       "fit_decision_checklist": {
-        "boundary": "This is a work sample check, not a personality diagnosis or a hiring conclusion.",
+        "boundary": "Long periods standing, repeated postures, close patient contact and a high need for accuracy can be demanding. Use the paper exercise to see how it feels to stop and verify an uncertain record.",
         "how": {
           "$item": "diagnostic-medical-sonographers.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10740,12 +10930,13 @@
         "outlook_evidence": [
           {
             "geography": "United States",
-            "horizon": "2025 wages and the 2025—2035 projection",
+            "horizon": "2025–2035",
             "interpretation": "Recruitment samples, employment scale and job openings must be explained separately.",
             "limitation": "Cannot serve as a guarantee of individual employment.",
             "metric": "Projected growth and net increase",
-            "occupation_scope": "Diagnostic medical sonographers (29-2032.00)",
-            "value": "About 14% growth over 2025—2035; net increase 12900, with a projected 105100 in 2035"
+            "occupation_scope": "U.S. 29-2032 diagnostic medical sonographers",
+            "source_id": "bls-sonography-ep",
+            "value": "2025–35: +13.9%, net gain 12,900"
           },
           {
             "geography": "United States",
@@ -10753,7 +10944,7 @@
             "interpretation": "Employment scale and openings are not the same indicator.",
             "limitation": "Cannot serve as a guarantee of individual employment.",
             "metric": "Employment scale",
-            "occupation_scope": "Diagnostic medical sonographers (29-2032.00)",
+            "occupation_scope": "U.S. 29-2032 diagnostic medical sonographers",
             "value": "About 92,200 people in 2025"
           },
           {
@@ -10762,7 +10953,7 @@
             "interpretation": "The annual average of about 6000 includes growth and replacement such as job changes and labour force exits; it is not a net increase, real-time positions or a ten-year total.",
             "limitation": "Cannot serve as a guarantee of individual employment.",
             "metric": "Job openings",
-            "occupation_scope": "Diagnostic medical sonographers (29-2032.00)",
+            "occupation_scope": "U.S. 29-2032 diagnostic medical sonographers",
             "value": "About 6,000 openings per year on average over 2025—2035"
           }
         ],
@@ -10923,6 +11114,12 @@
               "item": "diagnostic-medical-sonographers.source-register.published.1"
             },
             "scope": "Supports only the object, market and period corresponding to that source; editorial suggestions are not treated as statistical results."
+          },
+          {
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "id": "bls-sonography-ep",
+            "label": "BLS Employment Projections Table 1.2: 29-2032",
+            "scope": "U.S. SOC projection; it does not measure mainland vacancies."
           }
         ],
         "transitions": [
@@ -11003,8 +11200,8 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
+            "cta_label": "Explore career interests",
             "evidence_level": "Work sample",
             "id": "riasec",
             "label": "Interests and tasks",
@@ -11022,8 +11219,8 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
+            "cta_label": "Explore the Big Five assessment",
             "evidence_level": "Work sample",
             "id": "big-five",
             "label": "Stable execution",
@@ -11041,8 +11238,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "Explore the MBTI assessment",
             "evidence_level": "Work sample",
             "id": "mbti",
             "label": "Observation preferences",
@@ -11055,8 +11252,8 @@
           },
           {
             "answer": "Verify through actual observation and institutional feedback, not by assessment.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
+            "cta_label": "Explore the Enneagram assessment",
             "evidence_level": "Work sample",
             "id": "enneagram",
             "label": "Motivation observation",
@@ -11069,8 +11266,8 @@
           },
           {
             "answer": "Observe how the person adjusts and asks in a simulated or supervised setting.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "Explore the reasoning assessment",
             "evidence_level": "Work sample",
             "id": "iq",
             "label": "Problem solving",
@@ -11083,8 +11280,8 @@
           },
           {
             "answer": "Verify through handover records and team feedback.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start the occupational interest test",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "Explore the emotional skills assessment",
             "evidence_level": "Work sample",
             "id": "eq",
             "label": "Collaboration boundaries",
@@ -11494,11 +11691,25 @@
         "id": "diagnostic-medical-sonographers.path.credential-decision.current.v1",
         "location": "entry_decisions",
         "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "diagnostic-medical-sonographers.path.entry-work-sample-data.current.v1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "diagnostic-medical-sonographers.path.recruitment-sample.current.v1",
+        "location": "entry_decisions",
+        "type": "notice"
       }
     ],
     "path": "/en/career/jobs/diagnostic-medical-sonographers",
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and record review",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -11529,26 +11740,26 @@
       },
       {
         "derivation": null,
-        "display_value": "$46.44/hour; $96,590/year (United States 29-2032, 2025)",
+        "display_value": "$96,590/year; $46.44/hour",
         "fact_id": "us-annual-wage",
         "market": "United States",
         "measure": "hourly and annual median wage",
         "occupation_scope": "Precise occupational data: Diagnostic Medical Sonographers 29-2032.00",
-        "period": "2025 wages; 2025-2035 projections; accessed 2026-09-06",
+        "period": "2025-05",
         "source_refs": [
-          "bls-sonographer-current"
+          "current-national-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "United States 29-2032: 92,200 positions in 2025; 14% growth over 2025—2035; about 6,000 annual average openings",
+        "display_value": "92,200→105,100; up 13.9%; about 6,000 openings/year",
         "fact_id": "us-workforce-outlook",
         "market": "United States",
         "measure": "employment and projection",
         "occupation_scope": "Precise occupational data: Diagnostic Medical Sonographers 29-2032.00",
-        "period": "2025 wages; 2025-2035 projections; accessed 2026-09-06",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-sonographer-current"
+          "bls-sonography-ep"
         ]
       },
       {
@@ -11586,27 +11797,15 @@
         "source_refs": [
           "fda-ultrasound-current"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+75+0)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Diagnostic medical sonographers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and record review"
     },
     "badges": [
       "Ultrasound equipment operation · image and measurement review · technical record handover",
@@ -11618,25 +11817,25 @@
         "availability": "available",
         "fact_ref": "us-annual-wage",
         "key": "us_pay",
-        "label": "United States median wage (2025, 96,590 USD/year; 46.44 USD/hour)"
+        "label": "U.S. median wage"
       },
       {
         "availability": "available",
         "fact_ref": "us-workforce-outlook",
         "key": "us_growth",
-        "label": "United States employment projection (14% growth over 2025—2035, much faster than average)"
+        "label": "U.S. projected growth (2025–35)"
       },
       {
         "availability": "available",
         "fact_ref": "us-workforce-outlook",
         "key": "us_employment",
-        "label": "United States employment (2025, about 92,200 people)"
+        "label": "U.S. employment and projections"
       },
       {
         "availability": "available",
         "fact_ref": "us-workforce-outlook",
         "key": "us_openings",
-        "label": "United States annual average job openings (2025—2035, about 6,000)"
+        "label": "U.S. annual openings"
       },
       {
         "availability": "missing",
@@ -11650,17 +11849,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Diagnostic medical sonographers verify the patient and the examination site, operate ultrasound equipment to acquire and review images, measurements and technical records, and then hand traceable results to the physician for use. To judge whether this path suits you, detail accuracy, patient communication, postural load, formal training and boundaries of authorization should all be verified."
+      "text": "Compare ultrasound image acquisition with physician interpretation, check pay and training by market, and try a fictional quality handoff."
     },
     "title": {
       "availability": "available",
-      "text": "Diagnostic medical sonographers"
+      "text": "Diagnostic Medical Sonographer: Duties, Pay and Training"
     }
   },
-  "source_content_sha256": "0b41074d445a0c342fda2108a8747069082f28411ffd7be1b29189fb3ceffbce",
+  "source_content_sha256": "c16dc9b3177ebad70524c5d94ec0c7db66fc77df6b262b23a1eb6836ca07c88c",
   "subject": {
     "canonical_slug": "diagnostic-medical-sonographers",
-    "name": "Diagnostic medical sonographers",
-    "summary": "Diagnostic medical sonographers verify the patient and the examination site, operate ultrasound equipment to acquire and review images, measurements and technical records, and then hand traceable results to the physician for use. To judge whether this path suits you, detail accuracy, patient communication, postural load, formal training and boundaries of authorization should all be verified."
+    "name": "Diagnostic Medical Sonographers",
+    "summary": "Diagnostic medical sonographers acquire and check ultrasound images, measurements and technical records for physicians to interpret. This is U.S. O*NET 29-2032.00. Mainland China distinguishes technical and physician roles in hiring, qualifications and diagnostic responsibility."
   }
 }

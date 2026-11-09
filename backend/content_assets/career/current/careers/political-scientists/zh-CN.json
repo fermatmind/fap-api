@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -23311,7 +23308,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "政治学家适合愿意把制度、政策或舆论问题转成可检验研究的人：先界定概念与对象，再核原始资料、方法和反例，最后说明结论能回答什么、不能回答什么。喜欢表达立场本身不足以判断是否适合；不同岗位的研究自由、保密与成果受众须逐岗核。"
+              "如果更喜欢即时评论，不愿整理资料、交代方法或接受复核，可以先做小样本再决定。研究自由、数据权限和成果受众按岗位核。"
             ]
           },
           "id": "political-scientists.quick-decision.fit-decision-checklist.1",
@@ -23326,7 +23323,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "可观察信号：愿意追溯原始文件和抽样方法；能把事实、解释与价值判断分开；面对与预期相反的数据会修订假设；能向非研究受众说明不确定性。若只喜欢即时评论而不愿清洗数据、写方法或接受同行复核，应先做短研究样本再决定。"
+              "从目录「入行、资格与职业发展」找到「入行练习：两城虚构政策调查」。只用 A1–A3，在 60 分钟内写一页备忘录。四次调查无法配对，抽样方式未交代，征询未随机分配，既往趋势未知。"
             ]
           },
           "id": "political-scientists.quick-decision.fit-decision-checklist.2",
@@ -23340,7 +23337,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全工作样本：使用本页完全虚构的 A1–A3 两城公共咨询资料，在 60 分钟内写一页研究备忘录，计算两城前后变化并注明样本不可配对、非随机与趋势未知；不得使用真实受访者或未授权政府资料。"
+              "愿意把制度或政策问题转成可检验问题，并肯查原始资料、补方法、面对反例修订结论的人，可以优先了解这条路。"
             ]
           },
           "id": "political-scientists.quick-decision.fit-decision-checklist.3",
@@ -23355,7 +23352,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "自验时核三件事：是否把 A1–A3 的样本人数和百分比写对；是否区分两城观察差与政策因果效果；是否提出至少两项缺失证据和一项复核办法。记录自己在资料核查、方法解释和写作中的难点，再请同伴独立复核。"
+              "按参考答案独立复算，并核对是否说清因果限制和至少两项待补资料。有同伴时可另请对方复核。"
             ]
           },
           "id": "political-scientists.quick-decision.fermat-decision-card.6",
@@ -24778,16 +24775,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可以辅助检索、摘要、文本编码建议、代码草拟和写作结构；现有证据不能给政治学家一个可靠的“替代率”。研究问题、样本、测量、伦理与结论仍由人负责。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "AI 可先整理公开资料或提议编码；逐条核来源、日期、变量定义与遗漏，涉及受限记录先核数据权限。未取得本职业的实际采用、任务效果或替代率。"
             ]
           },
           "id": "political-scientists.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor",
-            "ilo",
-            "arxiv",
-            "onet",
-            "bls"
+            "nist",
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -27344,12 +27338,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS报告美国政治学家2025年5月年工资中位数142,080美元，属于全国在岗者分布，不是新人起薪或个人报价。职业预测表以2025年约6,100人为基期，预计2035年约6,000人，下降2.0%，十年净减少约100人；年均约400个空缺包含替代需求，不等于净新增。工资调查、就业预测与具体招聘采用不同口径，不能直接推算个人录用机会或中国薪酬；申请时应查目标机构的岗位职责、资历要求及招聘公告。"
+              "美国 2025 年 5 月 19-3094 年薪中位数 142,080 美元、时薪中位数 68.31 美元。年薪 P10/P25/P50/P75/P90 为 83,350／114,030／142,080／174,180／195,190 美元；分位不对应资历或到手。 BLS 美国 19-3094：2025 年约 6,100 个岗位，2035 年预计 6,000 个，减少约 100 个（−2.0%）；年均约 400 个空缺来自替补。2025 年自雇占 2.5%，与工资统计覆盖不同。"
             ]
           },
           "id": "political-scientists.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "bls",
+            "onet-wages",
             "ep"
           ],
           "type": "prose"
@@ -27389,7 +27383,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "联邦政府、专业技术服务、教育服务和社会组织的中位数不同；这些是行业组别，不是统一薪酬等级。"
+              "四个行业组口径分别为联邦政府（不含邮政）、专业科学技术服务、州和地方及私营教育服务、州和地方政府（不含教育和医院）。这些中位数不能当作统一薪级。"
             ]
           },
           "id": "political-scientists.us-salary.career-snapshot-secondary-locale.29",
@@ -27544,7 +27538,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "宗教、资助、公民、专业及类似组织"
+              "州和地方政府，不含教育与医院"
             ]
           },
           "id": "political-scientists.us-salary.career-snapshot-secondary-locale.40",
@@ -27558,7 +27552,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "81,310美元/年"
+              "92,010 美元/年"
             ]
           },
           "id": "political-scientists.us-salary.career-snapshot-secondary-locale.41",
@@ -27773,19 +27767,19 @@
                 "entity": "九型人格测试",
                 "id": "link-4",
                 "relation": "career.test",
-                "url": "/zh/tests/enneagram-personality-test"
+                "url": "/zh/tests/enneagram-personality-test-nine-types"
               },
               {
                 "entity": "智力与推理测试",
                 "id": "link-5",
                 "relation": "career.test",
-                "url": "/zh/tests/iq-test"
+                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
               },
               {
                 "entity": "情绪智力测试",
                 "id": "link-6",
                 "relation": "career.test",
-                "url": "/zh/tests/eq-test"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "经济学家",
@@ -28122,7 +28116,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格不能推断政治学家的研究表现。"
+              "本页未取得支持用九型结果预测政治学家研究表现的证据。可用它反思自己如何应对异议，再以实际研究样本验证。"
             ]
           },
           "id": "political-scientists.fit.personality-fit-block.14",
@@ -29524,7 +29518,7 @@
                 "id": "education",
                 "values": [
                   "学历与方法",
-                  "BLS美国政治学家通常以硕士为典型入门教育；有雇主考虑本科，也有岗位偏好博士。中国要求看机构公告。",
+                  "BLS 美国政治学家典型入行学历为硕士。部分雇主考虑本科，也有雇主偏好博士；O*NET Job Zone Five 是准备程度分组，不能换成统一学位、工龄或许可。 教育部研究生目录 0302 政治学是学科分类；学位、职称、雇主招聘条件和项目的数据/伦理授权用途不同。高校教师、科研机构研究员与政策研究助理分别核。",
                   "核对：把目标岗位的学位、专业、方法和作品逐条列出。"
                 ]
               },
@@ -29587,15 +29581,15 @@
                 "id": "exercise-approach",
                 "values": [
                   "参考计算、评分与反馈",
-                  "A市40%至52%，增加12个百分点，相对增长(52−40)/40=30%；B市45%至46%，增加1个百分点。变化之差(52−40)−(46−45)=11个百分点，仅为描述差异。两市各期支持人数相加也不能识别同一人的态度转变；A3的104等于52+46，是后期两市支持人数合计，无法追踪个体。",
-                  "示例备忘录：观察到A市支持率增加12个百分点，B市增加1个百分点，变化之差11个百分点；同期宣传、样本构成变化及既往趋势差异均可能解释结果，不能认定是征询效果。需补两市多期同口径资料检验此前趋势、样本框与非回应记录核查可比性，并核实宣传时点。可说“观察到11个百分点的变化之差”；不能说“征询造成11%的提升”。四维0–2分量规：计算与单位——2分四率及三差均对且分清单位、1分部分正确、0分主要错误；证据边界——2分非配对及非因果均明确、1分仅一项、0分当因果或个体转变；替代解释与补证——2分三解释及两项有用途的资料、1分不全、0分没有；A3纠错与表达——2分三错均指出且给限定句、1分部分、0分照抄。A3原稿四维分别1、0、0、0，共1/8：识别A市前后数差但单位错，并错误宣称因果与个体变化；分数仅为本练习编辑自评。反馈示例：先把12%改为12个百分点，把11%政策效果改为11个百分点的观察差异；104只反映两市后期支持人数合计。补写非配对样本和三项替代解释，再按资料表独立复算。"
+                  "A市40%至52%，增加12个百分点，相对增长(52−40)/40=30%；B市45%至46%，增加1个百分点。变化之差(52−40)−(46−45)=11个百分点，仅为描述差异。两市各期支持人数相加也不能识别同一人的态度转变；后期支持人数合计是 52+46=98；A3 的 104 没有数据依据。独立样本也无法识别个人态度改变。",
+                  "示例备忘录：观察到A市支持率增加12个百分点，B市增加1个百分点，变化之差11个百分点；同期宣传、样本构成变化及既往趋势差异均可能解释结果，不能认定是征询效果。需补两市多期同口径资料检验此前趋势、样本框与非回应记录核查可比性，并核实宣传时点。可说“观察到11个百分点的变化之差”；不能说“征询造成11%的提升”。四维0–2分量规：计算与单位——2分四率及三差均对且分清单位、1分部分正确、0分主要错误；证据边界——2分非配对及非因果均明确、1分仅一项、0分当因果或个体转变；替代解释与补证——2分三解释及两项有用途的资料、1分不全、0分没有；A3纠错与表达——2分三错均指出且给限定句、1分部分、0分照抄。A3原稿四维分别1、0、0、0，共1/8：识别A市前后数差但单位错，并错误宣称因果与个体变化；分数仅为本练习编辑自评。反馈示例：先把12%改为12个百分点，把11%政策效果改为11个百分点的观察差异；后期人数合计为 98，104 无依据；98 也不表示个人转变。补写非配对样本和三项替代解释，再按资料表独立复算。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "复核与使用边界",
-                  "逐项复算40/100、52/100、45/100、46/100以及12、1、11个百分点、30%相对增长和52+46=104；核60分钟分配、量规总1/8和反馈一致。资料没有随机分配、配对个体和政策前趋势，不能据此推因果、个体转变或统计显著性。全部为虚构练习，不能当真实研究成果或用来录用评分。"
+                  "逐项复算40/100、52/100、45/100、46/100以及12、1、11个百分点、30%相对增长和52+46=98；核60分钟分配、量规总1/8和反馈一致。资料没有随机分配、配对个体和政策前趋势，不能据此推因果、个体转变或统计显著性。全部为虚构练习，不能当真实研究成果或用来录用评分。"
                 ]
               }
             ]
@@ -29639,7 +29633,7 @@
                 "id": "tooling-note",
                 "values": [
                   "方法限制卡",
-                  "说明非配对、非随机、同期宣传和未知既往趋势。"
+                  "说明四次调查不配对、抽样方式未交代，征询未随机分配。A 市同期有媒体宣传，两市既往趋势未知。"
                 ]
               }
             ]
@@ -29745,7 +29739,7 @@
                 "id": "entry-trial-day-6",
                 "values": [
                   "第六日",
-                  "请另一人按A1–A3复算并用四维0–2分量规复核；记录争议、具体修改依据和仍缺的资料。"
+                  "先用 A1–A3、参考答案和量规自行复算评分，记录修改依据和缺证。同伴复核可选。"
                 ]
               },
               {
@@ -29879,7 +29873,7 @@
           "data": {
             "paragraphs": [
               "学历、培训、研究岗位录用和项目伦理批准是不同事项，任何课程或证书都不自动授予研究或发布权限。",
-              "BLS美国政治学家典型入门教育为硕士，但个别雇主可接受本科或偏好博士；中国机构条件须按公告核对。",
+              "BLS 美国政治学家典型入行学历为硕士。部分雇主考虑本科，也有雇主偏好博士；O*NET Job Zone Five 是准备程度分组，不能换成统一学位、工龄或许可。 教育部研究生目录 0302 政治学是学科分类；学位、职称、雇主招聘条件和项目的数据/伦理授权用途不同。高校教师、科研机构研究员与政策研究助理分别核。",
               "含访谈或敏感政治身份资料的项目，先确认适用法律、机构审查和数据权限；本页不是法律意见。",
               "高校教师、政府公务员、独立政策研究者分别有不同岗位条件，不能把一个岗位的门槛推广为整个职业。"
             ]
@@ -29888,7 +29882,8 @@
           "source_refs": [
             "bls",
             "editor",
-            "privacy"
+            "privacy",
+            "china-discipline"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29898,15 +29893,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮核到中国社科院2026年度第一批专业技术人员招聘总公告（2025-12-11发布，主要报名截止2025-12-31）。科研等岗位一般要求博士学历学位及学术论文、专著或智库成果；这是该院总公告条件，不能推广到所有政治学研究岗。待遇只称按规定执行，没有可引用工资金额。",
-              "证据不足：岗位表附件访问返回403，未核政治学研究所的具体专业、人数和职责；浙江大学2026-09-20政治学研究所劳务派遣公告链接可定位，但动态岗位详情无可读正文，不据此认定独立研究职责或岗位仍开放。求职须重新核当期完整公告，本页不统计招聘占比或统一门槛。"
+              "中国社会科学院 2026 年第二批专业技术人员岗位表第 23 项：政治学研究所科研岗 2 人，专业技术中级、博士研究生，限政治学（0302）或公共管理（1204）。承担国家治理、城市治理、公共政策研究等领域的学术研究和教学，论文门槛按应聘类别不同。",
+              "北大人事部 2026 年中国政治学研究中心教研系列公告：列助理教授、预聘副教授、长聘副教授和教授，要求相关学科博士；材料含未来 3–5 年学术工作计划、至少 5 项代表性成果和至少 3 封专家推荐信。 两份是有日期的研究或教研用工样本，未给可比固定薪资。它们不代表全国资格、现招或普通研究助理门槛。"
             ]
           },
           "id": "political-scientists.path.recruitment-sample.1",
           "source_refs": [
             "cass-recruitment",
-            "zju-index",
-            "editor"
+            "zju-index"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30087,13 +30081,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑提出的能力积累路径：先用研究助理任务练资料和方法，再探索项目分析、研究设计及负责人任务。阶段不是晋升成功率研究，不同机构的学位、经验、岗位名称和发布权限须按实际公告核对。"
+              "BLS 美国政治学家典型入行学历为硕士。部分雇主考虑本科，也有雇主偏好博士；O*NET Job Zone Five 是准备程度分组，不能换成统一学位、工龄或许可。 教育部研究生目录 0302 政治学是学科分类；学位、职称、雇主招聘条件和项目的数据/伦理授权用途不同。高校教师、科研机构研究员与政策研究助理分别核。"
             ]
           },
           "id": "political-scientists.path.career-path-block.20",
           "source_refs": [
             "bls",
-            "editor"
+            "onet",
+            "china-discipline"
           ],
           "type": "prose"
         },
@@ -31189,14 +31184,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国BLS预计政治学家2025约6,100人、2035约6,000人，十年净减少约100人（-2.0%），年均仍约400个空缺。中国没有本页可比的单职业预测。"
+              "BLS 美国 19-3094：2025 年约 6,100 个岗位，2035 年预计 6,000 个，减少约 100 个（−2.0%）；年均约 400 个空缺来自替补。2025 年自雇占 2.5%，与工资统计覆盖不同。"
             ]
           },
           "id": "political-scientists.market-signals.market-signal-card.8",
           "source_refs": [
-            "ep",
-            "onet",
-            "editor"
+            "ep"
           ],
           "type": "prose"
         },
@@ -32143,9 +32136,9 @@
                 "url": "https://www.onetonline.org/link/details/19-3094.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025年5月工资中位数142,080美元；行业中位数分组。",
+                  "BLS 美国政治学家典型入行学历为硕士。部分雇主考虑本科，也有雇主偏好博士；O*NET Job Zone Five 是准备程度分组，不能换成统一学位、工龄或许可。",
                   "典型入门教育硕士；部分雇主接受本科或偏好博士。"
                 ],
                 "evidence_type": "official occupational outlook",
@@ -32159,9 +32152,9 @@
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/political-scientists.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025约6,100人、2035约6,000人，净变化约-100、增长率约-2.0%、年均空缺约400。",
+                  "BLS 美国 19-3094：2025 年约 6,100 个岗位，2035 年预计 6,000 个，减少约 100 个（−2.0%）；年均约 400 个空缺来自替补。2025 年自雇占 2.5%，与工资统计覆盖不同。",
                   "表1.2列2025年工资中位数142,080美元和典型入门教育硕士学位。"
                 ],
                 "evidence_type": "official employment projection and wage table",
@@ -32495,9 +32488,9 @@
                 "url": "https://www.onetonline.org/link/summary/13-1161.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "全国年工资第10/25/50/75/90分位分别为83,350/114,030/142,080/174,180/195,190美元。",
+                  "美国 2025 年 5 月 19-3094 年薪中位数 142,080 美元、时薪中位数 68.31 美元。年薪 P10/P25/P50/P75/P90 为 83,350／114,030／142,080／174,180／195,190 美元；分位不对应资历或到手。",
                   "页面包含州别与小时工资，不能把其他市场或单位误写为全国年薪。"
                 ],
                 "evidence_type": "official wage statistics",
@@ -32527,53 +32520,68 @@
                 "url": "https://www.onetonline.org/link/summary/15-2051.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "科研等岗位一般博士及成果，待遇按规定执行但未列金额。",
-                  "附件岗位表返回403，不能声称已核精确岗位；不能声称目前开放。"
+                  "中国社会科学院 2026 年第二批专业技术人员岗位表第 23 项：政治学研究所科研岗 2 人，专业技术中级、博士研究生，限政治学（0302）或公共管理（1204）。承担国家治理、城市治理、公共政策研究等领域的学术研究和教学，论文门槛按应聘类别不同。",
+                  "两份是有日期的研究或教研用工样本，未给可比固定薪资。它们不代表全国资格、现招或普通研究助理门槛。"
                 ],
-                "evidence_type": "official employer announcement",
+                "evidence_type": "原始公开资料",
                 "id": "cass-recruitment",
-                "limitation": "历史总公告；未核附件中的政治学研究所具体专业、人数和职责；非全国职业门槛或薪资分布。",
+                "limitation": "两份是有日期的研究或教研用工样本，未给可比固定薪资。它们不代表全国资格、现招或普通研究助理门槛。",
                 "market": "CN",
-                "name": "中国社会科学院2026年度公开招聘第一批专业技术人员公告",
-                "period": "2025-12-11公告；主要报名截止2025-12-31",
+                "name": "中国社科院：2026 年第二批专业技术人员岗位表",
+                "period": "2026-05-22",
                 "publisher": "中国社会科学院人事教育局",
-                "scope": "contextual",
-                "url": "https://www.cass.cn/tongzhigonggao/202512/t20251211_5955190.shtml"
+                "scope": "recruitment_proxy",
+                "url": "https://www.cssn.cn/ggzp/202605/t20260523_5992954.shtml"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "索引指向劳务派遣人员招聘（派遣至浙江大学政治学研究所）。",
-                  "未把劳务派遣自动映射成政治学家独立研究责任或工资报价。"
+                  "北大人事部 2026 年中国政治学研究中心教研系列公告：列助理教授、预聘副教授、长聘副教授和教授，要求相关学科博士；材料含未来 3–5 年学术工作计划、至少 5 项代表性成果和至少 3 封专家推荐信。",
+                  "两份是有日期的研究或教研用工样本，未给可比固定薪资。它们不代表全国资格、现招或普通研究助理门槛。"
                 ],
-                "evidence_type": "official employer recruitment index",
+                "evidence_type": "原始公开资料",
                 "id": "zju-index",
-                "limitation": "证据不足：只有索引及动态详情链接可核；未取得可读具体职责、待遇或截止条件，不能当独立研究岗位招聘样本。",
+                "limitation": "两份是有日期的研究或教研用工样本，未给可比固定薪资。它们不代表全国资格、现招或普通研究助理门槛。",
                 "market": "CN",
-                "name": "浙江大学人力资源处招聘信息（二）",
-                "period": "索引载2026-09-20政治学研究所劳务派遣公告",
-                "publisher": "浙江大学人力资源处",
-                "scope": "contextual",
-                "url": "https://hr.zju.edu.cn/cn/29047/list.psp"
+                "name": "北大人事部：2026 年中国政治学研究中心教研岗位",
+                "period": "2026",
+                "publisher": "北京大学人事部",
+                "scope": "recruitment_proxy",
+                "url": "https://hr.pku.edu.cn/rczp/jxky/4c5be82ca78e442eac412ecdb781d5d8.htm"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "问题输入｜界定制度、政策或公众意见中的可检验问题｜说明研究对象、时间、地区、概念和所需决策，不把立场当问题定义。 — 50/100; weight=1/3; political-scientists.profile.responsibilities-block.1[0]",
-                  "资料获取｜按许可取得原始政策、文献、调查或选举资料｜记录出处、抽样、变量定义与缺失值，保护受访者和机构机密。 — 75/100; weight=1/3; political-scientists.profile.responsibilities-block.1[1]",
-                  "方法分析｜比较制度机制、编码文本或分析数据｜检验替代解释和稳健性，避免把相关关系直接写成政策因果效果。 — 75/100; weight=1/3; political-scientists.profile.responsibilities-block.1[2]"
+                  "AI 可先整理公开资料或提议编码；逐条核来源、日期、变量定义与遗漏，涉及受限记录先核数据权限。未取得本职业的实际采用、任务效果或替代率。",
+                  "定性说明，无替代评分。",
+                  "定性说明，无替代评分。",
+                  "定性说明，无替代评分。",
+                  "定性说明，无替代评分。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "原始公开资料",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "定性说明，无替代评分。",
+                "name": "费马测试：AI 研究任务证据口径",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "#career-visual-group-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "教育部研究生目录 0302 政治学是学科分类；学位、职称、雇主招聘条件和项目的数据/伦理授权用途不同。高校教师、科研机构研究员与政策研究助理分别核。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "china-discipline",
+                "limitation": "学科目录不能作为职业许可。",
+                "name": "教育部：研究生教育学科专业目录",
+                "period": "2022",
+                "publisher": "教育部",
+                "scope": "contextual",
+                "url": "https://www.moe.gov.cn/srcsite/A22/moe_833/202209/W020220914572994461110.pdf"
               }
             ]
           },
@@ -34025,6 +34033,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.cssn.cn/ggzp/202605/t20260523_5992954.shtml",
+            "id": "cass-recruitment",
+            "label": "中国社科院：2026 年第二批专业技术人员岗位表",
+            "scope": "两份是有日期的研究或教研用工样本，未给可比固定薪资。它们不代表全国资格、现招或普通研究助理门槛。"
+          },
+          {
+            "href": "https://hr.pku.edu.cn/rczp/jxky/4c5be82ca78e442eac412ecdb781d5d8.htm",
+            "id": "zju-index",
+            "label": "北大人事部：2026 年中国政治学研究中心教研岗位",
+            "scope": "两份是有日期的研究或教研用工样本，未给可比固定薪资。它们不代表全国资格、现招或普通研究助理门槛。"
+          },
+          {
+            "href": "https://www.moe.gov.cn/srcsite/A22/moe_833/202209/W020220914572994461110.pdf",
+            "id": "china-discipline",
+            "label": "教育部：研究生教育学科专业目录",
+            "scope": "学科目录不能作为职业许可。"
           }
         ],
         "tracks": [
@@ -37486,7 +37512,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与研究任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37541,7 +37567,7 @@
       },
       {
         "derivation": null,
-        "display_value": "142,080美元/年",
+        "display_value": "142,080 美元/年；68.31 美元/小时",
         "fact_id": "us-wage-2025",
         "market": "US",
         "measure": "年薪中位数",
@@ -37637,10 +37663,10 @@
       },
       {
         "derivation": null,
-        "display_value": "81,310美元/年",
+        "display_value": "92,010 美元/年",
         "fact_id": "us-industry-wage-civic-2025",
         "market": "US",
-        "measure": "公民和社会组织政治学家年工资中位数",
+        "measure": "州和地方政府（不含教育与医院）年薪中位",
         "occupation_scope": "SOC 19-3094 / O*NET 19-3094.00 Political Scientists，US全国",
         "period": "May 2025",
         "source_refs": [
@@ -37754,27 +37780,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "政治学家",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与研究任务"
     },
     "badges": [
       "政治学家 · 政治制度与政策研究",
@@ -37818,17 +37832,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "政治学家的研究任务、职业边界、AI 影响、中美工资口径与入行路径：用虚构两城公共咨询数据练习研究设计、前后比较、因果限制和可复核政策备忘录。"
+      "text": "比较政治学研究、政策分析与调查岗位，核中美学历和工资口径，并用两城虚构调查练一页可复核的政策备忘录。"
     },
     "title": {
       "availability": "available",
-      "text": "政治学家"
+      "text": "政治学家做什么？研究岗位、收入与入行"
     }
   },
-  "source_content_sha256": "32c99e0f942c8f15349e12c9d2fd0f079e70787ec27a32afbac4f96ba0bcb5ae",
+  "source_content_sha256": "483538eb2317a3c75d72254ee78fe53f5ffb350f1a5bb0407ec5f280c81eb1dc",
   "subject": {
     "canonical_slug": "political-scientists",
     "name": "政治学家",
-    "summary": "政治学家研究政治制度、政策、公共意见与政治行为，提出可检验的问题，收集并分析文献、调查或选举资料，再向研究、政府或公共事务受众说明结论与限制。岗位可能包含教学、咨询或政策评估；实际授权、数据使用和最终公共决策由具体机构界定。"
+    "summary": "政治学家研究制度、政策与公共意见，用文献、调查或比较资料回答可检验的问题。选方向时先看你要交学术研究、政策备忘录，还是调查数据；各岗位的学历、研究权限和发布责任分别核。"
   }
 }

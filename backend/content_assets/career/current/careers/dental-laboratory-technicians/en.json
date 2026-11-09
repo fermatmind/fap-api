@@ -8,9 +8,6 @@
       "fact:employment": {
         "status": "mapped"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -22554,7 +22551,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Decision center: whether, with prescription specifications, model and impression quality, material and process parameters, occlusion and seating precision and delivery deadlines all applying at the same time, one can turn impression work and modeling, wax patterns and casting, porcelain build-up and polishing, and inspection and delivery into a genuine, traceable processing loop that meets quality requirements; the focus is not on “looking right” but on making every restoration meet the agreed functional and appearance requirements when the dentist seats it."
+              "Try lab work if you enjoy precise measurement, ask before proceeding with missing specifications, and keep a record of rework."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.1",
@@ -22568,7 +22565,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Worth trying first: willing to do fine manual work for long periods, able to accept repeated polishing and repeated verification, willing to follow the work order and process specifications without changing the prescription on one's own, interested in hand feel, spatial sense, color discrimination and dimensional precision, and able to record anomalies, rework and process parameters faithfully."
+              "Pause if you want to make patient-care decisions or dislike repeated checking and rework. Compare the responsibilities of dental assistants and dentists before choosing a path."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.2",
@@ -22596,7 +22593,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Low-risk verification: complete the paper exercise for the entry case D-01 covering deviation in three dimensions, missing work-order items and version conflicts, then compare it with the reference delivery and the seven-day plan; no real impressions or equipment are used, and it only observes preferences for verification, documentation and rework feedback, and does not equal training completion or hiring."
+              "Open “Entry, certification and career development” and find “Entry case: D-01 work order and dimensions.” Use three fictional measurements, then decide how to handle a v2 file with conflicting units and materials."
             ]
           },
           "id": "actors.quick-decision.fit-decision-checklist.4",
@@ -22624,7 +22621,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The work is mainly in a laboratory, mostly in a temperature-controlled indoor environment, requiring long periods of mostly seated fine manual work and equipment operation, with exposure to gypsum and metal dust, noise and some chemical materials; delivery deadlines are often set by clinical appointments, creating time pressure; units differ clearly (clinic-affiliated laboratories, commercial denture manufacturing enterprises, medical device manufacturing enterprises) in process division of labor, degree of digitalization, pay method and quality management system."
+              "Lab work uses hand tools or digital equipment and can involve long periods of fine work. Exposure to dust, noise and materials varies by process and workplace. Ask who trains new staff, who checks their work, and how rework is recorded."
             ]
           },
           "id": "actors.display.fermat_decision_card.summary",
@@ -22652,12 +22649,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Inputs that must be verified: the work order and specifications (material, color, occlusion and contact requirements, seating time), impressions or intraoral scan data, model quality and disinfection requirements, denture materials and registration information, equipment parameters and process specifications. What must not be done: do not change specifications set by the dentist without authorization, do not use unregistered denture materials or materials of unknown origin, do not start work when models are damaged or scan data are unclear, and do not skip inspection and release finished products directly."
+              "Check the order, model, scan and material records first. If material origin or the applicable registration, filing and production licence are unclear, pause and refer the case to quality staff. Do not change the dentist’s specifications or bypass authorized release."
             ]
           },
           "id": "actors.display.fit_decision_checklist.suit-detail",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-cn-denture2026"
           ],
           "type": "prose"
         },
@@ -22666,7 +22664,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Fit judgments should combine laboratory mentoring observation, finished-product inspection records and dentist feedback, and are not replaced by an interest type or a single test; color vision, manual dexterity and spatial sense are ability requirements in real tasks that must be confirmed through actual operation and feedback."
+              "If repeated rework, dust or noise is a concern, ask about workstation rotation, exposure controls and quality checks. Use the paper exercise to explore your preferences."
             ]
           },
           "id": "actors.display.fit_decision_checklist.boundary-detail",
@@ -22773,14 +22771,16 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Verify records, inspection and cleaning, disinfection and packaging validation according to the actual product materials, processes and quality system; the guiding principles are not universal fixed-parameter statutory provisions. On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary."
+              "Verify records, inspection and cleaning, disinfection and packaging validation according to the actual product materials, processes and quality system; the guiding principles are not universal fixed-parameter statutory provisions. From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record."
             ]
           },
           "id": "actors.profile.work-context-block.6",
           "source_refs": [
             "r5-cn-denture2026",
             "r5-cn-production",
-            "r5-cn-gmp-transition"
+            "r5-cn-gmp-transition",
+            "dental-nmpa16",
+            "dental-nmpa16-denture"
           ],
           "type": "prose"
         },
@@ -23000,7 +23000,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Compare by actual tasks: dental assistants perform limited clinical and administrative work under a dentist's direction; eyewear dispensing selects and fits prescription lenses and frames; equipment repair tests, adjusts and repairs; ophthalmic work processes lenses and optical parts; medical appliances 51-9082 fabricate and maintain braces and prostheses, and the authority for patient measurement and fitting under 29-2091 is not automatically merged in. Laboratory inspection and fitting on the model and articulator are separate from clinical try-in and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience or training or supervisor approval does not substitute for physician qualifications."
+              "Dental assistants support chairside care. Optical labs make lenses; medical appliance technicians make or repair braces and prostheses."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.secondary",
@@ -23048,7 +23048,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Compare by actual tasks: dental assistants perform limited clinical and administrative work under a dentist's direction; eyewear dispensing selects and fits prescription lenses and frames; equipment repair tests, adjusts and repairs; ophthalmic work processes lenses and optical parts; medical appliances 51-9082 fabricate and maintain braces and prostheses, and the authority for patient measurement and fitting under 29-2091 is not automatically merged in. Laboratory inspection and fitting on the model and articulator are separate from clinical try-in and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience or training or supervisor approval does not substitute for physician qualifications."
+              "Dental assistants work with care schedules, instruments and patient records. Optical labs use lens specifications; medical appliance technicians use device specifications and models."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.secondary",
@@ -23096,7 +23096,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Compare by actual tasks: dental assistants perform limited clinical and administrative work under a dentist's direction; eyewear dispensing selects and fits prescription lenses and frames; equipment repair tests, adjusts and repairs; ophthalmic work processes lenses and optical parts; medical appliances 51-9082 fabricate and maintain braces and prostheses, and the authority for patient measurement and fitting under 29-2091 is not automatically merged in. Laboratory inspection and fitting on the model and articulator are separate from clinical try-in and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience or training or supervisor approval does not substitute for physician qualifications."
+              "Assistants set up, handle instruments and support dentists. Optical labs cut, grind and mount lenses. Medical appliance technicians shape and finish devices."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.secondary",
@@ -23144,7 +23144,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Compare by actual tasks: dental assistants perform limited clinical and administrative work under a dentist's direction; eyewear dispensing selects and fits prescription lenses and frames; equipment repair tests, adjusts and repairs; ophthalmic work processes lenses and optical parts; medical appliances 51-9082 fabricate and maintain braces and prostheses, and the authority for patient measurement and fitting under 29-2091 is not automatically merged in. Laboratory inspection and fitting on the model and articulator are separate from clinical try-in and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience or training or supervisor approval does not substitute for physician qualifications."
+              "Assistants prepare instruments and care records. Optical technicians supply finished lenses; medical appliance technicians supply fabricated or repaired devices."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.outputs.secondary",
@@ -23192,7 +23192,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Compare by actual tasks: dental assistants perform limited clinical and administrative work under a dentist's direction; eyewear dispensing selects and fits prescription lenses and frames; equipment repair tests, adjusts and repairs; ophthalmic work processes lenses and optical parts; medical appliances 51-9082 fabricate and maintain braces and prostheses, and the authority for patient measurement and fitting under 29-2091 is not automatically merged in. Laboratory inspection and fitting on the model and articulator are separate from clinical try-in and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience or training or supervisor approval does not substitute for physician qualifications."
+              "Dental assistants work within their duties and supervision. Optical technicians work to lens specifications. Medical appliance fabrication is separate from patient assessment by orthotists or prosthetists."
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.secondary",
@@ -23481,14 +23481,16 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "Verify records, inspection and cleaning, disinfection and packaging validation according to the actual product materials, processes and quality system; the guiding principles are not universal fixed-parameter statutory provisions. On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary."
+              "Verify records, inspection and cleaning, disinfection and packaging validation according to the actual product materials, processes and quality system; the guiding principles are not universal fixed-parameter statutory provisions. From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record."
             ]
           },
           "id": "actors.display.responsibilities_block.04",
           "source_refs": [
             "r5-cn-denture2026",
             "r5-cn-production",
-            "r5-cn-gmp-transition"
+            "r5-cn-gmp-transition",
+            "dental-nmpa16",
+            "dental-nmpa16-denture"
           ],
           "type": "prose"
         },
@@ -23642,14 +23644,16 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Verify records, inspection and cleaning, disinfection and packaging validation according to the actual product materials, processes and quality system; the guiding principles are not universal fixed-parameter statutory provisions. On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary."
+              "Verify records, inspection and cleaning, disinfection and packaging validation according to the actual product materials, processes and quality system; the guiding principles are not universal fixed-parameter statutory provisions. From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record."
             ]
           },
           "id": "actors.display.work_context_block.quality",
           "source_refs": [
             "r5-cn-denture2026",
             "r5-cn-production",
-            "r5-cn-gmp-transition"
+            "r5-cn-gmp-transition",
+            "dental-nmpa16",
+            "dental-nmpa16-denture"
           ],
           "type": "prose"
         },
@@ -23716,7 +23720,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification. The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority. On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary."
+              "The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification. The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority. From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
@@ -24388,7 +24392,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OOH describes dental technicians using computer programs and 3D printing, and gives a demand projection explanation based on labor-saving technology; long-term prevalence, generative AI adoption and replacement ratios for each process were not verified. CAD/CAM, scanning and additive manufacturing do not automatically equal GenAI, and work order summaries and design candidates are scenarios to be verified. Laboratory inspection and fitting on the model and articulator are separate from clinical try-in and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience or training or supervisor approval does not substitute for physician qualifications. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "BLS cites 3D printing and other labor-saving technologies in its outlook. CAD/CAM, scanning and additive manufacturing can change how parts are made. Generative AI for order summaries or design suggestions remains a scenario to validate. Labs still check orders and measurements; qualified dentists handle clinical fitting and adjustments."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24771,14 +24775,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Beyond the uses permitted by the unit, the lawful basis for personal information and the applicable production quality requirements must also be verified. Identifiable oral health data are treated as sensitive personal information, requiring a lawful basis, specific purpose, adequacy and necessity, strict protection, applicable notice and prior impact assessment records; the consent basis follows separate consent conditions, and consent is not the only basis in all cases. De-identification does not equal irreversible anonymization, and a unit account does not automatically allow uploads to external AI. On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary."
+              "Beyond the uses permitted by the unit, the lawful basis for personal information and the applicable production quality requirements must also be verified. Identifiable oral health data are treated as sensitive personal information, requiring a lawful basis, specific purpose, adequacy and necessity, strict protection, applicable notice and prior impact assessment records; the consent basis follows separate consent conditions, and consent is not the only basis in all cases. De-identification does not equal irreversible anonymization, and a unit account does not automatically allow uploads to external AI. From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
             "r5-cn-pipl",
             "r5-cn-gmp-transition",
-            "r5-cn-production"
+            "r5-cn-production",
+            "dental-nmpa16",
+            "dental-nmpa16-denture"
           ],
           "type": "prose"
         },
@@ -26178,7 +26184,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no Chinese occupational wage or real recruitment quote distribution for dental restoration fabrication was obtained in this round; the NBS2025 industry table already read serves only as matching unit background, and it is not claimed from what was not obtained that it has never been published or that this is the highest statistical breakdown."
+              "This page did not find a national mainland China wage distribution for this occupation. The two notices illustrate job requirements; manufacturing wages describe the broader industry."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
@@ -26192,7 +26198,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorially, job seekers should verify the pay basis, hours, orders, rework unit price and responsibility, and material and equipment arrangements; there is no recruitment sample in this round, so it is not claimed that processing plants generally use piece-rate commissions or that individuals bear no procurement responsibility."
+              "Neither notice lists pay. Ask the employer separately about base pay, piece rates or bonuses, how rework is counted, and working hours."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
@@ -26235,7 +26241,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Note: not obtaining an occupation-specific figure does not mean the official source has never published one; this page records only the actual scope and results of what was consulted, and does not fill in with U.S. data, industry averages or non-transparent quote samples."
+              "Compare offers for similar processes, hours and locations. U.S. wage percentiles, manufacturing averages and job requirements answer different questions."
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
@@ -26280,7 +26286,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no Chinese occupational wage or real recruitment quote distribution for dental restoration fabrication was obtained in this round; the NBS2025 industry table already read serves only as matching unit background, and it is not claimed from what was not obtained that it has never been published or that this is the highest statistical breakdown."
+              "This page did not find a national mainland median, starting salary or wage percentiles for this occupation. Neither the Shenzhen nor Liuzhou notice lists an amount."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
@@ -26294,14 +26300,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification."
+              "In June 2025 Shenzhen Stomatology Hospital advertised one dental technician. It specified a junior college diploma or higher in dental restoration technology, an occupational qualification certificate in dental restoration, and a preference for related experience. Duties included scanning, impressions, milling and sintering, temporary dentures, and assisting with design and adjustment. The notice did not list pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "r5-cn-standard2020-read",
-            "r5-cn-standard2023-notice",
-            "r5-cn-title"
+            "dental-shenzhen"
           ],
           "type": "prose"
         },
@@ -26310,13 +26314,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorially verify the specific processes, education and experience, mentoring, equipment and quality authority; there is no real Chinese recruitment sample in this round, and the commonness of related graduates, widespread piecework, or the frequency of CAD or implant recruitment advantages was not verified."
+              "In a May 13, 2026 supplemental notice, Liuzhou Workers’ Hospital advertised one dental department technician outside its established staffing quota. It required undergraduate education in a dental medicine field or medical imaging and a bachelor’s or higher degree, graduate eligibility under the notice and CET-4 or above. The supplemental notice did not list a pay amount or denture fabrication duties. It referred to the February posting for compensation terms. This is an adjacent role."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "r5-onet-current",
-            "r5-cn-production"
+            "dental-liuzhou"
           ],
           "type": "prose"
         },
@@ -26325,7 +26328,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority. On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary. The guiding principles are guidance for registration materials rather than mandatory enforcement of regulations, and the actual licensing and product requirements are verified separately."
+              "The CMDE registration review guide covers fixed and removable custom dentures made with registered denture materials as Class II (17-06-04). For manufacturing inspection, the attachment to NMPA Notice 16 of 2026 separately addresses dentures made with denture materials that have neither been registered nor filed: these are managed as Class III, with the corresponding manufacturing licence."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -26333,7 +26336,9 @@
             "r5-cn-denture2026",
             "r5-cn-patientmatch",
             "r5-cn-production",
-            "r5-cn-gmp-transition"
+            "r5-cn-gmp-transition",
+            "dental-nmpa16",
+            "dental-nmpa16-denture"
           ],
           "type": "prose"
         },
@@ -26342,7 +26347,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no Chinese occupational wage or real recruitment quote distribution for dental restoration fabrication was obtained in this round; the NBS2025 industry table already read serves only as matching unit background, and it is not claimed from what was not obtained that it has never been published or that this is the highest statistical breakdown."
+              "Average 2025 wages in urban manufacturing units provide industry context only. A hospital role and a denture manufacturer’s job may differ substantially."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26385,7 +26390,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The mainland China salary section of this page retains only the evidence boundary: it does not treat an industry average as an occupational wage, does not substitute U.S. data, and does not state a national median, starting pay or percentile for this occupation."
+              "This section gives two sets of job requirements and manufacturing context. It does not estimate mainland occupational pay."
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
@@ -28204,7 +28209,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority. On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary."
+              "From November 1, 2026, the Notice 16 attachment is used for custom denture manufacturing licence inspections and postmarket inspection decisions. It distinguishes acceptance criteria, production and inspection records for each batch or unit, and release signed by authorized staff. Contract production release is separate from the contracting party’s market release. See the CMDE registration guide for clinical fitting and adjustment by qualified dentists."
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
@@ -28212,7 +28217,9 @@
             "r5-cn-denture2026",
             "r5-cn-patientmatch",
             "r5-cn-production",
-            "r5-cn-gmp-transition"
+            "r5-cn-gmp-transition",
+            "dental-nmpa16",
+            "dental-nmpa16-denture"
           ],
           "type": "prose"
         },
@@ -28551,7 +28558,9 @@
           "source_refs": [
             "r5-cn-denture2026",
             "r5-cn-patientmatch",
-            "r5-cn-production"
+            "r5-cn-production",
+            "dental-nmpa16",
+            "dental-nmpa16-denture"
           ],
           "type": "prose"
         },
@@ -28781,7 +28790,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "United States JobZone1—2 and SVP below 6 are the preparation group; education 52% high school, 18% post-high-school certificate and 13% below high school are respondents' opinions about required education, with the categories for the remaining 17% unverified, and are not treated as employee composition or law. BLS own typical entry is high school, no related experience and medium-term on-the-job training, not short- or long-term; group-level training descriptions do not guarantee individual duration. The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification. OOH industry certification is voluntary, and current certification fees, experience and all state rules were not fully verified."
+              "In June 2025 Shenzhen Stomatology Hospital advertised one dental technician. It specified a junior college diploma or higher in dental restoration technology, an occupational qualification certificate in dental restoration, and a preference for related experience. Duties included scanning, impressions, milling and sintering, temporary dentures, and assisting with design and adjustment. The notice did not list pay. In a May 13, 2026 supplemental notice, Liuzhou Workers’ Hospital advertised one dental department technician outside its established staffing quota. It required undergraduate education in a dental medicine field or medical imaging and a bachelor’s or higher degree, graduate eligibility under the notice and CET-4 or above. The supplemental notice did not list a pay amount or denture fabrication duties. It referred to the February posting for compensation terms. This is an adjacent role. BLS lists high school or equivalent, no related work experience and moderate-term on-the-job training as typical in the United States. Check the employer’s training and credential requirements separately."
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28791,7 +28800,9 @@
             "r5-bls-ooh",
             "r5-cn-standard2020-read",
             "r5-cn-standard2023-notice",
-            "r5-cn-title"
+            "r5-cn-title",
+            "dental-shenzhen",
+            "dental-liuzhou"
           ],
           "type": "notice"
         },
@@ -28809,7 +28820,7 @@
             "column_labels": [
               "Entry directions",
               "What you mainly do initially",
-              "Editorial observation basis (uniform employer requirements not verified)",
+              "What to ask the employer",
               "How to prove it without experience",
               "Differences from other directions"
             ],
@@ -28817,35 +28828,35 @@
               [
                 "Modeling and die technician",
                 "Under mentoring, handle impressions and scan data, pour models, make removable dies and occlusal records, and verify model quality.",
-                "Editorially verify specifications, materials, safety, records and mentoring by actual process; there is no real recruitment sample in this round",
+                "Who accepts impressions and scans, and who contacts the dentist when a specification is missing?",
                 "Editorially, preparation evidence must be within safe conditions and permissions, was not actually performed or tested, and does not substitute for hiring",
                 "Compared with wax patterns and casting, this is more about data and model preparation and is the starting point of most processes."
               ],
               [
                 "Wax pattern and casting technician",
                 "Make wax patterns and investment patterns, invest and cast, and complete cutting, sandblasting and fitting of castings.",
-                "Editorially verify specifications, materials, safety, records and mentoring by actual process; there is no real recruitment sample in this round",
+                "Which processes and equipment does training cover, and when is a second check required?",
                 "Editorially, preparation evidence must be within safe conditions and permissions, was not actually performed or tested, and does not substitute for hiring",
                 "Compared with porcelain build-up and grinding, this is more about shaping and parameter control and requires safety awareness for refractory and high-temperature operations."
               ],
               [
                 "Porcelain build-up and grinding technician",
                 "Layer porcelain powder on the framework, sinter and glaze, adjust shade, and grind and polish.",
-                "Editorially verify specifications, materials, safety, records and mentoring by actual process; there is no real recruitment sample in this round",
+                "Who checks shade and surface requirements, and how is rework recorded?",
                 "Editorially, preparation evidence must be within safe conditions and permissions, was not actually performed or tested, and does not substitute for hiring",
                 "Compared with modeling and casting, this relies more on esthetic judgment and fixed light source conditions."
               ],
               [
                 "Digital designer",
                 "Process intraoral or model scan data, design restoration shapes with CAD software, and drive milling or printing equipment.",
-                "Editorially verify specifications, materials, safety, records and mentoring by actual process; there is no real recruitment sample in this round",
+                "The Shenzhen posting includes scanning, milling and sintering, and design support. Ask who designs and who checks the result.",
                 "Editorially, preparation evidence must be within safe conditions and permissions, was not actually performed or tested, and does not substitute for hiring",
                 "A digital direction example; general remote collaboration or greater standardization was not verified; the actual product process must be validated"
               ],
               [
                 "Inspection and work order coordinator",
                 "Verify finished products against inspection items, organize work orders and material records, and coordinate delivery deadlines.",
-                "Editorially verify specifications, materials, safety, records and mentoring by actual process; there is no real recruitment sample in this round",
+                "Who checks the production and inspection records, and who is authorized to sign release?",
                 "Editorially, preparation evidence must be within safe conditions and permissions, was not actually performed or tested, and does not substitute for hiring",
                 "Compared with other directions, the output is processes and records, with responsibility covering the entire order batch."
               ]
@@ -28913,14 +28924,14 @@
                 "id": "scene",
                 "values": [
                   "Portfolio piece one: three-dimension decision table",
-                  "Use D-01 to record the target, record, deviation and closed-interval conclusion, mark B as out of tolerance and C as at the boundary with an equals sign, and attach units."
+                  "Use D-01 to record targets, measurements, signed deviations and whether each is within the closed interval. Include units."
                 ]
               },
               {
                 "id": "rework",
                 "values": [
                   "Portfolio piece two: before-and-after rework records",
-                  "Keep B's 12.12 and 12.04 mm and calculate +0.12 and +0.04 mm respectively; record that the rework process is unknown and do not invent equipment parameters."
+                  "Keep the original B readings from before and after rework and calculate both deviations. Leave equipment settings unknown."
                 ]
               },
               {
@@ -29073,7 +29084,7 @@
                 "Production enterprises in mainland China",
                 "The precondition for lawful production of custom dentures",
                 "The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority.",
-                "On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary.",
+                "From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record.",
                 "Insufficient evidence: specific costs and training or handling cycles were not verified; verify against the real matter",
                 "Enterprise qualification does not equal a technician's individual practice qualification."
               ]
@@ -29102,7 +29113,7 @@
               "United States JobZone1—2 and SVP below 6 are the preparation group; education 52% high school, 18% post-high-school certificate and 13% below high school are respondents' opinions about required education, with the categories for the remaining 17% unverified, and are not treated as employee composition or law. BLS own typical entry is high school, no related experience and medium-term on-the-job training, not short- or long-term; group-level training descriptions do not guarantee individual duration.",
               "The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification.",
               "The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority.",
-              "On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary.",
+              "From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record.",
               "Laboratory inspection and fitting on the model and articulator are separate from clinical try-in and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience or training or supervisor approval does not substitute for physician qualifications.",
               "Actual training and handling costs and current conditions still need verification; the editorial stage does not guarantee hiring or promotion, and exploratory materials do not substitute for production or release authorization."
             ]
@@ -29115,7 +29126,9 @@
             "r5-cn-title",
             "r5-cn-denture2026",
             "r5-cn-production",
-            "r5-cn-gmp-transition"
+            "r5-cn-gmp-transition",
+            "dental-nmpa16",
+            "dental-nmpa16-denture"
           ],
           "title": "Training, identity and contract boundaries",
           "type": "notice"
@@ -29238,14 +29251,14 @@
                 "id": "day-3",
                 "values": [
                   "Day 3: calculate deviations",
-                  "Calculate the A／B／C deviations of +0.08／+0.12／−0.10 mm, compare against the ±0.10 mm closed interval, and produce a decision table."
+                  "Calculate the signed deviations for A, B and C and mark which are within the exercise tolerance. Check the reference only after completing your table."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
                   "Day 4: verify the rework record",
-                  "Verify B's post-rework +0.04 mm and keep the earlier value, and explain that data within range still cannot prove clinical conformity."
+                  "Compare the two B measurements and keep the original. Explain why meeting the exercise tolerance does not establish product conformity."
                 ]
               },
               {
@@ -30577,7 +30590,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification. The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority. On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary."
+              "The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification. The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority. From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record."
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
@@ -30619,7 +30632,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Market signal note: employment, wages and education and training use official bases; task-derived observation points are editorial suggestions. This page has no individual recruitment samples, and the technology list is not used to judge national recruitment frequency."
+              "U.S. employment and pay come from official occupational data. The Shenzhen and Liuzhou notices illustrate requirements at two employers. Use tool lists to prepare interview questions."
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30649,7 +30662,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification. The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority. On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary."
+              "The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification. The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority. From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record."
             ]
           },
           "id": "actors.market-signals.market-signal-card.3",
@@ -30668,7 +30681,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "United States JobZone1—2 and SVP below 6 are the preparation group; education 52% high school, 18% post-high-school certificate and 13% below high school are respondents' opinions about required education, with the remaining 17% uncategorized, and are not treated as employee composition or law. BLS own typical entry is high school, no related experience and medium-term on-the-job training, not short- or long-term; group-level training descriptions do not guarantee individual duration. 2025 U.S. job posting technical terms: 7 items, with Office1% and Outlook/Excel below 1%; QuickBooks/PowerPoint/Windows/Word are NA, not 0. The absence of professional CAD terms does not prove CAD is not used; OOH explicitly describes computer program and 3D printing use, which is not an adoption rate, long-term prevalence or GenAI effect. There is no real Chinese recruitment sample in this round, so CAD or implant skills cannot be described as frequent or related graduates as common."
+              "BLS lists high school or equivalent and moderate-term on-the-job training as typical U.S. preparation. O*NET technology keywords describe the postings it analyzed and can help you prepare questions."
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
@@ -30684,7 +30697,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Reading boundary: recruitment samples obtained in the future would only show that employer's conditions at that time; this page currently has no such samples and does not treat technology keywords as adoption rates or a national hiring standard."
+              "The two notices describe requirements at those employers at the time. Technology keywords do not establish nationwide adoption or hiring criteria."
             ]
           },
           "id": "actors.market-signals.market-signal-card.5",
@@ -30746,13 +30759,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no recruitment sample from an individual unit for this occupation (United States or mainland China) was obtained in this round; the technology keywords, education and hiring conditions of a target position must be checked in the specific announcement, and O*NET tool lists cannot be extrapolated to national demand."
+              "In June 2025 Shenzhen Stomatology Hospital advertised one dental technician. It specified a junior college diploma or higher in dental restoration technology, an occupational qualification certificate in dental restoration, and a preference for related experience. Duties included scanning, impressions, milling and sintering, temporary dentures, and assisting with design and adjustment. The notice did not list pay. In a May 13, 2026 supplemental notice, Liuzhou Workers’ Hospital advertised one dental department technician outside its established staffing quota. It required undergraduate education in a dental medicine field or medical imaging and a bachelor’s or higher degree, graduate eligibility under the notice and CET-4 or above. The supplemental notice did not list a pay amount or denture fabrication duties. It referred to the February posting for compensation terms. This is an adjacent role."
             ]
           },
           "id": "actors.display.market_signal_card.outlook.hiring.limit",
           "source_refs": [
             "r5-bls-ooh",
-            "r5-wages-current"
+            "r5-wages-current",
+            "dental-shenzhen",
+            "dental-liuzhou"
           ],
           "type": "prose"
         },
@@ -31128,7 +31143,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Own 51-9081 in 2025—2035 is 34400 → 32300 people, an official net change of −2000 and −5.9%, with 3600 openings per year on average and 1% self-employed; the counts are rounded values and the net change is not recomputed. The combined 51-9080 is 64300 → 63000, −1.9% and 7100 per year on average, and OOH rounds to −6% and −2% split between own and combined; openings include replacements, not net additions or individual opportunities."
+              "Compare the two mainland notices for education, credentials and task scope. Neither lists a pay amount."
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
@@ -31175,7 +31190,7 @@
                 ]
               },
               {
-                "answer": "The dental physician is responsible for diagnosis, seating and clinical adjustment; dental assistants assist chairside, handle instruments and keep records; dental hygienists perform oral examination, scaling and preventive procedures under their licence; this occupation processes restorations in the laboratory according to prescriptions and specifications, usually does not have direct patient contact, and cannot change prescription content or make clinical judgments on its own.",
+                "answer": "Dentists diagnose and handle clinical fitting and adjustment. Dental assistants support chairside care; U.S. hygienists provide examination, cleaning and prevention services under state rules. Technicians fabricate and check restorations against the order. Some hospital jobs also list scanning or impression support within the role’s authorized scope.",
                 "id": "actors.faq.2",
                 "question": "How do dental laboratory technicians differ from dental assistants and dental hygienists?",
                 "question_key": "career.faq.dental-laboratory-technicians.2",
@@ -31226,7 +31241,7 @@
                 ]
               },
               {
-                "answer": "BLS lists high school or equivalent plus medium-term on-the-job training for the United States, and some employers prefer a further certificate or an associate degree. China's national skill standard lists the ordinary education level as junior high school graduation or equivalent and sets five skill levels; this is not a uniform hiring education requirement, and the target unit's requirements and mentoring conditions must be verified.",
+                "answer": "BLS lists high school or equivalent and moderate-term on-the-job training. The education level in the mainland 2020 skills standard is separate from hiring criteria. One Shenzhen hospital posting required a junior college diploma or higher and a vocational qualification certificate. Check the posting and training plan.",
                 "id": "actors.faq.7",
                 "question": "What education do dental laboratory technicians need, and how should training be arranged?",
                 "question_key": "career.faq.dental-laboratory-technicians.7",
@@ -31278,10 +31293,10 @@
           "data": {
             "entries": [
               "Own 51-9081 in 2025—2035 is 34400 → 32300 people, an official net change of −2000 and −5.9%, with 3600 openings per year on average and 1% self-employed; the counts are rounded values and the net change is not recomputed. The combined 51-9080 is 64300 → 63000, −1.9% and 7100 per year on average, and OOH rounds to −6% and −2% split between own and combined; openings include replacements, not net additions or individual opportunities.",
-              "Distinguish own 2025 wage percentiles from combined industry wages; Chinese occupational wages and recruitment remain a gap, and manufacturing 113594/76055 matches only the background of actual manufacturing units.",
+              "U.S. occupational pay, U.S. industry figures for the combined group, mainland job notices and Chinese manufacturing context have different coverage.",
               "21 tasks: 7 core, 10 supplementary, 4 New. Core includes reading prescription specifications and models, articulator and micrometer inspection, fabricating and repairing appliances, occlusal and jaw relation appliances, removing excess material and polishing, training and supervising others, and melting metal, mixing and casting. Supplementary includes preparing metal for porcelain, repairs, wax patterns, porcelain firing, wax gingiva, models, bite blocks and trays, soldering and resin repair; meeting dentists or patients, ordering materials, scanning models digitally and shade matching are New with importance NA, not 0 or all core. 17 work styles on Impact: attention to detail 100, dependability 86, carefulness 68, achievement 53, integrity 48 and persistence 47, among others, are occupational ratings, not population percentages or Big Five thresholds; interests R94/I58/C52/S28/A9/E0, RIC, not ability or hiring scores.",
-              "The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification. The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority. On the retrieval date 2026-10-09 the new production quality specifications had not yet taken effect; from 2026-11-01 custom dentures follow the new version plus the existing appendix, and license verification continuity is differentiated according to the situations in the notice. The full text of the 2016 appendix was not read in this round, so all zone-by-zone disinfection details cannot be restated from an old summary. Laboratory inspection and fitting on the model and articulator are separate from clinical try-in and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience or training or supervisor approval does not substitute for physician qualifications.",
-              "Actually read the web page, the 2026 DOC, the first 8 pages of the 2020 standard and the 2023 transition notice; the later skill tables of 2020 were not reviewed item by item, and the 2016 appendix 412 and the 2019 attachment 403 retain genuine gaps."
+              "The 2020 original text of 4-14-03-02 sets five levels for fabricators — level five junior, level four intermediate, level three advanced, level two technician and level one senior technician — with an ordinary education level of junior high school or equivalent. The 2024 Chongqing catalogue names it fabrication master; the 2023 Ministry of Human Resources and Social Security notice clarifies that where the old standard conflicts with the 2023 compilation procedures, the 2023 procedures apply, and the 2020 application years cannot be taken directly as current conditions. Levels and education level are not unified recruitment, physician qualifications or production licenses; the declaring and cost cycle of the current evaluating body still needs verification. The 2026 guiding principles classify only fixed and removable dentures using registered denture materials under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns and custom orthodontic retainers, so they cannot be applied to all oral appliances. Custom dentures are patient-matched and follow the usual classification and registration administration, not the special filing for rare custom devices; Class II and III production is licensed by law, and enterprise qualification is not an individual skill certificate or clinical authority. From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record. Laboratory inspection and fitting on the model and articulator are separate from clinical try-in and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience or training or supervisor approval does not substitute for physician qualifications.",
+              "Check manufacturing licences, device classification, job training and clinical qualifications separately for the product and role."
             ]
           },
           "id": "actors.sources.boundary.1",
@@ -31302,7 +31317,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The content of this page was written and self-reviewed by the production side based on the listed sources; it does not constitute independent acceptance, nor compliance or legal advice."
+              "FermatMind Editorial compiled the occupational tasks, market figures and paper exercise from the public sources below."
             ]
           },
           "id": "actors.display.source_card.author",
@@ -31316,7 +31331,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round: O*NET own detailed tasks, 2025 wages and recruitment terms and actual adjacent definitions; BLS own Table 1.2 and the combined OOH/OEWS methods; NBS2025 manufacturing, the 2024 training catalogue and 2020 release notes, the 2019 patient-matched interpretation, the 2026 denture DOC, the production measures and transition and PIPL; the NIST voluntary framework and the ILO abstract are listed separately, and the original source names and URLs are retained."
+              "See O*NET for tasks, OEWS for wages and BLS Table 1.2 for projections. Mainland hiring examples come from hospital notices. See the NMPA notice and attachment for custom denture manufacturing inspection."
             ]
           },
           "id": "actors.display.source_card.source",
@@ -31335,7 +31350,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Retrieved and compiled 2026-10-09; U.S. own and combined wages 2025, projection 2025—2035; China manufacturing wages 2025, denture guidance 2026, and the new production specifications effective 2026-11-01."
+              "Sources checked November 9, 2026."
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31351,7 +31366,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Chinese occupational wages and actual recruitment, current skill registration fees and evaluating body conditions, and AI adoption effects and occupational score matching were not verified; the 2020 levels and education have been read but the old registration conditions must follow the 2023 transition procedures and are not used directly as current thresholds. Industry background and adjacent definitions do not substitute for the occupational gap."
+              "The hospital notices are historical. Check current openings, training, authority and assessment arrangements with the employer. This page did not find a comparable national mainland wage distribution or evidence of AI adoption outcomes."
             ]
           },
           "id": "actors.display.source_card.note",
@@ -31501,7 +31516,7 @@
                 "details": [
                   "Supports the combined group's wage, employment, projection and industry wage comparison.",
                   "Retains the combined group limitation and does not label combined group values as exact single-subcategory figures.",
-                  "Verified this round: own 51-9081 in 2025—2035 is 34400 → 32300 people, an official net change of −2000 and −5.9%, with 3600 openings per year on average and 1% self-employed; the counts are rounded values and the net change is not recomputed. The combined 51-9080 is 64300 → 63000, −1.9% and 7100 per year on average, and OOH rounds to −6% and −2% split between own and combined; openings include replacements, not net additions or individual opportunities. The OOH labor-saving projection explanation applies to dental technicians themselves, not only to the combined group or to GenAI causation."
+                  "own 51-9081 in 2025—2035 is 34400 → 32300 people, an official net change of −2000 and −5.9%, with 3600 openings per year on average and 1% self-employed; the counts are rounded values and the net change is not recomputed. The combined 51-9080 is 64300 → 63000, −1.9% and 7100 per year on average, and OOH rounds to −6% and −2% split between own and combined; openings include replacements, not net additions or individual opportunities. The OOH labor-saving projection explanation applies to dental technicians themselves, not only to the combined group or to GenAI causation."
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
@@ -31518,7 +31533,7 @@
                 "details": [
                   "Keeps the base-period and projection-period counts and rates of change for each of the four bases separately.",
                   "Does not present the total change over the projection period as an individual opportunity.",
-                  "Verified this round: own 51-9081 in 2025—2035 is 34400 → 32300 people, an official net change of −2000 and −5.9%, with 3600 openings per year on average and 1% self-employed; the counts are rounded values and the net change is not recomputed. The combined 51-9080 is 64300 → 63000, −1.9% and 7100 per year on average, and OOH rounds to −6% and −2% split between own and combined; openings include replacements, not net additions or individual opportunities."
+                  "own 51-9081 in 2025—2035 is 34400 → 32300 people, an official net change of −2000 and −5.9%, with 3600 openings per year on average and 1% self-employed; the counts are rounded values and the net change is not recomputed. The combined 51-9080 is 64300 → 63000, −1.9% and 7100 per year on average, and OOH rounds to −6% and −2% split between own and combined; openings include replacements, not net additions or individual opportunities."
                 ],
                 "evidence_type": "official statistics",
                 "id": "employer",
@@ -31533,13 +31548,13 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Retains the original BLS wage statistics entry; the detailed occupational page failed to load in this round, and the specific percentiles were verified from the accessible O*NET My Next Move 51-9081.00 page.",
-                  "No claim can be made that this round read the original BLS subcategory table or obtained state or regional wages.",
-                  "Verified this round: own 2025 wages, straight-time gross pay including piece rates and commissions, which cannot be excluded across the board or used to explain skill causation through percentiles."
+                  "OEWS provides U.S. occupational wage estimates.",
+                  "The linked O*NET wage table reports national May 2025 percentiles for 51-9081.",
+                  "Check matching reference periods when comparing local estimates."
                 ],
                 "evidence_type": "official statistics",
                 "id": "oews",
-                "limitation": "Own 2025 wages, straight-time gross pay including piece rates and commissions, which cannot be excluded across the board or used to explain skill causation through percentiles.",
+                "limitation": "National wage percentiles are not individual offers.",
                 "market": "United States",
                 "name": "BLS Occupational Employment and Wage Statistics (OEWS): 51-9081 wage statistics entry (May 2025 data published through the O*NET national wage page)",
                 "period": "May 2025 wage data; retrieved 2026-09-19",
@@ -31552,11 +31567,11 @@
                 "details": [
                   "Cross-checks medians and percentiles against the OEWS entry.",
                   "Does not derive an individual's take-home income from percentiles.",
-                  "Verified this round: own 2025 quintiles, not starting pay, experience or an individual's full-year take-home pay."
+                  "own 2025 selected percentiles, not starting pay, experience or an individual's full-year take-home pay."
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-3",
-                "limitation": "Own 2025 quintiles, not starting pay, experience or an individual's full-year take-home pay.",
+                "limitation": "Own 2025 selected percentiles, not starting pay, experience or an individual's full-year take-home pay.",
                 "market": "United States",
                 "name": "O*NET My Next Move: Dental Laboratory Technicians national wage percentiles",
                 "period": "May 2025 wage data; verified in this round 2026-10-03",
@@ -31569,7 +31584,7 @@
                 "details": [
                   "Used to explain the wage statistics basis and the boundaries of what cannot be inferred.",
                   "Does not provide conclusions about individual income.",
-                  "Verified this round: OEWS includes piece rates, commissions and production bonuses, and excludes overtime premium and shift differentials."
+                  "OEWS includes piece rates, commissions and production bonuses, and excludes overtime premium and shift differentials."
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
@@ -31586,11 +31601,11 @@
                 "details": [
                   "Records the level of detail and the gaps in mainland China's published wage statistics.",
                   "Industry averages must not be written as this occupation's wage.",
-                  "Verified this round: the legacy homepage does not substitute for the statistical table; the 2025 manufacturing 113594/76055 already read matches only the background of actual manufacturing units, and the occupational wage remains a gap."
+                  "The 2025 urban manufacturing averages provide industry context."
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "The legacy homepage does not substitute for the statistical table; the 2025 manufacturing 113594/76055 already read matches only the background of actual manufacturing units, and the occupational wage remains a gap.",
+                "limitation": "The manufacturing figures cover many occupations.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics: average annual wages of urban unit employees 2025",
                 "period": "2025 statistical period, released 2026-05-15; verified in this round 2026-10-03",
@@ -31602,11 +31617,11 @@
                 "accessed_at": "2026-09-19",
                 "details": [
                   "Explains the publication level of occupation-level wage data in mainland China.",
-                  "Does not use this to give a national figure."
+                  "The National Bureau of Statistics groups urban unit wages by industry and personnel category."
                 ],
                 "evidence_type": "official statistics",
                 "id": "nbs",
-                "limitation": "Insufficient evidence: this round did not obtain a wage distribution listed separately for dental restoration fabricators from the National Bureau of Statistics 2025 urban unit wage release. That release is compiled by industry and personnel category and cannot replace occupational wages, nor can it be asserted from this failure that nothing was ever published nationwide.",
+                "limitation": "This release does not give percentiles for the occupation on this page.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics: published statistics and wage release entry",
                 "period": "Current release; retrieved 2026-09-19",
@@ -31617,11 +31632,11 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "The 2020 release notes and the original standard were read separately: the first 8 pages of the original standard on levels, education and historical registration branches were verified; the 2023 notice applies the new procedures where the old standard conflicts, and the current evaluating body's conditions still need verification. This is not a physician qualification or a production licence."
+                  "The 2020 national skills standard lists the code, five skill levels and general education."
                 ],
                 "evidence_type": "official guidance",
                 "id": "cn-rule",
-                "limitation": "The 2020 release notes and the original standard were read separately: the first 8 pages of the original standard on levels, education and historical registration branches were verified; the 2023 notice applies the new procedures where the old standard conflicts, and the current evaluating body's conditions still need verification. This is not a physician qualification or a production licence.",
+                "limitation": "Skills assessment is separate from hiring, clinical qualifications and manufacturing licences.",
                 "market": "Mainland China",
                 "name": "National occupational skill standard for dental restoration fabricators (2020 version, reproduced original document)",
                 "period": "2020 version; sections 1.1—1.8 of the PDF text, verified in this round 2026-10-03",
@@ -31632,11 +31647,11 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "The current legacy URL is the medical device supervision regulations, not the adjacent dental assistant definition; the specific production measures and the 2026 denture guidance are listed separately in this round."
+                  "The medical device regulation sets general requirements for device oversight."
                 ],
                 "evidence_type": "official guidance",
                 "id": "agent",
-                "limitation": "The current legacy URL is the medical device supervision regulations, not the adjacent dental assistant definition; the specific production measures and the 2026 denture guidance are listed separately in this round.",
+                "limitation": "See the Notice 16 attachment for custom denture inspection.",
                 "market": "Mainland China",
                 "name": "Regulations on the Supervision and Administration of Medical Devices (State Council Order No. 739)",
                 "period": "Revised 2021, effective 2021-06-01; verified in this round 2026-10-03",
@@ -31662,11 +31677,11 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "The current legacy URL is the Fujian patient-matched device Q&A, not the ophthalmic technician definition; the 2019 patient-matched interpretation is listed separately in this round, without applying the special filing for rare custom devices."
+                  "The Fujian regulator explains the distinction between patient-matched devices and specially filed custom devices."
                 ],
                 "evidence_type": "official guidance",
                 "id": "art",
-                "limitation": "The current legacy URL is the Fujian patient-matched device Q&A, not the ophthalmic technician definition; the 2019 patient-matched interpretation is listed separately in this round, without applying the special filing for rare custom devices.",
+                "limitation": "Device classification does not grant authority to practise.",
                 "market": "Mainland China",
                 "name": "Fujian Provincial Medical Products Administration: What is a patient-matched medical device?",
                 "period": "2020-04-26; verified in this round 2026-10-03",
@@ -31786,7 +31801,7 @@
                 "details": [
                   "Used to explain governance, documentation and human oversight requirements when introducing AI systems.",
                   "The framework does not replace regulations, unit policies or compliance requirements.",
-                  "Verified this round: the voluntary framework does not substitute for medical device law, clinical requirements or a fixed release authorization."
+                  "the voluntary framework does not substitute for medical device law, clinical requirements or a fixed release authorization."
                 ],
                 "evidence_type": "institutional framework",
                 "id": "nist",
@@ -31803,11 +31818,11 @@
                 "details": [
                   "Used to explain the methods and limitations of task-level exposure measurement.",
                   "Task exposure does not equal automation adoption or job replacement outcomes.",
-                  "Verified this round: the abstract read in this round did not verify scores matching 51-9081, so it is not claimed that the full text has none."
+                  "Task exposure describes which work might be affected by generative AI."
                 ],
                 "evidence_type": "institutional research",
                 "id": "sag",
-                "limitation": "The abstract read in this round did not verify scores matching 51-9081, so it is not claimed that the full text has none.",
+                "limitation": "Exposure does not measure adoption, displacement or pay.",
                 "market": "Global",
                 "name": "ILO：Generative AI and Jobs — A Refined Global Index of Occupational Exposure",
                 "period": "2025-05-20 study; verified in this round 2026-10-03",
@@ -31820,7 +31835,7 @@
                 "details": [
                   "Supports the market signal description of tool keywords.",
                   "Keywords do not equal adoption rates or ability requirements.",
-                  "Verified this round: 2025 U.S. job postings contained 7 technical terms: Office1%, with Outlook/Excel below 1%; QuickBooks/PowerPoint/Windows/Word are NA, not 0. The absence of professional CAD terms does not prove CAD is not used; OOH explicitly describes computer program and 3D printing use, which is not an adoption rate, long-term prevalence or GenAI effect."
+                  "2025 U.S. job postings contained 7 technical terms: Office1%, with Outlook/Excel below 1%; QuickBooks/PowerPoint/Windows/Word are NA, not 0. The absence of professional CAD terms does not prove CAD is not used; OOH explicitly describes computer program and 3D printing use, which is not an adoption rate, long-term prevalence or GenAI effect."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r2-ai",
@@ -31837,11 +31852,11 @@
                 "details": [
                   "Supports the verification entry for certification and training information.",
                   "The entry does not predict the number of positions or wage levels.",
-                  "Verified this round: the certification entry does not mean every state is statutorily unlicensed, nor that the latest examination, experience and fee information was read; OOH only proves that certification is voluntary."
+                  "The U.S. occupational handbook describes certification as voluntary. Check state and employer requirements separately."
                 ],
                 "evidence_type": "official guidance",
                 "id": "ratify",
-                "limitation": "The certification entry does not mean every state is statutorily unlicensed, nor that the latest examination, experience and fee information was read; OOH only proves that certification is voluntary.",
+                "limitation": "Certification does not grant clinical, equipment or product release authority.",
                 "market": "United States",
                 "name": "O*NET OnLine: Dental Laboratory Technicians certification and training entry (51-9081.00)",
                 "period": "Page updated 2026; retrieved 2026-09-19",
@@ -31884,11 +31899,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "21 tasks: 7 core, 10 supplementary, 4 New; mentoring and supervising others is core, while scanning models, staining porcelain surfaces, meeting dentists or patients and ordering materials are New, and importance NA is not treated as 0. 17 work styles on Impact are not population percentages; RIC interests are not abilities. Education 52 high school, 18 post-high-school certificate and 13 below high school are required-education opinions, with the remaining 17 not extrapolated as unknown education; 2025 own manufacturing 80 and health and social work 17, with the remaining 3 an editorial difference. The 57 context items were actually read, and exposure frequencies are not illness rates."
+                  "O*NET 51-9081.00 reports core, supplemental and new tasks, work context, skills and interests."
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r5-onet-current",
-                "limitation": "21 tasks: 7 core, 10 supplementary, 4 New; mentoring and supervising others is core, while scanning models, staining porcelain surfaces, meeting dentists or patients and ordering materials are New, and importance NA is not treated as 0. 17 work styles on Impact are not population percentages; RIC interests are not abilities. Education 52 high school, 18 post-high-school certificate and 13 below high school are required-education opinions, with the remaining 17 not extrapolated as unknown education; 2025 own manufacturing 80 and health and social work 17, with the remaining 3 an editorial difference. The 57 context items were actually read, and exposure frequencies are not illness rates.",
+                "limitation": "Survey responses describe the source’s respondents and do not estimate the mainland market or health risks.",
                 "market": "United States",
                 "name": "O*NET current Dental Laboratory Technicians detailed profile 51-9081.00",
                 "period": "Updated2026; not all items were surveyed in the same year; retrieved 2026-10-09",
@@ -31974,11 +31989,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "This round actually downloaded the main text tables 1 and 3: manufacturing non-private 113594 and private 76055 average annual pre-tax; urban legal entities with 5 or more persons, excluding self-employed and freelance workers, and non-private not state-owned only. It matches only the background of actual manufacturing units and covers multiple occupations, and is not the wage of all dental technicians or of clinical units."
+                  "Average 2025 annual wages in urban manufacturing entities: CNY 113,594 in non-private and CNY 76,055 in private units. The release covers urban legal entities with at least five employees."
                 ],
                 "evidence_type": "official industry statistics",
                 "id": "r5-nbs-manufact",
-                "limitation": "This round actually downloaded the main text tables 1 and 3: manufacturing non-private 113594 and private 76055 average annual pre-tax; urban legal entities with 5 or more persons, excluding self-employed and freelance workers, and non-private not state-owned only. It matches only the background of actual manufacturing units and covers multiple occupations, and is not the wage of all dental technicians or of clinical units.",
+                "limitation": "The industry figures cover many jobs and do not estimate dental technician pay.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 manufacturing urban unit wage background",
                 "period": "2025; released 2026-05-15; retrieved 2026-10-09",
@@ -31989,11 +32004,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "Actually read sequence 156: 4—14—03—02 dental restoration fabrication master, and category B is a local training catalogue classification, not a skill level or national licence; it is distinguished from the 2020 standard name fabricator, the frozen name is not changed, and it does not prove that all recruitment conditions are uniform."
+                  "Chongqing’s 2024 training catalogue uses dental restoration fabricator for code 4-14-03-02. Category B is a catalogue grouping."
                 ],
                 "evidence_type": "official training catalogue",
                 "id": "r5-cn-title",
-                "limitation": "Actually read sequence 156: 4—14—03—02 dental restoration fabrication master, and category B is a local training catalogue classification, not a skill level or national licence; it is distinguished from the 2020 standard name fabricator, the frozen name is not changed, and it does not prove that all recruitment conditions are uniform.",
+                "limitation": "A local training classification does not establish nationwide licensure or hiring requirements.",
                 "market": "Mainland China",
                 "name": "Chongqing Human Resources and Social Security 2024 skill training catalogue: dental restoration fabrication master",
                 "period": "2024-05-16 catalogue; retrieved 2026-10-09",
@@ -32004,11 +32019,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The 2020 release notes and the original standard were read separately: the first 8 pages of the original standard on levels, education and historical registration branches were verified; the 2023 notice applies the new procedures where the old standard conflicts, and the current evaluating body's conditions still need verification. This is not a physician qualification or a production licence."
+                  "The human resources department’s notice lists national occupational standards including dental restoration fabrication."
                 ],
                 "evidence_type": "official announcement",
                 "id": "r5-cn-standard-index",
-                "limitation": "The 2020 release notes and the original standard were read separately: the first 8 pages of the original standard on levels, education and historical registration branches were verified; the 2023 notice applies the new procedures where the old standard conflicts, and the current evaluating body's conditions still need verification. This is not a physician qualification or a production licence.",
+                "limitation": "The index does not set current application terms at assessment providers.",
                 "market": "Mainland China",
                 "name": "Human Resources and Social Security 2020 release note on the occupational standard for dental restoration fabricators",
                 "period": "2020 standard release note; retrieved 2026-10-09",
@@ -32019,11 +32034,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "Actual full text: patient-matched devices within the verified scope include custom dentures, which follow general registration and filing classification administration and do not fall under the 2019 trial special filing provisions for rare custom medical devices; this is not a technician's individual licence. The 2019 announcement was readable this round but attachment 403 was not, so no claim is made that all attachment clauses were read."
+                  "Custom dentures are patient-matched devices within the validated range and follow general classification, registration or filing rules."
                 ],
                 "evidence_type": "official regulatory interpretation",
                 "id": "r5-cn-patientmatch",
-                "limitation": "Actual full text: patient-matched devices within the verified scope include custom dentures, which follow general registration and filing classification administration and do not fall under the 2019 trial special filing provisions for rare custom medical devices; this is not a technician's individual licence. The 2019 announcement was readable this round but attachment 403 was not, so no claim is made that all attachment clauses were read.",
+                "limitation": "This source addresses device classification.",
                 "market": "Mainland China",
                 "name": "Drug regulatory interpretation: the difference between patient-matched devices and custom devices",
                 "period": "Interpretation of 2019-07-08; retrieved 2026-10-09",
@@ -32034,11 +32049,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "Actually downloaded the DOC and converted it with textutil to read the full text; fixed and removable dentures made with registered denture materials fall under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns, custom orthodontic retainers and products using unregistered materials; unregistered materials are separately noted as Class III and the specific product must be verified. The guiding document is not mandatory regulation; it lists process, printing precision, cleaning and disinfection validation and traceability, with seating and adjustment performed by a physician with professional qualifications; model fitting must not be treated as clinical clearance."
+                  "Covered Class II fixed and removable custom dentures are coded 17-06-04. The guide sets out scope exclusions and calls for fitting and adjustment by qualified dentists."
                 ],
                 "evidence_type": "official registration guidance",
                 "id": "r5-cn-denture2026",
-                "limitation": "Actually downloaded the DOC and converted it with textutil to read the full text; fixed and removable dentures made with registered denture materials fall under Class II 17-06-04, excluding implant and abutment attachments, maxillofacial prostheses, preformed crowns, custom orthodontic retainers and products using unregistered materials; unregistered materials are separately noted as Class III and the specific product must be verified. The guiding document is not mandatory regulation; it lists process, printing precision, cleaning and disinfection validation and traceability, with seating and adjustment performed by a physician with professional qualifications; model fitting must not be treated as clinical clearance.",
+                "limitation": "Registration review guidance; use Notice 16 for manufacturing licence and postmarket inspection.",
                 "market": "Mainland China",
                 "name": "CMDE technical review guiding principles for custom denture registration, 2026 revision",
                 "period": "2026 revision; regional sub-centre index 2026-07-21; retrieved 2026-10-09",
@@ -32049,11 +32064,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The current October 9 new specifications had not yet taken effect; before November 1 verification was carried out under the current specifications with an assessment of the new version, and cases where acceptance was not completed or rectification was undecided are handled under the new version afterwards; from November 1 custom dentures follow the new specifications plus the existing appendix. In this round the original address for the 2016 appendix returned 412, so it is not falsely claimed that the full text was read or that it has been repealed."
+                  "This notice covers the transition from November 1, 2026. Custom dentures follow the revised requirements and the existing denture appendix."
                 ],
                 "evidence_type": "official transition notice",
                 "id": "r5-cn-gmp-transition",
-                "limitation": "The current October 9 new specifications had not yet taken effect; before November 1 verification was carried out under the current specifications with an assessment of the new version, and cases where acceptance was not completed or rectification was undecided are handled under the new version afterwards; from November 1 custom dentures follow the new specifications plus the existing appendix. In this round the original address for the 2016 appendix returned 412, so it is not falsely claimed that the full text was read or that it has been repealed.",
+                "limitation": "This is a transition notice. See the attachment to NMPA Notice 16 of 2026 for inspection items.",
                 "market": "Mainland China",
                 "name": "Drug regulatory 2026 notice on the transition between the old and new production quality specifications",
                 "period": "Notice of 2026-09-14 / released 09-16; the new specifications take effect 2026-11-01; retrieved 2026-10-09",
@@ -32064,11 +32079,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "Actually read 3/4/9/10/25—32: Class II and III production licensing, system and registration or filing technical requirements, personnel training, equipment, procurement acceptance, entrustment agreements and traceability. Enterprise licensing is not an individual skill certificate or physician qualification; no province-wide list of handling fees and times was compiled."
+                  "Covers Class II and III manufacturing licences, quality systems, staff training, acceptance and traceability."
                 ],
                 "evidence_type": "official regulation",
                 "id": "r5-cn-production",
-                "limitation": "Actually read 3/4/9/10/25—32: Class II and III production licensing, system and registration or filing technical requirements, personnel training, equipment, procurement acceptance, entrustment agreements and traceability. Enterprise licensing is not an individual skill certificate or physician qualification; no province-wide list of handling fees and times was compiled.",
+                "limitation": "Manufacturing licences are separate from individual skills assessment and clinical credentials.",
                 "market": "Mainland China",
                 "name": "Measures for the Supervision and Administration of Medical Device Production 2022",
                 "period": "Effective 2022-05-01; currently displayed; retrieved 2026-10-09",
@@ -32079,11 +32094,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "Actually read 6/13/21/28—30/51/55/73; identifiable medical and health data are sensitive information, requiring specific purpose, adequacy and necessity, strict protection and applicable notice, and prior impact assessment and records when processing sensitive information; the consent basis must follow separate consent conditions, and because Article 13 has other lawful bases it cannot be written that consent is always the only basis. De-identification is not anonymization, and a unit account does not authorize uploads to external AI; the full cross-border package was not fully verified in this round."
+                  "Health information is sensitive personal information. Processing requires a specific purpose and sufficient necessity, along with applicable notice, safeguards and prior impact assessment."
                 ],
                 "evidence_type": "official law",
                 "id": "r5-cn-pipl",
-                "limitation": "Actually read 6/13/21/28—30/51/55/73; identifiable medical and health data are sensitive information, requiring specific purpose, adequacy and necessity, strict protection and applicable notice, and prior impact assessment and records when processing sensitive information; the consent basis must follow separate consent conditions, and because Article 13 has other lawful bases it cannot be written that consent is always the only basis. De-identification is not anonymization, and a unit account does not authorize uploads to external AI; the full cross-border package was not fully verified in this round.",
+                "limitation": "De-identification differs from anonymization. Check the legal basis and rules for sharing or outsourced processing.",
                 "market": "Mainland China",
                 "name": "Personal Information Protection Law: oral models and patient information",
                 "period": "2021 law; retrieved 2026-10-09",
@@ -32109,11 +32124,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The abstract read in this round did not verify scores matching 51-9081, so it is not claimed on that basis that the complete study has none; task exposure is not actual adoption or job wage causation, and 3D printing is not equated with GenAI."
+                  "The study estimates potential exposure to generative AI by task."
                 ],
                 "evidence_type": "official research summary",
                 "id": "r5-ilo-current",
-                "limitation": "The abstract read in this round did not verify scores matching 51-9081, so it is not claimed on that basis that the complete study has none; task exposure is not actual adoption or job wage causation, and 3D printing is not equated with GenAI.",
+                "limitation": "Exposure does not measure adoption, displacement or wage change.",
                 "market": "Cross-market",
                 "name": "ILO2025 GenAI task exposure study abstract",
                 "period": "2025 study abstract; retrieved in this round 2026-10-09",
@@ -32319,11 +32334,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "The 26-page PDF has been downloaded; the cover, occupational overview, registration branches and the first 8 pages of basic knowledge were actually read, with page 1 visually inspected in the printed rendering. 4-14-03-02, five levels of junior, intermediate, advanced, technician and senior technician, with an ordinary education level of junior high school or equivalent; indoor normal temperature with dust and noise in some processes. Its registration year pathway is the 2020 version original text, and where the 2023 compilation procedures conflict with the old standard the 2023 procedures apply, so it is not listed directly as a current registration conclusion; the later skill tables were not reviewed item by item. Skill assessment is not a physician or enterprise licence."
+                  "The 2020 national skills standard lists code 4-14-03-02 and five skill levels. The general education level is junior secondary or equivalent."
                 ],
                 "evidence_type": "primary standard version text",
                 "id": "r5-cn-standard2020-read",
-                "limitation": "The 26-page PDF has been downloaded; the cover, occupational overview, registration branches and the first 8 pages of basic knowledge were actually read, with page 1 visually inspected in the printed rendering. 4-14-03-02, five levels of junior, intermediate, advanced, technician and senior technician, with an ordinary education level of junior high school or equivalent; indoor normal temperature with dust and noise in some processes. Its registration year pathway is the 2020 version original text, and where the 2023 compilation procedures conflict with the old standard the 2023 procedures apply, so it is not listed directly as a current registration conclusion; the later skill tables were not reviewed item by item. Skill assessment is not a physician or enterprise licence.",
+                "limitation": "The standard’s education level is separate from hiring requirements; check current application terms with the assessment provider.",
                 "market": "Mainland China",
                 "name": "National occupational skill standard for dental restoration fabricators, 2020 version original text",
                 "period": "2020 version; third-party hosted original text; read 2026-10-09",
@@ -32334,11 +32349,11 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "Actually read the notice: the 2023 national occupational standard compilation technical procedures take effect upon issuance, and the 2012 and 2018 procedures are repealed; where existing standards conflict with the 2023 procedures, the 2023 procedures prevail. This round did not verify item by item all levels in the attachment and the current registration conditions of evaluating bodies, and the 2020 original year limits are not treated directly as the current threshold."
+                  "The 2023 national technical procedures for occupational standards govern when they conflict with earlier standards."
                 ],
                 "evidence_type": "official transition notice",
                 "id": "r5-cn-standard2023-notice",
-                "limitation": "Actually read the notice: the 2023 national occupational standard compilation technical procedures take effect upon issuance, and the 2012 and 2018 procedures are repealed; where existing standards conflict with the 2023 procedures, the 2023 procedures prevail. This round did not verify item by item all levels in the attachment and the current registration conditions of evaluating bodies, and the 2020 original year limits are not treated directly as the current threshold.",
+                "limitation": "Check current assessment requirements rather than applying historical experience thresholds.",
                 "market": "Mainland China",
                 "name": "Human Resources and Social Security 2023 occupational standard compilation procedures and the notice on transition from the old standard",
                 "period": "Human Resources and Social Security Department document 2023 No. 31; issued 2023-08-31; page dated 2023-12-18",
@@ -32348,20 +32363,72 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Verify materials, color, occlusion and contact requirements against the work order and prescription specifications, and clarify missing items before starting work. — 50/100; weight=1/3; actors.display.responsibilities_block.01[0]",
-                  "Make dies, wax patterns and investment patterns from models and scan data, complete casting, grinding, porcelain build-up and sintering according to process specifications, and record the parameters. — 25/100; weight=1/3; actors.display.responsibilities_block.02[0]",
-                  "Verify precision and occlusion on the model and articulator according to prescription specifications, with specific inspection items per the product's technical requirements; laboratory inspection and fitting on the model and articulator are separate from clinical try-in and adjustment on the patient; the 2026 guiding principles require seating and adjustment by a physician with professional qualifications, and technician experience or training or supervisor approval does not substitute for physician qualifications. — 25/100; weight=1/3; actors.display.responsibilities_block.03[0]"
+                  "Candidate uses are assessed by input, human checks and responsibility. This does not measure adoption, hours or displacement."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "This is an editorial method.",
+                "name": "FermatMind: AI task analysis method",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In June 2025 Shenzhen Stomatology Hospital advertised one dental technician. It specified a junior college diploma or higher in dental restoration technology, an occupational qualification certificate in dental restoration, and a preference for related experience. Duties included scanning, impressions, milling and sintering, temporary dentures, and assisting with design and adjustment. The notice did not list pay."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "dental-shenzhen",
+                "limitation": "One historical job; the notice does not state pay.",
+                "name": "Shenzhen Stomatology Hospital: June 2025 recruitment attachment",
+                "period": "2025-06",
+                "publisher": "Shenzhen Stomatology Hospital",
+                "scope": "recruitment_proxy",
+                "url": "https://www.szskqyy.com/attachment/0/91/91644/1566599.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In a May 13, 2026 supplemental notice, Liuzhou Workers’ Hospital advertised one dental department technician outside its established staffing quota. It required undergraduate education in a dental medicine field or medical imaging and a bachelor’s or higher degree, graduate eligibility under the notice and CET-4 or above. The supplemental notice did not list a pay amount or denture fabrication duties. It referred to the February posting for compensation terms. This is an adjacent role."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "dental-liuzhou",
+                "limitation": "Adjacent role; no denture duties or pay are stated.",
+                "name": "Liuzhou Workers’ Hospital: dental department technician",
+                "period": "2026-05-13",
+                "publisher": "Liuzhou Workers’ Hospital",
+                "scope": "recruitment_proxy",
+                "url": "https://www.lzsgryy.cn/hos_layout_dxbl/2026/yb81Q2dv.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "dental-nmpa16",
+                "limitation": "Manufacturing inspection guidance; it does not grant individual clinical or release authority.",
+                "name": "NMPA Notice 16 of 2026: manufacturing inspection guidance",
+                "period": "2026-11-01",
+                "publisher": "NMPA, reproduced by Shanghai MPA",
+                "scope": "exact",
+                "url": "https://yjj.sh.gov.cn/qtgzwj/20261029/aba959d8c1854b2d997fd8cee8fee6e9.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "From November 1, 2026, custom denture production follows the revised manufacturing quality requirements and the existing denture appendix. Inspection guidance under NMPA Notice 16 of 2026 covers acceptance criteria for impressions, models, scans and design orders, plus traceable production and inspection records for each batch or unit. Authorized staff sign the release record."
+                ],
+                "evidence_type": "Primary official source",
+                "id": "dental-nmpa16-denture",
+                "limitation": "See 8.7.1, 10.4, 11.6 and 11.10.1; apply the requirements for the product and quality system.",
+                "name": "Custom Denture Inspection Guidance (original attachment)",
+                "period": "2026-11-01",
+                "publisher": "NMPA",
+                "scope": "exact",
+                "url": "https://yjj.sh.gov.cn/cmsres/8b/8bcd4c0847084fc1b7f439e0d0ba74e5/8db96c7598c2c7fca6ee51e91c7d5543.docx"
               }
             ]
           },
@@ -33978,6 +34045,30 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.szskqyy.com/attachment/0/91/91644/1566599.pdf",
+            "id": "dental-shenzhen",
+            "label": "Shenzhen Stomatology Hospital: June 2025 recruitment attachment",
+            "scope": "One historical job; the notice does not state pay."
+          },
+          {
+            "href": "https://www.lzsgryy.cn/hos_layout_dxbl/2026/yb81Q2dv.html",
+            "id": "dental-liuzhou",
+            "label": "Liuzhou Workers’ Hospital: dental department technician",
+            "scope": "Adjacent role; no denture duties or pay are stated."
+          },
+          {
+            "href": "https://yjj.sh.gov.cn/qtgzwj/20261029/aba959d8c1854b2d997fd8cee8fee6e9.html",
+            "id": "dental-nmpa16",
+            "label": "NMPA Notice 16 of 2026: manufacturing inspection guidance",
+            "scope": "Manufacturing inspection guidance; it does not grant individual clinical or release authority."
+          },
+          {
+            "href": "https://yjj.sh.gov.cn/cmsres/8b/8bcd4c0847084fc1b7f439e0d0ba74e5/8db96c7598c2c7fca6ee51e91c7d5543.docx",
+            "id": "dental-nmpa16-denture",
+            "label": "Custom Denture Inspection Guidance (original attachment)",
+            "scope": "See 8.7.1, 10.4, 11.6 and 11.10.1; apply the requirements for the product and quality system."
           }
         ],
         "tracks": [
@@ -34932,8 +35023,8 @@
             },
             "evidence_refs": [
               "r5-denture",
-              "r5-production",
-              "r5-transition"
+              "dental-nmpa16",
+              "dental-nmpa16-denture"
             ],
             "id": "identity-procedure",
             "mitigation": {
@@ -35266,6 +35357,18 @@
               "item": "actors.source-register.published.1"
             },
             "scope": "The new November 1 takes effect; the current and future versions are kept separate"
+          },
+          {
+            "href": "https://yjj.sh.gov.cn/qtgzwj/20261029/aba959d8c1854b2d997fd8cee8fee6e9.html",
+            "id": "dental-nmpa16",
+            "label": "NMPA Notice 16 of 2026: manufacturing inspection guidance",
+            "scope": "Manufacturing inspection guidance; it does not grant individual clinical or release authority."
+          },
+          {
+            "href": "https://yjj.sh.gov.cn/cmsres/8b/8bcd4c0847084fc1b7f439e0d0ba74e5/8db96c7598c2c7fca6ee51e91c7d5543.docx",
+            "id": "dental-nmpa16-denture",
+            "label": "Custom Denture Inspection Guidance (original attachment)",
+            "scope": "See 8.7.1, 10.4, 11.6 and 11.10.1; apply the requirements for the product and quality system."
           }
         ]
       },
@@ -35291,7 +35394,7 @@
             {
               "指标": "Pay method",
               "数值": "Editorially to be verified: monthly salary, piece rate, commission and rework settlement",
-              "说明": "No recruitment sample, so no claim to be nationally mainstream"
+              "说明": "Neither hospital notice lists pay; compare job requirements only."
             },
             {
               "指标": "Employment form",
@@ -35422,7 +35525,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "This round: the NBS2025 manufacturing unit industry table, the 2024 skill training catalogue, the 2026 denture registration guidance and the transition between the old and new specifications, the production measures and PIPL; occupational wages and recruitment samples remain a gap",
+          "china_open": "Mainland sources include two hospital notices, 2025 manufacturing statistics and 2026 custom denture inspection requirements.",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -35483,7 +35586,7 @@
               }
             },
             {
-              "城市/区间": "Individual employer and recruitment quotes (cannot replace the national basis)",
+              "城市/区间": "Hospital job requirements (pay not listed)",
               "月薪参考": {
                 "$item": "actors.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -35928,7 +36031,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "how": {
           "$join": [
@@ -35945,7 +36048,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "suit": {
           "$join": [
@@ -35962,7 +36065,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         }
       },
       "hero": {
@@ -36580,8 +36683,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Understand my career interests",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
+            "cta_label": "Take the Holland career interest test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
               "block": "fit",
@@ -36629,8 +36732,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
-            "cta_label": "Understand my Big Five traits",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
+            "cta_label": "Take the Big Five personality test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
               "block": "fit",
@@ -36678,8 +36781,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "cta_label": "Understand my personality preferences",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "Take the MBTI preferences test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
               "block": "fit",
@@ -36727,8 +36830,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
-            "cta_label": "Understand my motivation cues",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
+            "cta_label": "Take the Enneagram test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
               "block": "fit",
@@ -36776,8 +36879,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
-            "cta_label": "Understand my cognitive performance",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "Take the matrix reasoning test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.iq.evidence-level",
               "block": "fit",
@@ -36825,8 +36928,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
-            "cta_label": "Understand my communication cues",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "Take the emotional skills test",
             "evidence_level": {
               "$item": "actors.display.personality_fit_block.assessments.eq.evidence-level",
               "block": "fit",
@@ -37447,7 +37550,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Understand dental laboratory technicians' task interests and work preferences",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37560,20 +37663,20 @@
         },
         "secondary_links": [
           {
-            "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Understand dental laboratory technicians' task interests and work preferences"
+            "href": "/en/tests/holland-career-interest-test-riasec",
+            "label": "Take the Holland career interest test"
           },
           {
             "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Understand dental laboratory technicians' task interests and work preferences"
+            "label": "Take the Big Five personality test"
           },
           {
             "href": "/en/tests/mbti-personality-test-16-personality-types",
-            "label": "Understand dental laboratory technicians' task interests and work preferences"
+            "label": "Take the MBTI preferences test"
           },
           {
-            "href": "/en/tests/big-five-personality-test-ocean-model",
-            "label": "Understand dental laboratory technicians' task interests and work preferences"
+            "href": "/en/tests/enneagram-personality-test-nine-types",
+            "label": "Take the Enneagram test"
           }
         ]
       },
@@ -37912,7 +38015,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and lab tasks",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Occupational fit guide",
@@ -38183,27 +38286,15 @@
         "source_refs": [
           "r5-nbs-manufact"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+25+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Dental Laboratory Technicians",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and lab tasks"
     },
     "badges": [
       "Restoration fabrication · specification and occlusion verification · recording and traceability",
@@ -38247,17 +38338,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Dental Laboratory Technicians (O*NET-SOC 51-9081.00) fabricate and repair dentures, crowns, bridges, inlays, post-and-cores and orthodontic appliances in the laboratory according to the dentist's prescription and specifications, using processes such as impressions and models, wax patterns, investing and casting, porcelain firing and sintering, resin build-up and grinding and polishing, and verify seating, contact and occlusal precision with articulators and measuring tools; they also process intraoral and model scan data, design with CAD and drive milling or additive manufacturing equipment, while recording material batches and process parameters for traceability; seating and clinical adjustment are the responsibility of the dental physician. The work context is an indoor environment requiring long periods of seated fine manual work and equipment operation, with exposure to dust, noise and some chemical materials. U.S. basis: in this occupation's May 2025 wage data the median annual wage is 49,610 USD (median hourly wage 23.85 USD) and the annual percentiles are 36,660／40,420／49,610／62,070／76,940 USD; about 34,400 people in 2025, a projected decline of about 6% in 2025—2035 (about 32,300 in 2035), and about 3,600 openings per year on average over the projection period including replacement needs; the U.S. official data combine this occupation with ophthalmic laboratory technicians (51-9083.00) and medical appliance technicians (51-9082.00) into group 51-9080 for statistics (combined group May 2025 median annual wage 47,060 USD, about 64,300 positions in 2025, a decline of about 2% in 2025—2035). Mainland China: the counterpart occupation is dental restoration fabricators (4-14-03-02); custom dentures are administered as Class II medical devices, and production must have the corresponding registration certificate and production licence; mainland China's published statistics do not release occupation-level wages corresponding to this occupation, and this page visibly marks the gap in the relevant places rather than filling it with an industry average."
+      "text": "Learn how dental laboratory technicians make and repair restorations, check orders and document rework. Compare U.S. pay, mainland China entry routes, and try a paper case."
     },
     "title": {
       "availability": "available",
       "text": "Dental Laboratory Technicians"
     }
   },
-  "source_content_sha256": "5d5948cfa5fb3592021c04c170386d5e9df8e242d86f01f054bc91ba628d0568",
+  "source_content_sha256": "da294699c19f38780e03f2107bd9dc5d09ec12ca012df4aebd73261c4a112a86",
   "subject": {
     "canonical_slug": "dental-laboratory-technicians",
     "name": "Dental Laboratory Technicians",
-    "summary": "Dental Laboratory Technicians (O*NET-SOC 51-9081.00) fabricate and repair dental restorations and appliances in the laboratory according to the dentist's or prosthodontist's prescription and specifications: reading the work order and specifications, inspecting impressions or intraoral scan data and models, making dies and occlusal records, and using processes such as wax patterns, investing and casting, porcelain firing and sintering, resin build-up and grinding and polishing to fabricate and repair dentures, crowns, bridges, inlays, post-and-cores and orthodontic appliances, while verifying seating, contact and occlusal precision with articulators and measuring tools; the outputs are deliverable restorations, working models and digital exchange files, and traceable fabrication and inspection records. Seating, clinical adjustment and the final diagnostic and treatment judgment are the responsibility of the dental physician. U.S. basis: O*NET-SOC 51-9081.00 is a single occupational code, and the BLS Occupational Outlook publishes both this subcategory and the 51-9080 combined group data formed by it together with ophthalmic laboratory technicians (51-9083.00) and medical appliance technicians (51-9082.00) in the same group, so the bases must be distinguished; in this occupation's May 2025 wage data the median annual wage is 49,610 USD (median hourly wage 23.85 USD), with about 34,400 people in 2025 and a projected decline of about 6% in 2025—2035. Mainland China basis: the counterpart occupation is dental restoration fabricators (occupational code 4-14-03-02); custom dentures are administered as Class II medical devices, and production requires a registration certificate and production licence together with compliance with good manufacturing practice; in this round the National Bureau of Statistics wage release consulted did not provide a figure listed separately for this occupation in mainland China, and this page retains the gap as it stands."
+    "summary": "Dental laboratory technicians make and repair restorations to a dentist’s order. They check impressions, scans and materials, and document fabrication, inspection and rework. Dentists handle diagnosis, prescriptions, clinical fitting and adjustments. Try the D-01 paper case to see how you feel about checking dimensions and files."
   }
 }
