@@ -58,6 +58,12 @@ final class ResultAccessLinkTemplateDeliveryTest extends TestCase
         $absoluteResultUrl = 'https://app.example.test'.$resultUrl;
         $this->assertStringContainsString($expectedTitle, $html);
         $this->assertStringContainsString($absoluteResultUrl, $html);
+        if ($locale === 'zh-TW') {
+            $this->assertStringContainsString('<html lang="zh-TW">', $html);
+            $this->assertStringContainsString('查看結果（簡體中文）', $html);
+            $this->assertStringContainsString('/zh-TW/email/preferences?token=', $html);
+            $this->assertStringContainsString('/zh-TW/email/unsubscribe?token=', $html);
+        }
 
         $row = DB::table('email_outbox')
             ->where('attempt_id', $attemptId)
@@ -65,6 +71,8 @@ final class ResultAccessLinkTemplateDeliveryTest extends TestCase
             ->first();
         $this->assertNotNull($row);
         $this->assertSame('sent', (string) ($row->status ?? ''));
+        $this->assertSame($locale, (string) $row->locale);
+        $this->assertSame($expectedTitle, (string) $row->subject);
         $this->assertSame('', (string) ($row->body_html ?? ''));
         $this->assertStringNotContainsString((string) $token['token'], (string) ($row->payload_json ?? ''));
 
@@ -82,6 +90,7 @@ final class ResultAccessLinkTemplateDeliveryTest extends TestCase
         return [
             'en' => ['en', 'Your result access link', '/en/result/'],
             'zh-CN' => ['zh-CN', '你的结果访问链接', '/zh/result/'],
+            'zh-TW' => ['zh-TW', '你的測驗結果連結', '/zh/result/'],
         ];
     }
 

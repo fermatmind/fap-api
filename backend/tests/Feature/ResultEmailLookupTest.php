@@ -175,6 +175,27 @@ final class ResultEmailLookupTest extends TestCase
             ->assertJsonPath('error_code', 'RATE_LIMIT_RESULT_LOOKUP');
     }
 
+    public function test_taiwan_lookup_keeps_guest_verification_and_queues_a_taiwan_email(): void
+    {
+        $email = 'owner@example.test';
+        $attempt = $this->seedAttemptWithResult('anon_lookup_taiwan', 'MBTI', 'INTJ-A', now()->subMinute());
+        $this->seedBinding($attempt, $email, 'anon_lookup_taiwan');
+
+        $response = $this->postJson('/api/v0.3/results/lookup-by-email', ['email' => $email, 'locale' => 'zh-TW'])
+            ->assertOk()
+            ->assertJsonPath('email_verification_required', true)
+            ->assertJsonPath('recovery_email_requested', true)
+            ->assertJsonCount(0, 'items');
+        $this->assertStringNotContainsString($attempt, $response->getContent());
+
+        $row = DB::table('email_outbox')->where('attempt_id', $attempt)->where('template', 'result_access_link')->first();
+        $this->assertNotNull($row);
+        $this->assertSame('zh-TW', $row->locale);
+        $payload = json_decode((string) app(PiiCipher::class)->decrypt((string) $row->payload_enc), true, 64, JSON_THROW_ON_ERROR);
+        $this->assertStringStartsWith('/zh/result/'.$attempt.'?access_token=', $payload['result_access_url']);
+        $this->assertStringNotContainsString($payload['result_access_token'], (string) $row->payload_json);
+    }
+
     public function test_lookup_by_email_without_server_side_identity_requires_verification(): void
     {
         $response = $this->postJson('/api/v0.3/results/lookup-by-email', [

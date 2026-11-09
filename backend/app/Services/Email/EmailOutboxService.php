@@ -447,7 +447,9 @@ class EmailOutboxService
             ];
         }
 
-        $locale = $this->resolveRequestedLocale($attemptId, $preferredLocale);
+        $locale = $this->isTaiwanResultAccessLocale(self::RESULT_ACCESS_LINK_TEMPLATE, $preferredLocale)
+            ? 'zh-TW'
+            : $this->resolveRequestedLocale($attemptId, $preferredLocale);
         $subject = $this->defaultSubjectForTemplate(self::RESULT_ACCESS_LINK_TEMPLATE, $locale);
         $outboxUserId = $this->resultAccessLinkOutboxUserId($binding);
         $lifecycleContext = $this->buildLifecyclePayloadContext($email, null, [
@@ -921,8 +923,11 @@ class EmailOutboxService
     private function preparePendingDelivery(object $row): array
     {
         $payload = $this->decodePayloadFromRow($row);
-        $locale = $this->normalizeLocale((string) ($row->locale ?? ($payload['locale'] ?? 'en')));
         $templateKey = $this->resolveTemplateKeyFromRow($row, $payload);
+        $requestedLocale = (string) ($row->locale ?? ($payload['locale'] ?? 'en'));
+        $locale = $this->isTaiwanResultAccessLocale($templateKey, $requestedLocale)
+            ? 'zh-TW'
+            : $this->normalizeLocale($requestedLocale);
         $subject = $this->resolveSubjectFromRow($row, $payload, $templateKey, $locale);
         $recipientEmail = $this->extractRecipientEmailFromOutboxRow($row, $payload);
 
@@ -1643,9 +1648,9 @@ class EmailOutboxService
 
     private function resolveEmailViewName(string $templateKey, string $locale): string
     {
-        $lang = strtolower((string) explode('-', $this->normalizeLocale($locale))[0]) === 'zh'
-            ? 'zh'
-            : 'en';
+        $lang = $this->isTaiwanResultAccessLocale($templateKey, $locale)
+            ? 'zh-TW'
+            : ($this->normalizeLocale($locale) === 'zh-CN' ? 'zh' : 'en');
         $supported = [
             'payment_success',
             'report_claim',
@@ -1763,8 +1768,9 @@ class EmailOutboxService
             : '/en/help';
 
         $orderLookupUrl = $this->frontendUrl($frontendBaseUrl, '/orders/lookup', $query);
-        $emailPreferencesUrl = $this->frontendUrl($frontendBaseUrl, '/email/preferences', ['token' => $preferenceToken] + $query);
-        $emailUnsubscribeUrl = $this->frontendUrl($frontendBaseUrl, '/email/unsubscribe', ['token' => $preferenceToken] + $query);
+        $emailPath = $this->isTaiwanResultAccessLocale($templateKey, $locale) ? '/zh-TW/email' : '/email';
+        $emailPreferencesUrl = $this->frontendUrl($frontendBaseUrl, $emailPath.'/preferences', ['token' => $preferenceToken] + $query);
+        $emailUnsubscribeUrl = $this->frontendUrl($frontendBaseUrl, $emailPath.'/unsubscribe', ['token' => $preferenceToken] + $query);
         $helpUrl = $this->frontendUrl($frontendBaseUrl, $helpPath, $query);
         $preferences = is_array($payload['preferences'] ?? null) ? $payload['preferences'] : [];
 
@@ -2269,6 +2275,12 @@ class EmailOutboxService
         return $this->piiCipher->encrypt($encoded);
     }
 
+    private function isTaiwanResultAccessLocale(string $templateKey, ?string $locale): bool
+    {
+        return $templateKey === self::RESULT_ACCESS_LINK_TEMPLATE
+            && strtolower(str_replace('_', '-', trim($locale ?? ''))) === 'zh-tw';
+    }
+
     private function normalizeLocale(string $locale): string
     {
         $locale = trim(str_replace('_', '-', $locale));
@@ -2319,7 +2331,11 @@ class EmailOutboxService
             return $lang === 'zh' ? '你的报告链接已准备好' : 'Your report link is ready';
         }
         if ($templateKey === self::RESULT_ACCESS_LINK_TEMPLATE) {
-            return $lang === 'zh' ? '你的结果访问链接' : 'Your result access link';
+            return match ($locale) {
+                'zh-TW' => '你的測驗結果連結',
+                'zh-CN' => '你的结果访问链接',
+                default => 'Your result access link',
+            };
         }
         if ($templateKey === 'payment_success') {
             return $lang === 'zh' ? '支付成功与报告交付通知' : 'Payment successful and report delivered';
