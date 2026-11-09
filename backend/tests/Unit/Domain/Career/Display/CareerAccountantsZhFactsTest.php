@@ -50,7 +50,10 @@ final class CareerAccountantsZhFactsTest extends TestCase
         $answers = collect($faq['data']['entries'])->keyBy('id');
         self::assertStringContainsString('$83,680', $answers['faq-6']['answer']);
         self::assertStringContainsString('115,300', $answers['faq-3']['answer']);
-        self::assertSame(['source-6', 'source-2', 'source-5'], $answers['faq-6']['source_refs']);
+        self::assertSame(
+            ['source-7', 'review-oews-concepts', 'source-mohrss-national-2025-revision', 'source-5'],
+            $answers['faq-6']['source_refs'],
+        );
         self::assertSame(['source-8', 'source-22', 'source-9'], $answers['faq-3']['source_refs']);
     }
 
