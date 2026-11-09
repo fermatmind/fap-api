@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Events\PublicAuthorityChanged;
 use App\Filament\Ops\Resources\CareerGuideResource\Support\CareerGuideWorkspace;
 use App\Models\AdminUser;
 use App\Models\CareerGuide;
+use App\Models\Scopes\TenantScope;
 use App\Services\Audit\AuditLogger;
 use App\Support\Rbac\PermissionNames;
 use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use RuntimeException;
 use Throwable;
 
@@ -38,6 +41,13 @@ final class UpdateExistingCareerGuideBody extends Command
     public static function state(CareerGuide $guide): array
     {
         $guide->unsetRelations();
+        // The record's organization owns its relations even when Ops has another organization selected.
+        $orgId = (int) $guide->org_id;
+        $guide->load([
+            'relatedJobs' => fn ($query) => $query->withoutGlobalScope(TenantScope::class)->where('career_jobs.org_id', $orgId),
+            'relatedArticles' => fn ($query) => $query->withoutGlobalScope(TenantScope::class)->where('articles.org_id', $orgId),
+            'relatedPersonalityProfiles' => fn ($query) => $query->withoutGlobalScope(TenantScope::class)->where('personality_profiles.org_id', $orgId),
+        ]);
 
         return [
             'attributes_sha256' => self::digest($guide->getAttributes()),
@@ -104,7 +114,7 @@ final class UpdateExistingCareerGuideBody extends Command
                 if (! $guide instanceof CareerGuide || (int) $guide->org_id !== 0
                     || ! in_array($guide->locale, CareerGuide::SUPPORTED_LOCALES, true)
                     || $guide->status !== CareerGuide::STATUS_PUBLISHED || ! $guide->is_public
-                    || filled($guide->body_html)) {
+                    || $guide->published_at?->isFuture() || filled($guide->body_html)) {
                     throw new RuntimeException('existing_public_markdown_guide_required');
                 }
                 foreach (['id', 'org_id', 'guide_code', 'slug', 'locale'] as $field) {
@@ -113,6 +123,9 @@ final class UpdateExistingCareerGuideBody extends Command
                     }
                 }
                 $before = self::state($guide);
+                if ($guide->body_md !== $body && blank($guide->seoMeta?->seo_description) && blank($guide->excerpt)) {
+                    throw new RuntimeException('body_derived_seo_description_requires_review');
+                }
                 $expected = $before['native_snapshot'];
                 $expected['guide']['body_md'] = $body;
                 if (self::digest($expected) !== self::digest(data_get($package, 'candidate.native_snapshot'))) {
@@ -145,13 +158,28 @@ final class UpdateExistingCareerGuideBody extends Command
                     'career_guide_body_update', 'career_guide', (string) $guide->id,
                     ['package_sha256' => $sha, 'before_snapshot_sha256' => self::digest($before['native_snapshot']),
                         'actor' => 'delegated_cli', 'authorized_operator_id' => (int) $actor->id,
+                        'resource_org_id' => (int) $guide->org_id,
                         'after_snapshot_sha256' => self::digest($after['native_snapshot']), 'editorial_attestation_created' => false],
                     'Operator-authorized existing guide copy update');
 
                 return ['guide_id' => $guide->id, 'changed' => true, 'readonly' => false,
                     'new_revision_id' => $after['revisions'][0]['id'], 'readback_passed' => true];
             };
-            $result = $execute ? DB::transaction($operation) : $operation();
+            if ($execute) {
+                $result = null;
+                try {
+                    Event::defer(function () use ($operation, &$result): void {
+                        $result = DB::transaction($operation);
+                    }, [PublicAuthorityChanged::class]);
+                } catch (Throwable $exception) {
+                    if ($result === null) {
+                        throw $exception;
+                    }
+                    $result['followup_error'] = 'public_authority_event_failed';
+                }
+            } else {
+                $result = $operation();
+            }
             $this->line(json_encode(['ok' => true, ...$result], JSON_THROW_ON_ERROR));
 
             return self::SUCCESS;

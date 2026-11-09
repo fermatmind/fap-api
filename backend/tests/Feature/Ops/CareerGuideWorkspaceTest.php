@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Console\Commands\UpdateExistingCareerGuideBody;
 use App\Filament\Ops\Resources\CareerGuideResource;
+use App\Filament\Ops\Resources\CareerGuideResource\Pages\EditCareerGuide;
 use App\Filament\Ops\Resources\CareerGuideResource\Support\CareerGuideWorkspace;
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\AuditLog;
 use App\Models\CareerGuide;
 use App\Models\CareerGuideRevision;
 use App\Models\CareerJob;
@@ -17,15 +20,68 @@ use App\Models\PersonalityProfile;
 use App\Models\Role;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
+use Filament\Facades\Filament;
+use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 final class CareerGuideWorkspaceTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_body_only_action_keeps_the_global_guide_snapshot_in_a_selected_tenant(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_PUBLISH]);
+        $selectedOrg = $this->createSelectedOrg();
+        $guide = $this->seedGuide(['status' => CareerGuide::STATUS_PUBLISHED, 'is_public' => true, 'body_html' => null]);
+        $job = $this->seedJob();
+        $article = $this->seedArticle();
+        $profile = $this->seedProfile();
+        $guide->relatedJobs()->attach($job->id, ['sort_order' => 37]);
+        $guide->relatedArticles()->attach($article->id, ['sort_order' => 42]);
+        $guide->relatedPersonalityProfiles()->attach($profile->id, ['sort_order' => 19]);
+        CareerGuideWorkspace::syncWorkspaceSeo($guide, $this->workspaceSeoState());
+        CareerGuideWorkspace::createRevision($guide, 'Seed revision', $admin);
+        $before = UpdateExistingCareerGuideBody::state($guide->fresh());
+
+        Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+        app(OrgContext::class)->set($selectedOrg->id, null, 'admin');
+        config(['admin.totp.enabled' => true]);
+        $this->withSession([
+            'ops_org_id' => $selectedOrg->id,
+            'ops_admin_totp_verified_user_id' => $admin->id,
+        ])->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $body = "## Worked example\n\nTry a short project before committing to a course.";
+        $candidate = ['baseline' => UpdateExistingCareerGuideBody::digest($before), 'body_md' => $body];
+        Livewire::test(EditCareerGuide::class, ['record' => $guide->id])
+            ->callAction('updatePublishedBody', $candidate)->assertHasNoActionErrors()->assertRedirect();
+
+        $guide->refresh();
+        $expected = $before['native_snapshot'];
+        $expected['guide']['body_md'] = $body;
+        $after = UpdateExistingCareerGuideBody::state($guide);
+        $this->assertSame($expected, $after['native_snapshot']);
+        $this->assertSame($expected, $guide->revisions()->firstOrFail()->snapshot_json);
+        $this->assertSame($before['revisions'], array_slice($after['revisions'], 1));
+        $audit = AuditLog::withoutGlobalScopes()->where('action', 'career_guide_body_update')->sole();
+        $this->assertSame($selectedOrg->id, (int) $audit->org_id);
+        $this->assertSame($admin->id, (int) $audit->actor_admin_id);
+        $this->assertSame(0, $audit->meta_json['resource_org_id']);
+        Livewire::test(EditCareerGuide::class, ['record' => $guide->id])
+            ->callAction('updatePublishedBody', [...$candidate, 'body_md' => 'Stale proposed body'])
+            ->assertHasActionErrors(['body_md']);
+        $this->withSession(['ops_admin_totp_verified_user_id' => 0]);
+        Livewire::test(EditCareerGuide::class, ['record' => $guide->id])
+            ->mountAction('updatePublishedBody')
+            ->setActionData(['baseline' => UpdateExistingCareerGuideBody::digest($after), 'body_md' => 'Unverified proposed body'])
+            ->call('callMountedAction')
+            ->assertForbidden();
+        $this->assertSame($after, UpdateExistingCareerGuideBody::state($guide->fresh()));
+    }
 
     public function test_career_guide_workspace_pages_render_for_authorized_admin(): void
     {

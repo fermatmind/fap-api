@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Console\Commands\UpdateExistingCareerGuideBody as Updater;
+use App\Events\PublicAuthorityChanged;
 use App\Filament\Ops\Resources\CareerGuideResource\Support\CareerGuideWorkspace;
 use App\Models\AdminUser;
 use App\Models\AuditLog;
@@ -15,6 +16,7 @@ use App\Services\Audit\AuditLogger;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Event;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -82,6 +84,22 @@ final class UpdateExistingCareerGuideBodyTest extends TestCase
         $this->assertSame(1, $guide->revisions()->count());
     }
 
+    public function test_future_guide_and_body_derived_seo_description_are_rejected_without_writes(): void
+    {
+        $guide = $this->guide();
+        $actor = $this->actor(true);
+        $guide->forceFill(['published_at' => now()->addDay()])->saveQuietly();
+        $this->assertSame(1, $this->runPackage($this->package($guide), $actor));
+        $this->assertSame('existing_public_markdown_guide_required', json_decode(Artisan::output(), true)['error']);
+
+        $guide->forceFill(['published_at' => now()->subDay(), 'excerpt' => null])->saveQuietly();
+        $this->assertSame(1, $this->runPackage($this->package($guide), $actor));
+        $this->assertSame('body_derived_seo_description_requires_review', json_decode(Artisan::output(), true)['error']);
+        $this->assertSame('Old guide body', $guide->fresh()->body_md);
+        $this->assertSame(1, $guide->revisions()->count());
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+    }
+
     public function test_missing_execute_authority_or_package_tamper_never_writes(): void
     {
         $guide = $this->guide();
@@ -99,6 +117,22 @@ final class UpdateExistingCareerGuideBodyTest extends TestCase
         $before = Updater::state($guide);
         $this->assertSame(1, $this->runPackage($this->package($guide), $this->actor(true)));
         $this->assertSame($before, Updater::state($guide->fresh()));
+    }
+
+    public function test_post_commit_event_failure_reports_saved_body_and_revision(): void
+    {
+        $guide = $this->guide();
+        Event::listen(PublicAuthorityChanged::class, static function (): void {
+            throw new RuntimeException('event_dispatch_failed');
+        });
+
+        $this->assertSame(0, $this->runPackage($this->package($guide, 'Saved body'), $this->actor(true)));
+        $result = json_decode(Artisan::output(), true);
+        $this->assertTrue($result['readback_passed']);
+        $this->assertSame('public_authority_event_failed', $result['followup_error']);
+        $this->assertSame('Saved body', $guide->fresh()->body_md);
+        $this->assertSame(2, $guide->revisions()->count());
+        $this->assertSame(1, AuditLog::withoutGlobalScopes()->count());
     }
 
     public function test_production_execute_requires_matching_active_release(): void

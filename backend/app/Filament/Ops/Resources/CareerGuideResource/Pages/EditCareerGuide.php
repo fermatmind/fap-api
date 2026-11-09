@@ -4,11 +4,20 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Resources\CareerGuideResource\Pages;
 
+use App\Console\Commands\UpdateExistingCareerGuideBody;
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerGuideResource\Support\CareerGuideWorkspace;
+use App\Models\AdminUser;
+use App\Models\CareerGuide;
+use App\Support\Rbac\PermissionNames;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Textarea;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class EditCareerGuide extends EditRecord
 {
@@ -47,7 +56,110 @@ class EditCareerGuide extends EditRecord
                 ->url(CareerGuideResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
+            Action::make('updatePublishedBody')
+                ->label('仅更新已发布正文')
+                ->visible(fn (): bool => $this->bodyUpdateOperator() instanceof AdminUser
+                    && $this->isPublicMarkdownGuide($this->getRecord()))
+                ->modalDescription('从当前公开指南生成锁定快照，只写入 Markdown 正文并记录新修订。')
+                ->fillForm(function (): array {
+                    $guide = $this->getRecord()->fresh();
+
+                    return [
+                        'baseline' => UpdateExistingCareerGuideBody::digest(UpdateExistingCareerGuideBody::state($guide)),
+                        'body_md' => $guide->body_md,
+                    ];
+                })
+                ->form([
+                    Textarea::make('baseline')->label('公开指南快照')->readOnly()->required()->rows(2),
+                    Textarea::make('body_md')->label('完整正文 Markdown')->required()->maxLength(100000)->rows(18),
+                ])
+                ->action(function (array $data): void {
+                    $error = $this->updatePublishedBody($data);
+                    if ($error === 'public_authority_event_failed') {
+                        Notification::make()->title('正文已提交，公开变更事件未完成')->warning()->persistent()->send();
+                    } elseif ($error !== null) {
+                        throw ValidationException::withMessages([
+                            $this->getMountedActionForm()->getStatePath().'.body_md' => $error,
+                        ]);
+                    } else {
+                        Notification::make()->title('已核对公开指南正文')->success()->send();
+                    }
+                    $this->redirect($this->getRedirectUrl());
+                }),
         ];
+    }
+
+    private function bodyUpdateOperator(): ?AdminUser
+    {
+        $actor = auth((string) config('admin.guard', 'admin'))->user();
+
+        return $actor instanceof AdminUser && ($actor->hasPermission(PermissionNames::ADMIN_OWNER)
+            || $actor->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)) ? $actor : null;
+    }
+
+    private function isPublicMarkdownGuide(CareerGuide $guide): bool
+    {
+        return (int) $guide->org_id === 0 && $guide->status === CareerGuide::STATUS_PUBLISHED
+            && $guide->is_public && ! $guide->published_at?->isFuture() && blank($guide->body_html);
+    }
+
+    private function updatePublishedBody(array $data): ?string
+    {
+        $actor = $this->bodyUpdateOperator();
+        abort_unless($actor instanceof AdminUser, 403);
+        abort_if((bool) config('admin.totp.enabled', true)
+            && (int) session('ops_admin_totp_verified_user_id', 0) !== (int) $actor->id, 403);
+
+        $guide = $this->getRecord()->fresh();
+        if (! $guide instanceof CareerGuide || ! $this->isPublicMarkdownGuide($guide)) {
+            return 'existing_public_markdown_guide_required';
+        }
+        $before = UpdateExistingCareerGuideBody::state($guide);
+        if (! hash_equals(UpdateExistingCareerGuideBody::digest($before), (string) ($data['baseline'] ?? ''))) {
+            return 'before_state_drift';
+        }
+
+        $body = (string) $data['body_md'];
+        $snapshot = $before['native_snapshot'];
+        $snapshot['guide']['body_md'] = $body;
+        $package = json_encode([
+            'schema' => 'career_guide_existing_body_update.v1',
+            'identity' => $guide->only(['id', 'org_id', 'guide_code', 'slug', 'locale']),
+            'before' => [
+                'attributes_sha256' => $before['attributes_sha256'],
+                'native_snapshot_sha256' => UpdateExistingCareerGuideBody::digest($before['native_snapshot']),
+                'revision_history_sha256' => UpdateExistingCareerGuideBody::digest($before['revisions']),
+            ],
+            'candidate' => ['body_md' => $body, 'body_md_sha256' => hash('sha256', $body), 'native_snapshot' => $snapshot],
+        ], JSON_THROW_ON_ERROR);
+        $file = tempnam(sys_get_temp_dir(), 'career-guide-body-');
+        if ($file === false) {
+            return 'package_required';
+        }
+
+        try {
+            if (file_put_contents($file, $package) !== strlen($package)) {
+                return 'package_required';
+            }
+            $hash = hash('sha256', $package);
+            $releaseFile = dirname(base_path()).'/REVISION';
+            $output = new BufferedOutput;
+            $status = Artisan::call('career-guides:update-existing-body', [
+                '--file' => $file,
+                '--sha256' => $hash,
+                '--execute' => true,
+                '--deployed-sha' => is_file($releaseFile) ? trim((string) file_get_contents($releaseFile)) : '',
+                '--admin-user-id' => (int) $actor->id,
+                '--confirm' => $hash,
+            ], $output);
+            $result = json_decode($output->fetch(), true);
+
+            return $status === 0 && ($result['ok'] ?? false) === true
+                ? ($result['followup_error'] ?? null)
+                : ($result['error'] ?? 'native_update_failed');
+        } finally {
+            unlink($file);
+        }
     }
 
     protected function getSaveFormAction(): Action
