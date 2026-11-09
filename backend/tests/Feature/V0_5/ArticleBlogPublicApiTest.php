@@ -8,9 +8,12 @@ use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\ArticleTranslationRevision;
 use App\Models\LandingSurface;
+use App\Services\ContentPromotion\PublicContent53State;
+use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
@@ -232,6 +235,41 @@ final class ArticleBlogPublicApiTest extends TestCase
         $this->getJson($url)->assertHeader('X-FM-Article-List-Cache', 'hit')->assertJsonPath('blog_v1.is_indexable', true);
         $surface->update(['is_public' => false]);
         $this->getJson($url)->assertJsonPath('blog_v1.configuration_state', 'unconfigured')->assertJsonPath('blog_v1.is_indexable', false);
+    }
+
+    public function test_featured_order_requires_the_locked_surface_and_current_traditional_revisions(): void
+    {
+        $surface = $this->surface('zh-TW', []);
+        $surface->update(['is_indexable' => false]);
+        $article = $this->createArticle(['locale' => 'zh-TW']);
+        $before = $surface->only(['title', 'description', 'payload_json']);
+        $after = $before;
+        $after['payload_json']['blog_v1']['featured_article_ids'] = [$article->id];
+        $row = [
+            'page_id' => 'TRADITIONAL-BLOG-FEATURED-ORDER',
+            'kind' => 'surface', 'before' => $before, 'staging_before' => $before, 'snapshot' => $after,
+            'source_identity' => [], 'staging_source_identity' => [],
+            'featured_targets' => [[
+                'id' => $article->id, 'slug' => $article->slug, 'published_revision_id' => $article->published_revision_id,
+                'source_article_id' => (int) $article->source_article_id, 'translation_group_id' => $article->translation_group_id,
+            ]],
+        ];
+        $state = app(PublicContent53State::class);
+        $assertLocked = fn (array $candidate) => DB::transaction(fn () => $state->assertLockedBaseline([$candidate], [
+            $candidate['page_id'] => ['values' => $surface->fresh()->getRawOriginal(), 'relations' => []],
+        ]));
+
+        $assertLocked($row);
+        $surface->update(['payload_json' => $after['payload_json']]);
+        $assertLocked($row);
+        $this->getJson('/api/v0.5/articles?locale=zh-TW&include_blog=1')->assertOk()
+            ->assertJsonPath('blog_v1.featured_items.0.id', $article->id)
+            ->assertJsonPath('blog_v1.featured_items.0.published_revision_id', $article->published_revision_id);
+
+        $article->publishedRevision->updateQuietly(['published_at' => now()->addDay()]);
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessage('traditional_blog_featured_order_article_drift');
+        $assertLocked($row);
     }
 
     private function category(): ArticleCategory

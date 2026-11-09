@@ -16,6 +16,8 @@ final class TraditionalLandingSurfacePublication
 
     public const SCHEMA = 'fermatmind.traditional_landing_surfaces.v1';
 
+    public const FEATURED_ORDER_SCHEMA = 'fermatmind.traditional_blog_featured_order.v1';
+
     private const COPY_KEYS = ['description', 'page_blocks', 'payload_json', 'schema_version', 'title'];
 
     private const TEXT_FIELDS = [
@@ -130,6 +132,49 @@ final class TraditionalLandingSurfacePublication
             'source_snapshot' => $environment === 'staging' ? null : $source,
             'snapshot' => $target,
         ];
+    }
+
+    public static function featuredOrder(string $bytes, string $environment, array $directory, array $articles): array
+    {
+        $selection = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $identity = ['org_id' => 0, 'slug' => 'articles_index', 'locale' => 'zh-TW'];
+        $targets = $selection['environments'][$environment] ?? [];
+        if (($selection['schema'] ?? null) !== self::FEATURED_ORDER_SCHEMA || ($directory['identity'] ?? null) !== $identity
+            || ! array_is_list($targets) || count($targets) !== 4 || count($articles) !== 4) {
+            throw new DomainException('traditional_blog_featured_order_package_invalid');
+        }
+
+        foreach ($targets as $index => $target) {
+            $article = $articles[$index];
+            if (array_keys($target) !== ['id', 'slug', 'published_revision_id'] || ! is_int($target['id']) || $target['id'] < 1
+                || $target['slug'] !== $article['identity']['slug']
+                || ! is_int($target['published_revision_id']) || $target['published_revision_id'] < 1) {
+                throw new DomainException('traditional_blog_featured_order_target_invalid');
+            }
+            $targets[$index] += [
+                'source_article_id' => $article['source_expectations']['source']['id'],
+                'translation_group_id' => $article['source_expectations']['source']['translation_group_id'],
+            ];
+        }
+
+        $before = array_intersect_key($directory['snapshot'], array_flip(['title', 'description', 'payload_json']));
+        $after = $before;
+        $ids = array_column($targets, 'id');
+        if (count(array_unique($ids)) !== 4 || $before['payload_json']['blog_v1']['featured_article_ids'] !== []) {
+            throw new DomainException('traditional_blog_featured_order_prestate_invalid');
+        }
+        $after['payload_json']['blog_v1']['featured_article_ids'] = $ids;
+
+        return ['candidates' => [[
+            'page_id' => 'TRADITIONAL-BLOG-FEATURED-ORDER',
+            'kind' => 'surface',
+            'identity' => $identity,
+            'new_traditional_blog' => true,
+            'blog_article_slugs' => [...$directory['blog_article_slugs'], ...array_column($targets, 'slug')],
+            'featured_targets' => $targets,
+            'before' => $before, 'staging_before' => $before, 'snapshot' => $after,
+            'source_identity' => [], 'staging_source_identity' => [],
+        ]]];
     }
 
     private static function assertCopy(string $key, array $source, array $target): void

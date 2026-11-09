@@ -3,7 +3,8 @@ import { classifyPaths } from './classify-paths.mjs';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
-import { readFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { selectPublicContentPackage, packageDigest, executorPaths, inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
@@ -1083,5 +1084,63 @@ test('Traditional Article featured package preserves reviewed editorial output i
    assert.throws(()=>assertDom(editorialRow,html.replace(href,'/zh/tests'),{missing:true},environment),/TRADITIONAL_ARTICLE_EDITORIAL_DOM/);
    assert.throws(()=>assertDom(editorialRow,html.replace(faq,''),{missing:true},environment),/TRADITIONAL_ARTICLE_EDITORIAL_DOM/);
   }
+ }
+});
+
+test('Traditional Blog featured order binds published targets and checks the visible grid order',async()=>{
+ const selection='traditional-blog-featured-order';
+ const filename=selection+'.json';
+ const assets='content_assets/public_content_53';
+ assert.equal(classifyPaths(['backend/'+assets+'/'+filename]).operations.public_content_53_package,selection);
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ const fixture=mkdtempSync(resolve(tmpdir(),'traditional-blog-featured-order-'));
+ try {
+  symlinkSync(resolve(root,'app'),resolve(fixture,'app'),'dir');
+  mkdirSync(resolve(fixture,assets),{recursive:true});
+  for (const packageName of ['traditional-article-batch','traditional-article-featured']) {
+   for (const name of [packageName+'.json',packageName+'-review.json'])
+    copyFileSync(resolve(root,assets,name),resolve(fixture,assets,name));
+  }
+  const digest=packageDigest(root,'traditional-article-featured');
+  const source=readCandidateRows(root,digest).candidates;
+  const articles=source.map((row,i)=>({id:500+i,slug:row.identity.slug,published_revision_id:900+i}));
+  const packageRow={schema:'fermatmind.traditional_blog_featured_order.v1',environments:{
+   staging:articles.map(a=>({...a,id:a.id+100})),production:articles,
+  }};
+  const save=()=>writeFileSync(resolve(fixture,assets,filename),JSON.stringify(packageRow));
+  save();
+  const sha=packageDigest(fixture,selection);
+  const [row]=readCandidateRows(fixture,sha).candidates;
+  const [stage]=readCandidateRows(fixture,sha,'staging').candidates;
+  assert.deepEqual(row.snapshot.payload_json.blog_v1.featured_article_ids,[500,501,502,503]);
+  assert.deepEqual(stage.snapshot.payload_json.blog_v1.featured_article_ids,[600,601,602,603]);
+  assert.deepEqual(row.featured_targets.map(item=>item.source_article_id),[40,31,10,3]);
+  assert.deepEqual({...row.snapshot,payload_json:{...row.snapshot.payload_json,blog_v1:{...row.snapshot.payload_json.blog_v1,featured_article_ids:[]}}},row.before);
+  const path=pathFor(row);
+  const anchor=slug=>'<a href="'+path+'/'+slug+'">文章</a>';
+  const cards=targets=>'<div data-testid="articles-featured-grid">'+targets.map(a=>'<article data-article-layout="featured">'+anchor(a.slug)+'</article>').join('')+'</div>';
+  const categories=row.snapshot.payload_json.blog_v1.categories;
+  const html=targets=>'<html lang="zh-TW"><head><meta charset="utf-8"><title>'+row.snapshot.title+' | 費馬測試</title><meta name="description" content="'+row.snapshot.description+'"><meta name="robots" content="noindex"><link rel="canonical" href="https://fermatmind.com'+path+'"></head><body><main><h1>'+row.snapshot.title+'</h1><p>'+row.snapshot.description+'</p>'+categories.map(category=>'<a href="'+path+'/category/'+category.slug+'">'+category.name+'</a>').join('')+row.blog_article_slugs.map(anchor).join('')+cards(targets)+'</main></body></html>';
+  assert.doesNotThrow(()=>assertDom(row,html(articles),{},'production'));
+  assert.throws(()=>assertDom(row,html(articles.toReversed()),{},'production'),/TRADITIONAL_BLOG_DOM/);
+  assert.throws(()=>assertDom(row,html([]),{},'production'),/TRADITIONAL_BLOG_DOM/);
+  const fetcher=items=>async url=>{
+   const path=new URL(url).pathname;
+   const body=path.endsWith('/articles_index')
+    ? {ok:true,surface:{surface_key:'articles_index',locale:'zh-TW',status:'published',is_public:true,is_indexable:false,...row.snapshot}}
+    : {ok:true,blog_v1:{configuration_state:'published',is_indexable:false,featured_items:items}};
+   return Response.json(body);
+  };
+  const prestate={[row.page_id]:{flags:{is_indexable:false}}};
+  const renderer=async()=>html(articles);
+  const accepted=await verifyOnlineCandidates('production',fixture,fetcher(articles),renderer,prestate,sha);
+  assert.equal(accepted.api_readback_count,1);
+  assert.equal(accepted.dom_readback_count,1);
+  await assert.rejects(verifyOnlineCandidates('production',fixture,fetcher(articles.toReversed()),renderer,prestate,sha),/TRADITIONAL_BLOG_FEATURED_API/);
+  packageRow.environments.production=[...articles].reverse();
+  save();
+  assert.throws(()=>readCandidateRows(fixture,packageDigest(fixture,selection)));
+ } finally {
+  rmSync(fixture,{recursive:true,force:true});
  }
 });

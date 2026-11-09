@@ -96,6 +96,7 @@ $homeJsonLd=[]; foreach($xp->query('//script[@type="application/ld+json"]') as $
 echo json_encode(['language'=>$doc->documentElement->getAttribute('lang'),'link_labels'=>$labels,'body'=>$values($mainQuery),'h1'=>$values($mainQuery.'//h1'),'links'=>$values($mainQuery.'//a','href'),
  'home_jsonld'=>$homeJsonLd,'home_iq_cards'=>$values('//main//article[.//a[contains(@href,"iq-test-intelligence-quotient-assessment")]]'),
  'tests_quickstart_jsonld'=>$quickstart,'article_body'=>$values('//main//article[@data-testid="article-detail-content"]'),
+ 'blog_featured_links'=>$values($mainQuery.'//*[@data-testid="articles-featured-grid"]//article[@data-article-layout="featured"]/a','href'),
  'h1_names'=>$values($mainQuery.'//h1','aria-label'),'title'=>$documentTitles,'description'=>$values('//meta[@name="description"]','content'),
  'og_title'=>$values('//meta[@property="og:title"]','content'),'og_description'=>$values('//meta[@property="og:description"]','content'),
  'canonical'=>$canonicalLinks,'robots'=>$values('//meta[@name="robots"]','content'),
@@ -242,7 +243,8 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
       || dom.alternate_entries.some(entry=>entry.hreflang)
       || !body.includes(compact(row.snapshot.description))
       || categories.some(category=>!body.includes(compact(category.name)))
-      || expectedLinks.some(href=>!dom.links.includes(href))) {
+      || expectedLinks.some(href=>!dom.links.includes(href))
+      || (row.featured_targets && !equal(dom.blog_featured_links,row.featured_targets.map(target=>path+'/'+target.slug)))) {
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_BLOG_DOM_${row.page_id}`);
     }
     return;
@@ -502,6 +504,14 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
     const createdArticle = row.new_article === true && before?.missing === true;
     const createdTraditional = (row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true) && before?.missing === true;
+    if (row.featured_targets) {
+      const archive=parseApi(await read(api+'/api/v0.5/articles?locale=zh-TW&org_id=0&include_blog=1',fetcher)).blog_v1;
+      const fields=['id','slug','published_revision_id'];
+      const pick=item=>fields.map(field=>item[field]);
+      if (native.is_indexable !== false || archive?.configuration_state !== 'published'
+        || archive.is_indexable !== false || !equal(archive.featured_items?.map(pick),row.featured_targets.map(pick)))
+        throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_BLOG_FEATURED_API_${row.page_id}`);
+    }
     if (row.new_traditional_landing && native.is_indexable !== row.traditional_landing_indexable)
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_LANDING_QUALIFICATION_${row.page_id}`);
     if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)))

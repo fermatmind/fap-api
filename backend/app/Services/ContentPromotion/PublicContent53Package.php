@@ -143,6 +143,25 @@ final class PublicContent53Package
                 return self::pricingRefundPackage($this->bytes($root, 'pricing-refund.json'), $this->bytes($root, 'pricing-refund-review.json'), $expectedSha256);
             }
         }
+        $featuredOrder = 'traditional-blog-featured-order.json';
+        if (is_file($root.'/'.self::PACKAGE.'/'.$featuredOrder)) {
+            $bytes = $this->bytes($root, $featuredOrder);
+            $chain = TraditionalLandingSurfacePublication::FEATURED_ORDER_SCHEMA."\n".$featuredOrder."\n".hash('sha256', $bytes)."\n";
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                $directoryDigest = '4fc4331c5b1962af4324ba2ced6ec0c64fc6545ffee9434aff3d3bbc4976f69c';
+                $articleDigest = '44598344b8bc155564ff2cee09650e6a72d9a9be43ed153c80f36f912b6e63c4';
+                $directories = array_values(array_filter($this->read($backendRoot, $directoryDigest)['candidates'], fn (array $row): bool => $row['new_traditional_blog'] ?? false));
+                $productionArticles = $this->read($backendRoot, $articleDigest)['candidates'];
+                $articles = $environment === 'production' ? $productionArticles : $this->read($backendRoot, $articleDigest, $environment)['candidates'];
+                $directory = $directories[0] ?? [];
+                if (($directory['source_snapshot']['payload_json']['blog_v1']['featured_article_ids'] ?? null)
+                    !== array_column(array_column($productionArticles, 'source_identity'), 'source_article_id')) {
+                    throw new DomainException('traditional_blog_featured_order_source_drift');
+                }
+
+                return TraditionalLandingSurfacePublication::featuredOrder($bytes, $environment, $directory, $articles);
+            }
+        }
         foreach (['traditional-article-batch', 'traditional-article-featured'] as $name) {
             if (! is_file($root.'/'.self::PACKAGE.'/'.$name.'.json')) {
                 continue;

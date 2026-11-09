@@ -299,6 +299,9 @@ final class PublicContent53State
             if (($row['new_article'] ?? false) && (($saved['missing'] ?? false) || ($saved['retained_draft'] ?? false))) {
                 continue;
             }
+            if (isset($row['featured_targets'])) {
+                $this->assertBlogFeaturedSelection($row, $saved);
+            }
             $beforeCopy = PublicContent53Package::before($row);
             $candidateCopy = $row['snapshot'];
             $nativeBefore = PublicContent53Package::nativeBlocks($row, false);
@@ -401,6 +404,30 @@ final class PublicContent53State
     public function hash(array $value): string
     {
         return hash('sha256', PromotionContextFactory::canonicalJson($value));
+    }
+
+    private function assertBlogFeaturedSelection(array $row, array $saved): void
+    {
+        if ((bool) $saved['values']['is_indexable']) {
+            throw new DomainException('traditional_blog_featured_order_surface_drift');
+        }
+
+        $targets = $row['featured_targets'];
+        $articles = Article::query()->withoutGlobalScopes()->where('org_id', 0)->where('locale', 'zh-TW')
+            ->whereNull('deleted_at')->publiclyReadable()->whereIn('id', array_column($targets, 'id'))
+            ->where(fn ($query) => $query->whereNull('published_at')->orWhere('published_at', '<=', now()))
+            ->where(fn ($query) => $query->whereNull('scheduled_at')->orWhere('scheduled_at', '<=', now()))
+            ->whereHas('publishedRevision', fn ($query) => $query->where('revision_status', ArticleTranslationRevision::STATUS_PUBLISHED)
+                ->where(fn ($dates) => $dates->whereNull('published_at')->orWhere('published_at', '<=', now())))
+            ->orderBy('id')->lockForUpdate()->get()->keyBy('id');
+        foreach ($targets as $target) {
+            $article = $articles->get($target['id']);
+            if (! $article || $article->slug !== $target['slug'] || $article->translation_group_id !== $target['translation_group_id']
+                || (int) $article->published_revision_id !== $target['published_revision_id']
+                || (int) $article->source_article_id !== $target['source_article_id']) {
+                throw new DomainException('traditional_blog_featured_order_article_drift');
+            }
+        }
     }
 
     private function nativeBatch(array $rows): bool
