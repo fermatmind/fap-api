@@ -9,6 +9,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleMaterialDecisionService;
 use App\Support\ArticleSourceTargetSnapshot;
+use App\Support\CanonicalTranslationPayloadHash;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 
@@ -163,20 +164,31 @@ final class TraditionalArticlePublication
         }
 
         $target = $current['missing'] ? new Article : Article::query()->withoutGlobalScopes()->findOrFail($current['target_id']);
-        $target->forceFill($row['identity'] + $copy + $row['article_metadata'] + [
+        $articleCopy = $row['identity'] + $copy + $row['article_metadata'] + [
             'category_id' => $source->category_id, 'reading_minutes' => $source->reading_minutes,
             'source_locale' => $source->locale, 'source_article_id' => $source->id, 'translated_from_article_id' => $source->id,
             'translation_group_id' => $source->translation_group_id, 'translated_from_version_hash' => $source->source_version_hash,
+            'is_indexable' => false, 'sitemap_eligible' => false, 'llms_eligible' => false,
+        ];
+        $revisionCopy = array_intersect_key($copy, array_flip(['title', 'excerpt', 'content_md']))
+            + array_intersect_key($seo, array_flip(['seo_title', 'seo_description']));
+        $seoCopy = [
+            'org_id' => 0, 'locale' => 'zh-TW', 'canonical_url' => 'https://fermatmind.com/zh-TW/articles/'.$row['identity']['slug'],
+            'is_indexable' => false, 'robots' => 'noindex,follow', ...$seo,
+        ];
+        $revision = $current['missing'] ? null : $this->retainedRevision(
+            $target, $articleCopy, $revisionCopy, $seoCopy, $expectedTags, $current['source_state_sha256'],
+        );
+        $target->forceFill($articleCopy + [
             'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED, 'status' => 'published',
             'lifecycle_state' => Article::LIFECYCLE_ACTIVE, 'published_at' => now(), 'is_public' => true,
-            'is_indexable' => false, 'sitemap_eligible' => false, 'llms_eligible' => false,
         ])->save();
         if ($current['missing']) {
             foreach ($tags as $tag) {
                 DB::table('article_tag_map')->insert(['org_id' => 0, 'article_id' => $target->id, 'tag_id' => $tag]);
             }
         }
-        $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->create([
+        $revision ??= ArticleTranslationRevision::query()->withoutGlobalScopes()->create([
             'org_id' => 0, 'article_id' => $target->id, 'source_article_id' => $source->id,
             'locale' => 'zh-TW', 'source_locale' => $source->locale, 'translation_group_id' => $source->translation_group_id,
             'source_version_hash' => $source->source_version_hash, 'translated_from_version_hash' => $source->source_version_hash,
@@ -190,14 +202,38 @@ final class TraditionalArticlePublication
                 'approval_kind' => 'verified_automated_exact_package'],
             'approved_at' => now(), 'published_at' => now(),
         ]);
+        if (! $current['missing']) {
+            $revision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => now()])->saveQuietly();
+        }
         $target->forceFill(['working_revision_id' => $revision->id, 'published_revision_id' => $revision->id])->saveQuietly();
-        ArticleSeoMeta::query()->withoutGlobalScopes()->updateOrCreate(['article_id' => $target->id], [
-            'org_id' => 0, 'locale' => 'zh-TW', 'canonical_url' => 'https://fermatmind.com/zh-TW/articles/'.$target->slug,
-            'is_indexable' => false, 'robots' => 'noindex,follow', ...$seo,
-        ]);
+        ArticleSeoMeta::query()->withoutGlobalScopes()->updateOrCreate(['article_id' => $target->id], $seoCopy);
         app(ArticleMaterialDecisionService::class)->recordPublished($target, $revision, now());
 
         return $current['missing'];
+    }
+
+    private function retainedRevision(Article $target, array $articleCopy, array $revisionCopy, array $seoCopy, array $tags, string $sourceState): ArticleTranslationRevision
+    {
+        $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey($target->working_revision_id)
+            ->where('org_id', 0)->where('article_id', $target->id)->lockForUpdate()->sole();
+        $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('org_id', 0)->where('article_id', $target->id)
+            ->where('locale', $target->locale)->lockForUpdate()->sole();
+        $targetTags = DB::table('article_tag_map')->where('org_id', 0)->where('article_id', $target->id)
+            ->orderBy('tag_id')->lockForUpdate()->pluck('tag_id')->map(fn ($id): int => (int) $id)->all();
+        if (! CanonicalTranslationPayloadHash::sameValue($target->only(array_keys($articleCopy)), $articleCopy)
+            || $revision->only(array_keys($revisionCopy)) !== $revisionCopy
+            || $revision->authority_source_hash !== $sourceState
+            || $revision->source_article_id !== $target->source_article_id
+            || $revision->source_locale !== $target->source_locale
+            || $revision->translation_group_id !== $target->translation_group_id
+            || $revision->locale !== $target->locale
+            || $revision->source_version_hash !== $target->translated_from_version_hash
+            || $revision->translated_from_version_hash !== $target->translated_from_version_hash
+            || $seo->only(array_keys($seoCopy)) !== $seoCopy || ! empty($seo->schema_json) || $targetTags !== $tags) {
+            throw new DomainException('traditional_article_retained_draft_changed');
+        }
+
+        return $revision;
     }
 
     public function restore(array $row, array $published): void

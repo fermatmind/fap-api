@@ -15,6 +15,8 @@ use RuntimeException;
 
 final class IncrementalUrlTruthSyncService
 {
+    public const SUPPORTED_LOCALES = ['en', 'zh-CN'];
+
     public function __construct(
         private readonly UrlTruthInventorySource $authority,
         private readonly EffectivePublicUrlEvaluator $evaluator,
@@ -34,7 +36,7 @@ final class IncrementalUrlTruthSyncService
         $entityIdentity = trim($entityIdentity);
         $locale = trim($locale);
         $revision = trim($revision);
-        if ($pageEntityType === '' || $entityIdentity === '' || ! in_array($locale, ['en', 'zh-CN'], true) || $revision === '') {
+        if ($pageEntityType === '' || $entityIdentity === '' || ! in_array($locale, self::SUPPORTED_LOCALES, true) || $revision === '') {
             throw new InvalidArgumentException('incremental URL Truth identity is invalid.');
         }
         if (! (bool) config('seo_intel.enabled', false) || ! (bool) config('seo_intel.write_enabled', false)) {

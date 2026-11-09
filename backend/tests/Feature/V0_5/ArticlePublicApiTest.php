@@ -1416,6 +1416,25 @@ final class ArticlePublicApiTest extends TestCase
             $this->assertTrue($candidate->read($row, true)['retained_draft']);
         });
         $this->getJson('/api/v0.5/articles/'.$source->slug.'?org_id=0&locale=zh-TW')->assertNotFound();
+
+        $target = Article::withoutGlobalScopes()->where($row['identity'])->sole();
+        $retained = $target->workingRevision;
+        $retained->updateQuietly(['title' => '另有編輯的標題']);
+        try {
+            DB::transaction(fn () => $candidate->publish($row, $candidate->read($row, true), $context));
+            $this->fail('The publisher accepted an edited retained draft.');
+        } catch (DomainException $exception) {
+            $this->assertSame('traditional_article_retained_draft_changed', $exception->getMessage());
+        }
+        $this->assertSame('另有編輯的標題', $retained->fresh()->title);
+        $retained->updateQuietly(['title' => $row['snapshot']['title']]);
+        $this->assertFalse(DB::transaction(fn () => $candidate->publish($row, $candidate->read($row, true), $context)));
+        $this->assertSame($retained->id, $target->fresh()->published_revision_id);
+        $this->assertSame(1, ArticleTranslationRevision::withoutGlobalScopes()->where('article_id', $target->id)->count());
+        $this->getJson('/api/v0.5/articles/'.$source->slug.'?org_id=0&locale=zh-TW')->assertOk();
+        DB::transaction(fn () => $candidate->restore($row, $candidate->read($row, true)));
+        $this->getJson('/api/v0.5/articles/'.$source->slug.'?org_id=0&locale=zh-TW')->assertNotFound();
+
         $this->assertSame($sourceBefore, $source->fresh()->getAttributes());
         $this->assertSame($englishBefore, $english->fresh()->getAttributes());
 
