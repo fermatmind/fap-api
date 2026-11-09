@@ -404,6 +404,13 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
     if (dom.language !== 'zh-TW' || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)])
       || !robots.includes('noindex') || robots.includes('index') || dom.alternate_entries.some(entry=>entry.hreflang))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_SEO_${row.page_id}`);
+    if (row.source_identity?.source_locale === 'en') {
+      const sourcePath='/en/articles/'+row.source_expectations.source.slug;
+      const testSlug=row.article_metadata?.related_test_slug;
+      if (!(dom.link_labels[sourcePath] ?? []).some(label=>compact(label) === 'English')
+        || (testSlug && !(dom.link_labels['/en/tests/'+testSlug] ?? []).some(label=>compact(label) === '開始測驗')))
+        throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_ENGLISH_READER_LINK');
+    }
     const editorial = row.snapshot.editorial_projection;
     if (editorial && (editorial.faq.some(({question})=>!body.includes(compact(question)) && !body.includes(compact(plain(question))))
       || editorial.ctas.some(({href,label})=>!(dom.link_labels[href] ?? []).some(value=>compact(value) === compact(label)))))
@@ -520,6 +527,15 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
       || native.translation_group_id !== row.source_identity.translation_group_id
       || native.source_article_id !== (environment === 'staging' ? row.staging_source_article_id : row.source_identity.source_article_id)
       || !Number.isInteger(native.published_revision_id))) throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_QUALIFICATION_${row.page_id}`);
+    if (row.new_traditional_article && row.source_identity?.source_locale === 'en') {
+      const source=row.source_expectations.source;
+      const original=parseApi(await read(api+'/api/v0.5/articles/'+source.slug+'?locale=en&org_id=0',fetcher));
+      const expected={en:source.slug,'zh-TW':row.identity.slug};
+      if (native.source_locale !== 'en' || original.ok !== true || original.article?.id !== source.id
+        || original.article.locale !== 'en' || original.article.published_revision_id !== source.published_revision_id
+        || !equal(data.reader_language_slugs,expected) || !equal(original.reader_language_slugs,expected))
+        throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_ENGLISH_READER_PAIR');
+    }
     if (row.traditional_article_batch && (native.category?.id !== row.taxonomy_display.category.id
       || native.category?.slug !== row.taxonomy_display.category.slug
       || !equal((native.tags ?? []).map(tag=>[tag.id,tag.slug]).sort(),row.taxonomy_display.tags.map(tag=>[tag.id,tag.slug]).sort())))

@@ -1166,3 +1166,24 @@ test('Traditional Article English source preserves one independent published roo
   assert.equal(row.source_expectations.existing_chinese,null);
  }
 });
+
+test('Traditional Article English source verifies reciprocal reader links and retains the English assessment route',async()=>{
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ const {package_sha256:sha}=inspectPackage(root,'traditional-article-english');
+ const [row]=readCandidateRows(root,sha,'staging').candidates;
+ const source=row.source_expectations.source;
+ const sourcePath='/en/articles/'+source.slug, testPath='/en/tests/'+row.article_metadata.related_test_slug;
+ const fixture={...row,snapshot:{content_md:'繁體正文'}};
+ const html='<html lang="zh-TW"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="https://fermatmind.com'+pathFor(row)+'"></head><body><main><h1>繁體正文</h1><a href="'+sourcePath+'">English</a><a href="'+testPath+'">開始測驗</a></main></body></html>';
+ assert.doesNotThrow(()=>assertDom(fixture,html,{missing:true},'staging'));
+ assert.throws(()=>assertDom(fixture,html.replace(testPath,testPath.replace('/en/','/zh/')),{missing:true},'staging'),/TRADITIONAL_ENGLISH_READER_LINK/);
+ assert.throws(()=>assertDom(fixture,html.replace(sourcePath,'/en/articles/other'),{missing:true},'staging'),/TRADITIONAL_ENGLISH_READER_LINK/);
+ const links={en:source.slug,'zh-TW':row.identity.slug};
+ const fetcher=async url=>{
+  const original=new URL(url).searchParams.get('locale')==='en';
+  return Response.json(original
+   ? {ok:true,article:{id:source.id,locale:'en',published_revision_id:source.published_revision_id},reader_language_slugs:{en:source.slug}}
+   : {ok:true,article:{locale:'zh-TW',source_locale:'en',source_article_id:source.id,translation_group_id:source.translation_group_id,published_revision_id:123,is_indexable:false,sitemap_eligible:false,llms_eligible:false},reader_language_slugs:links});
+ };
+ await assert.rejects(verifyOnlineCandidates('staging',root,fetcher,undefined,{[row.page_id]:{missing:true}},sha),/TRADITIONAL_ENGLISH_READER_PAIR/);
+});
