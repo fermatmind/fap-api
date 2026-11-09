@@ -36,6 +36,7 @@ final class ClaimReportRequest extends FormRequest
             'order_no' => ['required', 'string', 'max:64'],
             'email' => ['required', 'email:rfc', 'max:320'],
             'locale' => ['nullable', 'string', 'max:16'],
+            'recovery_mail_locale' => ['nullable', Rule::in(['zh-TW'])],
             'surface' => ['nullable', Rule::in(['lookup', 'help', 'payment_success', 'payment_cancel'])],
             'entrypoint' => ['nullable', 'string', 'max:128'],
             'referrer' => ['nullable', 'string', 'max:2048'],

@@ -58,7 +58,9 @@ class EmailOutboxService
         $token = 'claim_'.(string) Str::uuid();
         $tokenHash = hash('sha256', $token);
         $expiresAt = now()->addMinutes(15);
-        $locale = $this->resolveRequestedLocale($attemptId, $preferredLocale);
+        $locale = $this->isTaiwanRecoveryMailLocale('report_claim', $preferredLocale)
+            ? 'zh-TW'
+            : $this->resolveRequestedLocale($attemptId, $preferredLocale);
         $subject = $this->defaultSubjectForTemplate('report_claim', $locale);
 
         $reportUrl = $this->reportUrl($attemptId);
@@ -447,7 +449,7 @@ class EmailOutboxService
             ];
         }
 
-        $locale = $this->isTaiwanResultAccessLocale(self::RESULT_ACCESS_LINK_TEMPLATE, $preferredLocale)
+        $locale = $this->isTaiwanRecoveryMailLocale(self::RESULT_ACCESS_LINK_TEMPLATE, $preferredLocale)
             ? 'zh-TW'
             : $this->resolveRequestedLocale($attemptId, $preferredLocale);
         $subject = $this->defaultSubjectForTemplate(self::RESULT_ACCESS_LINK_TEMPLATE, $locale);
@@ -925,7 +927,7 @@ class EmailOutboxService
         $payload = $this->decodePayloadFromRow($row);
         $templateKey = $this->resolveTemplateKeyFromRow($row, $payload);
         $requestedLocale = (string) ($row->locale ?? ($payload['locale'] ?? 'en'));
-        $locale = $this->isTaiwanResultAccessLocale($templateKey, $requestedLocale)
+        $locale = $this->isTaiwanRecoveryMailLocale($templateKey, $requestedLocale)
             ? 'zh-TW'
             : $this->normalizeLocale($requestedLocale);
         $subject = $this->resolveSubjectFromRow($row, $payload, $templateKey, $locale);
@@ -1648,7 +1650,7 @@ class EmailOutboxService
 
     private function resolveEmailViewName(string $templateKey, string $locale): string
     {
-        $lang = $this->isTaiwanResultAccessLocale($templateKey, $locale)
+        $lang = $this->isTaiwanRecoveryMailLocale($templateKey, $locale)
             ? 'zh-TW'
             : ($this->normalizeLocale($locale) === 'zh-CN' ? 'zh' : 'en');
         $supported = [
@@ -1768,7 +1770,7 @@ class EmailOutboxService
             : '/en/help';
 
         $orderLookupUrl = $this->frontendUrl($frontendBaseUrl, '/orders/lookup', $query);
-        $emailPath = $this->isTaiwanResultAccessLocale($templateKey, $locale) ? '/zh-TW/email' : '/email';
+        $emailPath = $this->isTaiwanRecoveryMailLocale($templateKey, $locale) ? '/zh-TW/email' : '/email';
         $emailPreferencesUrl = $this->frontendUrl($frontendBaseUrl, $emailPath.'/preferences', ['token' => $preferenceToken] + $query);
         $emailUnsubscribeUrl = $this->frontendUrl($frontendBaseUrl, $emailPath.'/unsubscribe', ['token' => $preferenceToken] + $query);
         $helpUrl = $this->frontendUrl($frontendBaseUrl, $helpPath, $query);
@@ -2275,9 +2277,9 @@ class EmailOutboxService
         return $this->piiCipher->encrypt($encoded);
     }
 
-    private function isTaiwanResultAccessLocale(string $templateKey, ?string $locale): bool
+    private function isTaiwanRecoveryMailLocale(string $templateKey, ?string $locale): bool
     {
-        return $templateKey === self::RESULT_ACCESS_LINK_TEMPLATE
+        return in_array($templateKey, ['report_claim', self::RESULT_ACCESS_LINK_TEMPLATE], true)
             && strtolower(str_replace('_', '-', trim($locale ?? ''))) === 'zh-tw';
     }
 
@@ -2328,7 +2330,7 @@ class EmailOutboxService
     {
         $lang = strtolower((string) explode('-', str_replace('_', '-', $locale))[0]);
         if ($templateKey === 'report_claim') {
-            return $lang === 'zh' ? '你的报告链接已准备好' : 'Your report link is ready';
+            return $locale === 'zh-TW' ? '你的報告連結已備妥' : ($lang === 'zh' ? '你的报告链接已准备好' : 'Your report link is ready');
         }
         if ($templateKey === self::RESULT_ACCESS_LINK_TEMPLATE) {
             return match ($locale) {

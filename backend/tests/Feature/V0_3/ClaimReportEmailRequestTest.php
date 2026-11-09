@@ -64,6 +64,29 @@ final class ClaimReportEmailRequestTest extends TestCase
         );
     }
 
+    public function test_claim_report_uses_taiwan_mail_locale_only_after_existing_eligibility_check(): void
+    {
+        $attemptId = $this->createAttempt('claim_owner');
+        $orderNo = 'ord_claim_'.Str::lower(Str::random(8));
+        $this->insertOrder($orderNo, $attemptId, 'owner@example.com');
+        $request = [
+            'order_no' => $orderNo, 'email' => 'owner@example.com', 'locale' => 'zh-CN',
+            'surface' => 'lookup', 'recovery_mail_locale' => 'zh-TW',
+        ];
+
+        $invalid = $this->postJson('/api/v0.3/claim/report', array_replace($request, ['email' => 'wrong@example.com']));
+        $invalid->assertOk()->assertExactJson(['ok' => true, 'queued' => true]);
+        $this->assertSame(0, DB::table('email_outbox')->where('template', 'report_claim')->count());
+
+        $response = $this->postJson('/api/v0.3/claim/report', $request);
+        $response->assertOk()->assertExactJson(['ok' => true, 'queued' => true]);
+        $row = DB::table('email_outbox')->where('attempt_id', $attemptId)->where('template', 'report_claim')->first();
+        $this->assertNotNull($row);
+        $this->assertSame('zh-TW', $row->locale);
+        $this->assertSame('你的報告連結已備妥', $row->subject);
+        $this->assertStringNotContainsString('recovery_mail_locale', (string) $row->payload_json);
+    }
+
     public function test_claim_report_post_queues_outbox_for_eligible_request(): void
     {
         $attemptId = $this->createAttempt('claim_owner');

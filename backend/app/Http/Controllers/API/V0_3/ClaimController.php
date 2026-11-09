@@ -91,6 +91,8 @@ class ClaimController extends Controller
         EmailOutboxService $outbox
     ): JsonResponse {
         $payload = $request->validated();
+        $mailLocale = $payload['recovery_mail_locale'] ?? $payload['locale'] ?? null;
+        unset($payload['recovery_mail_locale']);
         $email = (string) ($payload['email'] ?? '');
         $orderNo = (string) ($payload['order_no'] ?? '');
         $orgId = is_numeric($request->attributes->get('org_id')) ? (int) $request->attributes->get('org_id') : 0;
@@ -131,7 +133,7 @@ class ClaimController extends Controller
                 (string) ($eligible['attempt_id'] ?? ''),
                 is_object($order) ? (string) ($order->order_no ?? '') : $orderNo,
                 $mergedAttribution,
-                is_string($payload['locale'] ?? null) ? (string) $payload['locale'] : null
+                is_string($mailLocale) ? $mailLocale : null
             )['ok'] ?? false);
         }
 

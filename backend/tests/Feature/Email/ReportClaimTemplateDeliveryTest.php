@@ -27,7 +27,7 @@ final class ReportClaimTemplateDeliveryTest extends TestCase
         ]);
 
         $this->flushArrayTransport();
-        $attemptId = $this->createAttempt($locale);
+        $attemptId = $this->createAttempt($locale === 'zh-TW' ? 'zh-CN' : $locale);
         $queued = app(EmailOutboxService::class)->queueReportClaim(
             'report_claim_template_user',
             'claim+template@example.com',
@@ -56,8 +56,14 @@ final class ReportClaimTemplateDeliveryTest extends TestCase
         $this->assertStringContainsString("https://api.example.test/api/v0.3/attempts/{$attemptId}/report", $html);
         $this->assertStringContainsString("https://api.example.test/api/v0.3/attempts/{$attemptId}/report.pdf", $html);
         $this->assertStringContainsString('https://app.example.test/orders/lookup?', $html);
-        $this->assertStringContainsString('https://app.example.test/email/preferences?token=', $html);
-        $this->assertStringContainsString('https://app.example.test/email/unsubscribe?token=', $html);
+        $settingsPrefix = $locale === 'zh-TW' ? 'https://app.example.test/zh-TW/email/' : 'https://app.example.test/email/';
+        $this->assertStringContainsString($settingsPrefix.'preferences?token=', $html);
+        $this->assertStringContainsString($settingsPrefix.'unsubscribe?token=', $html);
+        if ($locale === 'zh-TW') {
+            $this->assertStringContainsString('<html lang="zh-TW">', $html);
+            $this->assertStringContainsString('下載 PDF（原語）', $html);
+            $this->assertSame('你的報告連結已備妥', Mail::mailer('array')->getSymfonyTransport()->messages()->first()->getOriginalMessage()->getSubject());
+        }
         $this->assertStringContainsString('ord_template_001', $html);
     }
 
@@ -69,6 +75,7 @@ final class ReportClaimTemplateDeliveryTest extends TestCase
         return [
             'en' => ['en', 'Report recovery'],
             'zh-CN' => ['zh-CN', '报告恢复'],
+            'zh-TW' => ['zh-TW', '找回報告'],
         ];
     }
 
