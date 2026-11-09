@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -22967,14 +22964,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Make a fully offline fictional test plan: for two paper system cards, A and B, verify asset scope, permitted actions, exclusions, and anomaly escalation; do not scan real addresses, write exploit code, or handle real credentials."
+              "In the entry section, use fictional records A1–A5 to write four documents: a scope matrix, an evidence and open-items record, a stop notification, and a re-test checklist. Work on paper only."
             ]
           },
           "id": "penetration-testers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet",
-            "nist",
-            "editor"
+            "offline-a1-a5"
           ],
           "type": "prose"
         },
@@ -23052,12 +23047,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 15-1299.04 is the exact penetration tester occupational profile; its pay and employment use the 15-1299 parent category Computer Occupations, All Other and cannot serve as independent statistics for this occupation."
+              "O*NET 15-1299.04 describes penetration tester duties. U.S. wage and employment data use the broader 15-1299 Computer Occupations, All Other group. Mainland China’s 2021 Information Security Tester occupational skills standard uses code 4-04-04-04 and applies to the penetration testing trade. Its skill grades and training references do not set every employer’s hiring requirements or authorize testing a particular system."
             ]
           },
           "id": "penetration-testers.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "mohrss-testing-standard"
           ],
           "type": "prose"
         },
@@ -23307,13 +23304,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET 15-1299.04 is a US occupational definition; testing real systems requires written client authorization and permission under the applicable jurisdiction, and access rights cannot be inferred from the occupational title."
+              "O*NET 15-1299.04 is a U.S. occupational profile. For actual testing, obtain written authorization from the system owner who can grant it or their authorized representative, and follow applicable law, the agreed scope, and rules of engagement. The job title grants no access rights."
             ]
           },
           "id": "penetration-testers.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "nist"
+            "arxiv",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -24393,7 +24391,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Evidence gap: no actual generative AI adoption, overall substitution rate, substitution year, or reliable measured effect for penetration testers was verified. Organizing de-identified records and drafting reports in approved environments are editorial trial suggestions; authorization, original evidence, false positives, availability, and remediation decisions remain with authorized personnel and the organization. The BLS parent category figures of 5.1%, a net of 24.2 thousand, and annual average 27.0 thousand openings including replacements do not prove AI adoption for this occupation, individual unemployment, or Chinese demand. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Try organizing fictional records and outlining a report. People are responsible for checking authorization, original evidence, false positives, and stop conditions. The available sources do not establish adoption, job replacement, or measured effects for this occupation. The U.S. parent-group outlook does not answer those questions."
             ]
           },
           "id": "penetration-testers.ai-impact.ai-impact-table.18",
@@ -28707,28 +28705,28 @@
                 "url": "https://www.onetonline.org/link/details/15-1299.04"
               },
               {
-                "entity": "BLS parent category 15-1299 occupational statistics",
+                "entity": "NIST SP 800-115: Information security testing and assessment",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://csrc.nist.gov/pubs/sp/800/115/final"
               },
               {
-                "entity": "NIST testing rule definitions",
+                "entity": "NIST: Rules of Engagement",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://csrc.nist.gov/glossary/term/Rules_of_Engagement"
               },
               {
-                "entity": "Personal Information Protection Law of the People's Republic of China",
+                "entity": "China’s Cybersecurity Law, Articles 28–29",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+                "url": "https://www.cac.gov.cn/2025-12/29/c_1768735112911946.htm"
               },
               {
-                "entity": "NIST security testing and assessment guide",
+                "entity": "China’s Personal Information Protection Law, Article 51",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://csrc.nist.gov/pubs/sp/800/115/final"
+                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
               }
             ]
           },
@@ -29179,14 +29177,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Sensitive information | When real credentials or personal information are found, minimize forensics, limit dissemination, and escalate through the agreed channel."
+              "U.S. occupational tasks; does not grant project authorization."
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.35",
           "source_refs": [
-            "nist",
-            "arxiv",
-            "editor"
+            "onet"
           ],
           "type": "prose"
         },
@@ -29195,14 +29191,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "False and missed findings | Tool alerts must be reviewed against controlled evidence; reports state conditions and uncertainty and must not promise absolute security."
+              "Planning, testing, evidence, and reporting; U.S. technical guidance."
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.36",
           "source_refs": [
-            "nist",
-            "arxiv",
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -29211,14 +29205,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Remediation loop | Advice should point to the responsible person, version, and re-test conditions; a re-test must be covered by valid authorization and cannot automatically reuse expired rules or rules that exclude that action."
+              "Defines execution boundaries and constraints. Check project-specific rules."
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.37",
           "source_refs": [
-            "nist",
-            "arxiv",
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -29227,14 +29219,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Out-of-scope targets | When a target asset is not in the written scope, stop that test and ask the authorized contact to clarify; verbal consent afterward does not replace the rules."
+              "Mainland China rules for security testing and prohibitions on illegal intrusion, interference, and data theft."
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.38",
           "source_refs": [
-            "nist",
-            "arxiv",
-            "editor"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29243,14 +29233,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Availability impact | When testing triggers a service anomaly, abort per the preset threshold, record the time and impact, and hand it to the system owner."
+              "Authorization and protective measures for personal information handling, where applicable."
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.39",
           "source_refs": [
-            "nist",
-            "arxiv",
-            "editor"
+            "pipl"
           ],
           "type": "prose"
         }
@@ -29396,15 +29384,15 @@
                 "id": "exercise-task",
                 "values": [
                   "Task and rules",
-                  "A4: at 11:05 the test domain shows consecutive errors, and the paper stop rule is to pause and inform Lin Lan after three consecutive anomalies; the prompt shows one each at 11:04, 11:05, and 11:06.",
-                  "A5: a re-test requires new approval after remediation; trainees cannot change production configuration. Write the scope matrix, the finding and to-be-verified records, and the stop and escalation sheet, without performing scans or exploitation."
+                  "A4: the log lists consecutive errors at 11:04, 11:05, and 11:06. The paper rule is to pause at the third error and notify Lin Lan, the system owner.",
+                  "A5: the fixed version, re-test scope, and re-test approval are not provided. Submit a scope matrix, an evidence and open-items record, a stop and escalation sheet, and a re-test checklist. Work on paper only; do not scan or exploit anything."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
                   "Reference approach (complete it independently first)",
-                  "The production domain is explicitly excluded, and the A3 assertion about P5 has no evidence and exceeds authority; only unverified can be recorded, and the production domain must not be checked.",
+                  "P5 is out of scope and the tool summary lacks original evidence. Do not check production or report a confirmed finding.",
                   "Test domain T2 has only one failed login response, which is insufficient to confirm a login flaw; at 11:06 three consecutive anomalies are reached, so work should pause, Lin Lan should be notified, and an authorized re-test awaited."
                 ]
               },
@@ -29412,17 +29400,14 @@
                 "id": "exercise-boundary",
                 "values": [
                   "Deliverables and boundaries",
-                  "The report lists A1—A5, versions, original evidence, and inferences, points out that T2 is to be verified and P5 is excluded, and notes the 11:06 pause; the handoff contact is Lin Lan, and it contains no real targets, accounts, or exploitation steps."
+                  "Record the pause at 11:06 and notification to Lin Lan. No acknowledgement is supplied, so leave it pending. The fixed version, scope, and approval remain unconfirmed."
                 ]
               }
             ]
           },
           "id": "penetration-testers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet",
-            "nist",
-            "arxiv",
-            "editor"
+            "offline-a1-a5"
           ],
           "title": "Entry exercise: fictional authorized test scope and evidence verification",
           "type": "cards"
@@ -29437,7 +29422,7 @@
                 "values": [
                   "Authorization scope card",
                   "List the test domain, window, permitted pages, and the excluded production domain and employee mailboxes.",
-                  "Review: A1 permits only the T2 test domain, and the P5 production domain is excluded."
+                  "Review: A1 covers only the test domain’s web login page in the stated window. T2 is its asset version in A2. Production P5 is excluded."
                 ]
               },
               {
@@ -29452,14 +29437,14 @@
                 "id": "report-summary",
                 "values": [
                   "Stop and escalation sheet",
-                  "Record the consecutive anomalies from 11:04—11:06, the stop time, and acceptance by Lin Lan."
+                  "Record the consecutive error timestamps, when the paper rule calls for a pause, and who gets notified. No acknowledgement is supplied."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "Remediation re-test note",
-                  "State that a re-test requires a remediated version and new authorization, and testers do not change production configuration themselves."
+                  "In this case, record the fixed version, re-test scope, and approval as open. Testers do not change production configuration on their own. For actual re-testing, check existing authorization and obtain it if missing or expired."
                 ]
               }
             ]
@@ -29730,16 +29715,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Evidence gap: no current recruitment sample that can be cross-checked for Chinese employer, city, publication date, post scope, authorization model, and pay unit was verified; no recruiting thresholds or wages are invented.",
-              "Samples obtained later should keep the original notice and date and distinguish a single employer's requirements from occupational statistics; the A1—A5 material on this page is completely fictional."
+              "Beihang University’s School of Reliability and Systems Engineering posted one information security test engineer role in Beijing on September 18, 2026. It asked for a master’s degree or higher, at least three years of related testing experience, and at least one related credential. Work includes penetration testing, reporting, and regression testing after fixes. Employment is through an agency and pay is negotiable.",
+              "Zhengzhou University’s Henan education information security monitoring center posted one agency-employed network security engineer role on December 29, 2025. It asked for a bachelor’s degree or higher in cybersecurity or a related computing field. Work includes web penetration testing, vulnerability verification, and incident response. The quoted CNY 6,000–8,000 per month is total employment cost, including employer and employee social insurance and housing fund contributions. Terms are negotiable; it is not individual pay.",
+              "These two postings describe different employers. They do not establish current availability, nationwide pay, or universal credential requirements."
             ]
           },
           "id": "penetration-testers.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "beihang-job",
+            "zhengzhou-job"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -29973,13 +29957,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "This page verified no current comparable Chinese recruitment sample; when checking a post, keep the duties, authorization, and date."
+              "Mainland China’s 2021 Information Security Tester occupational skills standard uses code 4-04-04-04 and applies to the penetration testing trade. Its skill grades and training references do not set every employer’s hiring requirements or authorize testing a particular system. Compare the university’s reporting and regression work with the monitoring center’s vulnerability verification and incident response. Hiring education does not authorize a system test."
             ]
           },
           "id": "penetration-testers.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "editor"
+            "mohrss-testing-standard",
+            "beihang-job",
+            "zhengzhou-job"
           ],
           "type": "prose"
         },
@@ -31836,10 +31821,15 @@
                 "question_key": "career.faq.penetration-testers.ai-impact"
               },
               {
-                "answer": "The 2025 information transmission, software, and information technology services figures of 248,752 for non-private and 128,166 yuan per year for private are pre-tax broad industry averages including personal tax, social insurance, and housing fund. They apply as a reference only when the real employer legal entity's main business and the urban 5-or-more-person statistical population match, mixing many occupations; testers inside banks, hospitals, manufacturing, or universities are verified separately, and this is not pay for this occupation. Evidence gap: nationwide percentiles, comparable city wages, and current quote contracts with complete duties, authorization, and pay were not verified, and no currency conversion or division by 12 is used to pass as a monthly salary.",
+                "answer": "The available sources do not establish a mainland China median for penetration testers. NBS information transmission, software, and IT services averages are broad industry context. The Zhengzhou posting quotes employment cost and Beihang lists negotiable terms; neither establishes occupational pay.",
                 "id": "penetration-testers.faq.5",
                 "question": "What is the pay for penetration testers in mainland China?",
-                "question_key": "career.faq.penetration-testers.china-pay"
+                "question_key": "career.faq.penetration-testers.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "beihang-job",
+                  "zhengzhou-job"
+                ]
               },
               {
                 "answer": "It does not. The 116,580 dollars is the 2025 annual pay median for the 15-1299 parent category, and it is neither this occupation's independent median nor new-hire starting pay or after-tax income.",
@@ -31848,10 +31838,15 @@
                 "question_key": "career.faq.penetration-testers.us-pay"
               },
               {
-                "answer": "O*NET places this occupation in Job Zone 4; typical BLS parent category education is a bachelor's degree. Specific posts look at networks, applications, systems, security reporting, and authorization rule capability, and education and certificates grant no system testing permission.",
+                "answer": "Mainland China’s 2021 Information Security Tester occupational skills standard uses code 4-04-04-04 and applies to the penetration testing trade. Its skill grades and training references do not set every employer’s hiring requirements or authorize testing a particular system. Of the two postings that include testing, one asks for a master’s degree and related experience, and the other asks for a bachelor’s degree or higher. Check the specific posting.",
                 "id": "penetration-testers.faq.7",
                 "question": "What education and experience are needed to enter?",
-                "question_key": "career.faq.penetration-testers.education-path"
+                "question_key": "career.faq.penetration-testers.education-path",
+                "source_refs": [
+                  "mohrss-testing-standard",
+                  "beihang-job",
+                  "zhengzhou-job"
+                ]
               },
               {
                 "answer": "No single certificate can replace written authorization for a specific target. Courses and certificates can serve as learning evidence, and employer requirements, local regulations, and project rules must be verified separately.",
@@ -31903,7 +31898,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Occupational tasks follow O*NET15-1299.04, and US pay and employment follow the explicit 15-1299 combined group; the Chinese information technology broad industry serves as a reference only when the real employer's main business and population match. Evidence gap: this occupation's exact Chinese pay, complete current quote contracts, and independent US pay projections were not verified; authorization guides and jurisdictional rules are kept separate."
+              "O*NET 15-1299.04 describes duties. U.S. pay and employment cover the broader 15-1299 group. Mainland China industry means and individual job postings do not establish median penetration tester pay."
             ]
           },
           "id": "penetration-testers.sources.source-card.2",
@@ -31911,10 +31906,7 @@
             "onet",
             "ep",
             "onet-wages",
-            "nbs",
-            "penetration-cn-industry",
-            "nist",
-            "editor"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31923,12 +31915,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round on 2026-10-12 verified the O*NET exact tasks and parent category wages, the BLS15-1299 projection, the NIST testing guide and ROE, and the current Cybersecurity Law of the Cyberspace Administration of China, retaining the original A1—A5 offline fictional exercise. Complete Chinese quotes, independent statistics for this occupation, and measured AI effects remain missing; the NBS classification PDF text was not obtained this round, and historical source periods are not passed off as verification this round."
+              "U.S. wage and employment data cover the 15-1299 group. The mainland China skills standard, job postings, and broad industry wages answer different questions. A1–A5 are fictional records; actual work follows project rules and applicable law."
             ]
           },
           "id": "penetration-testers.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "ep",
+            "onet-wages",
+            "mohrss-testing-standard",
+            "beihang-job",
+            "zhengzhou-job",
+            "nist",
+            "cnclass",
+            "offline-a1-a5"
           ],
           "type": "prose"
         },
@@ -32525,20 +32524,72 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Test planning | Choose permitted methods based on risk and business continuity | Agree on stop conditions and contacts. — 50/100; weight=1/3; penetration-testers.profile.responsibilities-block.1[1]",
-                  "Controlled validation | Find and reproduce weaknesses within scope | Record versions, conditions, and evidence. — 75/100; weight=1/3; penetration-testers.profile.responsibilities-block.1[2]",
-                  "Impact judgment | Distinguish real risk, inference, and false positives | Do not expand collection of sensitive data. — 50/100; weight=1/3; penetration-testers.profile.responsibilities-block.1[3]"
+                  "Record drafting can be explored offline. Evidence is insufficient to give an occupational impact percentage or score automation of real vulnerability validation."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "Editorial evidence note",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "This note covers an observable fictional record task. It provides no score or measure of automation performance, adoption, or employment outcomes.",
+                "name": "FermatMind: Evidence for AI task claims",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Mainland China’s 2021 Information Security Tester occupational skills standard uses code 4-04-04-04 and applies to the penetration testing trade. Its skill grades and training references do not set every employer’s hiring requirements or authorize testing a particular system."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "mohrss-testing-standard",
+                "limitation": "Applies to the named trade. It does not map U.S. labor statistics or authorize testing.",
+                "name": "MOHRSS: Information Security Tester National Occupational Skills Standard (2021)",
+                "period": "2021",
+                "publisher": "Ministry of Human Resources and Social Security of China",
+                "scope": "contextual",
+                "url": "https://www.mohrss.gov.cn/wap/zc/zcwj/202112/W020211227626972382958.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Beihang University’s School of Reliability and Systems Engineering posted one information security test engineer role in Beijing on September 18, 2026. It asked for a master’s degree or higher, at least three years of related testing experience, and at least one related credential. Work includes penetration testing, reporting, and regression testing after fixes. Employment is through an agency and pay is negotiable."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "beihang-job",
+                "limitation": "These two postings describe different employers. They do not establish current availability, nationwide pay, or universal credential requirements.",
+                "name": "Beihang information security test engineer posting",
+                "period": "2026-09-18",
+                "publisher": "Beihang University Human Resources",
+                "scope": "recruitment_proxy",
+                "url": "https://rsc.buaa.edu.cn/info/1049/7266.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Zhengzhou University’s Henan education information security monitoring center posted one agency-employed network security engineer role on December 29, 2025. It asked for a bachelor’s degree or higher in cybersecurity or a related computing field. Work includes web penetration testing, vulnerability verification, and incident response. The quoted CNY 6,000–8,000 per month is total employment cost, including employer and employee social insurance and housing fund contributions. Terms are negotiable; it is not individual pay."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "zhengzhou-job",
+                "limitation": "These two postings describe different employers. They do not establish current availability, nationwide pay, or universal credential requirements.",
+                "name": "Zhengzhou University network security engineer posting",
+                "period": "2025-12-29",
+                "publisher": "Zhengzhou University Human Resources",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zzu.edu.cn/info/1442/87430.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Paper review of authorization, original evidence, stop conditions, and re-test request."
+                ],
+                "evidence_type": "Fictional paper exercise",
+                "id": "offline-a1-a5",
+                "limitation": "No operations against real systems.",
+                "name": "FermatMind: fictional offline records A1–A5",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -32655,13 +32706,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "label": {
-              "$link": "penetration-testers.direction-comparison.adjacent-career-comparison-table.7",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "entry": "link-5",
-              "field": "entity"
-            }
+            "label": "O*NET penetration tester profile (both specializations)"
           }
         ],
         "evidence_note": {
@@ -33990,6 +34035,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "mohrss-testing-standard",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "penetration-testers.source-register.published.1"
+            },
+            "id": "mohrss-testing-standard",
+            "label": {
+              "$source": "mohrss-testing-standard",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "penetration-testers.source-register.published.1"
+            },
+            "scope": "Mainland China occupational skills standard"
           }
         ],
         "tracks": [
@@ -34750,9 +34813,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "nist",
-              "arxiv"
+              "arxiv",
+              "cnclass",
+              "nist"
             ],
             "id": "scope",
             "mitigation": {
@@ -34783,9 +34846,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "arxiv",
               "nist",
-              "arxiv"
+              "cnclass"
             ],
             "id": "availability",
             "mitigation": {
@@ -34816,9 +34879,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "privacy",
               "nist",
-              "arxiv"
+              "cnclass"
             ],
             "id": "data",
             "mitigation": {
@@ -34849,9 +34912,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "nist",
-              "arxiv"
+              "arxiv",
+              "onet"
             ],
             "id": "evidence",
             "mitigation": {
@@ -34882,9 +34945,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "nist",
-              "arxiv"
+              "arxiv",
+              "onet"
             ],
             "id": "report",
             "mitigation": {
@@ -34915,9 +34978,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "arxiv",
               "nist",
-              "arxiv"
+              "cnclass"
             ],
             "id": "retest",
             "mitigation": {
@@ -35967,7 +36030,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls",
             "value": {
               "$item": "penetration-testers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36413,7 +36476,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "BLS 2025 wages and 2025–35 employment projections (parent group)",
             "secondary_value": null,
             "value": {
               "$item": "penetration-testers.profile.onet-structured-fields-block.2",
@@ -36435,7 +36498,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS employment projections table 1.2 (2025–35)",
+            "label": "O*NET occupational comparison",
             "secondary_value": null,
             "value": {
               "$item": "penetration-testers.profile.onet-structured-fields-block.4",
@@ -37450,7 +37513,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and work tasks",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37718,27 +37781,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Penetration Testers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and work tasks"
     },
     "badges": [
       "Written authorization · scope control",
@@ -37782,14 +37833,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Understand the penetration tester authorization scope, vulnerability validation, reporting, and re-testing; compare the US parent category occupational pay and employment proxy data, the Chinese pay evidence gaps, and the fictional offline exercises."
+      "text": "Learn how penetration testers verify authorization, document evidence, and plan re-tests. Compare mainland China job examples and U.S. pay data for the broader group."
     },
     "title": {
       "availability": "available",
-      "text": "Penetration Testers"
+      "text": "Penetration Tester Career Guide: Work, Authorization, and Training"
     }
   },
-  "source_content_sha256": "15cea0f03b43757c068d02a12129a954812dbc76f9d7afc8e1ec7a14555468cd",
+  "source_content_sha256": "9055f4abee9e383a22b0c7a23723376343c918051b5538b0ea285d558742f19c",
   "subject": {
     "canonical_slug": "penetration-testers",
     "name": "Penetration Testers",

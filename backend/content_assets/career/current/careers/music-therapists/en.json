@@ -17,9 +17,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:interest-code": {
         "status": "pending_mapping"
       },
@@ -147,7 +144,7 @@
         "status": "mapped"
       },
       "item:music-therapists.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:music-therapists.path.employer-evidence.3": {
         "status": "mapped"
@@ -156,10 +153,13 @@
         "status": "pending_mapping"
       },
       "item:music-therapists.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:music-therapists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:music-therapists.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:music-therapists.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -12201,12 +12201,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "How to assess fit: With compliance and authorization in place, observe a music therapy or related care activity, or conduct a paper exercise using an entirely fictional client description. Write down assessment dimensions, treatment goals, music experience design, observation records, and safety boundaries, and identify three checkpoints and escalation routes for exceptions. Do not use real client information."
+              "Try M02 in the entry section: check permission, a sound stop rule, and a fictional handoff. Do not run a real activity or create a treatment plan."
             ]
           },
           "id": "music-therapists.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet-details"
+            "music-paper"
           ],
           "type": "prose"
         },
@@ -12287,7 +12287,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Work context (O*NET Work Context survey): 88% of respondents have face-to-face discussions daily, 73% report constant contact with others, 81% work indoors in an environmentally controlled setting daily, 65% use email daily, and 62% report considerable freedom to make decisions. 46% are exposed to disease or infections daily, 40% deal with unpleasant, angry, or discourteous people once a week or more, and 36% deal with people who are violent or physically aggressive once a month or more. 54% sit about half the time, 35% use their hands to handle or feel objects and tools continually or almost continually, and 54% report that work decisions have important effects on coworkers or organizational outcomes."
+              "O*NET Work Context survey: 88% report daily face-to-face discussions and 81% report working indoors in a controlled setting daily. For dealing with unpleasant, angry or discourteous people, 12% report daily and 40% at least weekly but not daily. For dealing with violence or physical aggression, 12% report daily, 28% at least weekly but not daily, and 36% at least monthly but less than weekly. 46% report decisions usually have important effects. These are survey responses, not facility incident rates."
             ]
           },
           "id": "music-therapists.profile.work-context-block.3",
@@ -12315,13 +12315,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Preparation and training: O*NET places this occupation in Job Zone 4 (SVP 7.0—<8.0), typically requiring a four-year bachelor's degree (some positions require a master's). Education requirement responses indicate 73% bachelor's degrees, 15% master's degrees, and 12% graduate certificates. O*NET's national training directory lists 210 related programs."
+              "O*NET places the occupation in Job Zone 4. When asked what new hires need, respondents reported 73% bachelor’s degree, 15% master’s degree, and 12% post-baccalaureate certificate. These responses are not a count of credentials held or a universal entry requirement. Check AMTA programs and state requirements separately."
             ]
           },
           "id": "music-therapists.profile.onet-structured-fields-block.5",
           "source_refs": [
             "onet-details",
-            "source-pack-onet-localtraining"
+            "amta-training"
           ],
           "type": "prose"
         },
@@ -12366,12 +12366,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Conclusion: Music therapists' core outputs are music interventions designed around treatment goals and process records. Art therapists focus on visual arts media; rehabilitation counselors on functional assessment and vocational rehabilitation processes; mental health counselors on psychological counseling and emotional support; speech-language pathologists on assessing and intervening in speech, language, and swallowing disorders; and music directors and composers on composing and conducting. These relationships serve only as comparisons and do not imply automatic career transitions or mutual recognition of qualifications."
+              "Music therapists use music as the medium for individual assessment, treatment goals and planning, and progress records. U.S. recreational therapists also provide treatment and may use sports, music, or other activities. The Taikang recreation activity posting in China describes organizing resident activities. Each related role has its own training and hiring requirements."
             ]
           },
           "id": "music-therapists.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet-details"
+            "amta-cbmt-scope",
+            "onet-recreational",
+            "taikang-recruit"
           ],
           "type": "prose"
         },
@@ -12380,7 +12382,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Comparisons draw on the official O*NET 29-1129.02 description and tasks and the O*NET profiles of related occupations. They are editorial syntheses, not job recommendations."
+              "Use O*NET for the U.S. comparison. See the entry section for the Taikang posting and the risk section for the music therapy scope document."
             ]
           },
           "id": "music-therapists.direction-comparison.adjacent-career-comparison-table.2",
@@ -12863,12 +12865,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Boundaries: This checklist is an editorial synthesis and does not replace local requirements for licensure, privacy, informed consent, and record retention, or institutional clinical and safety procedures. Specific protections, reporting duties, and authorization depend on the documents of the relevant authorities and institution."
+              "Use this checklist for career exploration. Health information concerning an identifiable person is sensitive personal information in mainland China. Check the law and facility authorization before using real records. The U.S. AMTA/CBMT scope document separately describes professional duties."
             ]
           },
           "id": "music-therapists.risk.career-risk-cards.1",
           "source_refs": [
-            "onet-details"
+            "cn-pipl",
+            "amta-cbmt-scope"
           ],
           "type": "prose"
         },
@@ -12945,13 +12948,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "For the U.S. professional pathway, check an AMTA-approved music therapy degree and coursework and 1200 hours of clinical training including supervised internship; CBMT checks examination and certification requirements. It is not the certifying body that approves degrees. Verify jurisdictional authorization separately, and keep compliant, reviewable records."
+              "A March 2025 Shaoyang University notice republishes a rehabilitation department posting from Beijing Tsinghua Changgung Hospital. It lists three rehabilitation therapist positions across physical therapy, occupational therapy, and music therapy. The posting asks for new graduates with a bachelor’s degree or higher in rehabilitation therapy, music therapy, or sports rehabilitation. It gives no count by specialty or pay figure.",
+              "In October 2026, Taikang Community listed five recreation activity roles in Chengdu on Sichuan University’s employment portal. The roles require a bachelor’s degree and list music therapy among relevant fields. Work includes resident activities, clubs, and classes. The pay field shows 5,000–8,000 without a pay period. This is not clinical music therapy pay.",
+              "These postings illustrate duties and employer requirements. They do not establish current vacancies, national wages, or credential equivalence."
             ]
           },
           "id": "music-therapists.path.recruitment-sample.1",
           "source_refs": [
-            "source-pack-onet-localtraining",
-            "onet-details"
+            "btch-recruit",
+            "taikang-recruit"
           ],
           "type": "notice"
         },
@@ -12965,6 +12970,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Stage",
+              "Work",
+              "Scope",
+              "Preparation evidence",
+              "Next step"
             ],
             "rows": [
               [
@@ -13054,24 +13066,24 @@
               {
                 "id": "music-therapists.portfolio.one",
                 "values": [
-                  "Paper treatment plan",
-                  "Entirely fictional client description",
-                  "Assessment dimensions, goals, music experience design, and safety boundaries"
+                  "Permission and limits table",
+                  "Use P1 and P3 in M02",
+                  "Separate permitted actions, prohibited actions, and unresolved permissions"
                 ]
               },
               {
                 "id": "music-therapists.portfolio.two",
                 "values": [
-                  "Process and exception records",
-                  "Entirely fictional intervention process",
-                  "Observation records, reasons for adjustments, and escalation routes"
+                  "Timing and handoff record",
+                  "Use P2 and P3 in M02",
+                  "State when to pause, whom to notify, and whether there is evidence of receipt"
                 ]
               }
             ]
           },
           "id": "music-therapists.path.entry-portfolio.4",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "music-paper"
           ],
           "type": "cards"
         },
@@ -13084,6 +13096,12 @@
               "career.column.action",
               "career.column.review",
               "career.column.evidence"
+            ],
+            "column_labels": [
+              "Situation",
+              "Action",
+              "Reviewer",
+              "Record"
             ],
             "rows": [
               [
@@ -13128,28 +13146,28 @@
                 "id": "music-therapists.trial.day1",
                 "values": [
                   "Day 1",
-                  "Choose a fictional case scenario and list assessment dimensions and treatment goals"
+                  "Read M02 P1–P3. List what is and is not authorized."
                 ]
               },
               {
                 "id": "music-therapists.trial.day3",
                 "values": [
                   "Day 3",
-                  "Complete a paper music experience design and an observation record template"
+                  "Put the reports in order, write the stop rule, and draft a two-sentence handoff."
                 ]
               },
               {
                 "id": "music-therapists.trial.day7",
                 "values": [
                   "Day 7",
-                  "Review alignment among goals, experiences, and records, and state the next step"
+                  "Check against the answer. Flag any receipt or consent that the records do not establish."
                 ]
               }
             ]
           },
           "id": "music-therapists.path.seven-day-trial.6",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "music-paper"
           ],
           "type": "timeline"
         },
@@ -13165,6 +13183,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Credential",
+              "Purpose",
+              "Issuer",
+              "Conditions",
+              "Limits",
+              "Who confirms",
+              "Next step"
             ],
             "rows": [
               [
@@ -13258,6 +13285,41 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Materials | Fictional",
+                  "Fictional paper workshop: P1 allows only low-volume recordings. Pause and notify the lead after two “too loud” reports. P2 records one at 14:02 and another at 14:05. P3 limits notes to the team and has no consent record for sharing with families."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Submit three items first",
+                  "Submit three items: a permissions and limits table, a time and pause log, and a two-sentence handoff. Apply only the fictional rules. Play no audio and involve no real clients."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Reference answer",
+                  "The 14:05 report triggers a pause. P3 permits team use only; do not share the notes outside the team. If family sharing is considered later, verify authorization and any consent required. Sample handoff: “We received ‘too loud’ reports at 14:02 and 14:05, paused under the rule, and notified the lead. The lead has not yet confirmed receipt; keep this note within the team.” These reports do not measure treatment effects."
+                ]
+              }
+            ]
+          },
+          "id": "music-therapists.path.entry-work-sample-data.1",
+          "source_refs": [
+            "music-paper"
+          ],
+          "title": "M02 | Check a stop rule and write a handoff",
+          "type": "cards"
         }
       ]
     },
@@ -13272,12 +13334,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Current O*NET/BLS 29-1129 group: employment of 56100 in 2025 → 63200 in 2035, growth of 12.6%, net increase of 7100, and 3600 annual openings. These figures are not specific to music therapists and do not establish AI causation."
+              "U.S. BLS 29-1129, Therapists, All Other: about 56,100 jobs in 2025, projected 63,200 in 2035, growth of 12.6%, and about 3,600 annual openings including growth and replacements. Music therapists are not reported separately, and projected openings are not current vacancies."
             ]
           },
           "id": "music-therapists.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-therapists-all-other",
             "onet-trends"
           ],
           "type": "prose"
@@ -13292,7 +13353,7 @@
           },
           "id": "music-therapists.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-therapists-all-other"
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -13306,7 +13367,7 @@
           },
           "id": "music-therapists.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-therapists-all-other",
+            "onet-trends",
             "onet-wages"
           ],
           "type": "prose"
@@ -13316,12 +13377,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Current O*NET/BLS 29-1129 group: employment of 56100 in 2025 → 63200 in 2035, growth of 12.6%, net increase of 7100, and 3600 annual openings. These figures are not specific to music therapists and do not establish AI causation. Healthcare and social assistance accounts for 35% of the group's industry share, not a separate share for music therapists."
+              "The projection implies a net gain of about 7,100 jobs. Annual openings include growth and replacements and do not show where music therapy roles are located."
             ]
           },
           "id": "music-therapists.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-therapists-all-other",
             "onet-trends"
           ],
           "type": "prose"
@@ -13331,13 +13391,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "These are national projections for a combined occupation and cannot be extrapolated to mainland China. OEWS wages exclude self-employment and freelance income. Individual opportunities still require separate verification by target city, institution type, shifts or project cycles, qualifications, and budget."
+              "Self-employed workers made up 58.8% of the parent group in 2025. OEWS covers wage and salary workers and does not estimate self-employment income or pay for an individual music therapy job."
             ]
           },
           "id": "music-therapists.market-signals.market-signal-card.5",
           "source_refs": [
-            "bls-therapists-all-other",
-            "onet-trends"
+            "onet-trends",
+            "onet-wages"
           ],
           "type": "prose"
         }
@@ -13384,13 +13444,15 @@
                 ]
               },
               {
-                "answer": "O*NET places this occupation in Job Zone 4 (SVP 7.0—<8.0), typically requiring a four-year bachelor's degree, with some positions requiring a master's. The O*NET certification directory also lists Music Therapist - Board Certified (MT-BC). Certification does not equate to state practice licensure; specifics depend on the target position, place of practice, and employer procedures.",
+                "answer": "Start with an AMTA-approved program and supervised training. AMTA requires at least 1,200 clinical hours, including at least 180 before internship and 900 in internship; programs can require more. Eligible candidates who pass the CBMT exam earn MT-BC. Check state licensure separately; Oregon, for example, has its own license application. In mainland China, check training, hiring, and clinical authorization separately. The Central Conservatory of Music offers a music therapy direction. Hospital work depends on the role and facility. Organizing recreation carries different responsibilities from clinical assessment, treatment planning, and documentation. U.S. MT-BC does not automatically authorize clinical work in mainland China.",
                 "id": "music-therapists.faq.4",
                 "question": "What education, training, and qualifications are usually needed to enter?",
                 "question_key": "career.faq.music-therapists.4",
                 "source_refs": [
-                  "onet-details",
-                  "onet-cert"
+                  "amta-training",
+                  "cbmt-exam",
+                  "oregon-license",
+                  "ccom-program"
                 ]
               },
               {
@@ -13403,13 +13465,12 @@
                 ]
               },
               {
-                "answer": "Evidence indicates that most occupations are more likely to be transformed than eliminated. Literature searches, draft records, and repertoire organization can be assisted, but assessment conclusions, treatment goals, clinical improvisation, client safety, and record sign-off remain licensed therapists' responsibilities.",
+                "answer": "Use fictional M02 records to try organizing notes. Available evidence does not establish AI adoption, clinical performance, or job effects for music therapists. Qualified and authorized staff remain responsible for clinical decisions, interventions, and records.",
                 "id": "music-therapists.faq.6",
                 "question": "Will AI replace music therapists?",
                 "question_key": "career.faq.music-therapists.6",
                 "source_refs": [
-                  "ilo-genai-exposure-2025",
-                  "onet-details"
+                  "source-fermatmind-ai-rubric"
                 ]
               },
               {
@@ -13423,13 +13484,13 @@
                 ]
               },
               {
-                "answer": "U.S. BLS projects 11% employment growth for Therapists, All Other (the combined category containing music therapists) in 2024—2034, a net increase of about 6,400 positions and about 4,100 annual openings. Mainland China has only broad health and social work industry average wages, with no precise national data for this occupation.",
+                "answer": "U.S. BLS 29-1129, Therapists, All Other: about 56,100 jobs in 2025, projected 63,200 in 2035, growth of 12.6%, and about 3,600 annual openings including growth and replacements. Music therapists are not reported separately, and projected openings are not current vacancies.",
                 "id": "music-therapists.faq.8",
                 "question": "How should employment outlook and wage data for this occupation be interpreted?",
                 "question_key": "career.faq.music-therapists.8",
                 "source_refs": [
-                  "bls-therapists-all-other",
-                  "nbs-wages"
+                  "onet-trends",
+                  "onet-wages"
                 ]
               }
             ]
@@ -13522,16 +13583,16 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "The U.S. combined occupation Therapists, All Other had employment of 56,100 in 2024 and projected growth of 11% in 2024—2034 (about 6,400 net new jobs and 4,100 annual openings). The page also lists 29-1129.01 Art Therapists and 29-1129.02 Music Therapists."
+                  "BLS describes the 29-1129 parent group, not music therapists separately. Use Table 1.2 for projections."
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-therapists-all-other",
                 "limitation": "National projections for a combined occupation, not a separate value for music therapists, a hiring guarantee, or Chinese data.",
                 "market": "US",
                 "name": "Data for Occupations Not Covered in Detail: Therapists, All Other",
-                "period": "2024 employment and 2024–2034 projections; accessed 2026-09-25",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics, Occupational Outlook Handbook",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
@@ -13569,17 +13630,17 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "The page being in Chinese does not establish an exact equivalent of this U.S. occupational classification in mainland China. Industry averages and U.S. data are not used to fill the gap."
+                  "Health and social work industry: CNY 146,266 a year in urban non-private units and CNY 75,631 in urban private units."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "The page being in Chinese does not establish an exact equivalent of this U.S. occupational classification in mainland China. Industry averages and U.S. data are not used to fill the gap.",
+                "limitation": "Broad industry means do not establish music therapist pay.",
                 "market": "CN",
                 "name": "2025 annual average wages of employees in urban units",
-                "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
+                "period": "2025 industry wages",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -13642,19 +13703,19 @@
                 "url": "https://www.onetonline.org/link/summary/29-1129.02"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Employment of 56,100 in 2024, projected growth of 11% in 2024—2034 (Much faster than average), about 6,400 net new jobs, and 4,100 annual openings. The O*NET page labels these as covering the combined occupation Therapists, All Other."
+                  "U.S. BLS 29-1129, Therapists, All Other: about 56,100 jobs in 2025, projected 63,200 in 2035, growth of 12.6%, and about 3,600 annual openings including growth and replacements. Music therapists are not reported separately, and projected openings are not current vacancies."
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "Projections are not guarantees; annual openings are not an individual's probability of being hired.",
                 "market": "US",
-                "name": "National Employment Trends 29-1129.02 Music Therapists",
-                "period": "current O*NET/BLS employment data; accessed 2026-08-31",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS Employment Projections Table 1.2: 29-1129",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/29-1129.02"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -13749,7 +13810,7 @@
               {
                 "accessed_at": "2026-09-01",
                 "details": [
-                  "210 national training programs."
+                  "The directory lists related training. Verify AMTA approval separately."
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
@@ -13793,20 +13854,170 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Assess clients' perceptual, sensory, emotional, communication, musical, physical, cognitive, social, and spiritual abilities, and set treatment goals — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Design and deliver music therapy experiences such as playing instruments, singing, improvisation, and listening — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Document assessments, treatment plans, case summaries, and progress reports — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "Use fictional M02 records to try organizing notes. Available evidence does not establish AI adoption, clinical performance, or job effects for music therapists. Qualified and authorized staff remain responsible for clinical decisions, interventions, and records."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "Editorial note",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "Qualitative editorial note with no score.",
+                "name": "FermatMind: Evidence for AI task claims",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "At least 1,200 hours of supervised clinical training, with minimums for pre-internship and internship."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "amta-training",
+                "limitation": "U.S. education standard; it does not authorize individual practice.",
+                "name": "AMTA education and clinical training standards §3.2.9",
+                "period": "2026-11-09",
+                "publisher": "American Music Therapy Association",
+                "scope": "contextual",
+                "url": "https://www.musictherapy.org/standards-for-education-and-clinical-training/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Passing the exam earns MT-BC."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "cbmt-exam",
+                "limitation": "Separate professional certification from state licensure.",
+                "name": "CBMT board certification examination",
+                "period": "2026-11-09",
+                "publisher": "Certification Board for Music Therapists",
+                "scope": "contextual",
+                "url": "https://www.cbmt.org/candidates/examination/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Oregon lists separate application pathways."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "oregon-license",
+                "limitation": "Oregon only.",
+                "name": "Oregon music therapy license",
+                "period": "2026-11-09",
+                "publisher": "Oregon Health Authority",
+                "scope": "contextual",
+                "url": "https://www.oregon.gov/oha/ph/hlo/pages/board-music-therapy-program-license.aspx"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The Master of Fine Arts curriculum lists music therapy coursework and clinical practice."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "ccom-program",
+                "limitation": "Academic curriculum, not a license.",
+                "name": "Central Conservatory of Music: music therapy curriculum",
+                "period": "2026-11-09",
+                "publisher": "Central Conservatory of Music",
+                "scope": "contextual",
+                "url": "https://www.ccom.edu.cn/info/10761/184881.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Describes professional responsibilities for assessment, goals, planning, documentation, and collaboration."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "amta-cbmt-scope",
+                "limitation": "U.S. professional scope; local rules still apply.",
+                "name": "AMTA and CBMT: scope of music therapy practice",
+                "period": "2026-11-09",
+                "publisher": "AMTA and CBMT",
+                "scope": "contextual",
+                "url": "https://www.cbmt.org/wp-content/uploads/2019/10/CBMT-AMTA-Scope-of-Music-Therapy-Practice.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A March 2025 Shaoyang University notice republishes a rehabilitation department posting from Beijing Tsinghua Changgung Hospital. It lists three rehabilitation therapist positions across physical therapy, occupational therapy, and music therapy. The posting asks for new graduates with a bachelor’s degree or higher in rehabilitation therapy, music therapy, or sports rehabilitation. It gives no count by specialty or pay figure."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "btch-recruit",
+                "limitation": "University repost of a historical hospital notice; the three positions are not all music therapy.",
+                "name": "Shaoyang University repost: Beijing Tsinghua Changgung Hospital rehabilitation positions",
+                "period": "2025-03-12",
+                "publisher": "Shaoyang University School of Medical Technology",
+                "scope": "recruitment_proxy",
+                "url": "https://yxjs.hnsyu.edu.cn/info/1031/1404.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In October 2026, Taikang Community listed five recreation activity roles in Chengdu on Sichuan University’s employment portal. The roles require a bachelor’s degree and list music therapy among relevant fields. Work includes resident activities, clubs, and classes. The pay field shows 5,000–8,000 without a pay period. This is not clinical music therapy pay."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "taikang-recruit",
+                "limitation": "Does not establish current openings or national pay.",
+                "name": "Sichuan University employment portal: Taikang recreation activity role",
+                "period": "2026-10-08",
+                "publisher": "Taikang Community via Sichuan University",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh4Y5aKk7a6ynbddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Fictional records for reviewing procedure, stop conditions, and handoff."
+                ],
+                "evidence_type": "Fictional paper exercise",
+                "id": "music-paper",
+                "limitation": "No real clients, music prescription, or intervention.",
+                "name": "FermatMind: fictional M02 activity records",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Health information concerning an identifiable person is sensitive personal information. Check purpose, necessity, lawful basis, any applicable separate consent, and safeguards against unauthorized access."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "cn-pipl",
+                "limitation": "Mainland China law; not U.S. rules or a facility procedure.",
+                "name": "China Personal Information Protection Law, Arts. 28–30 and 51",
+                "period": "2021-11-01",
+                "publisher": "State Administration for Market Regulation (statutory text)",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_f374e8245320413181742e6d1baf4366.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Recreational therapists can use sports, music and other activities, develop treatment plans from assessments, and record progress."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "onet-recreational",
+                "limitation": "U.S. clinical occupation; distinct from mainland China activity roles.",
+                "name": "O*NET 29-1125.00 Recreational Therapists",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/29-1125.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Some approved schools offer an equivalency path to people who already hold a bachelor’s degree in another field."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "amta-equivalency",
+                "limitation": "Confirm course and admission requirements with the program.",
+                "name": "AMTA entry and degree equivalency paths",
+                "period": "2026-11-09",
+                "publisher": "American Music Therapy Association",
+                "scope": "contextual",
+                "url": "https://www.musictherapy.org/how-to-become-a-music-therapist/"
               }
             ]
           },
@@ -13852,6 +14063,10 @@
         },
         "evidence_links": [
           {
+            "href": "https://www.onetonline.org/link/details/29-1125.00",
+            "label": "O*NET 29-1125.00 Recreational Therapists"
+          },
+          {
             "href": "https://www.onetonline.org/link/details/29-1129.02",
             "label": "O*NET 29-1129.02 occupational profile"
           },
@@ -13886,6 +14101,18 @@
           "type": "prose"
         },
         "rows": [
+          {
+            "关键区别": "A distinct U.S. clinical occupation using multiple recreational activities.",
+            "更适合什么选择": "Consider if you want clinical work using a broad range of activities and can pursue its own training.",
+            "核心工作与产出": "Use activities such as sports and music in treatment; plan care and record progress.",
+            "职业方向": "O*NET 29-1125.00 Recreational Therapists"
+          },
+          {
+            "关键区别": "This posting establishes activity coordination duties. It does not establish clinical assessment, treatment planning, or documentation authority.",
+            "更适合什么选择": "Consider if you want to plan and run resident activities; verify the employer’s duties.",
+            "核心工作与产出": "Organize resident activities, clubs, and classes.",
+            "职业方向": "Recreation activity role in China (Taikang posting)"
+          },
           {
             "关键区别": {
               "$item": "music-therapists.direction-comparison.adjacent-career-comparison-table.4",
@@ -13994,7 +14221,7 @@
             }
           }
         ],
-        "answer": "Editorial trial suggestion: Try documentation/material assistance only with institutional authorization, necessary consent, and data protection in place. Appropriately qualified and authorized personnel are responsible for assessment, intervention, safety, and records. MT-BC professional certification does not equate to state licensure; adoption and outcome evidence has not been obtained. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
+        "answer": "Use fictional M02 records to try organizing notes. Available evidence does not establish AI adoption, clinical performance, or job effects for music therapists. Qualified and authorized staff remain responsible for clinical decisions, interventions, and records.",
         "authority_links": [
           {
             "来源": "O*NET occupational profile (29-1129.02)",
@@ -14015,7 +14242,7 @@
             "链接": "https://www.onetonline.org/link/hot_tech/29-1129.02"
           },
           {
-            "来源": "O*NET National Training (currently 297 related programs for the group)",
+            "来源": "O*NET related training directory; use AMTA to verify approved programs.",
             "类型": "Occupational training source",
             "适用范围": "A training program directory only, not a hiring guarantee",
             "链接": "https://www.onetonline.org/link/localtraining/29-1129.02"
@@ -14112,15 +14339,15 @@
         ],
         "questions": [
           {
-            "回答": "ILO estimates that about one quarter of workers globally have some degree of exposure, with task transformation predominating in most occupations. This cannot predict the probability of music therapists being replaced. Clinical Tasks and responsibilities in this occupation require checks against qualifications, jurisdiction, and institution; causal evidence of AI's net employment effects has not been obtained.",
+            "回答": "The ILO study measures global task exposure. It does not estimate the probability that music therapists will be replaced.",
             "来源": "ILO",
             "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
             "问题": "Will AI replace music therapists?"
           },
           {
-            "回答": "Literature searches and reviews, candidate repertoire and accompaniments, speech transcription, scale organization, interprofessional summaries, and document drafting.",
-            "来源": "O*NET OnLine",
-            "链接": "https://www.onetonline.org/link/details/29-1129.02",
+            "回答": "Editorial practice suggestion: organize timestamps and handoff notes using fictional M02 records. Sources do not establish widespread adoption by facilities.",
+            "来源": "FermatMind editorial note",
+            "链接": "See M02 in the entry section",
             "问题": "Which steps are more likely to receive tool assistance?"
           },
           {
@@ -14142,15 +14369,15 @@
             "问题": "How should this page's task-impact explanations be used?"
           },
           {
-            "回答": "Editorial checks: Institutional authorization, tool terms, necessary consent, minimum data, and review records. De-identification does not automatically permit uploading to external services; check jurisdictional requirements separately.",
-            "来源": "ILO",
-            "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "回答": "Editorial checklist: verify facility authorization, tool terms, and data minimization. In mainland China, check lawful basis, applicable separate consent, and access control for identifiable health information. De-identification does not automatically allow upload.",
+            "来源": "Editorial checklist; mainland China PIPL Arts. 28–30 and 51",
+            "链接": "See the statutory text in the risk section",
             "问题": "What conditions are needed to adopt generative tools?"
           },
           {
-            "回答": "Achievement of treatment goals, client responses and engagement, documentation accuracy and compliance, privacy protection, and records of human review and authorization for generated content.",
-            "来源": "BLS OOH (data page)",
-            "链接": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm",
+            "回答": "Editorial checklist: authorized staff review observations and records against the established treatment goals, then check sources, accuracy, and edits. The scope document describes assessment, planning, and documentation duties; it is not an AI quality standard.",
+            "来源": "Editorial checklist; AMTA/CBMT professional scope",
+            "链接": "See the scope document in the risk section",
             "问题": "What should quality metrics focus on?"
           }
         ],
@@ -14279,39 +14506,111 @@
             "stage": "Program design and overall responsibility"
           }
         ],
-        "direct_answer": "Entry usually begins with professional music therapy training and supervised internship. Supervision and independent cases progressively develop assessment, goal setting, music intervention delivery, and documentation. Verify scope of practice, licensure, privacy, and record retention against local practice rules and institutional procedures.",
+        "direct_answer": "Start with an AMTA-approved program and supervised training. AMTA requires at least 1,200 clinical hours, including at least 180 before internship and 900 in internship; programs can require more. Eligible candidates who pass the CBMT exam earn MT-BC. Check state licensure separately; Oregon, for example, has its own license application. Some AMTA-approved schools offer an equivalency path if you already hold another bachelor’s degree. Check prerequisites with each program.",
         "entry_heading": "From supervised internship to independent interventions and program review",
         "heading": "Music therapists' entry, qualifications, and career development pathways",
         "locale_requirements": {
-          "credential_boundary": "Education, professional certification, and state licensure are distinct statuses. Music Therapist - Board Certified (MT-BC), listed in the O*NET certification directory, is awarded by a certifying body and does not equate to state practice licensure or other authorization.",
+          "credential_boundary": "In mainland China, check training, hiring, and clinical authorization separately. The Central Conservatory of Music publishes a Master of Fine Arts curriculum in music therapy that includes clinical practice. Hospital work depends on the role and facility. Organizing recreation carries different responsibilities from clinical assessment, treatment planning, and documentation. U.S. MT-BC does not automatically authorize clinical work in mainland China.",
           "jurisdiction": "This page uses U.S. O*NET/BLS scopes to explain occupational facts. Mainland Chinese job, training, practice, and privacy rules depend on local authorities and employers.",
-          "summary": "JobZone4 education responses: 73% bachelor's degrees / 15% master's degrees / 12% post-baccalaureate certificates; currently 297 related-group training programs. The U.S. professional pathway involves an AMTA-approved degree, 1200 hours of clinical training including supervised internship, and the CBMT examination; check local licensure/title protection separately. U.S. certification cannot be applied as Chinese rules."
+          "summary": "Start with an AMTA-approved program and supervised training. AMTA requires at least 1,200 clinical hours, including at least 180 before internship and 900 in internship; programs can require more. Eligible candidates who pass the CBMT exam earn MT-BC. Check state licensure separately; Oregon, for example, has its own license application. Some AMTA-approved schools offer an equivalency path if you already hold another bachelor’s degree. Check prerequisites with each program."
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/29-1129.02",
-            "id": "onet-details",
-            "label": "O*NET 29-1129.02 occupational profile",
-            "scope": "Occupational scope and training requirements"
+            "href": {
+              "$source": "amta-training",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "amta-training",
+            "label": {
+              "$source": "amta-training",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "Training hours and supervision"
           },
           {
-            "href": "https://www.onetonline.org/link/localtraining/29-1129.02",
-            "id": "source-pack-onet-localtraining",
-            "label": "O*NET National Training 29-1129.02",
-            "scope": "297 related-group training programs, not all music therapy courses"
+            "href": {
+              "$source": "cbmt-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "cbmt-exam",
+            "label": {
+              "$source": "cbmt-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "MT-BC exam"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/29-1129.02",
-            "id": "source-pack-onet-localcert",
-            "label": "O*NET National Certifications 29-1129.02",
-            "scope": "Certification directory and qualification boundaries"
+            "href": {
+              "$source": "oregon-license",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "oregon-license",
+            "label": {
+              "$source": "oregon-license",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "State license example"
           },
           {
-            "href": "https://www.onetonline.org/link/industry/29-1129.02",
-            "id": "source-pack-onet-industry",
-            "label": "O*NET Industries 29-1129.02",
-            "scope": "Industry distribution and employer settings"
+            "href": {
+              "$source": "ccom-program",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "ccom-program",
+            "label": {
+              "$source": "ccom-program",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "Mainland China education example"
+          },
+          {
+            "href": {
+              "$source": "amta-cbmt-scope",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "amta-cbmt-scope",
+            "label": {
+              "$source": "amta-cbmt-scope",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "Professional scope"
+          },
+          {
+            "href": "https://www.musictherapy.org/how-to-become-a-music-therapist/",
+            "id": "amta-equivalency",
+            "label": "AMTA entry and degree equivalency paths",
+            "scope": "Equivalency option for holders of another bachelor’s degree"
           }
         ],
         "tracks": [
@@ -14620,11 +14919,11 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "onet-summary"
+              "cn-pipl",
+              "amta-cbmt-scope"
             ],
             "id": "cost-change",
-            "mitigation": "Use only institutionally approved tools and minimum necessary information, de-identify first, and check retention, transmission, and access permissions against applicable law and institutional policy",
+            "mitigation": "Before handling identifiable health information, check lawful basis, necessity, any applicable separate consent, and access controls. Tool approval or de-identification does not automatically authorize external sharing.",
             "scenario": "Assessment and treatment records contain health and identity information; handling them in documentation, interprofessional communication, or tool use without following the minimum necessary principle",
             "title": "Client privacy and data handling"
           },
@@ -14632,8 +14931,8 @@
             "affected_roles": "Personnel responsible for assessment and progress records, reports, and sign-off",
             "consequence": "Documentation disputes may affect continuity of treatment, interprofessional judgments, and compliance reviews",
             "evidence_refs": [
-              "onet-details",
-              "onet-summary"
+              "amta-cbmt-scope",
+              "onet-details"
             ],
             "id": "record-accuracy",
             "mitigation": "Fully document assessments, goals, reasons for adjustments, and exceptions using institutional templates; review generated content item by item before therapist sign-off",
@@ -14644,8 +14943,8 @@
             "affected_roles": "Personnel delivering music interventions and clinical improvisation",
             "consequence": "Editorial risk scenario: Check immediate responses, goals, and safety. No occupational empirical evidence was obtained that tool substitution reduces relationships/engagement.",
             "evidence_refs": [
-              "onet-details",
-              "onet-summary"
+              "amta-cbmt-scope",
+              "onet-details"
             ],
             "id": "therapeutic-relationship",
             "mitigation": "Restrict tools to preparation and documentation; therapists carry out live interventions, emergency recognition, and judgments about ending relationships",
@@ -14656,8 +14955,8 @@
             "affected_roles": "Music therapists providing remote services or cross-region practice",
             "consequence": "May involve practice beyond authorization, insurance issues, and legal liability",
             "evidence_refs": [
-              "onet-summary",
-              "onet-cert"
+              "amta-cbmt-scope",
+              "onet-details"
             ],
             "id": "scope-of-practice",
             "mitigation": "Check licensure, remote-service, informed-consent, and supervision requirements against local practice rules and institutional policy; stay within authorization",
@@ -14720,6 +15019,42 @@
             "id": "nbs-wage",
             "label": "NBS2025 industry wages",
             "scope": "Averages, not occupational wages"
+          },
+          {
+            "href": {
+              "$source": "amta-cbmt-scope",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "amta-cbmt-scope",
+            "label": {
+              "$source": "amta-cbmt-scope",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "Assessment, clinical scope, and documentation"
+          },
+          {
+            "href": {
+              "$source": "cn-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "cn-pipl",
+            "label": {
+              "$source": "cn-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "Mainland China health information and access safeguards"
           }
         ]
       },
@@ -14893,16 +15228,10 @@
         ],
         "boundary": "U.S. data apply only to the combined Therapists, All Other scope labeled on the O*NET/BLS 29-1129.02 page and the listed periods. They cannot be treated as separate values for this occupation or converted or extrapolated into individual earnings in mainland China.",
         "direct_answer": {
-          "$join": [
-            "The U.S. O*NET/BLS 29-1129.02 page displays 2025 median wages of $37.47/hour and $77,930/year. Both wages and employment cover the combined occupation Therapists, All Other;",
-            {
-              "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.1",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            }
-          ],
-          "separator": "；"
+          "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "factor_rows": [
           {
@@ -14927,12 +15256,12 @@
           {
             "industry": "Healthcare and social assistance",
             "median": "Insufficient evidence: No precise music therapist-by-industry wages obtained",
-            "note": "Healthcare and social assistance accounts for 35% of group 29-1129 employment in 2025; this is not a separate wage for 29-1129.02."
+            "note": "Health care and social assistance accounted for about 35% of U.S. 29-1129 employment in 2025. This is a share of employment, not a wage."
           },
           {
-            "industry": "Other industries combined",
+            "industry": "Remaining employment (including self-employment)",
             "median": "Insufficient evidence: No precise music therapist-by-industry wages obtained",
-            "note": "Other industries account for 65% of group 29-1129; this is neither wages nor the distribution of music therapists."
+            "note": "About 65% of the parent group, including self-employment. This is not a distribution for music therapists alone."
           },
           {
             "industry": "Differences by institution type",
@@ -14951,7 +15280,7 @@
           {
             "answer": {
               "$join": [
-                "The median wage is the center of the distribution, not starting pay or a promise of individual earnings; this value covers the combined occupation Therapists, All Other,",
+                "The median wage is the center of the distribution, not starting pay or a promise of individual earnings. ",
                 {
                   "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.5",
                   "block": "us-salary",
@@ -14959,14 +15288,14 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": ""
             },
             "question": "What does the median wage mean?"
           },
           {
             "answer": {
               "$join": [
-                "Percentiles help describe the range of the wage distribution, not experience or job ranks; this value covers the combined occupation Therapists, All Other,",
+                "Percentiles help describe the range of the wage distribution, not experience or job ranks. ",
                 {
                   "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -14974,7 +15303,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": ""
             },
             "question": "How should percentiles be used?"
           },
@@ -15002,7 +15331,7 @@
             "equivalent": "$37.47/hour",
             "interpretation": {
               "$join": [
-                "The median describes only the center of the distribution, not starting pay or senior-position pay; this value covers the combined occupation Therapists, All Other,",
+                "The median describes only the center of the distribution, not starting pay or senior-position pay. ",
                 {
                   "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.2",
                   "block": "us-salary",
@@ -15010,7 +15339,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": ""
             },
             "label": "Median (P50)",
             "value": "$77,930/year"
@@ -15019,7 +15348,7 @@
             "equivalent": "$28.29—$50.85/hour",
             "interpretation": {
               "$join": [
-                "The middle 50% of wages fall within this range. It describes the distribution only, not experience levels; this value covers the combined occupation Therapists, All Other,",
+                "The middle 50% of wages fall within this range. It describes the distribution only, not experience levels. ",
                 {
                   "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
@@ -15027,7 +15356,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": ""
             },
             "label": "25th—75th percentiles",
             "value": "$58,850—$105,760/year"
@@ -15036,7 +15365,7 @@
             "equivalent": "$22.37—$73.33/hour",
             "interpretation": {
               "$join": [
-                "10% at each end fall above or below this range. A lower percentile is not starting pay; this value covers the combined occupation Therapists, All Other,",
+                "10% at each end fall above or below this range. A lower percentile is not starting pay. ",
                 {
                   "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.4",
                   "block": "us-salary",
@@ -15044,7 +15373,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": ""
             },
             "label": "10th—90th percentiles",
             "value": "$46,540—$152,530/year"
@@ -15067,7 +15396,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "Use an entirely fictional client description for a paper exercise, checking assessment dimensions, treatment goals, music experience design, and documentation steps. A paper exercise grants no authorization for assessment, diagnosis, treatment, or practice.",
+        "summary": "Music therapy work produces reviewable goals, activity records, and team handoffs. Try record checking and handoff first with fictional M02.",
         "title": "Music Therapists"
       },
       "fit_decision_checklist": {
@@ -15157,7 +15486,7 @@
           {
             "geography": "Global (across economies)",
             "horizon": "Study publication date (2025)",
-            "interpretation": "ILO's global assessment estimates some degree of exposure for about one quarter of workers, with task transformation the main prospect for most occupations. This page's documentation assistance/in-session responsibility distinctions are editorial task analysis and are not used to infer a music therapy replacement rate.",
+            "interpretation": "The ILO study concerns task exposure. It does not estimate adoption, employment changes or clinical performance for this occupation.",
             "limitation": "A global task-level exposure assessment, not job growth, automation, or layoff projections for music therapists in China or the United States. It also cannot be added to this page's BLS projections.",
             "metric": "Generative AI task exposure",
             "occupation_scope": "ILO global occupational exposure index (ISCO-08 task level, not a job-count projection)",
@@ -15168,10 +15497,10 @@
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm",
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "BLS OOH: Therapists, All Other (data page)",
-            "scope": "U.S. group 29-1129 employment projections for 2025—2035"
+            "label": "BLS Employment Projections Table 1.2",
+            "scope": "29-1129 parent-group employment projections"
           },
           {
             "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
@@ -15279,7 +15608,7 @@
             "alternate_value": null,
             "label": "Job Zone",
             "secondary_value": null,
-            "value": "Job Zone4, SVP7—<8; occupational education responses are 73% bachelor's degrees, 15% master's degrees, and 12% post-baccalaureate certificates, not graduate certificates. The 297 related training directory entries belong to the group and are not all music therapy programs."
+            "value": "O*NET preparation and education responses describe the U.S. occupation. Check AMTA program approval and certification requirements separately."
           },
           {
             "alternate_value": null,
@@ -15488,7 +15817,7 @@
             "question": "Are extraverts or introverts better suited?"
           },
           {
-            "answer": "Education for new hires in this occupation: 73% bachelor's degrees / 15% master's degrees / 12% post-baccalaureate certificates. The 297 training entries form a related-group directory. Check U.S. AMTA degrees and 1200 hours of clinical training including internship, the CBMT examination/MT-BC, and state law separately; a directory is not permission to practice.",
+            "answer": "O*NET related training directory; use AMTA to verify approved programs.",
             "question": "What education, training, and qualifications are usually required for entry?"
           },
           {
@@ -15508,7 +15837,7 @@
             "question": "How can I build reviewable professional evidence?"
           },
           {
-            "answer": "With compliance and authorization in place, observe a music therapy or related care activity and record treatment goals, music experience design, and documentation methods. Then use public assessment dimensions to write an anonymized sample treatment plan and seek practitioner feedback.",
+            "answer": "Try M02 in the entry section: check permission, a sound stop rule, and a fictional handoff. Do not run a real activity or create a treatment plan.",
             "question": "What kind of low-cost experiment should I try first?"
           }
         ],
@@ -15546,7 +15875,7 @@
           },
           {
             "href": "https://www.onetonline.org/link/localtraining/29-1129.02",
-            "label": "O*NET297 related-group training directory",
+            "label": "O*NET related training directory; use AMTA to verify approved programs.",
             "usage": "Training programs and education pathways"
           },
           {
@@ -15612,10 +15941,10 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "O*NET29-1129.02 music therapy Tasks/SAI; wages, employment, the 35/65 industry split, and 297 training entries belong to group 29-1129; MT-BC is one directory entry. The five 2025 wage percentiles are correctly retained; BLS2025—2035 group figures are 12.6%/3600. NBS health and social work figures of 146266/75631 are industry averages. ILO global exposure is not an occupational effect. AMTA professional ethics/training, CBMT certification, and jurisdictional rules are separate; NCAC concerns only Chinese material rights.",
+          "source": "O*NET related training directory; use AMTA to verify approved programs.",
           "updated_at": "O*NET2026 profile; wages 2025, employment 2025—2035; NBS publication 2026-05-15; reviewed 2026-10-11."
         },
-        "note": "The evidence supports only broad judgments about music therapists within the labeled market, occupational scope, and period, not guarantees of personal earnings, hiring, or fit.",
+        "note": "Use O*NET for duties and BLS for parent-group wages and employment. Mainland China job postings and industry wages cover different populations. M02 uses fictional records and no real client materials.",
         "secondary_links": [
           {
             "href": {
@@ -15659,7 +15988,7 @@
           }
         ]
       },
-      "work_context_block": "Work context (O*NET Work Context survey): 88% of respondents have face-to-face discussions daily, 73% report constant contact with others, 81% work indoors in an environmentally controlled setting daily, 65% use email daily, and 62% report considerable decision-making freedom. 46% are exposed to disease or infections daily, 40% deal with unpleasant, angry, or discourteous people once a week or more, and 36% deal with violent or physically aggressive people once a month or more. 54% sit about half the time, and 35% use their hands to handle or feel objects and tools continually or almost continually."
+      "work_context_block": "O*NET Work Context survey: 88% report daily face-to-face discussions and 81% report working indoors in a controlled setting daily. For dealing with unpleasant, angry or discourteous people, 12% report daily and 40% at least weekly but not daily. For dealing with violence or physical aggression, 12% report daily, 28% at least weekly but not daily, and 36% at least monthly but less than weekly. 46% report decisions usually have important effects. These are survey responses, not facility incident rates."
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -15682,6 +16011,13 @@
         "block": "path",
         "copy_key": "career.item.employer-evidence",
         "id": "music-therapists.path.employer-evidence.3",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "music-therapists.path.entry-work-sample-data.1",
         "location": "entry_decisions",
         "type": "cards"
       },
@@ -15743,7 +16079,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and work tasks",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15822,36 +16158,36 @@
       },
       {
         "derivation": null,
-        "display_value": "56,100 people (2024)",
+        "display_value": "About 56,100 jobs (2025 parent group)",
         "fact_id": "employment-2024",
         "market": "United States",
-        "measure": "employment level",
+        "measure": "U.S. 29-1129 parent-group employment",
         "occupation_scope": "Therapists, All Other category proxy (as labeled on the O*NET 29-1129.02 page)",
-        "period": "2024 employment (republished by O*NET); accessed 2026-09-25",
+        "period": "2025",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "11% growth (2024—2034, Much faster than average)",
+        "display_value": "Projected growth: 12.6% (2025–35 parent group)",
         "fact_id": "employment-projection",
         "market": "United States",
-        "measure": "employment projection",
+        "measure": "U.S. 29-1129 parent-group employment",
         "occupation_scope": "Therapists, All Other category proxy (as labeled on the O*NET 29-1129.02 page)",
-        "period": "2024—2034 projection (BLS republished by O*NET); accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "4,100/year (2024—2034)",
+        "display_value": "About 3,600 per year (2025–35 parent group)",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "annual job openings",
+        "measure": "U.S. 29-1129 parent-group employment",
         "occupation_scope": "Therapists, All Other category proxy (as labeled on the O*NET 29-1129.02 page)",
-        "period": "2024—2034 projection (republished by O*NET); accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
@@ -15889,53 +16225,43 @@
         "occupation_scope": "Music Therapists",
         "period": "O*NET credential data current 2026; accessed 2026-09-25",
         "source_refs": [
-          "onet-cert"
+          "cbmt-exam",
+          "oregon-license"
         ]
       },
       {
         "derivation": null,
-        "display_value": "210 training programs",
+        "display_value": "The O*NET training directory includes related programs. Use the AMTA list for approved music therapy programs.",
         "fact_id": "training-programs",
         "market": "United States",
         "measure": "training programme count",
         "occupation_scope": "Music Therapists",
-        "period": "O*NET National Training; accessed 2026-09-25",
+        "period": "2026-11-09",
         "source_refs": [
+          "amta-training",
           "source-pack-onet-localtraining"
         ]
       },
       {
-        "derivation": "56,100 (2024) → 62,500 (2034), a net increase of about 6,400",
-        "display_value": "About 6,400 net new positions (2024—2034)",
+        "derivation": null,
+        "display_value": "Net gain of 7,100 (2025–35 parent group)",
         "fact_id": "us-net-change",
         "market": "United States",
-        "measure": "employment change",
+        "measure": "U.S. 29-1129 parent-group employment",
         "occupation_scope": "Therapists, All Other category proxy (as labeled on the O*NET 29-1129.02 page)",
-        "period": "2024—2034 projection; BLS OOH data page; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-therapists-all-other"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Music Therapists",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "onet-trends"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and work tasks"
     },
     "badges": [
       "Assessment and treatment design",
@@ -15947,31 +16273,31 @@
         "availability": "available",
         "fact_ref": "us-wage",
         "key": "us_pay",
-        "label": "U.S. pay reference"
+        "label": "U.S. parent-group median pay"
       },
       {
         "availability": "available",
         "fact_ref": "employment-projection",
         "key": "us_growth",
-        "label": "U.S. employment growth"
+        "label": "U.S. parent-group employment growth"
       },
       {
         "availability": "available",
         "fact_ref": "employment-2024",
         "key": "us_employment",
-        "label": "U.S. employment"
+        "label": "U.S. parent-group employment"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "U.S. annual job openings"
+        "label": "U.S. parent-group annual openings"
       },
       {
         "availability": "available",
         "fact_ref": "cn-wage-nonprivate",
         "key": "china_pay",
-        "label": "Mainland China pay reference"
+        "label": "Mainland China health and social work industry mean"
       }
     ]
   },
@@ -15979,17 +16305,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Music Therapists (O*NET 29-1129.02) design and deliver clinical and evidence-based music therapy interventions; assess clients' perceptual, sensory, emotional, communication, musical, physical, cognitive, social, and spiritual abilities; document processes, outcomes, and treatment plans; and collaborate with other professionals. This page uses only official sources to explain occupational scope, tasks, preparation requirements, Chinese and U.S. statistical scopes, and authorization boundaries."
+      "text": "Compare music therapy and recreation roles. Explore U.S. MT-BC certification and state licensure, mainland China job examples, and U.S. parent-group pay."
     },
     "title": {
       "availability": "available",
-      "text": "Music Therapists"
+      "text": "Music Therapist Career Guide: Work, Training, and Scope"
     }
   },
-  "source_content_sha256": "b9c738480da42bdd0f8d7a2fe891cefe55d298ecab4ca3bf1487db48d13e52c8",
+  "source_content_sha256": "8df58f20a05d757a74bb9e1040e886338b391ad224b7a44f3aa84c384693e8dd",
   "subject": {
     "canonical_slug": "music-therapists",
     "name": "Music Therapists",
-    "summary": "Music Therapists (O*NET 29-1129.02) design and deliver clinical and evidence-based music therapy interventions; assess clients' perceptual, sensory, emotional, communication, musical, physical, cognitive, social, and spiritual abilities; document processes, outcomes, and treatment plans; and collaborate with other professionals. This page uses only official sources to explain occupational scope, tasks, preparation requirements, Chinese and U.S. statistical scopes, and authorization boundaries."
+    "summary": "Music therapists assess needs, set goals, conduct music-based sessions, document progress, and coordinate with the care team. Training, credentials, and facility authorization must be checked separately."
   }
 }

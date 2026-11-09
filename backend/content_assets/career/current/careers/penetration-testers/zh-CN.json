@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -23327,14 +23324,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "做一份完全离线的虚构测试方案：对甲、乙两个纸面系统卡片核资产范围、允许动作、排除项和异常升级；不扫描真实地址、不写利用代码、不处理真实凭据。"
+              "到入行区用 A1–A5 五份虚构记录写四样：授权范围表、证据与待核项、停止通知和复测待确认清单。全程只用纸面。"
             ]
           },
           "id": "penetration-testers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet",
-            "nist",
-            "editor"
+            "offline-a1-a5"
           ],
           "type": "prose"
         },
@@ -23412,12 +23407,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 15-1299.04是渗透测试员的精确职业档案；其工资和就业使用15-1299父类Computer Occupations, All Other，不能当本职业独立统计。"
+              "O*NET 15-1299.04 单独描述渗透测试员的工作。美国工资和就业使用更宽的 15-1299 其他计算机职业合并组。 中国大陆《信息安全测试员国家职业技能标准（2021 年版）》的职业编码是 4-04-04-04，所列标准仅针对渗透测试员工种。标准的技能等级及培训参考不等于每个雇主的入职要求，也不授予具体系统的测试权限。"
             ]
           },
           "id": "penetration-testers.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "mohrss-testing-standard"
           ],
           "type": "prose"
         },
@@ -23667,13 +23664,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET 15-1299.04是美国职业定义；测试真实系统需委托方书面授权和适用法域许可，不能从职业名称推得访问权。"
+              "O*NET 15-1299.04 是美国职业档案。真实测试须取得有权授权的系统所有者或其获授权代表的书面授权，并遵守适用法律、约定范围和测试规则。职业名称不授予访问权。"
             ]
           },
           "id": "penetration-testers.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "nist"
+            "arxiv",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -24753,7 +24751,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未核得渗透测试员实际生成式AI采用、整体替代率、替代年份及可靠实测效果。许可环境整理去标识记录、起草报告是编辑试用建议；授权、原始证据、误报、可用性和修复决定仍由有权人员及组织负责。BLS父类5.1%、净24.2千、年均27.0千含替补空缺不证明本职AI采用、个人失业或中国需求。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可用虚构记录试做分类和报告提纲。核对授权、原始证据、误报与停止条件由人员负责。现有资料没有本职业实际采用率、岗位替代率或可靠实测影响；美国合并职业预测也无法回答这些问题。"
             ]
           },
           "id": "penetration-testers.ai-impact.ai-impact-table.18",
@@ -29067,28 +29065,28 @@
                 "url": "https://www.onetonline.org/link/details/15-1299.04"
               },
               {
-                "entity": "BLS父类15-1299职业统计",
+                "entity": "NIST SP 800-115：信息安全测试与评估",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://csrc.nist.gov/pubs/sp/800/115/final"
               },
               {
-                "entity": "NIST测试规则定义",
+                "entity": "NIST：测试规则（ROE）",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://csrc.nist.gov/glossary/term/Rules_of_Engagement"
               },
               {
-                "entity": "中华人民共和国个人信息保护法",
+                "entity": "中国《网络安全法》第 28–29 条",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+                "url": "https://www.cac.gov.cn/2025-12/29/c_1768735112911946.htm"
               },
               {
-                "entity": "NIST安全测试评估指南",
+                "entity": "中国《个人信息保护法》第 51 条",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://csrc.nist.gov/pubs/sp/800/115/final"
+                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
               }
             ]
           },
@@ -29539,14 +29537,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "敏感信息｜发现真实凭据或个人信息时最小化取证、限制传播，按约定渠道升级。"
+              "美国职业任务范围，不是项目授权。"
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.35",
           "source_refs": [
-            "nist",
-            "arxiv",
-            "editor"
+            "onet"
           ],
           "type": "prose"
         },
@@ -29555,14 +29551,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "误报与漏报｜工具提示须由受控证据复核；报告写条件与不确定性，不能承诺“绝对安全”。"
+              "测试计划、过程、证据与报告；美国技术指南。"
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.36",
           "source_refs": [
-            "nist",
-            "arxiv",
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -29571,14 +29565,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "修复闭环｜建议应指向责任人、版本和复测条件；复测须受有效授权覆盖，不能自动沿用已失效或不含该动作的规则。"
+              "界定执行范围和限制，项目规则须另确认。"
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.37",
           "source_refs": [
-            "nist",
-            "arxiv",
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -29587,14 +29579,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "越权目标｜目标资产不在书面范围内时，停止该测试并请授权联系人核清；事后口头同意不能替代规则。"
+              "大陆检测活动须遵守国家规定，禁止非法侵入、干扰和窃取数据。"
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.38",
           "source_refs": [
-            "nist",
-            "arxiv",
-            "editor"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29603,14 +29593,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可用性影响｜测试触发服务异常时按预定阈值中止、记录时间与影响，并交系统所有者处理。"
+              "个人信息处理权限及保护措施，按适用范围核。"
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.39",
           "source_refs": [
-            "nist",
-            "arxiv",
-            "editor"
+            "pipl"
           ],
           "type": "prose"
         }
@@ -29756,15 +29744,15 @@
                 "id": "exercise-task",
                 "values": [
                   "任务与规则",
-                  "A4：11:05测试域出现连续错误，纸面停止规则为连续三次异常即暂停并告知林岚；题面显示11:04、11:05、11:06各一次。",
-                  "A5：复测须在修复后重新获准；学员不能改生产配置。写范围矩阵、发现/待核记录、停止与升级单，不执行扫描或利用。"
+                  "A4：日志列 11:04、11:05、11:06 连续三次异常。题内规则：第三次时暂停，并通知资产负责人林岚。",
+                  "A5：修复版本、复测范围和复测批准还未给。先交授权范围表、证据与待核记录、停止升级单和复测待确认清单。全程只用纸面，不进行扫描或漏洞利用。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
                   "参考思路（先独立完成）",
-                  "生产域明确排除，A3关于P5的断言无证据且越权；只可记录“未验证”，不能检查生产域。",
+                  "P5 在范围外，汇总中的指称没有原始证据；不查生产域，也不写成已证漏洞。",
                   "测试域T2仅有一次失败登录响应，不足以确认登录缺陷；11:06达到连续三次异常，应暂停并通知林岚，待授权复测。"
                 ]
               },
@@ -29772,17 +29760,14 @@
                 "id": "exercise-boundary",
                 "values": [
                   "交付与边界",
-                  "报告列A1—A5、版本、原始证据与推断，指出T2待核、P5排除及11:06暂停；交接联系人林岚，不含真实目标、账号或利用步骤。"
+                  "交接写明 11:06 暂停并通知林岚；题面没有接收回执，记录为待确认。修复版本、范围和批准均待核。"
                 ]
               }
             ]
           },
           "id": "penetration-testers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet",
-            "nist",
-            "arxiv",
-            "editor"
+            "offline-a1-a5"
           ],
           "title": "入行练习：虚构授权测试范围与证据核查",
           "type": "cards"
@@ -29797,7 +29782,7 @@
                 "values": [
                   "授权范围卡",
                   "列测试域、时段、允许页面、排除生产域和员工邮箱。",
-                  "复核：A1只允许T2测试域，P5生产域被排除。"
+                  "参考：A1 只覆盖约定时段内测试域的 Web 登录页；T2 是 A2 的资产版本；生产域 P5 排除。"
                 ]
               },
               {
@@ -29812,14 +29797,14 @@
                 "id": "report-summary",
                 "values": [
                   "停止升级单",
-                  "记录11:04—11:06连续异常、停止时间和林岚接收。"
+                  "记录连续异常的时点、按题内规则判断的暂停时间和通知对象；题面未提供接收回执。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
                   "修复复测说明",
-                  "写复测需要修复版本和新的授权，测试员不自行改生产配置。"
+                  "在本案例记录待核的修复版本、复测范围和批准；测试员不自行改生产配置。真实复测先核现有授权，未覆盖或失效才补授权。"
                 ]
               }
             ]
@@ -30090,16 +30075,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：未核得可同时核对中国雇主、城市、发布日期、岗位范围、授权方式和计薪单位的当前招聘样本；不编造招聘门槛或工资。",
-              "取得样本后应保存原公告与日期，区分单个雇主要求和职业统计；本页A1—A5材料完全虚构。"
+              "北航可靠性与系统工程学院 2026 年 9 月 18 日公告：北京 1 名信息安全测试工程师，硕士及以上、至少 3 年相关测试经验，并要求至少一项相关资质。职责含渗透测试、报告和修复后回归；劳务派遣，待遇面议。",
+              "郑州大学河南省教育信息安全监测中心 2025 年 12 月 29 日公告：1 名劳务派遣网络安全工程师，本科及以上、网络安全或计算机相关专业；工作含 Web 渗透测试、漏洞验证及应急处置。原报用人成本合计 6,000–8,000 元/月，含单位与个人承担的社保、公积金等，具体面议，不等于个人工资。",
+              "两则是不同机构的岗位样本，不用来判断当前是否在招、全国薪资或通用证书要求。"
             ]
           },
           "id": "penetration-testers.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "beihang-job",
+            "zhengzhou-job"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30333,13 +30317,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页未核得中国当前可比招聘样本；核职位时保存职责、授权和日期。"
+              "中国大陆《信息安全测试员国家职业技能标准（2021 年版）》的职业编码是 4-04-04-04，所列标准仅针对渗透测试员工种。标准的技能等级及培训参考不等于每个雇主的入职要求，也不授予具体系统的测试权限。 比较岗位公告时分别看学校测试报告与修复回归、监测中心漏洞验证与应急，具体系统的授权与招聘学历无关。"
             ]
           },
           "id": "penetration-testers.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "editor"
+            "mohrss-testing-standard",
+            "beihang-job",
+            "zhengzhou-job"
           ],
           "type": "prose"
         },
@@ -32196,10 +32181,15 @@
                 "question_key": "career.faq.penetration-testers.ai-impact"
               },
               {
-                "answer": "2025信息传输、软件和信息技术服务业非私营248,752、私营128,166元/年是税前宽行业均值，含个人税社保公积金。仅真实雇主法人主业及城镇5人以上统计人口匹配参考，混合多职业；银行医院制造高校内设测试人员另核，非本職工资。证据不足：全国分位、可比城市工资及职责授权计薪齐全的当前报价合同未核得，不换汇或除12冒月薪。",
+                "answer": "未核得中国大陆渗透测试员全国工资中位数。国家统计局信息传输、软件和信息技术服务业均值是宽行业背景。入行区郑州公告的金额是用人成本，北航待遇面议，都不能当职业工资。",
                 "id": "penetration-testers.faq.5",
                 "question": "中国大陆渗透测试员的工资是多少？",
-                "question_key": "career.faq.penetration-testers.china-pay"
+                "question_key": "career.faq.penetration-testers.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "beihang-job",
+                  "zhengzhou-job"
+                ]
               },
               {
                 "answer": "不代表。116,580美元是2025年15-1299父类年薪中位数，既不是渗透测试员独立中位数，也不是新人起薪或税后收入。",
@@ -32208,10 +32198,15 @@
                 "question_key": "career.faq.penetration-testers.us-pay"
               },
               {
-                "answer": "O*NET将该职业列为Job Zone 4；BLS父类常见学历为学士。具体岗位会看网络、应用、系统、安全报告和授权规则能力，学历与证书不授予系统测试权限。",
+                "answer": "中国大陆《信息安全测试员国家职业技能标准（2021 年版）》的职业编码是 4-04-04-04，所列标准仅针对渗透测试员工种。标准的技能等级及培训参考不等于每个雇主的入职要求，也不授予具体系统的测试权限。 同样涉及测试的两则招聘，一则要求硕士及相关经验，一则要求本科及以上；具体条件看各公告。",
                 "id": "penetration-testers.faq.7",
                 "question": "入行需要什么学历和经验？",
-                "question_key": "career.faq.penetration-testers.education-path"
+                "question_key": "career.faq.penetration-testers.education-path",
+                "source_refs": [
+                  "mohrss-testing-standard",
+                  "beihang-job",
+                  "zhengzhou-job"
+                ]
               },
               {
                 "answer": "没有一张证书能替代具体目标的书面授权。课程和证书可作学习证据，雇主要求、当地法规与项目规则须分别核。",
@@ -32263,7 +32258,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业任务据O*NET15-1299.04，美国工资与就业据明确15-1299合并组；中国信息技术宽行业仅真实雇主主业与人口匹配条件参考。证据不足：本职精确中国工资、完整当前报价合同及美国独立工资预测未核得；授权指南与各法域规则分开。"
+              "O*NET 的 15-1299.04 是职责资料；美国薪资与就业均为 15-1299 合并组。大陆行业均值与单份招聘均不能当渗透测试员中位工资。"
             ]
           },
           "id": "penetration-testers.sources.source-card.2",
@@ -32271,10 +32266,7 @@
             "onet",
             "ep",
             "onet-wages",
-            "nbs",
-            "penetration-cn-industry",
-            "nist",
-            "editor"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32283,12 +32275,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮2026-10-12核读O*NET精确任务和父类工资、BLS15-1299预测、NIST测试指南与ROE、网信办现行网络安全法；保留原A1—A5离线虚构练习。中国完整报价和本职独立统计、AI实测效果仍缺；NBS分类PDF本轮原文未取得，来源历史期不冒充本轮核读。"
+              "美国工资与就业使用 15-1299 合并组。大陆职业技能标准、两则招聘及宽行业工资回答不同问题。A1–A5 为虚构文档，实际工作需按项目规则和适用法律处理。"
             ]
           },
           "id": "penetration-testers.sources.source-card.3",
           "source_refs": [
-            "editor"
+            "ep",
+            "onet-wages",
+            "mohrss-testing-standard",
+            "beihang-job",
+            "zhengzhou-job",
+            "nist",
+            "cnclass",
+            "offline-a1-a5"
           ],
           "type": "prose"
         },
@@ -32885,20 +32884,72 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "测试规划｜按风险和业务连续性选择允许方法｜约定停止条件与联系人。 — 50/100; weight=1/3; penetration-testers.profile.responsibilities-block.1[1]",
-                  "受控验证｜在范围内寻找和复现弱点｜记录版本、条件和证据。 — 75/100; weight=1/3; penetration-testers.profile.responsibilities-block.1[2]",
-                  "影响判断｜区分真实风险、推断和误报｜不扩大收集敏感资料。 — 50/100; weight=1/3; penetration-testers.profile.responsibilities-block.1[3]"
+                  "文稿整理可作为离线试验。没有足够证据为渗透测试员给出岗位影响比例，或为真实漏洞验证自动化打分。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "编辑证据说明",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "limitation": "仅讨论虚构文档整理的可观察任务；不提供分数、自动化表现、采用率或岗位结果。",
+                "name": "费马测试：AI 任务证据口径",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国大陆《信息安全测试员国家职业技能标准（2021 年版）》的职业编码是 4-04-04-04，所列标准仅针对渗透测试员工种。标准的技能等级及培训参考不等于每个雇主的入职要求，也不授予具体系统的测试权限。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "mohrss-testing-standard",
+                "limitation": "标准仅针对该工种，不能换算美国统计，不能代替真实测试授权。",
+                "name": "人社部《信息安全测试员国家职业技能标准（2021 年版）》",
+                "period": "2021",
+                "publisher": "人力资源和社会保障部",
+                "scope": "contextual",
+                "url": "https://www.mohrss.gov.cn/wap/zc/zcwj/202112/W020211227626972382958.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "北航可靠性与系统工程学院 2026 年 9 月 18 日公告：北京 1 名信息安全测试工程师，硕士及以上、至少 3 年相关测试经验，并要求至少一项相关资质。职责含渗透测试、报告和修复后回归；劳务派遣，待遇面议。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "beihang-job",
+                "limitation": "两则是不同机构的岗位样本，不用来判断当前是否在招、全国薪资或通用证书要求。",
+                "name": "北航信息安全测试工程师招聘原公告",
+                "period": "2026-09-18",
+                "publisher": "北京航空航天大学人力资源部",
+                "scope": "recruitment_proxy",
+                "url": "https://rsc.buaa.edu.cn/info/1049/7266.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "郑州大学河南省教育信息安全监测中心 2025 年 12 月 29 日公告：1 名劳务派遣网络安全工程师，本科及以上、网络安全或计算机相关专业；工作含 Web 渗透测试、漏洞验证及应急处置。原报用人成本合计 6,000–8,000 元/月，含单位与个人承担的社保、公积金等，具体面议，不等于个人工资。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "zhengzhou-job",
+                "limitation": "两则是不同机构的岗位样本，不用来判断当前是否在招、全国薪资或通用证书要求。",
+                "name": "郑州大学网络安全工程师招聘原公告",
+                "period": "2025-12-29",
+                "publisher": "郑州大学人事部",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zzu.edu.cn/info/1442/87430.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "判断纸面授权、原始证据、停止条件和复测请求。"
+                ],
+                "evidence_type": "虚构纸面练习",
+                "id": "offline-a1-a5",
+                "limitation": "不对真实系统执行操作。",
+                "name": "费马测试：A1–A5 离线虚构材料",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -33015,13 +33066,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "label": {
-              "$link": "penetration-testers.direction-comparison.adjacent-career-comparison-table.7",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "entry": "link-5",
-              "field": "entity"
-            }
+            "label": "O*NET 渗透测试员职业档案（两种内部方向共同参考）"
           }
         ],
         "evidence_note": {
@@ -34350,6 +34395,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "mohrss-testing-standard",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "penetration-testers.source-register.published.1"
+            },
+            "id": "mohrss-testing-standard",
+            "label": {
+              "$source": "mohrss-testing-standard",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "penetration-testers.source-register.published.1"
+            },
+            "scope": "大陆信息安全测试员工种标准"
           }
         ],
         "tracks": [
@@ -35110,9 +35173,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "nist",
-              "arxiv"
+              "arxiv",
+              "cnclass",
+              "nist"
             ],
             "id": "scope",
             "mitigation": {
@@ -35143,9 +35206,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "arxiv",
               "nist",
-              "arxiv"
+              "cnclass"
             ],
             "id": "availability",
             "mitigation": {
@@ -35176,9 +35239,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "privacy",
               "nist",
-              "arxiv"
+              "cnclass"
             ],
             "id": "data",
             "mitigation": {
@@ -35209,9 +35272,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "nist",
-              "arxiv"
+              "arxiv",
+              "onet"
             ],
             "id": "evidence",
             "mitigation": {
@@ -35242,9 +35305,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "nist",
-              "arxiv"
+              "arxiv",
+              "onet"
             ],
             "id": "report",
             "mitigation": {
@@ -35275,9 +35338,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "arxiv",
               "nist",
-              "arxiv"
+              "cnclass"
             ],
             "id": "retest",
             "mitigation": {
@@ -36327,7 +36390,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls",
             "value": {
               "$item": "penetration-testers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36773,7 +36836,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "BLS 2025 工资与 2025—2035 就业预测（合并组）",
             "secondary_value": null,
             "value": {
               "$item": "penetration-testers.profile.onet-structured-fields-block.2",
@@ -36795,7 +36858,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测表 1.2（2025–35）",
+            "label": "O*NET 职责对比",
             "secondary_value": null,
             "value": {
               "$item": "penetration-testers.profile.onet-structured-fields-block.4",
@@ -37810,7 +37873,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与工作任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38078,27 +38141,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "渗透测试员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务影响"
     },
     "badges": [
       "书面授权·范围控制",
@@ -38142,14 +38193,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解渗透测试员的授权范围、漏洞验证、报告与复测；比较美国父类职业工资和就业代理数据、中国薪资证据缺口，以及虚构离线练习。"
+      "text": "渗透测试员如何确认授权、验证证据和复测？比较大陆招聘样本与美国合并职业工资，再做一份完全离线的纸面练习。"
     },
     "title": {
       "availability": "available",
-      "text": "渗透测试员"
+      "text": "渗透测试员：工作内容、授权边界与入行"
     }
   },
-  "source_content_sha256": "862c6dd02a5c4f93264273cb3e17e7acbe31e1e170301c63cd9e25a6fb9a4e0b",
+  "source_content_sha256": "1b9e09cabeef05ffc1ac15634239bad39b718101ec7186cb1b31785e8203688e",
   "subject": {
     "canonical_slug": "penetration-testers",
     "name": "渗透测试员",

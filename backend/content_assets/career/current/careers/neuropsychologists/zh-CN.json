@@ -23,9 +23,6 @@
       "fact:education-profile": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "mapped"
       },
@@ -180,13 +177,19 @@
         "status": "pending_mapping"
       },
       "item:neuropsychologists.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:neuropsychologists.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:neuropsychologists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:neuropsychologists.path.interview-probation.10": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:neuropsychologists.path.recruitment-sample.1": {
+        "status": "pending_mapping"
       },
       "item:neuropsychologists.profile.definition-block.1": {
         "status": "pending_mapping"
@@ -11957,12 +11960,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话判断｜如果你愿意接受长期的心理学博士教育、实习与两年博士后专科训练，能在标准化条件下长时间保持施测与记分的准确性，并愿意把认知与行为表现写成可复核、写明不确定性的临床报告，同时能在高风险神经系统疾病判断中守住自己的边界，这个职业才值得继续验证。"
+              "如果想用一次分数就下结论，或不愿记录数据缺口和接受复核，先试做纸面记录，再比较科研或测评支持岗位。"
             ]
           },
           "id": "neuropsychologists.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "neuro-paper"
           ],
           "type": "prose"
         },
@@ -11971,12 +11974,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "核心产出｜把转诊问题、病史、标准化测验剖面、知情者信息与行为观察转成可追溯的临床神经心理报告：描述性或诊断性结论、认知强弱的解释、鉴别考虑、建议与转介，而不是只给出一组分数。"
+              "到入行区做 N01：三份虚构文档，写证据表、待核项和一条交接。题面没有患者资料、真实量表、诊断或临床分数。"
             ]
           },
           "id": "neuropsychologists.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "neuro-paper"
           ],
           "type": "prose"
         },
@@ -11985,12 +11988,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "20—120 分钟安全试做｜用虚构病例做一次非临床演练：写清转诊问题与病史要点，从公开测验说明中选出三项与假设对应的测验并说明理由，再写两段面向家属的反馈文字；不得据此对任何真实个体作出诊断、评分或治疗建议。"
+              "如果你喜欢把多份记录拼成可核对的说明，并能把证据不足写清，可以继续探索神经心理学。"
             ]
           },
           "id": "neuropsychologists.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-details",
+            "neuro-paper"
           ],
           "type": "prose"
         },
@@ -11999,12 +12003,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "第一道门槛｜先确认资质与边界：谁可以实施并解释神经心理测验、作出诊断并签发报告。美国需州级心理学家执照（含 EPPP 与督导时数），神经心理专科认证（ABPP/ABCN）为自愿性专业凭证；中国大陆的心理治疗须在医疗机构内开展，人员资质为精神科（助理）执业医师，或通过卫生专业技术资格考试（心理治疗专业）取得资格的卫生技术人员，具体测评权限按现行法规与机构制度执行。"
+              "先区分训练、辖区执照、专科认证和机构授权；美国与大陆分别核。"
             ]
           },
           "id": "neuropsychologists.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "source-pack-onet-details",
+            "asppb-current",
+            "abpp-neuropsychology",
             "china-mental-health-law"
           ],
           "type": "prose"
@@ -12025,14 +12030,15 @@
               "病史与访谈｜访谈患者及知情者获取全面病史、病程与既往史，明确本次转诊问题与需要回答的临床疑问。",
               "标准化测评｜选择并实施智力、学业能力、注意与专注、感觉运动、语言、学习与记忆等标准化测验，按统一条件施测并记分。",
               "报告撰写｜依据测验、自评量表、评定量表、直接观察与访谈数据撰写详细的临床神经心理报告，说明证据强度与限制。",
-              "诊断与治疗｜诊断和治疗涉及中枢神经系统损伤的病症，如脑血管意外、肿瘤、感染或炎症性疾病、退行性疾病、颅脑创伤、脱髓鞘疾病与各类痴呆。",
+              "美国职业档案还列部分诊断、治疗与康复职责；实际工作按当地执照、专业训练和机构授权。",
               "基线与随访｜建立神经行为基线测量，用于监测进行性脑部疾病或康复过程中的功能变化。",
               "教育、会诊与督导｜为个人和家庭提供教育或咨询，就患者神经状况与其他专业人员会诊，并教育和督导实习学生与工作人员。"
             ]
           },
           "id": "neuropsychologists.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-details",
+            "asppb-current"
           ],
           "type": "list"
         },
@@ -12055,12 +12061,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作以门诊、病房与康复机构的评估为主，几乎全部在室内完成；O*NET 工作情境显示 96% 每天在环境受控的室内工作，60% 每天需要面对面讨论、32% 每周多次，80% 每周工作超过 40 小时且 96% 为规律时间表。"
+              "O*NET 美国职业调查中，80% 的回应为通常每周超过 40 小时；面对面讨论 60% 选每天，32% 选每周至少一次但非每天。工作地点和班次看实际岗位。"
             ]
           },
           "id": "neuropsychologists.profile.definition-block.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -12162,12 +12168,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "临床心理学家｜提供一般心理评估与心理治疗，通常不做系统的神经心理测评；神经电生理技师执行脑电图等检查并整理技术数据，不作出诊断或签发报告；分类邻近不代表资格与权限可互换。"
+              "临床心理学与神经心理学的服务可重叠。区别在于是否承担脑与行为相关的专科评估和报告，并具备相应训练与授权。"
             ]
           },
           "id": "neuropsychologists.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-details",
+            "abpp-neuropsychology"
           ],
           "type": "prose"
         },
@@ -12204,7 +12211,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "更希望以标准化测评、报告与认知康复建议为主要工作、并愿意完成心理学博士与两年博士后专科训练时比较本职业；更希望承担医学诊疗与处方责任时，比较神经科医师方向。"
+              "想以认知与行为评估、报告为主，可比较神经心理方向；想负责神经系统疾病医学诊疗，可比较神经科医师。两者训练与授权分开核。"
             ]
           },
           "id": "neuropsychologists.direction-comparison.adjacent-career-comparison-table.5",
@@ -12240,12 +12247,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "辅助候选（编辑分析）：经授权的病史摘要、报告格式与清单检查、教育材料草稿；测验清单与记分核对须在获许可的系统进行，本轮未取得准确率或临床效果证据。"
+              "可用虚构记录试做文字整理。现有资料不能说明 AI 在本职业的实际采用率、临床表现或岗位影响。真实临床资料不能放入未经批准的工具；解释、诊断及报告签发由具备资格且获授权的人员负责。"
             ]
           },
           "id": "neuropsychologists.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -12346,13 +12353,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业为美国O*NET19-3039.02；本轮未核中国分类与执业资格的一一映射。精神卫生法51条规定心理治疗须在医疗机构，专门从事心理治疗者不得精神障碍诊断、开处方或外科治疗；不能据此否定符合资格精神科医师的诊疗权限。2013规范允许精神科（助理）执业医师且已接受规范化心理治疗培训，或通过心理治疗专业卫生资格考试者从事心理治疗；这不单独授予全部神经心理测评权限。"
+              "大陆《精神卫生法》第 23、29、51 条区分心理咨询、精神障碍诊断和医疗机构内心理治疗。精神障碍诊断由精神科执业医师作出。测评记录、临床解释和报告签发是不同职责，向机构分别核资格、督导与授权；不把美国心理学家执照或 ABCN 认证视作大陆准入。"
             ]
           },
           "id": "neuropsychologists.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "china-mental-health-law",
-            "china-psychotherapy-regulation"
+            "china-mental-health-law"
           ],
           "type": "prose"
         },
@@ -12361,7 +12367,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局此份表按行业门类及部分岗位类型给出均值，不单列本职业。本轮未取得同口径中国职业分布，仅以相关卫生和社会工作行业雇主参考；学校或纯研究雇主不能直接套此行业值。"
+              "国家统计局此份表按行业门类及部分岗位类型给出均值，不单列本职业。现有资料未显示同口径中国职业分布，仅以相关卫生和社会工作行业雇主参考；学校或纯研究雇主不能直接套此行业值。"
             ]
           },
           "id": "neuropsychologists.china-salary.career-snapshot-primary-locale.2",
@@ -12389,13 +12395,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国同口径全国职业工资分布，不据行业均值推分位或个人收入。心理治疗专业资格、医师资格和机构权限分开核，具体报考、职称与执业条件须查当年主管部门公告；本轮人社答复原入口未取得，不声称已核全部现行门槛。"
+              "暂无与美国 O*NET 19-3039.02 可比的大陆全国职业工资中位数。卫生和社会工作行业均值只用于相关机构背景。"
             ]
           },
           "id": "neuropsychologists.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs-wages",
-            "mohrss-psychotherapy-title"
+            "nbs-wages"
           ],
           "type": "prose"
         }
@@ -12608,12 +12613,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证方法｜人格与兴趣标签不能决定适配；用虚构病例完成一次测验选择与剖面解释演练，并在合规教学环境中接受有资质的临床人员评价。"
+              "用入行区 N01 检查自己是否会区分原始记录、缺失条件和未核结论。纸面练习不能证明真实测评或报告能力。"
             ]
           },
           "id": "neuropsychologists.fit.riasec-fit-block.8",
           "source_refs": [
-            "source-pack-onet-details"
+            "neuro-paper"
           ],
           "type": "prose"
         }
@@ -12708,13 +12713,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "第 0 步：确定执业辖区与授权范围｜先明确计划执业的国家或地区，查清心理学博士教育、实习、博士后训练、执照与专科认证要求；本页路径为编辑归纳，不代表统一准入条件，也不构成任何测评、诊断、测验解释或报告签发授权。"
+              "先确定想做临床评估、机构测评支持，还是研究。按所在辖区和机构核资格与职责。"
             ]
           },
           "id": "neuropsychologists.path.career-path-block.1",
           "source_refs": [
+            "asppb-current",
             "abpp-neuropsychology",
-            "asppb-current"
+            "china-mental-health-law"
           ],
           "type": "prose"
         },
@@ -12779,7 +12785,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "ABCN认证条件按博士训练或再专门化完成日期区分；2005-01-01及以后要求相当于两年全职、至少半时安排的博士后训练。至少50%博士后训练为受督导临床神经心理服务，具体附加指南要求其中至少50%临床服务涉及整合评估；总述另称服务须具整合性，须按申请审查核实，不能简化为所有岗位统一年限。"
+              "ABCN 对 2005 年 1 月 1 日及以后完成博士训练或再专门化的申请人，通常要求等同两年全职的博士后训练，至少以半时安排完成。至少 50% 的博士后专科训练时间用于神经心理学相关活动，可包括研究中的受督导临床活动。特殊情况由委员会个案审核。"
             ]
           },
           "id": "neuropsychologists.path.career-path-block.6",
@@ -12828,6 +12834,13 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "阶段",
+              "任务",
+              "权限边界",
+              "准备证据",
+              "下一步"
+            ],
             "rows": [
               [
                 "博士与实习阶段",
@@ -12852,7 +12865,7 @@
               ],
               [
                 "专科认证（自愿）",
-                "按现行流程通过笔试、实践样本评审与口试申请ABPP/ABCN认证（具体程序本轮未取得完整原页）",
+                "ABCN 认证流程包括笔试、实践样本评审和口试，按当前申请说明核对。",
                 "认证不替代执照或机构授权",
                 "认证记录与维护认证周期",
                 "承担督导、培训与质量改进"
@@ -12881,6 +12894,12 @@
               "career.column.action",
               "career.column.review",
               "career.column.evidence"
+            ],
+            "column_labels": [
+              "情境",
+              "行动",
+              "复核者",
+              "记录"
             ],
             "rows": [
               [
@@ -12928,6 +12947,15 @@
               "career.column.owner",
               "career.column.next"
             ],
+            "column_labels": [
+              "凭证或状态",
+              "可说明什么",
+              "授予主体",
+              "核验条件",
+              "权限限制",
+              "确认方",
+              "下一步"
+            ],
             "rows": [
               [
                 "心理学博士学位（PhD/PsyD）",
@@ -12960,7 +12988,7 @@
                 "两年博士后专科训练",
                 "在神经心理学家督导下形成专科能力",
                 "由训练机构提供并接受督导",
-                "ABCN特定年代认证：至少50%受督导临床服务，其整合评估比例按具体附加指南核",
+                "ABCN 对 2005 年 1 月 1 日及以后完成博士训练或再专门化的申请人，通常要求等同两年全职的博士后训练，至少以半时安排完成。至少 50% 的博士后专科训练时间用于神经心理学相关活动，可包括研究中的受督导临床活动。特殊情况由委员会个案审核。",
                 "专科认证训练条件，不作所有辖区法定年限",
                 "训练机构与督导师",
                 "核对训练结构与督导资质"
@@ -12991,6 +13019,58 @@
             "china-psychotherapy-regulation"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "中国科学院心理研究所心理测试中心 2026 年 10 月 29 日招聘测试员 2 人。要求心理学、认知科学、教育学、社会学或相关专业研究生学历，心理学背景优先；按规范执行心理测试、初步分析并提交复核。项目聘用，公告未给金额。 入职前须通过中心岗前培训和考核。",
+              "青海省 2025 年医疗卫生人员招聘计划列青海省第三人民医院精神科临床科室心理治疗师（2）1 人，岗位代码 1166300000002560004，最低本科和学士，应用心理学相关栏，列熟悉心理量表和开展心理测评的能力。计划表未列金额。 公告还要求心理治疗初级资格。",
+              "两则均是相邻岗位历史样本，不是现招、职业工资或临床资格对照。"
+            ]
+          },
+          "id": "neuropsychologists.path.recruitment-sample.1",
+          "source_refs": [
+            "cas-testing-job",
+            "qinghai-psych-job"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "题面｜虚构",
+                  "A：编号 K7，v2，项目负责人标为当前稿，只限教学组。B：同编号 v1，已归档。C：K7 v2 的核对记录，缺复核人签字，外发权限没有记录。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "先交三样",
+                  "交三样：列每份记录的编号、版本和来源；列需向谁确认的缺项；写两句交接。题内只有当前版本、复核齐备且获外发允许的稿可对外。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "参考答案",
+                  "A 是项目负责人标为当前的 v2，只供教学组使用。B 为已归档的 v1，来源未给；C 对应 v2，记录来源和复核签字待核，外发未获确认。交接示例：「K7 当前稿 v2 仅供教学组，v1 留档，B、C 来源待核。请复核人确认签字、项目负责人确认分享权限；在回复前暂不外发。」"
+                ]
+              }
+            ]
+          },
+          "id": "neuropsychologists.path.entry-work-sample-data.1",
+          "source_refs": [
+            "neuro-paper"
+          ],
+          "title": "N01｜核记录版本和分享权限",
+          "type": "cards"
         }
       ]
     },
@@ -13005,7 +13085,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS2025—2035其他心理学家19-3039：2025年60,000人，2035年61,400人，增长2.3%，年均3,500空缺。非神经心理学家单列，不推中国或个人录用。"
+              "BLS 19-3039“其他心理学家”合并组：2025 年约 60,000 人、2035 年预计 61,400 人，增长 2.3%，年均约 3,500 个空缺；空缺含增长和替补，不是当前招聘。BLS 没有把神经心理学家单列。"
             ]
           },
           "id": "neuropsychologists.market-signals.market-signal-card.1",
@@ -13033,11 +13113,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资为OEWS2025；父类就业与预测为BLS2025—2035；行业采用详情Top industries(2025)，独立子页本轮未取得，不沿用旧年度。"
+              "工资使用 OEWS 2025 雇员数据。就业预测属于更广的 19-3039 组，包括自雇；该组自雇占 67.2%，不能换算成本职业的个人收入。"
             ]
           },
           "id": "neuropsychologists.market-signals.market-signal-card.3",
           "source_refs": [
+            "onet-wages",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -13047,7 +13128,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "合并职业增长与替换产生年均空缺，BLS精确2.3%与O*NET分类1%—2%分开。不能分离神经心理方向具体规模，也不能归因AI。"
+              "2.3% 是 BLS 精确合并组预测；空缺包含增长和替补。无法拆分单一专科或归因于 AI。"
             ]
           },
           "id": "neuropsychologists.market-signals.market-signal-card.4",
@@ -13084,30 +13165,33 @@
           "data": {
             "entries": [
               {
-                "answer": "按 O*NET 19-3039.02，核心工作包括开展智力、注意、感觉运动、语言、学习与记忆等神经心理评估；访谈患者获取完整病史；结合测验、量表、观察与访谈数据撰写详细临床神经心理报告；诊断和治疗中枢神经系统损伤相关病症（脑血管意外、肿瘤、感染或炎症性疾病、退行性疾病、颅脑创伤、脱髓鞘疾病与各类痴呆）；建立神经行为基线用于随访；为个人与家庭提供教育或咨询，并会诊、督导学生与工作人员。",
+                "answer": "O*NET 的美国神经心理学家职业档案以访谈、认知与行为评估、临床报告及随访为主。该档案也列在授权范围内对脑功能变化的诊断性评估、干预协作与转介；神经系统原发病的医学诊疗由相应临床团队负责。",
                 "id": "neuropsychologists.faq.1",
                 "question": "神经心理学家每天做什么？",
                 "question_key": "career.faq.neuropsychologists.daily-work",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "onet-details",
+                  "asppb-current"
                 ]
               },
               {
-                "answer": "神经科医师以医学方式诊断和治疗神经系统疾病，可开具处方并判读影像；临床心理学家提供一般心理评估与心理治疗，通常不做系统的神经心理测评；神经电生理技师执行检查并整理技术数据，不作出诊断或签发报告。本职业以标准化认知与行为测评、剖面解释与临床报告为核心，训练路径通常为心理学博士加两年博士后专科训练，不承担药物处方。",
+                "answer": "神经科医师承担神经系统疾病的医学诊疗；神经心理学家以解释认知与行为测评并写报告为主。临床心理学家可做心理评估和治疗，是否做神经心理评估取决于训练与授权。神经电生理技师的技术记录与临床诊断也要区分。",
                 "id": "neuropsychologists.faq.2",
                 "question": "和神经科医师、临床心理学家有什么区别？",
                 "question_key": "career.faq.neuropsychologists.comparison",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "onet-details",
+                  "asppb-current",
+                  "abpp-neuropsychology"
                 ]
               },
               {
-                "answer": "现有证据不支持替代结论：O*NET 未提供本职业的生成式 AI 采用率或自动化率，其 Hot Technologies 只列出 IBM SPSS Statistics 与办公软件等雇主提及技能，页面未给出占比。工具更可能先改变病史与转诊摘要、测验清单核对、报告格式检查与教育材料草稿，而测验选择、施测与记分、剖面解释、诊断结论与报告签发仍须由取得资格并有督导的人员承担。",
+                "answer": "可用虚构记录试做文字整理。现有资料不能说明 AI 在本职业的实际采用率、临床表现或岗位影响。真实临床资料不能放入未经批准的工具；解释、诊断及报告签发由具备资格且获授权的人员负责。",
                 "id": "neuropsychologists.faq.3",
                 "question": "AI 会取代神经心理学家吗？",
                 "question_key": "career.faq.neuropsychologists.ai-replacement",
                 "source_refs": [
-                  "source-pack-onet-hot_tech"
+                  "source-fermatmind-ai-rubric"
                 ]
               },
               {
@@ -13120,12 +13204,13 @@
                 ]
               },
               {
-                "answer": "作出诊断或描述性结论、解释测验剖面、选择常模与计分方式、撰写并签署最终报告、给出治疗或用药建议，以及处理知情同意、隐私与紧急风险。可观察的验证方式是：报告能追溯到具体施测条件与效度指标，异常分数有替代解释，限制与不确定性写明，并由有资格者复核签字。",
+                "answer": "大陆《精神卫生法》第 23、29、51 条区分心理咨询、精神障碍诊断和医疗机构内心理治疗。精神障碍诊断由精神科执业医师作出。测评记录、临床解释和报告签发是不同职责，向机构分别核资格、督导与授权；不把美国心理学家执照或 ABCN 认证视作大陆准入。 临床报告应由具备相应资格和机构授权的人解释与签发。",
                 "id": "neuropsychologists.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.neuropsychologists.human-skills",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "asppb-current",
+                  "china-mental-health-law"
                 ]
               },
               {
@@ -13138,39 +13223,42 @@
                 ]
               },
               {
-                "answer": "O*NET 将本职业列为 Job Zone 5（SVP 8.0 及以上），教育调查显示 84% 为博士后培训、16% 为博士。美国实际路径通常为 APA 或 CPA 认证的心理学博士项目、认证实习，以及两年全职（或等效半时）博士后住院训练，其中至少 50% 时间用于在神经心理学家督导下提供整合性临床神经心理服务。",
+                "answer": "美国独立执业先核当地心理学执照委员会的学历、督导和考试条件。ABCN 临床神经心理专科认证另行申请：2005 年 1 月 1 日及以后完成博士训练或再专门化的申请人，通常须有等同两年全职、至少以半时安排完成的博士后训练。ABCN 按申请人训练时期审核，并有个案调整规则。",
                 "id": "neuropsychologists.faq.7",
                 "question": "需要什么学历和训练？",
                 "question_key": "career.faq.neuropsychologists.education",
                 "source_refs": [
-                  "onet-summary"
+                  "abpp-neuropsychology",
+                  "asppb-current"
                 ]
               },
               {
-                "answer": "美国以州级心理学家执照为独立执业的法定前提（通常要求博士层次教育、督导时数并通过 EPPP）；ABPP/ABCN 临床神经心理专科认证是自愿性专业凭证，有 2005 年 1 月 1 日起采用 Houston Conference 培训标准的要求，但不替代执照与机构授权。中国大陆的心理治疗人员资质为精神科（助理）执业医师，或通过卫生专业技术资格考试（心理治疗专业）取得资格的卫生技术人员，心理治疗须在医疗机构内开展。",
+                "answer": "美国独立执业先核当地心理学执照委员会的学历、督导和考试条件。ABCN 临床神经心理专科认证另行申请：2005 年 1 月 1 日及以后完成博士训练或再专门化的申请人，通常须有等同两年全职、至少以半时安排完成的博士后训练。ABCN 按申请人训练时期审核，并有个案调整规则。 大陆《精神卫生法》第 23、29、51 条区分心理咨询、精神障碍诊断和医疗机构内心理治疗。精神障碍诊断由精神科执业医师作出。测评记录、临床解释和报告签发是不同职责，向机构分别核资格、督导与授权；不把美国心理学家执照或 ABCN 认证视作大陆准入。",
                 "id": "neuropsychologists.faq.8",
                 "question": "是否必须取得专门资格？",
                 "question_key": "career.faq.neuropsychologists.credentials",
                 "source_refs": [
-                  "abpp-neuropsychology"
+                  "asppb-current",
+                  "abpp-neuropsychology",
+                  "china-mental-health-law"
                 ]
               },
               {
-                "answer": "神经心理方向以心理学博士与两年博士后训练为常规路径，转行成本高；低成本的第一步是用公开测验说明与虚构病例完成一次“测验选择 + 剖面解释 + 报告提纲”演练，确认自己是否愿意长期做标准化施测与写作，再去核对目标院校与辖区的教育、实习与执照要求。演练不构成诊断或执业授权，也不能替代任何法定资格。",
+                "answer": "可先完成 N01，再分别咨询培训项目、辖区执照机构和目标单位。纸面练习不用于真实评估。",
                 "id": "neuropsychologists.faq.9",
                 "question": "零基础想转进来先做什么？",
                 "question_key": "career.faq.neuropsychologists.career-change",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "neuro-paper"
                 ]
               },
               {
-                "answer": "把兴趣、现实条件与任务特征放在一起判断：你能否长期接受标准化施测与记分的重复性、能否在证据不完整时写明不确定性、能否承担高风险人群的判断压力与督导要求。下一步应核对目标辖区的执照与督导时数要求、认证项目的实习与博士后安排，以及目标雇主的岗位设置；公开的就业预测只是市场信号，不能替代个人决策。",
+                "answer": "BLS 19-3039“其他心理学家”合并组：2025 年约 60,000 人、2035 年预计 61,400 人，增长 2.3%，年均约 3,500 个空缺；空缺含增长和替补，不是当前招聘。BLS 没有把神经心理学家单列。",
                 "id": "neuropsychologists.faq.10",
                 "question": "现在是否值得进入，下一步核对什么？",
                 "question_key": "career.faq.neuropsychologists.career-worth",
                 "source_refs": [
-                  "source-pack-onet-localtraining"
+                  "bls-ep-2025-2035"
                 ]
               }
             ]
@@ -13280,7 +13368,7 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "把博士教育、认证实习、两年博士后专科训练与执照/认证整理为可核对阶段，并明确其为编辑归纳。"
+                  "美国独立执业先核当地心理学执照委员会的学历、督导和考试条件。ABCN 临床神经心理专科认证另行申请：2005 年 1 月 1 日及以后完成博士训练或再专门化的申请人，通常须有等同两年全职、至少以半时安排完成的博士后训练。ABCN 按申请人训练时期审核，并有个案调整规则。"
                 ],
                 "evidence_type": "editorial synthesis",
                 "id": "editorial-context",
@@ -13308,13 +13396,13 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "卫生和社会工作行业门类：城镇非私营单位 146,266 元/年、城镇私营单位 75,631 元/年；规模以上企业同门类专业技术人员 110,500 元/年。"
+                  "表 2：城镇非私营单位卫生和社会工作行业 146,266 元；表 5：城镇私营单位同门类 75,631 元；表 7：规模以上企业同门类专业技术人员 110,500 元，均为 2025 年年平均工资。三项统计总体不同。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "行业门类平均工资，未单列神经心理学家或心理治疗师；调查对象不含个体工商户与自由职业者。",
+                "limitation": "行业与岗位大类均值不代表神经心理学家职业薪资。",
                 "market": "CN",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025 年数据，2026-05-15 发布；accessed 2026-09-26",
@@ -13340,7 +13428,8 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "与 source-pack-onet-details 为同一 O*NET OnLine 页面；本页按其职业定义与任务清单章节引用。"
+                  "与 source-pack-onet-details 为同一 O*NET OnLine 页面；本页按其职业定义与任务清单章节引用。",
+                  "O*NET 问受访者新人需要什么教育或训练：84% 选博士后训练，16% 选博士学位。它是美国调查回答，不是执照规则、在职学历比例或大陆准入。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-details",
@@ -13353,9 +13442,9 @@
                 "url": "https://www.onetonline.org/link/details/19-3039.02"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "兴趣代码 IS、Job Zone 5、教育调查构成（84% 博士后、16% 博士），以及按 Psychologists, All Other 口径给出的就业 55,300 人（2024）、增长 4%、年均空缺 3,900 个。"
+                  "19-3039.02 职责含测评、临床报告、访谈及随访基线；工时和教育回答按原表的调查口径理解。"
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "onet-summary",
@@ -13383,19 +13472,19 @@
                 "url": "https://www.onetcenter.org/taxonomy.html"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "就业 55,300 人（2024）、预计 2034 年 57,700 人、增长 4%（平均）、年均空缺 3,900 个，均为 Psychologists, All Other 口径。"
+                  "BLS 19-3039“其他心理学家”合并组：2025 年约 60,000 人、2035 年预计 61,400 人，增长 2.3%，年均约 3,500 个空缺；空缺含增长和替补，不是当前招聘。BLS 没有把神经心理学家单列。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "合并口径的宏观预测，不是个人录用概率。",
                 "market": "US",
-                "name": "National Employment Trends: 19-3039.02 - Neuropsychologists",
-                "period": "BLS 2024—2034 projections via O*NET; accessed 2026-09-26",
+                "name": "BLS 就业预测表 1.2：19-3039 合并组",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/19-3039.02"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -13488,19 +13577,19 @@
                 "url": "https://www.onetonline.org/link/localcert/19-3039.02"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "第二十三条：心理咨询人员不得从事心理治疗或者精神障碍的诊断、治疗。第五十一条：心理治疗活动应当在医疗机构内开展；专门从事心理治疗的人员不得从事精神障碍的诊断，不得为精神障碍患者开具处方或者提供外科治疗。"
+                  "大陆《精神卫生法》第 23、29、51 条区分心理咨询、精神障碍诊断和医疗机构内心理治疗。精神障碍诊断由精神科执业医师作出。测评记录、临床解释和报告签发是不同职责，向机构分别核资格、督导与授权；不把美国心理学家执照或 ABCN 认证视作大陆准入。"
                 ],
                 "evidence_type": "national law",
                 "id": "china-mental-health-law",
                 "limitation": "规定心理治疗与精神障碍诊疗的法定边界；不规定神经心理测评的单独资格类别。",
                 "market": "CN",
                 "name": "中华人民共和国精神卫生法",
-                "period": "2012-10-26 通过，2018-04-27 修正；accessed 2026-09-26",
+                "period": "2018 修正文本",
                 "publisher": "全国人民代表大会常务委员会（中国政府网）",
                 "scope": "exact",
-                "url": "https://www.gov.cn/guoqing/2021-10/29/content_5647635.htm"
+                "url": "https://wjw.shanxi.gov.cn/zfxxgk/fdzdgknr/flfg/fl/202505/t20250509_9830994.shtml"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -13533,9 +13622,9 @@
                 "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/zhgl/jytabl/tadf/202501/t20250123_535325.html"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "通用条件为 APA/CPA 认证博士项目、认证实习与独立执业执照；专科要求 8 个核心知识领域的教学经历，以及至少 50% 时间用于在神经心理学家督导下提供整合性临床神经心理服务的博士后住院训练；ABCN 对 2005-01-01 及以后完成训练者采用 Houston Conference 培训标准。"
+                  "美国独立执业先核当地心理学执照委员会的学历、督导和考试条件。ABCN 临床神经心理专科认证另行申请：2005 年 1 月 1 日及以后完成博士训练或再专门化的申请人，通常须有等同两年全职、至少以半时安排完成的博士后训练。ABCN 按申请人训练时期审核，并有个案调整规则。"
                 ],
                 "evidence_type": "professional board certification requirements",
                 "id": "abpp-neuropsychology",
@@ -13545,7 +13634,7 @@
                 "period": "current requirements; accessed 2026-09-26",
                 "publisher": "American Board of Professional Psychology",
                 "scope": "exact",
-                "url": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific"
+                "url": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific/"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -13595,7 +13684,7 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "心理学家整体口径：2025 年 5 月中位年薪 99,110 美元，2025 年就业 209,400 人，2025—2035 年增长 6%，年均约 11,300 个空缺。"
+                  "BLS 手册介绍全体心理学家和各分组的工作背景；本页就业预测使用表 1.2 的 19-3039 行。"
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "bls-ooh-psychologists",
@@ -13638,9 +13727,9 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-11",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "各辖区许可条件不同，查PSY|Book后向目标委员会核；非统一两年博士后条件。"
+                  "按适用辖区核心理学家执照、学历、考试和督导要求。"
                 ],
                 "evidence_type": "official",
                 "id": "asppb-current",
@@ -13650,7 +13739,7 @@
                 "period": "现行",
                 "publisher": "ASPPB Psychology Licensure",
                 "scope": "contextual",
-                "url": "https://asppb.net/licensure/"
+                "url": "https://asppb.net/consumers/choosing-a-psychologist/requirements-to-practice/"
               },
               {
                 "accessed_at": "2026-10-11",
@@ -13684,20 +13773,71 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "访谈患者与知情者并采集全面病史 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "选择并实施标准化神经心理测验 — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "记分、整合与解释测验剖面 — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                  "可用虚构表格试做文本整理；没有可用证据支持专科表现、采用率或就业影响的评分。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "编辑说明",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "limitation": "不提供影响分数，也不使用真实病例或受保护的测验材料。",
+                "name": "费马测试：AI 任务证据口径",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国科学院心理研究所心理测试中心 2026 年 10 月 29 日招聘测试员 2 人。要求心理学、认知科学、教育学、社会学或相关专业研究生学历，心理学背景优先；按规范执行心理测试、初步分析并提交复核。项目聘用，公告未给金额。 入职前须通过中心岗前培训和考核。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "cas-testing-job",
+                "limitation": "科研支撑样本，不等同于临床神经心理执业。",
+                "name": "中科院心理研究所心理测试中心招聘",
+                "period": "2026-10-29",
+                "publisher": "中国科学院心理研究所",
+                "scope": "recruitment_proxy",
+                "url": "https://psych.cas.cn/team/rczp/202610/t20261029_8300114.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "青海省 2025 年医疗卫生人员招聘计划列青海省第三人民医院精神科临床科室心理治疗师（2）1 人，岗位代码 1166300000002560004，最低本科和学士，应用心理学相关栏，列熟悉心理量表和开展心理测评的能力。计划表未列金额。 公告还要求心理治疗初级资格。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "qinghai-psych-job",
+                "limitation": "第 9 页的一家医院样本，不证明全国门槛。",
+                "name": "青海卫生人员招聘计划：岗位 1166300000002560004",
+                "period": "2025",
+                "publisher": "青海省卫生健康委员会",
+                "scope": "recruitment_proxy",
+                "url": "https://wsjkw.qinghai.gov.cn/tzgg_0/202504/P020250424561167707172.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "纸面核对来源、版本、可用范围及交接。"
+                ],
+                "evidence_type": "虚构纸面练习",
+                "id": "neuro-paper",
+                "limitation": "无真实患者资料、测验材料或临床解释。",
+                "name": "费马测试：N01 虚构记录",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "details": [
+                  "个人信息处理者须按风险采取保护措施并合理确定处理权限。"
+                ],
+                "evidence_type": "法律文本",
+                "id": "china-pipl",
+                "limitation": "只说明大陆适用的个人信息保护边界。",
+                "name": "中国《个人信息保护法》第 51 条",
+                "period": "2026-11-09",
+                "publisher": "工业和信息化部",
+                "scope": "contextual",
+                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
               }
             ]
           },
@@ -13794,7 +13934,7 @@
             "职业方向": "神经科医师"
           },
           {
-            "关键区别": "通常不做系统的神经心理测评，训练路径不含两年神经心理博士后专科",
+            "关键区别": "临床心理学服务可以重叠；是否做专科测评按训练和授权核。",
             "更适合什么选择": "更偏好一般心理评估与治疗时比较该方向",
             "核心工作与产出": "提供一般心理评估与心理治疗并出具心理报告",
             "职业方向": "临床心理学家"
@@ -13885,7 +14025,7 @@
             }
           }
         ],
-        "answer": "工具可辅助病史与转诊摘要、测验清单核对、报告格式检查与教育材料草稿，但测验选择、施测与记分、剖面解释、诊断结论与报告签发仍由取得资格并在督导体系内工作的人员负责。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
+        "answer": "可用虚构记录试做文字整理。现有资料不能说明 AI 在本职业的实际采用率、临床表现或岗位影响。真实临床资料不能放入未经批准的工具；解释、诊断及报告签发由具备资格且获授权的人员负责。",
         "authority_links": [
           {
             "来源": "O*NET 19-3039.02 职业档案",
@@ -13920,7 +14060,7 @@
           {
             "来源": "O*NET 行业分布 19-3039.02",
             "类型": "官方行业来源",
-            "适用范围": "详情Top industries(2025)：父类政府16%、卫生社会援助14%；独立行业子页本轮未取得",
+            "适用范围": "详情Top industries(2025)：父类政府16%、卫生社会援助14%；独立行业子页现有资料未显示",
             "链接": "https://www.onetonline.org/link/details/19-3039.02"
           },
           {
@@ -13989,7 +14129,7 @@
         "heading": "神经心理学家的日常任务与 AI 边界",
         "method_cards": [
           {
-            "含义": "授权环境下文字摘要、格式核对等可作试用候选；临床鉴别、常模选择与效度判断没有本轮性能证据，由有资格者负责。",
+            "含义": "授权环境下文字摘要、格式核对等可作试用候选；临床鉴别、常模选择与效度判断没有可用性能证据，由有资格者负责。",
             "概念": "技术能力：工具能处理什么"
           },
           {
@@ -14121,8 +14261,8 @@
             "当前变化": "格式与检查项可被辅助"
           },
           {
-            "人的控制点": "诊断与治疗建议由本人负责",
-            "任务": "诊断并治疗中枢神经系统损伤相关病症",
+            "人的控制点": "有相应资格并获授权的人员负责该范围内的临床判断；原发病医学诊疗按团队职责分工。",
+            "任务": "在美国职业档案范围内，评估中枢神经系统疾病或损伤相关的认知与行为变化，按授权参与干预和转介。",
             "工作方向": "诊断与治疗",
             "当前变化": "鉴别清单草稿仅为试用候选，未核临床性能"
           },
@@ -14205,13 +14345,13 @@
             "stage": "专科、督导或质量负责人"
           }
         ],
-        "direct_answer": "先核计划工作辖区、岗位职责、心理学教育、监督经验、考试、许可及机构权限。O*NET美国调查84%博士后训练、16%博士，非许可规则；ABCN特定年代专科认证要求相当于两年博士后训练，不能代所有州许可。中国心理治疗与神经心理测评不作一一映射，精神科医师须另具规范化心理治疗培训，卫生资格路径不授予精神障碍诊断或处方。",
+        "direct_answer": "先确定想做临床评估、测评支持还是研究，再分别核当地执照、训练和机构授权。ABCN 专科认证另有按训练时期区分的条件。",
         "entry_heading": "从博士训练与博士后专科到执照与专科认证",
         "heading": "神经心理学家的入行、资格与职业发展路径",
         "locale_requirements": {
-          "credential_boundary": "学位、认证实习、博士后训练、州级心理学家执照、ABPP/ABCN 专科认证与机构授权是不同状态；专科认证为自愿性专业凭证，不替代执照与机构授权。中国需区分医师资格与心理治疗专业卫生专业技术资格；其他卫生技术岗位资格不等于心理测评、诊断或报告签发权限。",
-          "jurisdiction": "本页职业事实采用美国 O*NET 19-3039.02 口径；美国执照与认证参考各辖区心理学委员会、ASPPB、ABPP/ABCN 与 AACN 培训指南；中国资格与场所参考《中华人民共和国精神卫生法》《心理治疗规范（2013 年版）》与人力资源社会保障部职称政策答复。其他辖区与机构要求须另查现行法规与制度。",
-          "summary": "ABCN认证条件按博士训练或再专门化完成日期区分；2005-01-01及以后要求相当于两年全职、至少半时安排的博士后训练。至少50%博士后训练为受督导临床神经心理服务，具体附加指南要求其中至少50%临床服务涉及整合评估；总述另称服务须具整合性，须按申请审查核实，不能简化为所有岗位统一年限。 O*NET84/16为美国教育调查；中国2013心理治疗规范两类资质不等美国执照或一一职业映射。"
+          "credential_boundary": "大陆《精神卫生法》第 23、29、51 条区分心理咨询、精神障碍诊断和医疗机构内心理治疗。精神障碍诊断由精神科执业医师作出。测评记录、临床解释和报告签发是不同职责，向机构分别核资格、督导与授权；不把美国心理学家执照或 ABCN 认证视作大陆准入。",
+          "jurisdiction": "美国按辖区执照委员会和 ABCN 各自条件核对。大陆按精神卫生法及任职机构核对。",
+          "summary": "美国独立执业先核当地心理学执照委员会的学历、督导和考试条件。ABCN 临床神经心理专科认证另行申请：2005 年 1 月 1 日及以后完成博士训练或再专门化的申请人，通常须有等同两年全职、至少以半时安排完成的博士后训练。ABCN 按申请人训练时期审核，并有个案调整规则。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14228,19 +14368,19 @@
             "scope": "兴趣代码与教育构成"
           },
           {
-            "href": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific",
+            "href": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific/",
             "id": "abcn",
             "label": "ABPP — 临床神经心理专科要求",
             "scope": "博士后训练与专科认证要求"
           },
           {
-            "href": "https://www.gov.cn/guoqing/2021-10/29/content_5647635.htm",
+            "href": "https://wjw.shanxi.gov.cn/zfxxgk/fdzdgknr/flfg/fl/202505/t20250509_9830994.shtml",
             "id": "cn",
             "label": "中华人民共和国精神卫生法",
-            "scope": "中国心理治疗场所与人员边界"
+            "scope": "大陆咨询、精神障碍诊断和心理治疗的职责边界。"
           },
           {
-            "href": "https://asppb.net/licensure/",
+            "href": "https://asppb.net/consumers/choosing-a-psychologist/requirements-to-practice/",
             "id": "asppb-current",
             "label": "ASPPB辖区许可",
             "scope": "具体条件按计划工作辖区委员会核"
@@ -14641,22 +14781,22 @@
             "scope": "美国工资与分位（合并口径）"
           },
           {
-            "href": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific",
+            "href": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific/",
             "id": "abcn",
             "label": "ABPP — 临床神经心理专科要求",
             "scope": "训练、督导与专科能力要求"
           },
           {
-            "href": "https://wsjk.fuxin.gov.cn/wjw/file/2022-01-24/1643009036431ff8080817de469ed396017e8af8508f7143.pdf",
+            "href": "https://wjw.shanxi.gov.cn/zfxxgk/fdzdgknr/flfg/fl/202505/t20250509_9830994.shtml",
             "id": "law",
-            "label": "中华人民共和国精神卫生法",
-            "scope": "心理治疗场所与人员资质边界"
+            "label": "大陆《精神卫生法》第 23、29、51 条",
+            "scope": "区分咨询、精神障碍诊断与机构内心理治疗。"
           },
           {
-            "href": "https://ncmhc.org.cn/channel/newsinfo/6298",
+            "href": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html",
             "id": "privacy",
-            "label": "心理治疗规范（2013年版）",
-            "scope": "心理治疗人员资质与伦理要求"
+            "label": "大陆《个人信息保护法》第 51 条",
+            "scope": "个人信息处理权限和保护措施。"
           }
         ]
       },
@@ -14710,7 +14850,7 @@
             {
               "学历段": "岗位训练与机构授权",
               "岗位方向": "按评估对象核施测、解释、报告和督导责任",
-              "说明": "证据不足：本轮未核全国统一神经心理学家资格映射；美国州执照与ABCN认证不替代中国条件。"
+              "说明": "证据不足：现有资料未确认全国统一神经心理学家资格映射；美国州执照与ABCN认证不替代中国条件。"
             }
           ],
           "china_industry_table": [
@@ -14737,7 +14877,7 @@
           "china_open": "可用公开职责、培训与资格路径信息做职业探索，但不能据此推导中国大陆个人收入。",
           "china_open_note": "如需收入判断，应回到具体城市、机构类型、岗位设置与合同条件核对。",
           "china_ref": "国家统计局：2025 年城镇单位就业人员平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
-          "china_salary_note": "证据不足：本轮未取得中国同口径职业工资；卫生社会工作行业仅相关雇主参考，不推个人、职业分位或学校科研岗位。",
+          "china_salary_note": "证据不足：现有资料未显示中国同口径职业工资；卫生社会工作行业仅相关雇主参考，不推个人、职业分位或学校科研岗位。",
           "china_salary_table": [
             {
               "城市/区间": "职业精确工资",
@@ -14758,7 +14898,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "中国NBS2025为相关行业雇主参考；精神卫生法与2013规范仅所列主体及心理治疗范围。美国OEWS2025父类工资、BLS2025—2035父类预测分别标注；本轮未取得人社答复和中国一一映射。",
+          "sources_note": "中国NBS2025为相关行业雇主参考；精神卫生法与2013规范仅所列主体及心理治疗范围。美国OEWS2025父类工资、BLS2025—2035父类预测分别标注；现有资料未显示人社答复和中国一一映射。",
           "ui": {
             "ai_heading": "工具与责任边界",
             "driver_heading": "影响实际待遇的因素",
@@ -14977,7 +15117,7 @@
           }
         ]
       },
-      "definition_block": "神经心理学家（O*NET-SOC 19-3039.02）以标准化测评与临床报告为核心：通过访谈与病史采集、实施神经心理测验与量表、结合观察与知情者信息解释认知、情绪与行为表现，诊断与治疗中枢神经系统损伤相关病症并建立随访基线；实际可执行范围由心理学家执照、机构授权与所在辖区规则决定。 职业名称本身不授予医师或处方权限；诊断、治疗与报告签发须分别核辖区许可和机构权限，心理治疗与神经心理测评不作中国资格的一一映射。",
+      "definition_block": "O*NET 19-3039.02 描述的是美国职业：神经心理学家整合病史、访谈、标准化测验和观察，解释认知与行为表现并写临床报告。该美国档案也列部分诊断、治疗与康复职责。大陆精神障碍诊断依法由精神科执业医师作出；测评记录、临床解释和报告签发按机构职责与权限核。",
       "faq_block": {
         "items": {
           "$item": "neuropsychologists.sources.faq-block.1",
@@ -14993,7 +15133,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "用虚构病例完成一次非临床演练：写清转诊问题与病史要点，选出三项与假设对应的测验并说明选择理由，写出剖面解释的两条替代解释和一段面向家属的反馈；演练不构成诊断、评分或执业授权。",
+        "summary": "神经心理学工作把访谈、病史、标准化测验和观察转成可复核的报告。先用 N01 虚构记录试做版本与权限交接。",
         "title": "神经心理学家"
       },
       "fit_decision_checklist": {
@@ -15205,7 +15345,7 @@
             "alternate_value": null,
             "label": "准备层级",
             "secondary_value": null,
-            "value": "Job Zone 5：需要大量准备，SVP 8.0 及以上；教育调查显示 84% 博士后、16% 博士"
+            "value": "O*NET 问受访者新人需要什么教育或训练：84% 选博士后训练，16% 选博士学位。它是美国调查回答，不是执照规则、在职学历比例或大陆准入。"
           },
           {
             "alternate_value": null,
@@ -15406,7 +15546,7 @@
             "question": "兴趣代码 IS 能决定我适不适合吗？"
           },
           {
-            "answer": "O*NET美国调查84%博士后训练、16%博士，JobZone5是准备组描述；临床许可按辖区，ABCN专科认证训练条件另核。",
+            "answer": "O*NET 问受访者新人需要什么教育或训练：84% 选博士后训练，16% 选博士学位。它是美国调查回答，不是执照规则、在职学历比例或大陆准入。",
             "question": "需要什么学历？"
           },
           {
@@ -15418,7 +15558,7 @@
             "question": "非心理学专业能转进来吗？"
           },
           {
-            "answer": "ABCN认证条件按博士训练或再专门化完成日期区分；2005-01-01及以后要求相当于两年全职、至少半时安排的博士后训练。至少50%博士后训练为受督导临床神经心理服务，具体附加指南要求其中至少50%临床服务涉及整合评估；总述另称服务须具整合性，须按申请审查核实，不能简化为所有岗位统一年限。 州级许可的监督时数另核。",
+            "answer": "ABCN 对 2005 年 1 月 1 日及以后完成博士训练或再专门化的申请人，通常要求等同两年全职的博士后训练，至少以半时安排完成。至少 50% 的博士后专科训练时间用于神经心理学相关活动，可包括研究中的受督导临床活动。特殊情况由委员会个案审核。",
             "question": "需要做多久的督导？"
           },
           {
@@ -15434,7 +15574,7 @@
             "question": "测评结果能作为录用证据吗？"
           },
           {
-            "answer": "用虚构病例完成一次测验选择、剖面解释与报告提纲演练，并请有资格的临床人员反馈。",
+            "answer": "到入行区完成 N01：核 K7 三份虚构记录的版本、来源、复核和分享权限。此题不涉及真实量表、临床分数或诊断。",
             "question": "适合先做哪一类低成本试验？"
           }
         ],
@@ -15453,7 +15593,7 @@
             "tone": "caution"
           },
           {
-            "body": "用虚构病例完成测验选择与剖面解释演练，并在合规教学环境中接受有资质临床人员评价。",
+            "body": "到入行区完成 N01：核 K7 三份虚构记录的版本、来源、复核和分享权限。此题不涉及真实量表、临床分数或诊断。",
             "id": "experiment",
             "label": "低成本试验",
             "tone": "action"
@@ -15538,8 +15678,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "局部O*NET2026职责/教育、OEWS2025父类全国五分位（州页UnitedStates行）、BLS2025—2035父类2.3%及年均3,500，详情行业2025已核。ABCN认证与辖区许可分开；中国2013规范PDF补医师培训条件。独立行业/ABCN流程/人社答复原入口未取得；快答FAQ共享历史预测、资质与训练表述未全页同步。",
-          "updated_at": "本轮查阅2026-10-11；局部工资/行业2025、预测2025—2035；保护共享旧版本保留。"
+          "source": "O*NET 19-3039.02 职责、BLS 合并组工资及就业、ASPPB/ABCN 资格、大陆法律及两则相邻岗位原公告。",
+          "updated_at": "2026 年 11 月 9 日查阅"
         },
         "note": "证据只支持在标注市场、职业口径与期间内的范围性判断，不构成个人收入、录用或执业授权；测评、诊断与报告签发须由取得资格并在督导或机构授权范围内工作的人员执行。",
         "secondary_links": [
@@ -15585,7 +15725,7 @@
           }
         ]
       },
-      "work_context_block": "美国O*NET调查：96%每天环境受控室内、60%每天面对面讨论、32%每周多次、80%每周超过40小时、96%规律排班，不代表每家中国机构。质量控制为编辑建议：保留施测条件、评分与常模选择依据、解释限制和复核记录，不用报告速度作为唯一指标。"
+      "work_context_block": "O*NET 美国调查回应：96% 选每天在环境受控的室内工作，60% 选每天面对面讨论，32% 选每周至少一次但非每天，80% 选通常每周超过 40 小时。实际地点、班次及复核安排按岗位核。"
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -15624,6 +15764,20 @@
         "id": "neuropsychologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "neuropsychologists.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "neuropsychologists.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
       }
     ],
     "path": {
@@ -15634,7 +15788,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与工作任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15689,14 +15843,14 @@
       },
       {
         "derivation": null,
-        "display_value": "84% 博士后培训；16% 博士学位",
+        "display_value": "O*NET 问受访者新人需要什么教育或训练：84% 选博士后训练，16% 选博士学位。它是美国调查回答，不是执照规则、在职学历比例或大陆准入。",
         "fact_id": "education-profile",
         "market": "美国",
-        "measure": "新入职教育需求调查",
+        "measure": "美国新入职教育或训练的调查回应",
         "occupation_scope": "精确职业 19-3039.02",
-        "period": "O*NET 2026 教育调查；访问 2026-09-26",
+        "period": "2026",
         "source_refs": [
-          "onet-summary"
+          "onet-details"
         ]
       },
       {
@@ -15773,38 +15927,38 @@
       },
       {
         "derivation": null,
-        "display_value": "55,300 人（2024）",
+        "display_value": "约 60,000 人（2025 合并组）",
         "fact_id": "us-employment",
         "market": "美国",
-        "measure": "就业存量",
+        "measure": "2025 合并组就业",
         "occupation_scope": "Psychologists, All Other（19-3039）合并口径",
-        "period": "2024 年就业，经 O*NET 转发；访问 2026-09-26",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "平均（4%，2024—2034）",
+        "display_value": "预计增长 2.3%（2025—2035 合并组）",
         "fact_id": "us-growth",
         "market": "美国",
-        "measure": "就业预测",
+        "measure": "合并组就业增长",
         "occupation_scope": "Psychologists, All Other（19-3039）合并口径",
-        "period": "BLS 2024—2034 预测，经 O*NET 转发；访问 2026-09-26",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "3,900 个（2024—2034 年均）",
+        "display_value": "年均约 3,500 个（2025—2035 合并组）",
         "fact_id": "us-openings",
         "market": "美国",
-        "measure": "预计职位空缺",
+        "measure": "合并组年均空缺",
         "occupation_scope": "Psychologists, All Other（19-3039）合并口径；含增长与替换需求",
-        "period": "BLS 2024—2034 预测，经 O*NET 转发；访问 2026-09-26",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -15833,29 +15987,27 @@
       },
       {
         "derivation": null,
-        "display_value": "州级心理学家执照（EPPP 与督导时数）+ 2 年博士后专科训练；ABPP/ABCN 专科认证为自愿性凭证",
+        "display_value": "美国独立执业先核当地心理学执照委员会的学历、督导和考试条件。ABCN 临床神经心理专科认证另行申请：2005 年 1 月 1 日及以后完成博士训练或再专门化的申请人，通常须有等同两年全职、至少以半时安排完成的博士后训练。ABCN 按申请人训练时期审核，并有个案调整规则。",
         "fact_id": "credential-us",
         "market": "美国",
         "measure": "美国资格与认证路径",
         "occupation_scope": "精确职业 19-3039.02 相关的执业与认证",
         "period": "ASPPB、ABPP/ABCN 与 AACN 现行要求；访问 2026-09-26",
         "source_refs": [
-          "asppb-licensure",
-          "abpp-neuropsychology",
-          "minnesota-guidelines"
+          "asppb-current",
+          "abpp-neuropsychology"
         ]
       },
       {
         "derivation": null,
-        "display_value": "心理治疗须在医疗机构内开展，人员资质为精神科（助理）执业医师或通过卫生专业技术资格考试（心理治疗专业）取得资格的卫生技术人员",
+        "display_value": "大陆《精神卫生法》第 23、29、51 条区分心理咨询、精神障碍诊断和医疗机构内心理治疗。精神障碍诊断由精神科执业医师作出。测评记录、临床解释和报告签发是不同职责，向机构分别核资格、督导与授权；不把美国心理学家执照或 ABCN 认证视作大陆准入。",
         "fact_id": "credential-cn",
         "market": "中国大陆",
         "measure": "中国资格与培训路径",
         "occupation_scope": "医疗机构心理治疗岗位；无一一对应的“神经心理学家”执业类别",
         "period": "《精神卫生法》与《心理治疗规范（2013年版）》；访问 2026-09-26",
         "source_refs": [
-          "china-mental-health-law",
-          "china-psychotherapy-regulation"
+          "china-mental-health-law"
         ]
       },
       {
@@ -15883,27 +16035,15 @@
           "onet-wages",
           "source-pack-onet-details"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "神经心理学家",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务影响"
     },
     "badges": [
       "神经心理测评与临床报告",
@@ -15915,31 +16055,31 @@
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国合并组工资中位数"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国合并组就业增长"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国合并组就业"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国合并组年均空缺"
       },
       {
         "availability": "available",
         "fact_ref": "cn-wage-proxy",
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "大陆卫生和社会工作行业均值"
       }
     ]
   },
@@ -15947,17 +16087,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "神经心理学家（O*NET 19-3039.02）以访谈、病史采集与标准化神经心理测验评估认知、情绪与行为表现，诊断中枢神经系统损伤相关病症，建立随访基线并撰写临床神经心理报告；本页说明其任务范围、两年博士后专科训练与执照／认证边界，以及中美工资与就业口径。"
+      "text": "了解神经心理学家怎样整合病史、认知测评和行为观察，比较美国执照与专科认证、大陆相邻岗位，并试做一份虚构交接。"
     },
     "title": {
       "availability": "available",
-      "text": "神经心理学家"
+      "text": "神经心理学家：认知评估、训练与入行边界"
     }
   },
-  "source_content_sha256": "53ca8d45be5e6a7f3396feddde178b19d6fb4bc930cfabdd69f4a78128ea0095",
+  "source_content_sha256": "5b8ba5fca883e121500e836734434b02d79764b8af14cdad53b7739e4726e548",
   "subject": {
     "canonical_slug": "neuropsychologists",
     "name": "神经心理学家",
-    "summary": "神经心理学家（O*NET-SOC 19-3039.02）以标准化测评与临床报告为核心：通过访谈与病史采集、选择并实施神经心理测验与量表，结合行为观察与知情者信息解释认知、情绪与行为表现，诊断与治疗中枢神经系统损伤相关病症，建立用于随访的神经行为基线，撰写临床神经心理报告并向患者、家属与转诊方反馈建议。本页只用官方来源说明职业范围、任务、准备要求、中美统计口径与授权边界。"
+    "summary": "神经心理学家整合病史、访谈、标准化测验和行为观察，向转诊团队解释认知与行为表现。临床评估与签发报告依执照、训练和机构授权。"
   }
 }

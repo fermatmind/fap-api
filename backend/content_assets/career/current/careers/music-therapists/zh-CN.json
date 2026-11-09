@@ -17,9 +17,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:interest-code": {
         "status": "pending_mapping"
       },
@@ -147,7 +144,7 @@
         "status": "mapped"
       },
       "item:music-therapists.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:music-therapists.path.employer-evidence.3": {
         "status": "mapped"
@@ -156,10 +153,13 @@
         "status": "pending_mapping"
       },
       "item:music-therapists.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:music-therapists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:music-therapists.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:music-therapists.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -12201,12 +12201,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "怎么判断：在合规与授权前提下观察一次音乐治疗或相关照护活动，或用完全虚构的来访者描述做纸面推演：写出评估维度、治疗目标、音乐体验设计、观察记录与安全边界，并列出三处检查点与异常升级路径；不使用真实来访者信息。"
+              "到入行区做 M02：核虚构活动的授权、声音停止条件和交接记录，不组织真实活动，也不制定治疗计划。"
             ]
           },
           "id": "music-therapists.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet-details"
+            "music-paper"
           ],
           "type": "prose"
         },
@@ -12287,7 +12287,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作情境（O*NET 工作情境调查）：88% 的受访者每天进行面对面讨论，73% 表示持续与他人接触，81% 每天在环境可控的室内工作，65% 每天使用电子邮件，62% 表示有较多决策自由；46% 每天暴露于疾病或感染，40% 每周一次以上需要应对不愉快、愤怒或无礼的人，36% 每月一次以上需要应对有暴力或身体攻击倾向的人；54% 约一半时间坐着，35% 持续或几乎持续用手操作或感受物件与工具，54% 表示工作决策对同事或机构结果有重要影响。"
+              "O*NET 工作情境调查：88% 受访者每天面对面讨论，81% 每天在环境可控的室内工作。应对不愉快、愤怒或无礼者：12% 每日，40% 至少每周一次但非每日。应对有暴力或身体攻击行为者：12% 每日、28% 至少每周一次但非每日、36% 至少每月一次但不足每周。46% 认为决策通常有重要影响。这些是调查回答，不能用来估计某机构的事故率。"
             ]
           },
           "id": "music-therapists.profile.work-context-block.3",
@@ -12315,13 +12315,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "准备与训练：O*NET 将本职业列为准备层级 4（SVP 7.0—<8.0），典型要求四年制学士学位（部分要求硕士）；教育要求回应显示 73% 为学士学位、15% 为硕士学位、12% 为研究生证书；O*NET 全国训练目录列出 210 个相关项目。"
+              "O*NET 的 Job Zone 4 描述准备程度。受访者对新聘人员所需教育的回答为本科 73%、硕士 15%、学士后证书 12%。这不是持证统计或统一入行门槛；AMTA 项目和州要求另核。"
             ]
           },
           "id": "music-therapists.profile.onet-structured-fields-block.5",
           "source_refs": [
             "onet-details",
-            "source-pack-onet-localtraining"
+            "amta-training"
           ],
           "type": "prose"
         },
@@ -12366,12 +12366,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论：音乐治疗师的核心产出是围绕治疗目标设计的音乐干预与过程记录；艺术治疗师以视觉艺术媒介为核心，康复咨询师以功能评估与职业康复流程为核心，心理健康咨询师以心理咨询与情绪支持为核心，言语语言病理师以言语、语言与吞咽障碍的评估与干预为核心，音乐总监与作曲家以创作与指挥为核心。相邻关系只用于比较，不代表自动转岗或资格互认。"
+              "音乐治疗师以音乐为媒介进行个体评估、制定治疗目标和计划，并记录进展。美国休闲治疗师同样提供治疗，但可用运动、音乐等多种活动。大陆泰康的文娱活动岗样本则负责居民活动组织。下表的相邻岗位有各自的训练和用人要求。"
             ]
           },
           "id": "music-therapists.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet-details"
+            "amta-cbmt-scope",
+            "onet-recreational",
+            "taikang-recruit"
           ],
           "type": "prose"
         },
@@ -12380,7 +12382,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "比较依据为 O*NET 29-1129.02 官方描述与任务，以及相邻职业的 O*NET 档案；属编辑归纳，不构成岗位推荐。"
+              "美国临床岗位对照见 O*NET；泰康公告原件见入行区，音乐治疗专业职责见风险区。"
             ]
           },
           "id": "music-therapists.direction-comparison.adjacent-career-comparison-table.2",
@@ -12863,12 +12865,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界：本清单为编辑归纳，不替代执业所在地的执照、隐私、知情同意与记录保存要求，也不替代机构的临床与安全流程；具体防护、报告义务与授权以主管部门与机构文件为准。"
+              "这份清单用于职业探索。中国大陆可识别个人的医疗健康信息属于敏感个人信息；涉及真实记录时，先核法律规定和机构授权。美国 AMTA／CBMT 执业范围说明另作专业职责参考。"
             ]
           },
           "id": "music-therapists.risk.career-risk-cards.1",
           "source_refs": [
-            "onet-details"
+            "cn-pipl",
+            "amta-cbmt-scope"
           ],
           "type": "prose"
         },
@@ -12945,13 +12948,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "美国专业路径核AMTA认可音乐治疗学位及课程、1200小时临床训练含督导实习，CBMT核考试和认证；不是认证机构认可学位。法域授权另核，记录应合规且可复核。"
+              "邵阳学院就业页面 2025 年 3 月转刊北京清华长庚医院康复医学科招聘。共列康复治疗师 3 名，方向含 PT、OT、音乐治疗；招聘本科及以上应届毕业生，专业含康复治疗、音乐治疗或运动康复。公告未分配各方向人数，也未给薪资。",
+              "泰康之家在四川大学就业平台 2026 年 10 月发布成都文娱活动师 5 名，本科，音乐治疗是所列相关专业之一。职责为组织居民活动、俱乐部及课程。薪资栏为 5,000–8,000，未标计薪周期；这不是临床音乐治疗薪资。",
+              "两则仅用于比较职责和用人条件，不作为当前在招、全国工资或资格互认依据。"
             ]
           },
           "id": "music-therapists.path.recruitment-sample.1",
           "source_refs": [
-            "source-pack-onet-localtraining",
-            "onet-details"
+            "btch-recruit",
+            "taikang-recruit"
           ],
           "type": "notice"
         },
@@ -12965,6 +12970,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "阶段",
+              "工作",
+              "权限边界",
+              "准备证据",
+              "下一步"
             ],
             "rows": [
               [
@@ -13054,24 +13066,24 @@
               {
                 "id": "music-therapists.portfolio.one",
                 "values": [
-                  "纸面治疗计划",
-                  "完全虚构的来访者描述",
-                  "评估维度、目标、音乐体验设计与安全边界"
+                  "许可与限制表",
+                  "使用 M02 的 P1 和 P3",
+                  "逐项写可做、不可做和需要确认的事"
                 ]
               },
               {
                 "id": "music-therapists.portfolio.two",
                 "values": [
-                  "过程与异常记录",
-                  "完全虚构的干预过程",
-                  "观察记录、调整理由与升级路径"
+                  "时间与交接记录",
+                  "使用 M02 的 P2 和 P3",
+                  "写何时暂停、通知谁，以及交接回执是否有证据"
                 ]
               }
             ]
           },
           "id": "music-therapists.path.entry-portfolio.4",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "music-paper"
           ],
           "type": "cards"
         },
@@ -13084,6 +13096,12 @@
               "career.column.action",
               "career.column.review",
               "career.column.evidence"
+            ],
+            "column_labels": [
+              "情境",
+              "行动",
+              "复核者",
+              "记录"
             ],
             "rows": [
               [
@@ -13128,28 +13146,28 @@
                 "id": "music-therapists.trial.day1",
                 "values": [
                   "第1天",
-                  "选定虚构个案情境，列出评估维度与治疗目标"
+                  "读 M02 的 P1–P3，列出已授权和未授权的事项。"
                 ]
               },
               {
                 "id": "music-therapists.trial.day3",
                 "values": [
                   "第3天",
-                  "完成纸面音乐体验设计与观察记录模板"
+                  "把反馈排成时间线，写暂停条件和两句交接。"
                 ]
               },
               {
                 "id": "music-therapists.trial.day7",
                 "values": [
                   "第7天",
-                  "复盘目标—体验—记录是否一致，写明下一步"
+                  "用参考答案复核，标出没有回执或同意记录的事项。"
                 ]
               }
             ]
           },
           "id": "music-therapists.path.seven-day-trial.6",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "music-paper"
           ],
           "type": "timeline"
         },
@@ -13165,6 +13183,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "凭证",
+              "用途",
+              "授予方",
+              "条件",
+              "局限",
+              "确认方",
+              "下一步"
             ],
             "rows": [
               [
@@ -13258,6 +13285,41 @@
             "source-pack-onet-localtraining"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "题面｜虚构",
+                  "虚构纸面工作坊：P1 场地规则只许使用低音量录音，出现两次「太响」反馈就暂停并通知组长。P2 记录两个反馈，14:02 一次、14:05 一次。P3 记录只允许团队内部使用，家属分享同意未留档。"
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "先交三样",
+                  "交三样：许可与限制表、时间和暂停记录、两句交接。只判断题内规则，不播放声音、不接触真实来访者。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "参考答案",
+                  "14:05 达到暂停条件；P3 只许团队内用，当前不得外发。日后如拟向家属分享，须另核授权范围和所需同意。两句交接示例：“14:02 和 14:05 各收到一次‘太响’反馈，已按规则暂停并通知组长。组长回执待确认；本记录限团队内用。”反馈不衡量治疗效果。"
+                ]
+              }
+            ]
+          },
+          "id": "music-therapists.path.entry-work-sample-data.1",
+          "source_refs": [
+            "music-paper"
+          ],
+          "title": "M02｜判断停止条件并写交接",
+          "type": "cards"
         }
       ]
     },
@@ -13272,12 +13334,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "当前O*NET/BLS 29-1129分组：2025就业56100→2035年63200，增长12.6%净7100，年均空缺3600；非音乐治疗师单列，非AI因果。"
+              "美国 BLS 29-1129“其他治疗师”合并组：2025 年约 56,100 人，2035 年预计 63,200 人；增长 12.6%，年均约 3,600 个空缺，含增长和替补。音乐治疗师没有单列，空缺不是当前招聘。"
             ]
           },
           "id": "music-therapists.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-therapists-all-other",
             "onet-trends"
           ],
           "type": "prose"
@@ -13292,7 +13353,7 @@
           },
           "id": "music-therapists.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-therapists-all-other"
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -13306,7 +13367,7 @@
           },
           "id": "music-therapists.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-therapists-all-other",
+            "onet-trends",
             "onet-wages"
           ],
           "type": "prose"
@@ -13316,12 +13377,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "当前O*NET/BLS 29-1129分组：2025就业56100→2035年63200，增长12.6%净7100，年均空缺3600；非音乐治疗师单列，非AI因果。 医疗社会援助35%为分组行业份额，非音乐治疗师单列。"
+              "预计净增约 7,100 个岗位；年均空缺含新增与替补，不能据此推算音乐治疗岗位的地区分布。"
             ]
           },
           "id": "music-therapists.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-therapists-all-other",
             "onet-trends"
           ],
           "type": "prose"
@@ -13331,13 +13391,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为国家层面合并职业预测，不能外推中国大陆；OEWS 工资口径不含自雇与自由职业收入。个人机会仍需按目标城市、机构类型、班次或项目周期、资格与预算单独验证。"
+              "该合并组 2025 年自雇占 58.8%。OEWS 工资是雇员统计，不能估自雇者收入或单个音乐治疗岗位。"
             ]
           },
           "id": "music-therapists.market-signals.market-signal-card.5",
           "source_refs": [
-            "bls-therapists-all-other",
-            "onet-trends"
+            "onet-trends",
+            "onet-wages"
           ],
           "type": "prose"
         }
@@ -13384,13 +13444,15 @@
                 ]
               },
               {
-                "answer": "O*NET 准备层级为 4（SVP 7.0—<8.0），典型要求四年制学士学位，部分要求硕士；O*NET 认证目录另列出 Music Therapist - Board Certified（MT-BC）。认证不等于州执业许可，具体以目标岗位、执业所在地与雇主流程为准。",
+                "answer": "美国先核 AMTA 认可项目及临床训练。AMTA 标准至少 1,200 小时受督导临床训练，其中实习前至少 180 小时、实习至少 900 小时，项目可要求更多。符合资格后通过 CBMT 考试可获 MT-BC；州许可另核，例如俄勒冈州有独立的执照申请。 中国大陆课程、岗位聘用和临床授权分别核。中央音乐学院列有音乐治疗培养方向；医院工作看机构和实际任务要求。文娱活动组织与临床评估、治疗计划和记录的责任不同，美国 MT-BC 不自动授予大陆临床权限。",
                 "id": "music-therapists.faq.4",
                 "question": "入行通常需要什么学历、训练和资格？",
                 "question_key": "career.faq.music-therapists.4",
                 "source_refs": [
-                  "onet-details",
-                  "onet-cert"
+                  "amta-training",
+                  "cbmt-exam",
+                  "oregon-license",
+                  "ccom-program"
                 ]
               },
               {
@@ -13403,13 +13465,12 @@
                 ]
               },
               {
-                "answer": "证据显示多数职业更可能被改造而非裁减：文献检索、记录草拟与曲目整理可被辅助，但评估结论、治疗目标、临床即兴、来访者安全与记录签署仍由持证治疗师承担。",
+                "answer": "可用 M02 虚构材料试做记录整理。现有资料不能给出音乐治疗师的 AI 采用率、临床表现或岗位影响比例。临床判断、干预和记录由具备资格并获授权的人员负责。",
                 "id": "music-therapists.faq.6",
                 "question": "AI 会取代音乐治疗师吗？",
                 "question_key": "career.faq.music-therapists.6",
                 "source_refs": [
-                  "ilo-genai-exposure-2025",
-                  "onet-details"
+                  "source-fermatmind-ai-rubric"
                 ]
               },
               {
@@ -13423,13 +13484,13 @@
                 ]
               },
               {
-                "answer": "美国 BLS 预计“Therapists, All Other”（音乐治疗师归入此合并口径）2024—2034 年就业增长 11%、净增约 6,400 个职位，年均约 4,100 个空缺；中国大陆只有卫生和社会工作行业门类平均工资，没有本职业精确全国数据。",
+                "answer": "美国 BLS 29-1129“其他治疗师”合并组：2025 年约 56,100 人，2035 年预计 63,200 人；增长 12.6%，年均约 3,600 个空缺，含增长和替补。音乐治疗师没有单列，空缺不是当前招聘。",
                 "id": "music-therapists.faq.8",
                 "question": "这个职业的就业前景与工资数据怎么看？",
                 "question_key": "career.faq.music-therapists.8",
                 "source_refs": [
-                  "bls-therapists-all-other",
-                  "nbs-wages"
+                  "onet-trends",
+                  "onet-wages"
                 ]
               }
             ]
@@ -13522,16 +13583,16 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "美国合并职业 “Therapists, All Other” 的 2024 年就业 56,100 人与 2024—2034 年增长 11%（净增约 6,400 个、年均空缺 4,100 个）；页面同时列出 29-1129.01 艺术治疗师与 29-1129.02 音乐治疗师。"
+                  "BLS 给出 29-1129 合并组的职业概况，不单列音乐治疗师；就业预测数值见表 1.2。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "bls-therapists-all-other",
                 "limitation": "合并职业国家预测，不等于音乐治疗师单列值，不是录用保证，也不含中国数据。",
                 "market": "US",
                 "name": "Data for Occupations Not Covered in Detail: Therapists, All Other",
-                "period": "2024 employment and 2024–2034 projections; accessed 2026-09-25",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics, Occupational Outlook Handbook",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
@@ -13569,17 +13630,17 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "中文页面语言不证明该美国职业分类在中国大陆存在精确等价映射；不使用行业均值或美国数据填补。"
+                  "卫生和社会工作行业：城镇非私营 146,266 元/年、城镇私营 75,631 元/年。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "中文页面语言不证明该美国职业分类在中国大陆存在精确等价映射；不使用行业均值或美国数据填补。",
+                "limitation": "宽行业平均工资不代表音乐治疗师工资。",
                 "market": "CN",
                 "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
+                "period": "2025 年行业工资",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -13642,19 +13703,19 @@
                 "url": "https://www.onetonline.org/link/summary/29-1129.02"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2024 年就业 56,100 人，2024—2034 年增长 11%（Much faster than average），净增约 6,400 个职位，年均空缺 4,100 个；O*NET 页面标注为 Therapists, All Other 合并职业口径。"
+                  "美国 BLS 29-1129“其他治疗师”合并组：2025 年约 56,100 人，2035 年预计 63,200 人；增长 12.6%，年均约 3,600 个空缺，含增长和替补。音乐治疗师没有单列，空缺不是当前招聘。"
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "预测不等于保证；年均空缺不等于个人录用概率。",
                 "market": "US",
-                "name": "National Employment Trends 29-1129.02 Music Therapists",
-                "period": "current O*NET/BLS employment data; accessed 2026-08-31",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "BLS 就业预测表 1.2：29-1129 合并组",
+                "period": "2025–2035",
+                "publisher": "美国劳工统计局",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/29-1129.02"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -13749,7 +13810,7 @@
               {
                 "accessed_at": "2026-09-01",
                 "details": [
-                  "全国训练项目 210 个。"
+                  "目录列出相关训练项目；AMTA 单独确认其认可项目。"
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
@@ -13793,20 +13854,170 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "评估来访者的感知、感官、情感、交流、音乐、身体、认知、社交与精神能力，并设定治疗目标 — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "设计并实施音乐治疗体验，如演奏、歌唱、即兴与聆听 — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "记录评估、治疗计划、个案摘要与进展报告 — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "可用 M02 虚构材料试做记录整理。现有资料不能给出音乐治疗师的 AI 采用率、临床表现或岗位影响比例。临床判断、干预和记录由具备资格并获授权的人员负责。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "编辑说明",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "limitation": "定性编辑说明，不给出评分。",
+                "name": "费马测试：AI 任务证据口径",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "至少 1,200 小时受督导临床训练，含两个子项下限。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "amta-training",
+                "limitation": "美国项目教育标准；不授权个人执业。",
+                "name": "AMTA 教育及临床训练标准 §3.2.9",
+                "period": "2026-11-09",
+                "publisher": "American Music Therapy Association",
+                "scope": "contextual",
+                "url": "https://www.musictherapy.org/standards-for-education-and-clinical-training/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "通过考试可取得 MT-BC。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "cbmt-exam",
+                "limitation": "专业认证与州许可分列。",
+                "name": "CBMT MT-BC 考试说明",
+                "period": "2026-11-09",
+                "publisher": "Certification Board for Music Therapists",
+                "scope": "contextual",
+                "url": "https://www.cbmt.org/candidates/examination/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "俄勒冈州单独列执照申请路径。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "oregon-license",
+                "limitation": "仅俄勒冈州。",
+                "name": "俄勒冈州音乐治疗执照",
+                "period": "2026-11-09",
+                "publisher": "Oregon Health Authority",
+                "scope": "contextual",
+                "url": "https://www.oregon.gov/oha/ph/hlo/pages/board-music-therapy-program-license.aspx"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "艺术硕士研究生教学方案列音乐治疗课程及临床实践。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "ccom-program",
+                "limitation": "学校培养方案，不是执业许可。",
+                "name": "中央音乐学院音乐治疗培养方案",
+                "period": "2026-11-09",
+                "publisher": "中央音乐学院",
+                "scope": "contextual",
+                "url": "https://www.ccom.edu.cn/info/10761/184881.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "解释评估、目标、计划、记录和合作的专业职责。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "amta-cbmt-scope",
+                "limitation": "美国专业范围说明，不替代本地规则。",
+                "name": "AMTA／CBMT 音乐治疗执业范围",
+                "period": "2026-11-09",
+                "publisher": "AMTA and CBMT",
+                "scope": "contextual",
+                "url": "https://www.cbmt.org/wp-content/uploads/2019/10/CBMT-AMTA-Scope-of-Music-Therapy-Practice.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "邵阳学院就业页面 2025 年 3 月转刊北京清华长庚医院康复医学科招聘。共列康复治疗师 3 名，方向含 PT、OT、音乐治疗；招聘本科及以上应届毕业生，专业含康复治疗、音乐治疗或运动康复。公告未分配各方向人数，也未给薪资。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "btch-recruit",
+                "limitation": "医院历史招聘的院校转刊；不能把三人全算作音乐治疗。",
+                "name": "邵阳学院转刊：北京清华长庚医院康复科招聘",
+                "period": "2025-03-12",
+                "publisher": "邵阳学院医学技术学院",
+                "scope": "recruitment_proxy",
+                "url": "https://yxjs.hnsyu.edu.cn/info/1031/1404.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "泰康之家在四川大学就业平台 2026 年 10 月发布成都文娱活动师 5 名，本科，音乐治疗是所列相关专业之一。职责为组织居民活动、俱乐部及课程。薪资栏为 5,000–8,000，未标计薪周期；这不是临床音乐治疗薪资。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "taikang-recruit",
+                "limitation": "岗位样本不证明当前招聘状态或全国工资。",
+                "name": "四川大学就业平台：泰康之家文娱活动师",
+                "period": "2026-10-08",
+                "publisher": "泰康之家（四川大学就业平台）",
+                "scope": "recruitment_proxy",
+                "url": "https://jy.scu.edu.cn/index/index/employjobdetail.html?data=MDAwMDAwMDAwMJG6n3_Ed6imi4qQtLh4Y5aKk7a6ynbddricp9CWi5qikaeWacSdqLqGfaK2w4iil5C4zNbGiL-E"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "仅用模拟记录判断流程、停止条件和交接。"
+                ],
+                "evidence_type": "虚构纸面练习",
+                "id": "music-paper",
+                "limitation": "没有真实来访者、音乐处方或干预。",
+                "name": "费马测试：M02 虚构活动记录",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "涉及可识别个人的医疗健康信息属于敏感个人信息；核处理目的、必要性、合法依据、适用的单独同意与防止未授权访问的措施。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "cn-pipl",
+                "limitation": "中国大陆法律；不是美国规则或机构流程。",
+                "name": "《个人信息保护法》第28–30、51条",
+                "period": "2021-11-01",
+                "publisher": "国家市场监督管理总局（法律原文）",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_f374e8245320413181742e6d1baf4366.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "休闲治疗师可用运动、音乐等多种活动，按评估制定治疗计划并记录进展。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "onet-recreational",
+                "limitation": "美国临床职业示例；不同于大陆文娱活动岗位。",
+                "name": "O*NET 29-1125.00 休闲治疗师",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/29-1125.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "部分认可学校为已持其他学士学位的人提供等效培养。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "amta-equivalency",
+                "limitation": "课程和入学要求由项目确认。",
+                "name": "AMTA 入行与等效培养路径",
+                "period": "2026-11-09",
+                "publisher": "American Music Therapy Association",
+                "scope": "contextual",
+                "url": "https://www.musictherapy.org/how-to-become-a-music-therapist/"
               }
             ]
           },
@@ -13852,6 +14063,10 @@
         },
         "evidence_links": [
           {
+            "href": "https://www.onetonline.org/link/details/29-1125.00",
+            "label": "O*NET 29-1125.00 休闲治疗师"
+          },
+          {
             "href": "https://www.onetonline.org/link/details/29-1129.02",
             "label": "O*NET 29-1129.02 职业档案"
           },
@@ -13886,6 +14101,18 @@
           "type": "prose"
         },
         "rows": [
+          {
+            "关键区别": "美国的另一类临床治疗，以多种休闲活动为媒介。",
+            "更适合什么选择": "希望用多类活动做治疗，并接受该领域的专门训练。",
+            "核心工作与产出": "用运动、音乐等活动提供治疗；制定计划并记录进展。",
+            "职业方向": "O*NET 29-1125.00 休闲治疗师"
+          },
+          {
+            "关键区别": "该公告支持活动组织职责，不能由此推断临床评估、治疗计划或记录权限。",
+            "更适合什么选择": "希望做居民活动策划与组织，先核雇主职责。",
+            "核心工作与产出": "组织居民活动、俱乐部和课程。",
+            "职业方向": "大陆文娱活动师（泰康招聘样本）"
+          },
           {
             "关键区别": {
               "$item": "music-therapists.direction-comparison.adjacent-career-comparison-table.4",
@@ -13994,7 +14221,7 @@
             }
           }
         ],
-        "answer": "编辑试用建议：仅在机构授权、必要同意与数据保护条件下尝试文书/素材辅助。评估、干预、安全与记录由获相应资格授权人员负责；MT-BC专业认证不等于州执照，未取得采用及效果。 AI影响度 33% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
+        "answer": "可用 M02 虚构材料试做记录整理。现有资料不能给出音乐治疗师的 AI 采用率、临床表现或岗位影响比例。临床判断、干预和记录由具备资格并获授权的人员负责。",
         "authority_links": [
           {
             "来源": "O*NET 职业档案（29-1129.02）",
@@ -14015,7 +14242,7 @@
             "链接": "https://www.onetonline.org/link/hot_tech/29-1129.02"
           },
           {
-            "来源": "O*NET National Training（当前297分组相关项目）",
+            "来源": "O*NET 相关训练目录，认可项目以 AMTA 名单为准。",
             "类型": "职业训练来源",
             "适用范围": "仅为训练项目目录，不构成入职保证",
             "链接": "https://www.onetonline.org/link/localtraining/29-1129.02"
@@ -14112,15 +14339,15 @@
         ],
         "questions": [
           {
-            "回答": "ILO全球约四分之一工人有某程度暴露，多数职业以任务变革为主；不能预测音乐治疗师替代概率。本职临床Tasks与责任需按资质、法域和机构核，AI净就业因果未取得。",
+            "回答": "ILO 的全球研究衡量任务暴露。没有职业级资料可据此估计音乐治疗师被替代的概率。",
             "来源": "ILO",
             "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
             "问题": "AI 会取代音乐治疗师吗？"
           },
           {
-            "回答": "文献检索与综述、曲目与伴奏候选、语音转写、量表整理、跨专业摘要与文书草拟。",
-            "来源": "O*NET OnLine",
-            "链接": "https://www.onetonline.org/link/details/29-1129.02",
+            "回答": "编辑试做建议：用 M02 的虚构材料整理时间与交接。现有来源不表明机构已普遍采用这些工具。",
+            "来源": "费马测试编辑说明",
+            "链接": "见入行区 M02",
             "问题": "哪些环节更可能被工具辅助？"
           },
           {
@@ -14142,15 +14369,15 @@
             "问题": "如何使用本页的任务影响说明？"
           },
           {
-            "回答": "编辑核对：机构授权、工具条款、必要同意、最小数据及复核记录；去标识化不自动允许上传外部服务，法域要求另核。",
-            "来源": "ILO",
-            "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "回答": "编辑核查项：先核机构授权、工具条款和最小数据范围。中国大陆如处理可识别的医疗健康信息，另核合法依据、适用的单独同意和访问控制。去标识化不自动允许上传。",
+            "来源": "编辑核查项；中国大陆《个人信息保护法》第28–30、51条",
+            "链接": "见风险区法条原文",
             "问题": "采用生成式工具需要哪些条件？"
           },
           {
-            "回答": "治疗目标是否达成、来访者反应与参与度、记录准确性与合规性、隐私保护，以及生成内容的人工复核与授权留痕。",
-            "来源": "BLS OOH（数据页）",
-            "链接": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm",
+            "回答": "编辑核查项：授权人员按既定治疗目标核观察和记录，再查来源、准确性与修改痕迹。以下专业范围说明用于解释评估、计划及记录职责，不是 AI 质量标准。",
+            "来源": "编辑核查项；AMTA／CBMT 专业职责",
+            "链接": "见风险区专业范围原文",
             "问题": "质量指标应当关注哪些方面？"
           }
         ],
@@ -14279,39 +14506,111 @@
             "stage": "方案设计与整体责任"
           }
         ],
-        "direct_answer": "进入本职业通常从音乐治疗专业训练与带教实习开始，通过督导与独立个案逐步掌握评估、目标设定、音乐干预实施与记录；执业范围、执照、隐私与记录保存要求按执业所在地规则与机构流程核验。",
+        "direct_answer": "美国先核 AMTA 认可项目及临床训练。AMTA 标准至少 1,200 小时受督导临床训练，其中实习前至少 180 小时、实习至少 900 小时，项目可要求更多。符合资格后通过 CBMT 考试可获 MT-BC；州许可另核，例如俄勒冈州有独立的执照申请。 部分 AMTA 认可学校为已有其他学士学位的读者提供等效培养，先修要求由各项目确认。",
         "entry_heading": "从带教实习到独立干预与方案复核",
         "heading": "音乐治疗师的入行、资格与职业发展路径",
         "locale_requirements": {
-          "credential_boundary": "学历、职业认证与州执照不是同一状态；O*NET 认证目录列出的 Music Therapist - Board Certified（MT-BC）由认证机构颁发，不等于州执业许可或其他授权。",
+          "credential_boundary": "美国先核 AMTA 认可项目及临床训练。AMTA 标准至少 1,200 小时受督导临床训练，其中实习前至少 180 小时、实习至少 900 小时，项目可要求更多。符合资格后通过 CBMT 考试可获 MT-BC；州许可另核，例如俄勒冈州有独立的执照申请。 部分 AMTA 认可学校为已有其他学士学位的读者提供等效培养，先修要求由各项目确认。",
           "jurisdiction": "本页采用美国 O*NET/BLS 口径说明职业事实；中国大陆的岗位、培养、执业与隐私规则以当地主管部门与用人单位为准。",
-          "summary": "JobZone4教育回应73%学士/15%硕士/12%学士后证书；当前297相关分组训练项目。美国专业路径AMTA认可学位及1200小时临床训练含督导实习、CBMT考试，所在地执照/称谓保护另核。中国规则不可套美国认证。"
+          "summary": "中国大陆课程、岗位聘用和临床授权分别核。中央音乐学院公开的音乐治疗方向艺术硕士教学方案列有临床实践；医院工作看机构和实际任务要求。文娱活动组织与临床评估、治疗计划和记录的责任不同，美国 MT-BC 不自动授予大陆临床权限。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/29-1129.02",
-            "id": "onet-details",
-            "label": "O*NET 29-1129.02 职业档案",
-            "scope": "职业范围与训练要求"
+            "href": {
+              "$source": "amta-training",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "amta-training",
+            "label": {
+              "$source": "amta-training",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "训练学时及督导"
           },
           {
-            "href": "https://www.onetonline.org/link/localtraining/29-1129.02",
-            "id": "source-pack-onet-localtraining",
-            "label": "O*NET National Training 29-1129.02",
-            "scope": "297相关分组训练项目，非全部音乐治疗课程"
+            "href": {
+              "$source": "cbmt-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "cbmt-exam",
+            "label": {
+              "$source": "cbmt-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "MT-BC 考试"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/29-1129.02",
-            "id": "source-pack-onet-localcert",
-            "label": "O*NET National Certifications 29-1129.02",
-            "scope": "认证目录与资格边界"
+            "href": {
+              "$source": "oregon-license",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "oregon-license",
+            "label": {
+              "$source": "oregon-license",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "州执照示例"
           },
           {
-            "href": "https://www.onetonline.org/link/industry/29-1129.02",
-            "id": "source-pack-onet-industry",
-            "label": "O*NET Industries 29-1129.02",
-            "scope": "行业分布与雇主场景"
+            "href": {
+              "$source": "ccom-program",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "ccom-program",
+            "label": {
+              "$source": "ccom-program",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "中国大陆学校培养示例"
+          },
+          {
+            "href": {
+              "$source": "amta-cbmt-scope",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "amta-cbmt-scope",
+            "label": {
+              "$source": "amta-cbmt-scope",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "专业职责"
+          },
+          {
+            "href": "https://www.musictherapy.org/how-to-become-a-music-therapist/",
+            "id": "amta-equivalency",
+            "label": "AMTA 入行与等效培养路径",
+            "scope": "非音乐治疗专业学士的等效培养示例"
           }
         ],
         "tracks": [
@@ -14620,11 +14919,11 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "onet-summary"
+              "cn-pipl",
+              "amta-cbmt-scope"
             ],
             "id": "cost-change",
-            "mitigation": "只使用机构批准的工具与最小必要信息，先去标识化，按适用法规与机构政策核对保存、传输与访问权限",
+            "mitigation": "处理可识别的医疗健康信息前，先核合法依据、必要范围、适用的单独同意及访问控制。机构批准工具或去标识化不自动授权外发。",
             "scenario": "评估与治疗记录含健康与身份信息，在文书、跨专业沟通或使用工具时未按最小必要原则处理",
             "title": "来访者隐私与数据处理"
           },
@@ -14632,8 +14931,8 @@
             "affected_roles": "负责评估与进展记录、报告与签署的人员",
             "consequence": "记录争议可能影响治疗连续性、跨专业判断与合规审查",
             "evidence_refs": [
-              "onet-details",
-              "onet-summary"
+              "amta-cbmt-scope",
+              "onet-details"
             ],
             "id": "record-accuracy",
             "mitigation": "按机构模板完整记录评估、目标、调整理由与异常，生成内容逐条复核后再由治疗师签署",
@@ -14644,8 +14943,8 @@
             "affected_roles": "承担音乐干预实施与临床即兴的人员",
             "consequence": "编辑风险情境：需核即时回应、目标与安全；未取得工具替代使关系/参与下降的本职实测效果。",
             "evidence_refs": [
-              "onet-details",
-              "onet-summary"
+              "amta-cbmt-scope",
+              "onet-details"
             ],
             "id": "therapeutic-relationship",
             "mitigation": "把工具限制在准备与文书环节，现场干预、紧急情况识别与关系终止判断由治疗师完成",
@@ -14656,8 +14955,8 @@
             "affected_roles": "提供远程服务或跨地区实务的音乐治疗师",
             "consequence": "可能涉及超出授权范围的实务、保险与法律责任问题",
             "evidence_refs": [
-              "onet-summary",
-              "onet-cert"
+              "amta-cbmt-scope",
+              "onet-details"
             ],
             "id": "scope-of-practice",
             "mitigation": "按执业所在地与机构政策核对执照、远程服务、知情同意与督导要求，不超出授权范围",
@@ -14720,6 +15019,42 @@
             "id": "nbs-wage",
             "label": "NBS2025行业工资",
             "scope": "均值非本职工资"
+          },
+          {
+            "href": {
+              "$source": "amta-cbmt-scope",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "amta-cbmt-scope",
+            "label": {
+              "$source": "amta-cbmt-scope",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "评估、临床职责及记录"
+          },
+          {
+            "href": {
+              "$source": "cn-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "id": "cn-pipl",
+            "label": {
+              "$source": "cn-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "music-therapists.source-register.published.1"
+            },
+            "scope": "大陆医疗健康信息与访问控制"
           }
         ]
       },
@@ -14893,16 +15228,10 @@
         ],
         "boundary": "美国数据只适用于 O*NET/BLS 29-1129.02 页面标注的 Therapists, All Other 合并职业口径与所列期间，不能当作本职业单列值，也不能换算或外推为中国大陆个人收入。",
         "direct_answer": {
-          "$join": [
-            "美国 O*NET/BLS 29-1129.02 页面展示的 2025 年中位时薪 37.47 美元、中位年薪 77,930 美元，该工资与就业均为 Therapists, All Other 合并职业口径；",
-            {
-              "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.1",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            }
-          ],
-          "separator": "；"
+          "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "factor_rows": [
           {
@@ -14927,12 +15256,12 @@
           {
             "industry": "医疗与社会援助",
             "median": "证据不足：未取得音乐治疗师×行业精确工资",
-            "note": "29-1129分组2025医疗社会援助35%就业份额，非29-1129.02单列工资。"
+            "note": "2025 年卫生和社会援助约占美国 29-1129 合并组就业的 35%；这是就业构成，不是单列工资。"
           },
           {
-            "industry": "其他行业合计",
+            "industry": "其余就业（含自雇）",
             "median": "证据不足：未取得音乐治疗师×行业精确工资",
-            "note": "29-1129分组其他行业65%份额，非工资或音乐治疗师分布。"
+            "note": "约占合并组就业的 65%，其中含自雇；这不是音乐治疗师单列行业分布。"
           },
           {
             "industry": "机构类型差异",
@@ -14951,7 +15280,7 @@
           {
             "answer": {
               "$join": [
-                "中位工资是分布中心，不是起薪或个人收入承诺；该值为 Therapists, All Other 合并口径，",
+                "中位工资是分布中心，不是起薪或个人收入承诺；该值为 Therapists, All Other 合并口径",
                 {
                   "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.5",
                   "block": "us-salary",
@@ -14966,7 +15295,7 @@
           {
             "answer": {
               "$join": [
-                "分位用于了解工资分布范围，不代表经验或职级；该值为 Therapists, All Other 合并口径，",
+                "分位用于了解工资分布范围，不代表经验或职级；该值为 Therapists, All Other 合并口径",
                 {
                   "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -15002,7 +15331,7 @@
             "equivalent": "$37.47/小时",
             "interpretation": {
               "$join": [
-                "中位数只描述分布中心，不是起薪或资深岗位工资；该值为 Therapists, All Other 合并口径，",
+                "中位数只描述分布中心，不是起薪或资深岗位工资；该值为 Therapists, All Other 合并口径",
                 {
                   "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.2",
                   "block": "us-salary",
@@ -15019,7 +15348,7 @@
             "equivalent": "$28.29—$50.85/小时",
             "interpretation": {
               "$join": [
-                "中间 50% 的工资落在该区间，仅描述分布，不代表经验等级；该值为 Therapists, All Other 合并口径，",
+                "中间 50% 的工资落在该区间，仅描述分布，不代表经验等级；该值为 Therapists, All Other 合并口径",
                 {
                   "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
@@ -15036,7 +15365,7 @@
             "equivalent": "$22.37—$73.33/小时",
             "interpretation": {
               "$join": [
-                "两端各 10% 高于或低于该区间，低分位不是起薪；该值为 Therapists, All Other 合并口径，",
+                "两端各 10% 高于或低于该区间，低分位不是起薪；该值为 Therapists, All Other 合并口径",
                 {
                   "$item": "music-therapists.us-salary.career-snapshot-secondary-locale.4",
                   "block": "us-salary",
@@ -15067,7 +15396,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "用一份完全虚构的来访者描述做纸面推演，核对评估维度、治疗目标、音乐体验设计与记录步骤；纸面推演不构成评估、诊断、治疗或执业授权。",
+        "summary": "音乐治疗的产出包括可复核的目标、活动记录和团队交接。用 M02 虚构材料先试记录与交接。",
         "title": "音乐治疗师"
       },
       "fit_decision_checklist": {
@@ -15157,7 +15486,7 @@
           {
             "geography": "全球（跨经济体）",
             "horizon": "研究发布时点（2025 年）",
-            "interpretation": "ILO全球评估约四分之一工人有某程度暴露，多数职业主要面临任务变革；本页文书辅助/现场责任为编辑任务分析，未据此推音乐治疗替代率。",
+            "interpretation": "ILO 研究的是任务暴露，不提供该职业的采用率、岗位变化或临床表现。",
             "limitation": "为全球任务层面的暴露评估，不是中国或美国音乐治疗师的岗位增长率、自动化率或裁员预测，也不能与本页的 BLS 预测相加。",
             "metric": "生成式 AI 的任务暴露",
             "occupation_scope": "ILO 全球职业暴露指数（ISCO-08 任务层，非岗位数量预测）",
@@ -15168,10 +15497,10 @@
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm",
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "BLS OOH: Therapists, All Other（数据页）",
-            "scope": "美国29-1129分组2025—2035就业预测"
+            "label": "BLS 就业预测表 1.2",
+            "scope": "29-1129 合并组就业预测"
           },
           {
             "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
@@ -15279,7 +15608,7 @@
             "alternate_value": null,
             "label": "准备层级",
             "secondary_value": null,
-            "value": "Job Zone4、SVP7—<8；本職教育回应73%学士、15%硕士、12%学士后证书，非研究生证书。297相关训练目录属分组，非全音乐治疗课程。"
+            "value": "O*NET 的准备程度和教育调查描述美国职业。AMTA 认可项目及认证条件分别核。"
           },
           {
             "alternate_value": null,
@@ -15488,7 +15817,7 @@
             "question": "性格外向还是内向更适合？"
           },
           {
-            "answer": "本职新聘教育73%学士/15%硕士/12%学士后证书；297训练属相关分组目录。美国AMTA学位及1200小时临床训练含实习、CBMT考试/MT-BC与州法律分别核，目录不是许可。",
+            "answer": "O*NET 的准备程度和教育调查描述美国职业。AMTA 认可项目及认证条件分别核。",
             "question": "入行通常需要什么学历、训练和资格条件？"
           },
           {
@@ -15508,7 +15837,7 @@
             "question": "如何积累可复核的专业证据？"
           },
           {
-            "answer": "在合规与授权前提下观察一次音乐治疗或相关照护活动，记录治疗目标、音乐体验设计与记录方式；再用公开评估维度写一份匿名化示例治疗计划并请从业者反馈。",
+            "answer": "到入行区做 M02：核虚构活动的授权、声音停止条件和交接记录，不组织真实活动，也不制定治疗计划。",
             "question": "适合先做哪一类低成本试验？"
           }
         ],
@@ -15546,7 +15875,7 @@
           },
           {
             "href": "https://www.onetonline.org/link/localtraining/29-1129.02",
-            "label": "O*NET297分组相关训练目录",
+            "label": "O*NET 相关训练目录，认可项目以 AMTA 名单为准。",
             "usage": "训练项目与学历路径"
           },
           {
@@ -15612,10 +15941,10 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "O*NET29-1129.02音乐治疗Tasks/SAI；工资、就业、35/65行业及297训练属29-1129分组，MT-BC一项目录。2025五工资分位正确保留；BLS2025—2035分组12.6%/3600。NBS卫生社会工作146266/75631行业均值，ILO全球暴露非本职效果，AMTA专业伦理/训练与CBMT认证及法域规则分开，NCAC仅中国素材权利。",
+          "source": "O*NET 相关训练目录，认可项目以 AMTA 名单为准。",
           "updated_at": "O*NET2026档案；工资2025、就业2025—2035；NBS发布2026-05-15；本次查阅2026-10-11。"
         },
-        "note": "证据只支持音乐治疗师在标注市场、职业口径与期间内的范围性判断，不构成个人收入、录用或适配保证。",
+        "note": "O*NET 用于职业职责，BLS 用于合并组工资和就业。大陆招聘与行业工资是不同范围。M02 是虚构记录，不用真实来访者材料。",
         "secondary_links": [
           {
             "href": {
@@ -15659,7 +15988,7 @@
           }
         ]
       },
-      "work_context_block": "工作情境（O*NET 工作情境调查）：88% 的受访者每天进行面对面讨论，73% 表示持续与他人接触，81% 每天在环境可控的室内工作，65% 每天使用电子邮件，62% 表示有较多决策自由；46% 每天暴露于疾病或感染，40% 每周一次以上需要应对不愉快、愤怒或无礼的人，36% 每月一次以上需要应对有暴力或身体攻击倾向的人；54% 约一半时间坐着，35% 持续或几乎持续用手操作或感受物件与工具。"
+      "work_context_block": "O*NET 工作情境调查：88% 受访者每天面对面讨论，81% 每天在环境可控的室内工作。应对不愉快、愤怒或无礼者：12% 每日，40% 至少每周一次但非每日。应对有暴力或身体攻击行为者：12% 每日、28% 至少每周一次但非每日、36% 至少每月一次但不足每周。46% 认为决策通常有重要影响。这些是调查回答，不能用来估计某机构的事故率。"
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -15682,6 +16011,13 @@
         "block": "path",
         "copy_key": "career.item.employer-evidence",
         "id": "music-therapists.path.employer-evidence.3",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "music-therapists.path.entry-work-sample-data.1",
         "location": "entry_decisions",
         "type": "cards"
       },
@@ -15743,7 +16079,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与工作任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15822,36 +16158,36 @@
       },
       {
         "derivation": null,
-        "display_value": "56,100人（2024）",
+        "display_value": "约 56,100 人（2025 合并组）",
         "fact_id": "employment-2024",
         "market": "美国",
-        "measure": "employment level",
+        "measure": "美国 29-1129 合并组就业",
         "occupation_scope": "Therapists, All Other 类目代理（O*NET 29-1129.02 页面标明）",
-        "period": "2024 employment（经 O*NET 转发）; accessed 2026-09-25",
+        "period": "2025",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长11%（2024—2034，Much faster than average）",
+        "display_value": "增长 12.6%（2025—2035 合并组）",
         "fact_id": "employment-projection",
         "market": "美国",
-        "measure": "employment projection",
+        "measure": "美国 29-1129 合并组就业",
         "occupation_scope": "Therapists, All Other 类目代理（O*NET 29-1129.02 页面标明）",
-        "period": "2024—2034 projection（BLS 经 O*NET 转发）; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "4,100个/年（2024—2034）",
+        "display_value": "年均约 3,600 个（2025—2035 合并组）",
         "fact_id": "us-openings",
         "market": "美国",
-        "measure": "annual job openings",
+        "measure": "美国 29-1129 合并组就业",
         "occupation_scope": "Therapists, All Other 类目代理（O*NET 29-1129.02 页面标明）",
-        "period": "2024—2034 projection（经 O*NET 转发）; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
@@ -15889,53 +16225,43 @@
         "occupation_scope": "Music Therapists",
         "period": "O*NET credential data current 2026; accessed 2026-09-25",
         "source_refs": [
-          "onet-cert"
+          "cbmt-exam",
+          "oregon-license"
         ]
       },
       {
         "derivation": null,
-        "display_value": "210 个训练项目",
+        "display_value": "O*NET 训练目录包含相关项目，不能当 AMTA 认可项目清单。",
         "fact_id": "training-programs",
         "market": "美国",
         "measure": "training programme count",
         "occupation_scope": "Music Therapists",
-        "period": "O*NET National Training; accessed 2026-09-25",
+        "period": "2026-11-09",
         "source_refs": [
+          "amta-training",
           "source-pack-onet-localtraining"
         ]
       },
       {
-        "derivation": "56,100（2024）→62,500（2034），净增约 6,400",
-        "display_value": "净增约 6,400 个职位（2024—2034）",
+        "derivation": null,
+        "display_value": "合并组净增 7,100 人（2025—2035）",
         "fact_id": "us-net-change",
         "market": "美国",
-        "measure": "employment change",
+        "measure": "美国 29-1129 合并组就业",
         "occupation_scope": "Therapists, All Other 类目代理（O*NET 29-1129.02 页面标明）",
-        "period": "2024—2034 projection; BLS OOH data page; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-therapists-all-other"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+0+75)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "音乐治疗师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "onet-trends"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 任务影响"
     },
     "badges": [
       "评估与治疗设计",
@@ -15947,31 +16273,31 @@
         "availability": "available",
         "fact_ref": "us-wage",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国合并组工资中位数"
       },
       {
         "availability": "available",
         "fact_ref": "employment-projection",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国合并组就业增长"
       },
       {
         "availability": "available",
         "fact_ref": "employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国合并组就业"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国合并组年均空缺"
       },
       {
         "availability": "available",
         "fact_ref": "cn-wage-nonprivate",
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "大陆卫生和社会工作行业均值"
       }
     ]
   },
@@ -15979,17 +16305,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "音乐治疗师（O*NET 29-1129.02）设计并实施临床与循证音乐治疗干预，评估来访者的感知、感官、情感、交流、音乐、身体、认知、社交与精神能力，记录过程、结果与治疗计划，并与其他专业人员协作。本页只用官方来源说明职业范围、任务、准备要求、中美统计口径与授权边界。"
+      "text": "音乐治疗师和文娱活动师有什么区别？查看美国 MT-BC 与州执照、大陆岗位样本和美国合并组薪资，再做纸面试做。"
     },
     "title": {
       "availability": "available",
-      "text": "音乐治疗师"
+      "text": "音乐治疗师：工作、入行与临床职责"
     }
   },
-  "source_content_sha256": "ee5da5b53533cc11e6d78c65eb10f350b19cc07407df8a7afa43029aaa2c56a1",
+  "source_content_sha256": "3a310e374fa24559da6d919a5e2f20773ab1ab9a741fbd1e4a35c13a046d7fd1",
   "subject": {
     "canonical_slug": "music-therapists",
     "name": "音乐治疗师",
-    "summary": "音乐治疗师（O*NET 29-1129.02）设计并实施临床与循证音乐治疗干预，评估来访者的感知、感官、情感、交流、音乐、身体、认知、社交与精神能力，记录过程、结果与治疗计划，并与其他专业人员协作。本页只用官方来源说明职业范围、任务、准备要求、中美统计口径与授权边界。"
+    "summary": "音乐治疗师按职责评估需求、制定目标、开展音乐活动、记录进展并与团队交接。临床训练、资格和机构授权分别核。"
   }
 }

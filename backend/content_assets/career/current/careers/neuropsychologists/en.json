@@ -23,9 +23,6 @@
       "fact:education-profile": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "mapped"
       },
@@ -180,13 +177,19 @@
         "status": "pending_mapping"
       },
       "item:neuropsychologists.path.credential-decision.11": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:neuropsychologists.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:neuropsychologists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
       },
       "item:neuropsychologists.path.interview-probation.10": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:neuropsychologists.path.recruitment-sample.1": {
+        "status": "pending_mapping"
       },
       "item:neuropsychologists.profile.definition-block.1": {
         "status": "pending_mapping"
@@ -11957,12 +11960,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "One-sentence assessment | This career is worth exploring further only if you are willing to undertake lengthy doctoral education in psychology, an internship and two years of postdoctoral specialty training; can maintain accurate test administration and scoring for extended periods under standardized conditions; are willing to turn cognitive and behavioral performance into clinical reports that can be reviewed and explicitly state uncertainty; and can respect your professional boundaries when making high-stakes judgments involving neurological disease."
+              "If you tend to draw conclusions from a single score or dislike documenting gaps and having your work reviewed, try the paper exercise and compare research or testing support roles."
             ]
           },
           "id": "neuropsychologists.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "neuro-paper"
           ],
           "type": "prose"
         },
@@ -11971,12 +11974,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Core output | Turn the referral question, medical history, standardized test profile, informant information and behavioral observations into a traceable clinical neuropsychological report: descriptive or diagnostic conclusions, explanations of cognitive strengths and weaknesses, differential considerations, recommendations and referrals, rather than just a set of scores."
+              "Try N01 in the entry section: use three fictional records to write an evidence table, a list of open items, and one handoff. It contains no patient data, real instruments, diagnosis, or clinical scores."
             ]
           },
           "id": "neuropsychologists.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "neuro-paper"
           ],
           "type": "prose"
         },
@@ -11985,12 +11988,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "20—120-minute safe trial | Conduct a nonclinical exercise using a fictional case: specify the referral question and key history, select three tests matching your hypotheses from public test descriptions and explain your reasons, then write two paragraphs of feedback for family members. Do not use this exercise to diagnose, score or recommend treatment for any real individual."
+              "If you like turning several records into a checkable account and explaining what the evidence cannot show, explore neuropsychology further."
             ]
           },
           "id": "neuropsychologists.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-details",
+            "neuro-paper"
           ],
           "type": "prose"
         },
@@ -11999,12 +12003,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First hurdle | Verify qualifications and boundaries first: who may administer and interpret neuropsychological tests, make diagnoses and sign reports. The United States requires state psychologist licensure, including the EPPP and supervised hours; neuropsychology board certification (ABPP/ABCN) is a voluntary professional credential. In mainland China, psychotherapy must take place in medical institutions and be provided by licensed psychiatrists or assistant psychiatrists, or health professionals qualified through the national health professional technical qualification examination in psychotherapy. Specific assessment permissions follow current regulations and institutional policies."
+              "Distinguish training, jurisdictional licensure, specialty certification, and facility authorization. Check the U.S. and mainland China separately."
             ]
           },
           "id": "neuropsychologists.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "source-pack-onet-details",
+            "asppb-current",
+            "abpp-neuropsychology",
             "china-mental-health-law"
           ],
           "type": "prose"
@@ -12025,14 +12030,15 @@
               "History and interviews | Interview patients and informants to obtain a comprehensive history, course of illness and past history, and clarify the current referral question and clinical questions to be answered.",
               "Standardized assessment | Select and administer standardized tests of intelligence, academic abilities, attention and concentration, sensorimotor function, language, learning and memory, following uniform administration and scoring conditions.",
               "Report writing | Write detailed clinical neuropsychological reports using tests, self-report measures, rating scales, direct observations and interview data, explaining the strength and limitations of the evidence.",
-              "Diagnosis and treatment | Diagnose and treat conditions involving central nervous system damage, such as cerebrovascular accidents, tumors, infectious or inflammatory diseases, degenerative diseases, traumatic brain injuries, demyelinating diseases and various dementias.",
+              "The U.S. profile also lists diagnosis, treatment, and rehabilitation duties. Actual scope depends on local licensure, specialty training, and facility authorization.",
               "Baseline and follow-up | Establish neurobehavioral baseline measurements to monitor functional changes during progressive brain disease or rehabilitation.",
               "Education, consultation and supervision | Provide education or counseling to individuals and families, consult with other professionals about patients' neurological conditions, and educate and supervise interns and staff."
             ]
           },
           "id": "neuropsychologists.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-details",
+            "asppb-current"
           ],
           "type": "list"
         },
@@ -12055,12 +12061,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Work primarily involves assessments in outpatient clinics, inpatient wards and rehabilitation facilities, almost entirely indoors. O*NET work context data show that 96% work indoors in environmentally controlled conditions daily; 60% have face-to-face discussions daily and 32% several times a week; 80% work more than 40 hours per week, and 96% have regular schedules."
+              "In the U.S. O*NET survey, 80% of respondents reported a usual workweek over 40 hours. For face-to-face discussions, 60% reported daily and 32% at least weekly but not daily. Work location and schedule depend on the position."
             ]
           },
           "id": "neuropsychologists.profile.definition-block.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -12162,12 +12168,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Clinical psychologists | Provide general psychological assessment and psychotherapy and typically do not conduct systematic neuropsychological assessments. Neurodiagnostic technologists perform examinations such as electroencephalography and organize technical data, without making diagnoses or signing reports. Adjacent classifications do not make qualifications or permissions interchangeable."
+              "Clinical psychology and neuropsychology services can overlap. Check whether the role includes specialty assessment and reports about brain–behavior relationships, and what training and authorization it requires."
             ]
           },
           "id": "neuropsychologists.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-details",
+            "abpp-neuropsychology"
           ],
           "type": "prose"
         },
@@ -12204,7 +12211,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Consider this occupation if you want standardized assessment, reports and cognitive rehabilitation recommendations to be your main work and are willing to complete a psychology doctorate and two years of postdoctoral specialty training. Consider neurology if you prefer responsibility for medical diagnosis, treatment and prescribing."
+              "Compare neuropsychology if you want to focus on cognitive and behavioral assessment and reports. Compare neurology if you want to provide medical care for nervous system disorders. Check the two training and licensing paths separately."
             ]
           },
           "id": "neuropsychologists.direction-comparison.adjacent-career-comparison-table.5",
@@ -12240,12 +12247,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Potential assistance (editorial analysis): authorized history summaries, report formatting and checklist checks, and drafts of educational materials. Test lists and scoring checks must be handled in licensed systems. This review did not obtain evidence of accuracy or clinical outcomes."
+              "Try organizing fictional records. The available sources do not establish AI adoption, clinical performance, or job effects for this occupation. Keep real clinical records out of unapproved tools. Qualified and authorized staff remain responsible for interpretation, diagnosis, and sign-off."
             ]
           },
           "id": "neuropsychologists.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -12346,13 +12353,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This occupation corresponds to the US O*NET19-3039.02. This review did not verify a one-to-one mapping to Chinese classifications or practice qualifications. Article 51 of the Mental Health Law requires psychotherapy to take place in medical institutions; personnel specializing in psychotherapy may not diagnose mental disorders, prescribe medications or perform surgery. This does not negate the diagnostic and treatment authority of qualified psychiatrists. The 2013 standards permit psychotherapy by licensed psychiatrists or assistant psychiatrists who have completed standardized psychotherapy training, or personnel who have passed the health qualification examination in psychotherapy. This alone does not confer all neuropsychological assessment permissions."
+              "Articles 23, 29, and 51 of China’s Mental Health Law distinguish counseling, diagnosis of mental disorders, and psychotherapy in medical institutions. A licensed psychiatrist makes a diagnosis of mental disorder. Check facility requirements for testing records, clinical interpretation, and signing reports separately. U.S. licensure and ABCN certification do not establish authorization in mainland China."
             ]
           },
           "id": "neuropsychologists.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "china-mental-health-law",
-            "china-psychotherapy-regulation"
+            "china-mental-health-law"
           ],
           "type": "prose"
         },
@@ -12389,13 +12395,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this review did not obtain a nationwide Chinese occupational wage distribution on a comparable basis, so industry averages are not used to infer percentiles or individual income. Verify psychotherapy qualifications, physician qualifications and institutional permissions separately. Check the relevant authorities' announcements for the applicable year for examination eligibility, professional titles and practice conditions. The original human resources and social security response page was not obtained in this review; complete verification of all current entry requirements is not claimed."
+              "The available data do not establish a nationwide mainland China occupational median comparable with U.S. O*NET 19-3039.02. The health and social work industry mean gives context for relevant employers only."
             ]
           },
           "id": "neuropsychologists.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs-wages",
-            "mohrss-psychotherapy-title"
+            "nbs-wages"
           ],
           "type": "prose"
         }
@@ -12608,12 +12613,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Verification method | Personality and interest labels cannot determine fit. Use a fictional case to practice test selection and profile interpretation, and obtain evaluation from qualified clinicians in a compliant teaching environment."
+              "Use N01 to see whether you separate original records, missing conditions, and unsupported conclusions. The paper exercise cannot demonstrate clinical testing or reporting ability."
             ]
           },
           "id": "neuropsychologists.fit.riasec-fit-block.8",
           "source_refs": [
-            "source-pack-onet-details"
+            "neuro-paper"
           ],
           "type": "prose"
         }
@@ -12708,13 +12713,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Step 0: determine the practice jurisdiction and authorized scope | First identify the country or region where you plan to practice, and verify requirements for doctoral psychology education, internship, postdoctoral training, licensure and specialty certification. The pathway on this page is an editorial synthesis, does not represent uniform entry requirements and does not authorize any assessment, diagnosis, test interpretation or report signing."
+              "Decide whether you want clinical assessment, institutional testing support, or research. Verify qualifications and responsibilities with the jurisdiction and institution."
             ]
           },
           "id": "neuropsychologists.path.career-path-block.1",
           "source_refs": [
+            "asppb-current",
             "abpp-neuropsychology",
-            "asppb-current"
+            "china-mental-health-law"
           ],
           "type": "prose"
         },
@@ -12779,7 +12785,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "ABCN certification requirements vary by the completion date of doctoral training or respecialization. For completion on or after 2005-01-01, postdoctoral training equivalent to two full-time years, scheduled at least half-time, is required. At least 50% of postdoctoral training must involve supervised clinical neuropsychological services; specific supplementary guidelines require at least 50% of those clinical services to involve integrative assessment. The overview also states that services must be integrative. Verify these requirements through application review; they cannot be reduced to a uniform duration for every position."
+              "For applicants who finished doctoral training or respecialization on or after January 1, 2005, ABCN generally requires the equivalent of two full-time years of postdoctoral training completed on at least a half-time basis. At least 50% of residency time is spent on neuropsychology-related activities, which can include supervised clinical activity in research. The committee considers exceptions case by case."
             ]
           },
           "id": "neuropsychologists.path.career-path-block.6",
@@ -12827,6 +12833,13 @@
               "career.column.boundary",
               "career.column.evidence",
               "career.column.next"
+            ],
+            "column_labels": [
+              "Stage",
+              "Task",
+              "Scope",
+              "Preparation evidence",
+              "Next step"
             ],
             "rows": [
               [
@@ -12882,6 +12895,12 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "Situation",
+              "Action",
+              "Reviewer",
+              "Record"
+            ],
             "rows": [
               [
                 "Validity indicators suggest responses may be unreliable",
@@ -12928,6 +12947,15 @@
               "career.column.owner",
               "career.column.next"
             ],
+            "column_labels": [
+              "Credential or status",
+              "What it shows",
+              "Issuer",
+              "What to verify",
+              "Limits",
+              "Who confirms",
+              "Next step"
+            ],
             "rows": [
               [
                 "Doctoral degree in psychology (PhD/PsyD)",
@@ -12960,7 +12988,7 @@
                 "Two years of postdoctoral specialty training",
                 "Develop specialty competence under a neuropsychologist's supervision",
                 "Provided and supervised by a training institution",
-                "ABCN certification for specified training cohorts: at least 50% supervised clinical services; verify the proportion involving integrative assessment against the specific supplementary guidelines",
+                "For applicants who finished doctoral training or respecialization on or after January 1, 2005, ABCN generally requires the equivalent of two full-time years of postdoctoral training completed on at least a half-time basis. At least 50% of residency time is spent on neuropsychology-related activities, which can include supervised clinical activity in research. The committee considers exceptions case by case.",
                 "A training requirement for specialty certification, not a statutory duration for all jurisdictions",
                 "Training institutions and supervisors",
                 "Verify the training structure and supervisor qualifications"
@@ -12991,6 +13019,58 @@
             "china-psychotherapy-regulation"
           ],
           "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "The Institute of Psychology, Chinese Academy of Sciences, posted two tester positions on October 29, 2026. It asked for graduate education in psychology, cognitive science, education, sociology, or a related field, with psychology preferred. The work includes standardized testing and preliminary analysis submitted for review. The posting gives project employment terms but no salary figure. The center required applicants to pass its pre-employment training and assessment.",
+              "Qinghai’s 2025 public health recruitment plan lists one clinical psychiatry department psychotherapist position at Qinghai Third People’s Hospital (role code 1166300000002560004). It lists bachelor’s education and degree, applied psychology, and ability to work with psychological scales and assessments. The plan gives no pay amount. The posting also required a junior-level psychotherapy qualification.",
+              "Both are historical examples of adjacent roles. They do not establish current vacancies, occupational wages, or clinical credential equivalence."
+            ]
+          },
+          "id": "neuropsychologists.path.recruitment-sample.1",
+          "source_refs": [
+            "cas-testing-job",
+            "qinghai-psych-job"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Materials | Fictional",
+                  "A: record K7, v2, marked current by the project owner and limited to the teaching group. B: K7 v1, archived. C: K7 v2 review sheet, missing reviewer sign-off and with no external sharing authorization recorded."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Submit three items first",
+                  "Submit three items: record each identifier, revision, and source; list gaps and whom to ask; and write a two-sentence handoff. In this exercise, external sharing requires the current version, completed review, and explicit permission."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Reference answer",
+                  "A is the owner-marked current v2, limited to the teaching group. B is archived v1 and has no stated source. C concerns v2, but its source, review sign-off, and external sharing approval are unconfirmed. Example handoff: “Keep the current K7 v2 in the teaching group and v1 in the archive; confirm the sources of B and C. Please confirm the reviewer’s sign-off and the owner’s sharing authorization before any external release.”"
+                ]
+              }
+            ]
+          },
+          "id": "neuropsychologists.path.entry-work-sample-data.1",
+          "source_refs": [
+            "neuro-paper"
+          ],
+          "title": "N01 | Check revisions and sharing authorization",
+          "type": "cards"
         }
       ]
     },
@@ -13005,7 +13085,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS2025—2035, Psychologists, All Other, 19-3039: 60,000 employed in 2025 and 61,400 in 2035, growth of 2.3%, and 3,500 average annual openings. Neuropsychologists are not listed separately; these figures do not predict Chinese outcomes or individual hiring."
+              "BLS 19-3039, Psychologists, All Other: about 60,000 jobs in 2025, projected 61,400 in 2035, growth of 2.3%, and about 3,500 annual openings including growth and replacements. This is a combined group, not current vacancies or a separate estimate for neuropsychologists."
             ]
           },
           "id": "neuropsychologists.market-signals.market-signal-card.1",
@@ -13033,11 +13113,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Wages use OEWS2025; employment and projections for the parent category use BLS2025—2035. Industry information uses Top industries (2025) in the details view. The separate subpage was not obtained in this review, and older years are not carried forward."
+              "Wages use 2025 OEWS employee data. The broader 19-3039 employment projection includes self-employment; 67.2% of the parent group was self-employed. This is not an estimate of individual pay."
             ]
           },
           "id": "neuropsychologists.market-signals.market-signal-card.3",
           "source_refs": [
+            "onet-wages",
             "bls-ep-2025-2035"
           ],
           "type": "prose"
@@ -13047,7 +13128,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Growth and replacement needs in the combined occupation generate average annual openings. BLS's precise 2.3% figure is separate from O*NET's 1%—2% category. The specific size of neuropsychology cannot be isolated, and the figures cannot be attributed to AI."
+              "The BLS parent-group projection is 2.3%. Openings include growth and replacements. The figures do not isolate this specialty or show an effect of AI."
             ]
           },
           "id": "neuropsychologists.market-signals.market-signal-card.4",
@@ -13084,30 +13165,33 @@
           "data": {
             "entries": [
               {
-                "answer": "According to O*NET 19-3039.02, core work includes neuropsychological assessments of intelligence, attention, sensorimotor function, language, learning and memory; interviewing patients for comprehensive histories; writing detailed clinical neuropsychological reports using tests, scales, observations and interview data; diagnosing and treating conditions associated with central nervous system damage, including cerebrovascular accidents, tumors, infectious or inflammatory diseases, degenerative diseases, traumatic brain injury, demyelinating diseases and various dementias; establishing neurobehavioral baselines for follow-up; providing education or counseling to individuals and families; and consulting with professionals and supervising students and staff.",
+                "answer": "The U.S. O*NET profile emphasizes interviewing, cognitive and behavioral assessment, clinical reports, and follow-up. It also includes diagnostic assessment of brain–behavior effects and participation in treatment and referrals within authorized scope. The appropriate medical team handles diagnosis and treatment of the underlying medical condition.",
                 "id": "neuropsychologists.faq.1",
                 "question": "What do neuropsychologists do each day?",
                 "question_key": "career.faq.neuropsychologists.daily-work",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "onet-details",
+                  "asppb-current"
                 ]
               },
               {
-                "answer": "Neurologists medically diagnose and treat neurological diseases and may prescribe medications and interpret imaging. Clinical psychologists provide general psychological assessment and psychotherapy and typically do not conduct systematic neuropsychological assessments. Neurodiagnostic technologists perform examinations and organize technical data, without making diagnoses or signing reports. This occupation centers on standardized cognitive and behavioral assessment, profile interpretation and clinical reports. The training pathway typically involves a psychology doctorate plus two years of postdoctoral specialty training, without responsibility for prescribing medications.",
+                "answer": "Neurologists provide medical diagnosis and treatment for nervous system disorders. Neuropsychologists focus on interpreting cognitive and behavioral assessments and writing reports. Clinical psychologists provide psychological assessment and treatment; whether they practice neuropsychology depends on training and authorization. Technical records from neurodiagnostic technologists are separate from clinical diagnosis.",
                 "id": "neuropsychologists.faq.2",
                 "question": "How do they differ from neurologists and clinical psychologists?",
                 "question_key": "career.faq.neuropsychologists.comparison",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "onet-details",
+                  "asppb-current",
+                  "abpp-neuropsychology"
                 ]
               },
               {
-                "answer": "The available evidence does not support a replacement conclusion: O*NET provides no generative AI adoption or automation rate for this occupation. Its Hot Technologies list only employer-mentioned skills such as IBM SPSS Statistics and office software, without percentages. Tools are more likely to first change history and referral summaries, test checklist verification, report formatting checks and drafts of educational materials. Test selection, administration and scoring, profile interpretation, diagnostic conclusions and report signing must still be handled by qualified, supervised personnel.",
+                "answer": "Try organizing fictional records. The available sources do not establish AI adoption, clinical performance, or job effects for this occupation. Keep real clinical records out of unapproved tools. Qualified and authorized staff remain responsible for interpretation, diagnosis, and sign-off.",
                 "id": "neuropsychologists.faq.3",
                 "question": "Will AI replace neuropsychologists?",
                 "question_key": "career.faq.neuropsychologists.ai-replacement",
                 "source_refs": [
-                  "source-pack-onet-hot_tech"
+                  "source-fermatmind-ai-rubric"
                 ]
               },
               {
@@ -13120,12 +13204,13 @@
                 ]
               },
               {
-                "answer": "Making diagnostic or descriptive conclusions, interpreting test profiles, selecting norms and scoring methods, writing and signing final reports, recommending treatment or medications, and handling informed consent, privacy and urgent risks. Observable verification includes reports traceable to specific administration conditions and validity indicators, alternative explanations for abnormal scores, explicit limitations and uncertainty, and review and signature by a qualified practitioner.",
+                "answer": "Articles 23, 29, and 51 of China’s Mental Health Law distinguish counseling, diagnosis of mental disorders, and psychotherapy in medical institutions. A licensed psychiatrist makes a diagnosis of mental disorder. Check facility requirements for testing records, clinical interpretation, and signing reports separately. U.S. licensure and ABCN certification do not establish authorization in mainland China. Clinical interpretation and report sign-off require appropriate qualification and facility authorization.",
                 "id": "neuropsychologists.faq.5",
                 "question": "Which judgments must remain a human responsibility?",
                 "question_key": "career.faq.neuropsychologists.human-skills",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "asppb-current",
+                  "china-mental-health-law"
                 ]
               },
               {
@@ -13138,39 +13223,42 @@
                 ]
               },
               {
-                "answer": "O*NET places this occupation in Job Zone 5, with an SVP of 8.0 and above. Its education survey reports 84% postdoctoral training and 16% doctoral degrees. The typical US pathway involves an APA- or CPA-accredited psychology doctoral program, an accredited internship and two full-time years, or the equivalent half-time duration, of postdoctoral residency training, with at least 50% of the time spent providing integrative clinical neuropsychological services under a neuropsychologist's supervision.",
+                "answer": "For independent U.S. practice, check the licensing board’s requirements for education, supervision, and exams. ABCN clinical neuropsychology certification is separate. For applicants who completed doctoral training or respecialization on or after January 1, 2005, ABCN generally requires the equivalent of two full-time years of postdoctoral training completed on at least a half-time basis. ABCN reviews by training era and provides for individual exceptions.",
                 "id": "neuropsychologists.faq.7",
                 "question": "What education and training are required?",
                 "question_key": "career.faq.neuropsychologists.education",
                 "source_refs": [
-                  "onet-summary"
+                  "abpp-neuropsychology",
+                  "asppb-current"
                 ]
               },
               {
-                "answer": "In the United States, state psychologist licensure is the legal prerequisite for independent practice, typically requiring doctoral education, supervised hours and passing the EPPP. ABPP/ABCN clinical neuropsychology specialty certification is a voluntary professional credential, with a requirement to adopt Houston Conference training standards from January 1, 2005, but does not replace licensure or institutional authorization. In mainland China, psychotherapy providers must be licensed psychiatrists or assistant psychiatrists, or health professionals qualified through the health professional technical qualification examination in psychotherapy. Psychotherapy must take place in medical institutions.",
+                "answer": "For independent U.S. practice, check the licensing board’s requirements for education, supervision, and exams. ABCN clinical neuropsychology certification is separate. For applicants who completed doctoral training or respecialization on or after January 1, 2005, ABCN generally requires the equivalent of two full-time years of postdoctoral training completed on at least a half-time basis. ABCN reviews by training era and provides for individual exceptions. Articles 23, 29, and 51 of China’s Mental Health Law distinguish counseling, diagnosis of mental disorders, and psychotherapy in medical institutions. A licensed psychiatrist makes a diagnosis of mental disorder. Check facility requirements for testing records, clinical interpretation, and signing reports separately. U.S. licensure and ABCN certification do not establish authorization in mainland China.",
                 "id": "neuropsychologists.faq.8",
                 "question": "Are specific credentials mandatory?",
                 "question_key": "career.faq.neuropsychologists.credentials",
                 "source_refs": [
-                  "abpp-neuropsychology"
+                  "asppb-current",
+                  "abpp-neuropsychology",
+                  "china-mental-health-law"
                 ]
               },
               {
-                "answer": "The usual neuropsychology pathway involves a psychology doctorate and two years of postdoctoral training, making career transition costly. A low-cost first step is to use public test descriptions and a fictional case for an exercise in \"test selection + profile interpretation + report outline\" to assess your willingness to undertake standardized testing and writing over the long term. Then verify education, internship and licensing requirements with the target institutions and jurisdiction. The exercise does not authorize diagnosis or practice and cannot replace any legally required qualification.",
+                "answer": "Try N01, then speak to training programs, the licensing board, and target institutions separately. The paper exercise is not an assessment.",
                 "id": "neuropsychologists.faq.9",
                 "question": "What should someone starting from scratch do first?",
                 "question_key": "career.faq.neuropsychologists.career-change",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "neuro-paper"
                 ]
               },
               {
-                "answer": "Consider interests, practical circumstances and task characteristics together: whether you can sustain repetitive standardized administration and scoring, explicitly state uncertainty when evidence is incomplete, and bear the judgment pressure and supervision requirements associated with high-risk populations. Next, verify the target jurisdiction's licensing and supervised-hour requirements, accredited programs' internship and postdoctoral arrangements, and target employers' position structures. Public employment projections are only market signals and cannot replace personal decisions.",
+                "answer": "BLS 19-3039, Psychologists, All Other: about 60,000 jobs in 2025, projected 61,400 in 2035, growth of 2.3%, and about 3,500 annual openings including growth and replacements. This is a combined group, not current vacancies or a separate estimate for neuropsychologists.",
                 "id": "neuropsychologists.faq.10",
                 "question": "Is this career worth entering now, and what should be verified next?",
                 "question_key": "career.faq.neuropsychologists.career-worth",
                 "source_refs": [
-                  "source-pack-onet-localtraining"
+                  "bls-ep-2025-2035"
                 ]
               }
             ]
@@ -13280,7 +13368,7 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "Organize doctoral education, accredited internships, two years of postdoctoral specialty training, and licensure / certification into verifiable stages, explicitly identified as an editorial synthesis."
+                  "For independent U.S. practice, check the licensing board’s requirements for education, supervision, and exams. ABCN clinical neuropsychology certification is separate. For applicants who completed doctoral training or respecialization on or after January 1, 2005, ABCN generally requires the equivalent of two full-time years of postdoctoral training completed on at least a half-time basis. ABCN reviews by training era and provides for individual exceptions."
                 ],
                 "evidence_type": "editorial synthesis",
                 "id": "editorial-context",
@@ -13308,13 +13396,13 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Health and social work industry section: RMB 146,266 / year in urban nonprivate units and RMB 75,631 / year in urban private units; professional and technical personnel in enterprises above designated size in the same industry: RMB 110,500 / year."
+                  "Table 2: CNY 146,266 in urban non-private health and social work units. Table 5: CNY 75,631 in urban private units in the same industry. Table 7: CNY 110,500 for professional and technical employees of enterprises above designated size in that industry. These are 2025 annual means for different populations."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "Average wages for an industry section, without separate figures for neuropsychologists or psychotherapists; the survey excludes individually owned businesses and freelancers.",
+                "limitation": "Industry and broad job-group averages do not establish neuropsychologist pay.",
                 "market": "CN",
                 "name": "Average Annual Wages of Employees in Urban Units in 2025",
                 "period": "2025 data, released 2026-05-15; accessed 2026-09-26",
@@ -13340,7 +13428,8 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "The same O*NET OnLine page as source-pack-onet-details; this page cites its occupational definition and task list sections."
+                  "The same O*NET OnLine page as source-pack-onet-details; this page cites its occupational definition and task list sections.",
+                  "O*NET asked respondents what education a new hire needs: 84% chose postdoctoral training and 16% a doctoral degree. These are U.S. survey responses, not licensing rules, incumbent degrees, or mainland China requirements."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-details",
@@ -13353,9 +13442,9 @@
                 "url": "https://www.onetonline.org/link/details/19-3039.02"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Interest code IS, Job Zone 5, education survey composition of 84% postdoctoral training and 16% doctoral degrees, and employment of 55,300 in 2024, growth of 4% and 3,900 average annual openings under the Psychologists, All Other category."
+                  "19-3039.02 tasks include assessments, clinical reports, interviews, and follow-up baselines. Work context and education responses follow their survey scope."
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "onet-summary",
@@ -13383,19 +13472,19 @@
                 "url": "https://www.onetcenter.org/taxonomy.html"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Employment of 55,300 in 2024, projected employment of 57,700 in 2034, growth of 4% (average), and 3,900 average annual openings, all for Psychologists, All Other."
+                  "BLS 19-3039, Psychologists, All Other: about 60,000 jobs in 2025, projected 61,400 in 2035, growth of 2.3%, and about 3,500 annual openings including growth and replacements. This is a combined group, not current vacancies or a separate estimate for neuropsychologists."
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "Macroeconomic projections for a combined category, not an individual's probability of being hired.",
                 "market": "US",
-                "name": "National Employment Trends: 19-3039.02 - Neuropsychologists",
-                "period": "BLS 2024—2034 projections via O*NET; accessed 2026-09-26",
+                "name": "BLS Employment Projections Table 1.2: 19-3039 parent group",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localtrends/19-3039.02"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -13488,19 +13577,19 @@
                 "url": "https://www.onetonline.org/link/localcert/19-3039.02"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Article Twenty-Three: psychological counselors may not provide psychotherapy or diagnose or treat mental disorders. Article Fifty-One: psychotherapy must take place in medical institutions; personnel specializing in psychotherapy may not diagnose mental disorders, prescribe medications for patients with mental disorders or provide surgical treatment."
+                  "Articles 23, 29, and 51 of China’s Mental Health Law distinguish counseling, diagnosis of mental disorders, and psychotherapy in medical institutions. A licensed psychiatrist makes a diagnosis of mental disorder. Check facility requirements for testing records, clinical interpretation, and signing reports separately. U.S. licensure and ABCN certification do not establish authorization in mainland China."
                 ],
                 "evidence_type": "national law",
                 "id": "china-mental-health-law",
                 "limitation": "Defines the legal boundaries of psychotherapy and the diagnosis and treatment of mental disorders; does not establish a separate qualification category for neuropsychological assessment.",
                 "market": "CN",
                 "name": "Mental Health Law of the People's Republic of China",
-                "period": "Adopted 2012-10-26, amended 2018-04-27; accessed 2026-09-26",
+                "period": "Text as amended in 2018",
                 "publisher": "Standing Committee of the National People's Congress (Chinese Government website)",
                 "scope": "exact",
-                "url": "https://www.gov.cn/guoqing/2021-10/29/content_5647635.htm"
+                "url": "https://wjw.shanxi.gov.cn/zfxxgk/fdzdgknr/flfg/fl/202505/t20250509_9830994.shtml"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -13533,9 +13622,9 @@
                 "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/zhgl/jytabl/tadf/202501/t20250123_535325.html"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "General requirements include an APA/CPA-accredited doctoral program, an accredited internship and a license for independent practice. Specialty requirements include educational experience in 8 core knowledge areas and postdoctoral residency training with at least 50% of time spent providing integrative clinical neuropsychological services under a neuropsychologist's supervision. ABCN applies Houston Conference training standards to those completing training on or after 2005-01-01."
+                  "For independent U.S. practice, check the licensing board’s requirements for education, supervision, and exams. ABCN clinical neuropsychology certification is separate. For applicants who completed doctoral training or respecialization on or after January 1, 2005, ABCN generally requires the equivalent of two full-time years of postdoctoral training completed on at least a half-time basis. ABCN reviews by training era and provides for individual exceptions."
                 ],
                 "evidence_type": "professional board certification requirements",
                 "id": "abpp-neuropsychology",
@@ -13545,7 +13634,7 @@
                 "period": "current requirements; accessed 2026-09-26",
                 "publisher": "American Board of Professional Psychology",
                 "scope": "exact",
-                "url": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific"
+                "url": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific/"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -13595,7 +13684,7 @@
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "All psychologists combined: median annual wage of USD 99,110 in May 2025, employment of 209,400 in 2025, growth of 6% over 2025—2035 and approximately 11,300 average annual openings."
+                  "The handbook describes psychologists and their occupational groups. For this page’s employment projections, use row 19-3039 of Table 1.2."
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "bls-ooh-psychologists",
@@ -13638,9 +13727,9 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-11",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Licensing requirements vary by jurisdiction. Consult PSY|Book, then verify with the target board; there is no uniform two-year postdoctoral requirement."
+                  "Check the applicable jurisdiction for psychologist licensure, education, examinations, and supervised experience."
                 ],
                 "evidence_type": "official",
                 "id": "asppb-current",
@@ -13650,7 +13739,7 @@
                 "period": "Current",
                 "publisher": "ASPPB Psychology Licensure",
                 "scope": "contextual",
-                "url": "https://asppb.net/licensure/"
+                "url": "https://asppb.net/consumers/choosing-a-psychologist/requirements-to-practice/"
               },
               {
                 "accessed_at": "2026-10-11",
@@ -13684,20 +13773,71 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Interview patients and informants and collect comprehensive histories — 25/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Select and administer standardized neuropsychological tests — 25/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Score, integrate and interpret test profiles — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                  "Fictional paperwork can illustrate text organization. Available evidence does not support a score for specialty performance, adoption, or job effects."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "Editorial note",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "No impact score and no real cases or protected test materials.",
+                "name": "FermatMind: Evidence for AI task claims",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The Institute of Psychology, Chinese Academy of Sciences, posted two tester positions on October 29, 2026. It asked for graduate education in psychology, cognitive science, education, sociology, or a related field, with psychology preferred. The work includes standardized testing and preliminary analysis submitted for review. The posting gives project employment terms but no salary figure. The center required applicants to pass its pre-employment training and assessment."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "cas-testing-job",
+                "limitation": "Research support example, not clinical neuropsychology authorization.",
+                "name": "CAS Institute of Psychology testing center job notice",
+                "period": "2026-10-29",
+                "publisher": "Institute of Psychology, Chinese Academy of Sciences",
+                "scope": "recruitment_proxy",
+                "url": "https://psych.cas.cn/team/rczp/202610/t20261029_8300114.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Qinghai’s 2025 public health recruitment plan lists one clinical psychiatry department psychotherapist position at Qinghai Third People’s Hospital (role code 1166300000002560004). It lists bachelor’s education and degree, applied psychology, and ability to work with psychological scales and assessments. The plan gives no pay amount. The posting also required a junior-level psychotherapy qualification."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "qinghai-psych-job",
+                "limitation": "One hospital example on PDF page 9; no national threshold.",
+                "name": "Qinghai recruitment plan: role 1166300000002560004",
+                "period": "2025",
+                "publisher": "Qinghai Health Commission",
+                "scope": "recruitment_proxy",
+                "url": "https://wsjkw.qinghai.gov.cn/tzgg_0/202504/P020250424561167707172.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Paper exercise on provenance, versions, permitted sharing, and handoff."
+                ],
+                "evidence_type": "Fictional paper exercise",
+                "id": "neuro-paper",
+                "limitation": "No real patient information, testing material, or clinical interpretation.",
+                "name": "FermatMind: fictional N01 records",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "details": [
+                  "Personal information handlers must implement safeguards based on risk and define access permissions."
+                ],
+                "evidence_type": "Statutory text",
+                "id": "china-pipl",
+                "limitation": "Mainland China personal information obligations, where applicable.",
+                "name": "China’s Personal Information Protection Law, Article 51",
+                "period": "2026-11-09",
+                "publisher": "Ministry of Industry and Information Technology of China",
+                "scope": "contextual",
+                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
               }
             ]
           },
@@ -13794,7 +13934,7 @@
             "职业方向": "Neurologists"
           },
           {
-            "关键区别": "Typically do not conduct systematic neuropsychological assessments; their training pathway does not include two years of neuropsychology postdoctoral specialty training",
+            "关键区别": "Clinical psychology services can overlap. Specialty assessment depends on training and authorization.",
             "更适合什么选择": "Consider this direction if you prefer general psychological assessment and therapy",
             "核心工作与产出": "Provide general psychological assessment and psychotherapy and issue psychological reports",
             "职业方向": "Clinical psychologists"
@@ -13885,7 +14025,7 @@
             }
           }
         ],
-        "answer": "Tools may assist with history and referral summaries, test checklist verification, report formatting checks and drafts of educational materials. Test selection, administration and scoring, profile interpretation, diagnostic conclusions and report signing remain the responsibility of qualified personnel working within a supervisory system. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page.",
+        "answer": "Try organizing fictional records. The available sources do not establish AI adoption, clinical performance, or job effects for this occupation. Keep real clinical records out of unapproved tools. Qualified and authorized staff remain responsible for interpretation, diagnosis, and sign-off.",
         "authority_links": [
           {
             "来源": "O*NET 19-3039.02 occupational profile",
@@ -14121,8 +14261,8 @@
             "当前变化": "Formatting and checklist items may receive assistance"
           },
           {
-            "人的控制点": "The practitioner remains responsible for diagnosis and treatment recommendations",
-            "任务": "Diagnose and treat conditions associated with central nervous system damage",
+            "人的控制点": "Qualified and authorized staff remain responsible for clinical judgments in their scope. The appropriate medical team treats the underlying condition.",
+            "任务": "The U.S. role assesses cognitive and behavioral effects of central nervous system disease or injury and participates in treatment or referrals within authorized scope.",
             "工作方向": "Diagnosis and treatment",
             "当前变化": "Draft differential checklists are only candidates for trials; clinical performance has not been verified"
           },
@@ -14205,13 +14345,13 @@
             "stage": "Specialty, supervision or quality lead"
           }
         ],
-        "direct_answer": "First verify the intended practice jurisdiction, job responsibilities, psychology education, supervised experience, examinations, licensure and institutional permissions. The US O*NET survey reports 84% postdoctoral training and 16% doctoral degrees; these are not licensing rules. ABCN specialty certification requires the equivalent of two postdoctoral years for specified training cohorts and cannot substitute for licensing requirements in every state. Chinese psychotherapy and neuropsychological assessment qualifications do not map one-to-one. Psychiatrists also require standardized psychotherapy training; the health qualification pathway does not confer authority to diagnose mental disorders or prescribe medications.",
+        "direct_answer": "Decide whether you want clinical assessment, testing support, or research. Check local licensure, training, and facility authorization separately. ABCN has separate criteria based on training era.",
         "entry_heading": "From doctoral and postdoctoral specialty training to licensure and specialty certification",
         "heading": "Entry, qualifications and career development pathways for neuropsychologists",
         "locale_requirements": {
-          "credential_boundary": "Degrees, accredited internships, postdoctoral training, state psychologist licensure, ABPP/ABCN specialty certification and institutional authorization are distinct statuses. Specialty certification is a voluntary professional credential and does not replace licensure or institutional authorization. In China, distinguish physician qualifications from health professional technical qualifications in psychotherapy. Qualifications for other health technical positions do not confer authority for psychological assessment, diagnosis or report signing.",
-          "jurisdiction": "Occupational facts on this page use the US O*NET 19-3039.02 definition. US licensing and certification references include jurisdictional psychology boards, ASPPB, ABPP/ABCN and AACN training guidelines. Chinese qualification and setting references include the Mental Health Law of the People's Republic of China, Psychotherapy Standards (2013 edition) and the Ministry of Human Resources and Social Security response on professional title policy. Current regulations and policies for other jurisdictions and institutions require separate verification.",
-          "summary": "ABCN certification requirements vary by the completion date of doctoral training or respecialization. For completion on or after 2005-01-01, postdoctoral training equivalent to two full-time years, scheduled at least half-time, is required. At least 50% of postdoctoral training must involve supervised clinical neuropsychological services; specific supplementary guidelines require at least 50% of those clinical services to involve integrative assessment. The overview also states that services must be integrative. Verify these requirements through application review; they cannot be reduced to a uniform duration for every position. O*NET84/16 is a US education survey. The two qualification categories in China's 2013 psychotherapy standards are not equivalent to US licensure or a one-to-one occupational mapping."
+          "credential_boundary": "Articles 23, 29, and 51 of China’s Mental Health Law distinguish counseling, diagnosis of mental disorders, and psychotherapy in medical institutions. A licensed psychiatrist makes a diagnosis of mental disorder. Check facility requirements for testing records, clinical interpretation, and signing reports separately. U.S. licensure and ABCN certification do not establish authorization in mainland China.",
+          "jurisdiction": "Check the U.S. jurisdictional licensing board and ABCN separately. In mainland China, check the Mental Health Law and the facility.",
+          "summary": "For independent U.S. practice, check the licensing board’s requirements for education, supervision, and exams. ABCN clinical neuropsychology certification is separate. For applicants who completed doctoral training or respecialization on or after January 1, 2005, ABCN generally requires the equivalent of two full-time years of postdoctoral training completed on at least a half-time basis. ABCN reviews by training era and provides for individual exceptions."
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14228,19 +14368,19 @@
             "scope": "Interest code and education composition"
           },
           {
-            "href": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific",
+            "href": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific/",
             "id": "abcn",
             "label": "ABPP — clinical neuropsychology specialty requirements",
             "scope": "Postdoctoral training and specialty certification requirements"
           },
           {
-            "href": "https://www.gov.cn/guoqing/2021-10/29/content_5647635.htm",
+            "href": "https://wjw.shanxi.gov.cn/zfxxgk/fdzdgknr/flfg/fl/202505/t20250509_9830994.shtml",
             "id": "cn",
             "label": "Mental Health Law of the People's Republic of China",
-            "scope": "Chinese psychotherapy setting and personnel boundaries"
+            "scope": "Mainland China responsibilities for counseling, diagnosis of mental disorders, and psychotherapy."
           },
           {
-            "href": "https://asppb.net/licensure/",
+            "href": "https://asppb.net/consumers/choosing-a-psychologist/requirements-to-practice/",
             "id": "asppb-current",
             "label": "ASPPB jurisdictional licensure",
             "scope": "Verify specific requirements with the board in the intended practice jurisdiction"
@@ -14641,22 +14781,22 @@
             "scope": "US wages and percentiles (combined category)"
           },
           {
-            "href": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific",
+            "href": "https://abpp.org/application-information/learn-about-specialty-boards/clinical-neuropsychology/specialty-specific/",
             "id": "abcn",
             "label": "ABPP — clinical neuropsychology specialty requirements",
             "scope": "Training, supervision and specialty competence requirements"
           },
           {
-            "href": "https://wsjk.fuxin.gov.cn/wjw/file/2022-01-24/1643009036431ff8080817de469ed396017e8af8508f7143.pdf",
+            "href": "https://wjw.shanxi.gov.cn/zfxxgk/fdzdgknr/flfg/fl/202505/t20250509_9830994.shtml",
             "id": "law",
-            "label": "Mental Health Law of the People's Republic of China",
-            "scope": "Psychotherapy setting and personnel qualification boundaries"
+            "label": "China’s Mental Health Law, Articles 23, 29, and 51",
+            "scope": "Distinguishes counseling, diagnosis of mental disorders, and psychotherapy in medical institutions."
           },
           {
-            "href": "https://ncmhc.org.cn/channel/newsinfo/6298",
+            "href": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html",
             "id": "privacy",
-            "label": "Psychotherapy Standards (2013 edition)",
-            "scope": "Psychotherapy provider qualifications and ethical requirements"
+            "label": "China’s Personal Information Protection Law, Article 51",
+            "scope": "Authorization and protective measures for personal information."
           }
         ]
       },
@@ -14977,7 +15117,7 @@
           }
         ]
       },
-      "definition_block": "Neuropsychologists (O*NET-SOC 19-3039.02) center their work on standardized assessment and clinical reports: interviewing and taking histories, administering neuropsychological tests and scales, integrating observations and informant information to interpret cognitive, emotional and behavioral performance, diagnosing and treating conditions associated with central nervous system damage, and establishing follow-up baselines. Actual permitted activities depend on psychologist licensure, institutional authorization and jurisdictional rules. The occupational title itself does not confer physician status or prescribing authority. Diagnosis, treatment and report signing each require verification of jurisdictional licensure and institutional permissions; psychotherapy and neuropsychological assessment do not map one-to-one to Chinese qualifications.",
+      "definition_block": "O*NET 19-3039.02 describes the U.S. occupation: neuropsychologists combine history, interviews, standardized tests, and observations to interpret cognitive and behavioral findings and write clinical reports. The U.S. profile also lists some diagnosis, treatment, and rehabilitation duties. In mainland China, a licensed psychiatrist diagnoses mental disorders. Check facility rules separately for testing records, clinical interpretation, and signing reports.",
       "faq_block": {
         "items": {
           "$item": "neuropsychologists.sources.faq-block.1",
@@ -14993,7 +15133,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
-        "summary": "Conduct a nonclinical exercise using a fictional case: specify the referral question and key history, select three tests matching your hypotheses and explain the reasons, provide two alternative explanations for the profile interpretation, and write a paragraph of feedback for family members. The exercise does not authorize diagnosis, scoring or practice.",
+        "summary": "Neuropsychology turns interviews, history, standardized tests, and observations into a reviewable report. Try N01 with fictional records to practice version and authorization handoff.",
         "title": "Neuropsychologists"
       },
       "fit_decision_checklist": {
@@ -15205,7 +15345,7 @@
             "alternate_value": null,
             "label": "Preparation level",
             "secondary_value": null,
-            "value": "Job Zone 5: extensive preparation required, SVP 8.0 and above; education survey shows 84% postdoctoral training and 16% doctoral degrees"
+            "value": "O*NET asked respondents what education a new hire needs: 84% chose postdoctoral training and 16% a doctoral degree. These are U.S. survey responses, not licensing rules, incumbent degrees, or mainland China requirements."
           },
           {
             "alternate_value": null,
@@ -15406,7 +15546,7 @@
             "question": "Can interest code IS determine whether this career fits me?"
           },
           {
-            "answer": "The US O*NET survey reports 84% postdoctoral training and 16% doctoral degrees. JobZone5 describes a preparation group; clinical licensing depends on the jurisdiction, and ABCN specialty certification training requirements must be verified separately.",
+            "answer": "O*NET asked respondents what education a new hire needs: 84% chose postdoctoral training and 16% a doctoral degree. These are U.S. survey responses, not licensing rules, incumbent degrees, or mainland China requirements.",
             "question": "What education is required?"
           },
           {
@@ -15418,7 +15558,7 @@
             "question": "Can someone without a psychology degree transition into this career?"
           },
           {
-            "answer": "ABCN certification requirements vary by the completion date of doctoral training or respecialization. For completion on or after 2005-01-01, postdoctoral training equivalent to two full-time years, scheduled at least half-time, is required. At least 50% of postdoctoral training must involve supervised clinical neuropsychological services; specific supplementary guidelines require at least 50% of those clinical services to involve integrative assessment. The overview also states that services must be integrative. Verify these requirements through application review; they cannot be reduced to a uniform duration for every position. Verify state licensing supervised-hour requirements separately.",
+            "answer": "For applicants who finished doctoral training or respecialization on or after January 1, 2005, ABCN generally requires the equivalent of two full-time years of postdoctoral training completed on at least a half-time basis. At least 50% of residency time is spent on neuropsychology-related activities, which can include supervised clinical activity in research. The committee considers exceptions case by case.",
             "question": "How much supervision is required?"
           },
           {
@@ -15434,7 +15574,7 @@
             "question": "Can assessment results serve as evidence for hiring?"
           },
           {
-            "answer": "Use a fictional case to practice test selection, profile interpretation and a report outline, and request feedback from a qualified clinician.",
+            "answer": "In the entry section, try N01 with three fictional K7 records. Check revision, provenance, review sign-off, and sharing permission. It uses no real tests, clinical scores, or diagnoses.",
             "question": "What kind of low-cost trial should I start with?"
           }
         ],
@@ -15453,7 +15593,7 @@
             "tone": "caution"
           },
           {
-            "body": "Use a fictional case to practice test selection and profile interpretation, and obtain evaluation from qualified clinicians in a compliant teaching environment.",
+            "body": "In the entry section, try N01 with three fictional K7 records. Check revision, provenance, review sign-off, and sharing permission. It uses no real tests, clinical scores, or diagnoses.",
             "id": "experiment",
             "label": "Low-cost trial",
             "tone": "action"
@@ -15538,8 +15678,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "Selected O*NET2026 responsibilities / education, OEWS2025 parent-category national five percentile values (UnitedStates row on the state page), BLS2025—2035 parent-category growth of 2.3% and 3,500 average annual openings, and 2025 industry details have been verified. ABCN certification is separate from jurisdictional licensure; the Chinese 2013 standards PDF adds physician training requirements. The original separate industry, ABCN process and human resources and social security response pages were not obtained. Historical projection, qualification and training descriptions shared by the quick-answer FAQ have not been synchronized throughout the page.",
-          "updated_at": "Reviewed 2026-10-11; selected wage / industry data from 2025 and projections for 2025—2035; protected shared older versions retained."
+          "source": "O*NET 19-3039.02 duties, BLS parent-group pay and outlook, ASPPB and ABCN requirements, mainland China law, and two adjacent job postings.",
+          "updated_at": "Sources checked November 9, 2026"
         },
         "note": "The evidence supports only scope-limited judgments within the specified markets, occupational definitions and periods. It does not establish individual income, hiring or practice authorization. Assessment, diagnosis and report signing must be performed by qualified personnel within their supervision or institutional authorization.",
         "secondary_links": [
@@ -15585,7 +15725,7 @@
           }
         ]
       },
-      "work_context_block": "US O*NET survey: 96% work indoors in environmentally controlled conditions daily, 60% have face-to-face discussions daily and 32% several times a week, 80% work more than 40 hours per week, and 96% have regular schedules. These figures do not represent every Chinese institution. Quality controls are editorial recommendations: retain administration conditions, rationales for scoring and norm selection, interpretive limitations and review records; do not use report speed as the sole metric."
+      "work_context_block": "U.S. O*NET survey responses: 96% selected daily indoor work in a controlled environment; 60% selected daily face-to-face discussions and 32% selected at least weekly but not daily; 80% selected a typical workweek over 40 hours. Check location, schedule, and review arrangements for the actual position."
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -15624,6 +15764,20 @@
         "id": "neuropsychologists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "neuropsychologists.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "neuropsychologists.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
       }
     ],
     "path": {
@@ -15634,7 +15788,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and work tasks",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -15689,14 +15843,14 @@
       },
       {
         "derivation": null,
-        "display_value": "84% postdoctoral training; 16% doctoral degree",
+        "display_value": "O*NET asked respondents what education a new hire needs: 84% chose postdoctoral training and 16% a doctoral degree. These are U.S. survey responses, not licensing rules, incumbent degrees, or mainland China requirements.",
         "fact_id": "education-profile",
         "market": "United States",
-        "measure": "Survey of education requirements for new hires",
+        "measure": "U.S. survey responses about preparation for new hires",
         "occupation_scope": "Exact occupation 19-3039.02",
-        "period": "O*NET 2026 education survey; accessed 2026-09-26",
+        "period": "2026",
         "source_refs": [
-          "onet-summary"
+          "onet-details"
         ]
       },
       {
@@ -15773,38 +15927,38 @@
       },
       {
         "derivation": null,
-        "display_value": "55,300 people (2024)",
+        "display_value": "About 60,000 jobs (2025 parent group)",
         "fact_id": "us-employment",
         "market": "United States",
-        "measure": "Employment level",
+        "measure": "2025 parent-group employment",
         "occupation_scope": "Combined Psychologists, All Other (19-3039) category",
-        "period": "2024 employment, relayed by O*NET; accessed 2026-09-26",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Average (4%, 2024—2034)",
+        "display_value": "Projected growth: 2.3% (2025–35 parent group)",
         "fact_id": "us-growth",
         "market": "United States",
-        "measure": "Employment projections",
+        "measure": "Parent-group growth",
         "occupation_scope": "Combined Psychologists, All Other (19-3039) category",
-        "period": "BLS 2024—2034 projections, relayed by O*NET; accessed 2026-09-26",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "3,900 openings (annual average, 2024—2034)",
+        "display_value": "About 3,500 per year (2025–35 parent group)",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Projected job openings",
+        "measure": "Parent-group average annual openings",
         "occupation_scope": "Combined Psychologists, All Other (19-3039) category; includes growth and replacement needs",
-        "period": "BLS 2024—2034 projections, relayed by O*NET; accessed 2026-09-26",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -15833,29 +15987,27 @@
       },
       {
         "derivation": null,
-        "display_value": "State psychologist license (EPPP and supervised hours) + 2 years of postdoctoral specialty training; ABPP/ABCN specialty certification is a voluntary credential",
+        "display_value": "For independent U.S. practice, check the licensing board’s requirements for education, supervision, and exams. ABCN clinical neuropsychology certification is separate. For applicants who completed doctoral training or respecialization on or after January 1, 2005, ABCN generally requires the equivalent of two full-time years of postdoctoral training completed on at least a half-time basis. ABCN reviews by training era and provides for individual exceptions.",
         "fact_id": "credential-us",
         "market": "United States",
         "measure": "US qualification and certification pathway",
         "occupation_scope": "Practice and certification associated with exact occupation 19-3039.02",
         "period": "Current ASPPB, ABPP/ABCN and AACN requirements; accessed 2026-09-26",
         "source_refs": [
-          "asppb-licensure",
-          "abpp-neuropsychology",
-          "minnesota-guidelines"
+          "asppb-current",
+          "abpp-neuropsychology"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Psychotherapy must take place in medical institutions and be provided by licensed psychiatrists or assistant psychiatrists, or health professionals qualified through the health professional technical qualification examination in psychotherapy",
+        "display_value": "Articles 23, 29, and 51 of China’s Mental Health Law distinguish counseling, diagnosis of mental disorders, and psychotherapy in medical institutions. A licensed psychiatrist makes a diagnosis of mental disorder. Check facility requirements for testing records, clinical interpretation, and signing reports separately. U.S. licensure and ABCN certification do not establish authorization in mainland China.",
         "fact_id": "credential-cn",
         "market": "Mainland China",
         "measure": "Chinese qualification and training pathway",
         "occupation_scope": "Psychotherapy positions in medical institutions; no one-to-one corresponding \"neuropsychologist\" practice category",
         "period": "Mental Health Law and Psychotherapy Standards (2013 edition); accessed 2026-09-26",
         "source_refs": [
-          "china-mental-health-law",
-          "china-psychotherapy-regulation"
+          "china-mental-health-law"
         ]
       },
       {
@@ -15883,27 +16035,15 @@
           "onet-wages",
           "source-pack-onet-details"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+25+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Neuropsychologists",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and work tasks"
     },
     "badges": [
       "Neuropsychological assessment and clinical reports",
@@ -15915,31 +16055,31 @@
         "availability": "available",
         "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "US wage reference"
+        "label": "U.S. parent-group median pay"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "US employment growth"
+        "label": "U.S. parent-group employment growth"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "US employment"
+        "label": "U.S. parent-group employment"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "US average annual job openings"
+        "label": "U.S. parent-group annual openings"
       },
       {
         "availability": "available",
         "fact_ref": "cn-wage-proxy",
         "key": "china_pay",
-        "label": "Mainland China wage reference"
+        "label": "Mainland China health and social work industry mean"
       }
     ]
   },
@@ -15947,17 +16087,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Neuropsychologists (O*NET 19-3039.02) use interviews, history taking and standardized neuropsychological tests to assess cognitive, emotional and behavioral performance, diagnose conditions associated with central nervous system damage, establish follow-up baselines and write clinical neuropsychological reports. This page explains their tasks, two years of postdoctoral specialty training, licensure / certification boundaries, and Chinese and US wage and employment definitions."
+      "text": "Learn how neuropsychologists combine history, cognitive testing, and observations. Compare U.S. licensure, specialty certification, and adjacent mainland China roles."
     },
     "title": {
       "availability": "available",
-      "text": "Neuropsychologists"
+      "text": "Neuropsychologist Career Guide: Assessment, Training, and Scope"
     }
   },
-  "source_content_sha256": "2acb19ac2b6e5efe358c135c19e04fb3ad4d9d5321959c40931f91af5dbac282",
+  "source_content_sha256": "8700bc6fee98f06ee18415ac676393f1b08dda832fbdfbb812ca744f00044fef",
   "subject": {
     "canonical_slug": "neuropsychologists",
     "name": "Neuropsychologists",
-    "summary": "Neuropsychologists (O*NET-SOC 19-3039.02) center their work on standardized assessment and clinical reports: interviewing and taking histories, selecting and administering neuropsychological tests and scales, integrating behavioral observations and informant information to interpret cognitive, emotional and behavioral performance, diagnosing and treating conditions associated with central nervous system damage, establishing neurobehavioral baselines for follow-up, writing clinical neuropsychological reports, and providing feedback and recommendations to patients, families and referring professionals. This page uses only official sources to explain occupational scope, tasks, preparation requirements, Chinese and US statistical definitions, and authorization boundaries."
+    "summary": "Neuropsychologists integrate history, interviews, standardized tests, and behavior observations to explain cognitive and behavioral findings to referral teams. Clinical assessment and report sign-off depend on licensure, training, and facility authorization."
   }
 }
