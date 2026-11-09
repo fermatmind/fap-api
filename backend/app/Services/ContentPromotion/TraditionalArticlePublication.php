@@ -112,7 +112,9 @@ final class TraditionalArticlePublication
             $reviewed['/article/tags/'.$index.'/name'] = $tag['label'];
         }
         if ($editorial !== null) {
-            $reviewed += self::editorialReviewFields($editorial, $sourceLocale);
+            // Published article projections can expose up to nine FAQ blocks.
+            $faqLimit = $projectedBatch && $sourceLocale === 'zh-CN' ? 9 : 6;
+            $reviewed += self::editorialReviewFields($editorial, $sourceLocale, $faqLimit);
             // These articles use the runtime's default navigation and assessment CTA.
             // Store only reviewed FAQ copy so publishing it leaves those links in place.
             $sourceCtaTargets = $proofs['production']['editorial_cta_targets'] ?? null;
@@ -317,7 +319,7 @@ final class TraditionalArticlePublication
         return array_map(static fn (array $slot): array => ['key' => $slot['key'], 'kind' => $slot['kind'], 'href' => $slot['href']], $slots);
     }
 
-    private static function editorialReviewFields(array $editorial, string $sourceLocale): array
+    private static function editorialReviewFields(array $editorial, string $sourceLocale, int $faqLimit): array
     {
         $faq = $editorial['answer_surface_v1']['faq_items'] ?? [];
         $ctas = $editorial['cta_slots'] ?? [];
@@ -325,7 +327,7 @@ final class TraditionalArticlePublication
             || ($editorial['answer_surface_policy'] ?? null) !== 'editor_supplied'
             || ($editorial['answer_surface_visibility'] ?? null) !== 'below_intro'
             || array_keys($editorial['answer_surface_v1'] ?? []) !== ['faq_items']
-            || ! array_is_list($faq) || count($faq) > 6 || ! array_is_list($ctas) || count($ctas) > 3) {
+            || ! array_is_list($faq) || count($faq) > $faqLimit || ! array_is_list($ctas) || count($ctas) > 3) {
             throw new DomainException('traditional_article_editorial_package_invalid');
         }
 

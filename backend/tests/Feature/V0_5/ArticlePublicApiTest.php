@@ -1097,6 +1097,36 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', $path);
     }
 
+    public function test_traditional_iq_batch_preserves_nine_reviewed_public_faqs(): void
+    {
+        $directory = base_path('content_assets/public_content_53');
+        $bytes = file_get_contents($directory.'/traditional-article-assessment-reading.json');
+        $review = file_get_contents($directory.'/traditional-article-assessment-reading-review.json');
+        $rows = TraditionalArticlePublication::batch($bytes, $review, 'production')['candidates'];
+        $editorial = $rows[0]['editorial_package_v1'];
+        $faq = $editorial['answer_surface_v1']['faq_items'];
+        $this->assertCount(9, $faq);
+
+        $article = $this->createArticle([
+            'slug' => 'what-is-iq-and-how-it-is-measured',
+            'locale' => 'zh-TW',
+            'title' => $rows[0]['snapshot']['title'],
+        ]);
+        $this->createSeoMeta($article, ['schema_json' => ['editorial_package_v1' => $editorial]]);
+        $this->getJson('/api/v0.5/articles/'.$article->slug.'?org_id=0&locale=zh-TW')
+            ->assertOk()
+            ->assertJsonPath('article.locale', 'zh-TW')
+            ->assertJsonPath('answer_surface_v1.faq_blocks', $faq)
+            ->assertJsonPath('landing_surface_v1.cta_bundle.0.href', '/zh-TW/articles');
+
+        $package = json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);
+        $package['articles'][0]['editorial_package_v1']['answer_surface_v1']['faq_items'][] = [
+            'key' => 'extra_faq', 'question' => '額外問題？', 'answer' => '額外回答。',
+        ];
+        $this->expectExceptionMessage('traditional_article_editorial_package_invalid');
+        TraditionalArticlePublication::batch(json_encode($package, JSON_THROW_ON_ERROR), $review, 'production');
+    }
+
     public function test_article_detail_uses_locale_specific_cms_faq_blocks(): void
     {
         $groupId = 'article_locale_specific_faq_v1';

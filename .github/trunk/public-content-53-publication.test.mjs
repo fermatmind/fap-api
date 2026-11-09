@@ -1478,3 +1478,88 @@ test('Traditional Big Five score-use keeps the source body visual information an
   assert.match(rows[3].snapshot.content_md,/articlebig5zh007bodyv1/u);
  }
 });
+
+test('Traditional IQ articles retain the complete published FAQ and numeric examples',()=>{
+ const selection='traditional-article-assessment-reading';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,10);
+ const identities={production:[[260,807,261,1038],[6,1010,196,1021],[50,1174,197,1178]],staging:[[206,479,207,480],[6,475,196,476],[50,690,197,691]]};
+ for(const [environment,expected] of Object.entries(identities)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(0,3);
+  assert.deepEqual(rows.map(({source_expectations:{source,existing_english:english}})=>[source.id,source.published_revision_id,english.id,english.published_revision_id]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection.faq.length),[9,5,7]);
+  assert.deepEqual(rows.slice(0,2).map(row=>row.editorial_package_v1.cta_slots),[[],[]]);
+  assert.match(rows[0].snapshot.content_md,/100 \+ 15×1 = 115/u);
+  assert.match(rows[1].snapshot.content_md,/18\/30/u);
+  assert.deepEqual(rows[2].editorial_package_v1.cta_slots,[{
+   key:'primary_iq_test',kind:'start_test',href:'/zh/tests/iq-test-intelligence-quotient-assessment',label:'開始 IQ 智商測驗',
+  }]);
+  assert.match(rows[2].snapshot.content_md,/100×Φ\(\(S−100\)÷15\)/u);
+  assert.equal([...rows[2].snapshot.content_md.matchAll(/^\| \d+ \| \d+ \| [\d.]+% \|$/gmu)].length,31);
+ }
+});
+
+test('Traditional IQ practice articles keep the published diagrams, observed paths and official destinations',()=>{
+ const selection='traditional-article-assessment-reading';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,10);
+ const revisions={production:[[1015,1056],[1032,1084],[1033,1035]],staging:[[700,701],[696,697],[710,711]]};
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(3,6);
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english.published_revision_id]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection.faq.length),[4,5,4]);
+  assert.ok(rows.every(row=>row.article_metadata.related_test_slug==='iq-test-intelligence-quotient-assessment'));
+  assert.equal([...rows[0].snapshot.content_md.matchAll(/^```text$/gmu)].length,9);
+  assert.deepEqual([...rows[0].snapshot.content_md.matchAll(/答案為([A-D])/gu)].map(match=>match[1]),['C','C','B','C','D']);
+  assert.match(rows[1].snapshot.content_md,/https:\/\/www\.mensa\.org\.hk\/prior-evidence/u);
+  assert.match(rows[2].snapshot.content_md,/n20261015a/u);
+  assert.match(rows[2].snapshot.content_md,/當時顯示的「超過人群比例」（模型換算）/u);
+ }
+});
+
+test('Traditional EQ and AI guides retain reviewed evidence boundaries and their distinct actions',()=>{
+ const selection='traditional-article-assessment-reading';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,10);
+ const revisions={production:[[1029,1088],[482,1144]],staging:[[791,470],[434,675]]};
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(6,8);
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english.published_revision_id]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection.faq.length),[7,4]);
+  assert.deepEqual(rows.map(row=>row.snapshot.author_name),[null,'FermatMind Editorial']);
+  assert.equal(rows[0].editorial_package_v1.cta_slots[0].href,'/zh/tests/eq-test-emotional-intelligence-assessment');
+  assert.deepEqual(rows[0].snapshot.body_visual,{
+   image_url:'https://assets.fermatmind.com/storage/media-library/variants/articleeqscoreemotional-intelligencepillarbody-visualv1/hero_1600x900.jpg',
+   fallback_authorized:false,
+  });
+  assert.deepEqual(rows[1].editorial_package_v1.cta_slots,[]);
+  assert.match(rows[0].snapshot.content_md,/POMP=100×\(S−15\)÷60/u);
+  assert.match(rows[1].snapshot.content_md,/298/u);
+ }
+});
+
+test('Traditional MBTI reading guides preserve preference codes, report scales and the original assessment action',()=>{
+ const selection='traditional-article-assessment-reading';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,10);
+ const revisions={production:[[1078,1091],[1151,893]],staging:[[787,677],[655,729]]};
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(8,10);
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english.published_revision_id]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection.faq.length),[5,0]);
+  assert.equal(rows[1].source_expectations.english_relationship,'independent_published_english');
+  assert.deepEqual(rows.map(row=>row.snapshot.author_name),[null,'Fermat Institute']);
+  assert.ok(rows.every(row=>row.editorial_package_v1.cta_slots[0].href==='/zh/tests/mbti-personality-test-16-personality-types'));
+  assert.match(rows[0].snapshot.content_md,/2 × 2 × 2 × 2/u);
+  assert.match(rows[0].snapshot.content_md,/articlembtibasicspillarbody-visualv1/u);
+  assert.match(rows[1].snapshot.content_md,/93\/144.*0–100.*50 為中點.*A\/T/u);
+  assert.deepEqual(rows[1].snapshot.body_visual,{
+   image_url:'https://assets.fermatmind.com/storage/media-library/variants/articlembti-full-report-career-relationship-communicationbody-visualv3/hero_1600x900.jpg',
+   fallback_authorized:false,
+  });
+ }
+});
