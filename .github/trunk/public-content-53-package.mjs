@@ -10,6 +10,7 @@ const packages = {
   'support-contact': ['fermatmind.public_support_contact.v1', ['support-contact.json','support-contact-review.json']],
   'pricing-refund': ['fermatmind.public_content_pricing_refund.v1', ['pricing-refund.json','pricing-refund-review.json']],
   'traditional-article-batch': ['fermatmind.traditional_article_batch.v1', ['traditional-article-batch.json','traditional-article-batch-review.json']],
+  'traditional-article-featured': ['fermatmind.traditional_article_batch.v1', ['traditional-article-featured.json','traditional-article-featured-review.json']],
   'traditional-article': ['fermatmind.traditional_article.v1', ['traditional-article.json','traditional-article-review.json']],
   'traditional-entrance': ['fermatmind.traditional_landing_surfaces.v1', ['traditional-entrance.json','traditional-entrance-review.json']],
   'traditional-pages': ['fermatmind.traditional_content_page.v1', ['traditional-pages.json','traditional-pages-review.json']],

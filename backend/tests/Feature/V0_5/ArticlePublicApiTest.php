@@ -1529,6 +1529,17 @@ final class ArticlePublicApiTest extends TestCase
             $tag = ArticleTag::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => 'riasec', 'name' => 'RIASEC', 'is_active' => true]);
             $row['staging_source_taxonomy'] = ['category_id' => null, 'tag_ids' => []];
             $row['taxonomy_display'] = ['category' => $category->only(['id', 'slug']), 'tags' => [$tag->only(['id', 'slug'])]];
+            $this->ensurePublicRiasecRegistry();
+            $faq = [['key' => 'reviewed_faq', 'question' => '如何理解興趣？', 'answer' => '先觀察自己偏好的活動。']];
+            $ctas = [['key' => 'reviewed_cta', 'kind' => 'start_test', 'href' => '/zh/tests/holland-career-interest-test-riasec', 'label' => '開始職涯興趣測驗']];
+            $row['snapshot']['author_name'] = null;
+            $row['snapshot']['editorial_projection'] = ['faq' => $faq, 'ctas' => $ctas];
+            $row['editorial_package_v1'] = [
+                'answer_surface_policy' => 'editor_supplied',
+                'answer_surface_visibility' => 'below_intro',
+                'answer_surface_v1' => ['faq_items' => $faq],
+                'cta_slots' => $ctas,
+            ];
             $tag->update(['is_active' => false]);
             try {
                 DB::transaction(fn () => $candidate->publish($row, $candidate->read($row, true), $context));
@@ -1549,7 +1560,14 @@ final class ArticlePublicApiTest extends TestCase
             ->assertOk()->assertJsonPath('article.locale', 'zh-TW')
             ->assertJsonPath('article.content_md', '## 繁體正文')->assertJsonPath('article.is_indexable', false);
         if ($useStagingTaxonomy) {
-            $published->assertJsonPath('article.category.slug', 'career-exploration')->assertJsonPath('article.tags.0.slug', 'riasec');
+            $published->assertJsonPath('article.category.slug', 'career-exploration')
+                ->assertJsonPath('article.tags.0.slug', 'riasec')
+                ->assertJsonPath('article.author_name', null)
+                ->assertJsonPath('answer_surface_v1.faq_blocks', $row['snapshot']['editorial_projection']['faq'])
+                ->assertJsonCount(1, 'landing_surface_v1.cta_bundle');
+            foreach ($row['snapshot']['editorial_projection']['ctas'][0] as $key => $value) {
+                $published->assertJsonPath('landing_surface_v1.cta_bundle.0.'.$key, $value);
+            }
         }
         DB::transaction(function () use ($candidate, $row): void {
             $candidate->restore($row, $candidate->read($row, true));

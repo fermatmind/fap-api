@@ -117,6 +117,12 @@ export function projection(row,data) {
   }
   if (row.kind === 'guide' && row.snapshot.seo_text) result.seo_text=Object.fromEntries(Object.keys(row.snapshot.seo_text).map(key=>[key,data.seo_meta?.[key]]));
   if (row.kind === 'article' && row.snapshot.seo_text) result.seo_text=Object.fromEntries(Object.keys(row.snapshot.seo_text).filter(key=>Object.hasOwn(value.seo_meta ?? {},key)).map(key=>[key,value.seo_meta[key]]));
+  if (row.kind === 'article' && row.snapshot.editorial_projection) {
+    result.editorial_projection = {
+      faq: data.answer_surface_v1?.faq_blocks ?? [],
+      ctas: data.landing_surface_v1?.cta_bundle ?? [],
+    };
+  }
   if (row.kind === 'profile') Object.assign(result,{sections:data.sections,entry_groups:data.entry_groups,seo_text:{title:data.seo_meta?.seo_title,description:data.seo_meta?.seo_description}});
   return result;
 }
@@ -396,6 +402,10 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
     if (dom.language !== 'zh-TW' || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)])
       || !robots.includes('noindex') || robots.includes('index') || dom.alternate_entries.some(entry=>entry.hreflang))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_SEO_${row.page_id}`);
+    const editorial = row.snapshot.editorial_projection;
+    if (editorial && (editorial.faq.some(({question})=>!body.includes(compact(question)) && !body.includes(compact(plain(question))))
+      || editorial.ctas.some(({href,label})=>!(dom.link_labels[href] ?? []).some(value=>compact(value) === compact(label)))))
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_EDITORIAL_DOM_${row.page_id}`);
   }
   if (newArticle) {
     const languages=dom.alternate_entries.filter(entry=>entry.hreflang).map(entry=>[entry.hreflang,entry.href]).sort();

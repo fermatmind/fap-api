@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPromotion;
 
+use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Support\ArticleSourceTargetSnapshot;
+use App\Support\CanonicalTranslationPayloadHash;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +30,15 @@ final class TraditionalArticleSourcePreflight
             || (int) $source->working_revision_id !== (int) $source->published_revision_id
             || ! hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash())) {
             throw new DomainException('traditional_article_source_working_state_changed');
+        }
+
+        if (isset($proof['editorial_projection_sha256'])) {
+            $response = app(ArticleController::class)->publicDetailProjection($source);
+            $editorial = TraditionalArticlePublication::editorialProjection($response);
+            if (CanonicalTranslationPayloadHash::hash($editorial) !== $proof['editorial_projection_sha256']
+                || TraditionalArticlePublication::ctaTargets($editorial['ctas']) !== ($proof['editorial_cta_targets'] ?? null)) {
+                throw new DomainException('traditional_article_source_editorial_drift');
+            }
         }
 
         $english = $proof['existing_english'];

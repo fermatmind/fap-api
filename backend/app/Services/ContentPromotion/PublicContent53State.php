@@ -195,6 +195,9 @@ final class PublicContent53State
         if (in_array($row['kind'], ['article', 'guide'], true) && isset($row['snapshot']['seo_text'])) {
             $projection['seo_text'] = array_intersect_key(($row['kind'] === 'guide' ? $data['seo_meta'] : $value['seo_meta']) ?? [], $row['snapshot']['seo_text']);
         }
+        if ($row['kind'] === 'article' && isset($row['snapshot']['editorial_projection'])) {
+            $projection['editorial_projection'] = TraditionalArticlePublication::editorialProjection($data);
+        }
         if ($row['kind'] === 'profile') {
             $projection['sections'] = $data['sections'];
             $projection['entry_groups'] = $data['entry_groups'];

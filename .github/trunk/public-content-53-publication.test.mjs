@@ -1052,3 +1052,36 @@ test('Traditional Article batch selects three independently verified native sour
  assert.deepEqual(staging.map(row=>row.snapshot),production.map(row=>row.snapshot));
  assert.ok(staging.every(row=>row.staging_source_taxonomy.category_id===null && row.taxonomy_display.category.id===11));
 });
+
+test('Traditional Article featured package preserves reviewed editorial output in each environment',()=>{
+ const files=['backend/content_assets/public_content_53/traditional-article-featured.json','backend/content_assets/public_content_53/traditional-article-featured-review.json'];
+ assert.equal(classifyPaths(files).operations.public_content_53_package,'traditional-article-featured');
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ const binding=inspectPackage(root,'traditional-article-featured');
+ assert.equal(binding.expected_row_count,4);
+ for (const environment of ['production','staging']) {
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates;
+  assert.deepEqual(rows.map(row=>row.identity.slug),[
+   'riasec-holland-career-interest-test-explained','holland-career-interest-test-can-and-cannot-tell-you',
+   'mbti-narrative-portrait','big-five-tool-guide',
+  ]);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection.faq.length),[6,4,6,5]);
+  assert.ok(rows.every(row=>row.snapshot.editorial_projection.ctas.length===1));
+  assert.equal(rows[2].snapshot.author_name,null);
+  for (const row of rows) {
+   const expected=row.snapshot.editorial_projection;
+   const actual=projection(row,{
+    ok:true,article:{...row.identity,status:'published',is_public:true},
+    answer_surface_v1:{faq_blocks:expected.faq},landing_surface_v1:{cta_bundle:expected.ctas},
+   });
+   assert.deepEqual(actual.editorial_projection,expected);
+   const {href,label}=expected.ctas[0];
+   const faq=expected.faq.map(({question})=>'<summary>'+question+'</summary>').join('');
+   const html='<html lang="zh-TW"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://fermatmind.com'+pathFor(row)+'"></head><body><main><h1>繁體文章</h1>'+faq+'<a href="'+href+'">'+label+'</a></main></body></html>';
+   const editorialRow={...row,snapshot:{content_md:'繁體文章',editorial_projection:expected}};
+   assert.doesNotThrow(()=>assertDom(editorialRow,html,{missing:true},environment));
+   assert.throws(()=>assertDom(editorialRow,html.replace(href,'/zh/tests'),{missing:true},environment),/TRADITIONAL_ARTICLE_EDITORIAL_DOM/);
+   assert.throws(()=>assertDom(editorialRow,html.replace(faq,''),{missing:true},environment),/TRADITIONAL_ARTICLE_EDITORIAL_DOM/);
+  }
+ }
+});

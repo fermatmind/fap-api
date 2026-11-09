@@ -93,6 +93,7 @@ final class TraditionalArticlePublication
             throw new DomainException('traditional_article_package_protected_fields');
         }
 
+        $editorial = $package['editorial_package_v1'] ?? null;
         $reviewed = [
             '/article/title' => $revision['title'], '/article/excerpt' => $revision['excerpt'],
             '/article/content_md' => $revision['content_md'], '/article/author_name' => $article['author_name'],
@@ -103,6 +104,18 @@ final class TraditionalArticlePublication
         ];
         foreach ($mapping['taxonomy_display']['tags'] as $index => $tag) {
             $reviewed['/article/tags/'.$index.'/name'] = $tag['label'];
+        }
+        if ($editorial !== null) {
+            $reviewed += self::editorialReviewFields($editorial);
+            if (self::ctaTargets($editorial['cta_slots']) !== ($proofs['production']['editorial_cta_targets'] ?? null)) {
+                throw new DomainException('traditional_article_editorial_cta_drift');
+            }
+            foreach (['author_name', 'cover_image_alt'] as $field) {
+                if ($article[$field] === null && array_key_exists($field, $proofs['production']['source']['snapshot_sha256'])
+                    && $proofs['production']['source']['snapshot_sha256'][$field] === null) {
+                    unset($reviewed['/article/'.$field]);
+                }
+            }
         }
         if (count($reviewed) !== count($review['fields'] ?? [])) {
             throw new DomainException('traditional_article_review_coverage_invalid');
@@ -137,12 +150,20 @@ final class TraditionalArticlePublication
 
         $stagingTaxonomy = $package['staging_source_taxonomy'] ?? null;
         if ($batch) {
-            if ($stagingTaxonomy !== ['category_id' => null, 'tag_ids' => []]
+            if ($editorial === null ? ($stagingTaxonomy !== ['category_id' => null, 'tag_ids' => []]
                 || ! array_key_exists('cover_image_alt', $proofs['staging']['source']['snapshot_sha256'])
-                || $proofs['staging']['source']['snapshot_sha256']['cover_image_alt'] !== null) {
+                || $proofs['staging']['source']['snapshot_sha256']['cover_image_alt'] !== null)
+                : (array_keys($stagingTaxonomy ?? []) !== ['category_id', 'tag_ids']
+                    || ! is_int($stagingTaxonomy['category_id']) || ! array_is_list($stagingTaxonomy['tag_ids']))) {
                 throw new DomainException('traditional_article_batch_staging_source_invalid');
             }
             foreach ($proofs as $name => $proof) {
+                if ($editorial !== null && ! preg_match('/\A[a-f0-9]{64}\z/', $proof['editorial_projection_sha256'] ?? '')) {
+                    throw new DomainException('traditional_article_editorial_source_invalid');
+                }
+                if ($editorial !== null && $name === 'staging') {
+                    continue;
+                }
                 $sourceHashes = $proof['source']['snapshot_sha256'];
                 foreach (['title', 'excerpt', 'content_md', 'author_name', 'seo_title', 'seo_description', 'og_title', 'og_description', 'cover_image_alt'] as $field) {
                     if ($name === 'staging' && $field === 'cover_image_alt') {
@@ -169,14 +190,62 @@ final class TraditionalArticlePublication
             'source_expectations' => $proofs[$environment],
             'allow_staging_prepared_root' => $environment === 'staging',
             'article_metadata' => $article,
+            'editorial_package_v1' => $editorial,
             'taxonomy_display' => $mapping['taxonomy_display'],
             'snapshot' => [
                 'title' => $revision['title'], 'excerpt' => $revision['excerpt'], 'content_md' => $revision['content_md'],
                 'author_name' => $article['author_name'], 'cover_image_alt' => $article['cover_image_alt'],
+                ...($editorial === null ? [] : ['editorial_projection' => [
+                    'faq' => $editorial['answer_surface_v1']['faq_items'], 'ctas' => $editorial['cta_slots'],
+                ]]),
                 'seo_text' => ['seo_title' => $revision['seo_title'], 'seo_description' => $revision['seo_description'],
                     'og_title' => $seo['og_title'], 'og_description' => $seo['og_description'], 'og_image_url' => $seo['og_image_url']],
             ],
         ];
+    }
+
+    public static function editorialProjection(array $response): array
+    {
+        return [
+            'faq' => $response['answer_surface_v1']['faq_blocks'] ?? [],
+            'ctas' => $response['landing_surface_v1']['cta_bundle'] ?? [],
+        ];
+    }
+
+    public static function ctaTargets(array $slots): array
+    {
+        return array_map(static fn (array $slot): array => ['key' => $slot['key'], 'kind' => $slot['kind'], 'href' => $slot['href']], $slots);
+    }
+
+    private static function editorialReviewFields(array $editorial): array
+    {
+        $faq = $editorial['answer_surface_v1']['faq_items'] ?? [];
+        $ctas = $editorial['cta_slots'] ?? [];
+        if (array_diff(array_keys($editorial), ['answer_surface_policy', 'answer_surface_visibility', 'answer_surface_v1', 'cta_slots']) !== []
+            || ($editorial['answer_surface_policy'] ?? null) !== 'editor_supplied'
+            || ($editorial['answer_surface_visibility'] ?? null) !== 'below_intro'
+            || array_keys($editorial['answer_surface_v1'] ?? []) !== ['faq_items']
+            || ! array_is_list($faq) || count($faq) > 6 || ! array_is_list($ctas) || count($ctas) > 3) {
+            throw new DomainException('traditional_article_editorial_package_invalid');
+        }
+
+        $fields = [];
+        foreach ($faq as $index => $item) {
+            if (array_keys($item) !== ['key', 'question', 'answer'] || ! preg_match('/\A[a-z0-9_-]+\z/', $item['key'])) {
+                throw new DomainException('traditional_article_editorial_faq_invalid');
+            }
+            $fields['/answer_surface_v1/faq_blocks/'.$index.'/question'] = $item['question'];
+            $fields['/answer_surface_v1/faq_blocks/'.$index.'/answer'] = $item['answer'];
+        }
+        foreach ($ctas as $index => $slot) {
+            if (array_keys($slot) !== ['key', 'kind', 'href', 'label'] || ! preg_match('/\A[a-z0-9_-]+\z/', $slot['key'])
+                || $slot['kind'] !== 'start_test' || ! preg_match('~\A/zh/tests/[a-z0-9]+(?:-[a-z0-9]+)*\z~', $slot['href'])) {
+                throw new DomainException('traditional_article_editorial_cta_invalid');
+            }
+            $fields['/landing_surface_v1/cta_bundle/'.$index.'/label'] = $slot['label'];
+        }
+
+        return $fields;
     }
 
     public static function englishSourceId(array $proof): ?int
@@ -255,7 +324,7 @@ final class TraditionalArticlePublication
         $source = Article::query()->withoutGlobalScopes()->findOrFail($row['source_identity']['source_article_id']);
         $copy = $row['snapshot'];
         $seo = $copy['seo_text'];
-        unset($copy['seo_text']);
+        unset($copy['seo_text'], $copy['editorial_projection']);
         $tags = DB::table('article_tag_map')->where('article_id', $source->id)->where('org_id', 0)
             ->orderBy('tag_id')->lockForUpdate()->pluck('tag_id')->map(fn ($id): int => (int) $id)->all();
         $expectedTags = array_column($row['taxonomy_display']['tags'], 'id');
@@ -281,6 +350,7 @@ final class TraditionalArticlePublication
         $seoCopy = [
             'org_id' => 0, 'locale' => 'zh-TW', 'canonical_url' => 'https://fermatmind.com/zh-TW/articles/'.$row['identity']['slug'],
             'is_indexable' => false, 'robots' => 'noindex,follow', ...$seo,
+            ...(($row['editorial_package_v1'] ?? null) === null ? [] : ['schema_json' => ['editorial_package_v1' => $row['editorial_package_v1']]]),
         ];
         $revision = $current['missing'] ? null : $this->retainedRevision(
             $target, $articleCopy, $revisionCopy, $seoCopy, $expectedTags, $current['source_state_sha256'],
@@ -289,6 +359,9 @@ final class TraditionalArticlePublication
             'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED, 'status' => 'published',
             'lifecycle_state' => Article::LIFECYCLE_ACTIVE, 'published_at' => now(), 'is_public' => true,
         ])->save();
+        if ($current['missing'] && array_key_exists('author_name', $copy) && $copy['author_name'] === null) {
+            $target->forceFill(['author_name' => null])->saveQuietly();
+        }
         if ($current['missing']) {
             foreach ($expectedTags as $tag) {
                 DB::table('article_tag_map')->insert(['org_id' => 0, 'article_id' => $target->id, 'tag_id' => $tag]);
@@ -335,7 +408,8 @@ final class TraditionalArticlePublication
             || $revision->locale !== $target->locale
             || $revision->source_version_hash !== $target->translated_from_version_hash
             || $revision->translated_from_version_hash !== $target->translated_from_version_hash
-            || $seo->only(array_keys($seoCopy)) !== $seoCopy || ! empty($seo->schema_json) || $targetTags !== $tags) {
+            || ! CanonicalTranslationPayloadHash::sameValue($seo->only(array_keys($seoCopy)), $seoCopy)
+            || (! array_key_exists('schema_json', $seoCopy) && ! empty($seo->schema_json)) || $targetTags !== $tags) {
             throw new DomainException('traditional_article_retained_draft_changed');
         }
 

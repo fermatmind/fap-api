@@ -143,11 +143,14 @@ final class PublicContent53Package
                 return self::pricingRefundPackage($this->bytes($root, 'pricing-refund.json'), $this->bytes($root, 'pricing-refund-review.json'), $expectedSha256);
             }
         }
-        if (is_file($root.'/'.self::PACKAGE.'/traditional-article-batch.json')) {
-            $bytes = $this->bytes($root, 'traditional-article-batch.json');
-            $review = $this->bytes($root, 'traditional-article-batch-review.json');
-            $chain = TraditionalArticlePublication::BATCH_SCHEMA."\ntraditional-article-batch.json\n".hash('sha256', $bytes)
-                ."\ntraditional-article-batch-review.json\n".hash('sha256', $review)."\n";
+        foreach (['traditional-article-batch', 'traditional-article-featured'] as $name) {
+            if (! is_file($root.'/'.self::PACKAGE.'/'.$name.'.json')) {
+                continue;
+            }
+            $bytes = $this->bytes($root, $name.'.json');
+            $review = $this->bytes($root, $name.'-review.json');
+            $chain = TraditionalArticlePublication::BATCH_SCHEMA."\n".$name.".json\n".hash('sha256', $bytes)
+                ."\n".$name."-review.json\n".hash('sha256', $review)."\n";
             if (hash_equals($expectedSha256, hash('sha256', $chain))) {
                 $package = TraditionalArticlePublication::batch($bytes, $review, $environment);
                 foreach ($package['candidates'] as &$row) {
