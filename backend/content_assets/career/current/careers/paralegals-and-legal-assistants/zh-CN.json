@@ -135,7 +135,7 @@
         "status": "mapped"
       },
       "item:paralegals-and-legal-assistants.path.credential-decision.10": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:paralegals-and-legal-assistants.path.employer-evidence.2": {
         "status": "mapped"
@@ -144,10 +144,13 @@
         "status": "mapped"
       },
       "item:paralegals-and-legal-assistants.path.entry-role-comparison.9": {
-        "status": "mapped"
+        "status": "pending_mapping"
+      },
+      "item:paralegals-and-legal-assistants.path.entry-work-sample-data.11": {
+        "status": "pending_mapping"
       },
       "item:paralegals-and-legal-assistants.path.interview-probation.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:paralegals-and-legal-assistants.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -3274,18 +3277,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": null,
@@ -12269,7 +12262,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国全国同口径法律助理工资分布未取得。本职业在律师或法律团队指导下调查事实、检索法律资料、管理案卷并草拟文件，最终法律意见和客户代理按所在地规则由有资格者负责。规上专业技术均值仅供符合实质法律研究和雇主调查范围的岗位参照。"
+              "大陆全国同口径律师助理薪资分布未核实。应核对具体岗位的工作内容、律师监督、合同和实际薪酬。 国家统计局2025年规模以上企业专业技术人员税前年均155,491元，属于跨行业统计背景。法律检索这一项任务不能判定岗位统计归类，也不能据此估计助理薪酬。"
             ]
           },
           "id": "paralegals-and-legal-assistants.quick-decision.fermat-decision-card.1",
@@ -12314,12 +12307,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用公开虚构案例练事实时间线、法规检索与文档版本管理，不使用真实客户资料。"
+              "到入行区完成虚构案卷 P-17 的四行索引与复核提问，再对照参考。"
             ]
           },
           "id": "paralegals-and-legal-assistants.quick-decision.fit-decision-checklist.4",
           "source_refs": [
-            "source-pack-onet-details"
+            "paralegal-editorial-case"
           ],
           "type": "prose"
         }
@@ -12412,12 +12405,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "BLS 2025 年美国该职业就业约 404,900 人，不是当前空缺。"
+              "BLS 2025年约404,900个岗位，不是当前空缺。"
             ]
           },
           "id": "paralegals-and-legal-assistants.profile.work-context-block.7",
           "source_refs": [
-            "source-pack-onet-details"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -12476,7 +12469,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "合规专员核内部制度执行；律师助理围绕具体法律事务和律师任务工作。"
+              "律师助理为具体法律事务准备事实、检索结果和草稿；执业律师承担法律意见与代理，法律秘书偏文书行政，合规专员核内部制度落实。"
             ]
           },
           "id": "paralegals-and-legal-assistants.direction-comparison.adjacent-career-comparison-table.3",
@@ -12654,13 +12647,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得与美国 O*NET 23-2011.00 一一对应的全国职业工资分布。"
+              "暂未取得中国大陆律师助理这一细分职业的全国工资分布。先核招聘岗位、计薪周期、固定和浮动部分、税前后及工作地。"
             ]
           },
           "id": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-reference-2025",
-            "law-current-2026"
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -12722,12 +12714,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 BLS 2025 年该职业中位时薪 30.24 美元、年薪 62,890 美元。"
+              "年薪与时薪均直接引用 OEWS 公布值。"
             ]
           },
           "id": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "paralegal-oews-2025"
           ],
           "type": "prose"
         },
@@ -12736,7 +12728,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年工资最低10%的群体年薪低于44,740美元，最高10%的群体高于101,500美元；这是分位尾部群体，不是起薪区间，分位阈值数值见五分位表。"
+              "年薪分位表的两端分别是第10和第90百分位阈值，不能用来划定起薪范围。"
             ]
           },
           "id": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.2",
@@ -12750,13 +12742,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS精确23-2011在2025就业404,900、2035预计403,800人；2025—2035总体变化-0.3%、净减1,100人，年均40,800空缺含人员替补。OOH图表约0%为整数舍入，非净变化为零；不作AI采用、替代或个人失业概率及中国需求。"
+              "OEWS 公布的中位时薪为30.24美元。"
             ]
           },
           "id": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "bls-ep-2025-2035",
-            "bls-ooh-paralegals"
+            "paralegal-oews-2025"
           ],
           "type": "prose"
         },
@@ -12943,13 +12934,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "分法域核执业、律师监督与案件数据权限；中国律师法第16/41条针对相应律师业务保密边界，具体助理职责另核。"
+              "中国大陆现行《律师法》第16条约束无执业证者以律师名义服务，诉讼代理或辩护保留法定例外。第41条是律师执业保密义务。"
             ]
           },
           "id": "paralegals-and-legal-assistants.risk.career-risk-cards.1",
           "source_refs": [
-            "aba-ai",
-            "editorial-guidance"
+            "law-current-2026"
           ],
           "type": "prose"
         },
@@ -12973,14 +12963,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET支持任务；ABA公告与监督指引限美国规则说明，中国2026律师法第16/41条限本法对象。后果控制为编辑核验建议，具体案件依所在地及机构规则。"
+              "真实案卷在中国大陆的个人信息处理先核明确目的、最小必要和合法基础，再核授权与接收范围。机构允许不能替代法定基础；删姓名也不等于可上传外部工具。"
             ]
           },
           "id": "paralegals-and-legal-assistants.risk.career-risk-cards.3",
           "source_refs": [
-            "aba-ai",
-            "law-current-2026",
-            "editorial-guidance"
+            "paralegal-cn-pipl",
+            "law-current-2026"
           ],
           "type": "prose"
         },
@@ -13027,14 +13016,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "用公开虚构案例练事实表、法律检索、草稿和版本记录，不使用真实客户案卷。"
+              "苏州大学王健法学院2026年3月3日刊载的锦天城（苏州）样本列诉讼文书、法规与案例检索、证据整理，也包括合同初审与尽调支持。法学或法律本科以上，公告把通过司法考试列为优先。120元/天只写给实习生，律师助理薪资面议。",
+              "同济大学法学院2026年9月17日刊载的全职律师助理公告列法律检索、非诉尽调，协助主办律师草拟和校对文件。要求通过法考，研究生优先；薪酬面谈。",
+              "两份是历史公告，当前可投状态未核。问第一项交付是诉讼事实表、检索备忘还是非诉尽调清单，谁复核，以及何时可接触真实案卷。"
             ]
           },
           "id": "paralegals-and-legal-assistants.path.recruitment-sample.1",
           "source_refs": [
-            "source-pack-onet-summary",
-            "editorial-guidance",
-            "aba-supervision"
+            "paralegal-cn-suzhou",
+            "paralegal-cn-tongji"
           ],
           "type": "notice"
         },
@@ -13046,31 +13036,71 @@
               {
                 "id": "paralegals-and-legal-assistants.employer-evidence.1",
                 "values": [
-                  "虚构案例工作样本",
-                  "原始法律来源与律师复核"
+                  "诉讼检索与材料整理",
+                  "苏州大学王健法学院2026年3月3日刊载的锦天城（苏州）样本列诉讼文书、法规与案例检索、证据整理，也包括合同初审与尽调支持。法学或法律本科以上，公告把通过司法考试列为优先。120元/天只写给实习生，律师助理薪资面议。"
                 ]
               },
               {
                 "id": "paralegals-and-legal-assistants.employer-evidence.2",
                 "values": [
-                  "虚构案例工作样本",
-                  "原始法律来源与律师复核"
+                  "非诉尽调与文件校对",
+                  "同济大学法学院2026年9月17日刊载的全职律师助理公告列法律检索、非诉尽调，协助主办律师草拟和校对文件。要求通过法考，研究生优先；薪酬面谈。"
                 ]
               },
               {
                 "id": "paralegals-and-legal-assistants.employer-evidence.3",
                 "values": [
-                  "虚构案例工作样本",
-                  "原始法律来源与律师复核"
+                  "对比首项交付与复核人",
+                  "两份是历史公告，当前可投状态未核。问第一项交付是诉讼事实表、检索备忘还是非诉尽调清单，谁复核，以及何时可接触真实案卷。"
                 ]
               }
             ]
           },
           "id": "paralegals-and-legal-assistants.path.employer-evidence.2",
           "source_refs": [
-            "source-pack-onet-summary",
-            "editorial-guidance",
-            "aba-supervision"
+            "paralegal-cn-suzhou",
+            "paralegal-cn-tongji"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "actors-practice-materials",
+                "values": [
+                  "材料｜虚构案卷 P-17",
+                  "P-17 四份虚构材料：A01 草稿v1页眉3月4日，页脚标“已被替换”；A02 草稿v2页眉3月5日，附件中没有签署页；A03 内部收件登记3月6日写“收到v2”，未记签署；A04 3月7日便笺写“3月5日签了”，无原件或收件证明。日期仅用于练习。"
+                ]
+              },
+              {
+                "id": "actors-practice-task",
+                "values": [
+                  "任务｜证据索引和待核",
+                  "做四行证据索引（ID、文件所写日期、可核事实、不能确认），另写一段给负责律师的复核备忘，不发给客户、不判断真实期限。"
+                ]
+              },
+              {
+                "id": "actors-practice-reference",
+                "values": [
+                  "参考｜文件日期不等于签署",
+                  "参考：A01只证明v1被标作已替换；A02只证明v2页眉3月5日，签署未证；A03证明3月6日有收到v2的内部记录，不证明签署；A04是未核陈述。问负责律师能否调取签署页、签署原件和提交记录；签署日与最终有效版本暂记未知。"
+                ]
+              },
+              {
+                "id": "actors-practice-boundary",
+                "values": [
+                  "边界｜只做纸面复核",
+                  "不用真实客户、案号、记录或文书；不出具法律意见、不签发或递交材料，不从题面推实际法定期限。"
+                ]
+              }
+            ]
+          },
+          "id": "paralegals-and-legal-assistants.path.entry-work-sample-data.11",
+          "source_refs": [
+            "paralegal-editorial-case"
           ],
           "type": "cards"
         },
@@ -13082,31 +13112,29 @@
               {
                 "id": "portfolio-source-research",
                 "values": [
-                  "虚构案例工作样本",
-                  "原始法律来源与律师复核"
+                  "四行索引",
+                  "用 A01–A04 区分文件日期、收件和签署证据。"
                 ]
               },
               {
                 "id": "portfolio-fictional-file",
                 "values": [
-                  "虚构案例工作样本",
-                  "原始法律来源与律师复核"
+                  "冲突备忘",
+                  "注明 A04 无原件，签署日和有效版本待核。"
                 ]
               },
               {
                 "id": "portfolio-contract-redline",
                 "values": [
-                  "虚构案例工作样本",
-                  "原始法律来源与律师复核"
+                  "复核提问",
+                  "列签署页、签署原件和提交记录三个请求；只给负责律师。"
                 ]
               }
             ]
           },
           "id": "paralegals-and-legal-assistants.path.entry-portfolio.3",
           "source_refs": [
-            "source-pack-onet-summary",
-            "editorial-guidance",
-            "aba-supervision"
+            "paralegal-editorial-case"
           ],
           "type": "cards"
         },
@@ -13121,6 +13149,13 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "阶段",
+              "练什么",
+              "边界",
+              "可复核证据",
+              "下一步"
+            ],
             "rows": [
               [
                 "职业探索",
@@ -13133,7 +13168,7 @@
                 "带教准备",
                 "事实表和证据索引",
                 "律师监督",
-                "匿名样本与反馈",
+                "虚构样本与反馈",
                 "学习草稿"
               ],
               [
@@ -13172,14 +13207,13 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "面试可说明如何核法条判例有效期、事实来源、保密权限和提交期限。"
+              "在中国大陆，受聘为助理、登记为律师执业实习人员、取得律师执业证是三种不同状态。招聘公告写“实习”或通过法考，不等于正式登记；全国律协规则规定实习期从签发实习证之日起算，办理手续按当地律师协会要求核对。现行《律师法》第16条限制无执业证人员以律师名义提供法律服务；诉讼代理或辩护保留法律另有规定。全国律协实习规则第23条禁止正式实习人员独自承办律师业务、以律师名义签委托代理或法律顾问协议、签发文书或发表代理辩护意见。依程序获准的辅助提交与签署、签发不同，由负责律师确认权限。"
             ]
           },
           "id": "paralegals-and-legal-assistants.path.credential-boundary.5",
           "source_refs": [
-            "source-pack-onet-summary",
-            "editorial-guidance",
-            "aba-supervision"
+            "law-current-2026",
+            "paralegal-cn-intern-rules"
           ],
           "type": "notice"
         },
@@ -13188,14 +13222,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日练习完成虚构案情时间线、证据表、检索备忘、草稿与律师复核清单。"
+              "用本节 P-17 逐日完成证据索引、冲突备忘和待核提问，核参考后保留未确认的签署日。"
             ]
           },
           "id": "paralegals-and-legal-assistants.path.career-path-block.6",
           "source_refs": [
-            "source-pack-onet-summary",
-            "editorial-guidance",
-            "aba-supervision"
+            "paralegal-editorial-case"
           ],
           "type": "prose"
         },
@@ -13207,38 +13239,36 @@
               {
                 "id": "trial-day-1",
                 "values": [
-                  "虚构案例工作样本",
-                  "原始法律来源与律师复核"
+                  "第1天｜读四份材料",
+                  "列 A01–A04 和各自文件日期。"
                 ]
               },
               {
                 "id": "trial-day-2-3",
                 "values": [
-                  "虚构案例工作样本",
-                  "原始法律来源与律师复核"
+                  "第2–3天｜画时间线",
+                  "把版本、收到记录与签署陈述分开。"
                 ]
               },
               {
                 "id": "trial-day-4-5",
                 "values": [
-                  "虚构案例工作样本",
-                  "原始法律来源与律师复核"
+                  "第4–5天｜写待核清单",
+                  "核 A04 是否有原件，并问签署页和提交记录。"
                 ]
               },
               {
                 "id": "trial-day-6-7",
                 "values": [
-                  "虚构案例工作样本",
-                  "原始法律来源与律师复核"
+                  "第6–7天｜对照参考",
+                  "保留未知，写给负责律师，不发送或签署。"
                 ]
               }
             ]
           },
           "id": "paralegals-and-legal-assistants.path.seven-day-trial.7",
           "source_refs": [
-            "source-pack-onet-summary",
-            "editorial-guidance",
-            "aba-supervision"
+            "paralegal-editorial-case"
           ],
           "type": "timeline"
         },
@@ -13247,17 +13277,15 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "法律检索与引注核对",
-              "案卷目录与事实时间线",
-              "草稿版本与律师审阅记录",
-              "法律检索与引注核对"
+              "四行索引是否把日期和证据分开？",
+              "是否把 A04 留为未核陈述？",
+              "签署日和最终版本是否留待核？",
+              "是否仅交负责律师纸面复核？"
             ]
           },
           "id": "paralegals-and-legal-assistants.path.seven-day-decision.8",
           "source_refs": [
-            "source-pack-onet-summary",
-            "editorial-guidance",
-            "aba-supervision"
+            "paralegal-editorial-case"
           ],
           "type": "list"
         },
@@ -13270,6 +13298,12 @@
               "career.column.action",
               "career.column.review",
               "career.column.evidence"
+            ],
+            "column_labels": [
+              "情境",
+              "怎样处理",
+              "复核点",
+              "保留证据"
             ],
             "rows": [
               [
@@ -13318,6 +13352,15 @@
               "career.column.gap",
               "career.column.owner",
               "career.column.next"
+            ],
+            "column_labels": [
+              "阶段",
+              "交付物",
+              "谁授权",
+              "条件",
+              "待核",
+              "复核人",
+              "下一步"
             ],
             "rows": [
               [
@@ -13397,13 +13440,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS精确23-2011在2025就业404,900、2035预计403,800人；2025—2035总体变化-0.3%、净减1,100人，年均40,800空缺含人员替补。OOH图表约0%为整数舍入，非净变化为零；不作AI采用、替代或个人失业概率及中国需求。"
+              "美国全国 23-2011：2025年约404,900个岗位，2035年预计403,800个，下降0.3%、净减约1,100个；年均约40,800个职业空缺。 实际选择按地区比较主要交付与复核人。"
             ]
           },
           "id": "paralegals-and-legal-assistants.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-ep-2025-2035",
-            "bls-ooh-paralegals"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13412,12 +13454,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "同期平均每年约 40,800 个岗位空缺，主要含离职和转岗更替，不等于净增长。"
+              "净减约1,100个岗位，下降0.3%。"
             ]
           },
           "id": "paralegals-and-legal-assistants.market-signals.market-signal-card.2",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13426,12 +13468,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年美国就业约 404,900 人，不与 O*NET 2024 年基期混用。"
+              "职业空缺含转入其他职业、退出劳动力市场和净就业变化；不是净新增、当前招聘或个人录用率。"
             ]
           },
           "id": "paralegals-and-legal-assistants.market-signals.market-signal-card.3",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13440,12 +13482,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 指出 AI 可能提高研究和文档效率并限制需求；真实岗位仍看监督、保密和事务质量。"
+              "这是全国基期和期末岗位数。"
             ]
           },
           "id": "paralegals-and-legal-assistants.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-ooh-paralegals"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13454,12 +13496,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "向律师、法律秘书、法院或合规岗位转向需核不同资格与任务。"
+              "不能据此估计大陆招聘或个人机会。"
             ]
           },
           "id": "paralegals-and-legal-assistants.market-signals.market-signal-card.5",
           "source_refs": [
-            "source-pack-onet-summary"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         }
@@ -13486,25 +13528,29 @@
                 ]
               },
               {
-                "answer": "美国 ABA 指引下不能独立建立律师客户关系、定法律服务费或承担给客户法律意见的责任；所在地规则另核。",
+                "answer": "中国大陆受聘助理、申请律师执业的登记实习和取得律师执业证是三个不同状态。现行《律师法》第16条限制无执业证人员以律师名义提供法律服务；诉讼代理或辩护保留法律另有规定。全国律协实习规则第23条针对正式执业实习，限制独自承办、以律师名义签发文书或发表代理辩护意见；辅助工作按指导、授权和程序核。 ABA示范指引区分律师负责的关系建立、费用和法律意见；美国具体规则按法域核。",
                 "id": "paralegals-and-legal-assistants.faq.2",
                 "question": "能独立给客户法律意见吗？",
                 "question_key": "career.faq.paralegals-and-legal-assistants.2",
                 "source_refs": [
-                  "aba-supervision"
+                  "law-current-2026",
+                  "paralegal-cn-intern-rules",
+                  "paralegal-aba-model-guidelines",
+                  "paralegal-aba-definition"
                 ]
               },
               {
-                "answer": "法律秘书更偏行政排程和文书支持；律师助理还有实质性法律研究与证据整理。",
+                "answer": "法律秘书以排程、联络和办公室文件为主，也可能协助检索；paralegal主要交事实表、法律研究或供律师复核的草稿。职名重叠时问主要交付。",
                 "id": "paralegals-and-legal-assistants.faq.3",
                 "question": "与法律秘书有什么区别？",
                 "question_key": "career.faq.paralegals-and-legal-assistants.3",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "paralegal-aba-definition",
+                  "paralegal-legal-secretary"
                 ]
               },
               {
-                "answer": "可辅助草稿和检索，但引注、法律有效期、事实、保密及最终专业判断须由人员复核。",
+                "answer": "AI可辅助起草和检索。引注、法律现行有效性、事实和保密边界应逐项核对，最终专业判断由负责律师或有相应执业权限者复核。",
                 "id": "paralegals-and-legal-assistants.faq.4",
                 "question": "AI 能直接写最终法律文件吗？",
                 "question_key": "career.faq.paralegals-and-legal-assistants.4",
@@ -13525,32 +13571,32 @@
                 ]
               },
               {
-                "answer": "证据不足：未取得中国全国同口径法律助理工资分布。国家统计局2025规上企业专业技术人员税前年均155,491元；仅实际从事实质法律研究且雇主属于该调查规上企业时作宽岗位参考，非法律助理中位数、起薪或到手收入。行政文书为主的岗位不能仅按名称套用；政府机构、未达规模律所、个体与自由职业不适用此规上企业数字。税前含个人税、社保及住房公积金，不作本职月薪换算。",
+                "answer": "暂未取得中国大陆律师助理这一细分职业的全国工资分布。先核招聘岗位、计薪周期、固定和浮动部分、税前后及工作地。 苏州公告120元/天只给实习生，律师助理薪资面议；同济刊载全职助理公告的薪酬面谈。两则均不代表现招或职业工资分布。",
                 "id": "paralegals-and-legal-assistants.faq.6",
                 "question": "中国工资是多少？",
                 "question_key": "career.faq.paralegals-and-legal-assistants.6",
                 "source_refs": [
-                  "nbs-reference-2025"
+                  "nbs-wages-2025",
+                  "paralegal-cn-suzhou",
+                  "paralegal-cn-tongji"
                 ]
               },
               {
-                "answer": "BLS2025美国中位年薪62,890、时薪30.24美元；五分位已核，非起薪或资历。BLS精确23-2011在2025就业404,900、2035预计403,800人；2025—2035总体变化-0.3%、净减1,100人，年均40,800空缺含人员替补。OOH图表约0%为整数舍入，非净变化为零；不作AI采用、替代或个人失业概率及中国需求。",
+                "answer": "美国2025年5月年薪中位数62,890美元、时薪中位30.24美元。P10、P25、P50、P75、P90年薪为44,740、50,340、62,890、80,080、101,500美元。",
                 "id": "paralegals-and-legal-assistants.faq.7",
                 "question": "美国工资和就业是多少？",
                 "question_key": "career.faq.paralegals-and-legal-assistants.7",
                 "source_refs": [
-                  "source-pack-onet-localwages",
-                  "bls-ep-2025-2035"
+                  "paralegal-oews-2025"
                 ]
               },
               {
-                "answer": "BLS精确23-2011在2025就业404,900、2035预计403,800人；2025—2035总体变化-0.3%、净减1,100人，年均40,800空缺含人员替补。OOH图表约0%为整数舍入，非净变化为零；不作AI采用、替代或个人失业概率及中国需求。",
+                "answer": "美国全国 23-2011：2025年约404,900个岗位，2035年预计403,800个，下降0.3%、净减约1,100个；年均约40,800个职业空缺。 职业空缺含转入其他职业、退出劳动力市场和净就业变化；不是净新增、当前招聘或个人录用率。",
                 "id": "paralegals-and-legal-assistants.faq.8",
                 "question": "美国未来机会如何？",
                 "question_key": "career.faq.paralegals-and-legal-assistants.8",
                 "source_refs": [
-                  "bls-ep-2025-2035",
-                  "bls-ooh-paralegals"
+                  "bls-ep-2025-2035"
                 ]
               }
             ]
@@ -13566,12 +13612,14 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "中国与美国数据分栏，不能互相改写。；AI 推演不等于真实采用证据。；纸面练习不构成真实执业或安全授权。"
+              "费马测试职业内容编辑"
             ]
           },
           "id": "paralegals-and-legal-assistants.sources.boundary-notice.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "bls-ep-2025-2035",
+            "paralegal-oews-2025",
+            "nbs-wages-2025"
           ],
           "type": "prose"
         }
@@ -13595,28 +13643,28 @@
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "律师助理与法律助理",
+                "entity": "探索职业兴趣",
                 "id": "navigation-2",
                 "relation": "career.section",
-                "url": "/en/tests/mbti-personality-test-16-personality-types"
+                "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "律师助理与法律助理",
+                "entity": "查看大五测评",
                 "id": "navigation-3",
                 "relation": "career.section",
-                "url": "/en/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "律师助理与法律助理",
+                "entity": "查看 MBTI 测评",
                 "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "律师助理与法律助理",
+                "entity": "查看情绪智力测评",
                 "id": "navigation-5",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/zh/tests/eq-test-emotional-intelligence-assessment"
               },
               {
                 "entity": "律师助理与法律助理",
@@ -13705,14 +13753,14 @@
               {
                 "accessed_at": "2026-08-30",
                 "details": [
-                  "界定律师业务，不把企业助理统一设为法定资格。"
+                  "旧第13条为历史；现行执业边界见2026修正后第16条。"
                 ],
                 "evidence_type": "national law",
                 "id": "moj-lawyers-law",
-                "limitation": "界定律师业务，不把企业助理统一设为法定资格。",
+                "limitation": "仅供版本对照。",
                 "market": "CN",
-                "name": "中华人民共和国律师法",
-                "period": "2017 revision; accessed 2026-08-30",
+                "name": "2017年修正《律师法》｜历史版本",
+                "period": "2017",
                 "publisher": "中华人民共和国司法部",
                 "scope": "exact",
                 "url": "https://xzfy.moj.gov.cn/c/2021-01-06/487877.shtml"
@@ -13765,11 +13813,11 @@
               {
                 "accessed_at": "2026-08-30",
                 "details": [
-                  "职位样本比例不是法定要求。"
+                  "美国2025年1月1日至12月31日 Lightcast 去重招聘中，在归入23-2011的广告内，29%提及Office、21%提及Excel、5%提及Westlaw。"
                 ],
                 "evidence_type": "job posting market signal",
                 "id": "onet-demand-232011",
-                "limitation": "职位样本比例不是法定要求。",
+                "limitation": "招聘广告提及率，不是实际使用率或门槛。",
                 "market": "US",
                 "name": "O*NET In Demand 23-2011.00",
                 "period": "US postings 2025-01-01 to 2025-12-31",
@@ -13900,13 +13948,13 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "国家统计局2025规上企业专业技术人员税前年均155,491元；仅实际从事实质法律研究且雇主属于该调查规上企业时作宽岗位参考，非法律助理中位数、起薪或到手收入。行政文书为主的岗位不能仅按名称套用；政府机构、未达规模律所、个体与自由职业不适用此规上企业数字。"
+                  "国家统计局2025年规模以上企业专业技术人员税前年均155,491元，属于跨行业统计背景。法律检索这一项任务不能判定岗位统计归类，也不能据此估计助理薪酬。"
                 ],
                 "evidence_type": "official broad position wages",
                 "id": "nbs-reference-2025",
-                "limitation": "专业技术含法律专业工作但不是所有助理；按实质工作和规上企业雇主核，政府、未达规模律所、行政文书与个体不套。",
+                "limitation": "仅跨行业统计背景，不能用于判断法律助理岗位类别、中位工资、起薪或到手收入。",
                 "market": "CN",
-                "name": "国家统计局2025规上企业专业技术宽岗位工资",
+                "name": "国家统计局：2025年规模以上企业专业技术人员年平均工资（表6）",
                 "period": "2025表6及岗位、调查范围定义",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
@@ -13930,14 +13978,14 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "第16条不得冒律师名义执业，诉讼代理辩护有法律另有规定例外；第41条律师保密。"
+                  "中国大陆受聘助理、申请律师执业的登记实习和取得律师执业证是三个不同状态。现行《律师法》第16条限制无执业证人员以律师名义提供法律服务；诉讼代理或辩护保留法律另有规定。全国律协实习规则第23条针对正式执业实习，限制独自承办、以律师名义签发文书或发表代理辩护意见；辅助工作按指导、授权和程序核。"
                 ],
                 "evidence_type": "national law",
                 "id": "law-current-2026",
-                "limitation": "律师义务不自动变成所有法律助理一律须律师证；具体岗位程序另核。",
+                "limitation": "第16条与第41条分开读。申请执业实习另核登记及实习规则。",
                 "market": "CN",
-                "name": "中华人民共和国律师法2026修正全文",
-                "period": "2026修正；修正决定2026-09-01施行",
+                "name": "现行《中华人民共和国律师法》｜第16、41条",
+                "period": "2026-09-01",
                 "publisher": "北京市司法局",
                 "scope": "exact",
                 "url": "https://sfj.beijing.gov.cn/sfj/zwgk/2024zcwj/744120751/fl91/744123073/index.html"
@@ -13974,20 +14022,211 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "建时间线和证据索引 — 75/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "核法规判例和法域 — 75/100; weight=1/3; display.ai_impact_table.task_rows.2[0]",
-                  "写合同诉状等草稿 — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "一般隐私和虚构输出风险，不提供律师助理职业采用率或岗位替代率。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "official risk guidance",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "本页编辑练习只用虚构文件。",
+                "name": "NIST生成式AI风险指引",
+                "period": "2024年7月",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "受委派处理实质法律工作，负责律师承担责任。"
+                ],
+                "evidence_type": "official reference",
+                "id": "paralegal-aba-definition",
+                "limitation": "行业定义不替代各州执业规则。",
+                "market": "美国",
+                "name": "ABA｜Paralegal 职责定义",
+                "period": "2020",
+                "publisher": "American Bar Association",
+                "scope": "contextual",
+                "url": "https://www.americanbar.org/groups/paralegals/profession-information/current_aba_definition_of_legal_assistant_paralegal/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS OEWS 2025年5月美国全国23-2011，A01年薪第10、25、50、75、90百分位及中位时薪。链接为美国劳工部O*NET呈现的BLS工资职业表。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "paralegal-oews-2025",
+                "limitation": "美国雇员工资，不能套大陆待遇或资历等级。",
+                "market": "美国",
+                "name": "BLS OEWS｜美国律师助理工资",
+                "period": "2025年5月",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/23-2011.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第23条限制独办、以律师名义签发法律文书或发表代理意见。"
+                ],
+                "evidence_type": "official reference",
+                "id": "paralegal-cn-intern-rules",
+                "limitation": "只适用申请律师执业实习，不把每个雇佣助理或校园实习职位算进该登记阶段。",
+                "market": "中国大陆",
+                "name": "全国律协｜申请律师执业人员实习管理规则",
+                "period": "2021",
+                "publisher": "中华全国律师协会",
+                "scope": "contextual",
+                "url": "https://www.acla.org.cn/info/1a19899a34c9496e9f3d7b04dad6b071"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "协助诉讼文书、检索报告和证据整理；也列合同初审、尽调支持。"
+                ],
+                "evidence_type": "official job notice",
+                "id": "paralegal-cn-suzhou",
+                "limitation": "120元/天只为实习生，助理薪资面议；历史样本，当前可投未核。",
+                "market": "中国大陆·苏州",
+                "name": "苏州大学｜锦天城（苏州）招聘样本",
+                "period": "2026-03-03",
+                "publisher": "苏州大学王健法学院",
+                "scope": "contextual",
+                "url": "https://law.suda.edu.cn/87/ed/c35177a690157/page.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "已通过法考，研究生优先；法律检索、非诉尽调、协助主办律师起草和校对。"
+                ],
+                "evidence_type": "official job notice",
+                "id": "paralegal-cn-tongji",
+                "limitation": "该招聘门槛不等于已取得执业证；薪酬面谈，当前可投未核。",
+                "market": "中国大陆",
+                "name": "同济法学院｜全职律师助理历史公告",
+                "period": "2026-09-17",
+                "publisher": "同济大学法学院",
+                "scope": "contextual",
+                "url": "https://law.tongji.edu.cn/info/1355/8703.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "P-17为虚构案卷，只核文件版本、收件和签署证据。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "paralegal-editorial-case",
+                "limitation": "不含真实当事人、期限、程序或法律意见。",
+                "market": "不限定地区",
+                "name": "费马测试编辑设计｜虚构案卷 P-17",
+                "period": "2026-11-09",
+                "publisher": "费马测试",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "以法律办公室行政、排程、联络和文件为主，部分岗位也协助研究。"
+                ],
+                "evidence_type": "official reference",
+                "id": "paralegal-legal-secretary",
+                "limitation": "与 paralegal 可有任务重叠，以主要交付区分。",
+                "market": "美国",
+                "name": "O*NET｜法律秘书与行政助理",
+                "period": "2026",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/43-6012.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "代理客户、提供法律意见和处理法律事务。"
+                ],
+                "evidence_type": "official reference",
+                "id": "paralegal-lawyers",
+                "limitation": "美国职业描述，不代替各地许可。",
+                "market": "美国",
+                "name": "O*NET｜律师",
+                "period": "2026",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/23-1011.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "真实案卷在中国大陆的个人信息处理先核明确目的、最小必要和合法基础，再核授权与接收范围。机构允许不能替代法定基础；删姓名也不等于可上传外部工具。"
+                ],
+                "evidence_type": "official reference",
+                "id": "paralegal-cn-pipl",
+                "limitation": "适用于中国大陆处理场景，个案授权另核。",
+                "market": "中国大陆",
+                "name": "中国个人信息保护法｜目的、基础、最小必要",
+                "period": "2021",
+                "publisher": "国家市场监督管理总局｜法条正文",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_f374e8245320413181742e6d1baf4366.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "示范指引第3项区分律师客户关系、费用和法律意见的责任。"
+                ],
+                "evidence_type": "official reference",
+                "id": "paralegal-aba-model-guidelines",
+                "limitation": "示范指引，不是州法规；核本地规定。",
+                "market": "United States",
+                "name": "ABA｜使用律师助理服务的示范指引",
+                "period": "2018",
+                "publisher": "American Bar Association",
+                "scope": "contextual",
+                "url": "https://www.americanbar.org/content/dam/aba/administrative/paralegals/ls_prlgs_modelguidelines.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "为法院和其他公共部门提供行政记录和流程支持。"
+                ],
+                "evidence_type": "official reference",
+                "id": "paralegal-court-clerk",
+                "limitation": "相邻职业，不以共用工具推同一职责。",
+                "market": "United States",
+                "name": "O*NET｜法院、市政及许可文员",
+                "period": "2026",
+                "publisher": "U.S. Department of Labor",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/43-4031.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "核组织是否遵循行业规则、识别风险并组织记录。"
+                ],
+                "evidence_type": "official reference",
+                "id": "paralegal-compliance",
+                "limitation": "相邻职业，不以共用工具推同一职责。",
+                "market": "United States",
+                "name": "BLS｜合规专员",
+                "period": "2026",
+                "publisher": "U.S. Department of Labor",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/business-and-financial/compliance-officers.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "核不动产记录、产权与相关文件。"
+                ],
+                "evidence_type": "official reference",
+                "id": "paralegal-title",
+                "limitation": "相邻职业，不以共用工具推同一职责。",
+                "market": "United States",
+                "name": "O*NET｜产权审查",
+                "period": "2026",
+                "publisher": "U.S. Department of Labor",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/23-2093.00"
               }
             ]
           },
@@ -14034,23 +14273,27 @@
         "evidence_links": [
           {
             "href": "https://www.onetonline.org/link/details/23-2011.00",
-            "label": "O*NET 23-2011.00 职业详情"
+            "label": "O*NET｜律师助理职责"
           },
           {
-            "href": "https://www.onetonline.org/link/details/23-2011.00",
-            "label": "O*NET 23-2011.00 职业详情"
+            "href": "https://www.onetonline.org/link/summary/23-1011.00",
+            "label": "O*NET｜律师"
           },
           {
-            "href": "https://www.onetonline.org/link/details/23-2011.00",
-            "label": "O*NET 23-2011.00 职业详情"
+            "href": "https://www.onetonline.org/link/summary/43-6012.00",
+            "label": "O*NET｜法律秘书与行政助理"
           },
           {
-            "href": "https://www.onetonline.org/link/details/23-2011.00",
-            "label": "O*NET 23-2011.00 职业详情"
+            "href": "https://www.onetonline.org/link/summary/43-4031.00",
+            "label": "O*NET｜法院、市政及许可文员"
           },
           {
-            "href": "https://www.onetonline.org/link/details/23-2011.00",
-            "label": "O*NET 23-2011.00 职业详情"
+            "href": "https://www.bls.gov/ooh/business-and-financial/compliance-officers.htm",
+            "label": "BLS｜合规专员"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/23-2093.00",
+            "label": "O*NET｜产权审查"
           }
         ],
         "evidence_note": {
@@ -14084,33 +14327,33 @@
             "职业方向": "律师助理与法律助理"
           },
           {
-            "关键区别": "需要所在地执业资格",
+            "关键区别": "依法取得执业资格，承担对外法律判断与责任。",
             "更适合什么选择": "愿承担专业责任",
-            "核心工作与产出": "提供法律意见、代理和签署",
+            "核心工作与产出": "依法向客户提供法律意见、代理或处理法律事务。",
             "职业方向": "律师"
           },
           {
-            "关键区别": "行政支持比重更高",
+            "关键区别": "以行政协调为主，也可能协助检索；按主要交付分岗。",
             "更适合什么选择": "偏好事务协调",
-            "核心工作与产出": "排程、联络和行政文书",
+            "核心工作与产出": "排程、联络、文件流转与办公室记录。",
             "职业方向": "法律秘书"
           },
           {
             "关键区别": "服务法院而非律师案件团队",
             "更适合什么选择": "偏好司法行政",
-            "核心工作与产出": "记录与处理法院程序",
+            "核心工作与产出": "为法院等机构维护记录、排案与程序资料。",
             "职业方向": "法院书记员"
           },
           {
             "关键区别": "重内部制度和监管流程",
             "更适合什么选择": "偏好合规治理",
-            "核心工作与产出": "检查组织规则执行",
+            "核心工作与产出": "核内部流程是否遵守规则，记录风险与整改。",
             "职业方向": "合规专员"
           },
           {
             "关键区别": "对象较集中于产权",
             "更适合什么选择": "偏好交易资料",
-            "核心工作与产出": "核产权文书与登记",
+            "核心工作与产出": "查产权记录和相关证明，整理供审查的材料。",
             "职业方向": "产权检索员"
           }
         ],
@@ -14175,7 +14418,7 @@
             }
           }
         ],
-        "answer": "检索、摘要、引注和草稿可辅助；原始法律、案件事实、保密许可、律师审阅与法律意见不能跳过。 AI影响度 75% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。",
+        "answer": "工具可帮你整理虚构案卷的索引或拟核对问题。逐条回查日期、版本和签署证据，把缺失项交负责律师判断；不要上传真实案卷，也不要把输出当正式法律意见。本页未验证职业量化成效。",
         "authority_links": [
           {
             "来源": "O*NET本职14任务",
@@ -14196,9 +14439,15 @@
             "链接": "https://www.americanbar.org/content/aba-cms-dotorg/en/groups/paralegals/profession-information/information_for_lawyers_how_paralegals_can_improve_your_practice/"
           },
           {
-            "来源": "中国律师法2026修正",
+            "来源": {
+              "$source": "law-current-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
             "类型": "任务、规则或总体统计；非AI效果实证",
-            "适用范围": "第16/41条律师业务及保密边界，非全部助理一律需律师证。",
+            "适用范围": "第16条限制以律师名义执业；第41条规定律师保密。",
             "链接": "https://sfj.beijing.gov.cn/sfj/zwgk/2024zcwj/744120751/fl91/744123073/index.html"
           },
           {
@@ -14263,25 +14512,40 @@
             "链接": "https://www.americanbar.org/news/abanews/aba-news-archives/2024/07/aba-issues-first-ethics-guidance-ai-tools/"
           },
           {
-            "使用限制": "O*NET仅任务背景；节时准确及采用效果待现场验证。",
-            "来源": "作者任务核验建议",
+            "source_ref": "paralegal-editorial-case",
+            "使用限制": "虚构演练不测用时、准确率或真实案卷权限。",
+            "来源": "费马测试编辑练习 P-17",
             "研究对象": "案卷摘要",
-            "结论": "摘要仅作候选；核原始证据、保密许可与律师审阅。",
-            "链接": "https://www.onetonline.org/link/summary/23-2011.00"
+            "结论": "逐条核 A01–A04，不把页眉日期当签署，不把 A04 陈述当原件。",
+            "链接": null
           },
           {
-            "使用限制": "非AI采用替代概率，也不外推中国需求。",
-            "来源": "BLS总体预测使用边界",
-            "研究对象": "岗位替代推断",
-            "结论": "总体变化与含替补空缺不能推个体结果。",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+            "source_ref": "source-fermatmind-ai-rubric",
+            "使用限制": "一般风险框架，不是律师助理采用或替代的测量。",
+            "来源": "NIST 生成式AI风险指引",
+            "研究对象": "虚构输出与隐私风险",
+            "结论": "生成内容可能看起来可信但错误，也可能造成未授权的个人信息披露。",
+            "链接": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
           },
           {
-            "使用限制": "精确职业而非23-2000合并法律支持组；不是AI采用、替代或个人失业概率。",
-            "来源": "BLS表1.2总体预测",
+            "source_ref": "bls-ep-2025-2035",
+            "使用限制": "全国预测不能识别AI的独立影响。",
+            "来源": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
             "研究对象": "美国23-2011精确总体就业",
-            "结论": "BLS精确23-2011在2025就业404,900、2035预计403,800人；2025—2035总体变化-0.3%、净减1,100人，年均40,800空缺含人员替补。OOH图表约0%为整数舍入，非净变化为零；不作AI采用、替代或个人失业概率及中国需求。",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+            "结论": "美国全国 23-2011：2025年约404,900个岗位，2035年预计403,800个，下降0.3%、净减约1,100个；年均约40,800个职业空缺。",
+            "链接": {
+              "$source": "bls-ep-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            }
           }
         ],
         "heading": "AI 如何影响法律助理任务",
@@ -14468,13 +14732,13 @@
             "stage": "律师审阅交付"
           }
         ],
-        "direct_answer": "先用公开虚构案例练事实表、法律原文检索、草稿和版本记录，再按雇主保密制度参与真实案件。",
+        "direct_answer": "先区分受聘助理、登记实习和执业证，再比较两个招聘样本的首项交付。用本节虚构案卷 P-17 练文件版本、证据索引和复核问题。",
         "entry_heading": "公开案例与文档训练",
         "heading": "从公开案例练习到律师监督下的案卷工作",
         "locale_requirements": {
-          "credential_boundary": "课程或证书不自动授予法律意见、代理或签署权限。",
+          "credential_boundary": "岗位名称、通过法考与取得律师执业证不可互换；核当地规则、登记和授权。",
           "jurisdiction": "美国职业资料与中国执业规则分开。",
-          "summary": "核当地规则、律师监督和案卷数据权限。"
+          "summary": "在中国大陆，受聘为助理、登记为律师执业实习人员、取得律师执业证是三种不同状态。招聘公告写“实习”或通过法考，不等于正式登记；全国律协规则规定实习期从签发实习证之日起算，办理手续按当地律师协会要求核对。现行《律师法》第16条限制无执业证人员以律师名义提供法律服务；诉讼代理或辩护保留法律另有规定。全国律协实习规则第23条禁止正式实习人员独自承办律师业务、以律师名义签委托代理或法律顾问协议、签发文书或发表代理辩护意见。依程序获准的辅助提交与签署、签发不同，由负责律师确认权限。 美国BLS列典型副学士或 paralegal studies 证书；部分雇主偏好本科，也可能接受高中学历加经验。ABA将 paralegal 描述为承担律师委派的实质法律工作，律师承担责任。州与程序规则单独核。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14501,6 +14765,60 @@
             "id": "law-current",
             "label": "中国律师法2026修正",
             "scope": "律师业务权限，非所有助理法定学历或执业证要求"
+          },
+          {
+            "href": {
+              "$source": "paralegal-cn-suzhou",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
+            "id": "paralegal-cn-suzhou",
+            "label": {
+              "$source": "paralegal-cn-suzhou",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
+            "scope": "苏州历史诉讼与尽调助理样本。"
+          },
+          {
+            "href": {
+              "$source": "paralegal-cn-tongji",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
+            "id": "paralegal-cn-tongji",
+            "label": {
+              "$source": "paralegal-cn-tongji",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
+            "scope": "同济刊载历史非诉助理样本。"
+          },
+          {
+            "href": {
+              "$source": "paralegal-cn-intern-rules",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
+            "id": "paralegal-cn-intern-rules",
+            "label": {
+              "$source": "paralegal-cn-intern-rules",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
+            "scope": "申请律师执业的正式登记实习。"
           }
         ],
         "tracks": [
@@ -14670,7 +14988,7 @@
             }
           },
           {
-            "answer": "BLS精确23-2011在2025就业404,900、2035预计403,800人；2025—2035总体变化-0.3%、净减1,100人，年均40,800空缺含人员替补。OOH图表约0%为整数舍入，非净变化为零；不作AI采用、替代或个人失业概率及中国需求。中位年薪62,890美元、时薪30.24美元为2025美国口径。",
+            "answer": "BLS 2025年约404,900个岗位，2035年预计约403,800个，下降0.3%，净减约1,100；年均约40,800个职业空缺。",
             "key": "qa2",
             "question": "美国官方数据是什么？",
             "table": {
@@ -14697,13 +15015,19 @@
                   "alternate_value": null,
                   "label": "2025在岗",
                   "secondary_value": "BLS 2025基期",
-                  "value": "404,900人"
+                  "value": {
+                    "$fact": "us-employment-2025",
+                    "field": "display_value"
+                  }
                 },
                 {
                   "alternate_value": null,
                   "label": "预计变化",
                   "secondary_value": "OOH约0%为整数舍入",
-                  "value": "2025—2035 -0.3%（净减1,100人）"
+                  "value": {
+                    "$fact": "us-precise-outlook-2025-2035",
+                    "field": "display_value"
+                  }
                 },
                 {
                   "alternate_value": null,
@@ -14721,7 +15045,7 @@
             }
           },
           {
-            "answer": "先选公开虚构案例，列事实时间线和证据索引，再查法条原文、法域和有效期，写研究备忘与文书草稿交专业人员复核；真实案卷须雇主授权，执业规则另核。",
+            "answer": "用入行区的虚构案卷 P-17，列 A01–A04、日期、可核事实和未知，再问签署页和提交记录。附有参考答案，不用真实客户材料。",
             "key": "qa1",
             "question": "如何入门？",
             "table": {
@@ -14833,7 +15157,6 @@
             "affected_roles": "律师与事实关联方",
             "consequence": "可能使案件事实判断失真。",
             "evidence_refs": [
-              "onet",
               "onet"
             ],
             "id": "personal-data",
@@ -14845,11 +15168,12 @@
             "affected_roles": "客户、第三方与团队",
             "consequence": "可能泄露客户及第三方信息。",
             "evidence_refs": [
-              "privacy",
-              "law-current"
+              "prc-pipl",
+              "law-current",
+              "privacy"
             ],
             "id": "technical-boundary",
-            "mitigation": "核组织许可、工具数据条款与保密安排；发现外泄按组织程序报告。",
+            "mitigation": "真实案卷先核适用法域、处理目的、合法基础、最小必要、权限和接收范围。未核前不上传；发现泄露按机构流程报告。",
             "scenario": "未获许可即把案卷传入外部工具。",
             "title": "客户隐私"
           },
@@ -14902,17 +15226,36 @@
             "href": "https://sfj.beijing.gov.cn/sfj/zwgk/2024zcwj/744120751/fl91/744123073/index.html",
             "id": "law-current",
             "label": "中国律师法2026修正",
-            "scope": "第16/41条权限保密；具体助理职责另核"
+            "scope": "第16条为执业范围，第41条为律师保密。"
           },
           {
             "href": "https://www.americanbar.org/content/aba-cms-dotorg/en/groups/paralegals/profession-information/information_for_lawyers_how_paralegals_can_improve_your_practice/",
             "id": "supervision",
             "label": "ABA律师监督助理指引",
             "scope": "美国监督规则和行政机构特例"
+          },
+          {
+            "href": {
+              "$source": "paralegal-cn-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
+            "id": "prc-pipl",
+            "label": {
+              "$source": "paralegal-cn-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
+            "scope": "真实案卷个人信息的目的、必要与合法基础。"
           }
         ]
       },
       "career_snapshot_primary_locale": {
+        "callout": "暂未取得中国大陆律师助理这一细分职业的全国工资分布。先核招聘岗位、计薪周期、固定和浮动部分、税前后及工作地。",
         "salary": {
           "bls_table": [
             {
@@ -14921,14 +15264,14 @@
               "说明": "法律助理中位、分位及统一起薪未取得。"
             },
             {
-              "指标": "规上专业技术宽岗位",
-              "数值": "155,491元/年",
-              "说明": "2025税前年均，法律专业工作包含于宽类，非助理精确工资。"
+              "指标": "国家统计局宽口径参照",
+              "数值": "155,491元/年（规上专业技术人员）",
+              "说明": "国家统计局2025年规模以上企业专业技术人员年平均工资155,491元，属于跨行业税前大类。法律检索这一项任务不能判定某人被统计为专业技术人员，也不能据此估律所或助理薪酬。"
             },
             {
-              "指标": "可用条件",
-              "数值": "实质法律研究＋规上企业",
-              "说明": "按实际工作及雇主核定，非行政文书岗位或全部律所、政府。"
+              "指标": "历史公告",
+              "数值": "实习日薪、助理面议分别核",
+              "说明": "苏州公告120元/天只给实习生，律师助理薪资面议；同济刊载全职助理公告的薪酬面谈。两则均不代表现招或职业工资分布。"
             },
             {
               "指标": "起薪和到手收入",
@@ -14986,14 +15329,14 @@
           ],
           "china_intl": "O*NET法律研究、案卷与草拟任务背景｜https://www.onetonline.org/link/summary/23-2011.00",
           "china_name_row": "专业技术宽岗位参考与本职缺口",
-          "china_open": "先分实质法律检索、研究和草拟与行政排程案卷事务，再核雇主是否属于规上企业。国家统计局2025规上企业专业技术人员税前年均155,491元；仅实际从事实质法律研究且雇主属于该调查规上企业时作宽岗位参考，非法律助理中位数、起薪或到手收入。行政文书为主的岗位不能仅按名称套用；政府机构、未达规模律所、个体与自由职业不适用此规上企业数字。",
+          "china_open": "先核岗位的计薪周期、固定和浮动部分，以及税前后。",
           "china_open_note": "如需薪资判断，应回到具体城市、雇主、岗位级别和公开招聘条件核对。",
           "china_ref": "国家统计局2025表6及岗位定义｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
-          "china_salary_note": "国家统计局2025规上企业专业技术人员税前年均155,491元；仅实际从事实质法律研究且雇主属于该调查规上企业时作宽岗位参考，非法律助理中位数、起薪或到手收入。行政文书为主的岗位不能仅按名称套用；政府机构、未达规模律所、个体与自由职业不适用此规上企业数字。调查城镇5人及以上法人；规上企业覆盖指定16行业，不能以5人门槛替代规上条件。税前含代扣税及个人社保、公积金，不含股息资本收益。",
+          "china_salary_note": "国家统计局2025年规模以上企业专业技术人员年平均工资155,491元，属于跨行业税前大类。法律检索这一项任务不能判定某人被统计为专业技术人员，也不能据此估律所或助理薪酬。 苏州公告120元/天只给实习生，律师助理薪资面议；同济刊载全职助理公告的薪酬面谈。两则均不代表现招或职业工资分布。",
           "china_salary_table": [
             {
-              "城市/区间": "中国数据状态",
-              "月薪参考": {
+              "城市/区间": "职业工资分布",
+              "年工资参照（行业/人员大类）": {
                 "$item": "paralegals-and-legal-assistants.china-salary.career-snapshot-primary-locale.1",
                 "block": "china-salary",
                 "copy_key": "career.item.career-snapshot-primary-locale",
@@ -15001,12 +15344,12 @@
               }
             },
             {
-              "城市/区间": "公开来源覆盖",
-              "月薪参考": "2025规上专业技术155,491元/年税前均值"
+              "城市/区间": "国家统计局宽口径参照",
+              "年工资参照（行业/人员大类）": "国家统计局2025年规模以上企业专业技术人员年平均工资155,491元，属于跨行业税前大类。法律检索这一项任务不能判定某人被统计为专业技术人员，也不能据此估律所或助理薪酬。"
             },
             {
-              "城市/区间": "使用边界",
-              "月薪参考": "实质法律研究且规上企业雇主才可参照；非本职月薪或到手"
+              "城市/区间": "历史公告",
+              "年工资参照（行业/人员大类）": "两则公告没有可比的助理年薪，具体口径见本节招聘说明。"
             }
           ],
           "china_soc_row": {
@@ -15031,7 +15374,7 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "O*NET/BLS2025五分位工资｜https://www.onetonline.org/link/localwages/23-2011.00；BLS精确23-2011总体预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS教育及行业工资｜https://www.bls.gov/ooh/legal/paralegals-and-legal-assistants.htm",
+        "authority_sources": "美国全国23-2011年薪分位（O*NET呈现BLS OEWS）｜https://www.onetonline.org/link/localwages/23-2011.00；BLS本职业中位时薪和行业工资｜https://www.bls.gov/ooh/legal/paralegals-and-legal-assistants.htm；BLS 23-2011精确就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
@@ -15059,25 +15402,34 @@
             "说明": "2025美国23-2011年薪百分位阈值，非资历、起薪或个人收入保证。"
           },
           {
-            "指标": "就业人数",
-            "数值": "404,900",
-            "说明": "BLS 2025 年美国就业人数。"
+            "指标": "2025年美国岗位数",
+            "数值": {
+              "$fact": "us-employment-2025",
+              "field": "display_value"
+            },
+            "说明": "BLS全国预测基期，不是当前招聘。"
           },
           {
-            "指标": "就业前景 2025—2035",
-            "数值": "-0.3%（净减1,100人）",
-            "说明": "2025就业404,900至2035预计403,800；OOH约0%为整数舍入，不是净变化为零。"
+            "指标": "2025–2035年岗位变化",
+            "数值": {
+              "$fact": "us-precise-outlook-2025-2035",
+              "field": "display_value"
+            },
+            "说明": "预计2035年约403,800个岗位，OOH取整为0%。"
           },
           {
-            "指标": "就业岗位空缺（平均年度）",
-            "数值": "40,800/年（含替补）",
-            "说明": "2025—2035年均空缺，不是十年净减，也不是AI采用替代个人失业。"
+            "指标": "预计年均职业空缺",
+            "数值": {
+              "$fact": "us-openings-2025-2035",
+              "field": "display_value"
+            },
+            "说明": "年均空缺反映转入其他职业、退出劳动力市场和净就业变化。"
           }
         ],
-        "boundary": "BLS精确23-2011在2025就业404,900、2035预计403,800人；2025—2035总体变化-0.3%、净减1,100人，年均40,800空缺含人员替补。OOH图表约0%为整数舍入，非净变化为零；不作AI采用、替代或个人失业概率及中国需求。",
+        "boundary": "BLS 2025年约404,900个岗位，2035年预计约403,800个，下降0.3%，净减约1,100；年均约40,800个职业空缺。 年均空缺反映转入其他职业、退出劳动力市场和净就业变化。 美国数字不适用于大陆。",
         "direct_answer": {
           "$join": [
-            "BLS 显示美国 2025 年中位年薪 $62,890；就业约 404,900 人。",
+            "2025年5月美国年薪中位62,890美元，时薪中位30.24美元。",
             {
               "$item": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -15085,7 +15437,7 @@
               "type": "prose"
             }
           ],
-          "separator": "；"
+          "separator": "\n"
         },
         "factor_rows": [
           {
@@ -15102,7 +15454,10 @@
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "-0.3%（净减1,100人）",
+        "growth": {
+          "$fact": "us-precise-outlook-2025-2035",
+          "field": "display_value"
+        },
         "heading": "美国法律助理工资与就业",
         "industry_heading": "行业与岗位差异",
         "industry_period": "2025",
@@ -15142,14 +15497,14 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "question": "如何解读中位工资和美国入门教育？"
           },
           {
             "answer": {
               "$join": [
-                "2025第10/25/50/75/90年薪44,740/50,340/62,890/80,080/101,500美元；时薪21.51/24.20/30.24/38.50/48.80美元。是分布阈值，不是职业阶段。",
+                "2025年美国全国第10、25、50、75和90百分位年薪依次为44,740、50,340、62,890、80,080和101,500美元；中位时薪为30.24美元。分位是工资分布的阈值，不是职业阶段。",
                 {
                   "$item": "paralegals-and-legal-assistants.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -15157,9 +15512,9 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
-            "question": "五分位代表什么？"
+            "question": "美国工资分位代表什么？"
           },
           {
             "answer": "它是职业就业存量，不是当前招聘数量。",
@@ -15172,7 +15527,7 @@
         ],
         "median": "$62,890",
         "outlook_heading": "就业前景",
-        "outlook_period": "2025—2035",
+        "outlook_period": "2025–2035",
         "wage_column_labels": [
           "工资统计位置",
           "年薪参考",
@@ -15193,7 +15548,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "label": "第10百分位以下",
             "value": "低于$44,740"
@@ -15210,7 +15565,7 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "label": "中位水平",
             "value": "$62,890"
@@ -15227,14 +15582,14 @@
                   "type": "prose"
                 }
               ],
-              "separator": "；"
+              "separator": "\n"
             },
             "label": "第90百分位以上",
             "value": "高于$101,500"
           }
         ]
       },
-      "definition_block": "在律师或法律团队指导下调查事实、检索法规判例、整理案卷、草拟文件并跟踪期限；法律意见与客户代理依所在地规则由有资格者负责。",
+      "definition_block": "律师助理的交付通常是供律师复核的事实表、证据目录、检索备忘或文书草稿。美国 paralegal 以受委派的实质法律工作为主；大陆雇主可能把行政、检索和实习安排混在同一职名，先核实际任务和复核人。",
       "faq_block": {
         "items": {
           "$item": "paralegals-and-legal-assistants.sources.faq-block.1",
@@ -15250,7 +15605,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "summary": "适合愿意做事实核对、法律检索、文件校订与期限管理，能守住客户保密和律师监督边界的人。",
+        "summary": "先试做虚构案卷：能否区分文件页眉日期、收到记录和实际签署证据，再给律师留下可复核的问题？",
         "title": "律师助理与法律助理"
       },
       "fit_decision_checklist": {
@@ -15275,7 +15630,7 @@
       },
       "hero": {
         "h1": "律师助理与法律助理",
-        "quick_answer": "在律师或法律团队指导下整理案卷、调查事实、检索法律资料、起草与校核文件，并跟踪期限和证据；法律意见、客户代理及其他执业决定按所在地规则由有资格者负责。",
+        "quick_answer": "律师助理核对事实、做法规和案例检索、整理证据与案卷，并把草稿交负责律师复核。在大陆，受聘为助理、正式登记为律师执业实习人员和持证执业是三种不同状态，工作范围要按岗位和当地规则核对。",
         "title": "律师助理与法律助理"
       },
       "market_signal_card": {
@@ -15298,54 +15653,69 @@
         "heading": "美国法律助理就业信号",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "paralegals-and-legal-assistants.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "paralegals-and-legal-assistants.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025–2035",
             "interpretation": {
-              "$item": "paralegals-and-legal-assistants.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                {
+                  "$item": "paralegals-and-legal-assistants.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "paralegals-and-legal-assistants.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "\n"
             },
             "limitation": {
-              "$item": "paralegals-and-legal-assistants.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                {
+                  "$item": "paralegals-and-legal-assistants.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "paralegals-and-legal-assistants.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "\n"
             },
             "metric": "总体净变化与空缺背景",
             "occupation_scope": "BLS 23-2011 美国职业",
             "source_id": "ep",
-            "value": "404,900人（2025）；2035预计403,800人"
+            "source_ref": "bls-ep-2025-2035",
+            "value": "约404,900 → 403,800个岗位"
           },
           {
             "geography": "美国",
             "horizon": "2025—2035",
-            "interpretation": "年均空缺主要含更替。",
+            "interpretation": "职业空缺含转入其他职业、退出劳动力市场和净就业变化；不是净新增、当前招聘或个人录用率。",
             "limitation": "不能外推个人录用概率或中国需求。",
             "metric": "变化与年均空缺",
             "occupation_scope": "BLS 23-2011 美国职业",
-            "source_id": "bls",
-            "value": "-0.3%、净减1,100人；40,800个/年含替补"
+            "source_id": "ep",
+            "source_ref": "bls-ep-2025-2035",
+            "value": "年均约40,800个职业空缺"
           },
           {
-            "geography": "中国大陆",
-            "horizon": "当前资料",
-            "interpretation": "未取得中国同职业、同周期总体预测；美国人员替补不能外推中国。",
-            "limitation": "不能外推个人录用概率或中国需求。",
-            "metric": "同口径预测",
-            "occupation_scope": "中国岗位不可直接对应",
-            "source_id": "nbs",
-            "value": "暂无可安全使用的数据"
+            "geography": "中国大陆·苏州",
+            "horizon": "2026-03-03",
+            "interpretation": "对照真实交付与律师复核要求。",
+            "limitation": "当前可投状态未核，不能估全国招聘。",
+            "metric": "苏州历史招聘样本",
+            "occupation_scope": "雇主历史样本",
+            "source_id": "suzhou",
+            "source_ref": "paralegal-cn-suzhou",
+            "value": "检索、文书和证据整理"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15373,6 +15743,24 @@
             "id": "onet",
             "label": "O*NET本职任务与招聘样本",
             "scope": "美国任务背景；2025软件提及样本不是AI采用。"
+          },
+          {
+            "href": {
+              "$source": "paralegal-cn-suzhou",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
+            "id": "suzhou",
+            "label": {
+              "$source": "paralegal-cn-suzhou",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "paralegals-and-legal-assistants.source-register.published.1"
+            },
+            "scope": "历史样本，助理薪资面议。"
           }
         ],
         "transitions": [
@@ -15385,11 +15773,11 @@
             "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标页为43-6000秘书行政四类汇总，含法律秘书而非法律秘书独立页；须按实际子职业核文书排程、专业术语及保密。",
+            "capability_gaps": "实际法律秘书的排程、联络和文档职责见上方专门职业资料；站内此链接覆盖更宽职业大类。",
             "shared_capabilities": "案卷版本、期限与行政沟通。",
             "target_href": "/zh/career/jobs/secretaries-and-administrative-assistants",
             "target_slug": "secretaries-and-administrative-assistants",
-            "target_title": "秘书与行政助理（汇总职业）",
+            "target_title": "秘书与行政助理（职业大类）",
             "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
@@ -15489,7 +15877,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "探索职业兴趣",
+            "cta_label": "探索霍兰德职业兴趣",
             "evidence_level": {
               "$item": "paralegals-and-legal-assistants.fit.personality-fit-block.8",
               "block": "fit",
@@ -15510,7 +15898,7 @@
           {
             "answer": "反思事实来源、期限和版本记录，实际样本另核。",
             "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
-            "cta_label": "了解人格特质",
+            "cta_label": "了解大五人格特质",
             "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "big-five",
             "label": "大五人格",
@@ -15526,7 +15914,7 @@
           {
             "answer": "记录文字、研究和协作偏好，不以类型判案件能力。",
             "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
-            "cta_label": "探索职业兴趣",
+            "cta_label": "探索 MBTI 偏好",
             "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "mbti",
             "label": "MBTI 偏好",
@@ -15542,7 +15930,7 @@
           {
             "answer": "反思冲突事实和期限压力，不据类型替代带教反馈。",
             "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
-            "cta_label": "了解人格特质",
+            "cta_label": "了解九型人格",
             "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "enneagram",
             "label": "九型人格",
@@ -15558,7 +15946,7 @@
           {
             "answer": "观察规则条件、证据和引注理解，不代法律训练。",
             "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
-            "cta_label": "探索职业兴趣",
+            "cta_label": "体验认知能力测评",
             "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "iq",
             "label": "认知能力测评",
@@ -15574,7 +15962,7 @@
           {
             "answer": "关注向律师准确交接事实、疑点和期限，沟通自评不代案件反馈。",
             "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
-            "cta_label": "了解人格特质",
+            "cta_label": "探索情绪与沟通自评",
             "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "eq",
             "label": "情绪与沟通自评",
@@ -15676,7 +16064,7 @@
           },
           {
             "answer": "不等于，核地区、事务、工时与雇主合同。",
-            "question": "全国中位工资等于律所报价吗？"
+            "question": "美国全国中位工资等于律所报价吗？"
           },
           {
             "answer": "需完成目标法域资格和执业程序，助理经历不代执业证。",
@@ -15710,7 +16098,7 @@
             "tone": "caution"
           },
           {
-            "body": "用公开虚构案例核事实来源、法域有效期和文书版本；不使用真实客户数据。",
+            "body": "在虚构 P-17 中练核版本、收到记录和未核陈述，只给负责律师留复核问题。",
             "id": "experiment",
             "label": "保密监督",
             "tone": "action"
@@ -15768,7 +16156,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "做霍兰德职业兴趣测试",
+        "label": "探索职业兴趣",
         "source_page_type": "职业详情页",
         "subject_key": "paralegals-and-legal-assistants",
         "subject_kind": "职业",
@@ -15795,8 +16183,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "O*NET23-2011任务与2025招聘、BLS2025工资及2025—2035预测、NBS2025条件宽岗、分法域ABA与中国2026律师法。",
-          "updated_at": "资料核查：2026-10-12"
+          "source": "美国职业任务与数据取 O*NET、BLS、OEWS；大陆执业规则、招聘样本和行业工资各列原章。P-17为虚构练习。",
+          "updated_at": "原证复核于2026年11月9日；各资料期见来源。"
         },
         "note": "证据只支持律师助理与法律助理在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15808,7 +16196,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业兴趣与人格探索"
+            "label": "探索职业兴趣"
           },
           {
             "href": {
@@ -15818,7 +16206,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "职业兴趣与人格探索"
+            "label": "查看大五测评"
           },
           {
             "href": {
@@ -15828,7 +16216,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "职业兴趣与人格探索"
+            "label": "查看 MBTI 测评"
           },
           {
             "href": {
@@ -15838,7 +16226,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "职业兴趣与人格探索"
+            "label": "查看情绪智力测评"
           }
         ]
       },
@@ -15865,6 +16253,13 @@
         "block": "path",
         "copy_key": "career.item.employer-evidence",
         "id": "paralegals-and-legal-assistants.path.employer-evidence.2",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "paralegals-and-legal-assistants.path.entry-work-sample-data.11",
         "location": "entry_decisions",
         "type": "cards"
       },
@@ -15933,7 +16328,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI能辅助哪些案卷任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -15971,7 +16366,7 @@
         "occupation_scope": "Paralegals and Legal Assistants 23-2011",
         "period": "May 2025 wages and 2025-2035 projections",
         "source_refs": [
-          "bls-ooh-paralegals"
+          "paralegal-oews-2025"
         ]
       },
       {
@@ -15983,7 +16378,7 @@
         "occupation_scope": "Paralegals and Legal Assistants 23-2011",
         "period": "May 2025 wages and 2025-2035 projections",
         "source_refs": [
-          "source-pack-onet-localwages"
+          "paralegal-oews-2025"
         ]
       },
       {
@@ -16012,38 +16407,38 @@
       },
       {
         "derivation": null,
-        "display_value": "约 0%",
+        "display_value": "下降0.3%（OOH取整为0%）",
         "fact_id": "us-outlook-2025-2035",
         "market": "美国",
         "measure": "OOH整数舍入的总体就业变化；精确表为-0.3%",
         "occupation_scope": "Paralegals and Legal Assistants 23-2011",
         "period": "May 2025 wages and 2025-2035 projections",
         "source_refs": [
-          "bls-ooh-paralegals"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "40,800个/年",
+        "display_value": "年均约40,800个职业空缺",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均空缺，含人员替补，非净增",
         "occupation_scope": "Paralegals and Legal Assistants 23-2011",
         "period": "May 2025 wages and 2025-2035 projections",
         "source_refs": [
-          "bls-ooh-paralegals"
+          "bls-ep-2025-2035"
         ]
       },
       {
         "derivation": null,
-        "display_value": "404,900 人",
+        "display_value": "约404,900个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
         "occupation_scope": "SOC 23-2011 paralegals and legal assistants",
         "period": "2025",
         "source_refs": [
-          "bls-ooh-paralegals"
+          "bls-ep-2025-2035"
         ]
       },
       {
@@ -16052,7 +16447,7 @@
         "fact_id": "china-professional-2025",
         "market": "中国大陆",
         "measure": "专业技术宽岗位年平均工资",
-        "occupation_scope": "实际实质法律研究与规上企业条件满足；非法律助理工资",
+        "occupation_scope": "规模以上企业专业技术人员跨行业统计背景；不可判断助理统计归类或工资。",
         "period": "2025",
         "source_refs": [
           "nbs-reference-2025"
@@ -16060,7 +16455,7 @@
       },
       {
         "derivation": null,
-        "display_value": "-0.3%（净减1,100人）",
+        "display_value": "下降0.3%（净减约1,100个岗位）",
         "fact_id": "us-precise-outlook-2025-2035",
         "market": "美国",
         "measure": "总体就业预测净变化",
@@ -16071,30 +16466,30 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+75+75)/3+0.5)=75; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "75%",
+        "derivation": null,
+        "display_value": "未核实职业量化成效",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "AI成效证据状态",
         "occupation_scope": "律师助理与法务助理",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "period": "2026-11-09",
         "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "paralegal-editorial-case"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 成效证据状态"
     },
     "badges": [
-      "案卷证据 · 法律检索 · 文件草拟",
-      "律师监督 · 保密 · 期限管理",
-      "O*NET 23-2011.00 · 美国统计口径"
+      "事实、引注和案卷",
+      "草稿与律师复核",
+      "美国 SOC 23-2011"
     ],
     "metrics": [
       {
@@ -16107,25 +16502,25 @@
         "availability": "available",
         "fact_ref": "us-precise-outlook-2025-2035",
         "key": "us_growth",
-        "label": "美国总体就业（2025—2035）"
+        "label": "美国就业变化预测（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗（2025）"
+        "label": "美国就业岗位数（2025年）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均空缺（含替补）"
+        "label": "美国预计年均职业空缺"
       },
       {
-        "availability": "available",
-        "fact_ref": "china-professional-2025",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "规上专业技术·税前年均"
+        "label": "中国大陆职业工资"
       }
     ]
   },
@@ -16133,17 +16528,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "在律师或法律团队指导下整理案卷、调查事实、检索法律资料、起草与校核文件，并跟踪期限和证据；法律意见、客户代理及其他执业决定按所在地规则由有资格者负责。美国 O*NET 23-2011.00 与 BLS 2025—2035 统计口径。"
+      "text": "了解律师助理怎样核事实、检索和整理案卷，区分受聘助理、申请执业实习与律师执业，比较薪资口径并试做虚构案卷。"
     },
     "title": {
       "availability": "available",
-      "text": "律师助理与法律助理：工作内容、工资与执业边界"
+      "text": "律师助理与法律助理：职责、入行和执业边界"
     }
   },
-  "source_content_sha256": "2dd5354fea50d31c47e43daf8317c3105fadb6d1e969552410d0b6e1c2a84622",
+  "source_content_sha256": "74f1a506a688b28158a315c50e3e745fc1c7cc4745def5c5960b90f6f04d4089",
   "subject": {
     "canonical_slug": "paralegals-and-legal-assistants",
     "name": "律师助理与法律助理",
-    "summary": "在律师或法律团队指导下整理案卷、调查事实、检索法律资料、起草与校核文件，并跟踪期限和证据；法律意见、客户代理及其他执业决定按所在地规则由有资格者负责。"
+    "summary": "律师助理核对事实、做法规和案例检索、整理证据与案卷，并把草稿交负责律师复核。大陆受聘助理、申请律师执业实习和持证执业是不同阶段，工作范围要按岗位和当地规则核。"
   }
 }
