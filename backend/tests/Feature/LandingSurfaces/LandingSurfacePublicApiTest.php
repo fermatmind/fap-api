@@ -315,6 +315,45 @@ final class LandingSurfacePublicApiTest extends TestCase
         $this->assertContains('paid_report', data_get($mediaRows->get('iq-full-report-cover'), 'payload_json.render_surface'));
     }
 
+    public function test_taiwan_public_reader_requires_an_exact_published_variant(): void
+    {
+        foreach (['home', 'tests', 'tests_category_personality', 'tests_category_career'] as $key) {
+            $create = [
+                'org_id' => 0,
+                'surface_key' => $key,
+                'locale' => 'zh-CN',
+                'status' => LandingSurface::STATUS_PUBLISHED,
+                'is_public' => true,
+                'is_indexable' => false,
+                'payload_json' => ['hero' => ['title' => '测评入口']],
+            ];
+            LandingSurface::query()->create($create);
+            $url = '/api/v0.5/landing-surfaces/'.$key;
+            $this->getJson($url.'?locale=zh-TW')->assertNotFound();
+            $this->getJson($url.'?locale=zh')->assertOk()->assertJsonPath('surface.locale', 'zh-CN');
+
+            $taiwan = LandingSurface::query()->create(array_replace($create, [
+                'locale' => 'zh-TW',
+                'status' => LandingSurface::STATUS_DRAFT,
+                'payload_json' => ['hero' => ['title' => '測評入口']],
+            ]));
+            $this->getJson($url.'?locale=zh-TW')->assertNotFound();
+
+            $taiwan->update(['status' => LandingSurface::STATUS_PUBLISHED, 'is_public' => false]);
+            $this->getJson($url.'?locale=zh-TW')->assertNotFound();
+
+            $taiwan->update(['is_public' => true]);
+            $this->getJson($url.'?locale=zh-TW&org_id=99')->assertNotFound();
+            $this->getJson($url.'?locale=zh-TW')->assertOk()
+                ->assertJsonPath('surface.surface_key', $key)
+                ->assertJsonPath('surface.locale', 'zh-TW')
+                ->assertJsonPath('surface.is_indexable', false)
+                ->assertJsonPath('surface.payload_json.hero.title', '測評入口');
+        }
+
+        $this->getJson('/api/v0.5/landing-surfaces/career?locale=zh-TW')->assertUnprocessable();
+    }
+
     public function test_public_and_internal_api_return_surface_payloads(): void
     {
         $this->artisan('landing-surfaces:import-local-baseline', [

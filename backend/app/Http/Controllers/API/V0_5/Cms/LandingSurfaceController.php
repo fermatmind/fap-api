@@ -27,6 +27,8 @@ final class LandingSurfaceController extends Controller
 {
     private const RECOMMENDED_ARTICLE_SELECTION_MODE_LATEST = 'latest_published_indexable';
 
+    private const TAIWAN_PUBLIC_SURFACES = ['home', 'tests', 'tests_category_personality', 'tests_category_career'];
+
     public function __construct(
         private readonly ArticleSeoService $articleSeoService,
         private readonly ArticlePublicListQuery $articlePublicListQuery,
@@ -34,7 +36,8 @@ final class LandingSurfaceController extends Controller
 
     public function show(Request $request, string $surfaceKey): JsonResponse
     {
-        $validated = $this->validateReadQuery($request);
+        $surfaceKey = $this->normalizeKey($surfaceKey);
+        $validated = $this->validateReadQuery($request, in_array($surfaceKey, self::TAIWAN_PUBLIC_SURFACES, true));
         if ($validated instanceof JsonResponse) {
             return $validated;
         }
@@ -43,7 +46,7 @@ final class LandingSurfaceController extends Controller
             ->withoutGlobalScopes()
             ->with(['blocks' => fn ($query) => $query->where('is_enabled', true)])
             ->where('org_id', $validated['org_id'])
-            ->where('surface_key', $this->normalizeKey($surfaceKey))
+            ->where('surface_key', $surfaceKey)
             ->where('locale', $validated['locale'])
             ->publishedPublic()
             ->first();
@@ -175,10 +178,11 @@ final class LandingSurfaceController extends Controller
         ]);
     }
 
-    private function validateReadQuery(Request $request): array|JsonResponse
+    private function validateReadQuery(Request $request, bool $allowTaiwan = false): array|JsonResponse
     {
+        $locales = $allowTaiwan ? ['en', 'zh-CN', 'zh', 'zh-TW'] : ['en', 'zh-CN', 'zh'];
         $validator = Validator::make($request->query(), [
-            'locale' => ['nullable', 'string', Rule::in(['en', 'zh-CN', 'zh'])],
+            'locale' => ['nullable', 'string', Rule::in($locales)],
             'org_id' => ['nullable', 'integer', 'min:0'],
         ]);
 
@@ -192,8 +196,10 @@ final class LandingSurfaceController extends Controller
 
         $validated = $validator->validated();
 
+        $locale = (string) ($validated['locale'] ?? 'en');
+
         return [
-            'locale' => $this->normalizeLocale((string) ($validated['locale'] ?? 'en')),
+            'locale' => $locale === 'zh-TW' ? $locale : $this->normalizeLocale($locale),
             'org_id' => (int) ($validated['org_id'] ?? 0),
         ];
     }
