@@ -16,6 +16,7 @@ use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticlePublicListQuery;
 use App\Services\Cms\ArticlePublicListReadCache;
 use App\Services\Cms\ArticlePublishService;
+use App\Services\Cms\ArticleReviewedCounterpartService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
 use App\Services\Cms\IqPublicArticleFaqProjection;
@@ -166,7 +167,13 @@ class ArticleController extends Controller
             ], 404);
         }
 
-        return response()->json($this->publicDetailProjection($article));
+        $payload = $this->publicDetailProjection($article);
+        $languages = app(ArticleReviewedCounterpartService::class)->readerLanguageSlugs($article);
+        if ($languages !== []) {
+            $payload['reader_language_slugs'] = $languages;
+        }
+
+        return response()->json($payload);
     }
 
     /** The reader and derived Truth consume the same public projection. */

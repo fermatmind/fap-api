@@ -84,6 +84,69 @@ final class ArticleReviewedCounterpartService
             && preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', (string) $article->slug) === 1;
     }
 
+    /** @return array<string, string> Published reader destinations, independent of search eligibility. */
+    public function readerLanguageSlugs(Article $article): array
+    {
+        if ((int) $article->org_id !== 0 || ! in_array($article->locale, ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES, true)) {
+            return [];
+        }
+
+        $sourceId = $article->locale === 'zh-CN' ? (int) $article->id : (int) $article->source_article_id;
+        $reviewed = $article->locale === 'en' ? $this->resolve($article) : null;
+        if ($reviewed !== null) {
+            $sourceId = (int) collect($reviewed)->firstWhere('locale', 'zh-CN')?->id;
+        }
+        if ($sourceId < 1) {
+            return [];
+        }
+
+        $members = Article::withoutGlobalScopes()->where('org_id', 0)->publiclyReadable()
+            ->where(static function ($query) use ($sourceId): void {
+                $query->whereKey($sourceId)->orWhere('source_article_id', $sourceId);
+            })
+            ->whereIn('locale', ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES)
+            ->with(['publishedRevision', 'seoMeta'])->get();
+        $source = $members->firstWhere('id', $sourceId);
+        if ($source?->locale !== 'zh-CN' || ! $this->readableForNavigation($source)) {
+            return [];
+        }
+
+        $group = trim((string) $source->translation_group_id);
+        if ($group === '') {
+            return [];
+        }
+        $siblings = $members->filter(fn (Article $member): bool => $member->source_locale === 'zh-CN'
+            && (int) $member->source_article_id === $sourceId && $member->translation_group_id === $group
+            && (int) $member->publishedRevision?->source_article_id === $sourceId && $this->readableForNavigation($member));
+        $traditional = $siblings->where('locale', 'zh-TW');
+        if ($traditional->count() !== 1) {
+            return [];
+        }
+
+        $reviewed ??= $this->resolve($source);
+        $english = $reviewed === null
+            ? $siblings->where('locale', 'en')
+            : collect($reviewed)->where('locale', 'en')->filter(fn (Article $member): bool => $this->readableForNavigation($member));
+        $destinations = collect([$source, $traditional->sole()]);
+        if ($english->count() === 1) {
+            $destinations->push($english->sole());
+        }
+        if (! $destinations->contains(fn (Article $member): bool => (int) $member->id === (int) $article->id)) {
+            return [];
+        }
+
+        return $destinations->mapWithKeys(static fn (Article $member): array => [$member->locale => $member->slug])->all();
+    }
+
+    private function readableForNavigation(Article $article): bool
+    {
+        $revision = $article->publishedRevision;
+
+        return preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', (string) $article->slug) === 1
+            && $revision !== null && $revision->isPubliclyReadableForArticle($article)
+            && trim((string) $revision->content_md) !== '';
+    }
+
     /** Published text and public reader semantics; private working drafts do not change this proof. */
     public function createBinding(array $members): array
     {

@@ -621,6 +621,56 @@ final class ArticlePublicApiTest extends TestCase
         $this->getJson($sourcePath)->assertOk()->assertJsonMissingPath('meta.alternates.zh-TW');
     }
 
+    public function test_article_reader_links_noindex_traditional_siblings_by_published_lineage(): void
+    {
+        $group = 'reader-language-group';
+        $source = $this->createArticle(['slug' => 'reader-source', 'locale' => 'zh-CN', 'translation_group_id' => $group]);
+        $identity = [
+            'translation_group_id' => $group, 'source_locale' => 'zh-CN', 'source_article_id' => $source->id,
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+        ];
+        $english = $this->createArticle($identity + ['slug' => 'reader-english', 'locale' => 'en']);
+        $traditional = $this->createArticle($identity + [
+            'slug' => 'reader-traditional', 'locale' => 'zh-TW', 'is_indexable' => false,
+        ]);
+        $unrelated = $this->createArticle(['slug' => $source->slug, 'locale' => 'en', 'translation_group_id' => 'other-group']);
+        $links = ['zh-CN' => $source->slug, 'zh-TW' => $traditional->slug, 'en' => $english->slug];
+
+        foreach ([$source, $english, $traditional] as $article) {
+            $path = '/api/v0.5/articles/'.$article->slug;
+            $this->getJson($path.'?locale='.$article->locale)->assertOk()->assertJsonPath('reader_language_slugs', $links);
+            $this->getJson($path.'/seo?locale='.$article->locale)->assertOk()->assertJsonMissingPath('meta.alternates.zh-TW');
+        }
+
+        $this->getJson('/api/v0.5/articles/'.$unrelated->slug.'?locale=en')->assertOk()->assertJsonMissingPath('reader_language_slugs');
+
+        $counterparts = app(\App\Services\Cms\ArticleReviewedCounterpartService::class);
+        $binding = $counterparts->createBinding([$source, $unrelated]);
+        foreach ([$source, $unrelated] as $article) {
+            $this->createSeoMeta($article, [
+                'canonical_url' => $counterparts->canonical($article),
+                'schema_json' => ['editorial_package_v1' => ['hreflang_gate_v1' => [
+                    'enabled' => true, 'policy' => 'reciprocal_counterparts_verified', 'counterpart_binding_v1' => $binding,
+                ]]],
+            ]);
+        }
+        $links['en'] = $unrelated->slug;
+        foreach ([$source, $unrelated, $traditional] as $article) {
+            $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale='.$article->locale)->assertOk()
+                ->assertJsonPath('reader_language_slugs', $links);
+        }
+        $this->getJson('/api/v0.5/articles/'.$english->slug.'?locale=en')->assertOk()->assertJsonMissingPath('reader_language_slugs');
+        $unrelated->publishedRevision->updateQuietly(['content_md' => 'Changed after counterpart review']);
+        $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()
+            ->assertJsonMissingPath('reader_language_slugs.en')->assertJsonPath('reader_language_slugs.zh-TW', $traditional->slug);
+
+        $traditional->publishedRevision->forceFill(['content_md' => '  '])->saveQuietly();
+        $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()->assertJsonMissingPath('reader_language_slugs');
+        $traditional->publishedRevision->forceFill(['content_md' => '繁體正文', 'revision_status' => 'draft'])->saveQuietly();
+        $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()->assertJsonMissingPath('reader_language_slugs');
+        $this->getJson('/api/v0.5/articles/'.$traditional->slug.'?locale=zh-TW')->assertNotFound();
+    }
+
     public function test_same_slug_in_other_group_cannot_replace_a_verified_locale_sibling(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
