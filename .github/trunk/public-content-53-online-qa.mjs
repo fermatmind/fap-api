@@ -18,8 +18,11 @@ const guideDocumentTitle = (sourceTitle, layoutBrand = 'FermatMind') => {
 const plain = x => /^\s*```[\w-]*\s*$/.test(x) ? '' : x.replace(/!\[[^\]]*\]\([^)]*\)/g,'').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1')
   .replace(/^\s*\[\^([0-9A-Za-z-]+)\]:\s*/,'$1 ').replace(/\[\^([0-9A-Za-z-]+)\]/g,'$1')
   .replace(/^\s*(?:>\s*)+|^\s*(?:#{1,6}\s*|[-*+]\s+|\d+[.)]\s+)/g,'').replace(/[*`_]/g,'');
+const traditionalPolicyType = row => row.new_traditional_page && row.kind === 'page'
+  ? ({methodology:'methodology','source-review-policy':'trust'})[row.identity.slug] : undefined;
 export const pathFor = row => {
   const {slug,locale} = row.identity; const segment = locale === 'zh-TW' ? 'zh-TW' : locale === 'en' ? 'en' : 'zh';
+  if (traditionalPolicyType(row)) return `/${segment}/personality/big-five/${slug}`;
   if (row.kind === 'guide') return `/${segment}/career/guides/${slug}`;
   if (row.kind === 'article') return `/${segment}/articles/${slug}`;
   if (row.kind === 'profile') return `/${segment}/topics/${slug}`;
@@ -631,7 +634,7 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
     const breadcrumb=schemas.some(node=>node['@type'] === 'BreadcrumbList' && node.itemListElement?.at(-1)?.item === url);
     if (dom.language !== 'zh-TW' || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)]) || !robots.includes('noindex') || robots.includes('index')
       || dom.alternate_entries.some(entry=>entry.hreflang)
-      || !webPage || !breadcrumb || (row.identity.slug === 'about' && !['創始人與博士顧問團隊','劉福威','賈睿璇','李琛'].every(text=>body.includes(compact(text)))))
+      || (traditionalPolicyType(row) ? schemas.length !== 0 : !webPage || !breadcrumb) || (row.identity.slug === 'about' && !['創始人與博士顧問團隊','劉福威','賈睿璇','李琛'].every(text=>body.includes(compact(text)))))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_SEO_OR_TEAM_${row.page_id}`);
   }
   if (row.new_traditional_article) {
@@ -790,7 +793,9 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     }
     if (row.new_traditional_landing && native.is_indexable !== row.traditional_landing_indexable)
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_LANDING_QUALIFICATION_${row.page_id}`);
+    const policyType = traditionalPolicyType(row);
     if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)
+      || (policyType && (native.canonical_path !== pathFor(row) || native.page_type !== policyType))
       || (row.protected_fields && native.support_contact !== row.protected_fields.support_contact)
       || (typeof row.protected_fields?.schema_enabled === 'boolean' && native.schema_enabled !== row.protected_fields.schema_enabled)))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_QUALIFICATION_${row.page_id}`);

@@ -1019,20 +1019,21 @@ test('AI method hreflang acceptance requires its exact reciprocal pair and keeps
  }
 });
 
-test('Traditional CMS package selects twenty-five reviewed variants with exact environment sources and verifies complete noindex DOM',()=>{
+test('Traditional CMS package selects twenty-seven reviewed variants with exact environment sources and verifies complete noindex DOM',()=>{
  const paths=['backend/content_assets/public_content_53/traditional-pages.json','backend/content_assets/public_content_53/traditional-pages-review.json'];
  assert.equal(selectPublicContentPackage(paths),'traditional-pages');
  assert.throws(()=>selectPublicContentPackage([...paths,'backend/content_assets/public_content_53/translation-batch.json']),/MULTIPLE_PACKAGES/);
  const binding=inspectPackage(root,'traditional-pages');
- assert.equal(binding.expected_row_count,25);
+ assert.equal(binding.expected_row_count,27);
  const rows=readCandidateRows(root,binding.package_sha256).candidates;
- assert.deepEqual(rows.map(row=>row.identity.slug),['about','brand','charter','careers','privacy','terms','method-boundaries','science','help-contact','foundation','policies','help-faq','help-about','help-team','help-used-and-mentioned','help-for-business-and-research','common-misconceptions','data-privacy','help-data-deletion','help-payment-refund','help-privacy-data','help-result-recovery','help-unlock-failure','item-design-notes','reliability-validity']);
+ assert.deepEqual(rows.map(row=>row.identity.slug),['about','brand','charter','careers','privacy','terms','method-boundaries','science','help-contact','foundation','policies','help-faq','help-about','help-team','help-used-and-mentioned','help-for-business-and-research','common-misconceptions','data-privacy','help-data-deletion','help-payment-refund','help-privacy-data','help-result-recovery','help-unlock-failure','item-design-notes','reliability-validity','methodology','source-review-policy']);
  const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
  for(const original of rows) {
   for(const environment of ['staging','production']) {
   const row=environment==='staging'&&original.staging_snapshot?{...original,snapshot:original.staging_snapshot}:original;
   assert.equal(row.identity.locale,'zh-TW');
-  assert.equal(pathFor(row),`/zh-TW/${row.identity.slug.startsWith('help-')?'help/'+row.identity.slug.slice(5):row.identity.slug}`);
+  const structured = ['methodology','source-review-policy'].includes(row.identity.slug);
+  assert.equal(pathFor(row),`/zh-TW/${structured?'personality/big-five/'+row.identity.slug:row.identity.slug.startsWith('help-')?'help/'+row.identity.slug.slice(5):row.identity.slug}`);
   assert.equal(row.snapshot.is_indexable,false);
   const links=[['/science','/zh-TW/science','測評科學'],['/method-boundaries','/zh/method-boundaries','方法邊界'],['/item-design-notes','/zh/item-design-notes','題目設計說明'],['/reliability-validity','/zh/reliability-validity','信度與效度'],['/tests/mbti-personality-test-16-personality-types','/zh/tests/mbti-personality-test-16-personality-types','MBTI免費測試'],['/tests/big-five-personality-test','/zh/tests/big-five-personality-test-ocean-model','大五人格免費測試'],['/tests/holland-career-interest-test-riasec','/zh/tests/holland-career-interest-test-riasec','霍蘭德職業興趣免費測試']];
   const body=row.snapshot.content_md.split('\n').filter(line=>line && !/^# content_md$|^visible_faq_items:$|^<!-- help-service-visible-faq:/.test(line)).map(line=>{
@@ -1047,7 +1048,7 @@ test('Traditional CMS package selects twenty-five reviewed variants with exact e
   }).join('');
   const url='https://fermatmind.com'+pathFor(row);
   const faq=row.protected_fields?.schema_enabled?{'@type':'FAQPage',mainEntity:row.snapshot.faq_items.map(({question,answer})=>({'@type':'Question',name:question,acceptedAnswer:{'@type':'Answer',text:answer}}))}:null;
-  const schema=[{'@type':'WebPage',url,inLanguage:'zh-TW',name:row.snapshot.title,description:row.snapshot.summary ?? ''},{'@type':'BreadcrumbList',itemListElement:[{item:url}]},...(faq?[faq]:[])].map(node=>`<script type="application/ld+json">${JSON.stringify(node)}</script>`).join('');
+  const schema=structured?'':[{'@type':'WebPage',url,inLanguage:'zh-TW',name:row.snapshot.title,description:row.snapshot.summary ?? ''},{'@type':'BreadcrumbList',itemListElement:[{item:url}]},...(faq?[faq]:[])].map(node=>`<script type="application/ld+json">${JSON.stringify(node)}</script>`).join('');
   const team=row.identity.slug==='about'?'<section>創始人與博士顧問團隊 劉福威 賈睿璇 李琛</section>':'';
   const html=`<html lang="zh-TW"><head><meta charset="utf-8"><title>${escape(row.snapshot.seo_title)} | 費馬測試</title><meta name="description" content="${escape(row.snapshot.meta_description)}"><meta name="robots" content="noindex, follow"><link rel="canonical" href="${url}"></head><body>${schema}<main><h1>${escape(row.snapshot.title)}</h1>${body}${team}</main></body></html>`;
   assert.doesNotThrow(()=>assertDom(row,html,{missing:true},environment));

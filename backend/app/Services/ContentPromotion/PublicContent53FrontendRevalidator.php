@@ -83,6 +83,9 @@ final class PublicContent53FrontendRevalidator
             } elseif ($row['kind'] === 'profile') {
                 $paths = ["/$segment/topics/$slug"];
                 $content = ['type' => 'public_content_53'];
+            } elseif ($row['kind'] === 'page' && $row['identity']['locale'] === 'zh-TW' && in_array($slug, ['methodology', 'source-review-policy'], true)) {
+                $paths = [TraditionalContentPagePublication::targetPath($slug)];
+                $content = ['type' => 'public_content_53'];
             } elseif ($row['kind'] === 'page' && in_array($slug, ['about', 'careers', 'charter', 'help-faq', 'help-contact', 'help-for-business-and-research'], true)
                 || ($row['kind'] === 'page' && $row['identity']['locale'] === 'zh-TW' && in_array($slug, ['foundation', 'policies', 'help-about', 'help-team', 'help-used-and-mentioned', 'common-misconceptions', 'data-privacy', 'help-data-deletion', 'help-payment-refund', 'help-privacy-data', 'help-result-recovery', 'help-unlock-failure', 'item-design-notes', 'reliability-validity'], true))) {
                 $path = str_starts_with($slug, 'help-') ? 'help/'.substr($slug, 5) : $slug;

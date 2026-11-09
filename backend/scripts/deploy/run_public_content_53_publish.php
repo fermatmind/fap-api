@@ -111,6 +111,7 @@ try {
         'app/Services/Cms/RowBackedRevisionWorkspace.php',
         'app/Services/Cms/AbstractSiblingTranslationAdapter.php',
         'app/Services/Cms/ContentPageTranslationAdapter.php',
+        'app/Services/Cms/StructuredContentPagePolicy.php',
         'app/Services/ContentPromotion/PublicContent53MbtiResultCopy.php',
         'app/Services/Cms/MbtiEnglishVariantSectionEnrichmentService.php',
         'app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php',

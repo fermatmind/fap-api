@@ -131,7 +131,6 @@ final class SiblingTranslationWorkflowService
             }
         }
         if (! is_array($fields['headings']) || ! array_is_list($fields['headings'])
-            || array_filter($fields['headings'], static fn ($heading): bool => ! is_string($heading)) !== []
             || ! is_array($fields['faq_items']) || ! array_is_list($fields['faq_items'])) {
             throw new CmsTranslationWorkflowException('Prepared ContentPage structure is invalid.', ['prepared structure invalid']);
         }
@@ -150,6 +149,16 @@ final class SiblingTranslationWorkflowService
                 throw new CmsTranslationWorkflowException('Prepared translation requires a published canonical Markdown source.', ['source identity invalid']);
             }
             $this->assertSourceApprovedForMachineTranslation($adapter, $source);
+            $policyType = StructuredContentPagePolicy::TYPES[$source->slug] ?? null;
+            if ($policyType !== null) {
+                $keys = StructuredContentPagePolicy::headingKeys($fields['headings']);
+                if ($keys === null || $keys !== StructuredContentPagePolicy::headingKeys($source->headings_json)
+                    || $source->page_type !== $policyType || $fields['faq_items'] !== []) {
+                    throw new CmsTranslationWorkflowException('Prepared ContentPage structure is invalid.', ['prepared structure invalid']);
+                }
+            } elseif (array_filter($fields['headings'], static fn ($heading): bool => ! is_string($heading)) !== []) {
+                throw new CmsTranslationWorkflowException('Prepared ContentPage structure is invalid.', ['prepared structure invalid']);
+            }
             // Legacy source version keys remain opaque native authority. A
             // publisher can bind their complete payload independently without
             // rewriting the source hash or invalidating its historical reviews.

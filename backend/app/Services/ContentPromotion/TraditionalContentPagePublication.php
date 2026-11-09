@@ -8,6 +8,7 @@ use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\Cms\ContentPageTranslationAdapter;
 use App\Services\Cms\SiblingTranslationWorkflowService;
+use App\Services\Cms\StructuredContentPagePolicy;
 use App\Support\CanonicalTranslationPayloadHash;
 use DomainException;
 use Illuminate\Support\Facades\DB;
@@ -21,9 +22,9 @@ final class TraditionalContentPagePublication
 
     public const FIELDS = ['title', 'kicker', 'summary', 'seo_title', 'meta_description', 'seo_description', 'content_md', 'headings', 'faq_items'];
 
-    private const SLUGS = ['about', 'brand', 'charter', 'careers', 'privacy', 'terms', 'method-boundaries', 'science', 'help-contact', 'foundation', 'policies', 'help-faq', 'help-about', 'help-team', 'help-used-and-mentioned', 'help-for-business-and-research', 'common-misconceptions', 'data-privacy', 'help-data-deletion', 'help-payment-refund', 'help-privacy-data', 'help-result-recovery', 'help-unlock-failure', 'item-design-notes', 'reliability-validity'];
+    private const SLUGS = ['about', 'brand', 'charter', 'careers', 'privacy', 'terms', 'method-boundaries', 'science', 'help-contact', 'foundation', 'policies', 'help-faq', 'help-about', 'help-team', 'help-used-and-mentioned', 'help-for-business-and-research', 'common-misconceptions', 'data-privacy', 'help-data-deletion', 'help-payment-refund', 'help-privacy-data', 'help-result-recovery', 'help-unlock-failure', 'item-design-notes', 'reliability-validity', 'methodology', 'source-review-policy'];
 
-    private const ENVIRONMENT_SLUGS = ['help-contact', 'foundation', 'policies', 'help-faq', 'help-about', 'help-team', 'help-used-and-mentioned', 'help-for-business-and-research', 'common-misconceptions', 'data-privacy', 'help-data-deletion', 'help-payment-refund', 'help-privacy-data', 'help-result-recovery', 'help-unlock-failure', 'item-design-notes', 'reliability-validity'];
+    private const ENVIRONMENT_SLUGS = ['help-contact', 'foundation', 'policies', 'help-faq', 'help-about', 'help-team', 'help-used-and-mentioned', 'help-for-business-and-research', 'common-misconceptions', 'data-privacy', 'help-data-deletion', 'help-payment-refund', 'help-privacy-data', 'help-result-recovery', 'help-unlock-failure', 'item-design-notes', 'reliability-validity', 'methodology', 'source-review-policy'];
 
     private const FAQ_SLUGS = ['common-misconceptions', 'data-privacy', 'help-data-deletion', 'help-payment-refund', 'help-privacy-data', 'help-result-recovery', 'help-unlock-failure', 'item-design-notes', 'reliability-validity'];
 
@@ -99,7 +100,8 @@ final class TraditionalContentPagePublication
             if (in_array($slug, self::ENVIRONMENT_SLUGS, true)) {
                 $expectedKeys = [...$expectedKeys, 'staging_source_snapshot', 'staging_snapshot'];
             }
-            if ($slug === 'help-contact' || in_array($slug, self::FAQ_SLUGS, true)) {
+            $structuredPolicy = isset(StructuredContentPagePolicy::TYPES[$slug]);
+            if ($slug === 'help-contact' || $structuredPolicy || in_array($slug, self::FAQ_SLUGS, true)) {
                 $expectedKeys[] = 'protected_fields';
             }
             sort($keys);
@@ -116,7 +118,7 @@ final class TraditionalContentPagePublication
             if (in_array($slug, self::ENVIRONMENT_SLUGS, true)) {
                 self::assertReviewedCopy(['source_snapshot' => $row['staging_source_snapshot'], 'snapshot' => $row['staging_snapshot']], $pageProof, $slug, 'staging_');
             }
-            if (in_array($slug, self::FAQ_SLUGS, true)) {
+            if ($structuredPolicy || in_array($slug, self::FAQ_SLUGS, true)) {
                 $protected = $row['protected_fields'];
                 if (! is_array($protected) || count($protected) !== 2 || ! array_key_exists('support_contact', $protected)
                     || ($protected['schema_enabled'] ?? null) !== str_starts_with($slug, 'help-')
@@ -165,6 +167,7 @@ final class TraditionalContentPagePublication
             || $row['snapshot']['is_indexable'] !== false) {
             throw new DomainException('traditional_page_identity_or_fields_invalid');
         }
+        $structuredPolicy = isset(StructuredContentPagePolicy::TYPES[$slug]);
         $faqAllowed = in_array($slug, self::FAQ_SLUGS, true);
         $markedFaq = $faqAllowed && str_starts_with($slug, 'help-');
         foreach (['source_snapshot', 'snapshot'] as $field) {
@@ -177,7 +180,9 @@ final class TraditionalContentPagePublication
             if (trim((string) $copy['title']) === '' || trim((string) $copy['content_md']) === ''
                 || trim((string) $copy['seo_title']) === '' || trim((string) $copy['meta_description']) === ''
                 || ! is_array($copy['headings']) || ! array_is_list($copy['headings'])
-                || array_filter($copy['headings'], static fn ($heading): bool => ! is_string($heading)) !== []
+                || ($structuredPolicy
+                    ? StructuredContentPagePolicy::headingKeys($copy['headings']) === null
+                    : array_filter($copy['headings'], static fn ($heading): bool => ! is_string($heading)) !== [])
                 || ! is_array($copy['faq_items']) || ! array_is_list($copy['faq_items']) || (! $faqAllowed && $copy['faq_items'] !== [])) {
                 throw new DomainException('traditional_page_format_invalid');
             }
@@ -213,7 +218,15 @@ final class TraditionalContentPagePublication
         if (self::markdownLinkTargets($row['source_snapshot']['content_md']) !== self::markdownLinkTargets($row['snapshot']['content_md'])) {
             throw new DomainException('traditional_page_link_targets_changed');
         }
-        foreach (array_diff(self::FIELDS, ['faq_items']) as $field) {
+        if ($structuredPolicy) {
+            if (array_column($row['source_snapshot']['headings'], 'key') !== array_column($row['snapshot']['headings'], 'key')) {
+                throw new DomainException('traditional_page_structure_changed');
+            }
+            foreach ($row['source_snapshot']['headings'] as $index => $heading) {
+                self::assertProtectedTokens($heading['title'], $row['snapshot']['headings'][$index]['title']);
+            }
+        }
+        foreach (array_diff(self::FIELDS, $structuredPolicy ? ['faq_items', 'headings'] : ['faq_items']) as $field) {
             $sourceText = is_array($row['source_snapshot'][$field]) ? implode("\n", $row['source_snapshot'][$field]) : (string) $row['source_snapshot'][$field];
             $targetText = is_array($row['snapshot'][$field]) ? implode("\n", $row['snapshot'][$field]) : (string) $row['snapshot'][$field];
             self::assertProtectedTokens($sourceText, $targetText);
@@ -251,8 +264,12 @@ final class TraditionalContentPagePublication
         }
     }
 
-    private static function targetPath(string $slug): string
+    public static function targetPath(string $slug): string
     {
+        if (isset(StructuredContentPagePolicy::TYPES[$slug])) {
+            return '/zh-TW/personality/big-five/'.$slug;
+        }
+
         return '/zh-TW/'.(str_starts_with($slug, 'help-') ? 'help/'.substr($slug, 5) : $slug);
     }
 
@@ -313,6 +330,11 @@ final class TraditionalContentPagePublication
         if (in_array($row['identity']['slug'], self::ENVIRONMENT_SLUGS, true)) {
             $checks['path'] = preg_replace('#^/(?:en|zh)(?=/|$)#', '', (string) $source->path) === substr(self::targetPath($source->slug), 6);
         }
+        $policyType = StructuredContentPagePolicy::TYPES[$source->slug] ?? null;
+        if ($policyType !== null) {
+            $checks['path'] = $checks['path'] && $source->canonical_path === $source->path;
+            $checks['identity'] = $checks['identity'] && $source->page_type === $policyType;
+        }
         if (isset($row['protected_fields'])) {
             $checks['support_contact'] = $source->support_contact === $row['protected_fields']['support_contact'];
             if (array_key_exists('schema_enabled', $row['protected_fields'])) {
@@ -337,6 +359,7 @@ final class TraditionalContentPagePublication
         if (count($revisions) !== 1 || $target->slug !== $source->slug || $target->locale !== 'zh-TW'
             || (int) $target->source_content_id !== (int) $source->id || $target->source_locale !== 'zh-CN'
             || $target->translation_group_id !== $source->translation_group_id
+            || ($policyType !== null && $target->page_type !== $policyType)
             || $target->path !== self::targetPath($source->slug) || $target->canonical_path !== self::targetPath($source->slug)
             || (isset($row['protected_fields']) && $target->support_contact !== $row['protected_fields']['support_contact'])
             || (isset($row['protected_fields']['schema_enabled']) && (bool) $target->schema_enabled !== $row['protected_fields']['schema_enabled'])
