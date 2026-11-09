@@ -27,7 +27,7 @@ final class LandingSurfaceController extends Controller
 {
     private const RECOMMENDED_ARTICLE_SELECTION_MODE_LATEST = PageBlock::LATEST_PUBLISHED_INDEXABLE;
 
-    private const TAIWAN_PUBLIC_SURFACES = ['home', 'tests', 'tests_category_personality', 'tests_category_career'];
+    private const TAIWAN_PUBLIC_SURFACES = ['home', 'tests', 'tests_category_personality', 'tests_category_career', 'articles_index'];
 
     public function __construct(
         private readonly ArticleSeoService $articleSeoService,

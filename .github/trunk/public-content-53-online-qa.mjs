@@ -22,6 +22,7 @@ export const pathFor = row => {
   if (row.kind === 'guide') return `/${segment}/career/guides/${slug}`;
   if (row.kind === 'article') return `/${segment}/articles/${slug}`;
   if (row.kind === 'profile') return `/${segment}/topics/${slug}`;
+  if (row.new_traditional_blog) return '/zh-TW/articles';
   if (row.kind === 'surface') return slug === 'home' ? `/${segment}` : `/${segment}/tests${slug === 'tests' ? '' : '/category/'+slug.replace('tests_category_','')}`;
   return `/${segment}/${slug.startsWith('help-') ? 'help/'+slug.slice(5) : slug}`;
 };
@@ -223,6 +224,23 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   const reviewedBefore=environment === 'staging' ? (row.staging_before ?? row.before) : row.before;
   const dom=domOf(html,{articleSsr}); const body=compact(dom.body.join(' '));
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
+  if (row.new_traditional_blog) {
+    const path=pathFor(row);
+    const categories=row.snapshot.payload_json.blog_v1.categories;
+    const expectedLinks=[...row.blog_article_slugs.map(slug=>path+'/'+slug), ...categories.map(category=>path+'/category/'+category.slug)];
+    if (dom.language !== 'zh-TW' || compact(dom.h1[0]) !== compact(row.snapshot.title)
+      || !equal(dom.title.map(compact),[compact(row.snapshot.title+' | 費馬測試')])
+      || !equal(dom.description.map(compact),[compact(row.snapshot.description)])
+      || !equal(dom.canonical,['https://fermatmind.com'+path])
+      || !dom.robots.some(value=>/\bnoindex\b/i.test(value))
+      || dom.alternate_entries.some(entry=>entry.hreflang)
+      || !body.includes(compact(row.snapshot.description))
+      || categories.some(category=>!body.includes(compact(category.name)))
+      || expectedLinks.some(href=>!dom.links.includes(href))) {
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_BLOG_DOM_${row.page_id}`);
+    }
+    return;
+  }
   if (row.new_traditional_landing) {
     const copy = row.snapshot.payload_json;
     const slug = row.identity.slug;

@@ -73,6 +73,65 @@ final class TraditionalLandingSurfacePublication
         return ['candidates' => $candidates];
     }
 
+    public static function blogCandidate(array $proof, string $reviewBytes, string $environment, array $articleSlugs): array
+    {
+        $review = json_decode($reviewBytes, true, 64, JSON_THROW_ON_ERROR);
+        $source = array_intersect_key($proof['production_source_surface'] ?? [], array_flip(self::COPY_KEYS));
+        $target = $proof['target_snapshot'] ?? [];
+        $target['page_blocks'] = [];
+        $blog = $target['payload_json']['blog_v1'] ?? [];
+        $sourceBlog = $source['payload_json']['blog_v1'] ?? [];
+        if (($proof['schema'] ?? null) !== 'fermatmind.traditional_blog_landing_expectations.v1'
+            || ($proof['review_sha256'] ?? null) !== hash('sha256', $reviewBytes)
+            || ($proof['target'] ?? null) !== ['org_id' => 0, 'surface_key' => 'articles_index', 'locale' => 'zh-TW']
+            || ($proof['target'] ?? null) !== ($review['target'] ?? null)
+            || ($proof['environments']['staging']['source_surface']['http_status'] ?? null) !== 404
+            || ($proof['environments']['production']['source_surface']['http_status'] ?? null) !== 200
+            || ($target['schema_version'] ?? null) !== 'v1' || ($source['schema_version'] ?? null) !== 'v1'
+            || ($target['title'] ?? null) !== ($review['title'] ?? null)
+            || ($target['description'] ?? null) !== ($review['description'] ?? null)
+            || $blog !== ($review['blog_v1'] ?? null)
+            || ($sourceBlog['featured_article_ids'] ?? null) !== array_column($review['featured_article_source_identities'] ?? [], 'id')
+            || count($articleSlugs) !== 4 || count(array_unique($articleSlugs)) !== 4) {
+            throw new DomainException('traditional_blog_directory_package_invalid');
+        }
+
+        $labels = ['/blog_v1/title' => $source['title'], '/blog_v1/description' => $source['description']];
+        foreach ($sourceBlog['categories'] as $index => $category) {
+            $translated = $blog['categories'][$index] ?? [];
+            if (($translated['slug'] ?? null) !== $category['slug'] || ($translated['line_key'] ?? null) !== $category['line_key']) {
+                throw new DomainException('traditional_blog_directory_category_drift');
+            }
+            $labels['/blog_v1/categories/'.$index.'/name'] = $category['name'];
+            $labels['/blog_v1/categories/'.$index.'/description'] = $category['description'];
+        }
+        if (count($labels) !== count($review['source_labels_sha256'] ?? []) || count($blog['categories']) !== count($sourceBlog['categories'])) {
+            throw new DomainException('traditional_blog_directory_labels_missing');
+        }
+        foreach ($labels as $path => $label) {
+            if (hash('sha256', $label) !== ($review['source_labels_sha256'][$path] ?? null)) {
+                throw new DomainException('traditional_blog_directory_source_copy_drift');
+            }
+        }
+
+        // The reviewed featured order is kept in the source package until all
+        // four Traditional translations are published and their own IDs resolve.
+        $target['payload_json']['blog_v1']['featured_article_ids'] = [];
+
+        return [
+            'page_id' => 'TRADITIONAL-BLOG-ARTICLES-INDEX',
+            'kind' => 'surface',
+            'identity' => ['org_id' => 0, 'slug' => 'articles_index', 'locale' => 'zh-TW'],
+            'new_traditional_landing' => true,
+            'new_traditional_blog' => true,
+            'traditional_landing_indexable' => false,
+            'blog_article_slugs' => $articleSlugs,
+            'before' => [], 'staging_before' => [],
+            'source_snapshot' => $environment === 'staging' ? null : $source,
+            'snapshot' => $target,
+        ];
+    }
+
     private static function assertCopy(string $key, array $source, array $target): void
     {
         $keys = array_keys($source);
@@ -126,7 +185,7 @@ final class TraditionalLandingSurfacePublication
         }
 
         $key = $row['identity']['slug'] ?? null;
-        if (! in_array($key, self::SURFACE_KEYS, true)
+        if ((! in_array($key, self::SURFACE_KEYS, true) && ! ($key === 'articles_index' && ($row['new_traditional_blog'] ?? false)))
             || $row['identity'] !== ['org_id' => 0, 'slug' => $key, 'locale' => 'zh-TW']) {
             throw new DomainException('public_content_53_traditional_landing_identity_invalid');
         }
@@ -146,9 +205,11 @@ final class TraditionalLandingSurfacePublication
     public function assertBaseline(array $row, array $state): void
     {
         $source = $state['source'];
-        if ($source === null || $source['status'] !== LandingSurface::STATUS_PUBLISHED || ! $source['is_public']
-            || ($row['traditional_landing_indexable'] && ! $source['is_indexable'])
-            || ! $this->same($this->publicSourceCopy($source['copy']), $row['source_snapshot'])) {
+        $expected = $row['source_snapshot'];
+        $allowMissingSource = ($row['new_traditional_blog'] ?? false) && $expected === null;
+        if ($allowMissingSource ? $source !== null : ($source === null || $expected === null || $source['status'] !== LandingSurface::STATUS_PUBLISHED
+            || ! $source['is_public'] || ($row['traditional_landing_indexable'] && ! $source['is_indexable'])
+            || ! $this->same($this->publicSourceCopy($source['copy']), $expected))) {
             throw new DomainException('public_content_53_traditional_landing_source_drift');
         }
 
@@ -303,10 +364,13 @@ final class TraditionalLandingSurfacePublication
             && $target['scheduled_at'] === null && $this->same($target['copy'], $row['snapshot']);
     }
 
-    private function same(array $left, ?array $right): bool
+    private function same(?array $left, ?array $right): bool
     {
-        return $right !== null
-            && PromotionContextFactory::canonicalJson($left) === PromotionContextFactory::canonicalJson($right);
+        if ($left === null || $right === null) {
+            return $left === $right;
+        }
+
+        return PromotionContextFactory::canonicalJson($left) === PromotionContextFactory::canonicalJson($right);
     }
 
     private function requireTransaction(): void

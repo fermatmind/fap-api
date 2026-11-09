@@ -745,5 +745,240 @@
         "tag_ids": []
       }
     }
-  ]
+  ],
+  "blog_directory": {
+    "schema": "fermatmind.traditional_blog_landing_expectations.v1",
+    "state": "reviewed_directory_candidate_pending_native_binding",
+    "review_sha256": "40213c418e6d375b4acbc5cd2947028b047ad9424e9346065cf4d30be3206ba7",
+    "production_source_response_sha256": "9718fb566d34e46230efbe9c3417b05c07a7e2bfe1ad03f4ad0edc1dd095c60e",
+    "production_source_surface": {
+      "locale": "zh-CN",
+      "surface_key": "articles_index",
+      "schema_version": "v1",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "title": "费马博客",
+      "description": "围绕人格、职业、沟通与成长，用清晰的解释、具体案例和有依据的建议，帮助你读懂测评结果、比较选择，并找到适合自己的下一步。",
+      "payload_json": {
+        "blog_v1": {
+          "categories": [
+            {
+              "name": "人格与自我认识",
+              "slug": "55e888afb9f3",
+              "line_key": "personality-and-self-understanding",
+              "description": "把结果放回真实经历，理解倾向、情境与反例。"
+            },
+            {
+              "name": "职业与学习选择",
+              "slug": "career-exploration",
+              "line_key": "career-and-learning",
+              "description": "比较兴趣、课程、任务与现实条件，形成可验证的探索问题。"
+            }
+          ],
+          "schema_version": 1,
+          "featured_article_ids": [
+            40,
+            31,
+            10,
+            3
+          ]
+        }
+      },
+      "page_blocks": []
+    },
+    "target": {
+      "org_id": 0,
+      "surface_key": "articles_index",
+      "locale": "zh-TW"
+    },
+    "target_snapshot": {
+      "schema_version": "v1",
+      "title": "費馬部落格",
+      "description": "透過清楚的解釋、具體案例和有依據的建議，從人格、職涯、溝通與成長的角度，幫助你看懂測評結果、比較選項，找到適合自己的下一步。",
+      "payload_json": {
+        "blog_v1": {
+          "schema_version": 1,
+          "categories": [
+            {
+              "slug": "55e888afb9f3",
+              "line_key": "personality-and-self-understanding",
+              "name": "人格與自我認識",
+              "description": "把結果放回實際經驗中，理解自己的傾向、不同情境下的表現，以及不符合結果的例子。"
+            },
+            {
+              "slug": "career-exploration",
+              "line_key": "career-and-learning",
+              "name": "職業與學習選擇",
+              "description": "比較興趣、課程、實際工作任務與現實條件，找出可以透過行動驗證的探索問題。"
+            }
+          ]
+        }
+      }
+    },
+    "featured_source_identities": [
+      {
+        "id": 40,
+        "slug": "riasec-holland-career-interest-test-explained",
+        "locale": "zh-CN",
+        "published_revision_id": 1172,
+        "translation_group_id": "riasec-explanation-article-2026-06-v2",
+        "target_locale": "zh-TW",
+        "candidate_language_reviewed": true,
+        "review_sha256": "cabc26553007424a5d293d9ca6b5e2cac04a3d63d9376e1dd8da0411c5045453"
+      },
+      {
+        "id": 31,
+        "slug": "holland-career-interest-test-can-and-cannot-tell-you",
+        "locale": "zh-CN",
+        "published_revision_id": 940,
+        "translation_group_id": "ddf3d56d-0b47-4b9b-816e-0d2de9dcbbc6",
+        "target_locale": "zh-TW",
+        "candidate_language_reviewed": true,
+        "review_sha256": "3f4327f452599eb2796cb7019e244cb7aa8c096395dc17baa74721fc090e1f94"
+      },
+      {
+        "id": 10,
+        "slug": "mbti-narrative-portrait",
+        "locale": "zh-CN",
+        "published_revision_id": 1170,
+        "translation_group_id": "article-10",
+        "target_locale": "zh-TW",
+        "candidate_language_reviewed": true,
+        "review_sha256": "62ebd5611e0393b918caeca74c502e9ebd340dc0cadee968aea8eb3e6f6df1c5"
+      },
+      {
+        "id": 3,
+        "slug": "big-five-tool-guide",
+        "locale": "zh-CN",
+        "published_revision_id": 1100,
+        "translation_group_id": "big5-v2-df8d5e7f157e301b9a0f4dc8e6b8c3b66c7e31f4",
+        "target_locale": "zh-TW",
+        "candidate_language_reviewed": true,
+        "review_sha256": "4da56e133ef95c88b42fe47a28a615d11ce8e2e78563fe9c87222e8cd841c3d5"
+      }
+    ],
+    "environments": {
+      "staging": {
+        "source_surface": {
+          "http_status": 404,
+          "sha256": null,
+          "configuration": null
+        },
+        "target_surface": {
+          "http_status": 422,
+          "sha256": null,
+          "configuration": null
+        },
+        "source_archive": {
+          "http_status": 200,
+          "sha256": "8e9c724aaede0412a6131114aea724758e91b4306b760450374885fe2725a197",
+          "configuration": "unconfigured"
+        },
+        "target_archive": {
+          "http_status": 200,
+          "sha256": "931095f12264f31f1cf056bb9e7dbc4251b5704f0c60883d020ae8cfdc0dd997",
+          "configuration": "unconfigured"
+        },
+        "featured_source_articles": [
+          {
+            "slug": "riasec-holland-career-interest-test-explained",
+            "status": 200,
+            "id": 40,
+            "locale": "zh-CN",
+            "published_revision_id": 788,
+            "translation_group_id": "riasec-explanation-article-2026-06-v2",
+            "public_body_sha256": "be487f213737e70d1b1c3efa85664c3decfbc222f279042af7ea7810e1aee671"
+          },
+          {
+            "slug": "holland-career-interest-test-can-and-cannot-tell-you",
+            "status": 200,
+            "id": 31,
+            "locale": "zh-CN",
+            "published_revision_id": 36,
+            "translation_group_id": "ddf3d56d-0b47-4b9b-816e-0d2de9dcbbc6",
+            "public_body_sha256": "123e2f54cefd4591279e72680c8de6015202eaf1da20c45c04555c4d941155d7"
+          },
+          {
+            "slug": "mbti-narrative-portrait",
+            "status": 200,
+            "id": 10,
+            "locale": "zh-CN",
+            "published_revision_id": 728,
+            "translation_group_id": "article-10",
+            "public_body_sha256": "d8398907147bf8bc493f3b6eaf8ae72e995d362958682a1975f9fe624c3c5582"
+          },
+          {
+            "slug": "big-five-tool-guide",
+            "status": 200,
+            "id": 3,
+            "locale": "zh-CN",
+            "published_revision_id": 790,
+            "translation_group_id": "big5-v2-df8d5e7f157e301b9a0f4dc8e6b8c3b66c7e31f4",
+            "public_body_sha256": "1643a74f6dd55ad8f9de513f6c7026f979c9fad347db2345ec8db5da74d08f42"
+          }
+        ]
+      },
+      "production": {
+        "source_surface": {
+          "http_status": 200,
+          "sha256": "9718fb566d34e46230efbe9c3417b05c07a7e2bfe1ad03f4ad0edc1dd095c60e",
+          "configuration": null
+        },
+        "target_surface": {
+          "http_status": 422,
+          "sha256": null,
+          "configuration": null
+        },
+        "source_archive": {
+          "http_status": 200,
+          "sha256": "d5dbcca6e64fc997ad2301622706ca3dd83678862315e674b8173fb52d3297e4",
+          "configuration": "published"
+        },
+        "target_archive": {
+          "http_status": 422,
+          "sha256": null,
+          "configuration": null
+        },
+        "featured_source_articles": [
+          {
+            "slug": "riasec-holland-career-interest-test-explained",
+            "status": 200,
+            "id": 40,
+            "locale": "zh-CN",
+            "published_revision_id": 1172,
+            "translation_group_id": "riasec-explanation-article-2026-06-v2",
+            "public_body_sha256": "18bc18d3e3c17e8727a0b8eb41dfc5d8a926c3e51634b1713c2ad7ed0227b2e5"
+          },
+          {
+            "slug": "holland-career-interest-test-can-and-cannot-tell-you",
+            "status": 200,
+            "id": 31,
+            "locale": "zh-CN",
+            "published_revision_id": 940,
+            "translation_group_id": "ddf3d56d-0b47-4b9b-816e-0d2de9dcbbc6",
+            "public_body_sha256": "6200896892c3623caed8cab3debdbfcfe7921010ef63272f821fb3edbcb9fdc5"
+          },
+          {
+            "slug": "mbti-narrative-portrait",
+            "status": 200,
+            "id": 10,
+            "locale": "zh-CN",
+            "published_revision_id": 1170,
+            "translation_group_id": "article-10",
+            "public_body_sha256": "5f7582763390314f8e99948f37a98774b1a8823e02d8858d0f84c81b14bd4473"
+          },
+          {
+            "slug": "big-five-tool-guide",
+            "status": 200,
+            "id": 3,
+            "locale": "zh-CN",
+            "published_revision_id": 1100,
+            "translation_group_id": "big5-v2-df8d5e7f157e301b9a0f4dc8e6b8c3b66c7e31f4",
+            "public_body_sha256": "3f102c37257916142645d57d5404efe8da5adae7dae617410eadb94732211bda"
+          }
+        ]
+      }
+    }
+  }
 }

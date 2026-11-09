@@ -6,6 +6,7 @@ namespace Tests\Feature\LandingSurfaces;
 
 use App\Models\LandingSurface;
 use App\Services\ContentPromotion\PromotionContextFactory;
+use App\Services\ContentPromotion\TraditionalArticlePublication;
 use App\Services\ContentPromotion\TraditionalLandingSurfacePublication;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -55,6 +56,39 @@ final class TraditionalLandingSurfacePublicationTest extends TestCase
 
         self::assertSame(8, LandingSurface::query()->withoutGlobalScopes()
             ->whereIn('surface_key', TraditionalLandingSurfacePublication::SURFACE_KEYS)->count());
+    }
+
+    public function test_blog_directory_uses_the_exact_article_consumer_and_can_be_rolled_back(): void
+    {
+        $base = base_path('content_assets/public_content_53/');
+        $bytes = file_get_contents($base.'traditional-article-batch.json');
+        $review = file_get_contents($base.'traditional-article-batch-review.json');
+        $native = app(TraditionalLandingSurfacePublication::class);
+        $staging = TraditionalArticlePublication::batch($bytes, $review, 'staging')['candidates'][3];
+        $production = TraditionalArticlePublication::batch($bytes, $review, 'production')['candidates'][3];
+        $url = '/api/v0.5/articles?org_id=0&locale=zh-TW&include_blog=1';
+        $this->getJson($url)->assertOk()->assertJsonPath('blog_v1.configuration_state', 'unconfigured');
+        $this->getJson('/api/v0.5/landing-surfaces/articles_index?locale=zh-TW')->assertNotFound();
+
+        DB::transaction(function () use ($native, $staging, $url): void {
+            $before = $native->read($staging, true);
+            self::assertNull($before['source']);
+            self::assertTrue($native->publish($staging, $before));
+            $after = $native->read($staging, true);
+            $this->getJson($url)->assertOk()->assertJsonPath('blog_v1.configuration_state', 'published')
+                ->assertJsonPath('blog_v1.title', '費馬部落格')->assertJsonPath('blog_v1.is_indexable', false)
+                ->assertJsonCount(0, 'blog_v1.featured_items');
+            $native->restore($staging, $before, $after);
+            $this->getJson($url)->assertJsonPath('blog_v1.configuration_state', 'unconfigured');
+        });
+
+        $this->seedSource($production);
+        DB::transaction(function () use ($native, $production, $url): void {
+            $before = $native->read($production, true);
+            self::assertTrue($native->publish($production, $before));
+            self::assertSame($before['source'], $native->read($production, true)['source']);
+            $this->getJson($url)->assertJsonPath('blog_v1.title', '費馬部落格');
+        });
     }
 
     public function test_frozen_public_copy_matches_the_source_projection_but_preserves_raw_source_blocks(): void

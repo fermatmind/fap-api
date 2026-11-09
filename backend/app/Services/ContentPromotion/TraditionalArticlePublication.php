@@ -49,7 +49,20 @@ final class TraditionalArticlePublication
             $rows[$slug] = self::candidate($package, $reviews['articles'][$slug], $environment, true);
         }
 
-        return ['candidates' => array_values($rows)];
+        $candidates = array_values($rows);
+        if (isset($batch['blog_directory']) !== isset($reviews['blog_directory'])) {
+            throw new DomainException('traditional_blog_directory_review_missing');
+        }
+        if (isset($batch['blog_directory'])) {
+            $candidates[] = TraditionalLandingSurfacePublication::blogCandidate(
+                $batch['blog_directory'],
+                $reviews['blog_directory'],
+                $environment,
+                ['ocean-traits-what-the-five-letters-mean', ...array_keys($rows)],
+            );
+        }
+
+        return ['candidates' => $candidates];
     }
 
     private static function candidate(array $package, string $reviewBytes, string $environment, bool $batch = false): array
