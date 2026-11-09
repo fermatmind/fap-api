@@ -1211,6 +1211,25 @@ test('Traditional Article career and EQ batch binds each environment and preserv
  }
 });
 
+test('Traditional Big Five metadata checks the public SEO title and rejects a leaked brand suffix',()=>{
+ const binding=inspectPackage(root,'traditional-article-big-five');
+ const source=readCandidateRows(root,binding.package_sha256,'staging').candidates.find(row=>row.identity.slug==='big-five-myths-types-destiny-and-perfect-scores');
+ const base='大五人格五大誤區';
+ const description='辨別常見誤區。';
+ const row={...source,snapshot:{title:base,content_md:base,seo_text:{
+  seo_title:base+' | FermatMind',og_title:base+' | FermatMind',seo_description:description,og_description:description,
+ }}};
+ const head=`<title>${base} | 費馬測試</title><meta name="description" content="${description}"><meta property="og:title" content="${base}"><meta property="og:description" content="${description}"><meta name="robots" content="noindex"><link rel="canonical" href="https://fermatmind.com${pathFor(row)}">`;
+ const href='/zh/tests/'+row.article_metadata.related_test_slug;
+ const html=`<html lang="zh-TW"><head><meta charset="utf-8">${head}</head><body><main><h1>${base}</h1><a href="${href}">開始測驗</a></main></body></html>`;
+ assert.doesNotThrow(()=>assertDom(row,html,{missing:true},'staging'));
+ for(const bad of [html.replace(base+' | 費馬測試',base+' | FermatMind | 費馬測試'),
+  html.replace('property="og:title" content="'+base+'"','property="og:title" content="'+base+' | FermatMind"'),
+  html.replace('property="og:title" content="'+base+'"','property="og:title" content="舊標題"')]){
+  assert.throws(()=>assertDom(row,bad,{missing:true},'staging'),/METADATA/);
+ }
+});
+
 test('Traditional Big Five articles retain the production English relationships while staging lacks those editions',()=>{
  const selection='traditional-article-big-five';
  const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));

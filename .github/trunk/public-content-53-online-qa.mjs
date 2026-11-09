@@ -280,11 +280,15 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   if (row.kind !== 'surface' && row.snapshot.title && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
   if (['article','guide'].includes(row.kind) && row.snapshot.seo_text) {
     const seo=row.snapshot.seo_text;
+    // ArticleSeoService projects Big Five SEO titles without a trailing brand.
+    // The Traditional page then adds its layout brand only to the document title.
+    const publicTitle = title => row.new_traditional_article && row.identity.slug.startsWith('big-five-')
+      ? (title.trim().replace(/(?:\s*\|\s*FermatMind)+\s*$/iu, '').trim() || title.trim()) : title;
     const documentTitle = row.kind === 'guide' ? guideDocumentTitle(seo.seo_title)
-      : `${seo.seo_title} | ${row.new_traditional_article ? '費馬測試' : 'FermatMind'}`;
+      : `${publicTitle(seo.seo_title)} | ${row.new_traditional_article ? '費馬測試' : 'FermatMind'}`;
     if (!equal(dom.title.map(compact),[compact(documentTitle)])
       || !equal(dom.description.map(compact),[compact(seo.seo_description)])
-      || !equal(dom.og_title.map(compact),[compact(seo.og_title)])
+      || !equal(dom.og_title.map(compact),[compact(publicTitle(seo.og_title))])
       || !equal(dom.og_description.map(compact),[compact(seo.og_description)]))
       throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
     if (row.kind === 'article' && !Object.hasOwn(row.snapshot,'content_md') && (dom.article_body.length !== 1 || before.dom.article_body.length !== 1
