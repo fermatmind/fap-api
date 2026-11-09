@@ -79,6 +79,15 @@ final class PublicContent53Writer
         }
         $rows = $this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'];
         $this->states->assertLockedBaseline($rows, $before);
+        if (isset($rows[0]['staging_article_original'])) {
+            $staging = PublicContent53Package::environment() === 'staging';
+            if ($staging) {
+                app(StagingArticleOriginals::class)->create($rows);
+            }
+
+            return ['written_count' => $staging ? count($rows) : 0, 'created_count' => $staging ? count(array_filter(array_column($before, 'missing'))) : 0,
+                'state' => $this->states->read($context->packageSha256, true)];
+        }
         usort($rows, static fn (array $a, array $b): int => ($a['identity']['locale'] === 'en') <=> ($b['identity']['locale'] === 'en'));
         $written = [];
         $created = 0;
@@ -212,6 +221,11 @@ final class PublicContent53Writer
         }
         $rows = collect($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'])->keyBy('page_id');
         foreach ($before as $id => $saved) {
+            if (isset($rows[$id]['staging_article_original'])) {
+                app(StagingArticleOriginals::class)->restore($rows[$id]);
+
+                continue;
+            }
             if ($saved['traditional_article'] ?? false) {
                 app(TraditionalArticlePublication::class)->restore($rows[$id], $after[$id]);
 

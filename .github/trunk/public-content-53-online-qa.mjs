@@ -128,6 +128,30 @@ export function projection(row,data) {
   return result;
 }
 const apiPath = row => `/api/v0.5/${{article:'articles',page:'content-pages',surface:'landing-surfaces',profile:'topics',guide:'career-guides'}[row.kind]}/${row.identity.slug}?locale=${row.identity.locale}&org_id=0`;
+function assertOriginalArticleApi(row,data,environment,parent) {
+  const source=row.staging_article_original;
+  const article=data.article;
+  const seo=article?.seo_meta;
+  const fields=['title','excerpt','content_md'];
+  const controls=['is_indexable','sitemap_eligible','llms_eligible'];
+  const expectedParent=environment === 'staging' && source.identity.source_article_id !== null ? parent : source.identity.source_article_id;
+  if (data.ok !== true || !article || article.org_id !== 0 || article.slug !== row.identity.slug
+    || article.locale !== row.identity.locale || article.status !== 'published' || article.is_public !== true
+    || article.translation_group_id !== source.identity.translation_group_id || article.source_locale !== source.identity.source_locale
+    || !Number.isInteger(article.published_revision_id) || article.source_article_id !== expectedParent
+    || (environment === 'production' && (article.id !== source.identity.id || article.published_revision_id !== source.identity.published_revision_id))
+    || !controls.every(key=>article[key] === (environment === 'staging' ? false : source.article[key]))
+    || fields.some(key=>article[key] !== source.published[key]) || article.author_name !== source.article.author_name
+    || article.cover_image_alt !== source.article.cover_image_alt
+    || ['og_title','og_description','og_image_url'].some(key=>source.seo[key] !== null && seo?.[key] !== source.seo[key])
+    || (article.category?.slug ?? null) !== (source.taxonomy.category?.slug ?? null)
+    || !equal((article.tags ?? []).map(tag=>tag.slug).sort(),source.taxonomy.tags.map(tag=>tag.slug).sort())
+    || !equal(data.answer_surface_v1?.faq_blocks ?? [],source.public_projection.faq)
+    || !equal(data.landing_surface_v1?.cta_bundle ?? [],source.public_projection.ctas)) {
+    throw new Error('PUBLIC_CONTENT_53_STAGING_ARTICLE_ORIGINAL_API');
+  }
+  return {id:article.id,published_revision_id:article.published_revision_id};
+}
 async function renderPrestate(row,url,renderer) {
   // This runs before publication transport. A failed isolated browser may be
   // read once more; no API, native write, DOM assertion or recovery is retried.
@@ -143,6 +167,19 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
   const [api,web] = hosts(environment); const result={};
   const rows = readCandidateRows(backendRoot,packageSha256,environment).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
   for (const row of rows) {
+    if (row.staging_article_original) {
+      const bytes=await read(api+apiPath(row),fetcher,environment === 'staging');
+      if (environment === 'staging') {
+        if (bytes !== null) throw new Error('PUBLIC_CONTENT_53_STAGING_ARTICLE_ORIGINAL_PRESTATE');
+        result[row.page_id]={missing:true};
+      } else {
+        const native=assertOriginalArticleApi(row,parseApi(bytes),environment);
+        const html=await read(web+pathFor(row),fetcher,false,{'User-Agent':'facebookexternalhit/1.1'});
+        const {canonical,robots,alternates}=domOf(html,{articleSsr:true});
+        result[row.page_id]={...native,dom:{canonical,robots,alternates}};
+      }
+      continue;
+    }
     if (row.kind === 'mbti-result') {
       if (row.page_id.endsWith('-NATIVE-LEAVES') && row.identity.slug !== 'intj-t') {
         result[row.page_id] = {native_adapter_phase_only:true};
@@ -501,7 +538,29 @@ export function assertNewArticleDiscovery(rows,documents,environment='production
 export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fetch,renderer=renderPage,prestate,packageSha256) {
   const [api,web]=hosts(environment);if(!prestate) throw new Error('PUBLIC_CONTENT_53_PRESTATE_REQUIRED');
   const rows = readCandidateRows(backendRoot,packageSha256,environment).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
+  const originalIds=new Map();
   for (const row of rows) {
+    if (row.staging_article_original) {
+      const source=row.staging_article_original;
+      const current=assertOriginalArticleApi(row,parseApi(await read(api+apiPath(row),fetcher)),environment,originalIds.get(source.identity.source_article_id));
+      const before=prestate[row.page_id];
+      if (environment === 'staging' ? before?.missing !== true : before?.id !== current.id || before.published_revision_id !== current.published_revision_id) {
+        throw new Error('PUBLIC_CONTENT_53_STAGING_ARTICLE_ORIGINAL_PRESTATE');
+      }
+      const html=await read(web+pathFor(row),fetcher,false,{'User-Agent':'facebookexternalhit/1.1'});
+      const dom=domOf(html,{articleSsr:true});
+      const stage=environment === 'staging';
+      const reference=before.dom;
+      if (!equal(dom.canonical.map(value=>new URL(value).pathname),[pathFor(row)])
+        || !equal(dom.h1.map(compact),[compact(source.published.title)])
+        || dom.article_body.length !== 1 || !compact(dom.article_body[0])
+        || (stage ? !dom.robots.some(value=>/\bnoindex\b/i.test(value)) || dom.alternate_entries.some(entry=>entry.hreflang)
+          : !equal(dom.robots,reference.robots) || !equal(dom.alternates,reference.alternates) || !equal(dom.canonical,reference.canonical))) {
+        throw new Error('PUBLIC_CONTENT_53_STAGING_ARTICLE_ORIGINAL_DOM');
+      }
+      originalIds.set(source.identity.id,current.id);
+      continue;
+    }
     if (row.kind === 'mbti-result') {
       if (row.page_id.endsWith('-NATIVE-LEAVES') && row.identity.slug !== 'intj-t') {
         if (prestate[row.page_id]?.native_adapter_phase_only !== true) throw new Error('MBTI_RESULT_COPY_QA_PRESTATE_REQUIRED');
@@ -581,5 +640,5 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
   const adapterOnly=rows.filter(row=>row.kind === 'mbti-result' && row.page_id.endsWith('-NATIVE-LEAVES') && row.identity.slug !== 'intj-t').length;
   return {environment,api_readback_count:rows.length-adapterOnly,dom_readback_count:rows.length-adapterOnly,
     ...(adapterOnly?{native_adapter_phase_only_row_count:adapterOnly,package_row_count:rows.length}:{}),
-    raw_html_readback_count:newRows.length,discovery_readback_count:environment === 'production'?newRows.length:0};
+    raw_html_readback_count:newRows.length+originalIds.size,discovery_readback_count:environment === 'production'?newRows.length:0};
 }

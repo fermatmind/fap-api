@@ -7,6 +7,7 @@ import { canonical } from './iq-public-scale-package.mjs';
 export const packagePath = 'content_assets/public_content_53';
 // Selection comes from the existing exact-range classifier, never file presence.
 const packages = {
+  'staging-article-originals': ['fermatmind.staging_article_originals.v1', ['staging-article-originals.json']],
   'support-contact': ['fermatmind.public_support_contact.v1', ['support-contact.json','support-contact-review.json']],
   'pricing-refund': ['fermatmind.public_content_pricing_refund.v1', ['pricing-refund.json','pricing-refund-review.json']],
   'traditional-article-batch': ['fermatmind.traditional_article_batch.v1', ['traditional-article-batch.json','traditional-article-batch-review.json']],
@@ -91,6 +92,7 @@ export const executorPaths = [
   "app/Services/ContentPromotion/PublicContent53Package.php",
   "app/Services/ContentPromotion/PublicContent53State.php",
   "app/Services/ContentPromotion/PublicContent53Writer.php",
+  "app/Services/ContentPromotion/StagingArticleOriginals.php",
   "app/Services/ContentPromotion/TraditionalArticlePublication.php",
   "app/Services/ContentPromotion/TraditionalArticleSourcePreflight.php",
   "app/Services/ContentPromotion/TraditionalContentPagePublication.php",
@@ -113,7 +115,7 @@ export const executorPaths = [
 ].sort();
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 export function readCandidateRows(backendRoot, digest = packageDigest(backendRoot), environment = 'production') {
-  const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/RiasecCodeSampleArticles.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53MbtiResultCopy.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalArticlePublication.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalContentPagePublication.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalLandingSurfacePublication.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2],$argv[3]), JSON_THROW_ON_ERROR);';
+  const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/RiasecCodeSampleArticles.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53MbtiResultCopy.php"; require $argv[1]."/app/Services/ContentPromotion/StagingArticleOriginals.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalArticlePublication.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalContentPagePublication.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalLandingSurfacePublication.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2],$argv[3]), JSON_THROW_ON_ERROR);';
   return JSON.parse(execFileSync('php', ['-r', code, realpathSync(backendRoot), digest, environment], { encoding: 'utf8', timeout: 30000, maxBuffer: 4000000, stdio: ['pipe', 'pipe', 'pipe'] }));
 }
 export function inspectPackage(backendRoot, selection = process.env.PUBLIC_CONTENT_53_PACKAGE_NAME) {

@@ -41,6 +41,11 @@ final class PublicContent53State
             });
         }
         foreach ($rows as $row) {
+            if (isset($row['staging_article_original'])) {
+                $state[$row['page_id']] = app(StagingArticleOriginals::class)->read($row, $lock);
+
+                continue;
+            }
             if ($row['new_traditional_article'] ?? false) {
                 $state[$row['page_id']] = app(TraditionalArticlePublication::class)->read($row, $lock);
 
@@ -219,6 +224,12 @@ final class PublicContent53State
             return;
         }
         foreach ($rows as $row) {
+            if (isset($row['staging_article_original'])) {
+                $originals = app(StagingArticleOriginals::class);
+                $originals->assertBaseline($row, $originals->read($row, false));
+
+                continue;
+            }
             if ($row['new_traditional_article'] ?? false) {
                 $native = app(TraditionalArticlePublication::class);
                 $native->assertBaseline($native->read($row, false));
@@ -276,6 +287,11 @@ final class PublicContent53State
     {
         foreach ($rows as $row) {
             $saved = $state[$row['page_id']];
+            if (isset($row['staging_article_original'])) {
+                app(StagingArticleOriginals::class)->assertBaseline($row, $saved);
+
+                continue;
+            }
             if ($row['new_traditional_article'] ?? false) {
                 app(TraditionalArticlePublication::class)->assertBaseline($saved);
 
@@ -379,6 +395,12 @@ final class PublicContent53State
 
     public function assertPublished(array $rows, array $state): void
     {
+        if (isset($rows[0]['staging_article_original'])) {
+            app(StagingArticleOriginals::class)->assertPublished($rows);
+
+            return;
+        }
+
         if ($this->nativeBatch($rows)) {
             app(PublicContent53MbtiResultCopy::class)->withNativeRead($rows, false, function (PublicContent53MbtiResultCopy $native) use ($rows): void {
                 foreach ($rows as $row) {

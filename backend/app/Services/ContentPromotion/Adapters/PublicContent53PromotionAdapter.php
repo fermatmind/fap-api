@@ -243,6 +243,9 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
     private function invalidate(): void
     {
         $rows = $this->package->read(base_path(), $this->activePackageSha, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'];
+        if (isset($rows[0]['staging_article_original']) && PublicContent53Package::environment() === 'production') {
+            return;
+        }
         foreach ($rows as $row) {
             if ($row['kind'] === 'page') {
                 \Illuminate\Support\Facades\Cache::forget('content_page:v1:0:'.$row['identity']['slug'].':'.$row['identity']['locale']);

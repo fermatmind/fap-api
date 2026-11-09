@@ -51,6 +51,11 @@ final class PublicContent53FrontendRevalidator
             } elseif ($row['kind'] === 'article') {
                 $article = Article::query()->withoutGlobalScopes()->where($row['identity'])->firstOrFail();
                 $revision = $article->publishedRevision;
+                if (! $revision && isset($row['staging_article_original']) && PublicContent53Package::environment() === 'staging'
+                    && $article->workingRevision?->authority_asset_key === $row['page_id']
+                    && $article->workingRevision?->authority_package_sha256 === $row['package_sha256']) {
+                    $revision = $article->workingRevision;
+                }
                 if (! $revision && ($row['new_article'] ?? false) && RiasecCodeSampleArticles::isRestored($article->getRawOriginal(), (string) $article->workingRevision?->authority_package_sha256)) {
                     $revision = $article->workingRevision;
                 }

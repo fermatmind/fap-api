@@ -125,6 +125,20 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256, string $environment = 'production'): array
     {
         $root = realpath($backendRoot);
+        $stagingOriginals = StagingArticleOriginals::FILE;
+        if (is_file($root.'/'.self::PACKAGE.'/'.$stagingOriginals)) {
+            $bytes = $this->bytes($root, $stagingOriginals);
+            $chain = StagingArticleOriginals::SCHEMA."\n".$stagingOriginals."\n".hash('sha256', $bytes)."\n";
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                $package = StagingArticleOriginals::package($bytes);
+                foreach ($package['candidates'] as &$candidate) {
+                    $candidate['package_sha256'] = $expectedSha256;
+                }
+                unset($candidate);
+
+                return $package;
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/support-contact.json')) {
             $chain = "fermatmind.public_support_contact.v1\n";
             foreach (['support-contact.json', 'support-contact-review.json'] as $name) {
