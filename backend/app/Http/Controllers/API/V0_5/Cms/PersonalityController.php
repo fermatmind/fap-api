@@ -8,6 +8,7 @@ use App\Domain\Personality\Current\PersonalityCurrentIndexProjector;
 use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use App\Domain\Personality\Current\PersonalityCurrentSeoProjector;
 use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
+use App\Domain\Personality\Current\PersonalityPageContentContract;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalityProfile;
@@ -446,19 +447,31 @@ class PersonalityController extends Controller
                 [
                     'key' => 'at_comparisons',
                     'comparison_type' => 'mbti_at_comparison',
-                    'title' => $locale === 'zh-CN' ? 'A/T 人格差异' : 'A/T personality differences',
-                    'description' => $locale === 'zh-CN'
-                        ? '同一 16 型人格核心下，比较 A 与 T 在压力反馈、自我确认和行动节奏上的差异。'
-                        : 'Compare A and T variants within the same 16-type personality core across stress feedback, self-confirmation, and action rhythm.',
+                    'title' => match ($locale) {
+                        'zh-CN' => 'A/T 人格差异',
+                        'zh-TW' => 'A/T 人格差異',
+                        default => 'A/T personality differences',
+                    },
+                    'description' => match ($locale) {
+                        'zh-CN' => '同一 16 型人格核心下，比较 A 与 T 在压力反馈、自我确认和行动节奏上的差异。',
+                        'zh-TW' => '在相同的 16 型人格核心下，比較 A 與 T 在壓力回饋、自我確認和行動步調上的差異。',
+                        default => 'Compare A and T variants within the same 16-type personality core across stress feedback, self-confirmation, and action rhythm.',
+                    },
                     'items' => $items,
                 ],
                 [
                     'key' => 'cross_type_comparisons',
                     'comparison_type' => 'mbti_cross_type',
-                    'title' => $locale === 'zh-CN' ? '易混淆人格对比' : 'Commonly confused personality types',
-                    'description' => $locale === 'zh-CN'
-                        ? '比较容易混淆的 16 型人格组合，帮助用户从思维入口、行动节奏和协作方式上做区分。'
-                        : 'Compare commonly confused 16-type personality pairs through thinking patterns, action rhythm, and collaboration style.',
+                    'title' => match ($locale) {
+                        'zh-CN' => '易混淆人格对比',
+                        'zh-TW' => '容易混淆的人格類型比較',
+                        default => 'Commonly confused personality types',
+                    },
+                    'description' => match ($locale) {
+                        'zh-CN' => '比较容易混淆的 16 型人格组合，帮助用户从思维入口、行动节奏和协作方式上做区分。',
+                        'zh-TW' => '比較 16 型人格中容易混淆的組合，從思考切入點、行動步調和合作方式辨別差異。',
+                        default => 'Compare commonly confused 16-type personality pairs through thinking patterns, action rhythm, and collaboration style.',
+                    },
                     'items' => $crossTypeItems,
                 ],
             ],
@@ -2584,7 +2597,7 @@ class PersonalityController extends Controller
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
             'scale_code' => ['nullable', 'in:MBTI'],
-            'locale' => ['required', 'in:en,zh-CN'],
+            'locale' => ['required', 'in:'.implode(',', PersonalityPageContentContract::LOCALES)],
             'page' => ['nullable', 'integer', 'min:1'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
             'include_variants' => ['nullable', 'in:0,1'],
@@ -2595,9 +2608,14 @@ class PersonalityController extends Controller
         }
 
         $validated = $validator->validated();
+        $orgId = (int) ($validated['org_id'] ?? 0);
+        if ($validated['locale'] === 'zh-TW'
+            && (! $this->usesCurrentAuthority($orgId) || ! $this->personalityCurrentPageReader->hasLocale('zh-TW'))) {
+            return $this->currentAuthorityNotFoundResponse('personality locale not found.');
+        }
 
         return [
-            'org_id' => (int) ($validated['org_id'] ?? 0),
+            'org_id' => $orgId,
             'scale_code' => (string) ($validated['scale_code'] ?? PersonalityProfile::SCALE_CODE_MBTI),
             'locale' => (string) $validated['locale'],
             'page' => (int) ($validated['page'] ?? 1),
@@ -2614,7 +2632,7 @@ class PersonalityController extends Controller
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
             'scale_code' => ['nullable', 'in:MBTI'],
-            'locale' => ['required', 'in:en,zh-CN'],
+            'locale' => ['required', 'in:'.implode(',', PersonalityPageContentContract::LOCALES)],
         ]);
 
         if ($validator->fails()) {
@@ -2622,9 +2640,14 @@ class PersonalityController extends Controller
         }
 
         $validated = $validator->validated();
+        $orgId = (int) ($validated['org_id'] ?? 0);
+        if ($validated['locale'] === 'zh-TW'
+            && (! $this->usesCurrentAuthority($orgId) || ! $this->personalityCurrentPageReader->hasLocale('zh-TW'))) {
+            return $this->currentAuthorityNotFoundResponse('personality locale not found.');
+        }
 
         return [
-            'org_id' => (int) ($validated['org_id'] ?? 0),
+            'org_id' => $orgId,
             'scale_code' => (string) ($validated['scale_code'] ?? PersonalityProfile::SCALE_CODE_MBTI),
             'locale' => (string) $validated['locale'],
         ];
@@ -2661,6 +2684,11 @@ class PersonalityController extends Controller
     /** @param array<string,mixed> $payload */
     private function currentAuthorityResponse(array $payload): JsonResponse
     {
+        $languages = $this->personalityCurrentPageReader->traditionalLanguageAlternates($payload);
+        if ($languages !== []) {
+            $payload['traditional_language_alternates'] = $languages;
+        }
+
         return response()->json(['ok' => true, ...$payload])
             ->header('X-Fermat-Content-Authority', 'personality.page.content.v1')
             ->header('X-Fermat-Content-Aggregate', $this->personalityCurrentPageReader->aggregateSha256());

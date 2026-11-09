@@ -39,6 +39,7 @@ class SitemapGeneratorTest extends TestCase
         $manifest = json_decode(file_get_contents(base_path('content_assets/personality_public/current/manifest.json')), true, 512, JSON_THROW_ON_ERROR);
         $expected = collect($manifest['files'])
             ->where('framework', 'mbti')
+            ->whereIn('locale', ['en', 'zh-CN'])
             ->pluck('canonical_path')
             ->sort()->values()->all();
         $generator = app(SitemapGenerator::class);

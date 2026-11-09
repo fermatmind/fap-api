@@ -8,7 +8,9 @@ final class PersonalityPageContentContract
 {
     public const CONTRACT_VERSION = 'personality.page.content.v1';
 
-    public const LOCALES = ['en', 'zh-CN'];
+    public const BASE_LOCALES = ['en', 'zh-CN'];
+
+    public const LOCALES = [...self::BASE_LOCALES, 'zh-TW'];
 
     private const PAGE_KINDS = [
         'mbti' => ['hub', 'profile', 'variant', 'comparison_at', 'comparison_cross'],
@@ -75,9 +77,10 @@ final class PersonalityPageContentContract
             self::fail('PERSONALITY_CURRENT_PAYLOAD_CONTRACT_INVALID');
         }
 
-        $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+        $segment = $locale === 'zh-CN' ? 'zh' : $locale;
         $canonicalPath = (string) $identity['canonical_path'];
-        if (! str_starts_with($canonicalPath, '/'.$segment.'/personality')
+        $prefix = '/'.$segment.'/personality';
+        if (($canonicalPath !== $prefix && ! str_starts_with($canonicalPath, $prefix.'/'))
             || str_contains($canonicalPath, '..')
             || str_contains($canonicalPath, '//')) {
             self::fail('PERSONALITY_CURRENT_CANONICAL_PATH_INVALID');

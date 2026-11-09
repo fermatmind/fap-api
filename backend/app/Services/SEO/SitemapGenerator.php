@@ -190,7 +190,12 @@ class SitemapGenerator
             ->mapWithKeys(static fn (array $url): array => [(string) $url['loc'] => true])
             ->all();
 
-        return collect($this->generateUrlsFromAuthoritySnapshot($personalityPublicContentAssetUrls))
+        $urls = $this->generateUrlsFromAuthoritySnapshot($personalityPublicContentAssetUrls);
+        if ($this->usesCurrentPersonalityAuthority()) {
+            $urls = array_merge($urls, $this->getCurrentTraditionalPersonalitySitemapUrls());
+        }
+
+        return collect($urls)
             ->filter(static function (array $url) use ($eligibleBigFiveLocs): bool {
                 $loc = trim((string) ($url['loc'] ?? ''));
                 if (preg_match('/[\x00-\x1F\x7F]/', $loc) === 1) {
@@ -224,6 +229,7 @@ class SitemapGenerator
                     && isset($eligibleBigFiveLocs[$loc]);
             })
             ->unique('loc')
+            ->sortBy('loc', SORT_STRING)
             ->values()
             ->all();
     }
@@ -625,6 +631,34 @@ class SitemapGenerator
                     'lastmod' => $lastmod->toAtomString(),
                     'slug' => 'personality:current:'.($locale === 'en' ? 'en' : 'zh').':'.basename($canonical),
                     'updated_at' => $lastmod->toDateTimeString(),
+                ];
+            }
+        }
+
+        return $urls;
+    }
+
+    private function getCurrentTraditionalPersonalitySitemapUrls(): array
+    {
+        $reader = app(PersonalityCurrentPageReader::class);
+        if (! $reader->hasLocale('zh-TW')) {
+            return [];
+        }
+
+        $urls = [];
+        foreach (['mbti', 'big_five', 'enneagram'] as $framework) {
+            foreach ($reader->payloadsByCanonicalPath($framework, null, 'zh-TW') as $path => $payload) {
+                if (! PersonalityCurrentPageReader::allowsTraditionalSitemap($path, $payload)) {
+                    continue;
+                }
+
+                $loc = 'https://fermatmind.com'.$path;
+                $lastmod = $this->parseUpdatedAt($payload['seo_meta']['updated_at'] ?? null);
+                $urls[] = [
+                    'loc' => $loc,
+                    'lastmod' => $lastmod?->toAtomString() ?? '',
+                    'slug' => 'personality:current:zh-TW:'.substr($path, strlen('/zh-TW/')),
+                    'updated_at' => $lastmod?->toDateTimeString() ?? '',
                 ];
             }
         }

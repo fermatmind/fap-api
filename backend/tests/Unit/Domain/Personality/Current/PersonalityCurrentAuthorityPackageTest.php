@@ -11,16 +11,17 @@ use Tests\TestCase;
 
 final class PersonalityCurrentAuthorityPackageTest extends TestCase
 {
-    public function test_installed_package_has_exact_bilingual_public_inventory(): void
+    public function test_installed_package_has_exact_public_inventory_per_locale(): void
     {
         $package = new PersonalityCurrentAuthorityPackage;
         $index = $package->manifestIndex(base_path());
 
-        $this->assertCount(364, $index['entries']);
+        $localeCount = count($index['manifest']['locales']);
+        $this->assertCount(182 * $localeCount, $index['entries']);
         $this->assertSame(182, $index['manifest']['coverage']['pages_per_locale']);
-        $this->assertSame(['big_five' => 104, 'enneagram' => 116, 'mbti' => 144], $index['manifest']['coverage']['by_framework']);
+        $this->assertSame(['big_five' => 52 * $localeCount, 'enneagram' => 58 * $localeCount, 'mbti' => 72 * $localeCount], $index['manifest']['coverage']['by_framework']);
         $this->assertSame(0, $index['manifest']['coverage']['baseline_locale_pages']);
-        $this->assertSame(364, $index['manifest']['coverage']['enhanced_locale_pages']);
+        $this->assertSame(182 * $localeCount, $index['manifest']['coverage']['enhanced_locale_pages']);
         $this->assertSame(
             count($index['entries']),
             $index['manifest']['coverage']['baseline_locale_pages']
@@ -54,6 +55,21 @@ final class PersonalityCurrentAuthorityPackageTest extends TestCase
         $path = base_path('content_assets/personality_public/current/pages/mbti/profile/intj/en.json');
         $page = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
         $page['identity']['canonical_path'] = '/zh/personality/intj';
+
+        $this->expectException(PersonalityCurrentAuthorityFailure::class);
+        PersonalityPageContentContract::assert($page);
+    }
+
+    public function test_traditional_page_requires_its_own_canonical_namespace(): void
+    {
+        $path = base_path('content_assets/personality_public/current/pages/mbti/profile/intj/zh-CN.json');
+        $page = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+        $page['locale'] = 'zh-TW';
+        $page['identity']['canonical_path'] = '/zh-TW/personality/intj';
+
+        PersonalityPageContentContract::assert($page);
+
+        $page['identity']['canonical_path'] = '/zh-TW/personality-other/intj';
 
         $this->expectException(PersonalityCurrentAuthorityFailure::class);
         PersonalityPageContentContract::assert($page);

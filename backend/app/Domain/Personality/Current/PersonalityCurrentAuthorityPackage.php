@@ -17,8 +17,6 @@ final class PersonalityCurrentAuthorityPackage
 
     public const COMPILER_VERSION = 'personality.page.per_page.compiler.v1';
 
-    public const EXPECTED_FILES = 364;
-
     public const EXPECTED_PAGES_PER_LOCALE = 182;
 
     /** @return array{root:string,manifest:array<string,mixed>,entries:array<string,array<string,mixed>>} */
@@ -38,14 +36,14 @@ final class PersonalityCurrentAuthorityPackage
         $routes = [];
         $semanticHashes = [];
         $compatibilityHashes = [];
-        $localeCounts = array_fill_keys(PersonalityPageContentContract::LOCALES, 0);
+        $localeCounts = array_fill_keys($manifest['locales'], 0);
         $frameworkCounts = [];
         $pageKindCounts = [];
         $baseline = 0;
         $enhanced = 0;
 
         foreach ($manifest['files'] as $entry) {
-            $this->assertFileEntry($entry);
+            $this->assertFileEntry($entry, $manifest['locales']);
             $path = $entry['path'];
             $identityKey = $entry['identity_key'];
             $routeKey = $entry['locale'].'|'.$entry['canonical_path'];
@@ -88,15 +86,16 @@ final class PersonalityCurrentAuthorityPackage
         sort($routeSet, SORT_STRING);
 
         $coverage = $manifest['coverage'];
-        if (count($entries) !== self::EXPECTED_FILES
-            || $localeCounts !== ['en' => self::EXPECTED_PAGES_PER_LOCALE, 'zh-CN' => self::EXPECTED_PAGES_PER_LOCALE]
-            || $frameworkCounts !== ['big_five' => 104, 'enneagram' => 116, 'mbti' => 144]
-            || $pageKindCounts !== [
-                'center' => 6, 'comparison_at' => 32, 'comparison_cross' => 14, 'core_type' => 18,
-                'domain' => 10, 'facet_detail' => 60, 'facet_hub' => 2, 'hub' => 6,
-                'instinctual_subtype' => 54, 'polarity' => 30, 'profile' => 32, 'variant' => 64,
-                'wing' => 36,
-            ]
+        $localeCount = count($manifest['locales']);
+        $forAllLocales = static fn (int $count): int => $count * $localeCount;
+        if ($localeCounts !== array_fill_keys($manifest['locales'], self::EXPECTED_PAGES_PER_LOCALE)
+            || $frameworkCounts !== array_map($forAllLocales, ['big_five' => 52, 'enneagram' => 58, 'mbti' => 72])
+            || $pageKindCounts !== array_map($forAllLocales, [
+                'center' => 3, 'comparison_at' => 16, 'comparison_cross' => 7, 'core_type' => 9,
+                'domain' => 5, 'facet_detail' => 30, 'facet_hub' => 1, 'hub' => 3,
+                'instinctual_subtype' => 27, 'polarity' => 15, 'profile' => 16, 'variant' => 32,
+                'wing' => 18,
+            ])
             || $coverage['baseline_locale_pages'] !== $baseline
             || $coverage['enhanced_locale_pages'] !== $enhanced
             || $coverage['by_framework'] !== $frameworkCounts
@@ -107,6 +106,20 @@ final class PersonalityCurrentAuthorityPackage
             || ! hash_equals($manifest['set_hashes']['compatibility_projection_aggregate_sha256'], self::hashValue($compatibilityHashes))) {
             self::fail('PERSONALITY_CURRENT_COVERAGE_INVALID');
         }
+        foreach ($entries as $entry) {
+            if ($entry['locale'] !== 'zh-TW') {
+                continue;
+            }
+            $sourceKey = substr($entry['identity_key'], 0, -5).'zh-CN';
+            $source = $entries[$sourceKey] ?? null;
+            if ($source === null
+                || $entry['canonical_path'] !== '/zh-TW'.substr($source['canonical_path'], 3)
+                || $entry['slug'] !== $source['slug']
+                || $entry['entity_type'] !== $source['entity_type']) {
+                self::fail('PERSONALITY_CURRENT_TRADITIONAL_PAIR_INVALID');
+            }
+        }
+
         $aggregate = $manifest;
         unset($aggregate['aggregate_sha256']);
         if (! hash_equals($manifest['aggregate_sha256'], self::hashValue($aggregate))) {
@@ -142,7 +155,7 @@ final class PersonalityCurrentAuthorityPackage
 
         $entries = [];
         foreach ($manifest['files'] as $entry) {
-            $this->assertFileEntry($entry);
+            $this->assertFileEntry($entry, $manifest['locales']);
             if (isset($entries[$entry['identity_key']])) {
                 self::fail('PERSONALITY_CURRENT_DUPLICATE_BINDING');
             }
@@ -205,14 +218,15 @@ final class PersonalityCurrentAuthorityPackage
             'aggregate_sha256', 'authority_path', 'compiler_version', 'contract_version', 'coverage',
             'files', 'locales', 'schema_version', 'set_hashes',
         ]);
+        $locales = $manifest['locales'] ?? null;
         if (($manifest['contract_version'] ?? null) !== self::CONTRACT_VERSION
             || ($manifest['schema_version'] ?? null) !== PersonalityPageContentContract::CONTRACT_VERSION
             || ($manifest['compiler_version'] ?? null) !== self::COMPILER_VERSION
             || ($manifest['authority_path'] ?? null) !== self::AUTHORITY_PATH
-            || ($manifest['locales'] ?? null) !== PersonalityPageContentContract::LOCALES
+            || ! in_array($locales, [PersonalityPageContentContract::BASE_LOCALES, PersonalityPageContentContract::LOCALES], true)
             || ! $this->isHash($manifest['aggregate_sha256'] ?? null)
             || ! is_array($manifest['files'] ?? null) || ! array_is_list($manifest['files'])
-            || count($manifest['files']) !== self::EXPECTED_FILES
+            || count($manifest['files']) !== self::EXPECTED_PAGES_PER_LOCALE * count($locales)
             || ! is_array($manifest['coverage'] ?? null) || array_is_list($manifest['coverage'])
             || ! is_array($manifest['set_hashes'] ?? null) || array_is_list($manifest['set_hashes'])) {
             self::fail('PERSONALITY_CURRENT_MANIFEST_INVALID');
@@ -230,16 +244,17 @@ final class PersonalityCurrentAuthorityPackage
                 self::fail('PERSONALITY_CURRENT_MANIFEST_INVALID');
             }
         }
-        if (($manifest['coverage']['files'] ?? null) !== self::EXPECTED_FILES
-            || ($manifest['coverage']['locale_pages'] ?? null) !== self::EXPECTED_FILES
-            || ($manifest['coverage']['locales'] ?? null) !== 2
+        $expectedFiles = self::EXPECTED_PAGES_PER_LOCALE * count($locales);
+        if (($manifest['coverage']['files'] ?? null) !== $expectedFiles
+            || ($manifest['coverage']['locale_pages'] ?? null) !== $expectedFiles
+            || ($manifest['coverage']['locales'] ?? null) !== count($locales)
             || ($manifest['coverage']['pages_per_locale'] ?? null) !== self::EXPECTED_PAGES_PER_LOCALE) {
             self::fail('PERSONALITY_CURRENT_COVERAGE_INVALID');
         }
     }
 
     /** @param array<string,mixed> $entry */
-    private function assertFileEntry(array $entry): void
+    private function assertFileEntry(array $entry, array $locales): void
     {
         $this->exactKeys($entry, [
             'bytes', 'canonical_path', 'compatibility_projection_sha256', 'content_state', 'entity_key',
@@ -252,12 +267,13 @@ final class PersonalityCurrentAuthorityPackage
             }
         }
         if (! is_int($entry['bytes'] ?? null) || $entry['bytes'] < 1
-            || ! in_array($entry['locale'] ?? null, PersonalityPageContentContract::LOCALES, true)
+            || ! in_array($entry['locale'] ?? null, $locales, true)
             || ! in_array($entry['content_state'] ?? null, ['baseline', 'enhanced'], true)
             || ! $this->isHash($entry['sha256'] ?? null)
             || ! $this->isHash($entry['source_content_sha256'] ?? null)
             || ! $this->isHash($entry['compatibility_projection_sha256'] ?? null)
-            || preg_match('#\Apages/(?:mbti|big-five|enneagram)/[a-z0-9-]+/[a-z0-9-]+/(?:en|zh-CN)\.json\z#', $entry['path']) !== 1) {
+            || ! str_ends_with($entry['path'], '/'.$entry['locale'].'.json')
+            || preg_match('#\Apages/(?:mbti|big-five|enneagram)/[a-z0-9-]+/[a-z0-9-]+/(?:en|zh-CN|zh-TW)\.json\z#', $entry['path']) !== 1) {
             self::fail('PERSONALITY_CURRENT_FILE_ENTRY_INVALID');
         }
     }

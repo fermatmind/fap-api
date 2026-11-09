@@ -13,7 +13,7 @@ final class PersonalityCurrentManifest extends Command
 {
     protected $signature = 'personality:current-manifest';
 
-    protected $description = 'Validate the compiler-owned 364-page Personality Current authority package';
+    protected $description = 'Validate the compiler-owned Personality Current authority package';
 
     public function handle(PersonalityCurrentAuthorityPackage $package): int
     {

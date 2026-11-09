@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 
 use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
+use App\Domain\Personality\Current\PersonalityPageContentContract;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
@@ -79,6 +80,10 @@ final class PersonalityPublicContentAssetController extends Controller
                 ],
             ]);
         }
+        if ($validated['locale'] === 'zh-TW') {
+            return $this->currentAuthorityNotFoundResponse();
+        }
+
         $selector = $this->indexSelector($validated['page'], $validated['per_page']);
         $cachedRead = $this->readModelCache->readActiveCollection(
             $framework,
@@ -193,6 +198,10 @@ final class PersonalityPublicContentAssetController extends Controller
                 ? $this->currentAuthorityNotFoundResponse()
                 : $this->currentAuthorityResponse($payload);
         }
+        if ($validated['locale'] === 'zh-TW') {
+            return $this->currentAuthorityNotFoundResponse();
+        }
+
         $fenceToken = $this->readModelCache->captureFence(
             'detail-slug',
             $normalizedFramework,
@@ -280,6 +289,10 @@ final class PersonalityPublicContentAssetController extends Controller
             return $this->currentAuthorityNotFoundResponse();
         }
 
+        if ($validated['locale'] === 'zh-TW') {
+            return $this->currentAuthorityNotFoundResponse();
+        }
+
         $fenceToken = $this->readModelCache->captureFence(
             'detail-code',
             $normalizedFramework,
@@ -340,7 +353,7 @@ final class PersonalityPublicContentAssetController extends Controller
     {
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
-            'locale' => ['nullable', Rule::in(['en', 'zh', 'zh-CN'])],
+            'locale' => ['nullable', Rule::in([...PersonalityPageContentContract::LOCALES, 'zh'])],
             'framework' => ['nullable', 'required_with:code', Rule::in(PersonalityPublicContentAsset::FRAMEWORKS)],
             'entity_type' => ['nullable', 'required_with:code', Rule::in(PersonalityPublicContentAsset::ENTITY_TYPES)],
             'code' => ['nullable', 'string', 'max:128'],
@@ -357,9 +370,14 @@ final class PersonalityPublicContentAssetController extends Controller
         }
 
         $validated = $validator->validated();
+        $orgId = max(0, (int) ($validated['org_id'] ?? 0));
+        if (($validated['locale'] ?? null) === 'zh-TW'
+            && (! $this->usesCurrentAuthority($orgId) || ! $this->personalityCurrentPageReader->hasLocale('zh-TW'))) {
+            return $this->currentAuthorityNotFoundResponse();
+        }
 
         return [
-            'org_id' => max(0, (int) ($validated['org_id'] ?? 0)),
+            'org_id' => $orgId,
             'locale' => PersonalityPublicContentAsset::normalizeLocale((string) ($validated['locale'] ?? 'en')),
             'framework' => isset($validated['framework'])
                 ? PersonalityPublicContentAsset::normalizeToken((string) $validated['framework'])
@@ -378,6 +396,11 @@ final class PersonalityPublicContentAssetController extends Controller
     /** @param array<string,mixed> $payload */
     private function currentAuthorityResponse(array $payload): JsonResponse
     {
+        $languages = $this->personalityCurrentPageReader->traditionalLanguageAlternates($payload);
+        if ($languages !== []) {
+            $payload['traditional_language_alternates'] = $languages;
+        }
+
         return response()->json(['ok' => true, ...$payload])
             ->header('X-Fermat-Content-Authority', 'personality.page.content.v1')
             ->header('X-Fermat-Content-Aggregate', $this->personalityCurrentPageReader->aggregateSha256());

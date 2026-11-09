@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Personality;
 
 use App\Domain\Personality\Current\PersonalityCurrentAuthorityPackage;
+use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use Tests\TestCase;
 
 final class PersonalityCurrentAtComparisonRuntimeTest extends TestCase
@@ -32,22 +33,29 @@ final class PersonalityCurrentAtComparisonRuntimeTest extends TestCase
 
         $response->assertOk()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
-            ->assertHeader('X-Fermat-Content-Aggregate', $this->currentAggregate())
-            ->assertExactJson(['ok' => true, ...$expected['payload']]);
+            ->assertHeader('X-Fermat-Content-Aggregate', $this->currentAggregate());
+
+        $languages = app(PersonalityCurrentPageReader::class)->traditionalLanguageAlternates($expected['payload']);
+        $expectedResponse = ['ok' => true, ...$expected['payload']];
+        if ($languages !== []) {
+            $expectedResponse['traditional_language_alternates'] = $languages;
+        }
+        $response->assertExactJson($expectedResponse);
     }
 
     public function test_runtime_index_binds_the_manifest_without_scanning_all_page_bodies(): void
     {
         $index = (new PersonalityCurrentAuthorityPackage)->runtimeIndex(base_path());
 
-        self::assertCount(364, $index['entries']);
+        self::assertCount(182 * count($index['manifest']['locales']), $index['entries']);
         self::assertArrayHasKey('mbti|comparison_at|intj-a-vs-intj-t|en', $index['entries']);
     }
 
     public function test_at_comparison_compatibility_copy_contains_the_current_visible_body(): void
     {
         $files = glob(base_path('content_assets/personality_public/current/pages/mbti/comparison-at/*/*.json'));
-        self::assertCount(32, $files);
+        $index = (new PersonalityCurrentAuthorityPackage)->runtimeIndex(base_path());
+        self::assertCount(16 * count($index['manifest']['locales']), $files);
 
         foreach ($files as $file) {
             $payload = json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['payload'];

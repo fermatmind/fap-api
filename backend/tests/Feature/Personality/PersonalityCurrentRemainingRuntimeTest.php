@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Personality;
 
+use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -24,11 +25,17 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
     {
         $expected = json_decode(file_get_contents(base_path($file)), true, 512, JSON_THROW_ON_ERROR);
 
-        $this->getJson($url)
-            ->assertOk()
+        $response = $this->getJson($url);
+        $response->assertOk()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
-            ->assertHeader('X-Fermat-Content-Aggregate', $this->currentAggregate())
-            ->assertExactJson(['ok' => true, ...$expected['payload']]);
+            ->assertHeader('X-Fermat-Content-Aggregate', $this->currentAggregate());
+
+        $languages = app(PersonalityCurrentPageReader::class)->traditionalLanguageAlternates($expected['payload']);
+        $expectedResponse = ['ok' => true, ...$expected['payload']];
+        if ($languages !== []) {
+            $expectedResponse['traditional_language_alternates'] = $languages;
+        }
+        $response->assertExactJson($expectedResponse);
     }
 
     /** @return iterable<string,array{string,string}> */
@@ -230,5 +237,27 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
         $this->getJson('/api/v0.5/personality-content-assets/enneagram/enneagram/type-1/instincts/not-real?locale=zh-CN&org_id=0')
             ->assertNotFound()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
+    }
+
+    public function test_traditional_requests_do_not_fall_back_to_legacy_authority(): void
+    {
+        foreach ([
+            '/personality?org_id=17',
+            '/personality/intj?org_id=17',
+            '/personality/intj/seo?org_id=17',
+            '/personality/comparisons?org_id=17',
+            '/personality/comparisons/intj-a-vs-intj-t?org_id=17',
+            '/personality-content-assets?org_id=17&framework=enneagram',
+            '/personality-content-assets/enneagram/center/head?org_id=17',
+            '/personality-content-assets/enneagram/enneagram/head?org_id=17',
+            '/personality-content-assets?org_id=0',
+            '/personality/zzzz?org_id=0',
+            '/personality-content-assets/big_five/domain/not-real?org_id=0',
+            '/personality-content-assets?framework=enneagram&entity_type=instinctual_subtype&code=type-1%2Fnot-real&org_id=0',
+        ] as $route) {
+            $this->getJson('/api/v0.5'.$route.'&locale=zh-TW')
+                ->assertNotFound()
+                ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
+        }
     }
 }
