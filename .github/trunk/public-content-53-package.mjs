@@ -14,6 +14,7 @@ const packages = {
   'traditional-article-career-eq': ['fermatmind.traditional_article_batch.v1', ['traditional-article-career-eq.json','traditional-article-career-eq-review.json']],
   'traditional-article-big-five': ['fermatmind.traditional_article_batch.v1', ['traditional-article-big-five.json','traditional-article-big-five-review.json']],
   'traditional-article-assessment-guides': ['fermatmind.traditional_article_batch.v1', ['traditional-article-assessment-guides.json','traditional-article-assessment-guides-review.json']],
+  'traditional-article-interpretation': ['fermatmind.traditional_article_batch.v1', ['traditional-article-interpretation.json','traditional-article-interpretation-review.json']],
   'traditional-article-featured': ['fermatmind.traditional_article_batch.v1', ['traditional-article-featured.json','traditional-article-featured-review.json']],
   'traditional-article-english': ['fermatmind.traditional_article.v1', ['traditional-article-english.json','traditional-article-english-review.json']],
   'traditional-article': ['fermatmind.traditional_article.v1', ['traditional-article.json','traditional-article-review.json']],

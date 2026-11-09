@@ -162,7 +162,7 @@ final class PublicContent53Package
                 return TraditionalLandingSurfacePublication::featuredOrder($bytes, $environment, $directory, $articles);
             }
         }
-        foreach (['traditional-article-batch', 'traditional-article-featured', 'traditional-article-career-eq', 'traditional-article-big-five', 'traditional-article-assessment-guides'] as $name) {
+        foreach (['traditional-article-batch', 'traditional-article-featured', 'traditional-article-career-eq', 'traditional-article-big-five', 'traditional-article-assessment-guides', 'traditional-article-interpretation'] as $name) {
             if (! is_file($root.'/'.self::PACKAGE.'/'.$name.'.json')) {
                 continue;
             }

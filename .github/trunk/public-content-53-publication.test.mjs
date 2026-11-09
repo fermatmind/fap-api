@@ -1282,3 +1282,34 @@ test('Traditional assessment guides preserve the published FAQ and each assessme
   }
  }
 });
+
+test('Traditional interpretation batch binds all twelve reviewed sources to the correct environment',()=>{
+ const selection='traditional-article-interpretation';
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,12);
+ const staging=readCandidateRows(root,binding.package_sha256,'staging').candidates;
+ const production=readCandidateRows(root,binding.package_sha256,'production').candidates;
+ assert.deepEqual(staging.map(row=>row.source_expectations.source.published_revision_id),[410,411,658,417,428,393,659,651,652,649,389,409]);
+ assert.deepEqual(production.map(row=>row.source_expectations.source.published_revision_id),[1066,737,1092,914,916,942,945,1115,1118,1062,1120,1125]);
+ for (const [index, row] of staging.entries()) {
+  const counterpart=production[index].source_expectations.existing_english;
+  if (index < 7 || index >= 9) {
+   assert.equal(row.source_expectations.existing_english,null);
+   assert.equal(row.source_expectations.unpublished_english_slug,counterpart.slug);
+  } else {
+   assert.equal(row.source_expectations.existing_english.slug,counterpart.slug);
+   assert.equal(row.source_expectations.existing_english.seo_present,false);
+   assert.equal(counterpart.seo_present,true);
+  }
+  assert.equal(row.article_metadata.related_test_slug,'big-five-personality-test-ocean-model');
+ }
+ for (const rows of [staging,production]) {
+  const faqRows=rows.filter(row=>row.snapshot.editorial_projection);
+  assert.deepEqual(faqRows.map(row=>[row.identity.slug,row.snapshot.editorial_projection.faq.length]),[
+   ['habits-and-big-five-traits-behavior-is-not-identity',4],['big-five-growth-guide',5],['big-five-narrative-portrait',5],['big-five-goal-setting-use-results-as-hypotheses',3],
+  ]);
+  assert.ok(faqRows.every(row=>row.editorial_package_v1.cta_slots.length===0));
+ }
+});
