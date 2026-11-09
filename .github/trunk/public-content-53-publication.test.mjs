@@ -1742,3 +1742,33 @@ test('Traditional lineage batch retains English roots, Chinese copy and independ
   assert.notEqual(chinese.snapshot.content_md,english.snapshot.content_md);
  }
 });
+
+test('Traditional article media batch uses verified variants and keeps inline and standalone images separate',()=>{
+ const selection='traditional-article-localized-media';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const {package_sha256:digest,expected_row_count:count}=inspectPackage(root,selection);
+ assert.equal(count,4);
+ const canonical=/^https:\/\/assets\.fermatmind\.com\/storage\/media-library\/variants\/org-0\/media-asset-\d+-[^/]+zh-tw/u;
+ for(const env of ['staging','production']){
+  const [usage,mismatch,tracking,repeat]=readCandidateRows(root,digest,env).candidates;
+  assert.deepEqual([usage,mismatch,tracking,repeat].map(row=>row.source_expectations.source.published_revision_id),
+   env==='staging'?[842,92,104,94]:[1061,811,758,757]);
+  assert.equal(usage.snapshot.body_visual,undefined);
+  const usageImages=[...usage.snapshot.content_md.matchAll(/!\[[^\]]+\]\(([^)]+)\)/gu)];
+  assert.equal(usageImages.length,1);
+  assert.match(usageImages[0][1],canonical);
+  assert.match(usageImages[0][1],/body-visualv1\/hero_1600x900\.jpg$/u);
+  assert.doesNotMatch(usage.snapshot.content_md,/articlemonthly-usage-2026-10formszhv1/u);
+  for(const row of [mismatch,tracking,repeat]){
+   assert.match(row.snapshot.body_visual.image_url,canonical);
+   assert.equal(row.snapshot.body_visual.fallback_authorized,false);
+   assert.ok(!row.snapshot.content_md.includes(row.snapshot.body_visual.image_url));
+  }
+  for(const row of [usage,tracking,repeat]){
+   assert.match(row.article_metadata.cover_image_url,canonical);
+   assert.match(row.snapshot.seo_text.og_image_url,canonical);
+   assert.notEqual(row.article_metadata.cover_image_url,row.snapshot.seo_text.og_image_url);
+  }
+  assert.deepEqual([mismatch,tracking,repeat].map(row=>row.snapshot.editorial_projection.faq.length),[6,6,7]);
+ }
+});
