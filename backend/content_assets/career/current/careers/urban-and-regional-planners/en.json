@@ -1602,7 +1602,7 @@
         "status": "mapped"
       },
       "item:urban-and-regional-planners.path.entry-role-comparison.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:urban-and-regional-planners.path.entry-work-sample-data.1": {
         "status": "mapped"
@@ -23740,14 +23740,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The US identity on this page is 19-3051.00 urban and regional planners, who study land and facility use in a jurisdiction and produce plans. Chinese territorial spatial planning has its own classification and practice system; architecture, landscape, surveying, and statutory approval are not automatically taken on just because of the job title."
+              "This page uses the U.S. occupation Urban and Regional Planners (O*NET 19-3051.00). The closest mainland Chinese category by duties is urban and rural planning engineering and technical personnel (2-02-37-02), within territorial spatial planning and ecological restoration engineering. Work overlaps in land use, spatial layout and plan development. In mainland China, master plans coordinate spatial needs, and detailed and relevant specialized plans follow the master plan. Check plan type, level and jurisdiction for the bodies that prepare and approve them. Architecture, landscape design, surveying and official approval have separate responsibilities."
             ]
           },
           "id": "urban-and-regional-planners.profile.work-context-block.1",
           "source_refs": [
             "onet",
             "cn-rule",
-            "editorial"
+            "editorial",
+            "cn-occupational-classification",
+            "cn-territorial-planning-system"
           ],
           "type": "prose"
         },
@@ -25442,16 +25444,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Generated renderings can help discuss visual direction, but they should be marked as indicative, showing which parts were generated and which conditions are unverified. A good-looking image does not prove that building dimensions, traffic capacity, sunlight, ecological constraints, and budget hold up, and it cannot replace formal planning drawings."
+              "NIST AI RMF 1.0 offers a voluntary framework for managing AI risk. Editorial application: mark generated renderings as illustrative and flag unchecked conditions. Verify dimensions, capacity, daylight, ecological constraints and costs separately."
             ]
           },
           "id": "urban-and-regional-planners.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
-            "cn-rule",
-            "bls",
+            "sag",
             "editorial"
           ],
           "type": "prose"
@@ -25461,16 +25459,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "China's current registered urban and rural planner system requires the relevant deliverables to be signed by the registered personnel who actually took part, who bear the prescribed responsibility. An AI draft does not obtain registration and does not turn a technical recommendation into an administrative approval; the author, the reviewer, and the approval body must be distinguished."
+              "Registered Certified Urban-Rural Planners who actually helped prepare the plan must sign territorial spatial master plans and detailed plans. This also applies to specialized plans when laws or regulations explicitly require it. A tool draft, technical review and official approval each have different responsibilities."
             ]
           },
           "id": "urban-and-regional-planners.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
             "cn-rule",
-            "bls",
             "editorial"
           ],
           "type": "prose"
@@ -25499,7 +25493,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The US 2025—2035 employment projection for this occupation shows 3.9% growth, which the OOH rounds to 4%. The projection includes factors such as demand and replacements and cannot be split into an independent AI net effect, let alone used to estimate an individual's unemployment probability in China."
+              "BLS projects U.S. employment growth of 3.9% from 2025 to 2035, rounded to 4% in its handbook. About 3,200 openings per year include replacement of people leaving the occupation. This projection does not isolate AI’s effect or estimate individual unemployment risk in China."
             ]
           },
           "id": "urban-and-regional-planners.ai-impact.ai-impact-table.8",
@@ -25509,7 +25503,9 @@
             "nist",
             "cn-rule",
             "bls",
-            "editorial"
+            "editorial",
+            "bls-ors",
+            "bls-ep-definitions"
           ],
           "type": "prose"
         },
@@ -25518,17 +25514,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The ILO 2025 study assesses potential generative AI exposure at the task level and emphasizes the possibility of occupational change. It does not provide a measured replacement rate for this occupation in China for this page; this page shows a separately defined FermatMind editorial estimate."
+              "The ILO’s 2025 study assesses potential generative AI exposure at the task level. It does not provide a measured replacement rate for this occupation in China."
             ]
           },
           "id": "urban-and-regional-planners.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
-            "cn-rule",
-            "bls",
-            "editorial"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -25556,7 +25547,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First distinguish text drafting, spatial analysis, public comments, and statutory responsibility. Tools can serve as controlled assistance, but every number, layer, policy citation, and plan judgment must be verifiable. This page has no Chinese actual adoption rate or personal replacement probability for this occupation, and does not use a general exposure study to fill in a score. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Separate drafting, spatial analysis, public comments and statutory responsibility. Authorized tools can help organize material, with numbers, map layers, policy citations and comment categories checked against the original records. The available evidence does not quantify adoption, employment effects or individual risk for this occupation in China. This page gives no score."
             ]
           },
           "id": "urban-and-regional-planners.display.ai_impact_table.answer",
@@ -25689,17 +25680,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Clarifies access, registration, signing by those who actually took part, and responsibility for deliverables; AI output does not replace these conditions."
+              "Registered Certified Urban-Rural Planners who actually helped prepare the plan must sign territorial spatial master plans and detailed plans. This also applies to specialized plans when laws or regulations explicitly require it. AI output cannot substitute for registration or actual participation."
             ]
           },
           "id": "urban-and-regional-planners.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
-            "cn-rule",
-            "bls",
-            "editorial"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25746,17 +25732,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Employment rises from 45.8 thousand to 47.6 thousand, growth of 3.9%; the annual average of 3.2 thousand openings includes replacements."
+              "U.S. employment is projected to rise from 45,800 to 47,600 jobs, up 3.9%. About 3,200 annual openings include replacements when people leave the occupation."
             ]
           },
           "id": "urban-and-regional-planners.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
-            "cn-rule",
-            "bls",
-            "editorial"
+            "bls-ors",
+            "bls-ep-definitions"
           ],
           "type": "prose"
         },
@@ -27450,7 +27432,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Tsinghua Tongheng Henan Branch J10912 notice dated 2026-04-07 quotes 10—20 ten-thousand yuan per year, with conditions such as 2—5 years of experience, a bachelor's degree or above in the field, and an intermediate professional title; the Beijing J10942 internship dated 2026-06-18 quotes 2K—3K yuan per month. Both positions are with the same employer and are not two independent industry statistics."
+              "The Tsinghua Tongheng Henan Branch J10912 notice dated 2026-04-07 quotes CNY 100,000–200,000 per year, with conditions such as 2—5 years of experience, a bachelor's degree or above in the field, and an intermediate professional title; the Beijing J10942 internship dated 2026-06-18 quotes CNY 2,000–3,000 per month. Both positions are with the same employer and are not two independent industry statistics."
             ]
           },
           "id": "urban-and-regional-planners.china-salary.career-snapshot-primary-locale.4",
@@ -27500,7 +27482,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Employer quotes | Tsinghua Tongheng Henan Branch planning designer J10912: 10 ten-thousand to 20 ten-thousand yuan per year, published 2026-04-07; Beijing general development research and planning branch J10942 internship: 2,000—3,000 yuan per month, published 2026-06-18. Not statistics of actual take-home pay."
+              "Employer quotes | Tsinghua Tongheng Henan Branch planning designer J10912: CNY 100,000–200,000 per year, published 2026-04-07; Beijing general development research and planning branch J10942 internship: CNY 2,000–3,000 per month, published 2026-06-18. Not statistics of actual take-home pay."
             ]
           },
           "id": "urban-and-regional-planners.display.career_snapshot_primary_locale.quote-limits",
@@ -27532,7 +27514,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Zhengzhou J10912 is a formal experienced-hire sample, requiring 2—5 years of planning experience, an intermediate professional title, and a bachelor's degree or above in urban and rural planning, with a postgraduate degree and registration preferred; 10 ten-thousand to 20 ten-thousand yuan per year does not equal the national distribution for the same years of experience."
+              "The Zhengzhou J10912 posting sought a full-time hire with 2–5 years of planning and design experience, an intermediate professional title, and at least a bachelor’s degree in urban and rural planning. It preferred a postgraduate degree and the professional qualification certificate. Its advertised CNY 100,000–200,000 annual range is one employer example."
             ]
           },
           "id": "urban-and-regional-planners.display.career_snapshot_primary_locale.scenario.featured",
@@ -27548,7 +27530,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Beijing J10942 is an internship sample covering assistance with plan-making, deliverables, research topics, drawing, databases, and field surveys, quoted at 2,000—3,000 yuan per month; it cannot be used to infer a formal planner's monthly wage or the national newcomer level."
+              "Beijing J10942 is an internship sample covering assistance with plan-making, deliverables, research topics, drawing, databases, and field surveys, quoted at CNY 2,000–3,000 per month; it cannot be used to infer a formal planner's monthly wage or the national newcomer level."
             ]
           },
           "id": "urban-and-regional-planners.display.career_snapshot_primary_locale.scenario.background",
@@ -27709,7 +27691,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The EMP2025—2035 projection is 45,800 to 47,600 people, with 3.9% in the original table (the OOH rounds to 4%), and an annual average of 3,200 openings including replacements for people leaving, which is not 3,200 net additions each year."
+              "BLS projects U.S. employment to rise from 45,800 jobs in 2025 to 47,600 in 2035, a net gain of 1,800 jobs. About 3,200 openings per year include replacements when people leave the occupation."
             ]
           },
           "fact_refs": [
@@ -27720,7 +27702,9 @@
           "source_refs": [
             "bls-oews",
             "bls-ooh",
-            "editorial"
+            "editorial",
+            "bls-ors",
+            "bls-ep-definitions"
           ],
           "type": "prose"
         },
@@ -27729,7 +27713,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS wages cover wage and salary employees and exclude the self-employed; the EMP employment projection has its own coverage. Wages and headcount cannot be multiplied to infer personal or industry net income."
+              "OEWS wages cover wage and salary employees and exclude the self-employed; the EMP employment projection has its own coverage. Wages and job counts cannot be multiplied to infer personal or industry net income."
             ]
           },
           "id": "urban-and-regional-planners.us-salary.career-snapshot-secondary-locale.5",
@@ -27931,7 +27915,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "There is also an annual median of 93,220 US dollars for this occupation in management, scientific, and technical consulting; these are all employee statistics and exclude self-employed net income. A personal consultancy needs separately verifying turnover, costs, and time."
+              "OEWS industry wages cover employees and exclude self-employed net income. For independent consulting, check project revenue, costs, delivery time and unbilled hours separately."
             ]
           },
           "id": "urban-and-regional-planners.display.career_snapshot_secondary_locale.industry.self-employed",
@@ -27939,7 +27923,8 @@
             "bls-oews",
             "bls-ooh",
             "oews",
-            "editorial"
+            "editorial",
+            "bls-oews-concepts"
           ],
           "type": "prose"
         },
@@ -28033,7 +28018,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The EMP change keeps 3.9% and the OOH rounds to 4%; these are the same projection at different display precision. The figures 45.8, 47.6, and 3.2 are in thousands. The US aggregate growth is not attributed to AI alone and is not extrapolated to Chinese demand."
+              "The BLS projections table reports 3.9%; the Occupational Outlook Handbook rounds it to 4%. The U.S. total does not isolate AI’s contribution or forecast demand in China."
             ]
           },
           "id": "urban-and-regional-planners.display.career_snapshot_secondary_locale.boundary.detail",
@@ -28041,7 +28026,9 @@
             "bls-oews",
             "bls-ooh",
             "oews",
-            "editorial"
+            "editorial",
+            "bls-ors",
+            "bls-ep-definitions"
           ],
           "type": "prose"
         }
@@ -29602,15 +29589,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Chinese registered urban and rural planner qualifications, registration, personal signing responsibility, and plan-making organization qualifications are verified separately. The relevant deliverables must be signed by the people who actually took part, under the system; signing without participation, affiliation arrangements, or borrowing another person's name are not accepted."
+              "Registered Certified Urban-Rural Planners who actually helped prepare the plan must sign territorial spatial master plans and detailed plans. This also applies to specialized plans when laws or regulations explicitly require it. Check the certificate, registration, organization qualifications and administrative approval separately. Do not lend credentials or sign work you did not help prepare."
             ]
           },
           "id": "urban-and-regional-planners.risk.career-risk-cards.4",
           "source_refs": [
-            "onet",
             "cn-rule",
-            "nist",
-            "editorial"
+            "cn-plan-unit-qualification"
           ],
           "type": "prose"
         },
@@ -30169,7 +30154,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Reviewed as of 2026-10-03: the Tsinghua Tongheng Zhengzhou J10912 experienced-hire position (published April 7, 10W—20W yuan per year, 2—5 years of related experience, an intermediate professional title, and a bachelor's degree or above in urban and rural planning) and the Beijing J10942 internship (published June 18, 2K—3K yuan per month, related bachelor's degree or above, with priority for enrolled students) are two entries from the same employer, and whether they can currently be applied for must be verified separately. The Jiangsu Group May 9 notice includes planning positions in Nanjing and Chengdu, with applications closing May 22 and no wage amounts listed. The CAUPD January notice is a multi-specialty recruitment, and all 23 people cannot be treated as demand for planners. The samples are used only for comparing conditions and no national hiring demand is calculated."
+              "Reviewed as of 2026-10-03: the Tsinghua Tongheng Zhengzhou J10912 experienced-hire position (published April 7, CNY 100,000–200,000 per year, 2—5 years of related experience, an intermediate professional title, and a bachelor's degree or above in urban and rural planning) and the Beijing J10942 internship (published June 18, CNY 2,000–3,000 per month, related bachelor's degree or above, with priority for enrolled students) are two entries from the same employer, and whether they can currently be applied for must be verified separately. The Jiangsu Group May 9 notice includes planning positions in Nanjing and Chengdu, with applications closing May 22 and no wage amounts listed. The CAUPD January notice is a multi-specialty recruitment, and all 23 people cannot be treated as demand for planners. The samples are used only for comparing conditions and no national hiring demand is calculated."
             ]
           },
           "id": "urban-and-regional-planners.path.recruitment-sample.1",
@@ -30202,9 +30187,16 @@
             ],
             "rows": [
               [
+                "U.S. local planning example",
+                "Review land-use proposals and supporting material and help communicate with the public.",
+                "Hampton’s City Planner class lists a related bachelor’s and at least one year of specified technical or research-oriented customer service. GIS knowledge is preferred.",
+                "Prepare a one-page fictional site-selection brief with assumptions, limits and questions. Verify whether your work history meets the employer’s experience requirement.",
+                "This is a city job classification, not an open posting or a nationwide rule. Check AICP certification and any state licensure separately."
+              ],
+              [
                 "Plan-making assistant / intern",
                 "Organize public current-situation materials, assist with drawings and plan text, and accept project review.",
-                "The Tsinghua Tongheng Beijing 2026 internship sample requires a related bachelor's degree or above and GIS mapping and office skills; the specific work follows the position description.",
+                "Tsinghua Tongheng’s 2026 Beijing internship J10942 asked for a bachelor’s degree or higher in a related field, preferred students in specified years, and required proficiency with relevant planning and design software.",
                 "Submit the fictional coverage exercise and a public source list, state your own contribution, and do not pass it off as a project.",
                 "Internship status and conditions are verified separately from experienced-hire routes, and no conversion to a formal role or signing qualification is guaranteed."
               ],
@@ -30218,9 +30210,9 @@
               [
                 "Tsinghua Tongheng Zhengzhou experienced-hire sample",
                 "Organize sub-packages, complete the planning scheme and briefings; the division of work follows the position.",
-                "J10912: 2—5 years of related experience, an intermediate professional title, and a bachelor's degree or above in urban and rural planning; a postgraduate degree and registration are preferred.",
+                "J10912 asked for 2–5 years in planning and design, an intermediate professional title, and at least a bachelor’s degree in urban and rural planning. A postgraduate degree and the professional qualification certificate were preferred.",
                 "People without experience cannot use an exercise to replace that experience condition; they can first check internships or campus recruitment.",
-                "The 2026 published annual quote is 10W—20W, whether it can currently be applied for must be verified separately, and it is not a national senior wage."
+                "The 2026 published annual quote is CNY 100,000–200,000, whether it can currently be applied for must be verified separately, and it is not a national senior wage."
               ],
               [
                 "Jiangsu Nanjing / Chengdu campus recruitment sample",
@@ -30232,7 +30224,7 @@
               [
                 "Pivot preparation for related fields",
                 "Verify the target tasks and application conditions, and build planning theory, regulations, and spatial methods.",
-                "Under the 2024 system, other fields add 1 year to the required business years for the corresponding education or degree; employers may have additional conditions.",
+                "Under the 2024 system, other fields add 1 year to the required years of territorial spatial planning work for the corresponding education or degree; employers may have additional conditions.",
                 "Clarify existing abilities and the gaps, and verify the foundation with a reproducible learning work sample.",
                 "Statutory application qualifications, employer conditions, and actual ability are different matters, and no promise of hiring on switching fields is made."
               ]
@@ -30244,7 +30236,10 @@
             "employer",
             "r2-pay-2",
             "cn-rule",
-            "editorial"
+            "editorial",
+            "us-hampton-planner",
+            "us-aicp-experience",
+            "bls-ooh"
           ],
           "title": "Entry tasks and real recruitment conditions",
           "type": "table"
@@ -30412,21 +30407,21 @@
             "rows": [
               [
                 "Planning-related education and training",
-                "For people who need to systematically build planning theory, regulations, spatial analysis, and presentation.",
-                "Provides the knowledge, methods, and work sample foundation; the employer may specify the field and education.",
+                "U.S. example: Hampton’s City Planner class accepts a related bachelor’s and specified experience; check the employer rather than assuming a single national hiring threshold.",
+                "Planning theory, land use law, GIS and evidence communication can support the work. The AICP exam, certification and any state license are separate from a degree.",
                 "Verify by position and statutory application category; the US education classification does not equal a uniform Chinese threshold.",
                 "Verify admission, field, degree, and recognition conditions by institution and position.",
                 "Locate the gap first, then compare courses, time, cost, and feedback, and do not set a uniform training price.",
                 "A completion certificate is not a national qualification certificate, registration, or formal signing authority."
               ],
               [
-                "Applying for the Chinese registered urban and rural planner examination",
+                "Mainland China: Certified Urban-Rural Planner examination",
                 "For people preparing to sit the professional qualification examination related to territorial spatial planning.",
-                "The national qualification system is an access-type system, and application conditions and job-seeking conditions are verified separately.",
-                "After obtaining the qualification and registering according to law, work within the scope of the system; assistant tasks are not all equated with registered signing.",
-                "The 2024 rules: 4 years of business experience for an urban and rural planning associate degree; 3 years for a bachelor's degree or a Bachelor of Architecture; 2 years for an accredited planning bachelor's degree; 1 year for a planning master's or architecture master's; 1 year for an accredited planning master's or an urban planning master's; a planning doctorate has no years listed in this provision. Other fields add 1 year to the corresponding education or degree.",
-                "Verify your own education, field, accreditation, and the business experience that can be recognized; fees follow the local examination arrangements for that year, and no uniform price is invented.",
-                "The business scope covers master, detailed, and specialized plan-making, implementation, and supervision; ordinary study years cannot replace the required business years."
+                "The exam is part of the national professional qualification. Check each job’s requirements separately.",
+                "The certificate and registration are separate. Taking the exam does not grant signing authority; see the specific signing scope above.",
+                "Applicants must meet Article 8’s citizenship, legal compliance and professional ethics conditions and one of the education and work paths below. Under the 2024 rules, qualifying experience is four years for an urban and rural planning associate degree; three for a planning bachelor’s or professional architecture bachelor’s; two for an accredited planning bachelor’s; one for a planning master’s or professional architecture master’s; and one for an accredited planning master’s or professional urban planning master’s. The planning doctorate provision lists no minimum experience. Other fields add one year at the corresponding education level.",
+                "Verify your own education, field, accreditation, and qualifying territorial spatial planning experience; fees follow the local examination arrangements for that year, and no uniform price is invented.",
+                "Qualifying work includes preparing, implementing or overseeing territorial spatial master plans, detailed plans and relevant specialized plans. General study time does not substitute for required experience."
               ],
               [
                 "Examination subjects and exemptions",
@@ -30442,9 +30437,9 @@
                 "For people who have obtained the qualification and intend to practise under the name of registered urban and rural planner.",
                 "Clarify the employer, the registration validity period, and the corresponding practice responsibility.",
                 "Practising under the registered name within the system requires registration; passing the examination alone does not mean you can call yourself registered.",
-                "The initial registration is applied for within 3 years of obtaining the qualification, and beyond that the continuing education requirements must be met; the employing organization and other conditions follow the current system, and registration is valid for 3 years.",
+                "Be employed by one territorial spatial planning and research organization and meet the other Article 13 conditions. Apply for initial registration within three years of earning the certificate; later applicants must meet continuing education requirements. Registration is valid for three years.",
                 "Verify the registration process, expiry, and continuing education arrangements, and check the fees and duration through the actual channels.",
-                "Personal registration differs from plan-making organization qualifications; deliverables must be signed by the people who actually took part, as required, and affiliation arrangements, borrowing names, and signing without participation are prohibited."
+                "Registered Certified Urban-Rural Planners who actually helped prepare the plan must sign territorial spatial master plans and detailed plans. This also applies to specialized plans when laws or regulations explicitly require it. Personal registration is separate from the organization’s qualifications. Do not lend a name or sign without taking part."
               ],
               [
                 "The employer's specific position conditions",
@@ -30473,7 +30468,11 @@
             "bls",
             "employer",
             "r2-pay-2",
-            "editorial"
+            "editorial",
+            "bls-ooh",
+            "us-hampton-planner",
+            "us-aicp-exam",
+            "us-aicp-experience"
           ],
           "title": "Chinese qualifications, registration, and position preparation",
           "type": "table"
@@ -30752,13 +30751,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "China's current system is an access-type qualification; after obtaining the qualification and registering according to law, you practise within the scope of the system, and the relevant deliverables are signed by the registered personnel who actually took part. The US education classification cannot replace Chinese application and registration conditions."
+              "BLS says U.S. planners typically need a bachelor’s or master’s from an accredited planning program. A master’s is common; check each employer’s requirements. Hampton’s City Planner class accepts a related bachelor’s, requires at least one year of specified technical or research-oriented customer-service experience, and prefers GIS knowledge. This is one city’s classification. APA members can register for the AICP exam. After passing, they submit education and professional planning experience for certification. APA lists two years of planning experience for a PAB-accredited planning master’s and three for a PAB-accredited planning bachelor’s; check the rules for other paths. State licensure is separate; BLS identifies New Jersey as an exception. For mainland China, Article 8 sets PRC citizenship, compliance with the constitution, laws and regulations, professional ethics, and an applicable education and experience path. After earning the certificate, register separately to practice under the registered title. Organization qualifications and hiring requirements are separate. Registered Certified Urban-Rural Planners who actually helped prepare the plan must sign territorial spatial master plans and detailed plans. This also applies to specialized plans when laws or regulations explicitly require it."
             ]
           },
           "id": "urban-and-regional-planners.display.career_path_block.locale.credentials",
           "source_refs": [
-            "onet",
-            "editorial"
+            "cn-rule",
+            "cn-plan-unit-qualification",
+            "bls-ooh",
+            "us-hampton-planner",
+            "us-aicp-exam",
+            "us-aicp-experience"
           ],
           "type": "prose"
         },
@@ -31097,13 +31100,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Signing Chinese deliverables is the responsibility of the registered personnel who actually took part, under the system."
+              "Registered Certified Urban-Rural Planners who actually helped prepare the plan must sign territorial spatial master plans and detailed plans. This also applies to specialized plans when laws or regulations explicitly require it."
             ]
           },
           "id": "urban-and-regional-planners.display.career_path_block.tracks.screen.03.credentials",
           "source_refs": [
-            "onet",
-            "editorial"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -31178,7 +31180,9 @@
           "id": "urban-and-regional-planners.display.career_path_block.tracks.screen.04.credentials",
           "source_refs": [
             "onet",
-            "editorial"
+            "editorial",
+            "cn-rule",
+            "cn-plan-unit-qualification"
           ],
           "type": "prose"
         },
@@ -31487,13 +31491,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Formal deliverables, registered signing, and change procedures follow the actual system."
+              "In mainland projects, distinguish plan preparation, signing where required by actual participants, and approval by the responsible authority."
             ]
           },
           "id": "urban-and-regional-planners.display.career_path_block.tracks.stage.04.credentials",
           "source_refs": [
-            "onet",
-            "editorial"
+            "cn-rule",
+            "cn-plan-unit-qualification"
           ],
           "type": "prose"
         },
@@ -31911,7 +31915,9 @@
             "employer",
             "r2-pay-2",
             "onet",
-            "editorial"
+            "editorial",
+            "bls-ors",
+            "bls-ep-definitions"
           ],
           "type": "prose"
         },
@@ -32546,13 +32552,18 @@
                 ]
               },
               {
-                "answer": "The current Natural Resources Regulation [2024] No. 3 is an access-type system; applications are classified by education, field, and years of professional work, and after obtaining the qualification and registering according to law you practise within the scope. The examination, registration, signing by those who actually took part, and organization qualifications are verified separately; the old 2017 measures have been repealed.",
+                "answer": "BLS says U.S. planners typically need a bachelor’s or master’s from an accredited planning program. A master’s is common; check each employer’s requirements. Hampton’s City Planner class accepts a related bachelor’s, requires at least one year of specified technical or research-oriented customer-service experience, and prefers GIS knowledge. This is one city’s classification. APA members can register for the AICP exam. After passing, they submit education and professional planning experience for certification. APA lists two years of planning experience for a PAB-accredited planning master’s and three for a PAB-accredited planning bachelor’s; check the rules for other paths. State licensure is separate; BLS identifies New Jersey as an exception. For mainland China, Article 8 sets PRC citizenship, compliance with the constitution, laws and regulations, professional ethics, and an applicable education and experience path. After earning the certificate, register separately to practice under the registered title. Organization qualifications and hiring requirements are separate. Registered Certified Urban-Rural Planners who actually helped prepare the plan must sign territorial spatial master plans and detailed plans. This also applies to specialized plans when laws or regulations explicitly require it.",
                 "id": "actors.faq.4",
-                "question": "Urban and regional planners: what qualifications are needed in China?",
+                "question": "How do entry requirements differ between the U.S. and mainland China?",
                 "question_key": "career.faq.urban-and-regional-planners.4",
                 "source_refs": [
                   "cn-rule",
-                  "ratify"
+                  "ratify",
+                  "cn-plan-unit-qualification",
+                  "bls-ooh",
+                  "us-hampton-planner",
+                  "us-aicp-exam",
+                  "us-aicp-experience"
                 ]
               },
               {
@@ -32628,7 +32639,13 @@
             "employer",
             "r2-ai",
             "nist",
-            "editorial"
+            "editorial",
+            "ratify",
+            "cn-plan-unit-qualification",
+            "bls-ooh",
+            "us-hampton-planner",
+            "us-aicp-exam",
+            "us-aicp-experience"
           ],
           "type": "faq"
         },
@@ -32873,24 +32890,24 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "E1/F1/F2/E3, the four work samples, and the seven-day plan are all fictional learning designs for this page.",
+                  "E1, F1, F2 and E3 supply fictional population and route inputs and conditions to leave unresolved.",
                   "The 500 metres is a learning threshold and not a standard; there are no real residents, plots, projects, approvals, or employer evaluations."
                 ],
                 "evidence_type": "editorial guidance",
                 "id": "editor",
-                "limitation": "The linked O*NET supports task background only and does not prove that the exercise standards, results, or suggestions on this page are officially certified.",
+                "limitation": "A fictional FermatMind exercise. The separate O*NET profile supports only the work context.",
                 "market": "Editorial design",
-                "name": "FermatMind author suggestions and fictional exercises for this page",
+                "name": "FermatMind park coverage exercise inputs",
                 "period": "Produced locally on 2026-10-01",
-                "publisher": "FermatMind career content editor; O*NET is used only as task background",
+                "publisher": "FermatMind",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/summary/19-3051.00"
+                "url": "#career-visual-group-path"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Zhengzhou experienced-hire planning designer J10912, 10W—20W yuan per year, 2—5 years of related experience, an intermediate professional title, and a bachelor's degree or above in urban and rural planning.",
-                  "Beijing J10942 internship, 2K—3K yuan per month, related bachelor's degree or above with priority for enrolled students, assisting with planning materials, drawing, and databases."
+                  "Zhengzhou experienced-hire planning designer J10912, CNY 100,000–200,000 per year, 2—5 years of related experience, an intermediate professional title, and a bachelor's degree or above in urban and rural planning.",
+                  "Beijing J10942 internship, CNY 2,000–3,000 per month, related bachelor's degree or above with priority for enrolled students, assisting with planning materials, drawing, and databases."
                 ],
                 "evidence_type": "employer recruitment notice",
                 "id": "employer",
@@ -33000,8 +33017,8 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Zhengzhou experienced-hire planning designer J10912, 10W—20W yuan per year, 2—5 years of related experience, an intermediate professional title, and a bachelor's degree or above in urban and rural planning.",
-                  "Beijing J10942 internship, 2K—3K yuan per month, related bachelor's degree or above with priority for enrolled students, assisting with planning materials, drawing, and databases."
+                  "Zhengzhou experienced-hire planning designer J10912, CNY 100,000–200,000 per year, 2—5 years of related experience, an intermediate professional title, and a bachelor's degree or above in urban and rural planning.",
+                  "Beijing J10942 internship, CNY 2,000–3,000 per month, related bachelor's degree or above with priority for enrolled students, assisting with planning materials, drawing, and databases."
                 ],
                 "evidence_type": "employer recruitment notice",
                 "id": "r2-pay-1",
@@ -33250,35 +33267,155 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "E1/F1/F2/E3, the four work samples, and the seven-day plan are all fictional learning designs for this page.",
+                  "Use the supplied counts, denominators and recommendation changes to check the four work samples and seven-day exercise.",
                   "The 500 metres is a learning threshold and not a standard; there are no real residents, plots, projects, approvals, or employer evaluations."
                 ],
                 "evidence_type": "editorial guidance",
                 "id": "editorial",
-                "limitation": "The linked O*NET supports task background only and does not prove that the exercise standards, results, or suggestions on this page are officially certified.",
+                "limitation": "A fictional FermatMind exercise. The separate O*NET profile supports only the work context.",
                 "market": "Editorial design",
-                "name": "FermatMind author suggestions and fictional exercises for this page",
+                "name": "FermatMind exercise reference and portfolio self-check",
                 "period": "Produced locally on 2026-10-01",
-                "publisher": "FermatMind career content editor; O*NET is used only as task background",
+                "publisher": "FermatMind",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/summary/19-3051.00"
+                "url": "#career-visual-group-path"
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Research | Survey and data checking | Conduct field surveys or study population, socio-economic, regulatory, and physical factors, state the period, scope, and limitations of the materials, and do not automatically fill in missing values. — 50/100; weight=1/3; urban-and-regional-planners.display.responsibilities_block.01[0]",
-                  "Plan analysis | Comparing plans and indicators | Assess the feasibility of land and facility choices and the alternatives, explain the comparison criteria and effects, and do not rely only on a rendering or a single score. — 75/100; weight=1/3; urban-and-regional-planners.display.responsibilities_block.02[0]",
-                  "Communication and coordination | Public and professional coordination | Organize communication or meetings, respond to inquiries and different demands, coordinate with transport, architecture, and economics specialists, and do not fabricate public consensus. — 25/100; weight=1/3; urban-and-regional-planners.display.responsibilities_block.04[0]"
+                  "The former quantitative estimate is withdrawn; there is no replacement score.",
+                  "There are no independent, verifiable effect measurements for the complete tasks.",
+                  "Research: check dates, geography, units and gaps after organizing information.",
+                  "Plan comparison: recalculate metrics from original inputs and document assumptions and limits.",
+                  "Public engagement: check original comments, preserve disagreement and follow permission and confidentiality requirements."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "Editorial evidence note",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "Distinguishes tool assistance from effects on the complete work. It does not measure adoption, job loss or changes in working hours.",
+                "name": "FermatMind AI evidence note for planning tasks",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The 2-02-37-02 category covers urban and rural land use, spatial layout, planning research and design."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-occupational-classification",
+                "limitation": "A comparison by duties; it does not establish equivalence of credentials, wages or occupation codes.",
+                "market": "Mainland China",
+                "name": "China occupational classification (2022 edition)",
+                "period": "Source as published",
+                "publisher": "Public edition hosted by a human resources authority",
+                "scope": "contextual",
+                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Order No. 11 requires planning organizations to operate within the scope of their qualification grade."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-plan-unit-qualification",
+                "limitation": "Organization qualification is separate from personal qualification, registration and official approval.",
+                "market": "Mainland China",
+                "name": "Rules on qualifications for planning organizations",
+                "period": "Source as published",
+                "publisher": "Ministry of Natural Resources, republished by Beijing’s planning authority",
+                "scope": "contextual",
+                "url": "https://ghzrzyw.beijing.gov.cn/zhengwuxinxi/zcfg/gz/202607/t20260722_4777955.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Master plans coordinate spatial needs; detailed plans follow approved master plans, as do relevant specialized plans."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-territorial-planning-system",
+                "limitation": "Check the plan type, level and applicable jurisdiction for preparation and approval authority.",
+                "market": "Mainland China",
+                "name": "Opinion on the territorial spatial planning system and its implementation",
+                "period": "Source as published",
+                "publisher": "CPC Central Committee and State Council",
+                "scope": "contextual",
+                "url": "https://app.www.gov.cn/govdata/gov/201905/23/440190/article.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "OEWS covers wage and salary employees in nonfarm industries and excludes self-employed workers."
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-oews-concepts",
+                "limitation": "Does not estimate independent planning income.",
+                "market": "United States",
+                "name": "OEWS population and exclusions",
+                "period": "Source as published",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The employment matrix counts jobs. Occupational openings combine net change and occupational separations."
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-ep-definitions",
+                "limitation": "Annual average openings are not current vacancies.",
+                "market": "United States",
+                "name": "BLS employment projection definitions",
+                "period": "Source as published",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/emp/documentation/definitions.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The class lists a related bachelor’s degree, at least one year in specified technical or research-oriented customer service, and GIS knowledge as a preference."
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-hampton-planner",
+                "limitation": "A city job classification, not a live posting or nationwide requirement.",
+                "market": "Hampton, Virginia, United States",
+                "name": "City of Hampton City Planner class specification",
+                "period": "Source as published",
+                "publisher": "City of Hampton",
+                "scope": "contextual",
+                "url": "https://www.hampton.gov/DocumentCenter/View/55711/City-Planner"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Exam eligibility and certification are separate. APA members can register for the exam; certification involves an experience assessment."
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-aicp-exam",
+                "limitation": "A professional certification is separate from state licensure.",
+                "market": "United States",
+                "name": "AICP exam and certification overview",
+                "period": "Source as published",
+                "publisher": "American Planning Association",
+                "scope": "contextual",
+                "url": "https://planning.org/certification/get-started/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "After passing the exam, applicants submit education, employment and professional planning experience for assessment."
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-aicp-experience",
+                "limitation": "Required experience varies with education; verify current association rules.",
+                "market": "United States",
+                "name": "AICP education, experience and assessment",
+                "period": "Source as published",
+                "publisher": "American Planning Association",
+                "scope": "contextual",
+                "url": "https://planning.org/certification/education-experience/"
               }
             ]
           },
@@ -33682,7 +33819,13 @@
             }
           },
           {
-            "来源": "The original 2024 Chinese system text is in the source list; this link is task background only",
+            "来源": {
+              "$source": "cn-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "urban-and-regional-planners.source-register.published.1"
+            },
             "类型": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.authority.sag-moa.type",
               "block": "ai-impact",
@@ -33695,16 +33838,16 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "onet",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            }
+            "链接": null
           },
           {
-            "来源": "The original 2026 Yantai examination text is in the source list; this link is task background only",
+            "来源": {
+              "$source": "ratify",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "urban-and-regional-planners.source-register.published.1"
+            },
             "类型": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.authority.ratify.type",
               "block": "ai-impact",
@@ -33717,13 +33860,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "onet",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "来源": {
@@ -33928,14 +34065,20 @@
             }
           },
           {
-            "source_ref": "onet",
+            "source_ref": "cn-rule",
             "使用限制": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.evidence.3.limit",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "来源": "The 2024 Chinese registration system (original text in the source list; this link is O*NET task background only)",
+            "来源": {
+              "$source": "cn-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "urban-and-regional-planners.source-register.published.1"
+            },
             "研究对象": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.evidence.3.object",
               "block": "ai-impact",
@@ -33948,16 +34091,10 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "onet",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            }
+            "链接": "Original rule in the evidence link below"
           },
           {
-            "source_ref": "bls",
+            "source_ref": "bls-ors",
             "使用限制": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.evidence.4.limit",
               "block": "ai-impact",
@@ -33965,7 +34102,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "bls-ors",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33984,7 +34121,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "bls-ors",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34093,13 +34230,7 @@
               "field": "name",
               "item": "urban-and-regional-planners.source-register.published.1"
             },
-            "链接": {
-              "$source": "editorial",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            },
+            "链接": "https://fermatmind.com/en/career/jobs/urban-and-regional-planners#career-visual-group-path",
             "问题": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.questions.1.question",
               "block": "ai-impact",
@@ -34122,13 +34253,7 @@
               "field": "name",
               "item": "urban-and-regional-planners.source-register.published.1"
             },
-            "链接": {
-              "$source": "editorial",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            },
+            "链接": "https://fermatmind.com/en/career/jobs/urban-and-regional-planners#career-visual-group-path",
             "问题": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.questions.2.question",
               "block": "ai-impact",
@@ -34166,21 +34291,21 @@
             }
           },
           {
-            "source_ref": "onet",
+            "source_ref": "cn-rule",
             "回答": {
               "$item": "urban-and-regional-planners.ai-impact.ai-impact-table.6",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "来源": "The original Chinese registration system text is in the source list; this link is O*NET background",
-            "链接": {
-              "$source": "onet",
+            "来源": {
+              "$source": "cn-rule",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
-              "field": "url",
+              "field": "name",
               "item": "urban-and-regional-planners.source-register.published.1"
             },
+            "链接": "Original rule in the evidence link below",
             "问题": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.questions.4.question",
               "block": "ai-impact",
@@ -34261,13 +34386,7 @@
               "field": "name",
               "item": "urban-and-regional-planners.source-register.published.1"
             },
-            "链接": {
-              "$source": "editorial",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            },
+            "链接": "https://fermatmind.com/en/career/jobs/urban-and-regional-planners#career-visual-group-path",
             "问题": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.questions.7.question",
               "block": "ai-impact",
@@ -34775,7 +34894,7 @@
                 "type": "prose"
               }
             ],
-            "separator": ""
+            "separator": "\n"
           }
         },
         "schema_version": "career.career_progression.v1",
@@ -36056,12 +36175,12 @@
             },
             {
               "指标": "Henan formal position",
-              "数值": "10 ten-thousand to 20 ten-thousand yuan per year",
+              "数值": "CNY 100,000–200,000 per year",
               "说明": "Tsinghua Tongheng J10912, 2026-04-07, Zhengzhou, not a monthly wage."
             },
             {
               "指标": "Beijing internship position",
-              "数值": "2,000—3,000 yuan per month",
+              "数值": "CNY 2,000–3,000 per month",
               "说明": "The same employer's J10942, 2026-06-18, not equal to formal pay."
             },
             {
@@ -36328,7 +36447,7 @@
           },
           {
             "fact_ref": "us-employment-2024",
-            "指标": "2025–2035 employment · base-year headcount",
+            "指标": "Employment in 2025 (jobs)",
             "数值": {
               "$fact": "us-employment-2024",
               "field": "display_value"
@@ -36351,7 +36470,7 @@
               "$fact": "us-openings-2024-2034",
               "field": "display_value"
             },
-            "说明": "Mainly replacement demand from career changes or exits from the labour market, not a net increase each year."
+            "说明": "Includes replacement openings when workers transfer out or leave the labor force; it is not annual net job growth."
           }
         ],
         "boundary": {
@@ -36369,7 +36488,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "direct_answer": {
           "$item": "urban-and-regional-planners.us-salary.career-snapshot-secondary-locale.1",
@@ -36577,7 +36696,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "The national median hourly wage",
+            "label": "National median wage: annual and hourly",
             "value": {
               "$fact": "us-median-2025",
               "field": "display_value"
@@ -36786,7 +36905,8 @@
             },
             "metric": "Access and registration boundaries",
             "occupation_scope": "The scope of the Chinese registered urban and rural planner system",
-            "source_id": "ratify",
+            "source_id": "cn-rule",
+            "source_ref": "cn-rule",
             "value": "Qualification, registration, and signing by those who actually took part"
           },
           {
@@ -36834,6 +36954,24 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "cn-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "urban-and-regional-planners.source-register.published.1"
+            },
+            "id": "cn-rule",
+            "label": {
+              "$source": "cn-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "urban-and-regional-planners.source-register.published.1"
+            },
+            "scope": "Mainland qualification, registration and signing responsibilities. Check local exam notices separately."
           },
           {
             "href": {
@@ -38035,7 +38173,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/en/tests/holland-career-interest-test-riasec",
-        "label": "Test whether my occupational interests suit this kind of work",
+        "label": "Explore career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -38175,13 +38313,14 @@
           },
           {
             "$join": [
-              "Work environment |",
+              "Work environment | ",
               {
                 "$item": "urban-and-regional-planners.display.work_context_block.summary",
                 "block": "profile",
                 "copy_key": "career.item.work-context-block",
                 "type": "prose"
               },
+              " ",
               {
                 "$item": "urban-and-regional-planners.profile.work-context-block.7",
                 "block": "profile",
@@ -38205,13 +38344,14 @@
           },
           {
             "$join": [
-              "How the work is organized |",
+              "How the work is organized | ",
               {
                 "$item": "urban-and-regional-planners.profile.work-context-block.4",
                 "block": "profile",
                 "copy_key": "career.item.work-context-block",
                 "type": "prose"
               },
+              " ",
               {
                 "$item": "urban-and-regional-planners.display.work_context_block.organization",
                 "block": "profile",
@@ -38229,13 +38369,14 @@
           },
           {
             "$join": [
-              "Collaboration and reporting lines |",
+              "Collaboration and reporting lines | ",
               {
                 "$item": "urban-and-regional-planners.profile.work-context-block.6",
                 "block": "profile",
                 "copy_key": "career.item.work-context-block",
                 "type": "prose"
               },
+              " ",
               {
                 "$item": "urban-and-regional-planners.display.work_context_block.collaboration",
                 "block": "profile",
@@ -38500,7 +38641,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "Where AI can help in planning",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38566,19 +38707,21 @@
         ]
       },
       {
-        "derivation": "The original EMP units are thousands, so 45.8 and 3.2 are multiplied by 1000; the change of 3.9% keeps the original table, and the OOH rounding to 4% is not recalculated.",
-        "display_value": "45,800 people",
+        "derivation": "The employment matrix counts jobs. Multiply the table’s 45.8 thousand by 1,000.",
+        "display_value": "45,800 jobs",
         "fact_id": "us-employment-2024",
         "market": "United States",
-        "measure": "Employment headcount",
+        "measure": "Number of jobs",
         "occupation_scope": "United States SOC19-3051 Urban and Regional Planners",
         "period": "2025",
         "source_refs": [
-          "bls-ooh"
+          "bls-ooh",
+          "bls-ors",
+          "bls-ep-definitions"
         ]
       },
       {
-        "derivation": "The original EMP units are thousands, so 45.8 and 3.2 are multiplied by 1000; the change of 3.9% keeps the original table, and the OOH rounding to 4% is not recalculated.",
+        "derivation": "The projections table reports 3.9%; the handbook rounds it to 4%.",
         "display_value": "3.9% (the OOH rounds to 4%)",
         "fact_id": "us-growth-2024-2034",
         "market": "United States",
@@ -38587,11 +38730,12 @@
         "period": "2025—2035",
         "source_refs": [
           "bls-ors",
-          "bls-ooh"
+          "bls-ooh",
+          "bls-ep-definitions"
         ]
       },
       {
-        "derivation": "The original EMP units are thousands, so 45.8 and 3.2 are multiplied by 1000; the change of 3.9% keeps the original table, and the OOH rounding to 4% is not recalculated.",
+        "derivation": "The annual average of 3.2 thousand is 3,200 openings, including replacements for occupational transfers and exits.",
         "display_value": "3,200 per year",
         "fact_id": "us-openings-2024-2034",
         "market": "United States",
@@ -38599,7 +38743,9 @@
         "occupation_scope": "United States SOC19-3051 Urban and Regional Planners",
         "period": "2025—2035",
         "source_refs": [
-          "bls-ooh"
+          "bls-ooh",
+          "bls-ors",
+          "bls-ep-definitions"
         ]
       },
       {
@@ -38654,13 +38800,13 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
+        "derivation": "The former editorial estimate is withdrawn. Evidence does not establish verifiable effects on the complete tasks, so no replacement score is reported.",
+        "display_value": "No verified quantitative estimate",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "Task-level AI evidence status",
         "occupation_scope": "Urban and regional planners",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -38669,10 +38815,10 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI evidence status"
     },
     "badges": [
       "O*NET-SOC 19-3051.00",
@@ -38696,7 +38842,7 @@
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "US employment headcount"
+        "label": "U.S. jobs"
       },
       {
         "availability": "available",
@@ -38723,7 +38869,7 @@
       "text": "Urban and regional planners"
     }
   },
-  "source_content_sha256": "2c638023cae3ac488a37e0e86fd317be30721921643b276f95fcff9011a657b0",
+  "source_content_sha256": "a75879ec43fd87ba80e6176d99aafa3d20eafb0f0640e78266ed7fffbdee456f",
   "subject": {
     "canonical_slug": "urban-and-regional-planners",
     "name": "Urban and regional planners",

@@ -1602,7 +1602,7 @@
         "status": "mapped"
       },
       "item:urban-and-regional-planners.path.entry-role-comparison.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:urban-and-regional-planners.path.entry-work-sample-data.1": {
         "status": "mapped"
@@ -23740,14 +23740,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本页美国身份为19-3051.00城市与区域规划师，研究辖区土地与设施使用并形成计划。中国国土空间规划有独立分类与执业制度；建筑、景观、测绘和法定审批不是本职名称即可自动承担。"
+              "本页美国职业为城市与区域规划师（O*NET 19-3051.00）。大陆按实际工作可参照《职业分类大典（2022年版）》的城乡规划工程技术人员（2-02-37-02），归入国土空间规划与生态修复工程技术人员，主要涉及城乡土地利用和空间布局的研究、规划与设计。总体规划统筹空间需求，详细规划依据已批准的总体规划编制，相关专项规划遵循总体规划；编制和审批主体按规划类别、层级和地区核对。建筑、景观、测绘与行政审批各有职责边界。"
             ]
           },
           "id": "urban-and-regional-planners.profile.work-context-block.1",
           "source_refs": [
             "onet",
             "cn-rule",
-            "editorial"
+            "editorial",
+            "cn-occupational-classification",
+            "cn-territorial-planning-system"
           ],
           "type": "prose"
         },
@@ -25442,16 +25444,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "生成效果图可以帮助讨论视觉方向，但应标明示意性质、生成部分和未验证条件。图像好看不证明建筑尺寸、交通容量、日照、生态约束和预算已经成立，也不能代替正式规划图纸。"
+              "NIST AI RMF 1.0提供自愿的通用AI风险管理框架。编辑应用建议：生成效果图只作示意，标明未核条件；仍要核尺寸、容量、日照、生态约束与预算。"
             ]
           },
           "id": "urban-and-regional-planners.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
-            "cn-rule",
-            "bls",
+            "sag",
             "editorial"
           ],
           "type": "prose"
@@ -25461,16 +25459,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国现行注册城乡规划师制度要求相关成果由实际参与的注册人员签字并承担规定责任。AI 草稿不取得注册资格，也不把技术推荐变成行政审批；作者、审核者和审批主体必须分清。"
+              "国土空间总体规划、详细规划，以及法律法规明确要求的专项规划成果，须由实际参与编制的注册城乡规划师签字。 工具稿、内部技术复核与行政审批各有责任。"
             ]
           },
           "id": "urban-and-regional-planners.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
             "cn-rule",
-            "bls",
             "editorial"
           ],
           "type": "prose"
@@ -25499,7 +25493,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国 2025—2035 本职就业预测增长 3.9%，OOH 四舍五入为 4%。该预测包含需求与替补等因素，不能拆成 AI 的独立净影响，更不能推算中国个人失业概率。"
+              "美国BLS预计2025—2035年本职就业增长3.9%，职业手册取整为4%。年均约3,200个空缺包含转岗和退出职业后的替补。该预测未单独量化AI净影响，也不能推算中国个人失业概率。"
             ]
           },
           "id": "urban-and-regional-planners.ai-impact.ai-impact-table.8",
@@ -25509,7 +25503,9 @@
             "nist",
             "cn-rule",
             "bls",
-            "editorial"
+            "editorial",
+            "bls-ors",
+            "bls-ep-definitions"
           ],
           "type": "prose"
         },
@@ -25518,17 +25514,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 2025 研究评估的是任务层面潜在生成式 AI 暴露，强调职业转变的可能性。它没有给本页中国本职提供经实测的替代率；本页不填写未经建立的 FermatMind 任务评分。"
+              "ILO 2025研究评估全球任务的潜在生成式AI暴露，区分任务变化与岗位损失。它没有给出中国本职业的实测替代率。"
             ]
           },
           "id": "urban-and-regional-planners.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
-            "cn-rule",
-            "bls",
-            "editorial"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -25556,7 +25547,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先区分文字起草、空间分析、公众意见与法定责任。工具可作为受控辅助，但每个数字、图层、政策引用和方案判断都要可核查。本页没有本职中国实际采用率或个人替代概率，不用通用暴露研究代填分数。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "先区分文字起草、空间分析、公众意见与法定责任。可用获准工具辅助整理，但应回到原始数据核对数字、图层、政策引文与意见归类。现有证据不能量化本职业在中国的实际采用、岗位影响或个人风险，本页不提供分数。"
             ]
           },
           "id": "urban-and-regional-planners.display.ai_impact_table.answer",
@@ -25689,17 +25680,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "明确准入、注册、实际参与签字和成果责任；AI 输出不替代这些条件。"
+              "国土空间总体规划、详细规划，以及法律法规明确要求的专项规划成果，须由实际参与编制的注册城乡规划师签字。 AI输出不能代替注册或实际参与。"
             ]
           },
           "id": "urban-and-regional-planners.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
-            "cn-rule",
-            "bls",
-            "editorial"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25746,17 +25732,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业从 45.8 千增至 47.6 千，增长 3.9%；年均 3.2 千空缺包含替补。"
+              "美国就业岗位预计从45,800个增至47,600个，增长3.9%；年均约3,200个空缺包含转岗和退出职业后的替补。"
             ]
           },
           "id": "urban-and-regional-planners.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "onet",
-            "r2-ai",
-            "nist",
-            "cn-rule",
-            "bls",
-            "editorial"
+            "bls-ors",
+            "bls-ep-definitions"
           ],
           "type": "prose"
         },
@@ -27450,7 +27432,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "清华同衡河南分院J10912公告2026-04-07报10W—20W元/年，2—5年经验、专业本科以上与中级职称等条件；北京J10942实习2026-06-18报2K—3K元/月。两岗位同一雇主，不是两个独立行业统计。"
+              "清华同衡河南分院J10912公告2026-04-07报10万—20万元/年，2—5年经验、专业本科以上与中级职称等条件；北京J10942实习2026-06-18报2,000—3,000元/月。两岗位同一雇主，不是两个独立行业统计。"
             ]
           },
           "id": "urban-and-regional-planners.china-salary.career-snapshot-primary-locale.4",
@@ -27532,7 +27514,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "郑州J10912为正式社会招聘样本，2—5年规划经验、中级职称、城乡规划本科以上，研究生及注册资格优先；10万—20万元/年不等全国同年资分布。"
+              "郑州J10912是有经验的全职岗位样本：2—5年规划设计经验、中级职称和城乡规划本科及以上，研究生学历及持注册城乡规划师资格证书者优先。公告年薪10万—20万元，不能据此估计全国同年资工资。"
             ]
           },
           "id": "urban-and-regional-planners.display.career_snapshot_primary_locale.scenario.featured",
@@ -27709,7 +27691,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "EMP2025—2035预计45,800人至47,600人，原表3.9%（OOH取整4%），年均3,200个机会含离岗替换，不等每年净新增3,200人。"
+              "BLS预计美国本职业的就业岗位从2025年的45,800个增至2035年的47,600个，净增1,800个。年均约3,200个空缺包含转岗和退出职业后的替补，不能当作年均净增。"
             ]
           },
           "fact_refs": [
@@ -27720,7 +27702,9 @@
           "source_refs": [
             "bls-oews",
             "bls-ooh",
-            "editorial"
+            "editorial",
+            "bls-ors",
+            "bls-ep-definitions"
           ],
           "type": "prose"
         },
@@ -27829,7 +27813,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "五分位是分布位置，不映射工作年限、注册资格或晋升级别；P25不是本科工资，P75不是硕士工资。"
+              "工资分位是分布位置，不映射工作年限、注册资格或晋升级别；P25不是本科工资，P75不是硕士工资。"
             ]
           },
           "id": "urban-and-regional-planners.display.career_snapshot_secondary_locale.interpretation.percentile",
@@ -27931,7 +27915,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "另有管理科学技术咨询本职年中位93,220美元；这些均雇员统计，不含自雇净收入。个人咨询业务需另核营业额、成本与时间。"
+              "OEWS行业工资是雇员统计，不含自雇者净收入。独立接项目时，应另核项目收入、成本、工期和未收费时间。"
             ]
           },
           "id": "urban-and-regional-planners.display.career_snapshot_secondary_locale.industry.self-employed",
@@ -27939,7 +27923,8 @@
             "bls-oews",
             "bls-ooh",
             "oews",
-            "editorial"
+            "editorial",
+            "bls-oews-concepts"
           ],
           "type": "prose"
         },
@@ -28033,7 +28018,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "EMP变化保3.9%，OOH取整4%是同预测不同显示精度；45.8、47.6、3.2为千人/千个。美国总体增长不单独归因AI，也不外推中国需求。"
+              "3.9%是BLS就业预测表的精度，职业手册取整为4%。美国总体增长不能单独归因于AI，也不能用来推算中国需求。"
             ]
           },
           "id": "urban-and-regional-planners.display.career_snapshot_secondary_locale.boundary.detail",
@@ -28041,7 +28026,9 @@
             "bls-oews",
             "bls-ooh",
             "oews",
-            "editorial"
+            "editorial",
+            "bls-ors",
+            "bls-ep-definitions"
           ],
           "type": "prose"
         }
@@ -29602,15 +29589,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国注册城乡规划师资格、注册、个人签字责任与编制单位资质分别核对。相关成果须实际参与者按制度签字，不接受未参与代签、挂靠或借用他人名义。"
+              "国土空间总体规划、详细规划，以及法律法规明确要求的专项规划成果，须由实际参与编制的注册城乡规划师签字。 个人证书、注册、单位资质和行政审批分别核实，不接受未参与代签、挂靠或借名。"
             ]
           },
           "id": "urban-and-regional-planners.risk.career-risk-cards.4",
           "source_refs": [
-            "onet",
             "cn-rule",
-            "nist",
-            "editorial"
+            "cn-plan-unit-qualification"
           ],
           "type": "prose"
         },
@@ -30169,7 +30154,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "截至2026-10-03复核：清华同衡郑州 J10912 社招（4月7日发布，10W—20W元/年，2—5年相关经验、中级职称，城乡规划本科以上）与北京 J10942 实习（6月18日发布，2K—3K元/月，相关本科以上、在校生优先）是同雇主两个条目，当前可投状态需另核。江苏集团5月9日公告含南京及成都规划岗位，投递5月22日已截止，未列薪资金额。中规院1月公告是多专业招聘，不能把23人全部当规划师需求。样本只用于条件比较，不计算全国招聘热度。"
+              "截至2026-10-03复核：清华同衡郑州 J10912 社招（4月7日发布，10万—20万元/年，2—5年相关经验、中级职称，城乡规划本科以上）与北京 J10942 实习（6月18日发布，2,000—3,000元/月，相关本科以上、在校生优先）是同雇主两个条目，当前可投状态需另核。江苏集团5月9日公告含南京及成都规划岗位，投递5月22日已截止，未列薪资金额。中规院1月公告是多专业招聘，不能把23人全部当规划师需求。样本只用于条件比较，不计算全国招聘热度。"
             ]
           },
           "id": "urban-and-regional-planners.path.recruitment-sample.1",
@@ -30204,7 +30189,7 @@
               [
                 "编制助理／实习",
                 "整理公开现状资料、协助图件和方案文字，接受项目审核。",
-                "清华同衡北京2026实习样本要求相关本科以上、GIS制图与办公能力；具体工作按岗位说明。",
+                "清华同衡北京2026实习 J10942：相关专业本科及以上，符合所列年级的在校生优先，熟练使用相关规划设计软件。",
                 "提交虚构覆盖练习和公开资料来源表，注明本人贡献，不冒充项目。",
                 "实习身份、条件与社招分别核，不保证转正或取得签字资格。"
               ],
@@ -30218,9 +30203,9 @@
               [
                 "清华同衡郑州社招样本",
                 "组织子项、完成规划方案及汇报；分工按岗位。",
-                "J10912：2—5年相关经验、中级职称、城乡规划本科以上；研究生及注册资格优先。",
+                "J10912：2—5年规划设计经验、中级职称、城乡规划本科及以上；研究生学历和持注册城乡规划师资格证书者优先。",
                 "无经验者不能用练习替代该经验条件，可先核实习或校招。",
-                "2026公布年报价10W—20W，当前可投需另核，不是全国资深工资。"
+                "2026公布年薪报价10万—20万元，当前可投需另核，不是全国资深工资。"
               ],
               [
                 "江苏南京／成都校招样本",
@@ -30228,6 +30213,13 @@
                 "2026江苏集团公告相关校招要求硕士及专业方向，南京、成都按各条核。",
                 "提交本人学习作品，核学历专业与届别；不得用纸面练习冒充学历。",
                 "投递5月22日已截止，只是该轮条件样本，工资未列。"
+              ],
+              [
+                "美国地方规划岗位示例",
+                "了解土地使用提案，核项目资料，协助公众沟通。",
+                "Hampton City Planner职类：相关学士、至少一年所列技术或研究导向客户服务经历，GIS知识为优先。",
+                "做一页虚构设施选址简报，解释假设、限制与所需反馈。岗位经验条件仍需另查。",
+                "这是一市职类说明，不是当前招聘或全国标准。另核AICP认证和所在州的许可。"
               ],
               [
                 "相关专业转行准备",
@@ -30244,7 +30236,10 @@
             "employer",
             "r2-pay-2",
             "cn-rule",
-            "editorial"
+            "editorial",
+            "us-hampton-planner",
+            "us-aicp-experience",
+            "bls-ooh"
           ],
           "title": "入门任务与真实招聘条件",
           "type": "table"
@@ -30420,11 +30415,11 @@
                 "结业证不等于全国资格证、注册或正式签字权限。"
               ],
               [
-                "中国注册城乡规划师报考",
+                "中国大陆注册城乡规划师职业资格考试",
                 "准备参加国土空间规划相关业务资格考试的人。",
-                "全国资格制度为准入类，报考条件与求职条件分别核。",
-                "取得资格并依法注册后在制度范围从事相关工作；不把助理任务一概等同注册签字。",
-                "2024规则：城乡规划专科业务4年；本科或建筑学学士3年；认证规划本科2年；规划硕士或建筑学硕士1年；认证规划硕士或城市规划硕士1年；规划博士本条未列年限。其他专业相应学历学位加1年。",
+                "报考是取得国家职业资格的一个步骤；求职条件由岗位单独核对。",
+                "资格证书与注册分开；报考不代表有签字权。签字适用范围见上方资格说明。",
+                "报考者须符合第八条的中华人民共和国公民身份、守法与职业道德条件，并满足下列学历和相关业务经历之一。 2024规定：城乡规划专科业务4年；城乡规划本科或建筑学学士（专业学位）3年；认证城乡规划本科2年；城乡规划硕士或建筑学硕士（专业学位）1年；认证城乡规划硕士或城市规划硕士（专业学位）1年；城乡规划博士本条未列年限。其他专业相应学历学位加1年。",
                 "核本人学历、专业、认证情况和可认定业务经历；费用按当地当年考务，不编统一价格。",
                 "业务含总体、详细、专项的编制、实施、监管；不能用普通学习年限代替所需业务年限。"
               ],
@@ -30442,9 +30437,9 @@
                 "已取得资格、拟以注册城乡规划师名义执业的人。",
                 "明确单位、注册有效期及相应执业责任。",
                 "制度范围内以注册名义执业须注册；不能仅凭考试合格自称已注册。",
-                "初始注册取得资格3年内申请，超期需符合继续教育；受聘单位及其他条件按现行制度，注册有效期3年。",
+                "受聘于一家国土空间规划编研机构并满足第十三条其他条件。取得证书后3年内申请初始注册；逾期应符合继续教育要求。注册有效期3年。",
                 "核注册办理、到期与继续教育安排，按实际渠道核费用和时长。",
-                "个人注册与编制单位资质不同；成果须实际参与者按规定签字，禁止挂靠、借名及未参与代签。"
+                "国土空间总体规划、详细规划，以及法律法规明确要求的专项规划成果，须由实际参与编制的注册城乡规划师签字。 个人注册不等于单位资质，不借名或代签。"
               ],
               [
                 "雇主的具体岗位条件",
@@ -30752,13 +30747,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国现行制度为准入类资格，取得资格并依法注册后按制度范围执业；相关成果由实际参与的注册人员签字。美国教育分类不能替代中国报考和注册条件。"
+              "中国大陆先按第八条核中华人民共和国公民身份、遵守宪法法律法规、职业道德，以及所列学历和经历条件。取得资格证书后，须另行注册方可以注册城乡规划师名义执业。编制单位资质和雇主岗位条件另查。 国土空间总体规划、详细规划，以及法律法规明确要求的专项规划成果，须由实际参与编制的注册城乡规划师签字。 美国BLS指出，通常可从获认证的学士或硕士规划项目入手，硕士常见；实际门槛看岗位。 Hampton市City Planner职类接受相关学士，要求至少一年所列技术或研究导向客户服务经历，GIS为优先；这是单市职类说明。 APA会员可按协会流程报名AICP考试。通过考试后另交教育和专业经历作认证评估，例如经美国规划认证委员会（PAB）认证的规划硕士需两年专业规划经历，PAB认证的规划学士需三年；其他路径另查。州执照另查，BLS以新泽西为例。"
             ]
           },
           "id": "urban-and-regional-planners.display.career_path_block.locale.credentials",
           "source_refs": [
-            "onet",
-            "editorial"
+            "cn-rule",
+            "cn-plan-unit-qualification",
+            "bls-ooh",
+            "us-hampton-planner",
+            "us-aicp-exam",
+            "us-aicp-experience"
           ],
           "type": "prose"
         },
@@ -31097,13 +31096,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国相关成果签字由实际参与注册人员按制度负责。"
+              "国土空间总体规划、详细规划，以及法律法规明确要求的专项规划成果，须由实际参与编制的注册城乡规划师签字。"
             ]
           },
           "id": "urban-and-regional-planners.display.career_path_block.tracks.screen.03.credentials",
           "source_refs": [
-            "onet",
-            "editorial"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -31178,7 +31176,9 @@
           "id": "urban-and-regional-planners.display.career_path_block.tracks.screen.04.credentials",
           "source_refs": [
             "onet",
-            "editorial"
+            "editorial",
+            "cn-rule",
+            "cn-plan-unit-qualification"
           ],
           "type": "prose"
         },
@@ -31487,13 +31487,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "正式成果、注册签字及变更程序按实际制度办理。"
+              "中国大陆项目须区分编制、实际参与者依法签字与主管部门审批。仅在规定范围内适用签字要求。"
             ]
           },
           "id": "urban-and-regional-planners.display.career_path_block.tracks.stage.04.credentials",
           "source_refs": [
-            "onet",
-            "editorial"
+            "cn-rule",
+            "cn-plan-unit-qualification"
           ],
           "type": "prose"
         },
@@ -31911,7 +31911,9 @@
             "employer",
             "r2-pay-2",
             "onet",
-            "editorial"
+            "editorial",
+            "bls-ors",
+            "bls-ep-definitions"
           ],
           "type": "prose"
         },
@@ -32546,13 +32548,18 @@
                 ]
               },
               {
-                "answer": "现行自然资规〔2024〕3号是准入类制度，报考按学历专业及业务年限分类，取得资格并依法注册后按范围执业。考试、注册、实际参与签字和单位资质分别核；2017旧办法已废止。",
+                "answer": "中国大陆先按第八条核中华人民共和国公民身份、遵守宪法法律法规、职业道德，以及所列学历和经历条件。取得资格证书后，须另行注册方可以注册城乡规划师名义执业。编制单位资质和雇主岗位条件另查。 国土空间总体规划、详细规划，以及法律法规明确要求的专项规划成果，须由实际参与编制的注册城乡规划师签字。 美国BLS指出，通常可从获认证的学士或硕士规划项目入手，硕士常见；实际门槛看岗位。 Hampton市City Planner职类接受相关学士，要求至少一年所列技术或研究导向客户服务经历，GIS为优先；这是单市职类说明。 APA会员可按协会流程报名AICP考试。通过考试后另交教育和专业经历作认证评估，例如经美国规划认证委员会（PAB）认证的规划硕士需两年专业规划经历，PAB认证的规划学士需三年；其他路径另查。州执照另查，BLS以新泽西为例。",
                 "id": "actors.faq.4",
-                "question": "城市与区域规划师：中国需要什么资格？",
+                "question": "大陆与美国的规划入行资格有什么区别？",
                 "question_key": "career.faq.urban-and-regional-planners.4",
                 "source_refs": [
                   "cn-rule",
-                  "ratify"
+                  "ratify",
+                  "cn-plan-unit-qualification",
+                  "bls-ooh",
+                  "us-hampton-planner",
+                  "us-aicp-exam",
+                  "us-aicp-experience"
                 ]
               },
               {
@@ -32628,7 +32635,13 @@
             "employer",
             "r2-ai",
             "nist",
-            "editorial"
+            "editorial",
+            "ratify",
+            "cn-plan-unit-qualification",
+            "bls-ooh",
+            "us-hampton-planner",
+            "us-aicp-exam",
+            "us-aicp-experience"
           ],
           "type": "faq"
         },
@@ -32873,24 +32886,24 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "E1/F1/F2/E3、四件作品与七天计划均为本页虚构学习设计。",
+                  "E1、F1、F2和E3给出虚构人口、路网变化和不作结论的条件。",
                   "500米为学习阈值；非规范，无真实居民、地块、项目、审批或雇主评价。"
                 ],
                 "evidence_type": "editorial guidance",
                 "id": "editor",
-                "limitation": "所链O*NET只支持任务背景，不证明本页练习标准、结果或建议被官方认证。",
+                "limitation": "费马原创虚构练习；O*NET职业档案另列，只支持工作背景。",
                 "market": "编辑设计",
-                "name": "FermatMind 本页作者建议与虚构练习",
+                "name": "FermatMind 公园服务覆盖练习题面",
                 "period": "2026-10-01本地制作",
-                "publisher": "FermatMind 职业内容编辑；O*NET仅作任务背景",
+                "publisher": "FermatMind",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/summary/19-3051.00"
+                "url": "#career-visual-group-path"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "郑州社招规划设计师J10912，10W—20W元/年，2—5年相关经验、中级职称、城乡规划本科以上。",
-                  "北京J10942实习，2K—3K元/月，相关本科以上与在校生优先，协助规划资料、绘图和数据库。"
+                  "郑州社招规划设计师J10912，10万—20万元/年，2—5年相关经验、中级职称、城乡规划本科以上。",
+                  "北京J10942实习，2,000—3,000元/月，相关本科以上与在校生优先，协助规划资料、绘图和数据库。"
                 ],
                 "evidence_type": "employer recruitment notice",
                 "id": "employer",
@@ -33000,8 +33013,8 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "郑州社招规划设计师J10912，10W—20W元/年，2—5年相关经验、中级职称、城乡规划本科以上。",
-                  "北京J10942实习，2K—3K元/月，相关本科以上与在校生优先，协助规划资料、绘图和数据库。"
+                  "郑州社招规划设计师J10912，10万—20万元/年，2—5年相关经验、中级职称、城乡规划本科以上。",
+                  "北京J10942实习，2,000—3,000元/月，相关本科以上与在校生优先，协助规划资料、绘图和数据库。"
                 ],
                 "evidence_type": "employer recruitment notice",
                 "id": "r2-pay-1",
@@ -33250,35 +33263,155 @@
               {
                 "accessed_at": "2026-10-01",
                 "details": [
-                  "E1/F1/F2/E3、四件作品与七天计划均为本页虚构学习设计。",
+                  "给定覆盖人数、分母与推荐变化，供四件作品与七天安排逐项自查。",
                   "500米为学习阈值；非规范，无真实居民、地块、项目、审批或雇主评价。"
                 ],
                 "evidence_type": "editorial guidance",
                 "id": "editorial",
-                "limitation": "所链O*NET只支持任务背景，不证明本页练习标准、结果或建议被官方认证。",
+                "limitation": "费马原创虚构练习；O*NET职业档案另列，只支持工作背景。",
                 "market": "编辑设计",
-                "name": "FermatMind 本页作者建议与虚构练习",
+                "name": "FermatMind 练习复算与作品自核",
                 "period": "2026-10-01本地制作",
-                "publisher": "FermatMind 职业内容编辑；O*NET仅作任务背景",
+                "publisher": "FermatMind",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/summary/19-3051.00"
+                "url": "#career-visual-group-path"
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "资料调查｜调查与数据核对｜现场调查或研究人口、社会经济、法规与物理因素，说明资料时期范围与限制，不将缺失值自动补齐。 — 50/100; weight=1/3; urban-and-regional-planners.display.responsibilities_block.01[0]",
-                  "方案分析｜方案与指标比较｜评估用地与设施选择的可行性和替代方案，解释比较标准及影响，不只凭效果图或一个得分。 — 75/100; weight=1/3; urban-and-regional-planners.display.responsibilities_block.02[0]",
-                  "沟通协调｜公众与专业协调｜组织沟通或会议，回应咨询和不同诉求，与交通建筑经济等专业协调，不虚构公众共识。 — 25/100; weight=1/3; urban-and-regional-planners.display.responsibilities_block.04[0]"
+                  "原量化估算撤回，不提供替代分数。",
+                  "原因：没有独立、可复核的完整任务效果数据。",
+                  "调查：整理信息后核对时间、地理范围、单位及缺项。",
+                  "方案比较：用原始数据重算指标，交代假设及适用边界。",
+                  "公众沟通：核对原意见、保留分歧；遵守授权与保密要求。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "编辑证据说明",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "limitation": "用于区分工具辅助与完整工作效果；未测量本职业的采用率、失业率或工时变化。",
+                "name": "FermatMind 规划任务 AI 证据说明",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "城乡规划工程技术人员（2-02-37-02）：城乡土地利用、空间布局、规划研究与设计。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-occupational-classification",
+                "limitation": "按工作内容对照，不作资格、工资或职业编码的跨国等效认定。",
+                "market": "中国大陆",
+                "name": "中华人民共和国职业分类大典（2022年版）",
+                "period": "原文件版本",
+                "publisher": "人力资源社会保障部门公开版本",
+                "scope": "contextual",
+                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第11号令规定编制单位应在相应资质等级范围内承担业务。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-plan-unit-qualification",
+                "limitation": "单位资质与个人职业资格、注册和行政审批分别核对。",
+                "market": "中国大陆",
+                "name": "城乡规划编制单位资质管理办法",
+                "period": "原文件版本",
+                "publisher": "自然资源部（北京市规划和自然资源委员会转载）",
+                "scope": "contextual",
+                "url": "https://ghzrzyw.beijing.gov.cn/zhengwuxinxi/zcfg/gz/202607/t20260722_4777955.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "总体规划统筹空间需求，详细规划依据已批准的总体规划编制，相关专项规划遵循总体规划。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-territorial-planning-system",
+                "limitation": "具体组织编制及审批权限依类型、层级和属地规定核实。",
+                "market": "中国大陆",
+                "name": "关于建立国土空间规划体系并监督实施的若干意见",
+                "period": "原文件版本",
+                "publisher": "中共中央、国务院",
+                "scope": "contextual",
+                "url": "https://app.www.gov.cn/govdata/gov/201905/23/440190/article.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "OEWS涵盖非农行业工资薪金雇员，不涵盖自雇人员。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-oews-concepts",
+                "limitation": "不用于估计自营规划项目净收入。",
+                "market": "美国",
+                "name": "OEWS统计总体和排除项",
+                "period": "原文件版本",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "就业矩阵统计岗位，职业空缺由净就业变化和离开职业产生的空缺构成。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-ep-definitions",
+                "limitation": "年均空缺不是当前在招数。",
+                "market": "美国",
+                "name": "BLS就业预测统计定义",
+                "period": "原文件版本",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/emp/documentation/definitions.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "该职类列相关学士、至少一年所列技术或研究导向客户服务经历；GIS知识为优先。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-hampton-planner",
+                "limitation": "市级职类示例，不是实时招聘或全国门槛。",
+                "market": "美国弗吉尼亚州",
+                "name": "Hampton 市 City Planner 职类说明",
+                "period": "原文件版本",
+                "publisher": "City of Hampton",
+                "scope": "contextual",
+                "url": "https://www.hampton.gov/DocumentCenter/View/55711/City-Planner"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "考试资格与取得认证分开；APA会员可按流程报名，认证另审核经验。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-aicp-exam",
+                "limitation": "行业认证不是州执照。",
+                "market": "美国",
+                "name": "AICP 考试与认证入门",
+                "period": "原文件版本",
+                "publisher": "American Planning Association",
+                "scope": "contextual",
+                "url": "https://planning.org/certification/get-started/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "通过考试后核验教育、就业和专业规划经历。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-aicp-experience",
+                "limitation": "所需经历取决于教育路径；按协会现行规则确认。",
+                "market": "美国",
+                "name": "AICP 教育、经历及评估",
+                "period": "原文件版本",
+                "publisher": "American Planning Association",
+                "scope": "contextual",
+                "url": "https://planning.org/certification/education-experience/"
               }
             ]
           },
@@ -33682,7 +33815,13 @@
             }
           },
           {
-            "来源": "中国2024制度原文见资料来源；此链接仅任务背景",
+            "来源": {
+              "$source": "cn-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "urban-and-regional-planners.source-register.published.1"
+            },
             "类型": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.authority.sag-moa.type",
               "block": "ai-impact",
@@ -33695,16 +33834,16 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "onet",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            }
+            "链接": null
           },
           {
-            "来源": "2026烟台考务原文见资料来源；此链接仅任务背景",
+            "来源": {
+              "$source": "ratify",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "urban-and-regional-planners.source-register.published.1"
+            },
             "类型": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.authority.ratify.type",
               "block": "ai-impact",
@@ -33717,13 +33856,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "onet",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            }
+            "链接": null
           },
           {
             "来源": {
@@ -33928,14 +34061,20 @@
             }
           },
           {
-            "source_ref": "onet",
+            "source_ref": "cn-rule",
             "使用限制": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.evidence.3.limit",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "来源": "中国2024注册制度（原文见资料来源；此链接仅O*NET任务背景）",
+            "来源": {
+              "$source": "cn-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "urban-and-regional-planners.source-register.published.1"
+            },
             "研究对象": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.evidence.3.object",
               "block": "ai-impact",
@@ -33948,16 +34087,10 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "onet",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            }
+            "链接": "法规原文见本项资料来源"
           },
           {
-            "source_ref": "bls",
+            "source_ref": "bls-ors",
             "使用限制": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.evidence.4.limit",
               "block": "ai-impact",
@@ -33965,7 +34098,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "bls-ors",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33984,7 +34117,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "bls-ors",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34093,13 +34226,7 @@
               "field": "name",
               "item": "urban-and-regional-planners.source-register.published.1"
             },
-            "链接": {
-              "$source": "editorial",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            },
+            "链接": "https://fermatmind.com/zh/career/jobs/urban-and-regional-planners#career-visual-group-path",
             "问题": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.questions.1.question",
               "block": "ai-impact",
@@ -34122,13 +34249,7 @@
               "field": "name",
               "item": "urban-and-regional-planners.source-register.published.1"
             },
-            "链接": {
-              "$source": "editorial",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            },
+            "链接": "https://fermatmind.com/zh/career/jobs/urban-and-regional-planners#career-visual-group-path",
             "问题": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.questions.2.question",
               "block": "ai-impact",
@@ -34166,21 +34287,21 @@
             }
           },
           {
-            "source_ref": "onet",
+            "source_ref": "cn-rule",
             "回答": {
               "$item": "urban-and-regional-planners.ai-impact.ai-impact-table.6",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "来源": "中国注册制度原文见资料来源；此链接为O*NET背景",
-            "链接": {
-              "$source": "onet",
+            "来源": {
+              "$source": "cn-rule",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
-              "field": "url",
+              "field": "name",
               "item": "urban-and-regional-planners.source-register.published.1"
             },
+            "链接": "法规原文见本项资料来源",
             "问题": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.questions.4.question",
               "block": "ai-impact",
@@ -34261,13 +34382,7 @@
               "field": "name",
               "item": "urban-and-regional-planners.source-register.published.1"
             },
-            "链接": {
-              "$source": "editorial",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "urban-and-regional-planners.source-register.published.1"
-            },
+            "链接": "https://fermatmind.com/zh/career/jobs/urban-and-regional-planners#career-visual-group-path",
             "问题": {
               "$item": "urban-and-regional-planners.display.ai_impact_table.questions.7.question",
               "block": "ai-impact",
@@ -36328,7 +36443,7 @@
           },
           {
             "fact_ref": "us-employment-2024",
-            "指标": "2025–2035 就业 · 基期人数",
+            "指标": "2025年就业岗位数",
             "数值": {
               "$fact": "us-employment-2024",
               "field": "display_value"
@@ -36351,7 +36466,7 @@
               "$fact": "us-openings-2024-2034",
               "field": "display_value"
             },
-            "说明": "主要来自转行或退出劳动市场的替补需求，不是每年净增。"
+            "说明": "包含从业者转岗或退出劳动力市场产生的替补空缺，不能当作年均净增。"
           }
         ],
         "boundary": {
@@ -36577,7 +36692,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "全国时薪中位数",
+            "label": "全国工资中位数：年薪与时薪",
             "value": {
               "$fact": "us-median-2025",
               "field": "display_value"
@@ -36786,7 +36901,8 @@
             },
             "metric": "准入与注册边界",
             "occupation_scope": "中国注册城乡规划师制度范围",
-            "source_id": "ratify",
+            "source_id": "cn-rule",
+            "source_ref": "cn-rule",
             "value": "资格、注册与实际参与签字"
           },
           {
@@ -36834,6 +36950,24 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "cn-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "urban-and-regional-planners.source-register.published.1"
+            },
+            "id": "cn-rule",
+            "label": {
+              "$source": "cn-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "urban-and-regional-planners.source-register.published.1"
+            },
+            "scope": "大陆职业资格、注册、规定范围的签字与成果责任；地方考务另查。"
           },
           {
             "href": {
@@ -38035,7 +38169,7 @@
       "primary_cta": {
         "entry_surface": "career_job_detail",
         "href": "/zh/tests/holland-career-interest-test-riasec",
-        "label": "测我的职业兴趣是否适合本职业工作",
+        "label": "探索职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -38500,7 +38634,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI能辅助哪些规划任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38566,19 +38700,21 @@
         ]
       },
       {
-        "derivation": "EMP原单位千人/千个，45.8与3.2乘1000；变化3.9%保原表，OOH取整4%不重算。",
-        "display_value": "45,800人",
+        "derivation": "就业预测矩阵按岗位计数，原表45.8千乘以1,000。",
+        "display_value": "45,800个岗位",
         "fact_id": "us-employment-2024",
         "market": "美国",
-        "measure": "就业人数",
+        "measure": "就业岗位数",
         "occupation_scope": "美国SOC19-3051 Urban and Regional Planners",
         "period": "2025年",
         "source_refs": [
-          "bls-ooh"
+          "bls-ooh",
+          "bls-ors",
+          "bls-ep-definitions"
         ]
       },
       {
-        "derivation": "EMP原单位千人/千个，45.8与3.2乘1000；变化3.9%保原表，OOH取整4%不重算。",
+        "derivation": "按原表3.9%报告，职业手册取整为4%。",
         "display_value": "3.9%（OOH取整4%）",
         "fact_id": "us-growth-2024-2034",
         "market": "美国",
@@ -38587,11 +38723,12 @@
         "period": "2025—2035年",
         "source_refs": [
           "bls-ors",
-          "bls-ooh"
+          "bls-ooh",
+          "bls-ep-definitions"
         ]
       },
       {
-        "derivation": "EMP原单位千人/千个，45.8与3.2乘1000；变化3.9%保原表，OOH取整4%不重算。",
+        "derivation": "年均3.2千个空缺换算为3,200个；包含转岗及退出职业的替补。",
         "display_value": "3,200个/年",
         "fact_id": "us-openings-2024-2034",
         "market": "美国",
@@ -38599,7 +38736,9 @@
         "occupation_scope": "美国SOC19-3051 Urban and Regional Planners",
         "period": "2025—2035年",
         "source_refs": [
-          "bls-ooh"
+          "bls-ooh",
+          "bls-ors",
+          "bls-ep-definitions"
         ]
       },
       {
@@ -38654,13 +38793,13 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
+        "derivation": "原编辑估算已撤回。缺少覆盖完整任务、可复核的效果证据，无替代分数。",
+        "display_value": "尚无经核实的定量影响估计",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "任务级AI证据状态",
         "occupation_scope": "城市与区域规划师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -38669,10 +38808,10 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI证据状态"
     },
     "badges": [
       "O*NET-SOC 19-3051.00",
@@ -38696,7 +38835,7 @@
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业岗位数"
       },
       {
         "availability": "available",
@@ -38723,7 +38862,7 @@
       "text": "城市与区域规划师"
     }
   },
-  "source_content_sha256": "281985b7f985fff941d31882b525fca76d51ed0216418e5ee6e827a32cb755e9",
+  "source_content_sha256": "7e4cb8fd5c7a8cf0bd73acb9f9a1ec9be44129e9ae08d18a4eb4c6d015fe352e",
   "subject": {
     "canonical_slug": "urban-and-regional-planners",
     "name": "城市与区域规划师",
