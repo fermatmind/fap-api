@@ -22,7 +22,7 @@ use Throwable;
 final class ArticleImportPreparedTranslationDraft extends Command
 {
     protected $signature = 'articles:import-prepared-translation-draft
-        {--file= : Local JSON package containing one complete en or zh-CN draft and exact source locks}
+        {--file= : Local JSON package containing one complete en, zh-CN or zh-TW draft and exact source locks}
         {--sha256= : Exact SHA-256 of package bytes}
         {--dry-run : Read and validate only}
         {--execute : Create one private working draft}
@@ -265,7 +265,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
         if (! is_int($source['article_id']) || $source['article_id'] <= 0
             || ! is_int($source['published_revision_id']) || $source['published_revision_id'] <= 0
             || ! in_array($source['locale'], ['en', 'zh-CN'], true)
-            || ! in_array($copy['locale'], ['en', 'zh-CN'], true)
+            || ! in_array($copy['locale'], ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES, true)
             || $source['locale'] === $copy['locale']
             || ! preg_match('/^[0-9a-f]{64}$/', (string) $source['source_version_hash'])
             || ! preg_match('/^[0-9a-f]{64}$/', (string) $source['content_sha256'])
@@ -410,7 +410,7 @@ final class ArticleImportPreparedTranslationDraft extends Command
             isset($package['target'])
                 ? 'Refresh private %s draft for source %d in group %s with package %s.'
                 : 'Import private %s draft for source %d in group %s with package %s.',
-            $package['translation']['locale'] === 'en' ? 'English' : 'zh-CN',
+            $package['translation']['locale'] === 'en' ? 'English' : $package['translation']['locale'],
             $package['source']['article_id'],
             $package['source']['translation_group_id'],
             (string) $this->option('sha256'),

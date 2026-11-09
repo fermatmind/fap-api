@@ -13,6 +13,8 @@ use RuntimeException;
 
 final class ArticleSourceTargetSnapshot
 {
+    public const TRANSLATION_TARGET_LOCALES = ['en', 'zh-CN', 'zh-TW'];
+
     /** Selected article state, shared by the editor and native transaction guards. */
     public static function publicationHash(Article $selected, bool $lock = false): string
     {
@@ -130,12 +132,15 @@ final class ArticleSourceTargetSnapshot
     }
 
     /** @return list<array{article_id:int,sha256:string}> */
-    public static function capture(Article $source, bool $lock = false): array
+    public static function capture(Article $source, bool $lock = false, ?string $targetLocale = null): array
     {
         if (! in_array($source->locale, ['en', 'zh-CN'], true)) {
             throw new RuntimeException('source_locale_unsupported');
         }
-        $targetLocale = $source->locale === 'en' ? 'zh-CN' : 'en';
+        $targetLocale ??= $source->locale === 'en' ? 'zh-CN' : 'en';
+        if ($targetLocale === $source->locale || ! in_array($targetLocale, self::TRANSLATION_TARGET_LOCALES, true)) {
+            throw new RuntimeException('target_locale_unsupported');
+        }
         $collision = $targetLocale === 'en' ? 'english_identity_collision' : 'target_identity_collision';
         $query = Article::query()->withoutGlobalScopes()->withTrashed()->where('org_id', 0)
             ->where('locale', $targetLocale)->where(function ($query) use ($source): void {

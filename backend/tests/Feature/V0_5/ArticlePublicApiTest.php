@@ -186,6 +186,41 @@ final class ArticlePublicApiTest extends TestCase
         }
     }
 
+    public function test_traditional_readers_use_the_exact_published_revision_and_canonical(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $slug = 'article-language-reader';
+        $path = '/api/v0.5/articles/'.$slug;
+        $this->createArticle(['slug' => $slug, 'locale' => 'zh-CN', 'title' => '简体正文']);
+
+        $this->getJson($path.'?locale=zh-TW')->assertNotFound();
+        $this->getJson($path.'/seo?locale=zh-TW')->assertNotFound();
+
+        $article = $this->createArticle([
+            'slug' => $slug,
+            'locale' => 'zh-TW',
+            'title' => '臺灣繁體文章',
+            'content_md' => '## 繁體正文',
+            'is_indexable' => false,
+        ]);
+        $canonical = 'https://fermatmind.com/zh-TW/articles/'.$slug;
+
+        $this->getJson('/api/v0.5/articles?locale=zh-TW&include_blog=1')->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.locale', 'zh-TW')
+            ->assertJsonPath('landing_surface_v1.discoverability_items.0.href', '/zh-TW/articles/'.$slug)
+            ->assertJsonPath('blog_v1.configuration_state', 'unconfigured');
+        $this->getJson($path.'?locale=zh-TW')->assertOk()
+            ->assertJsonPath('article.published_revision_id', $article->published_revision_id)
+            ->assertJsonPath('article.content_md', '## 繁體正文')
+            ->assertJsonPath('seo_surface_v1.canonical_url', $canonical);
+        $this->getJson($path.'/seo?locale=zh-TW')->assertOk()
+            ->assertJsonPath('meta.canonical', $canonical)
+            ->assertJsonPath('seo_surface_v1.canonical_url', $canonical);
+        $this->getJson($path.'?locale=zh-CN')->assertOk()
+            ->assertJsonPath('article.title', '简体正文');
+    }
+
     public function test_list_locale_query_filters_items_and_pagination(): void
     {
         foreach (range(1, 21) as $index) {
@@ -551,6 +586,34 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.alternates.zh-CN', 'https://staging.fermatmind.com/zh/articles/mbti-vs-holland-career-choice');
 
         $this->assertNull(data_get($response->json(), 'meta.alternates.x-default'));
+    }
+
+    public function test_traditional_alternates_require_published_group_lineage_and_seo_eligibility(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $group = 'three-language-article';
+        $source = $this->createArticle(['slug' => 'chinese-source', 'locale' => 'zh-CN', 'translation_group_id' => $group]);
+        $english = $this->createArticle(['slug' => 'english-sibling', 'locale' => 'en', 'translation_group_id' => $group]);
+        $traditional = $this->createArticle([
+            'slug' => 'traditional-sibling', 'locale' => 'zh-TW', 'translation_group_id' => $group,
+            'source_article_id' => $source->id, 'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+        ]);
+        $canonical = 'https://fermatmind.com/zh-TW/articles/traditional-sibling';
+        $seo = $this->createSeoMeta($traditional, ['canonical_url' => $canonical, 'robots' => 'noindex,follow',
+            'schema_json' => ['editorial_package_v1' => ['hreflang_gate_v1' => ['enabled' => true]]]]);
+        $sourcePath = '/api/v0.5/articles/'.$source->slug.'/seo?locale=zh-CN';
+        $this->getJson($sourcePath)->assertOk()->assertJsonMissingPath('meta.alternates.zh-TW');
+
+        $seo->update(['robots' => 'index,follow']);
+        foreach ([$source, $english, $traditional] as $article) {
+            $this->getJson('/api/v0.5/articles/'.$article->slug.'/seo?locale='.$article->locale)->assertOk()
+                ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', ['en', 'zh-CN', 'zh-TW'])
+                ->assertJsonPath('meta.alternates.zh-TW', $canonical);
+        }
+
+        $traditional->forceFill(['translation_group_id' => 'other-group'])->saveQuietly();
+        $this->getJson($sourcePath)->assertOk()->assertJsonMissingPath('meta.alternates.zh-TW');
     }
 
     public function test_same_slug_in_other_group_cannot_replace_a_verified_locale_sibling(): void

@@ -124,6 +124,28 @@ final class ReviewedTranslationPublicationTest extends TestCase
         $this->assertSame($sourceBefore, F::sourceHash($s->fresh()));
     }
 
+    public function test_traditional_publication_locks_the_selected_translation_alongside_english(): void
+    {
+        [$s, $t, $p] = $this->fixture('zh-CN', 'zh-TW');
+        $english = Article::create([
+            'org_id' => 0, 'locale' => 'en', 'slug' => $s->slug,
+            'source_locale' => $s->locale, 'source_article_id' => $s->id,
+            'translation_group_id' => $s->translation_group_id, 'translation_status' => 'machine_draft',
+            'title' => 'Existing English draft', 'content_md' => 'Existing English copy', 'status' => 'draft',
+        ]);
+        $englishBefore = F::targetHash($s);
+        $this->assertNotSame($englishBefore, $p['target_snapshot_hash']);
+        $this->assertSame(1, $this->runPublish([...$p, 'target_snapshot_hash' => $englishBefore], true));
+        $this->assertFalse($t->fresh()->is_public);
+        $this->assertSame(0, $this->runPublish($p), Artisan::output());
+        $this->assertSame(0, $this->runPublish($p, true), Artisan::output());
+        $this->assertSame('zh-TW', $t->fresh()->locale);
+        $this->assertSame($p['working_revision_id'], $t->fresh()->published_revision_id);
+        $this->assertFalse($t->fresh()->is_indexable);
+        $this->assertSame($englishBefore, F::targetHash($s->fresh()));
+        $this->assertNull($english->fresh()->published_revision_id);
+    }
+
     public function test_reverse_publish_rejects_wrong_language_canonical_and_drift_with_zero_writes(): void
     {
         [$s, $t, $p] = $this->fixture('en');
@@ -367,8 +389,9 @@ final class ReviewedTranslationPublicationTest extends TestCase
         return [$s, $t->fresh(), $p, $published];
     }
 
-    private function fixture(string $sourceLocale = 'zh-CN'): array
+    private function fixture(string $sourceLocale = 'zh-CN', ?string $targetLocale = null): array
     {
+        $targetLocale ??= $sourceLocale === 'en' ? 'zh-CN' : 'en';
         $owner = AdminUser::create(['name' => 'Owner', 'email' => 'owner@example.test', 'password' => bcrypt('test'), 'is_active' => 1]);
         config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => $owner->id]);
         $this->actingAs($owner, (string) config('admin.guard', 'admin'));
@@ -383,19 +406,19 @@ final class ReviewedTranslationPublicationTest extends TestCase
         EditorialReview::create(['org_id' => 0, 'content_type' => 'article', 'content_id' => $s->id, 'workflow_state' => 'approved', 'reviewed_by_admin_user_id' => $owner->id]);
         $category = ArticleCategory::create(['org_id' => 0, 'name' => 'Research', 'slug' => 'research', 'is_active' => true]);
         $tag = ArticleTag::create(['org_id' => 0, 'name' => 'Personality', 'slug' => 'personality', 'is_active' => true]);
-        $t = Article::create(['org_id' => 0, 'locale' => $sourceLocale === 'en' ? 'zh-CN' : 'en', 'slug' => $s->slug, 'source_locale' => $sourceLocale, 'source_article_id' => $s->id,
+        $t = Article::create(['org_id' => 0, 'locale' => $targetLocale, 'slug' => $s->slug, 'source_locale' => $sourceLocale, 'source_article_id' => $s->id,
             'translated_from_article_id' => $s->id, 'translation_group_id' => $s->translation_group_id, 'translation_status' => 'approved',
             'title' => 'English research', 'excerpt' => 'Reviewed excerpt', 'content_md' => "## References\n\nhttps://doi.org/example",
             'category_id' => $category->id, 'status' => 'draft', 'is_public' => false, 'is_indexable' => false,
             'cover_image_url' => 'https://assets.fermatmind.com/cover.jpg', 'cover_image_alt' => 'Research illustration']);
         $t->tags()->sync([$tag->id => ['org_id' => 0]]);
         $tr = ArticleTranslationRevision::create(['org_id' => 0, 'article_id' => $t->id, 'source_article_id' => $s->id,
-            'translation_group_id' => $s->translation_group_id, 'locale' => $sourceLocale === 'en' ? 'zh-CN' : 'en', 'source_locale' => $sourceLocale, 'revision_number' => 1,
+            'translation_group_id' => $s->translation_group_id, 'locale' => $targetLocale, 'source_locale' => $sourceLocale, 'revision_number' => 1,
             'revision_status' => 'approved', 'title' => $t->title, 'excerpt' => $t->excerpt, 'content_md' => $t->content_md,
             'source_version_hash' => $s->source_version_hash, 'translated_from_version_hash' => $s->source_version_hash]);
         $t->forceFill(['working_revision_id' => $tr->id])->saveQuietly();
-        ArticleSeoMeta::create(['org_id' => 0, 'article_id' => $t->id, 'locale' => $sourceLocale === 'en' ? 'zh-CN' : 'en', 'seo_title' => $t->title,
-            'seo_description' => 'Research interpretation', 'canonical_url' => 'https://fermatmind.com/'.($t->locale === 'zh-CN' ? 'zh' : 'en').'/articles/'.$t->slug,
+        ArticleSeoMeta::create(['org_id' => 0, 'article_id' => $t->id, 'locale' => $targetLocale, 'seo_title' => $t->title,
+            'seo_description' => 'Research interpretation', 'canonical_url' => 'https://fermatmind.com/'.($targetLocale === 'zh-CN' ? 'zh' : $targetLocale).'/articles/'.$t->slug,
             'og_image_url' => $t->cover_image_url, 'robots' => 'noindex,nofollow', 'is_indexable' => false]);
         foreach ([$sr, $tr] as $r) {
             app(Reviews::class)->bindOrCreateApproved(null, 'cms_article_review', 'test:revision:'.$r->id,
@@ -404,7 +427,7 @@ final class ReviewedTranslationPublicationTest extends TestCase
         $s = $s->fresh();
         $p = ['schema' => 'reviewed_article_translation_publication_v1', 'source_id' => $s->id, 'target_id' => $t->id,
             'source_published_revision_id' => $sr->id, 'working_revision_id' => $tr->id,
-            'source_snapshot_hash' => F::sourceHash($s), 'target_snapshot_hash' => F::targetHash($s), 'body_sha256' => hash('sha256', $tr->content_md)];
+            'source_snapshot_hash' => F::sourceHash($s), 'target_snapshot_hash' => F::targetHash($s, targetLocale: $targetLocale), 'body_sha256' => hash('sha256', $tr->content_md)];
 
         return [$s, $t, $p];
     }

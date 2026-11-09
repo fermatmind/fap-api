@@ -155,9 +155,9 @@ final class ArticleForkPrivateTranslationLinks extends Command
             JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
-    public static function targetHash(Article $source, bool $lock = false): string
+    public static function targetHash(Article $source, bool $lock = false, ?string $targetLocale = null): string
     {
-        $targets = ArticleSourceTargetSnapshot::capture($source, $lock);
+        $targets = ArticleSourceTargetSnapshot::capture($source, $lock, $targetLocale);
         if (count($targets) !== 1) {
             throw new RuntimeException('target_identity_missing');
         }

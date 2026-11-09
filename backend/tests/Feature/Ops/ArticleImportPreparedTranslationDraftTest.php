@@ -200,6 +200,35 @@ final class ArticleImportPreparedTranslationDraftTest extends TestCase
         }
     }
 
+    public function test_traditional_draft_import_uses_the_exact_locale_and_stays_private(): void
+    {
+        $source = $this->source('traditional-prepared-translation');
+        [$path] = $this->package($source);
+        try {
+            $package = json_decode(file_get_contents($path), true, 32, JSON_THROW_ON_ERROR);
+            $package['translation'] = ['locale' => 'zh-TW', 'title' => '臺灣繁體文章', 'excerpt' => '繁體摘要',
+                'content_md' => "## 範例\n\n已審校的繁體正文。", 'seo_title' => '繁體標題', 'seo_description' => '繁體說明'];
+            file_put_contents($path, json_encode($package, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
+            $sha = hash_file('sha256', $path);
+            $args = ['--file' => $path, '--sha256' => $sha, '--json' => true];
+            $this->assertSame(0, Artisan::call('articles:import-prepared-translation-draft', $args + ['--dry-run' => true]));
+            $this->assertSame(1, Article::withoutGlobalScopes()->count());
+            $this->assertSame(0, Artisan::call('articles:import-prepared-translation-draft', $args + ['--execute' => true,
+                '--confirm' => sprintf('Import private zh-TW draft for source %d in group %s with package %s.', $source->id, $source->translation_group_id, $sha)]));
+            $target = Article::withoutGlobalScopes()->where('locale', 'zh-TW')->where('slug', $source->slug)->sole();
+            $this->assertSame('zh-CN', $target->source_locale);
+            $this->assertSame($source->id, $target->source_article_id);
+            $this->assertSame($package['translation']['content_md'], $target->workingRevision->content_md);
+            $this->assertSame('zh-TW', $target->seoMeta->locale);
+            $this->assertFalse($target->is_public);
+            $this->assertNull($target->published_revision_id);
+            $this->assertSame(1, Artisan::call('articles:import-prepared-translation-draft', $args + ['--dry-run' => true]));
+            $this->assertContains('target_identity_collision', json_decode(Artisan::output(), true)['errors']);
+        } finally {
+            unlink($path);
+        }
+    }
+
     public function test_reverse_import_rejects_published_source_drift_and_soft_deleted_target_collision(): void
     {
         $source = $this->source('reverse-import-lock', 'en');

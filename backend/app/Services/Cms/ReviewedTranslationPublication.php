@@ -8,6 +8,8 @@ use App\Console\Commands\ArticleForkPrivateTranslationLinks as Fingerprint;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Audit\AuditLogger;
+use App\Support\ArticleSourceTargetSnapshot;
+use App\Support\CanonicalFrontendUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -80,7 +82,7 @@ final readonly class ReviewedTranslationPublication
             }
             $this->audit->log(Request::create('/ops/articles/publish-controlled', 'POST'), 'codex_controlled_translation_publish', 'article', (string) $t->id,
                 ['confirmation_sha256' => hash('sha256', $phrase), 'locks' => $p, 'restore_fields' => $restore,
-                    'after_snapshot_hash' => Fingerprint::targetHash($s->fresh(), true), 'make_indexable' => $indexable],
+                    'after_snapshot_hash' => Fingerprint::targetHash($s->fresh(), true, $t->locale), 'make_indexable' => $indexable],
                 reason: 'reviewed_translation_publication', result: 'success');
 
             return ['ok' => true, 'dry_run' => false, 'published_article_ids' => [$t->id], 'source_and_prior_versions_preserved' => true];
@@ -99,7 +101,7 @@ final readonly class ReviewedTranslationPublication
         $rows = ($lock ? $q->lockForUpdate() : $q)->get()->keyBy('id');
         $s = $rows->get($p['source_id']);
         $t = $rows->get($p['target_id']);
-        if (! $s instanceof Article || ! $t instanceof Article || ! in_array($s->locale, ['en', 'zh-CN'], true) || ! in_array($t->locale, ['en', 'zh-CN'], true) || $s->locale === $t->locale || ! $s->isSourceArticle()
+        if (! $s instanceof Article || ! $t instanceof Article || ! in_array($s->locale, ['en', 'zh-CN'], true) || ! in_array($t->locale, ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES, true) || $s->locale === $t->locale || ! $s->isSourceArticle()
             || $s->published_revision_id !== $p['source_published_revision_id']
             || ($s->working_revision_id !== $s->published_revision_id
                 && ! app(ArticlePublishedSourceReviewService::class)->hasCurrentIndependentReview($t))
@@ -108,7 +110,7 @@ final readonly class ReviewedTranslationPublication
                 ? ($t->published_revision_id !== $p['target_published_revision_id'] || $t->working_revision_id === $t->published_revision_id || $t->status !== 'published' || ! $t->is_public)
                 : ($t->published_revision_id !== null || $t->status !== 'draft' || $t->is_public))
             || $t->source_article_id !== $s->id || $t->translation_group_id !== $s->translation_group_id
-            || Fingerprint::sourceHash($s, $lock) !== $p['source_snapshot_hash'] || Fingerprint::targetHash($s, $lock) !== $p['target_snapshot_hash']) {
+            || Fingerprint::sourceHash($s, $lock) !== $p['source_snapshot_hash'] || Fingerprint::targetHash($s, $lock, $t->locale) !== $p['target_snapshot_hash']) {
             throw new RuntimeException('translation_snapshot_drift');
         }
         $t->load(['workingRevision', 'publishedRevision', 'seoMeta',
@@ -141,7 +143,7 @@ final readonly class ReviewedTranslationPublication
             throw new RuntimeException('translation_review_or_lineage_invalid');
         }
         if (! $t->category || $t->tags->isEmpty() || ! filled($t->cover_image_url) || ! filled($t->cover_image_alt) || ! $t->seoMeta
-            || $t->seoMeta->canonical_url !== 'https://fermatmind.com/'.($t->locale === 'zh-CN' ? 'zh' : 'en').'/articles/'.$t->slug
+            || $t->seoMeta->canonical_url !== CanonicalFrontendUrl::APEX_URL.'/'.app(ArticleSeoService::class)->mapBackendLocaleToFrontendSegment($t->locale).'/articles/'.$t->slug
             || ! filled($t->seoMeta->seo_title) || ! filled($t->seoMeta->seo_description) || ! filled($t->seoMeta->og_image_url)) {
             throw new RuntimeException('translation_public_metadata_incomplete');
         }

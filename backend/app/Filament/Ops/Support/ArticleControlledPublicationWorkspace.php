@@ -282,7 +282,7 @@ final class ArticleControlledPublicationWorkspace
         abort_if((bool) config('admin.totp.enabled', true)
             && (int) session('ops_admin_totp_verified_user_id', 0) !== (int) auth($guard)->id(), 403);
         $article = Article::withoutGlobalScopes()->whereKey($selected->getKey())->firstOrFail();
-        if ((int) $article->org_id !== 0 || ! in_array($article->locale, ['en', 'zh-CN'], true)
+        if ((int) $article->org_id !== 0 || ! in_array($article->locale, ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES, true)
             || $article->deleted_at !== null || $article->working_revision_id === null) {
             $this->reject('selected_article_not_supported');
         }
@@ -357,7 +357,7 @@ final class ArticleControlledPublicationWorkspace
             'source_published_revision_id' => (int) $source->published_revision_id,
             'working_revision_id' => (int) $article->working_revision_id,
             'source_snapshot_hash' => TranslationFingerprint::sourceHash($source),
-            'target_snapshot_hash' => TranslationFingerprint::targetHash($source),
+            'target_snapshot_hash' => TranslationFingerprint::targetHash($source, targetLocale: $article->locale),
             'body_sha256' => hash('sha256', (string) $article->workingRevision->content_md)];
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\Article;
+use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\CanonicalFrontendUrl;
 use App\Support\CanonicalTranslationPayloadHash as Hash;
 use Illuminate\Support\Arr;
@@ -66,13 +67,13 @@ final class ArticleReviewedCounterpartService
         }
     }
 
-    public function eligible(Article $article): bool
+    public function eligible(Article $article, bool $includeTraditional = false): bool
     {
         $article->loadMissing(['publishedRevision', 'seoMeta']);
         $seo = $article->seoMeta;
         $robots = array_map('trim', explode(',', strtolower((string) $seo?->robots)));
 
-        return (int) $article->org_id === 0 && in_array($article->locale, ['en', 'zh-CN'], true)
+        return (int) $article->org_id === 0 && in_array($article->locale, $includeTraditional ? ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES : ['en', 'zh-CN'], true)
             && $article->deleted_at === null && $article->status === 'published' && $article->is_public && $article->is_indexable
             && ! in_array($article->lifecycle_state, [Article::LIFECYCLE_ARCHIVED, Article::LIFECYCLE_SOFT_DELETED], true)
             && $article->published_at !== null && ! $article->published_at->isFuture()
@@ -115,7 +116,7 @@ final class ArticleReviewedCounterpartService
 
     public function canonical(Article $article): string
     {
-        return CanonicalFrontendUrl::APEX_URL.'/'.($article->locale === 'zh-CN' ? 'zh' : 'en').'/articles/'.$article->slug;
+        return CanonicalFrontendUrl::APEX_URL.'/'.app(ArticleSeoService::class)->mapBackendLocaleToFrontendSegment((string) $article->locale).'/articles/'.$article->slug;
     }
 
     /** Keep raw, even expired endpoints for bounded removal of both sides' cached tags. */

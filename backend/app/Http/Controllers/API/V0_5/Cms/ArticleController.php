@@ -285,7 +285,7 @@ class ArticleController extends Controller
     {
         $segment = $this->frontendLocaleSegment($locale);
         $discoverabilityItems = array_values(array_filter(array_map(
-            static function (array $item): ?array {
+            function (array $item): ?array {
                 $slug = trim((string) ($item['slug'] ?? ''));
                 $title = trim((string) ($item['title'] ?? ''));
                 if ($slug === '' || $title === '') {
@@ -293,7 +293,7 @@ class ArticleController extends Controller
                 }
 
                 $locale = trim((string) ($item['locale'] ?? 'en'));
-                $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+                $segment = $this->frontendLocaleSegment($locale);
 
                 return [
                     'key' => $slug,
@@ -951,7 +951,7 @@ class ArticleController extends Controller
 
     private function frontendLocaleSegment(string $locale): string
     {
-        return $locale === 'zh-CN' ? 'zh' : 'en';
+        return $this->articleSeoService->mapBackendLocaleToFrontendSegment($locale);
     }
 
     /**
@@ -961,7 +961,7 @@ class ArticleController extends Controller
     {
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
-            'locale' => ['nullable', 'in:en,zh-CN'],
+            'locale' => ['nullable', 'in:en,zh-CN,zh-TW'],
             'related_test_slug' => ['nullable', 'string', 'max:127'],
             'voice' => ['nullable', 'string', 'max:32'],
             'category' => ['nullable', 'string', 'max:127', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],

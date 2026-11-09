@@ -11,6 +11,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Services\BigFive\AuthorityV2\StructuredData\BigFiveStructuredDataProjector;
 use App\Services\Career\StructuredData\CareerArticleStructuredDataBuilder;
 use App\Support\ArticleBrandByline;
+use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\CanonicalFrontendUrl;
 use App\Support\PublicMediaUrlGuard;
 use App\Support\PublicSeoTitleNormalizer;
@@ -295,7 +296,11 @@ final class ArticleSeoService
 
     public function mapBackendLocaleToFrontendSegment(string $locale): string
     {
-        return $this->normalizeLocale($locale) === 'zh-CN' ? 'zh' : 'en';
+        return match ($this->normalizeLocale($locale)) {
+            'zh-CN' => 'zh',
+            'zh-TW' => 'zh-TW',
+            default => 'en',
+        };
     }
 
     private function extractDescription(string $contentMd): string
@@ -442,7 +447,7 @@ final class ArticleSeoService
 
         $eligibleAlternates = [];
         if ($publiclyIndexable) {
-            foreach (self::SUPPORTED_LOCALES as $supportedLocale) {
+            foreach (ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES as $supportedLocale) {
                 $url = $alternates[$supportedLocale] ?? null;
                 if (is_string($url) && trim($url) !== '') {
                     $eligibleAlternates[$supportedLocale] = trim($url);
@@ -721,7 +726,8 @@ final class ArticleSeoService
         $variants = [];
         $translationGroupId = trim((string) ($article->translation_group_id ?? ''));
 
-        $reviewedPair = app(ArticleReviewedCounterpartService::class)->resolve($article);
+        $counterparts = app(ArticleReviewedCounterpartService::class);
+        $reviewedPair = $counterparts->resolve($article);
         if ($reviewedPair !== null) {
             $variants = $reviewedPair !== [] ? $reviewedPair : [$article];
         } elseif ($translationGroupId !== '') {
@@ -730,13 +736,27 @@ final class ArticleSeoService
                 ->where('org_id', (int) $article->org_id)
                 ->where('translation_group_id', $translationGroupId)
                 ->publiclyIndexable()
-                ->whereIn('locale', self::SUPPORTED_LOCALES)
-                ->get(['slug', 'locale'])
-                ->all();
+                ->whereIn('locale', ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES)
+                ->with('seoMeta')
+                ->get();
+            $traditional = $variants->where('locale', 'zh-TW');
+            $candidate = $traditional->count() === 1 ? $traditional->first() : null;
+            $canLinkTraditional = $candidate instanceof Article
+                && $counterparts->eligible($candidate, includeTraditional: true)
+                && data_get($candidate->seoMeta?->schema_json, 'editorial_package_v1.hreflang_gate_v1.enabled') === true
+                && ! data_get($candidate->seoMeta?->schema_json, 'editorial_package_v1.hreflang_hold')
+                && $variants->contains(fn (Article $sibling): bool => $sibling->id === $candidate->source_article_id
+                    && $sibling->locale === $candidate->source_locale)
+                && ! $variants->contains(fn (Article $sibling): bool => $counterparts->binding($sibling) !== null);
+
+            if (! $canLinkTraditional && $article->locale === 'zh-TW') {
+                return [];
+            }
+            $variants = $variants->reject(fn (Article $sibling): bool => $sibling->locale === 'zh-TW' && ! $canLinkTraditional)->all();
         }
 
         // Explicit translation groups are authoritative; a shared slug is not pairing evidence.
-        if ($reviewedPair === null && $translationGroupId === '') {
+        if ($reviewedPair === null && $translationGroupId === '' && $article->locale !== 'zh-TW') {
             $variants = Article::query()
                 ->withoutGlobalScopes()
                 ->where('org_id', (int) $article->org_id)
@@ -766,7 +786,7 @@ final class ArticleSeoService
         }
 
         $alternates = [];
-        foreach (self::SUPPORTED_LOCALES as $supportedLocale) {
+        foreach (ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES as $supportedLocale) {
             if (! isset($availableLocales[$supportedLocale])) {
                 continue;
             }
@@ -859,7 +879,9 @@ final class ArticleSeoService
 
     private function normalizeLocale(string $locale): string
     {
-        return trim($locale) === 'zh-CN' ? 'zh-CN' : 'en';
+        $locale = trim($locale);
+
+        return in_array($locale, ['zh-CN', 'zh-TW'], true) ? $locale : 'en';
     }
 
     private function normalizeString(?string $value): ?string
