@@ -944,6 +944,33 @@ final class ArticlePublicApiTest extends TestCase
         $this->assertStringNotContainsString('Hidden FAQ?', (string) $seo->getContent());
     }
 
+    public function test_traditional_article_projects_reviewed_ctas_to_its_published_source_locale(): void
+    {
+        $this->ensurePublicRiasecRegistry();
+        $source = $this->createArticle(['slug' => 'traditional-cta-source', 'locale' => 'zh-CN']);
+        $target = $this->createArticle([
+            'slug' => $source->slug, 'locale' => 'zh-TW',
+            'source_article_id' => $source->id, 'translated_from_article_id' => $source->id,
+            'translation_group_id' => $source->translation_group_id, 'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+        ]);
+        $path = '/zh/tests/holland-career-interest-test-riasec';
+        $this->createSeoMeta($target, ['schema_json' => ['editorial_package_v1' => ['cta_slots' => [
+            ['key' => 'reviewed', 'label' => '查看霍蘭德職業興趣測驗', 'href' => $path],
+            ['key' => 'private', 'label' => 'Private result', 'href' => $path.'/result'],
+            ['key' => 'different_locale', 'label' => 'Different source', 'href' => '/en/tests/holland-career-interest-test-riasec'],
+            ['key' => 'query', 'label' => 'Private query', 'href' => $path.'?attempt=fixture'],
+        ]]]]);
+
+        $this->getJson('/api/v0.5/articles/'.$target->slug.'?locale=zh-TW')
+            ->assertOk()
+            ->assertJsonCount(1, 'landing_surface_v1.cta_bundle')
+            ->assertJsonPath('landing_surface_v1.cta_bundle.0.label', '查看霍蘭德職業興趣測驗')
+            ->assertJsonPath('landing_surface_v1.cta_bundle.0.href', $path)
+            ->assertJsonPath('landing_surface_v1.start_test_target', $path)
+            ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', $path);
+    }
+
     public function test_article_detail_uses_locale_specific_cms_faq_blocks(): void
     {
         $groupId = 'article_locale_specific_faq_v1';

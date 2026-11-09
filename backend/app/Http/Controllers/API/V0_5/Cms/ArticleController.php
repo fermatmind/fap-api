@@ -507,6 +507,16 @@ class ArticleController extends Controller
     {
         $metadata = $this->editorialPackageMetadata($article);
         $slots = is_array($metadata['cta_slots'] ?? null) ? $metadata['cta_slots'] : [];
+        $targetLocale = $locale;
+        if ($locale === 'zh-TW') {
+            // Editorial slots retain the published source's assessment route until
+            // the relevant assessment flow has its own Traditional release.
+            if (! $article->source_article_id || $article->source_article_id !== $article->translated_from_article_id
+                || ! in_array($article->source_locale, ['zh-CN', 'en'], true)) {
+                return [];
+            }
+            $targetLocale = $article->source_locale;
+        }
         $ctas = [];
 
         foreach ($slots as $slot) {
@@ -515,7 +525,7 @@ class ArticleController extends Controller
             }
 
             $label = $this->normalizeString($slot['label'] ?? $slot['title'] ?? null);
-            $href = $this->normalizePublicTestHref($slot['href'] ?? $slot['url'] ?? null, $locale);
+            $href = $this->normalizePublicTestHref($slot['href'] ?? $slot['url'] ?? null, $targetLocale);
             if ($label === null || $href === null) {
                 continue;
             }
