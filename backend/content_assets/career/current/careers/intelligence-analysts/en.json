@@ -4846,8 +4846,14 @@
         "status": "unfilled"
       },
       "interface.fit.interest_code_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.fit.interest_code_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.fit.interest_experience_heading": {
         "ref": null,
@@ -4882,8 +4888,14 @@
         "status": "unfilled"
       },
       "interface.outlook.evidence_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.outlook.evidence_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.outlook.evidence_limitation_label": {
         "ref": null,
@@ -4942,16 +4954,28 @@
         "status": "unfilled"
       },
       "interface.quick_decision.caution_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.caution_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.experiment_heading": {
         "ref": null,
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -7214,12 +7238,15 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Caution signals | This page corresponds to O*NET-SOC 33-3021.06, Intelligence Analysts. The official scope is to collect, analyze, or evaluate information from multiple sources such as law enforcement databases, surveillance, intelligence networks, or geographic information systems, and use intelligence to anticipate and prevent organized criminal activity such as terrorism. The core deliverable is a reviewable intelligence judgment with traceable grounds, rather than merely a conclusion. Risks include information without cross-checking, unclear source and timeliness labels, presenting inferences as facts, and unauthorized external disclosure or action recommendations. U.S. wages are not fixed as static figures (a current O*NET query entry point is provided). O*NET presents employment and outlook under the broader parent category Detectives and Criminal Investigators (a broader-category proxy): approximately 117,900 employed in 2024 and 117,100 in 2034, -1% growth for 2024—2034, and 7,800 projected openings. These are not projections for this precise occupation. Exact occupational wages for mainland China were not obtained and are recorded as a visible evidence gap. If information uncertainty, deadline pressure, and confidentiality constraints are difficult for you to tolerate, treat them as practical costs requiring serious consideration."
+              "U.S. wages and jobs are for the parent occupation. Mainland research examples cannot establish U.S. law enforcement eligibility."
             ]
           },
           "id": "intelligence-analysts.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "onet-details"
+            "intel-bls-parent",
+            "onet-wages",
+            "intel-cas-wuhan",
+            "intel-cas-archive"
           ],
           "type": "prose"
         },
@@ -7228,12 +7255,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Taking responsibility for judgments | Fit depends on whether you can do three things within the same assignment: conduct sound intelligence analysis (define questions and intelligence needs, collect and connect information from multiple sources, cross-check and identify gaps, form reviewable inferences and reports, and produce traceable analytical records); manage standards and confidentiality (follow organizational and regulatory requirements for source and timeliness labels, boundaries for public and restricted information, authorization levels for external disclosure and action recommendations, and personal and case information handling); and accept clearly defined job responsibilities (take responsibility for your analysis and grounds, and seek guidance or refer action recommendations, external sharing, or disclosure through the required process). Test this through a verifiable exercise, such as preparing an intelligence assessment and evidence chain using entirely fictional public materials, rather than relying only on an interest questionnaire."
+              "Do you like checking original sources, versions and copies and leaving unknowns visible? Try IA-07 before choosing an employer or pathway."
             ]
           },
           "id": "intelligence-analysts.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "intel-ia07"
           ],
           "type": "prose"
         },
@@ -7242,12 +7270,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "To assess whether intelligence analysis suits you, first conduct a verifiable exercise using public or simulated materials: create an entirely fictional case or threat assessment scenario, and outline the process from defining the intelligence question, listing available sources and search parameters, collecting and connecting information, cross-checking and labeling timeliness, and identifying gaps and alternative hypotheses to forming judgments and recommendations. Mark checks and possible problems at each step (information without cross-checking, unclear sources and timeliness, inferences presented as facts, unlabeled gaps, and unauthorized external disclosure or action recommendations). Afterwards, check whether sources, timeliness, verification, and gaps are indispensable; action recommendations or external sharing beyond authority are referred or submitted for guidance; and the process leaves reviewable records. All materials must be entirely fictional public examples; do not use real case details, people involved in cases, or restricted information."
+              "Try IA-07: compare three fictional notices, mark the copy and the update, then write one judgment and one open question."
             ]
           },
           "id": "intelligence-analysts.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-details"
+            "intel-ia07"
           ],
           "type": "prose"
         },
@@ -7278,21 +7306,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Intelligence analysts correspond to O*NET-SOC 33-3021.06, Intelligence Analysts. The official scope is to collect, analyze, or evaluate information from multiple sources such as law enforcement databases, surveillance, intelligence networks, or geographic information systems, and use intelligence to anticipate and prevent organized criminal activity such as terrorism. A typical complete workflow is to define the intelligence question, collect and connect information, cross-check and identify gaps, form reviewable judgments and reports, and share or recommend within authorization. Current U.S. national wages for Detectives and Criminal Investigators (a broader parent-category proxy, not precise intelligence analyst statistics): a 2025 median of $93,790 per year; employment of 120,500 in 2025, little or no change for 2025—2035 (a grouped label), and 7,800 average annual openings (an overall projection, not attributed to AI). The exact occupational wage gap for China remains; industry averages are broad references only."
+              "Intelligence analysts compare sources, distinguish established facts from uncertain judgments and brief authorized readers. U.S. law enforcement intelligence differs from mainland science and industry research. U.S. wages and projections cover the broader occupation only. Public mainland science intelligence roles include tracking research, analyzing trends and supporting research advice. U.S. law enforcement intelligence produces case or security assessments under agency authority. Both evaluate evidence, but access and operational duties differ."
             ]
           },
           "id": "intelligence-analysts.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "onet-custom",
-            "source-pack-onet-custom",
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "source-pack-onet-localwages",
-            "source-pack-onet-summary",
-            "onet-hot",
-            "onet-details"
+            "onet-details",
+            "intel-fbi",
+            "intel-cas-wuhan",
+            "intel-cas-archive"
           ],
           "type": "prose"
         },
@@ -7343,12 +7365,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Key judgments | O*NET work context data show: email daily, 100%; indoors in a controlled environment daily, 87%; telephone conversations daily, 78%; face-to-face discussions daily, 70%; working with others extremely important, 64%; and exactness or accuracy extremely important, 57%. Judgments rely on source reliability and timeliness, the extent of cross-checking, and authorization and confidentiality requirements for sharing and disclosure."
+              "Key judgments | In the O*NET work context survey, 100% of respondents reported using email daily and 87% reported working indoors in a controlled environment daily. For time pressure, 48% answered at least weekly but not daily, and 17% answered daily. The pace varies by employer and assignment."
             ]
           },
           "id": "intelligence-analysts.profile.work-context-block.5",
           "source_refs": [
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7357,12 +7379,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Environment and pace | Work primarily involves desk analysis and communication: sitting continually or almost continually, 65%; constant contact with others, 52%; some freedom to schedule tasks, 70%; some freedom to make decisions, 52%; a 40-hour workweek, 74%; time pressure more than once a week, 48%; and moderate competition, 48%. Case milestones and intelligence needs drive the pace."
+              "Environment and pace | In the O*NET work context survey, 100% of respondents reported using email daily and 87% reported working indoors in a controlled environment daily. For time pressure, 48% answered at least weekly but not daily, and 17% answered daily. The pace varies by employer and assignment."
             ]
           },
           "id": "intelligence-analysts.profile.work-context-block.6",
           "source_refs": [
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -7372,12 +7394,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Research inputs | O*NET 33-3021.06 provides the precise occupational identity, tasks, work activities, and work context. The interest code is ICE (Investigative—Conventional—Enterprising), and the occupation is in Job Zone Four (65% report a bachelor's degree, 13% a master's degree, and 9% an associate or other two-year degree). It is not marked Bright Outlook; the main industry is government. Current U.S. national wages for Detectives and Criminal Investigators (a broader parent-category proxy, not precise intelligence analyst statistics): a 2025 median of $93,790 per year; employment of 120,500 in 2025, little or no change for 2025—2035 (a grouped label), and 7,800 average annual openings (an overall projection, not attributed to AI). The exact occupational wage gap for China remains; industry averages are broad references only."
+              "Research inputs | O*NET 33-3021.06 describes U.S. intelligence analysts’ tasks, work context and interests. The interest code is I–C–E and the preparation category is Job Zone Four. Asked what education a new hire needs, 65% of respondents selected a bachelor’s degree, 13% a master’s degree and 9% an associate or other two-year degree. These are not incumbent education shares or employer requirements."
             ]
           },
           "id": "intelligence-analysts.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7480,12 +7502,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Security management | Core outputs are security governance, budgets, and risk acceptance. This occupation focuses on intelligence judgments and grounds; authorization levels and responsibilities differ, and shared risk terminology does not imply identical responsibilities."
+              "Investigators work on case evidence within their authority. Analysts compare sources and produce reviewable assessments."
             ]
           },
           "id": "intelligence-analysts.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-summary"
+            "intel-investigators",
+            "intel-fbi",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7494,12 +7518,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Management analysis | Core outputs are analysis of organizational problems and recommendations for improvement. This occupation focuses on collecting and verifying intelligence from multiple sources; information sources and confidentiality boundaries differ, so roles cannot be interchanged based only on titles."
+              "Assess system risks and help protect networks and information."
             ]
           },
           "id": "intelligence-analysts.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-summary"
+            "intel-cyber",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7508,12 +7533,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Security management specialist work | Core outputs emphasize security policies, controls, and compliance coordination. This occupation places greater emphasis on intelligence sources, cross-checking, and gap labels; evidence types and authorization boundaries differ and must be checked separately."
+              "Research digests, topic analysis and strategic advice materials."
             ]
           },
           "id": "intelligence-analysts.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-summary"
+            "intel-cas-archive",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7522,12 +7548,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Financial risk specialization | Core outputs are financial risk identification and quantitative assessment. This occupation focuses on case and threat intelligence; data characteristics, methods, and disclosure requirements differ and cannot be applied interchangeably."
+              "Industry reports, policy assessments and decision support."
             ]
           },
           "id": "intelligence-analysts.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "onet-summary"
+            "intel-longgang",
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -7559,11 +7586,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Direct answer | AI can assist with multi-source information search and deduplication, classification of text and communication records, initial pattern and anomaly screening, and drafting charts and reports. People remain responsible within their authorization for defining intelligence questions, judging source reliability, cross-checking conclusions, gaps and alternative hypotheses, external sharing, and action recommendations. Task exposure does not mean job replacement or widespread adoption; formal use requires authorization, human review, and an audit trail. This page provides no replacement probability or timetable. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "We did not verify occupation-specific generative AI adoption or effects on time, quality, pay or jobs. Use fictional IA-07 to try summarizing and comparing sources. Check whether a tool counts a copy as independent or invents a Sunday answer. Real access, analysis and sharing follow authorized processes."
             ]
           },
           "id": "intelligence-analysts.ai-impact.ai-impact-table.2",
           "source_refs": [
+            "source-fermatmind-ai-rubric",
+            "intel-ia07",
             "onet-details"
           ],
           "type": "prose"
@@ -7615,12 +7644,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Turning point | Editorial judgment: tools may help improve search and initial screening, but do not change who is responsible for source reliability judgments, cross-checking, gap identification, or disclosure authorization. A practical approach is to build strong source verification and evidence chain skills first, then introduce tools into low-risk steps that can be reviewed and traced."
+              "In IA-07, count errors, omissions and invented claims. Fluency does not establish reliability. Use only data you are authorized to handle."
             ]
           },
           "id": "intelligence-analysts.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "onet-details"
+            "source-fermatmind-ai-rubric",
+            "intel-ia07",
+            "intel-pipl"
           ],
           "type": "prose"
         },
@@ -7665,7 +7696,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Occupational title comparison | Intelligence analysts (U.S. O*NET-SOC 33-3021.06, Intelligence Analysts). Public statistics in China do not provide single-occupation wages corresponding to this precise occupation; industry or broad personnel-category averages cannot be presented as medians, and the page being in Chinese does not establish an equivalent Chinese occupation or wage mapping."
+              "Mainland science intelligence and industry research are related roles. No wage series with an exact crosswalk to U.S. O*NET 33-3021.06 was verified."
             ]
           },
           "fact_refs": [
@@ -7673,7 +7704,10 @@
           ],
           "id": "intelligence-analysts.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "intel-cas-wuhan",
+            "intel-cas-archive",
+            "nbs-wages",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7682,7 +7716,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Broad reference | NBS2025 Table 2 reports average annual wages of CNY 119,465 for employees in urban non-private entities in public administration, social security, and social organizations in China; Table 5 does not list a private-sector value for this industry. This is not intelligence analyst pay and does not establish equivalent Chinese and U.S. occupations. Source: https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html."
+              "Mainland science intelligence and industry research are related roles. No wage series with an exact crosswalk to U.S. O*NET 33-3021.06 was verified."
             ]
           },
           "fact_refs": [
@@ -7690,7 +7724,10 @@
           ],
           "id": "intelligence-analysts.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "intel-cas-wuhan",
+            "intel-cas-archive",
+            "nbs-wages",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7699,7 +7736,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: National Bureau of Statistics public wage materials for 2025 aggregate by industry or broad personnel category and do not establish a mainland China national occupational wage distribution precisely corresponding to O*NET 33-3021.06, Intelligence Analysts. This page records a visible data gap and does not extrapolate starting salaries, medians, or personal income across jurisdictions using industry averages, advertised salaries, or U.S. data."
+              "Mainland science intelligence and industry research are related roles. No wage series with an exact crosswalk to U.S. O*NET 33-3021.06 was verified."
             ]
           },
           "fact_refs": [
@@ -7707,7 +7744,10 @@
           ],
           "id": "intelligence-analysts.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "nbs-wages"
+            "intel-cas-wuhan",
+            "intel-cas-archive",
+            "nbs-wages",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7755,7 +7795,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "U.S. broader parent-category proxy wages in 2025 | O*NET explicitly states that the data come from Detectives and Criminal Investigators; pay at the 10 / 25 / 50 / 75 / 90 percentiles is $55,390 / 69,330 / 93,790 / 120,520 / 160,540 per year, not a single-occupation distribution for intelligence analysts."
+              "May 2025 OEWS median pay for parent SOC 33-3021 was USD 93,790 per year or USD 45.09 hourly. Annual P10/P25/P50/P75/P90 were USD 55,390/69,330/93,790/120,520/160,540. O*NET explicitly attributes the data to Detectives and Criminal Investigators; no analyst-only wage is shown."
             ]
           },
           "id": "intelligence-analysts.us-salary.career-snapshot-secondary-locale.2",
@@ -7797,12 +7837,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Industry definition | The O*NET industry page identifies Government as the main U.S. industry for this occupation. Industry distribution, recruitment demand, and annual openings are different indicators and cannot be combined into a single growth rate."
+              "Which pay figures apply to this job?"
             ]
           },
           "id": "intelligence-analysts.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-wages"
+            "onet-wages",
+            "intel-fbi",
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -7889,11 +7931,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Trial action | Practice with entirely fictional public materials: define an intelligence question, specify sources and search parameters, complete cross-checking and gap lists, and produce assessment conclusions and an evidence chain. Test through observable deliverables rather than relying only on an interest questionnaire."
+              "IA-07 tests whether you preserve dates, distinguish independent evidence from a copy and keep unknowns visible. Check your answer against the example."
             ]
           },
           "id": "intelligence-analysts.fit.riasec-fit-block.5",
           "source_refs": [
+            "intel-ia07",
             "onet-details"
           ],
           "type": "prose"
@@ -7903,12 +7946,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Conclusion | Activity preferences align more closely with a combination of investigative inquiry, following procedures, and a business perspective (O*NET interest code ICE). However, interest codes can only help design trials; they cannot determine hiring eligibility or performance."
+              "O*NET occupational interests: Investigative I 80, Conventional C 73, Enterprising E 47. The order describes interests in activities and sets no hiring, ability or authorization threshold."
             ]
           },
           "id": "intelligence-analysts.fit.riasec-fit-block.6",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "intel-ia07"
           ],
           "type": "prose"
         },
@@ -7986,7 +8030,9 @@
           },
           "id": "intelligence-analysts.risk.career-risk-cards.3",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "intel-pipl",
+            "intel-fbi"
           ],
           "type": "prose"
         },
@@ -8000,7 +8046,9 @@
           },
           "id": "intelligence-analysts.risk.career-risk-cards.4",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "intel-pipl",
+            "intel-fbi"
           ],
           "type": "prose"
         },
@@ -8031,16 +8079,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "How to become an intelligence analyst: preparation, training, and a path of responsibility. Begin with intelligence processes, source and verification methods, data analysis tools, and confidentiality and compliance awareness. Training or certificates do not automatically confer security clearance or disclosure authority."
+              "How to get started: compare employers and deliverables"
             ]
           },
           "id": "intelligence-analysts.path.career-path-block.1",
           "source_refs": [
-            "onet-cert",
-            "onet-summary",
-            "onet-training",
-            "source-pack-onet-localcert",
-            "source-pack-onet-localtraining"
+            "onet-details",
+            "intel-fbi",
+            "intel-cas-wuhan",
+            "intel-cas-archive"
           ],
           "type": "prose"
         },
@@ -8049,12 +8096,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Preparation information | O*NET education responses of 65% bachelor's degree, 13% master's degree, and 9% associate degree describe respondents' answers; Job Zone Four is not a uniform statutory entry requirement. First check the role's education, background checks, analysis tools, and supervision; separately confirm clearance, disclosure, and law enforcement action authority with the organization and jurisdiction. Courses or certificates do not confer these permissions."
+              "Check the U.S. employer. FBI education and experience requirements vary by role and grade. Its public process includes reasoning and writing assessments, followed by background investigation and training after a conditional offer. FBI applicants must be U.S. citizens and must obtain and maintain Top Secret SCI clearance."
             ]
           },
           "id": "intelligence-analysts.path.career-path-block.2",
           "source_refs": [
-            "onet-cert"
+            "intel-fbi",
+            "intel-fbi-eligibility"
           ],
           "type": "prose"
         },
@@ -8063,12 +8111,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Jurisdiction-specific requirements | For the United States, O*NET preparation information represents typical routes alongside job training. In mainland China, job entry, confidentiality, and personal information protection requirements are governed by relevant regulations and organizational policies and must be checked separately; they cannot be applied interchangeably."
+              "Compare two mainland science intelligence notices. Research assistant: one energy science and technology intelligence post. The notice requires doctoral education and lists relevant backgrounds such as energy, electrical or chemical engineering and information analysis skills. It gives no pay figure. Closed notice for one strategic frontier science intelligence researcher: tracking information, analyzing trends and supporting research advice. It is a research role. These examples show duties and requirements, not U.S. law enforcement equivalence."
             ]
           },
           "id": "intelligence-analysts.path.career-path-block.3",
           "source_refs": [
-            "onet-cert"
+            "intel-cas-wuhan",
+            "intel-cas-archive"
           ],
           "type": "prose"
         },
@@ -8077,12 +8126,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Qualification boundaries | Courses, certificates, or training do not automatically confer security clearance, disclosure authority, or authority to recommend action. Education, certificates, background checks, hiring, organizational authorization, security clearance, and disclosure authority are distinct statuses; specific requirements depend on the role and applicable rules."
+              "Employment, access, confidentiality and disclosure depend on employer rules and applicable law. Public science research differs from law enforcement intelligence in data access and operational authority."
             ]
           },
           "id": "intelligence-analysts.path.career-path-block.4",
           "source_refs": [
-            "onet-cert"
+            "intel-fbi",
+            "intel-cas-wuhan",
+            "intel-cas-archive",
+            "intel-pipl"
           ],
           "type": "prose"
         },
@@ -8091,12 +8143,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Responsibilities by stage | At entry and trial stages, search, organize, and make preliminary judgments under supervision and with limited permissions. At later stages, independently assess intelligence and prepare reports within authorization, taking responsibility for sources, verification, and conclusions."
+              "Paper self-check: one judgment, its basis and one open question. This is practice; it does not establish hiring, promotion or authorization."
             ]
           },
           "id": "intelligence-analysts.path.career-path-block.5",
           "source_refs": [
-            "onet-cert"
+            "intel-ia07"
           ],
           "type": "prose"
         },
@@ -8105,12 +8157,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Reviewable evidence | Demonstrate ability with entirely fictional public materials: define an intelligence question, specify sources and search parameters, complete cross-checking and gap lists, and produce assessment conclusions and an evidence chain. Do not use real case details, people involved in cases, or restricted information; state the basis and assumptions."
+              "IA-07: a fictional library’s weekend schedule. A: Monday’s library notice says it opens Saturday at 10:00. B: Tuesday’s neighborhood bulletin copies A and repeats 10:00. C: Friday’s library update changes Saturday to 12:00 and says nothing about Sunday. Write the Saturday judgment, its basis, the number of independent publishers supporting it and what remains unknown."
             ]
           },
           "id": "intelligence-analysts.path.career-path-block.6",
           "source_refs": [
-            "onet-cert"
+            "intel-ia07"
           ],
           "type": "prose"
         },
@@ -8119,12 +8171,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Next action | Complete a fictional intelligence assessment and evidence chain task package and review record. Ask an experienced person to challenge your source verification, gap labels, and authorization boundaries, then use the feedback to decide whether to invest further in this direction. Demonstrate ability through observable deliverables rather than course names."
+              "Reference: Saturday 12:00, based on C. Only the library independently supports the updated time; B copied A and is not independent confirmation. Sunday is unknown. Note Friday’s update and the open Sunday question in the handoff."
             ]
           },
           "id": "intelligence-analysts.path.career-path-block.7",
           "source_refs": [
-            "onet-cert"
+            "intel-ia07"
           ],
           "type": "prose"
         },
@@ -8133,12 +8185,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Transfer paths | Multi-source search and linking, cross-checking and evidence chains, data analysis tools, and documentation and communication are possible transferable skills. Security management, consulting, financial risk, and fraud investigation respectively require governance, consulting methods, financial quantitative analysis, or investigation procedures and qualifications. Proximity confers no authority."
+              "Choose your next step by deliverable: science or industry trend research, organizational risk analysis or law enforcement intelligence. Check domain knowledge, sample requirements, data access and supervision separately."
             ]
           },
           "id": "intelligence-analysts.path.career-path-block.8",
           "source_refs": [
-            "onet-cert"
+            "intel-fbi",
+            "intel-cas-wuhan",
+            "intel-cas-archive"
           ],
           "type": "prose"
         }
@@ -8169,12 +8223,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Overall employment projection for Detectives and Criminal Investigators (a broader parent-category proxy, not precise intelligence analyst statistics), not attributed to AI | O*NET 33-3021.06: employment of 120,500 in 2025, little or no change for 2025—2035 (a grouped label), and 7,800 projected average annual openings (including growth and replacement needs). Insufficient evidence: a national employment projection and a standardized recruitment sample for this occupation in China were not obtained; these figures cannot be converted into individual hiring probabilities."
+              "BLS projects U.S. parent SOC 33-3021 (Detectives and Criminal Investigators) from 120,500 jobs in 2025 to 120,700 in 2035, up about 200 (0.2%), with about 7,800 projected openings per year. These are not analyst-only projections or current vacancies."
             ]
           },
           "id": "intelligence-analysts.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "intel-bls-parent"
           ],
           "type": "prose"
         },
@@ -8183,12 +8237,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Overall employment projection for Detectives and Criminal Investigators (a broader parent-category proxy, not precise intelligence analyst statistics), not attributed to AI | O*NET 33-3021.06: employment of 120,500 in 2025, little or no change for 2025—2035 (a grouped label), and 7,800 projected average annual openings (including growth and replacement needs). Insufficient evidence: a national employment projection and a standardized recruitment sample for this occupation in China were not obtained; these figures cannot be converted into individual hiring probabilities."
+              "BLS projects U.S. parent SOC 33-3021 (Detectives and Criminal Investigators) from 120,500 jobs in 2025 to 120,700 in 2035, up about 200 (0.2%), with about 7,800 projected openings per year. These are not analyst-only projections or current vacancies."
             ]
           },
           "id": "intelligence-analysts.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-trends"
+            "intel-bls-parent"
           ],
           "type": "prose"
         },
@@ -8197,7 +8251,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Transferable skills | Shared foundations in related directions include multi-source search and linking, cross-checking and evidence chains, data analysis and tool use, confidentiality and compliance awareness, and records and communication. Each path still requires the tools, qualifications, and evidence of responsibility corresponding to its new outputs and obligations."
+              "Information risk identification, evidence chains, and report communication"
             ]
           },
           "id": "intelligence-analysts.market-signals.market-signal-card.4",
@@ -8211,7 +8265,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Skill gaps | Moving into neighboring fields such as security management, management consulting, security management specialist work, financial risk, or fraud examination requires the corresponding governance, consulting methods, compliance controls, quantitative analysis, or investigation procedure evidence. Proximity supports comparison of directions; it does not mean automatic job transfer or mutual recognition of qualifications."
+              "Organizational governance, budgets, and team management"
             ]
           },
           "id": "intelligence-analysts.market-signals.market-signal-card.5",
@@ -8234,7 +8288,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Work in O*NET 33-3021.06 primarily involves desk analysis and communication: email daily, 100%; indoors in a controlled environment daily, 87%; telephone conversations daily, 78%; face-to-face discussions daily, 70%; working with others extremely important, 64%; sitting continually or almost continually, 65%; a 40-hour workweek, 74%; and time pressure more than once a week, 48%.",
+                "answer": "In the O*NET work context survey, 100% of respondents reported using email daily and 87% reported working indoors in a controlled environment daily. For time pressure, 48% answered at least weekly but not daily, and 17% answered daily. The pace varies by employer and assignment.",
                 "id": "intelligence-analysts.faq.1",
                 "question": "What are the daily work and working hours like?",
                 "question_key": "career.faq.intelligence-analysts.daily-work",
@@ -8244,13 +8298,15 @@
                 ]
               },
               {
-                "answer": "This occupation focuses on collecting, cross-checking, and judging intelligence from multiple sources to support crime and threat prevention. Security managers handle governance and risk acceptance; management analysts focus on organizational improvement; security management specialists emphasize policy and compliance coordination; financial risk specialists quantify financial risks; and fraud examiners and investigators focus on individual investigations and evidence. Compare core outputs, authorized scope, and responsibility boundaries rather than interchanging titles.",
+                "answer": "Public mainland science intelligence roles include tracking research, analyzing trends and supporting research advice. U.S. law enforcement intelligence produces case or security assessments under agency authority. Both evaluate evidence, but access and operational duties differ.",
                 "id": "intelligence-analysts.faq.2",
                 "question": "How does this occupation differ from neighboring occupations?",
                 "question_key": "career.faq.intelligence-analysts.role-comparison",
                 "source_refs": [
                   "onet-details",
-                  "onet-custom"
+                  "intel-fbi",
+                  "intel-cas-wuhan",
+                  "intel-cas-archive"
                 ]
               },
               {
@@ -8264,13 +8320,13 @@
                 ]
               },
               {
-                "answer": "AI can assist with multi-source search and deduplication, classification of text and communication records, initial pattern and anomaly screening, and chart and report drafts. People remain responsible within their authorization for defining intelligence questions, judging source reliability, cross-checking conclusions, gaps and alternative hypotheses, external sharing, and action recommendations. Task exposure does not mean job replacement or widespread adoption; this page provides no replacement probability or timetable.",
+                "answer": "We did not verify occupation-specific generative AI adoption or effects on time, quality, pay or jobs. Use fictional IA-07 to try summarizing and comparing sources. Check whether a tool counts a copy as independent or invents a Sunday answer. Real access, analysis and sharing follow authorized processes.",
                 "id": "intelligence-analysts.faq.4",
                 "question": "How will AI affect this occupation?",
                 "question_key": "career.faq.intelligence-analysts.ai-impact",
                 "source_refs": [
-                  "ilo-ai",
-                  "onet-hot"
+                  "source-fermatmind-ai-rubric",
+                  "intel-ia07"
                 ]
               },
               {
@@ -8284,32 +8340,35 @@
                 ]
               },
               {
-                "answer": "Insufficient evidence: National Bureau of Statistics public wage materials for 2025 aggregate by industry or broad personnel category and do not establish a mainland China national occupational wage distribution precisely corresponding to O*NET 33-3021.06, Intelligence Analysts (recorded here as a visible data gap). This page does not extrapolate starting salaries, medians, or personal income across jurisdictions using industry averages, advertised salaries, or U.S. data.",
+                "answer": "A mainland national wage distribution for this occupation was not verified. In 2025, urban scientific research and technical services averaged CNY 182,064 per year in non-private units and CNY 83,560 in private units. The two CAS research notices did not specify pay.",
                 "id": "intelligence-analysts.faq.6",
                 "question": "What is the pay evidence for mainland China?",
                 "question_key": "career.faq.intelligence-analysts.china-pay",
                 "source_refs": [
-                  "nbs-wages"
+                  "nbs-wages",
+                  "intel-cas-wuhan",
+                  "intel-cas-archive"
                 ]
               },
               {
-                "answer": "This page does not fix static U.S. wage figures for this occupation (O*NET 33-3021.06 presents wages under the broader parent category Detectives and Criminal Investigators). Consult the current O*NET 33-3021.06 national wage page. Broader-category or regional figures are not starting salaries or individual take-home income.",
+                "answer": "May 2025 OEWS median pay for parent SOC 33-3021 was USD 93,790 per year or USD 45.09 hourly. Annual P10/P25/P50/P75/P90 were USD 55,390/69,330/93,790/120,520/160,540. O*NET explicitly attributes the data to Detectives and Criminal Investigators; no analyst-only wage is shown.",
                 "id": "intelligence-analysts.faq.7",
                 "question": "What is the U.S. pay evidence?",
                 "question_key": "career.faq.intelligence-analysts.us-pay",
                 "source_refs": [
-                  "onet-wages",
-                  "source-pack-onet-localwages"
+                  "onet-wages"
                 ]
               },
               {
-                "answer": "O*NET preparation information places this occupation in Job Zone Four: most require a four-year bachelor's degree (65% report a bachelor's degree, 13% a master's degree, and 9% an associate or other two-year degree). Entry should combine analysis training with verifiable work samples; education, certificates, background checks, hiring, organizational authorization, security clearance, and disclosure authority must be checked separately.",
+                "answer": "Check the U.S. employer. FBI education and experience requirements vary by role and grade. Its public process includes reasoning and writing assessments, followed by background investigation and training after a conditional offer. FBI applicants must be U.S. citizens and must obtain and maintain Top Secret SCI clearance. Compare two mainland science intelligence notices. Research assistant: one energy science and technology intelligence post. The notice requires doctoral education and lists relevant backgrounds such as energy, electrical or chemical engineering and information analysis skills. It gives no pay figure. Closed notice for one strategic frontier science intelligence researcher: tracking information, analyzing trends and supporting research advice. It is a research role. These examples show duties and requirements, not U.S. law enforcement equivalence.",
                 "id": "intelligence-analysts.faq.8",
                 "question": "What are the entry and training routes?",
                 "question_key": "career.faq.intelligence-analysts.education-path",
                 "source_refs": [
-                  "onet-training",
-                  "onet-cert"
+                  "intel-fbi",
+                  "intel-fbi-eligibility",
+                  "intel-cas-wuhan",
+                  "intel-cas-archive"
                 ]
               },
               {
@@ -8323,23 +8382,23 @@
                 ]
               },
               {
-                "answer": "O*NET presents U.S. employment and outlook under the broader parent category Detectives and Criminal Investigators: approximately 117,900 employed in 2024 and 117,100 in 2034, -1% growth for 2024—2034, and 7,800 projected openings. These are parent-occupation proxies, not projections for this precise occupation, and cannot be converted directly into recruitment volume or individual hiring probabilities.",
+                "answer": "BLS projects U.S. parent SOC 33-3021 (Detectives and Criminal Investigators) from 120,500 jobs in 2025 to 120,700 in 2035, up about 200 (0.2%), with about 7,800 projected openings per year. These are not analyst-only projections or current vacancies.",
                 "id": "intelligence-analysts.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.intelligence-analysts.outlook-transition",
                 "source_refs": [
-                  "onet-trends",
-                  "onet-summary"
+                  "intel-bls-parent"
                 ]
               },
               {
-                "answer": "This page does not draw employment or hiring conclusions. It provides a verifiable trial route: use entirely fictional public materials to define an intelligence question, specify sources and search parameters, complete cross-checking and gap lists, and produce assessment conclusions and an evidence chain. Decide whether to continue based on observable deliverables rather than only an interest questionnaire or promotional claims.",
+                "answer": "Try the three-notice IA-07 exercise, use the answer key to check source independence and unknowns, then read the two role examples.",
                 "id": "intelligence-analysts.faq.11",
                 "question": "Is this occupation worth exploring further?",
                 "question_key": "career.faq.intelligence-analysts.career-worth",
                 "source_refs": [
-                  "onet-details",
-                  "onet-summary"
+                  "intel-ia07",
+                  "intel-cas-wuhan",
+                  "intel-cas-archive"
                 ]
               },
               {
@@ -8355,6 +8414,17 @@
             ]
           },
           "id": "intelligence-analysts.sources.faq.1",
+          "source_refs": [
+            "intel-fbi",
+            "intel-fbi-eligibility",
+            "intel-cas-wuhan",
+            "intel-cas-archive",
+            "nbs-wages",
+            "onet-wages",
+            "intel-bls-parent",
+            "intel-ia07",
+            "source-fermatmind-ai-rubric"
+          ],
           "type": "faq"
         },
         {
@@ -8484,20 +8554,19 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Demonstrates that current public statistics aggregate by industry and do not establish a national occupational wage distribution precisely corresponding to the canonical occupation.",
-                  "The page being in Chinese does not establish a precise mainland China equivalent to this U.S. occupational classification; do not fill the gap with industry averages or U.S. data."
+                  "Scientific research and technical services averaged CNY 182,064 for urban non-private units and CNY 83,560 for private units, annual industry figures."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "The page being in Chinese does not establish a precise mainland China equivalent to this U.S. occupational classification; do not fill the gap with industry averages or U.S. data.",
+                "limitation": "Industry follows the employer’s main activity. These figures do not establish an analyst wage, offer or occupation crosswalk.",
                 "market": "Mainland China national scope",
-                "name": "Average Annual Wages of Employees in Urban Entities in 2025",
-                "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
+                "name": "NBS 2025 urban employee wages",
+                "period": "2025",
                 "publisher": "National Bureau of Statistics",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "scope": "contextual",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -8532,7 +8601,7 @@
                 "url": "https://www.onetonline.org/link/custom/33-3021.06"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Detailed tasks, work context, skills and work styles.",
                   "Employer tasks and local authorization vary."
@@ -8612,19 +8681,18 @@
                 "url": "https://www.onetonline.org/link/localtrends/33-3021.06"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Current wage measure shown for the occupation page.",
-                  "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay."
+                  "The page explicitly labels Detectives and Criminal Investigators as the source group. May 2025 national annual percentiles: USD 55,390/69,330/93,790/120,520/160,540; hourly: USD 26.63/33.33/45.09/57.94/77.18."
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
-                "limitation": "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay.",
+                "limitation": "U.S. SOC 33-3021, Detectives and Criminal Investigators; not a separate estimate for Intelligence Analysts (O*NET 33-3021.06).",
                 "market": "United States",
-                "name": "National Wages 33-3021.06 Intelligence Analysts",
-                "period": "2025 wage data; accessed 2026-08-31",
+                "name": "O*NET wages: parent SOC 33-3021",
+                "period": "May 2025",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localwages/33-3021.06"
               },
               {
@@ -8724,19 +8792,18 @@
                 "url": "https://www.onetonline.org/link/localtraining/33-3021.06"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Under this page's evidence policy, static wage figures are not transcribed; the source offers current national wage queries for 33-3021.06 by region and period.",
-                  "Retains the displayed period, employed population, geography, and units; failed direct access to BLS does not affect the O*NET page already opened."
+                  "The page explicitly labels Detectives and Criminal Investigators as the source group. May 2025 national annual percentiles: USD 55,390/69,330/93,790/120,520/160,540; hourly: USD 26.63/33.33/45.09/57.94/77.18."
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "BLS OEWS wage data presented by O*NET OnLine; this page does not fix static figures and requires a current query.",
+                "limitation": "U.S. SOC 33-3021, Detectives and Criminal Investigators; not a separate estimate for Intelligence Analysts (O*NET 33-3021.06).",
                 "market": "United States",
-                "name": "National Wages: 33-3021.06 - Intelligence Analysts",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "name": "O*NET wages: parent SOC 33-3021",
+                "period": "May 2025",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localwages/33-3021.06"
               },
               {
@@ -8757,20 +8824,166 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Collect and link information from multiple sources — 75/100; weight=1/3; intelligence-analysts.profile.responsibilities-block.4[0]",
-                  "Check timeliness and alternative hypotheses — 50/100; weight=1/3; intelligence-analysts.profile.responsibilities-block.4[0]",
-                  "Prepare assessments and share within authorization — 75/100; weight=1/3; intelligence-analysts.profile.responsibilities-block.4[0]"
+                  "General risks include confabulation, information integrity and human review."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "General risk management framework",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "Does not estimate occupational adoption, replacement or pay effects and grants no access or publishing authority.",
+                "name": "NIST Generative AI Risk Management Profile",
+                "period": "2024-07",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "120,500 jobs in 2025, 120,700 projected for 2035, about 200 net growth (0.2%) and about 7,800 projected annual occupational openings."
+                ],
+                "evidence_type": "U.S. employment projections",
+                "id": "intel-bls-parent",
+                "limitation": "U.S. SOC 33-3021, Detectives and Criminal Investigators; not a separate estimate for Intelligence Analysts (O*NET 33-3021.06).",
+                "market": "United States",
+                "name": "BLS Employment Projections Table 1.2: parent SOC 33-3021",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "FBI education and experience vary by role and grade. The public process includes screening, reasoning and writing assessments, interviews, a conditional offer, background investigation and training."
+                ],
+                "evidence_type": "Primary source",
+                "id": "intel-fbi",
+                "limitation": "FBI example only, not universal U.S. or global hiring rules.",
+                "market": "US",
+                "name": "FBI intelligence analyst careers and hiring",
+                "period": "Current public page",
+                "publisher": "FBI",
+                "scope": "contextual",
+                "url": "https://www.fbijobs.gov/careers/intelligence-analysts"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "FBI employment requires U.S. citizenship and the published eligibility criteria."
+                ],
+                "evidence_type": "Primary source",
+                "id": "intel-fbi-eligibility",
+                "limitation": "Specific eligibility depends on the posting and official review.",
+                "market": "US",
+                "name": "FBI general eligibility",
+                "period": "Current public page",
+                "publisher": "FBI",
+                "scope": "contextual",
+                "url": "https://www.fbijobs.gov/eligibility"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Research assistant: one energy science and technology intelligence post. The notice requires doctoral education and lists relevant backgrounds such as energy, electrical or chemical engineering and information analysis skills. It gives no pay figure."
+                ],
+                "evidence_type": "Primary source",
+                "id": "intel-cas-wuhan",
+                "limitation": "Dated research recruitment example. It does not establish current availability or law enforcement eligibility.",
+                "market": "中国大陆 / Mainland China",
+                "name": "CAS Wuhan recruitment notice (November 2026)",
+                "period": "2026-11",
+                "publisher": "CAS Wuhan Documentation and Information Center",
+                "scope": "contextual",
+                "url": "https://www.whlib.ac.cn/ver/nc/service/hd/hd0/202611/t20261103_8302815.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Closed notice for one strategic frontier science intelligence researcher: tracking information, analyzing trends and supporting research advice. It is a research role."
+                ],
+                "evidence_type": "Primary source",
+                "id": "intel-cas-archive",
+                "limitation": "Historical role example only. Do not generalize the notice’s credentials.",
+                "market": "中国大陆 / Mainland China",
+                "name": "CAS documentation center recruitment archive (2025 graduate cohort)",
+                "period": "2024-10",
+                "publisher": "CAS Documentation and Information Center / CAS Archives",
+                "scope": "contextual",
+                "url": "https://www.acas.ac.cn/xwdt/tzgg/202410/t20241015_7400384.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Fictional library opening notices for comparing dates, copied reports and uncertainty."
+                ],
+                "evidence_type": "Primary source",
+                "id": "intel-ia07",
+                "limitation": "No real person, place, case or restricted material.",
+                "market": "Editorial exercise",
+                "name": "FermatMind editorial exercise IA-07",
+                "period": "2026-11-09",
+                "publisher": "FermatMind Editorial",
+                "scope": "contextual",
+                "url": "#career-content-path"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Verify lawful grounds, purpose and necessity for applicable personal information processing."
+                ],
+                "evidence_type": "Primary source",
+                "id": "intel-pipl",
+                "limitation": "Does not replace organizational review for specific data, access, disclosure or cross-border processing.",
+                "market": "中国大陆 / Mainland China",
+                "name": "China Personal Information Protection Law",
+                "period": "2021-11-01",
+                "publisher": "Cyberspace Administration of China",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The role tracks policy and industry trends, prepares reports and supports project decisions. The business manager listing asks for a master’s degree or above."
+                ],
+                "evidence_type": "Primary source",
+                "id": "intel-longgang",
+                "limitation": "One posting does not set a field-wide education requirement.",
+                "market": "Mainland China",
+                "name": "Shenzhen Longgang: industry research business manager notice",
+                "period": "Dated public notice",
+                "publisher": "Longgang District government portal",
+                "scope": "contextual",
+                "url": "https://www.lg.gov.cn/bmzz/qcfjt/xxgk/rsxx/ryzp/content/post_12592895.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Duties cover information and network protection, vulnerability assessment and security controls."
+                ],
+                "evidence_type": "Primary source",
+                "id": "intel-cyber",
+                "limitation": "Its work, permissions and outputs differ from law enforcement intelligence.",
+                "market": "US",
+                "name": "O*NET 15-1212.00 Information Security Analysts",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1212.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Covers investigation of suspected legal violations and differs from the 33-3021.06 analyst specialty."
+                ],
+                "evidence_type": "U.S. occupational profile",
+                "id": "intel-investigators",
+                "limitation": "Compare duties; a job title does not establish individual authority.",
+                "market": "US",
+                "name": "O*NET: Detectives and Criminal Investigators",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/33-3021.00"
               }
             ]
           },
@@ -8814,62 +9027,82 @@
         "evidence_links": [
           {
             "href": {
-              "$source": "onet-cert",
+              "$source": "intel-investigators",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "label": "Sources for this occupation"
+            "label": "O*NET: Detectives and Criminal Investigators"
+          },
+          {
+            "href": {
+              "$source": "intel-cyber",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "intelligence-analysts.source-register.published.1"
+            },
+            "label": "O*NET 15-1212.00 Information Security Analysts"
+          },
+          {
+            "href": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "intelligence-analysts.source-register.published.1"
+            },
+            "label": "Intelligence Analysts detailed occupation profile"
           }
         ],
-        "evidence_note": "Proximity is for comparing directions only; it does not mean automatic job transfer or mutual recognition of qualifications.",
+        "evidence_note": "Use the O*NET links below for U.S. investigators and information security analysts, and the entry section for FBI intelligence analysis. The mainland comparisons use the CAS Wuhan energy intelligence research assistant notice and the Shenzhen Longgang industry research notice. Both are linked in the market section below. Related work does not imply equivalent credentials.",
         "heading": "Comparison with neighboring occupations",
-        "intro": "Compare core outputs, responsibility boundaries, and working patterns; do not interchange roles based on names.",
+        "intro": "Compare sources, deliverables and authority before choosing a role.",
         "rows": [
           {
-            "关键区别": "Core outputs are security governance, budgets, and risk acceptance.",
-            "更适合什么选择": "Compare if you wish to take responsibility for security governance and resource decisions.",
+            "关键区别": "Investigative and enforcement authority follows the actual role. Analysts produce judgments and briefings.",
+            "更适合什么选择": "Check agency hiring if your interest is investigative or enforcement duties.",
             "核心工作与产出": {
               "$item": "intelligence-analysts.direction-comparison.adjacent-career-comparison-table.2",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": "Security Managers"
+            "职业方向": "Criminal investigation (U.S. agency example)"
           },
           {
-            "关键区别": "Core outputs are analysis of organizational problems and recommendations for improvement.",
-            "更适合什么选择": "Compare if you wish to consult on organizational analysis.",
+            "关键区别": "Focuses on systems, information protection and controls.",
+            "更适合什么选择": "Compare it if technical systems, vulnerabilities and controls interest you.",
             "核心工作与产出": {
               "$item": "intelligence-analysts.direction-comparison.adjacent-career-comparison-table.3",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": "Management Analysts"
+            "职业方向": "Information security analysis (15-1212)"
           },
           {
-            "关键区别": "Core outputs emphasize security policies, controls, and compliance coordination.",
-            "更适合什么选择": "Compare preferences for policy controls or intelligence evidence.",
+            "关键区别": "Follows research and public science sources rather than law enforcement cases.",
+            "更适合什么选择": "Compare it if you like literature, research tracking and technical trends.",
             "核心工作与产出": {
               "$item": "intelligence-analysts.direction-comparison.adjacent-career-comparison-table.4",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": "Security Management Specialists"
+            "职业方向": "Mainland science intelligence research"
           },
           {
-            "关键区别": "Core outputs are financial risk identification and quantitative assessment.",
-            "更适合什么选择": "Compare if you wish to quantify financial risks.",
+            "关键区别": "Focuses on policy, industries and project planning.",
+            "更适合什么选择": "Compare it if you want to apply trends to project or industry decisions.",
             "核心工作与产出": {
               "$item": "intelligence-analysts.direction-comparison.adjacent-career-comparison-table.5",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": "Financial Risk Specialists"
+            "职业方向": "Mainland industry research"
           }
         ],
         "transition": "Next, test the direction through observable deliverables."
@@ -8898,16 +9131,16 @@
         "authority_links": [
           {
             "来源": {
-              "$source": "ilo-ai",
+              "$source": "source-fermatmind-ai-rubric",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
             "类型": "Official or research sources",
-            "适用范围": "Use only under the source's original definitions",
+            "适用范围": "Does not estimate occupational adoption, replacement or pay effects and grants no access or publishing authority.",
             "链接": {
-              "$source": "ilo-ai",
+              "$source": "source-fermatmind-ai-rubric",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8916,16 +9149,16 @@
           },
           {
             "来源": {
-              "$source": "onet-cert",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
             "类型": "Official or research sources",
-            "适用范围": "Use only under the source's original definitions",
+            "适用范围": "Employer tasks and local authorization vary.",
             "链接": {
-              "$source": "onet-cert",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8934,16 +9167,16 @@
           },
           {
             "来源": {
-              "$source": "onet-custom",
+              "$source": "intel-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
             "类型": "Official or research sources",
-            "适用范围": "Use only under the source's original definitions",
+            "适用范围": "Does not replace organizational review for specific data, access, disclosure or cross-border processing.",
             "链接": {
-              "$source": "onet-custom",
+              "$source": "intel-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8977,7 +9210,7 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "Global exposure evidence is not adoption, job-loss probability, regulation or authorization evidence.",
+            "使用限制": "Does not establish when jobs will be eliminated or what the adoption rate is.",
             "来源": {
               "$source": "ilo-ai",
               "block": "source-register",
@@ -8985,8 +9218,8 @@
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "研究对象": "Source coverage",
-            "结论": "Supports bounded judgments only",
+            "研究对象": "Generative AI task exposure across occupations",
+            "结论": "Examines the degree to which tasks may be exposed.",
             "链接": {
               "$source": "ilo-ai",
               "block": "source-register",
@@ -8996,18 +9229,18 @@
             }
           },
           {
-            "使用限制": "Directory entries are not state licenses, employer authorization or proof of universal requirement.",
+            "使用限制": "Does not measure tool performance or employment.",
             "来源": {
-              "$source": "onet-cert",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "研究对象": "Source coverage",
-            "结论": "Supports bounded judgments only",
+            "研究对象": "U.S. intelligence analysts, O*NET 33-3021.06",
+            "结论": "Describes work such as checking sources, analyzing information and reporting judgments.",
             "链接": {
-              "$source": "onet-cert",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9015,18 +9248,18 @@
             }
           },
           {
-            "使用限制": "US occupation evidence; it does not establish China mapping, pay or authorization.",
+            "使用限制": "Does not isolate intelligence analysts or attribute changes to AI.",
             "来源": {
-              "$source": "onet-custom",
+              "$source": "intel-bls-parent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "研究对象": "Source coverage",
-            "结论": "Supports bounded judgments only",
+            "研究对象": "U.S. detectives and criminal investigators, parent SOC 33-3021",
+            "结论": "Provides employment projections for the broader group in 2025–2035.",
             "链接": {
-              "$source": "onet-custom",
+              "$source": "intel-bls-parent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9076,14 +9309,14 @@
           {
             "回答": "No. Task exposure, organizational adoption, productivity changes, and job numbers are four distinct measurement objects; none can be inferred from another.",
             "来源": {
-              "$source": "onet-cert",
+              "$source": "ilo-ai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-cert",
+              "$source": "ilo-ai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9377,7 +9610,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "ilo-ai",
+              "$source": "intel-fbi",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9385,17 +9618,17 @@
             },
             "id": "intelligence-analysts.display.source.0",
             "label": {
-              "$source": "ilo-ai",
+              "$source": "intel-fbi",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "Generative AI task exposure and transformation boundaries, not an automation rate or evidence of enterprise deployment."
+            "scope": "FBI example only, not universal U.S. or global hiring rules."
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "intel-cas-wuhan",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9403,17 +9636,17 @@
             },
             "id": "intelligence-analysts.display.source.1",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "intel-cas-wuhan",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "Chinese wage aggregates by industry or broad personnel category; no national distribution corresponding to this precise occupation was established."
+            "scope": "Dated research recruitment example. It does not establish current availability or law enforcement eligibility."
           },
           {
             "href": {
-              "$source": "onet-cert",
+              "$source": "intel-cas-archive",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9421,17 +9654,17 @@
             },
             "id": "intelligence-analysts.display.source.2",
             "label": {
-              "$source": "onet-cert",
+              "$source": "intel-cas-archive",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "The precise occupational scope of O*NET 33-3021.06; does not establish Chinese qualifications."
+            "scope": "Historical role example only. Do not generalize the notice’s credentials."
           },
           {
             "href": {
-              "$source": "onet-custom",
+              "$source": "intel-fbi-eligibility",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9439,13 +9672,13 @@
             },
             "id": "intelligence-analysts.display.source.3",
             "label": {
-              "$source": "onet-custom",
+              "$source": "intel-fbi-eligibility",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "Hot technology mentions do not establish occupational capability, adoption, or the extent of automation."
+            "scope": "Specific eligibility depends on the posting and official review."
           }
         ],
         "tracks": [
@@ -9461,18 +9694,18 @@
                   "type": "prose"
                 },
                 "readiness_evidence": {
-                  "$item": "intelligence-analysts.path.career-path-block.6",
-                  "block": "path",
-                  "copy_key": "career.item.career-path-block",
-                  "type": "prose"
-                },
-                "responsibility": {
                   "$item": "intelligence-analysts.path.career-path-block.5",
                   "block": "path",
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "role": "Entry and trial stage 1"
+                "responsibility": {
+                  "$item": "intelligence-analysts.path.career-path-block.6",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "Paper evidence review"
               },
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
@@ -9484,92 +9717,92 @@
                 },
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Entry and trial stage 2"
+                "role": "Choose a role"
               },
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
                 "next_moves": "Obtain the necessary tools, qualifications, and evidence of responsibility.",
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Entry and trial stage 3"
+                "role": "Learn with an employer"
               },
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
                 "next_moves": "Obtain the necessary tools, qualifications, and evidence of responsibility.",
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Entry and trial stage 4"
+                "role": "Confirm review and sharing"
               }
             ],
-            "title": "Entry and trials"
+            "title": "Entry exploration and IA-07 paper exercise"
           },
           {
             "id": "independent-analysis",
             "stages": [
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
-                "next_moves": "Obtain the necessary tools, qualifications, and evidence of responsibility.",
+                "next_moves": "Check the original publisher, date and revision.",
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Independent delivery stage 1"
+                "role": "Maintain a source log"
               },
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
-                "next_moves": "Obtain the necessary tools, qualifications, and evidence of responsibility.",
+                "next_moves": "Attach the basis and remaining uncertainty to key judgments.",
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Independent delivery stage 2"
+                "role": "Write a reviewable brief"
               },
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
-                "next_moves": "Obtain the necessary tools, qualifications, and evidence of responsibility.",
+                "next_moves": "Keep corrections and version differences.",
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Independent delivery stage 3"
+                "role": "Get a second review"
               },
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
-                "next_moves": "Obtain the necessary tools, qualifications, and evidence of responsibility.",
+                "next_moves": "Confirm the distribution scope and leave unresolved points visible.",
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Independent delivery stage 4"
+                "role": "Hand off to approved readers"
               }
             ],
-            "title": "Independent analysis"
+            "title": "Independent public-source analysis"
           },
           {
             "id": "expanded-authority",
             "stages": [
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
-                "next_moves": "Obtain the necessary tools, qualifications, and evidence of responsibility.",
+                "next_moves": "Build science or industry knowledge and check employer training.",
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Expanded responsibility stage 1"
+                "role": "Choose a specialization"
               },
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
-                "next_moves": "Obtain the necessary tools, qualifications, and evidence of responsibility.",
+                "next_moves": "Confirm data access and purpose first.",
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Expanded responsibility stage 2"
+                "role": "Use internal material"
               },
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
-                "next_moves": "Obtain the necessary tools, qualifications, and evidence of responsibility.",
+                "next_moves": "Record disagreements and identify the approving role.",
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Expanded responsibility stage 3"
+                "role": "Coordinate review"
               },
               {
                 "credentials": "Verify under specific jurisdictional and employer rules.",
-                "next_moves": "Obtain the necessary tools, qualifications, and evidence of responsibility.",
+                "next_moves": "Say what the evidence supports and retain its limits.",
                 "readiness_evidence": "Retain reviewable deliverables.",
                 "responsibility": "Perform responsibilities within job authorization.",
-                "role": "Expanded responsibility stage 4"
+                "role": "Support a decision"
               }
             ],
-            "title": "Expanded authorization"
+            "title": "Take on assigned responsibility"
           }
         ]
       },
@@ -9722,14 +9955,14 @@
           }
         ],
         "direct_answer": "Risks must be handled through their triggers, consequences, controls, and escalation boundaries.",
-        "evidence_scope": "Risk scenarios are editorial analyses based on occupational tasks; sources support task context, not accident rates or statutory permission. Check local rules for specific qualifications and authorization.",
+        "evidence_scope": "O*NET describes U.S. occupational tasks; the FBI is a U.S. agency example. The Personal Information Protection Law applies to covered processing in mainland China. The NIST profile addresses generative AI risks.",
         "heading": "Work risks and boundaries for intelligence analysts",
         "risks": [
           {
             "affected_roles": "Intelligence Analysts",
             "consequence": "May cause incorrect judgments and misleading conclusions.",
             "evidence_refs": [
-              "intelligence-analysts.display.source.3"
+              "intelligence-analysts.display.source.0"
             ],
             "id": "risk-1",
             "mitigation": "Cross-check multiple sources, label sources and timeliness, and document verification.",
@@ -9761,7 +9994,7 @@
             "affected_roles": "Intelligence Analysts",
             "consequence": "May cause leaks, harm to cases, and compliance risks.",
             "evidence_refs": [
-              "intelligence-analysts.display.source.3"
+              "intelligence-analysts.display.source.2"
             ],
             "id": "risk-3",
             "mitigation": "Share within authorization and the minimum necessary scope, retain sharing records, and handle sensitive information under medium and location requirements.",
@@ -9777,11 +10010,11 @@
             "affected_roles": "Intelligence Analysts",
             "consequence": "May create compliance risks and harm rights and interests.",
             "evidence_refs": [
-              "intelligence-analysts.display.source.3"
+              "intelligence-analysts.display.source.1"
             ],
             "id": "risk-4",
             "mitigation": "Handle information within the minimum necessary and authorized scope and retain processing records.",
-            "scenario": "Processing or sending information about people involved in cases and related individuals beyond authorization.",
+            "scenario": "In mainland China, processing personal information beyond the specified purpose, necessary scope or applicable authority.",
             "title": {
               "$item": "intelligence-analysts.risk.career-risk-cards.4",
               "block": "risk",
@@ -9793,7 +10026,7 @@
             "affected_roles": "Intelligence Analysts",
             "consequence": "May cause unstable conclusions and rework.",
             "evidence_refs": [
-              "intelligence-analysts.display.source.3"
+              "intelligence-analysts.display.source.0"
             ],
             "id": "risk-5",
             "mitigation": "Process in batches according to procedures and retain review records.",
@@ -9809,7 +10042,7 @@
             "affected_roles": "Intelligence Analysts",
             "consequence": "May override confidentiality requirements, professional opinions, or organizational authorization.",
             "evidence_refs": [
-              "intelligence-analysts.display.source.3"
+              "intelligence-analysts.display.source.2"
             ],
             "id": "risk-6",
             "mitigation": "First stop the relevant step and hand over facts, impacts, and unresolved issues to an authorized responsible person.",
@@ -9821,7 +10054,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "ilo-ai",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9829,17 +10062,17 @@
             },
             "id": "intelligence-analysts.display.source.0",
             "label": {
-              "$source": "ilo-ai",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "Generative AI task exposure and transformation boundaries, not an automation rate or evidence of enterprise deployment."
+            "scope": "Employer tasks and local authorization vary."
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "intel-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9847,17 +10080,17 @@
             },
             "id": "intelligence-analysts.display.source.1",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "intel-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "Chinese wage aggregates by industry or broad personnel category; no national distribution corresponding to this precise occupation was established."
+            "scope": "Does not replace organizational review for specific data, access, disclosure or cross-border processing."
           },
           {
             "href": {
-              "$source": "onet-cert",
+              "$source": "intel-fbi",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9865,17 +10098,17 @@
             },
             "id": "intelligence-analysts.display.source.2",
             "label": {
-              "$source": "onet-cert",
+              "$source": "intel-fbi",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "The precise occupational scope of O*NET 33-3021.06; does not establish Chinese qualifications."
+            "scope": "FBI example only, not universal U.S. or global hiring rules."
           },
           {
             "href": {
-              "$source": "onet-custom",
+              "$source": "source-fermatmind-ai-rubric",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9883,13 +10116,13 @@
             },
             "id": "intelligence-analysts.display.source.3",
             "label": {
-              "$source": "onet-custom",
+              "$source": "source-fermatmind-ai-rubric",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "Sources support occupational task or work context background; risk cards are editorial scenario analyses and do not establish accident rates, statutory qualifications in China, or AI adoption effects."
+            "scope": "Does not estimate occupational adoption, replacement or pay effects and grants no access or publishing authority."
           }
         ]
       },
@@ -9897,19 +10130,19 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "Mainland China pay definitions",
-              "数值": "No reliable figure currently available",
-              "说明": "A bounded search did not establish a reliable mapping."
+              "指标": "Mainland occupation wages",
+              "数值": "Not verified",
+              "说明": "Industry pay and two notices do not establish a distribution."
             },
             {
-              "指标": "Mainland China pay definitions",
-              "数值": "No reliable figure currently available",
-              "说明": "A bounded search did not establish a reliable mapping."
+              "指标": "Related annual industry averages",
+              "数值": "CNY 182,064 / 83,560",
+              "说明": "Urban non-private / private scientific research and technical services, 2025."
             },
             {
-              "指标": "Mainland China pay definitions",
-              "数值": "No reliable figure currently available",
-              "说明": "A bounded search did not establish a reliable mapping."
+              "指标": "Job notices",
+              "数值": "No amounts posted",
+              "说明": "Check the employer, role and original posting."
             }
           ],
           "china_ai_row": {
@@ -9948,16 +10181,16 @@
           ],
           "china_industry_table": [
             {
-              "行业": "Public administration, social security, and social organizations (industry section)",
-              "需求": "No reliable figure currently available"
+              "行业": "Scientific research and technical services",
+              "需求": "CNY 182,064/year in urban non-private units (2025)"
             },
             {
-              "行业": "Information transmission, software, and information technology services (industry section)",
-              "需求": "No reliable figure currently available"
+              "行业": "Scientific research and technical services",
+              "需求": "CNY 83,560/year in urban private units (2025)"
             },
             {
-              "行业": "Other industries not listed separately",
-              "需求": "No reliable figure currently available"
+              "行业": "Coverage",
+              "需求": "Classified by the employer’s main activity; not occupation pay."
             }
           ],
           "china_intl": {
@@ -10010,16 +10243,16 @@
           "china_salary_note": "Mainland China definitions are separate from those for the United States, global contexts, and specific employers; do not combine markets.",
           "china_salary_table": [
             {
-              "城市/区间": "Insufficient evidence: no reliable mapping established",
-              "月薪参考": "No reliable figure currently available"
+              "城市/区间": "Mainland occupational wages",
+              "月薪参考": "A national occupation distribution was not verified."
             },
             {
-              "城市/区间": "Insufficient evidence: no reliable mapping established",
-              "月薪参考": "No reliable figure currently available"
+              "城市/区间": "Wuhan | energy science intelligence",
+              "月薪参考": "The November 2026 notice did not give a pay figure."
             },
             {
-              "城市/区间": "Insufficient evidence: no reliable mapping established",
-              "月薪参考": "No reliable figure currently available"
+              "城市/区间": "CAS documentation center | strategic frontier research",
+              "月薪参考": "The closed 2025 graduate cohort notice did not give a pay figure."
             }
           ],
           "china_soc_row": {
@@ -10051,7 +10284,7 @@
           "ui": {
             "ai_heading": "Boundaries for AI and pay judgments",
             "driver_heading": "Influencing factors",
-            "official_heading": "Official statistical definitions",
+            "official_heading": "Mainland job notices and the pay data gap",
             "scenario_caption": "This scenario illustrates definitions only; it is not an individual quote.",
             "scenario_heading": "Scenario reference",
             "scenario_interpretation_label": "Explanation",
@@ -10116,12 +10349,12 @@
           },
           {
             "指标": "Employment · Growth",
-            "数值": "Little or no change (a grouped label) (2025—2035)",
+            "数值": "Up 0.2% (2025–2035)",
             "说明": "Detectives and Criminal Investigators (a broader parent-category proxy, not precise intelligence analyst statistics); 2025 wages / 2025—2035 overall projections, not attributed to AI."
           },
           {
             "指标": "Employment · Openings",
-            "数值": "7,800 per year (2025—2035, including growth and replacement needs)",
+            "数值": "About 7,800 projected openings per year",
             "说明": "Detectives and Criminal Investigators (a broader parent-category proxy, not precise intelligence analyst statistics); 2025 wages / 2025—2035 overall projections, not attributed to AI."
           }
         ],
@@ -10152,7 +10385,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "Little or no change (a grouped label) (2025—2035, overall employment projection, not attributed to AI)",
+        "growth": "0.2% (2025–2035, U.S. parent SOC 33-3021)",
         "heading": {
           "$item": "intelligence-analysts.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10165,30 +10398,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "accessed 2026-08-30",
+        "industry_period": "Check the occupation scope, date and specific role",
         "industry_rows": [
           {
-            "industry": "Broad occupational category",
-            "median": "No reliable figure currently available",
-            "note": "The scope requires separate verification."
+            "industry": "U.S. national parent group",
+            "median": "USD 93,790/year median",
+            "note": "Covers detectives and criminal investigators (33-3021)."
           },
           {
-            "industry": "Broad occupational category",
-            "median": "No reliable figure currently available",
-            "note": "The scope requires separate verification."
+            "industry": "State or area",
+            "median": "Use the O*NET local wages lookup",
+            "note": "Check whether the source is still the parent group. Local does not mean analyst-only."
           },
           {
-            "industry": "Broad occupational category",
-            "median": "No reliable figure currently available",
-            "note": "The scope requires separate verification."
+            "industry": "Employer",
+            "median": "Read the posting and pay grade",
+            "note": "FBI and other employers depend on actual role and grade. National pay is not an offer."
           },
           {
-            "industry": "Broad occupational category",
-            "median": "No reliable figure currently available",
-            "note": "The scope requires separate verification."
+            "industry": "Mainland China",
+            "median": "No verified occupational wage distribution",
+            "note": "Read industry averages separately from job notices."
           }
         ],
-        "industry_value_label": "Industry value",
+        "industry_value_label": "Available figures and records",
         "interpretation_heading": {
           "$item": "intelligence-analysts.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10215,7 +10448,7 @@
         ],
         "median": "$93,790 per year (2025, Detectives and Criminal Investigators, a broader parent-category proxy, not precise intelligence analyst statistics)",
         "outlook_heading": "Employment outlook and openings",
-        "outlook_period": "2025 base year / 2025—2035 projection; checked on 2026-10-11",
+        "outlook_period": "2025–2035",
         "wage_column_labels": [
           "Percentile",
           "Annual reference",
@@ -10325,12 +10558,13 @@
         },
         "outlook_evidence": [
           {
-            "geography": "Source coverage",
-            "horizon": "Current source period",
-            "interpretation": "Recruitment samples, employment size, and openings must be interpreted separately.",
-            "limitation": "Cannot serve as an individual employment guarantee.",
-            "metric": "Market signals",
-            "occupation_scope": "Intelligence Analysts",
+            "fact_ref": "employment-projection",
+            "geography": "United States",
+            "horizon": "2025–2035",
+            "interpretation": "No separate analyst estimate.",
+            "limitation": "No separate analyst estimate.",
+            "metric": "Parent occupation projection",
+            "occupation_scope": "U.S. parent SOC 33-3021",
             "value": {
               "$item": "intelligence-analysts.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10339,29 +10573,31 @@
             }
           },
           {
-            "geography": "Source coverage",
-            "horizon": "Current source period",
-            "interpretation": "Recruitment samples, employment size, and openings must be interpreted separately.",
-            "limitation": "Cannot serve as an individual employment guarantee.",
-            "metric": "Market signals",
-            "occupation_scope": "Intelligence Analysts",
-            "value": "No reliable figure currently available"
+            "fact_ref": "us-openings-2024-2034",
+            "geography": "United States",
+            "horizon": "2025–2035",
+            "interpretation": "Not individual hiring odds or current vacancies.",
+            "limitation": "Not individual hiring odds or current vacancies.",
+            "metric": "Parent occupation annual openings",
+            "occupation_scope": "U.S. parent SOC 33-3021",
+            "value": "About 7,800"
           },
           {
-            "geography": "Source coverage",
-            "horizon": "Current source period",
-            "interpretation": "Recruitment samples, employment size, and openings must be interpreted separately.",
-            "limitation": "Cannot serve as an individual employment guarantee.",
-            "metric": "Market signals",
-            "occupation_scope": "Intelligence Analysts",
-            "value": "No reliable figure currently available"
+            "geography": "Mainland China",
+            "horizon": "2026 recruitment notice",
+            "interpretation": "The Wuhan notice illustrates a research role in energy science intelligence.",
+            "limitation": "A single notice cannot establish national employment or current availability.",
+            "metric": "Research role examples",
+            "occupation_scope": "Mainland science intelligence examples",
+            "source_ref": "intel-cas-wuhan",
+            "value": "Energy science intelligence research assistant"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "ilo-ai",
+              "$source": "intel-bls-parent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10369,17 +10605,17 @@
             },
             "id": "intelligence-analysts.display.source.0",
             "label": {
-              "$source": "ilo-ai",
+              "$source": "intel-bls-parent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "Generative AI task exposure and transformation boundaries, not an automation rate or evidence of enterprise deployment."
+            "scope": "U.S. SOC 33-3021, Detectives and Criminal Investigators; not a separate estimate for Intelligence Analysts (O*NET 33-3021.06)."
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "intel-longgang",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10387,17 +10623,17 @@
             },
             "id": "intelligence-analysts.display.source.1",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "intel-longgang",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "Chinese wage aggregates by industry or broad personnel category; no national distribution corresponding to this precise occupation was established."
+            "scope": "Dated industry research comparison; not a science intelligence or law enforcement job."
           },
           {
             "href": {
-              "$source": "onet-cert",
+              "$source": "intel-cas-wuhan",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10405,17 +10641,17 @@
             },
             "id": "intelligence-analysts.display.source.2",
             "label": {
-              "$source": "onet-cert",
+              "$source": "intel-cas-wuhan",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "The precise occupational scope of O*NET 33-3021.06; does not establish Chinese qualifications."
+            "scope": "Dated research recruitment example. It does not establish current availability or law enforcement eligibility."
           },
           {
             "href": {
-              "$source": "onet-custom",
+              "$source": "intel-cas-archive",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10423,13 +10659,13 @@
             },
             "id": "intelligence-analysts.display.source.3",
             "label": {
-              "$source": "onet-custom",
+              "$source": "intel-cas-archive",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "intelligence-analysts.source-register.published.1"
             },
-            "scope": "Hot technology mentions do not establish occupational capability, adoption, or the extent of automation."
+            "scope": "Historical role example only. Do not generalize the notice’s credentials."
           }
         ],
         "transitions": [
@@ -10482,14 +10718,6 @@
             "target_slug": "fraud-examiners-investigators-and-analysts",
             "target_title": "Fraud Examiners, Investigators, and Analysts",
             "transition_distance": "Closer direction; investigation procedure evidence needed"
-          },
-          {
-            "capability_gaps": "Organizational governance, budgets, and team management",
-            "shared_capabilities": "Information risk identification, evidence chains, and report communication",
-            "target_href": "/zh/career/jobs/security-managers",
-            "target_slug": "security-managers",
-            "target_title": "Security Managers",
-            "transition_distance": "Greater distance; governance evidence needed"
           }
         ]
       },
@@ -11098,23 +11326,17 @@
       },
       "source_card": {
         "eeat_signals": {
-          "author": "FermatMind research workflow",
+          "author": "FermatMind Editorial",
           "source": {
-            "$source": "ilo-ai",
+            "$source": "onet-details",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "name",
             "item": "intelligence-analysts.source-register.published.1"
           },
-          "updated_at": {
-            "$source": "ilo-ai",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "period",
-            "item": "intelligence-analysts.source-register.published.1"
-          }
+          "updated_at": "2026-11-09"
         },
-        "note": "Checked on 2026-10-11 | Tasks / Education in O*NET33-3021.06 support the precise occupational context. National wages and employment explicitly use Detectives and Criminal Investigators (a broader parent-category proxy, not precise intelligence analyst statistics), covering 2025 wages and 2025—2035 projections respectively. The public administration industry average of CNY 119,465 in NBS2025 Table 2 is an industry reference only. AI is task-level editorial analysis; the shared registry and protected FAQ retain earlier definitions."
+        "note": "Checked November 9, 2026. U.S. tasks use the precise O*NET role; U.S. pay and projections cover the parent occupation. Mainland job notices give examples and industry pay is context only."
       },
       "work_context_block": {
         "$item": "intelligence-analysts.profile.work-context-block.5",
@@ -11124,6 +11346,12 @@
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.interest_code_heading": "How to read I–C–E",
+      "interface.outlook.evidence_heading": "Two kinds of evidence",
+      "interface.quick_decision.caution_heading": "When should you think twice about a career in intelligence analysis?",
+      "interface.quick_decision.suit_heading": "Who may be a good fit for intelligence analysis?"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11191,14 +11419,14 @@
       },
       {
         "derivation": null,
-        "display_value": "-1% growth (2024—2034, broader parent-category proxy presented by O*NET, not a projection for this precise occupation)",
+        "display_value": "0.2%",
         "fact_id": "employment-projection",
         "market": "United States",
         "measure": "employment projection measure",
-        "occupation_scope": "Intelligence Analysts page; scope preserved",
-        "period": "current O*NET/BLS employment data; accessed 2026-08-31",
+        "occupation_scope": "U.S. SOC 33-3021, Detectives and Criminal Investigators; not a separate estimate for Intelligence Analysts (O*NET 33-3021.06).",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "intel-bls-parent"
         ]
       },
       {
@@ -11215,72 +11443,72 @@
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: this page does not fix static U.S. wage figures for this occupation (O*NET presents them under a broader parent category); consult the current O*NET 33-3021.06 national wage page",
+        "display_value": "Parent group median USD 93,790/year; USD 45.09/hour",
         "fact_id": "us-wage",
         "market": "United States",
         "measure": "annual wage measure",
-        "occupation_scope": "Intelligence Analysts page; scope preserved",
-        "period": "2025 wage data; accessed 2026-08-31",
+        "occupation_scope": "U.S. SOC 33-3021, Detectives and Criminal Investigators; not a separate estimate for Intelligence Analysts (O*NET 33-3021.06).",
+        "period": "May 2025",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "-1% growth (2024—2034, O*NET's broader parent-category proxy Detectives and Criminal Investigators, not a projection for this precise occupation)",
+        "display_value": "0.2%",
         "fact_id": "us-growth-2024-2034",
         "market": "US",
         "measure": "projected employment percent change (broader-group proxy)",
-        "occupation_scope": "Broader group proxy (Detectives and Criminal Investigators)",
-        "period": "2024-2034 outlook",
+        "occupation_scope": "U.S. SOC 33-3021, Detectives and Criminal Investigators; not a separate estimate for Intelligence Analysts (O*NET 33-3021.06).",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "intel-bls-parent"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 117,900 employed (2024, broader parent-category proxy presented by O*NET, not this precise occupation's figure)",
+        "display_value": "120,500",
         "fact_id": "us-employment-2024",
         "market": "US",
         "measure": "employment base (broader-group proxy)",
-        "occupation_scope": "Broader group proxy (Detectives and Criminal Investigators)",
-        "period": "2024 employment base",
+        "occupation_scope": "U.S. SOC 33-3021, Detectives and Criminal Investigators; not a separate estimate for Intelligence Analysts (O*NET 33-3021.06).",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "intel-bls-parent"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 117,100 projected in 2034 (broader parent-category proxy presented by O*NET)",
+        "display_value": "120,700",
         "fact_id": "us-project-2034",
         "market": "US",
         "measure": "projected employment (broader-group proxy)",
-        "occupation_scope": "Broader group proxy (Detectives and Criminal Investigators)",
-        "period": "2024-2034 outlook",
+        "occupation_scope": "U.S. SOC 33-3021, Detectives and Criminal Investigators; not a separate estimate for Intelligence Analysts (O*NET 33-3021.06).",
+        "period": "2035",
         "source_refs": [
-          "onet-trends"
+          "intel-bls-parent"
         ]
       },
       {
         "derivation": null,
-        "display_value": "7,800 projected openings (2024—2034, broader parent-category proxy presented by O*NET, including growth and replacement needs)",
+        "display_value": "About 7,800 projected per year",
         "fact_id": "us-openings-2024-2034",
         "market": "US",
         "measure": "projected job openings (broader-group proxy)",
-        "occupation_scope": "Broader group proxy (Detectives and Criminal Investigators)",
-        "period": "2024-2034 outlook",
+        "occupation_scope": "U.S. SOC 33-3021, Detectives and Criminal Investigators; not a separate estimate for Intelligence Analysts (O*NET 33-3021.06).",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "intel-bls-parent"
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
+        "derivation": null,
+        "display_value": "No verified occupational impact measure",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "AI evidence status",
         "occupation_scope": "Intelligence Analysts",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -11289,40 +11517,40 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI evidence status"
     },
     "badges": [
-      "Intelligence Analysts · Sources, Verification, and Confidentiality Boundaries",
-      "Source scope · Statistical definitions · Human review",
-      "U.S. wages not fixed · Employment uses a broader parent-category proxy · China gaps retained according to the evidence"
+      "Source comparison, judgments and briefings",
+      "Distinguish law enforcement from research intelligence",
+      "IA-07: paper evidence review"
     ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-wage",
         "key": "us_pay",
-        "label": "U.S. pay reference (not fixed here; see current O*NET query)"
+        "label": "U.S. parent group median (no analyst-only figure)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2024-2034",
         "key": "us_growth",
-        "label": "U.S. employment growth (2024—2034, -1%, broader parent-category proxy)"
+        "label": "U.S. parent group projected change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "U.S. employment (2024, broader parent-category proxy)"
+        "label": "U.S. parent group jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "U.S. openings (2024—2034, broader parent-category proxy)"
+        "label": "U.S. parent group projected annual openings"
       },
       {
         "availability": "missing",
@@ -11336,17 +11564,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What intelligence analysts do, how to enter and train, their authorization and risk boundaries, and which tasks AI may change. This page corresponds to O*NET-SOC 33-3021.06, interest code ICE, and Job Zone Four. U.S. wages are not fixed and a query entry point is provided; employment and outlook use broader parent-category proxies. Mainland China wage gaps are recorded according to the evidence."
+      "text": "See how intelligence analysts check sources and write judgments. Compare U.S. law enforcement and mainland research roles, check pay scope and try a fictional brief."
     },
     "title": {
       "availability": "available",
-      "text": "Evaluating Intelligence Analysis as a Career: Work, Entry, and Risk Boundaries"
+      "text": "Intelligence Analysts: Duties, Entry Paths and Pay Data"
     }
   },
-  "source_content_sha256": "490ccbd2f153a35db0f4a621ab144aa63320cd98a67c407d4f369cef84edddc0",
+  "source_content_sha256": "844c199197ebbad9835c17be43c7e15117db26cfca55883dbf988a2f4486e9f4",
   "subject": {
     "canonical_slug": "intelligence-analysts",
     "name": "Intelligence Analysts",
-    "summary": "Intelligence analysts collect, analyze, or evaluate information from multiple sources such as law enforcement databases, surveillance, intelligence networks, or geographic information systems, and use intelligence to anticipate and prevent organized criminal activity such as terrorism. Work includes defining intelligence questions, collecting and connecting information, cross-checking and identifying gaps, forming reviewable judgments and reports, and sharing or recommending within authorization. Under this page's evidence policy, U.S. wages are not fixed as static figures; a current O*NET query entry point is provided. O*NET presents employment and outlook under the broader parent category Detectives and Criminal Investigators (approximately 117,900 employed in 2024 and 117,100 in 2034, -1% growth for 2024—2034, and 7,800 projected openings), labeled throughout as not representing this precise occupation. Exact occupational wages for mainland China were not obtained and are recorded as a visible data gap."
+    "summary": "Intelligence analysts compare sources, distinguish established facts from uncertain judgments and brief authorized readers. U.S. law enforcement intelligence differs from mainland science and industry research. U.S. wages and projections cover the broader occupation only."
   }
 }

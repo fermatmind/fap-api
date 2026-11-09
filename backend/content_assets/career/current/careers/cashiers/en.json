@@ -26,6 +26,12 @@
       "fact:cash-industry-3-2025": {
         "status": "pending_mapping"
       },
+      "fact:cash-mile-2026-pay": {
+        "status": "pending_mapping"
+      },
+      "fact:cash-shanghai-2026-pay": {
+        "status": "pending_mapping"
+      },
       "fact:cash-us-growth-2025-2035": {
         "status": "pending_mapping"
       },
@@ -15885,8 +15891,14 @@
         "status": "unfilled"
       },
       "interface.fit.interest_code_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.fit.interest_code_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.fit.interest_experience_heading": {
         "ref": null,
@@ -15985,12 +15997,24 @@
         "status": "unfilled"
       },
       "interface.quick_decision.experiment_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.experiment_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -23406,7 +23430,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "One-line judgment: a cashier is not just someone who scans an item and takes money and gives change; the role completes a transaction that is verifiable, traceable and clearly accounted for at cashier positions in retail and other non-financial establishments — receiving payment by cash, cheque, bank card, mobile payment and vouchers, checking items, prices, promotions and tax amounts, issuing receipts and handling refunds and change, counting the starting till and reconciling the total transaction amount, preparing shift reconciliations and non-monetary records, keeping the checkout area tidy and restocked, and handling and escalating customer complaints and abnormal transactions according to institutional rules. O*NET lists this occupation as Job Zone 1-2 (little or no preparation to some preparation, SVP below 6.0), with an interest code of CE (Conventional, Enterprising), and the occupation page marks Bright Outlook. The core boundary is that cashiers are usually not a uniformly licensed occupation, but refund and discount authorization and final transaction determination are usually decided by institutional rules and authorization; where age-restricted purchases by minors, food safety and premises hygiene, cash and voucher management, and customer and payment information protection are involved, separate requirements apply under the applicable jurisdiction and institutional procedures; the output of this occupation is accurate transactions with traceable vouchers and reconciliation records, and it does not replace the determination of refunds, discrepancies and compliance matters by operator, compliance and finance positions."
+              "Clarify who can authorize refunds and resolve till differences before accepting responsibility for them."
             ]
           },
           "id": "cashiers.quick-decision.fit-decision-checklist.1",
@@ -23417,7 +23441,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: you can keep pricing and change accurate under continuous customer flow and long periods of standing, and are willing to check and document every refund and discount according to the rules (the O*NET work context shows 96% are in contact with others continuously, 79% have face-to-face discussions every day, 78% have telephone conversations every day, 67% make decisions every day, 51% stand continuously or almost continuously, 46% continuously handle and control objects and tools by hand, 27% consider repeating the same tasks extremely important and 26% very important), you can handle dissatisfied customers or checkout and payment failures through the process instead of relaxing the rules yourself, and you are willing to reconcile cash and transaction discrepancies at shift handover and report them truthfully."
+              "Try CA-18 in the entry section: calculate change, handle an unresolved payment and draft a closing handoff. Finish your draft before reading the answers."
             ]
           },
           "id": "cashiers.quick-decision.fit-decision-checklist.2",
@@ -23428,7 +23452,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing high investment first: you have not yet completed a full closed-loop exercise that runs from counting the starting till at the beginning of a shift, checking out and verifying prices and promotions, handling refunds and change, to reconciling and handing over at the end of the shift; or you are unwilling to check prices, promotions and payment results transaction by transaction, unwilling to follow the rules on refund and discount authorization, unwilling to escalate through the process when a customer is dissatisfied or equipment fails and instead just get through it; and do not treat having helped out at a convenience store as proof that you already have cash reconciliation, refund authorization, age and food safety verification and discrepancy handling ability."
+              "Explore this role if you like checking prices and payments, counting change and calmly explaining exceptions."
             ]
           },
           "id": "cashiers.quick-decision.fit-decision-checklist.3",
@@ -23439,7 +23463,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education, qualifications and authorization must be checked separately: O*NET lists this occupation as Job Zone 1-2 (little or no preparation to some preparation, SVP below 6.0), and the education survey shows 44% of respondents think a high school diploma or equivalent is needed, 37% think less than a high school diploma is enough and 9% think a postsecondary education certificate is needed; the occupation page lists no national certification and no registered apprenticeship position titles approved by the U.S. Department of Labor, which shows that the entry threshold for this occupation comes mainly from on-the-job training and institutional rules, not industry certification. In the United States, cashiers are usually not a uniformly licensed occupation, but positions involving the sale of age-restricted goods such as alcohol and tobacco, food safety and premises hygiene, and cash and voucher management have separate requirements under state and local regulations and institutional rules; in Chinese mainland, the related duties may fall within retail, food service and store service positions, subject to the Law of the People's Republic of China on the Protection of Consumer Rights and Interests, the Personal Information Protection Law of the People's Republic of China, and public rules on food safety and premises hygiene. Education and training, industry certification, statutory qualifications and practice eligibility, job hiring and authorization, and authority over refunds, discounts and discrepancy determinations are five different things."
+              "BLS lists no formal credential as typical for U.S. entry, but employers may prefer a high school diploma or equivalent. Store policy sets register, refund and price override authority. U.S. tobacco sales have a federal age rule. Check the relevant jurisdiction for alcohol and other restricted products."
             ]
           },
           "id": "cashiers.quick-decision.fermat-decision-card.6",
@@ -23875,7 +23899,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 41-2011.00 (SOC 41-2011, cashiers within the sales and related major group), listed as Job Zone 1-2 (little or no preparation to some preparation, SVP below 6.0), and the occupation page marks Bright Outlook; the interest code is CE (Conventional 87, Enterprising 44), and the specific interest areas corresponding to Conventional are led by sales (30), personal service (28), accounting (23) and office work (14); the O*NET industry distribution shows 82% of this occupation in retail trade, 11% in accommodation and food services and 7% in other industries. The official U.S. scope of 41-2011.00 is to receive and pay out money in non-financial establishment settings, possibly using electronic scanning equipment and cash registers or related equipment, and possibly processing credit card and debit card transactions and verifying cheques. The 2022 edition of China's occupational classification code lists cashiers as 4-01-02-04, with work covering cash and cheques, bank cards and mobile payments, consumer vouchers, revenue accounting and discrepancy reporting, and product scanning and handover together with discount and return authorization procedures. The duties overlap with the U.S. SOC41-2011 but the scope must still be checked position by position, and the same name cannot be used to infer that the two countries' statistics and authority are completely equivalent."
+              "O*NET-SOC 41-2011.00 (SOC 41-2011, cashiers within the sales and related major group), listed as Job Zone 1-2 (little or no preparation to some preparation, SVP below 6.0), and the occupation page marks Bright Outlook; the O*NET summary interest code is CE; its detailed ratings are led by Conventional 87, Enterprising 44 and Realistic 32; a separate specific-interest table lists sales (30), personal service (28), accounting (23) and office work (14); the O*NET industry distribution shows 82% of this occupation in retail trade, 11% in accommodation and food services and 7% in other industries. The official U.S. scope of 41-2011.00 is to receive and pay out money in non-financial establishment settings, possibly using electronic scanning equipment and cash registers or related equipment, and possibly processing credit card and debit card transactions and verifying cheques. The 2022 edition of China's occupational classification code lists cashiers as 4-01-02-04, with work covering cash and cheques, bank cards and mobile payments, consumer vouchers, revenue accounting and discrepancy reporting, and product scanning and handover together with discount and return authorization procedures. The duties overlap with the U.S. SOC41-2011 but the scope must still be checked position by position, and the same name cannot be used to infer that the two countries' statistics and authority are completely equivalent."
             ]
           },
           "id": "cashiers.profile.career-quick-answers-block.24",
@@ -23941,7 +23965,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The work is mainly standing work and interpersonal contact on the store floor. The O*NET work context shows: 96% are in contact with others continuously; 79% have face-to-face discussions every day; 78% have telephone conversations every day; 67% make decisions every day; 51% stand continuously or almost continuously; 68% work indoors in a controlled environment every day; 46% continuously handle and control objects and tools by hand; 25% consider precision or accuracy extremely important and 46% very important; 27% consider repeating the same tasks extremely important and 26% very important; 12% have a lot of freedom in how they make decisions, 31% some freedom and 50% limited freedom; 34% have very high responsibility for the work results of others; 26% deal with unpleasant, angry or discourteous people every day and 58% at least once a week; 21% experience conflict situations at least once a week; 13% face time pressure every day; 49% say the work is not automated at all; 28% consider the consequences of error serious, 14% fairly serious and 51% not serious at all. The work must follow institutional safety and cash management rules and equipment instructions, and night or solo shifts, cash handling and holding must comply with the institution's loss prevention and personal safety procedures."
+              "The work is mainly standing work and interpersonal contact on the store floor. The O*NET work context shows: 96% are in contact with others continuously; 79% have face-to-face discussions every day; 78% have telephone conversations every day; 67% make decisions every day; 51% stand continuously or almost continuously; 68% work indoors in a controlled environment every day; 46% continuously handle and control objects and tools by hand; 25% consider precision or accuracy extremely important and 46% very important; 27% consider repeating the same tasks extremely important and 26% very important; 12% have a lot of freedom in how they make decisions, 31% some freedom and 50% limited freedom; 34% report high responsibility for the work results of others; 26% deal with unpleasant, angry or discourteous people every day and 58% at least weekly but not daily; 21% report conflict at least weekly but not daily; 13% face time pressure every day; 49% say the work is not automated at all; 28% consider the consequences of error serious, 14% fairly serious and 51% not serious at all. The work must follow institutional safety and cash management rules and equipment instructions, and night or solo shifts, cash handling and holding must comply with the institution's loss prevention and personal safety procedures."
             ]
           },
           "id": "cashiers.profile.career-quick-answers-block.30",
@@ -23996,7 +24020,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Cashiers (O*NET-SOC 41-2011.00, Cashiers) receive and pay out money in non-financial establishment settings, possibly using electronic scanning equipment, cash registers or related equipment, and possibly processing credit card and debit card transactions and verifying cheques. Daily work includes: receiving payments by cash, cheque, credit card, voucher or automatic debit; greeting customers entering the establishment; issuing receipts and handling refunds, points and change owed; assisting customers by providing information and resolving complaints; monitoring the checkout to ensure there is enough cash and adequate staffing; using calculators and cash registers to determine prices of goods, services and admissions and to total bills; answering incoming calls; answering customers' questions about processes and policies; using a paging system to request information or assistance; helping customers find where items are; processing merchandise returns and exchanges; keeping the checkout area clean and orderly and performing general cleaning duties such as mopping and emptying bins; calculating the total amount received in a given period and checking it against total sales; counting the cash in the drawer at the start of the shift to ensure the amount is correct and there is enough change; issuing and redeeming vouchers and coupons; charging expenses to customer or patient accounts; calculating and recording the total transaction amount; weighing and pricing items sold by weight; sorting, counting and bundling cash and coins; periodically preparing balance sheets of transaction amounts and counts; preparing and maintaining non-monetary reports and records; supervising others and providing on-the-job training; assisting in other areas of the store; selling tickets and other goods to customers; stocking shelves and organizing returns and marking prices; bagging, crating, packing and gift-wrapping and preparing parcels for shipping; cashing cheques for customers; and providing carry-out assistance to customers after the transaction. It carries responsibility for pricing, receiving payment, giving change, vouchers, reconciliation and recording, but does not replace the determination of pricing and promotions, refund authority and discrepancy handling by operator, finance and compliance positions."
+              "Cashiers (O*NET-SOC 41-2011.00, Cashiers) receive and pay out money in non-financial establishment settings, possibly using electronic scanning equipment, cash registers or related equipment, and possibly processing credit card and debit card transactions and verifying cheques. Daily work includes: receiving payments by cash, cheque, credit card, voucher or automatic debit; greeting customers entering the establishment; issuing receipts and handling refunds, store credit and change owed; assisting customers by providing information and resolving complaints; monitoring the checkout to ensure there is enough cash and adequate staffing; using calculators and cash registers to determine prices of goods, services and admissions and to total bills; answering incoming calls; answering customers' questions about processes and policies; using a paging system to request information or assistance; helping customers find where items are; processing merchandise returns and exchanges; keeping the checkout area clean and orderly and performing general cleaning duties such as mopping and emptying bins; calculating the total amount received in a given period and checking it against total sales; counting the cash in the drawer at the start of the shift to ensure the amount is correct and there is enough change; issuing and redeeming vouchers and coupons; charging expenses to customer or patient accounts; calculating and recording the total transaction amount; weighing and pricing items sold by weight; sorting, counting and bundling cash and coins; periodically preparing balance sheets of transaction amounts and counts; preparing and maintaining non-monetary reports and records; supervising others and providing on-the-job training; assisting in other areas of the store; selling tickets and other goods to customers; stocking shelves and organizing returns and marking prices; bagging, crating, packing and gift-wrapping and preparing parcels for shipping; cashing cheques for customers; and providing carry-out assistance to customers after the transaction. It carries responsibility for pricing, receiving payment, giving change, vouchers, reconciliation and recording, but does not replace the determination of pricing and promotions, refund authority and discrepancy handling by operator, finance and compliance positions."
             ]
           },
           "id": "cashiers.profile.definition-block.11",
@@ -24007,7 +24031,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET occupational identity and tasks: O*NET-SOC 41-2011.00 Cashiers, page updated in 2026, listed as Job Zone 1-2 (little or no preparation to some preparation, SVP below 6.0), and the occupation page marks Bright Outlook. The official duties are 'Receive and disburse money in establishments other than financial institutions. May use electronic scanners, cash registers, or related equipment. May process credit or debit card transactions and validate checks.'; the page lists 28 tasks, of which 12 are core tasks, covering receiving payments by cash, cheque, credit card, voucher or automatic debit (94), greeting customers entering the establishment (93), issuing receipts and handling refunds, points and change (92), assisting customers by providing information and resolving complaints (88), monitoring the checkout to ensure adequate cash and staffing (87), using calculators and cash registers to determine prices and total bills (86), answering incoming calls (85), answering customers' questions about processes and policies (85), using a paging system to request information or assistance (82), helping customers find where items are (82), processing merchandise returns and exchanges (76) and keeping the checkout area tidy and performing cleaning duties such as mopping and emptying bins (75); the rest are supplemental tasks, including calculating the total amount received in a period against total sales (92), counting the cash in the drawer at the start of the shift to ensure the correct amount and enough change (90), issuing and redeeming vouchers and coupons (88), charging expenses to customer or patient accounts (85), calculating and recording the total transaction amount (85), weighing and pricing items sold by weight (85), sorting, counting and bundling cash and coins (85), periodically preparing balance sheets of transaction amounts and counts (84), preparing and maintaining non-monetary reports and records (82), supervising others and providing on-the-job training (81), assisting in other areas of the store (80), selling tickets and other goods (80), stocking shelves and organizing returns and marking prices (79), bagging, crating, packing and gift-wrapping and preparing parcels for shipping (79), cashing cheques for customers (78) and providing carry-out assistance after the transaction (74)."
+              "O*NET occupational identity and tasks: O*NET-SOC 41-2011.00 Cashiers, page updated in 2026, listed as Job Zone 1-2 (little or no preparation to some preparation, SVP below 6.0), and the occupation page marks Bright Outlook. The official duties are 'Receive and disburse money in establishments other than financial institutions. May use electronic scanners, cash registers, or related equipment. May process credit or debit card transactions and validate checks.'; the page lists 28 tasks, of which 12 are core tasks, covering receiving payments by cash, cheque, credit card, voucher or automatic debit (94), greeting customers entering the establishment (93), issuing receipts and handling refunds, store credit and change (92), assisting customers by providing information and resolving complaints (88), monitoring the checkout to ensure adequate cash and staffing (87), using calculators and cash registers to determine prices and total bills (86), answering incoming calls (85), answering customers' questions about processes and policies (85), using a paging system to request information or assistance (82), helping customers find where items are (82), processing merchandise returns and exchanges (76) and keeping the checkout area tidy and performing cleaning duties such as mopping and emptying bins (75); the rest are supplemental tasks, including calculating the total amount received in a period against total sales (92), counting the cash in the drawer at the start of the shift to ensure the correct amount and enough change (90), issuing and redeeming vouchers and coupons (88), charging expenses to customer or patient accounts (85), calculating and recording the total transaction amount (85), weighing and pricing items sold by weight (85), sorting, counting and bundling cash and coins (85), periodically preparing balance sheets of transaction amounts and counts (84), preparing and maintaining non-monetary reports and records (82), supervising others and providing on-the-job training (81), assisting in other areas of the store (80), selling tickets and other goods (80), stocking shelves and organizing returns and marking prices (79), bagging, crating, packing and gift-wrapping and preparing parcels for shipping (79), cashing cheques for customers (78) and providing carry-out assistance after the transaction (74)."
             ]
           },
           "id": "cashiers.profile.onet-structured-fields-block.1",
@@ -24051,7 +24075,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The detail page lists 8 software skill categories, and Hot Technologies lists 6 additional specific technologies: Safari, Firefox and Edge at 2% each, and Excel, Office and Windows at below 1% each (Lightcast2025 U.S. national job postings); categories and item counts, frequency and deployment or personal thresholds are kept separate. Work activities are led by getting information (80), performing for or working directly with the public (76), establishing and maintaining interpersonal relationships (53), communicating with people outside the organization (51) and communicating with supervisors, peers or subordinates (51); basic skills are led by active listening and speaking (50 each), critical thinking and reading comprehension (44 each) and mathematics and monitoring (41 each), with writing 28 and science 6; transferable skills are led by service orientation (53), social perceptiveness (50), coordination (44) and time management (41); knowledge is led by customer and personal service (76), English language (59), sales and marketing (52), administration and management (47), mathematics (47) and clerical (46); the interest code is CE (Conventional, Enterprising); work styles are led by dependability (77), integrity (69), social orientation (66) and attention to detail and cooperation (64 each)."
+              "The detail page lists 8 software skill categories, and Hot Technologies lists 6 additional specific technologies: Safari, Firefox and Edge at 2% each, and Excel, Office and Windows at below 1% each (Lightcast2025 U.S. national job postings); categories and item counts, frequency and deployment or personal thresholds are kept separate. Work activities are led by getting information (80), performing for or working directly with the public (76), establishing and maintaining interpersonal relationships (53), communicating with people outside the organization (51) and communicating with supervisors, peers or subordinates (51); basic skills are led by active listening and speaking (50 each), critical thinking and reading comprehension (44 each) and mathematics and monitoring (41 each), with writing 28 and science 6; transferable skills are led by service orientation (53), social perceptiveness (50), coordination (44) and time management (41); knowledge is led by customer and personal service (76), English language (59), sales and marketing (52), administration and management (47), mathematics (47) and clerical (46); the O*NET summary interest code is CE, with Realistic third in the detailed ratings (32); work styles are led by dependability (77), integrity (69), social orientation (66) and attention to detail and cooperation (64 each)."
             ]
           },
           "id": "cashiers.profile.onet-structured-fields-block.5",
@@ -24063,7 +24087,7 @@
           "data": {
             "entries": [
               "Checkout and settlement｜receiving payment by cash, bank card, mobile payment and vouchers and checking items, prices, promotions and tax amounts｜payment, change and payment voucher records.",
-              "Vouchers and change｜issuing receipts and handling refunds, points and change owed and double-checking the amount｜receipts, refund vouchers and redemption records.",
+              "Vouchers and change｜issuing receipts and handling refunds, store credit and change owed and double-checking the amount｜receipts, refund vouchers and redemption records.",
               "Customer service｜greeting and directing customers, answering questions about products, processes and policies and helping customers find items｜customer enquiry and guidance records.",
               "Returns, exchanges and complaints｜processing merchandise returns and exchanges and receiving and resolving complaints｜return, exchange and complaint handling records.",
               "Reconciliation and handover｜counting the starting till at the start of the shift and checking the total transaction amount and total sales and preparing reports｜till count and shift reconciliation records.",
@@ -24078,7 +24102,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "Collaboration and communication｜96% are in contact with others continuously; 79% have face-to-face discussions every day; 78% have telephone conversations every day.\nWorking hours and pace｜13% face time pressure every day; 51% stand continuously or almost continuously.\nDecision-making and autonomy｜12% have a lot of freedom in how they make decisions, 31% some freedom and 50% limited freedom; authority over refunds, discounts and discrepancy determinations is set by institutional rules and written authorization.\nResponsibility and impact｜25% consider precision or accuracy extremely important and 46% very important; 34% have very high responsibility for the work results of others; 28% consider the consequences of error serious.\nEnvironment and workspace｜68% work indoors in a controlled environment every day; 27% are exposed to distracting or uncomfortable noise every day; 18% work outdoors every day and are exposed to all weather conditions; 49% say the work is not automated at all.\nPhysical and job demands｜51% stand continuously or almost continuously; 46% continuously handle and control objects and tools by hand; 23% perform repetitive motions continuously and 25% more than half the time; 23% spend relatively little time sitting and 49% never sit.\nProtection and safety｜the work is mainly standing on the store floor and interpersonal contact, and the protection focus is loss prevention and personal safety for cash holding and night shifts; positions involving cleaning and food areas follow the institution's requirements on protective and hygiene measures.\nInterpersonal contact and conflict｜26% deal with unpleasant, angry or discourteous people every day and 58% at least once a week; 21% experience conflict situations at least once a week; 27% consider repeating the same tasks extremely important and 26% very important.\nRecords and handover｜payment, change and payment voucher records, receipts, refund vouchers and redemption records, till counts and shift reconciliation records, and anomaly, discrepancy and escalation records must be complete and traceable, and shift handover must set out open transactions, follow-ups and equipment anomalies."
+              "Collaboration and communication｜96% are in contact with others continuously; 79% have face-to-face discussions every day; 78% have telephone conversations every day.\nWorking hours and pace｜13% face time pressure every day; 51% stand continuously or almost continuously.\nDecision-making and autonomy｜12% have a lot of freedom in how they make decisions, 31% some freedom and 50% limited freedom; authority over refunds, discounts and discrepancy determinations is set by institutional rules and written authorization.\nResponsibility and impact｜25% consider precision or accuracy extremely important and 46% very important; 34% report high responsibility for the work results of others; 28% consider the consequences of error serious.\nEnvironment and workspace｜68% work indoors in a controlled environment every day; 27% are exposed to distracting or uncomfortable noise every day; 18% work outdoors every day and are exposed to all weather conditions; 49% say the work is not automated at all.\nPhysical and job demands｜51% stand continuously or almost continuously; 46% continuously handle and control objects and tools by hand; 23% perform repetitive motions continuously and 25% more than half the time; 23% spend relatively little time sitting and 49% never sit.\nProtection and safety｜the work is mainly standing on the store floor and interpersonal contact, and the protection focus is loss prevention and personal safety for cash holding and night shifts; positions involving cleaning and food areas follow the institution's requirements on protective and hygiene measures.\nInterpersonal contact and conflict｜26% deal with unpleasant, angry or discourteous people every day and 58% at least weekly but not daily; 21% report conflict at least weekly but not daily; 27% consider repeating the same tasks extremely important and 26% very important.\nRecords and handover｜payment, change and payment voucher records, receipts, refund vouchers and redemption records, till counts and shift reconciliation records, and anomaly, discrepancy and escalation records must be complete and traceable, and shift handover must set out open transactions, follow-ups and equipment anomalies."
             ]
           },
           "id": "cashiers.profile.work-context-block.1",
@@ -24188,34 +24212,40 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET-SOC 41-2011.00 occupation summary",
+                "entity": "O*NET Counter and Rental Clerks",
                 "id": "link-1",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/41-2011.00"
+                "url": "https://www.onetonline.org/link/summary/41-2021.00"
               },
               {
-                "entity": "O*NET-SOC 41-2011.00 detailed profile (tasks and work activities)",
+                "entity": "O*NET Retail Salespersons",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/41-2011.00"
+                "url": "https://www.onetonline.org/link/summary/41-2031.00"
               },
               {
-                "entity": "O*NET-SOC 41-2011.00 industry distribution",
+                "entity": "O*NET Customer Service Representatives",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/41-2011.00"
+                "url": "https://www.onetonline.org/link/summary/43-4051.00"
               },
               {
-                "entity": "O*NET-SOC 41-2011.00 technology list (employer recruitment technology signals)",
+                "entity": "O*NET Tellers",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/41-2011.00"
+                "url": "https://www.onetonline.org/link/summary/43-3071.00"
               },
               {
-                "entity": "O*NET-SOC 41-2011.00 related occupation list",
+                "entity": "O*NET Stockers and Order Fillers",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/41-2011.00"
+                "url": "https://www.onetonline.org/link/summary/53-7065.00"
+              },
+              {
+                "entity": "O*NET First-Line Supervisors of Retail Sales Workers",
+                "id": "link-6",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/41-1011.00"
               }
             ]
           },
@@ -24238,7 +24268,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Evidence note: occupational directions and core outputs are based on O*NET-SOC 41-2011.00 and the official descriptions of the adjacent entries (U.S. framing); the adjacent occupations listed by this evidence route are pharmacy assistants, first-line supervisors of retail sales workers, first-line supervisors of non-retail sales workers, gambling change booth cashiers and counter and rental clerks, while retail salespersons, customer service representatives, bank tellers and stockers and order fillers are same-chain directions among the O*NET related occupations; work scope and refund and discount authority, cash and voucher management, age-restricted purchase limits and customer information protection must be verified separately under each jurisdiction and institution and contract; this page does not present any direction as a shortcut to a career change."
+              "The six O*NET pages below support the duties in the table. Check actual assignments and authority with the employer."
             ]
           },
           "id": "cashiers.direction-comparison.adjacent-career-comparison-table.9",
@@ -24260,7 +24290,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "This direction specialises in rental business, deposits and returns, and receipt and payment is only one part of the business; this occupation centres on receiving payment, giving change, vouchers and reconciliation for retail merchandise transactions, and the merchandise does not involve return or loss determination."
+              "Rental clerks handle rental terms, deposits and items due back. Cashiers focus on retail payments and reconciliation and may process merchandise returns when authorized."
             ]
           },
           "id": "cashiers.direction-comparison.adjacent-career-comparison-table.11",
@@ -24348,7 +24378,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Customer service representatives specialise in receiving, tracking and resolving issues and usually do not handle cash or payment settlement; this occupation handles settlement, refunds and vouchers on the store floor at the same time, and the two have different objects of responsibility."
+              "Customer service representatives mainly resolve inquiries, complaints and account issues, and may also take payments, issue refunds or adjust bills. Cashiers mainly complete checkout, issue receipts and reconcile the till at handover. Some positions combine both."
             ]
           },
           "id": "cashiers.direction-comparison.adjacent-career-comparison-table.19",
@@ -24875,7 +24905,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Conclusion: reviewable steps such as candidate item recognition, prompts for price and promotion checks, calculating change and totals, and organizing reconciliation sheets and anomaly lists can be assisted by tools, but there is no official evidence that this replaces responsibility for physical identification and weighing and pricing double-checks, refund and discount authorization, age and identity verification, customer dispute handling and discrepancy determination. AI exposure is not the same as automation rate or job disappearance; task exposure, the degree of process automation and employment numbers are three different concepts. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Self-checkout is a form of workflow automation. Use fictional CA-18 to see whether a tool flags duplicate payment attempts and till discrepancies. Staff still verify payments and handle refunds or discrepancies under store policy. No occupation-level adoption or impact of generative AI was verified."
             ]
           },
           "id": "cashiers.ai-impact.ai-impact-table.18",
@@ -25205,7 +25235,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Core tasks include receiving payments by cash, cheque, credit card, voucher or automatic debit (94), greeting customers entering the establishment (93), issuing receipts and handling refunds, points and change (92), assisting customers by providing information and resolving complaints (88) and monitoring the checkout to ensure adequate cash and staffing (87); work activities are led by getting information (80) and performing for or working directly with the public (76)."
+              "Core tasks include receiving payments by cash, cheque, credit card, voucher or automatic debit (94), greeting customers entering the establishment (93), issuing receipts and handling refunds, store credit and change (92), assisting customers by providing information and resolving complaints (88) and monitoring the checkout to ensure adequate cash and staffing (87); work activities are led by getting information (80) and performing for or working directly with the public (76)."
             ]
           },
           "id": "cashiers.ai-impact.ai-impact-table.48",
@@ -25667,7 +25697,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Errors in price, promotion and tax amount conversion and deviations in change and refund calculations cause customer losses, a mismatch between books and stock and compliance risk (25% consider precision or accuracy extremely important and 46% very important; 34% have very high responsibility for the work results of others)."
+              "Errors in price, promotion and tax amount conversion and deviations in change and refund calculations cause customer losses, a mismatch between books and stock and compliance risk (25% consider precision or accuracy extremely important and 46% very important; 34% report high responsibility for the work results of others)."
             ]
           },
           "id": "cashiers.ai-impact.ai-impact-table.90",
@@ -26205,7 +26235,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "No recruitment sample with a verifiable statistical framing and duties was obtained this round, so no recruitment price is provided."
+              "The two dated job notices show what those employers advertised. They do not establish current vacancies or national pay."
             ]
           },
           "id": "cashiers.china-salary.career-snapshot-primary-locale.14",
@@ -26216,7 +26246,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The subject of the official wage statistics is legal entities with 5 or more employed persons in urban areas; it excludes sole proprietors and freelancers, and does not distinguish positions or forms of employment within the entity."
+              "The subject of the official wage statistics is legal entities with 5 or more employed persons in urban areas; it excludes self-employed individuals and freelancers, and does not distinguish positions or forms of employment within the entity."
             ]
           },
           "id": "cashiers.china-salary.career-snapshot-primary-locale.15",
@@ -26579,7 +26609,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page provides no monthly wage range or city ranking for this occupation in Chinese mainland; regions, store formats and stores differ considerably in duties and forms of employment, and any comparison must put shifts and working hours, responsibility for the till and reconciliation, and refund authorization into a written agreement."
+              "Annual industry averages and two advertised monthly ranges answer different questions. Check piece rates, hours and shifts before comparing offers. These past notices do not establish current vacancies."
             ]
           },
           "id": "cashiers.china-salary.career-snapshot-primary-locale.48",
@@ -26590,7 +26620,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese mainland (industry average annual wages; not occupational monthly wages)"
+              "Wholesale and retail industry annual averages"
             ]
           },
           "id": "cashiers.china-salary.career-snapshot-primary-locale.49",
@@ -26601,7 +26631,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "A precise cashier monthly wage distribution was not obtained; wholesale and retail annual averages are 135749 for non-private and 69622 for private units, and accommodation and food service annual averages are 62461 and 55123, and a monthly wage range cannot be derived from them."
+              "2025 urban annual averages: CNY 135,749 in non-private units and CNY 69,622 in private units. All jobs in the industry, not cashier pay."
             ]
           },
           "id": "cashiers.china-salary.career-snapshot-primary-locale.50",
@@ -26612,7 +26642,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Regions with concentrated retail and stores"
+              "Shanghai Hongkou | June 2026 posting"
             ]
           },
           "id": "cashiers.china-salary.career-snapshot-primary-locale.51",
@@ -26623,7 +26653,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable region-level occupational monthly wage data was obtained, so this page does not present a regional ranking."
+              "Advertised piece-rate pay of CNY 4,500–5,000 per month, rotating shifts, high school or above. One employer example."
             ]
           },
           "id": "cashiers.china-salary.career-snapshot-primary-locale.52",
@@ -26634,7 +26664,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other regions"
+              "Mile, Yunnan | 2026 posting, issue 33"
             ]
           },
           "id": "cashiers.china-salary.career-snapshot-primary-locale.53",
@@ -26645,7 +26675,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no official or verifiable source supports a monthly wage range for this occupation in other regions."
+              "Advertised CNY 2,600–3,500 per month, with experience preferred. No nationwide cashier wage distribution was verified."
             ]
           },
           "id": "cashiers.china-salary.career-snapshot-primary-locale.54",
@@ -27592,7 +27622,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The Holland interest code is CE (Conventional, Enterprising): Conventional corresponds to organizing information and data by procedures and rules, and Enterprising to managing, negotiating, marketing and influencing others; for this occupation Conventional is the highest score (87) and Enterprising the second highest (44), with Realistic 32 and Social 27, and the specific interest areas are mainly sales (30), personal service (28), accounting (23) and office work (14)."
+              "O*NET summarizes the occupational interests with CE (Conventional and Enterprising): Conventional corresponds to organizing information and data by procedures and rules, and Enterprising to managing, negotiating, marketing and influencing others; for this occupation Conventional is the highest score (87) and Enterprising the second highest (44), with Realistic 32 and Social 27, and the specific interest areas are mainly sales (30), personal service (28), accounting (23) and office work (14)."
             ]
           },
           "id": "cashiers.fit.personality-fit-block.2",
@@ -27772,7 +27802,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "This occupation mainly tests interpersonal service and checking according to the rules: O*NET work activities are led by getting information (80), performing for or working directly with the public (76), establishing and maintaining interpersonal relationships (53), communicating with people outside the organization (51) and communicating with supervisors, peers or subordinates (51); basic skills are led by active listening and speaking (50 each), critical thinking and reading comprehension (44 each) and mathematics and monitoring (41 each), with writing 28 and science 6; transferable skills are led by service orientation (53), social perceptiveness (50), coordination (44) and time management (41). Avoiding price and promotion checks and customer information protection requirements directly amplifies the risk of wrong charges and non-compliance."
+              "Start by practicing basic arithmetic: check the discounted total, count change and reconcile receipts against the till record. Recount and report a discrepancy. Try CA-18 and compare your steps with the answer. An assessment score does not replace hands-on practice or store training."
             ]
           },
           "id": "cashiers.fit.personality-fit-block.18",
@@ -28093,7 +28123,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Not very suitable. The work context shows 96% are in contact with others continuously, 79% have face-to-face discussions every day, 78% have telephone conversations every day and 26% deal with unpleasant, angry or discourteous people every day; even if you prefer quiet, you still need long periods of high-frequency interaction with customers and colleagues, and whether you can stay steady and accurate during continuous interaction matters more than how introverted you are."
+              "Checkout work often involves continuous customer contact. Introversion or extraversion does not establish job fit. Try a role-play or observe different shifts to see whether you can stay accurate and recover from a busy period."
             ]
           },
           "id": "cashiers.fit.personality-fit-block.47",
@@ -28126,7 +28156,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET lists the interest code for this occupation as CE (Conventional, Enterprising): Conventional is the highest score (87), corresponding to organizing information and data by procedures and rules; Enterprising (44) corresponds to managing, negotiating, marketing and influencing others. The specific areas are led by sales (30), personal service (28) and accounting (23). Interest codes describe characteristics of the occupational group, not an individual fit conclusion."
+              "The O*NET summary interest code for this occupation is CE: Conventional is the highest score (87), corresponding to organizing information and data by procedures and rules; Enterprising (44) corresponds to managing, negotiating, marketing and influencing others. The specific areas are led by sales (30), personal service (28) and accounting (23). Interest codes describe characteristics of the occupational group, not an individual fit conclusion."
             ]
           },
           "id": "cashiers.fit.personality-fit-block.50",
@@ -28148,7 +28178,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Situations where long-term investment is not advised: you cannot adapt to long periods of standing and continuous customer flow (51% stand continuously or almost continuously, 46% continuously handle and control objects and tools by hand, 23% perform repetitive motions continuously), or you are unwilling to check prices, promotions and payment results transaction by transaction (25% consider precision or accuracy extremely important), or you are unwilling to deal with dissatisfied customers and conflict (26% deal with unpleasant, angry or discourteous people every day); you can first judge after a supervised checkout and reconciliation exercise. Among the basic skills for this occupation, the importance of mathematics is 41, and basic calculation ability for amounts, tax and change is still required."
+              "Start by practicing basic arithmetic: check the discounted total, count change and reconcile receipts against the till record. Recount and report a discrepancy. Try CA-18 and compare your steps with the answer. An assessment score does not replace hands-on practice or store training."
             ]
           },
           "id": "cashiers.fit.personality-fit-block.52",
@@ -28324,7 +28354,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Interest profile: O*NET lists the interest code for this occupation as CE; Conventional corresponds to organizing information and data by procedures and rules, and Enterprising to managing, negotiating, marketing and influencing others."
+              "Interest profile: The O*NET summary lists interest code CE; Conventional corresponds to organizing information and data by procedures and rules, and Enterprising to managing, negotiating, marketing and influencing others."
             ]
           },
           "id": "cashiers.fit.riasec-fit-block.10",
@@ -28335,7 +28365,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET interest code: CE (Conventional, Enterprising). Conventional is the highest score for this occupation (87), Enterprising the second highest (44), with Realistic 32 and Social 27; the specific interest areas are mainly sales (30), personal service (28), accounting (23) and office work (14)."
+              "O*NET summary interest code: CE (Conventional and Enterprising). Conventional is the highest score for this occupation (87), Enterprising the second highest (44), with Realistic 32 and Social 27; the specific interest areas are mainly sales (30), personal service (28), accounting (23) and office work (14)."
             ]
           },
           "id": "cashiers.fit.riasec-fit-block.11",
@@ -28346,7 +28376,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "CE (Conventional, Enterprising)"
+              "CE (Conventional and Enterprising); Realistic ranks third in the detailed ratings"
             ]
           },
           "id": "cashiers.fit.riasec-fit-block.12",
@@ -28468,7 +28498,7 @@
                 "url": "https://www.onetonline.org/link/summary/41-2011.00"
               },
               {
-                "entity": "Law on the Protection of Consumer Rights and Interests, Articles 24—29",
+                "entity": "Full text of the Law on the Protection of Consumer Rights and Interests",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_615af9ed6bcd4974bf853dd2e02bc663.html"
@@ -28480,13 +28510,13 @@
                 "url": "https://www.onetonline.org/link/details/41-2011.00"
               },
               {
-                "entity": "Law on the Protection of Minors, Article 59",
+                "entity": "Full text of the Law on the Protection of Minors",
                 "id": "link-5",
                 "relation": "career.source",
                 "url": "https://qqhr.hljjcy.gov.cn/jwgk/flfg/202601/t20260129_7556418.shtml"
               },
               {
-                "entity": "Personal Information Protection Law, Articles 6, 13, 19 and 28",
+                "entity": "Full text of the Personal Information Protection Law",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
@@ -28765,7 +28795,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Customer dissatisfaction, conflict and night shifts bring personal safety and loss prevention risks (26% deal with unpleasant, angry or discourteous people every day and 58% more than once a week; 21% experience conflict situations more than once a week)."
+              "Customer dissatisfaction, conflict and night shifts bring personal safety and loss prevention risks (26% deal with unpleasant, angry or discourteous people every day and 58% at least weekly but not daily; 21% report conflict at least weekly but not daily)."
             ]
           },
           "id": "cashiers.risk.career-risk-cards.32",
@@ -28798,7 +28828,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Used to explain the U.S. occupational identity and official duties, not for risk assessment."
+              "U.S. O*NET occupational summary."
             ]
           },
           "id": "cashiers.risk.career-risk-cards.35",
@@ -28809,7 +28839,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Articles 24—29 of the consumer law: returns, exchanges and repairs for quality, no-reason returns for distance selling, and staff confidentiality obligations; internal policies cannot exclude them."
+              "Mainland China consumer law; Articles 24 and 25 apply to different situations."
             ]
           },
           "id": "cashiers.risk.career-risk-cards.36",
@@ -28820,7 +28850,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Used to explain the official task, work activity and work context framing, not for risk assessment."
+              "U.S. O*NET cashier tasks and work context."
             ]
           },
           "id": "cashiers.risk.career-risk-cards.37",
@@ -28831,7 +28861,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Article 59 of the minors law prohibits selling tobacco, alcohol and lottery tickets and requires checking identity when age is hard to judge; the U.S. tobacco age is checked separately against the FDA; identity documents are not automatically retained."
+              "Mainland China rules on protecting minors; check the product and applicable rules."
             ]
           },
           "id": "cashiers.risk.career-risk-cards.38",
@@ -28842,7 +28872,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Personal Information Protection Law 6/13/19/28: lawful basis, minimum necessity, shortest retention and sensitive financial accounts; food health conditions are checked separately against Articles 44—45."
+              "Mainland China personal information processing obligations; follow employer policy."
             ]
           },
           "id": "cashiers.risk.career-risk-cards.39",
@@ -29009,16 +29039,16 @@
                 "url": "https://www.onetonline.org/link/localtraining/41-2011.00"
               },
               {
-                "entity": "O*NET-SOC 41-2011.00 detailed profile (tasks and work activities)",
+                "entity": "Shanghai Hongkou: cashier job notice",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/41-2011.00"
+                "url": "https://www.shanghai.gov.cn/nw17239/20260615/5cbb9b97560a419fb5cc3d2553fe8217.html"
               },
               {
-                "entity": "O*NET-SOC 41-2011.00 Professional Certification Information (learning and experience signals)",
+                "entity": "Mile, Yunnan: cashier job notice",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/41-2011.00"
+                "url": "https://www.hhml.gov.cn/info/35871/936502.htm"
               }
             ]
           },
@@ -29030,7 +29060,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The following development levels, positions and assessment table are editorial suggestions, and no real recruitment sample or unified promotion timeline was obtained; specific positions and statutory conditions are checked separately."
+              "The following development levels, positions and assessment table are editorial suggestions, and there is no uniform promotion timeline; specific positions and statutory conditions are checked separately."
             ]
           },
           "id": "cashiers.path.career-path-block.11",
@@ -29140,7 +29170,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Qualification boundaries: education and training, industry certification and apprenticeship experience, statutory qualification and practice eligibility (such as sales of age-restricted goods and food safety), job hiring and authorization, and authority over refunds, discounts and discrepancy determinations are different states, and none can be automatically inferred from another."
+              "Training does not grant authority to override prices, approve refunds or resolve discrepancies. Mainland China’s price disclosure rules apply to sellers. Defective goods and no-reason returns for remote sales follow different rules. Check the transaction with an authorized colleague."
             ]
           },
           "id": "cashiers.path.career-path-block.21",
@@ -29162,7 +29192,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Path summary: start from shelf stocking, guidance and assisted settlement, build evidence through consistent pricing and change accuracy and reconciliation and voucher records, first independently take on checkout, returns and exchanges and shift reconciliation within the authorized scope, then gradually take on shift lead or exception reporting or store operations and compliance responsibilities."
+              "Mainland China’s occupational classification includes cashiers (4-01-02-04). The Hongkou example asked for high school or above and rotating shifts; the Mile notice preferred experience. Check the actual employer’s requirements. BLS lists no formal educational credential as typical for U.S. entry and short-term on-the-job training."
             ]
           },
           "id": "cashiers.path.career-path-block.23",
@@ -29184,7 +29214,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Detail page preparation level and education requirements, BLS typical entry; the training directory only discovers programs"
+              "O*NET training program directory. For typical entry see BLS; for survey responses see the O*NET occupation details."
             ]
           },
           "id": "cashiers.path.career-path-block.25",
@@ -29195,7 +29225,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Used to explain the official task, work activity and work context framing."
+              "Two openings in Hongkou, high school or above, rotating shifts, with advertised piece-rate pay of CNY 4,500–5,000 per month."
             ]
           },
           "id": "cashiers.path.career-path-block.26",
@@ -29206,7 +29236,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "U.S. certification program discovery directory; no certification for this occupation was found in the directory this round. The absence of a listing does not prove that no certification or licence exists, and conditions for specific products and target jurisdictions are checked separately."
+              "One role, experience preferred, at an advertised CNY 2,600–3,500 per month. This notice does not establish current availability or national pay."
             ]
           },
           "id": "cashiers.path.career-path-block.27",
@@ -29940,9 +29970,9 @@
               {
                 "id": "education",
                 "values": [
-                  "BLS SOC41-2011 gives a typical entry of no formal educational credential, no related experience and short-term on-the-job training; OOH notes that employers may prefer a high school diploma or equivalent, and that learning equipment from experienced workers may last up to a few weeks. The general preparation description for O*NET Job Zone1—2 is not the same as a uniform threshold for this occupation; 44%/37%/9% are respondents' judgments about the education new hires need, not the educational attainment of incumbents. No certification was found in the national certification directory at present; the apprenticeship field on the detail page only provides a discovery entry and lists no specific occupation titles, which does not prove that no program or personal licence exists.",
+                  "BLS lists no formal credential as typical in the United States. Employers may prefer a high school diploma or equivalent.",
                   "No program was found in the certification directory for this occupation and the apprenticeship field on the detail page lists no titles; the absence of a listing does not prove that nothing exists at all.",
-                  "O*NET marks Bright Outlook, and the United States has no formal educational credential requirement and short-term on-the-job training, which cannot be applied directly to China."
+                  "BLS lists no formal credential as typical in the United States. Employers may prefer a high school diploma or equivalent."
                 ]
               },
               {
@@ -29983,26 +30013,26 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Mock sample pack: a self-made store price tag and promotion rules sheet, a goods and barcode checking checklist, a payment method, change and payment voucher record template, a returns, exchanges and complaint handling form, a shift till count and reconciliation record sheet, and an age-restricted goods verification checklist; all materials are self-made and contain no real customer information or payment data.",
-                  "Tools: a calculator and amount conversion tables, operating instructions (illustrative) for cash registers, payment terminals and weighing equipment, and sample receipts and vouchers; do not connect to any real store system or payment channel.",
-                  "Boundary note: the exercises must not be used for real store transactions or for processing customer information or payment data.",
-                  "Time plan: one 30-minute price tag, promotion and tax amount check and change calculation, plus one 40-minute design of authority judgment and escalation paths for returns, exchanges and complaints, plus one 30-minute design of a till count and shift reconciliation sheet and discrepancy explanation."
+                  "Scenario | CA-18 | Fictional store. Soap is CNY 8.50 each, with CNY 2 off when buying two. Water is CNY 3. Prices include tax.",
+                  "Sale A: two bars of soap and one bottle of water; the customer pays CNY 20 cash. Sale B is a separate order: its payment shows pending, then the same order triggers a duplicate alert. You have no confirmation of payment or failure.",
+                  "Case C: a customer asks for a refund without a receipt. Store policy requires a supervisor to approve it. The cashier records the request and does not pay the refund.",
+                  "Closing: the opening float was CNY 100. Other verified net cash receipts total CNY 32, with no other cash movements. The till holds CNY 145. B and C caused no cash movement."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Using the price tags and promotion rules, complete the pricing, tax amount and change calculation for a group of goods and write out the checking process.",
-                  "Write out the judgment, handling and escalation path for two returns or exchanges and complaints, and mark the three steps most prone to authority or voucher problems and the self-check method for each.",
-                  "Complete a till count and shift reconciliation record, and write out the checking and reporting path for one instance of a discrepancy."
+                  "Your task | Calculate what is due and the change in A. Show how you worked it out.",
+                  "For B and C, record what you know, what remains unresolved and who should act next.",
+                  "Calculate expected cash and the discrepancy. Draft a handoff to the supervisor."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Write the prices, promotions and policies clearly first, then make the judgment; leave unverifiable conditions blank and mark them as insufficient evidence.",
-                  "Give two handling options for the same transaction (handling within authority and escalating) and compare the risks and voucher requirements.",
-                  "Keep records following the principle of facts or rules plus the basis for judgment plus how it was handled, and avoid vague descriptions."
+                  "Check after you try | A: 8.50 × 2 − 2 + 3 = CNY 18; change is CNY 2.",
+                  "B: retain the pending and duplicate messages. Verify with the terminal or supervisor. Try again only after confirming that the first payment failed. Do not mark the order paid while it is pending. C: record the missing receipt and hand it to the supervisor without refunding.",
+                  "Expected cash is 100 + 32 + 18 = CNY 150. The till is CNY 5 short. Count again and report the original records and difference; do not add personal money or change the ledger."
                 ]
               },
               {
@@ -30286,7 +30316,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This section has no specific institutional recruitment sample, and the position titles and ability checklist are editorial examples that cannot be treated as real open positions or common thresholds.",
+              "See the two dated job examples above. The practice stages below are editorial suggestions, not recruitment thresholds.",
               "When reading job postings, check the shifts and working-time form and rest arrangements, whether you carry responsibility for the till and reconciliation and how discrepancies are handled, the authorized scope for refunds and discounts, and whether age-restricted goods, food and weighing work are involved, and be alert to descriptions that present several years of experience as holding a statutory licence or as permission to determine refunds and discrepancies independently."
             ]
           },
@@ -30533,7 +30563,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS SOC41-2011: employment was 3,106,300 in 2025 and is projected to be 2,905,700 in 2035, a net change of -200,600, or a change rate of -6.5%, with about 521,300 openings per year on average over 2025—2035; the self-employed share was 0.4% in 2025. OOH rounds this to a decline of 6% and states that the openings all come from replacement demand such as workers transferring out or exiting the labour force, not from net new additions or a generative AI attribution."
+              "Employment is projected to decline from 3,106,300 to 2,905,700, a net loss of about 200,600. BLS expects all 521,300 average annual openings to be replacements."
             ]
           },
           "id": "cashiers.market-signals.market-signal-card.11",
@@ -30544,7 +30574,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "It is a statistic for the occupational group and does not constitute an employment guarantee for any individual store; demand is affected by the retail format, equipment deployment and fluctuations in customer flow, and net change and annual openings are different measures, with the large volume of openings coming mainly from replacement demand."
+              "Annual openings differ from net employment change. All projected openings are replacements for workers who change occupations or leave the labor force. The national projection does not establish vacancies at individual stores."
             ]
           },
           "id": "cashiers.market-signals.market-signal-card.12",
@@ -30610,7 +30640,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS May 2025 OEWS data; this occupation page marks Bright Outlook and lists it as Job Zone 1-2 (SVP below 6.0)."
+              "National OEWS wage estimates for wage and salary jobs, shown as annual and hourly figures."
             ]
           },
           "id": "cashiers.market-signals.market-signal-card.18",
@@ -30621,7 +30651,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The median is not entry-level pay and does not constitute an individual job offer; percentile figures cannot be treated as a starting-pay promise; this occupation is usually trained mainly on the job, and training does not guarantee income at this level."
+              "Percentiles do not establish an individual offer, starting wage or full-time hours."
             ]
           },
           "id": "cashiers.market-signals.market-signal-card.19",
@@ -31059,7 +31089,7 @@
           "data": {
             "entries": [
               {
-                "answer": "Receive and pay out money in non-financial establishment settings, possibly using electronic scanning equipment and cash registers or related equipment, and possibly processing credit card and debit card transactions and verifying cheques: receiving payment by cash, cheque, credit card, voucher or automatic debit and greeting customers; issuing receipts and handling refunds, points and change owed; assisting customers by providing information and resolving complaints; monitoring the checkout to ensure adequate cash and staffing; using calculators and cash registers to determine prices of goods, services and admissions and to total bills; answering incoming calls and answering customers' questions about processes and policies; using a paging system to request assistance; helping customers find where items are; processing merchandise returns and exchanges; keeping the checkout area tidy and performing cleaning duties such as mopping and emptying bins; calculating the total amount received in a given period and checking it against total sales; counting the cash in the drawer at the start of the shift to ensure the correct amount and enough change; issuing and redeeming vouchers and coupons; charging expenses to customer or patient accounts; calculating and recording the total transaction amount; weighing and pricing items sold by weight; sorting, counting and bundling cash and coins; periodically preparing balance sheets of transaction amounts and counts; preparing and maintaining non-monetary reports and records; supervising others and providing on-the-job training; assisting in other areas of the store; selling tickets and other goods; stocking shelves and organizing returns and marking prices; bagging, packing and preparing parcels for shipping; cashing cheques for customers; and providing carry-out assistance.",
+                "answer": "Receive and pay out money in non-financial establishment settings, possibly using electronic scanning equipment and cash registers or related equipment, and possibly processing credit card and debit card transactions and verifying cheques: receiving payment by cash, cheque, credit card, voucher or automatic debit and greeting customers; issuing receipts and handling refunds, store credit and change owed; assisting customers by providing information and resolving complaints; monitoring the checkout to ensure adequate cash and staffing; using calculators and cash registers to determine prices of goods, services and admissions and to total bills; answering incoming calls and answering customers' questions about processes and policies; using a paging system to request assistance; helping customers find where items are; processing merchandise returns and exchanges; keeping the checkout area tidy and performing cleaning duties such as mopping and emptying bins; calculating the total amount received in a given period and checking it against total sales; counting the cash in the drawer at the start of the shift to ensure the correct amount and enough change; issuing and redeeming vouchers and coupons; charging expenses to customer or patient accounts; calculating and recording the total transaction amount; weighing and pricing items sold by weight; sorting, counting and bundling cash and coins; periodically preparing balance sheets of transaction amounts and counts; preparing and maintaining non-monetary reports and records; supervising others and providing on-the-job training; assisting in other areas of the store; selling tickets and other goods; stocking shelves and organizing returns and marking prices; bagging, packing and preparing parcels for shipping; cashing cheques for customers; and providing carry-out assistance.",
                 "id": "cashiers.faq.1",
                 "question": "What do cashiers do every day?",
                 "question_key": "career.faq.cashiers.1"
@@ -31095,28 +31125,36 @@
                 "question_key": "career.faq.cashiers.6"
               },
               {
-                "answer": "The O*NET work context shows: 96% are in contact with others continuously, 79% have face-to-face discussions every day, 78% have telephone conversations every day, 67% make decisions every day, 51% stand continuously or almost continuously, 68% work indoors in a controlled environment every day, 46% continuously handle and control objects and tools by hand, 25% consider precision or accuracy extremely important and 46% very important, 27% consider repeating the same tasks extremely important and 26% very important, 26% deal with unpleasant, angry or discourteous people every day and 58% more than once a week, 21% experience conflict situations more than once a week, 13% face time pressure every day, 49% say the work is not automated at all, and 28% consider the consequences of error serious.",
+                "answer": "The O*NET work context shows: 96% are in contact with others continuously, 79% have face-to-face discussions every day, 78% have telephone conversations every day, 67% make decisions every day, 51% stand continuously or almost continuously, 68% work indoors in a controlled environment every day, 46% continuously handle and control objects and tools by hand, 25% consider precision or accuracy extremely important and 46% very important, 27% consider repeating the same tasks extremely important and 26% very important, 26% deal with unpleasant, angry or discourteous people every day and 58% at least weekly but not daily, 21% report conflict at least weekly but not daily, 13% face time pressure every day, 49% say the work is not automated at all, and 28% consider the consequences of error serious.",
                 "id": "cashiers.faq.7",
                 "question": "How are the physical and environmental demands of this job?",
                 "question_key": "career.faq.cashiers.7"
               },
               {
-                "answer": "Mainly on-site store work and standing work, with intensity fluctuating around peak customer flow, holidays and night shifts; the work context shows 51% stand continuously or almost continuously, 13% face time pressure every day, 12% have a lot of freedom in how they make decisions, 31% some freedom and 50% limited freedom, and 34% have very high responsibility for the work results of others; the working style is built around counting the till, pricing, receiving payment and giving change, issuing vouchers, handling returns, exchanges and complaints, and shift reconciliation and handover.",
+                "answer": "Mainly on-site store work and standing work, with intensity fluctuating around peak customer flow, holidays and night shifts; the work context shows 51% stand continuously or almost continuously, 13% face time pressure every day, 12% have a lot of freedom in how they make decisions, 31% some freedom and 50% limited freedom, and 34% report high responsibility for the work results of others; the working style is built around counting the till, pricing, receiving payment and giving change, issuing vouchers, handling returns, exchanges and complaints, and shift reconciliation and handover.",
                 "id": "cashiers.faq.8",
                 "question": "What are the working hours and working style like?",
                 "question_key": "career.faq.cashiers.8"
               },
               {
-                "answer": "This occupation page shows 3,157,200 people employed in 2024, and BLS projects an employment change of Decline (-1% or lower) over 2024—2034, with BLS projecting employment falling to about 2,843,600 people (about -10%) and about 542,600 job openings per year (mainly including replacement demand such as separations and retirements); the occupation page marks Bright Outlook. Demand is affected by the retail format and the number of stores and opening hours, the deployment of equipment such as self-checkout and mobile payment, fluctuations in customer flow and seasonality, and employer staffing models. Switching to adjacent directions (retail salespersons, customer service representatives, counter and rental clerks, stockers and order fillers, bank tellers and others) requires building up the corresponding system and authority and responsibility evidence.",
+                "answer": "BLS Table 1.2 projects a decline from 3,106,300 U.S. jobs in 2025 to 2,905,700 in 2035, a net decline of about 200,600, or 6.5%. The Occupational Outlook Handbook expects all 521,300 average annual openings to be replacements. Check local postings for current demand.",
                 "id": "cashiers.faq.9",
                 "question": "How do I judge career prospects and transitions?",
-                "question_key": "career.faq.cashiers.9"
+                "question_key": "career.faq.cashiers.9",
+                "source_refs": [
+                  "cash-ep-2025-2035",
+                  "cash-ooh-current"
+                ]
               },
               {
-                "answer": "U.S. wages are the national BLS May 2025 OEWS framing shown on this occupation page (hourly median 15.81 USD, annual median 32,880 USD, hourly 10th to 90th percentile 11.79 to 19.43 USD, annual 10th to 90th percentile 24,530 to 40,410 USD); for Chinese mainland, this evidence route did not obtain a precise national occupational wage framing for this occupation (the official wage statistics checked are aggregated by industry sector and unit type and do not break out this occupation), and this route requires showing the gap rather than using a proxy figure, so this page publishes no Chinese mainland figure; the two framings and periods differ and cannot be compared side by side or converted.",
+                "answer": "May 2025 U.S. OEWS median cashier pay was $15.81 per hour and $32,880 per year. No nationwide cashier wage distribution was verified for mainland China. The industry averages and two dated job examples do not give an equivalent occupational median.",
                 "id": "cashiers.faq.10",
                 "question": "Why can't U.S. wage figures and Chinese mainland figures be converted into each other?",
-                "question_key": "career.faq.cashiers.10"
+                "question_key": "career.faq.cashiers.10",
+                "source_refs": [
+                  "cash-wages-2025",
+                  "cash-nbs-2025"
+                ]
               },
               {
                 "answer": "The technology list shows 6 software skills (Hot Technologies entry: Apple Safari, Mozilla Firefox and Microsoft Edge at 2% each, and Microsoft Excel, Microsoft Office software and Microsoft Windows all below 1%); the core abilities are knowledge of goods, prices and promotions, operation of cash registers, payment terminals and weighing equipment, the basics of cash, change, counting and shift reconciliation, customer communication and complaint handling, and the ability to follow the rules for age-restricted goods, food safety and customer information protection.",
@@ -31125,10 +31163,15 @@
                 "question_key": "career.faq.cashiers.11"
               },
               {
-                "answer": "Verify age or identity for age-restricted goods as required and document it; check weighing, shelf life and labels as required; keep the checkout area and food contact areas clean and hygienic; access and use customer and payment information according to institutional rules and permissions, providing it only to authorized people and systems and documenting it; do not record or transmit customer payment vouchers or images of identity documents; handle refunds and discounts only within the authorized scope and keep vouchers and the approving person; discrepancies must be reported rather than balanced on your own; suspected fraud or abnormal external transmission requests must be reported immediately.",
+                "answer": "Keep only necessary transaction records in the authorized store system. Do not privately photograph or share customer information or override prices, refunds or discrepancies. Keep the records and hand uncertain cases to an authorized colleague. Mainland China’s privacy and consumer rules address different obligations.",
                 "id": "cashiers.faq.12",
                 "question": "What should I pay attention to in compliance and information protection?",
-                "question_key": "career.faq.cashiers.12"
+                "question_key": "career.faq.cashiers.12",
+                "source_refs": [
+                  "cash-cn-privacy",
+                  "cash-cn-consumer",
+                  "cash-price-rule"
+                ]
               },
               {
                 "answer": "96% are in contact with others continuously, 79% have face-to-face discussions every day, 68% work indoors in a controlled environment every day, 26% deal with unpleasant, angry or discourteous people every day and 13% face time pressure every day; you need to communicate with customers, the shift lead or supervisor and finance and loss prevention positions, merchandise and inventory positions, and equipment and payment service providers, and complete receipt and payment and reconciliation to prices, rules and institutional procedures while keeping evidence.",
@@ -31156,10 +31199,10 @@
           "data": {
             "entries": [
               "Boundary one: the identity framing on this page is O*NET-SOC 41-2011.00 (Cashiers); this occupation page lists it as Job Zone 1-2 (little or no preparation to some preparation, SVP below 6.0), and the page marks Bright Outlook; the official duties are to receive and disburse money in establishments other than financial institutions, possibly using electronic scanners, cash registers or related equipment, and possibly processing credit or debit card transactions and validating checks; this occupation usually does not require a unified licence, but sales of age-restricted goods and food safety and cash and information handling are required separately under their own rules.",
-              "Boundary two: the U.S. wages and employment on this page use the BLS framing shown on this occupation page (May 2025 OEWS hourly median 15.81 USD, annual median 32,880 USD, hourly 10th to 90th percentile 11.79 to 19.43 USD, annual 10th to 90th percentile 24,530 to 40,410 USD; 3,157,200 people employed in 2024, a change of Decline (-1% or lower) over 2024—2034, with BLS projecting employment falling to about 2,843,600 people (about -10%) and about 542,600 openings per year); a negative net change alongside a large volume of annual openings shows that the two are different measures, and annual openings mainly come from replacement demand such as separations and retirements; this occupation page marks Bright Outlook; outlook labels are directional hints at the occupational group level, not a personal guarantee of success.",
+              "Boundary two: the U.S. wages and employment on this page use the BLS framing shown on this occupation page (May 2025 OEWS hourly median 15.81 USD, annual median 32,880 USD, hourly 10th to 90th percentile 11.79 to 19.43 USD, annual 10th to 90th percentile 24,530 to 40,410 USD; 3,106,300 people employed in 2025, a change of Decline (-1% or lower) over 2025—2035, with BLS projecting employment falling to about 2,905,700 people (about -6.5%) and about 521,300 openings per year); a negative net change alongside a large volume of annual openings shows that the two are different measures, and annual openings mainly come from replacement demand such as separations and retirements; this occupation page marks Bright Outlook; outlook labels are directional hints at the occupational group level, not a personal guarantee of success.",
               "Boundary three: for Chinese mainland, this evidence route records the precise occupational wage as documented_unavailable (china-exact-wage-unavailable, severity=non_material), with resolution being to keep the documented_unavailable boundary of the China wage module and not fill it with industry averages or U.S. data, and the parity entry explicitly requires that the page must show the gap rather than use a proxy figure. Accordingly this page publishes no Chinese mainland wage figures at all: it marks the gap as insufficient evidence throughout the fact register, the Chinese mainland salary table and the market signals section, does not fill it with industry averages, recruitment samples or U.S. figures, and does not convert between them; it also states that Chinese mainland has no occupational sub-category corresponding one to one with 41-2011.00.",
               "Boundary four: the editorial exercises and business suggestions are all simulated materials, and readers should not use them for real store transactions, handling refunds and discounts, or processing customer information or payment data; the exercise results do not constitute a statutory licence, institutional job authorization, or refund and till authority.",
-              "Boundary five: this page is composed of the O*NET occupation summary, detailed profile, industry distribution, technology list, training and education information, certification information, national wage percentile page and related occupation comparison, the BLS May 2025 OEWS and the 2024—2034 projection shown on this occupation page, the National Bureau of Statistics average annual wages of urban employed persons, information published in the Occupational Classification Code of the People's Republic of China (2022 edition), public information from the State Administration for Market Regulation on consumer rights and business premises supervision, the ILO task exposure study and other public materials, together with editorial design; the applicable scope and gaps of each item are marked separately."
+              "Boundary five: this page is composed of the O*NET occupation summary, detailed profile, industry distribution, technology list, training and education information, certification information, national wage percentile page and related occupation comparison, the BLS May 2025 OEWS and the 2025—2035 projection shown on this occupation page, the National Bureau of Statistics average annual wages of urban employed persons, information published in the Occupational Classification Code of the People's Republic of China (2022 edition), public information from the State Administration for Market Regulation on consumer rights and business premises supervision, the ILO task exposure study and other public materials, together with editorial design; the applicable scope and gaps of each item are marked separately."
             ]
           },
           "id": "cashiers.sources.boundary.1",
@@ -31206,7 +31249,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Verified against sources on 2026-10-09 this round; O*NET updated 2026, U.S. wages 2025, employment 2025—2035, Lightcast2025, China unit wages 2025, occupational classification code 2022. The official full texts of the regulations have been read; specific state licensing, local requirements and recruitment were not verified."
+              "Two dated notices from Shanghai Hongkou and Mile, Yunnan were checked. Current vacancies were not verified."
             ]
           },
           "id": "cashiers.sources.source-card.3",
@@ -31293,7 +31336,7 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports the 28 official O*NET 41-2011.00 tasks and work activities (U.S. framing); the core tasks include receiving payments by cash, cheque, credit card, voucher or automatic debit (94), greeting customers entering the establishment (93), issuing receipts and handling refunds, points and change (92), assisting customers by providing information and resolving complaints (88) and monitoring the checkout to ensure adequate cash and staffing (87); work activities are led by getting information (80) and performing for or working directly with the public (76).",
+                  "Supports the 28 official O*NET 41-2011.00 tasks and work activities (U.S. framing); the core tasks include receiving payments by cash, cheque, credit card, voucher or automatic debit (94), greeting customers entering the establishment (93), issuing receipts and handling refunds, store credit and change (92), assisting customers by providing information and resolving complaints (88) and monitoring the checkout to ensure adequate cash and staffing (87); work activities are led by getting information (80) and performing for or working directly with the public (76).",
                   "Page updated 2026; accessed 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
@@ -31325,12 +31368,12 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports the industry distribution: retail trade 83%, accommodation and food services 10%, other industries 7%.",
-                  "Industry distribution framing; accessed 2026-09-16"
+                  "U.S. industry distribution: retail trade 82%, accommodation and food services 11%, other industries 7%.",
+                  "These shares describe U.S. employment by industry, not wages."
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-industry",
-                "limitation": "The industry distribution describes statistical categories (retail trade 83%, accommodation and food services 10%, other industries 7%) and is not used to infer wages or employment size by industry.",
+                "limitation": "The industry distribution describes statistical categories (retail trade 82%, accommodation and food services 11%, other industries 7%) and is not used to infer wages or employment size by industry.",
                 "market": "United States",
                 "name": "O*NET-SOC 41-2011.00 industry distribution",
                 "period": "Industry distribution framing; accessed 2026-09-16",
@@ -31357,28 +31400,28 @@
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports the preparation level (Job Zone 1-2, SVP below 6.0) and the fact that these occupations usually require a high school diploma or equivalent while some may not, used to explain the education and training entry.",
+                  "O*NET reports Job Zone 1–2 and SVP below 6.0. The education responses concern what a new hire needs, rather than the credentials of existing workers.",
                   "Page updated 2026; accessed 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
                 "id": "onet-training",
-                "limitation": "This occupation is listed as Job Zone 1-2 (SVP below 6.0) and usually requires a high school diploma or equivalent, though some occupations may not; the educational attainment is an estimate by respondents and does not constitute a recommendation for any program or institution.",
+                "limitation": "Job Zone describes general preparation across occupations. The new-hire responses do not establish a uniform education threshold. BLS lists no formal educational credential as typical for entry.",
                 "market": "United States",
-                "name": "O*NET-SOC 41-2011.00 Training and Education Information (preparation level and training entry)",
+                "name": "O*NET cashier preparation level and new-hire education survey",
                 "period": "Page updated 2026; accessed 2026-09-16",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtraining/41-2011.00"
+                "url": "https://www.onetonline.org/link/details/41-2011.00#Education"
               },
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports the fact that this occupation page lists no national certification and no registered apprenticeship position titles, used to explain that the entry threshold comes mainly from on-the-job training and institutional rules; it also notes that this does not mean the occupation needs no statutory licensing (sales of age-restricted goods, food safety and so on are required separately by jurisdiction).",
+                  "This O*NET page lists no national certification or U.S. Department of Labor registered apprenticeship title; the statement is limited to what this page lists.",
                   "Page updated 2026; accessed 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-entry",
-                "limitation": "This page lists no national certification and no registered apprenticeship position titles approved by the U.S. Department of Labor; this shows that the entry threshold for this occupation comes mainly from on-the-job training and institutional rules, and does not mean the occupation needs no statutory licensing (sales of age-restricted goods, food safety and so on are required separately by jurisdiction).",
+                "limitation": "An empty listing does not determine hiring thresholds or statutory licensing. BLS reports typical on-the-job training separately; check the applicable requirements for the particular role.",
                 "market": "United States",
                 "name": "O*NET-SOC 41-2011.00 Certification Information (professional certification and apprenticeship discovery entry)",
                 "period": "Page updated 2026; accessed 2026-09-16",
@@ -31396,37 +31439,37 @@
                 "id": "bls-pay",
                 "limitation": "This framing gives a national hourly median of 15.81 USD and an annual median of 32,880 USD for this occupation, with hourly 10th, 25th, 75th and 90th percentiles of 11.79, 13.81, 17.47 and 19.43 USD and annual 10th, 25th, 75th and 90th percentiles of 24,530, 28,720, 36,330 and 40,410 USD; percentile figures are not a starting-pay promise.",
                 "market": "United States",
-                "name": "BLS occupational employment and wage statistics (41-2011, May 2025 OEWS)",
+                "name": "O*NET national wages (BLS OEWS, May 2025)",
                 "period": "May 2025 OEWS; accessed 2026-09-16",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine (data: U.S. Bureau of Labor Statistics OEWS)",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/current/oes412011.htm"
+                "url": "https://www.onetonline.org/link/localwages/41-2011.00"
               },
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports the employment and projection framing: 3,157,200 people employed in 2024, a change of Decline (-1% or lower) over 2024—2034, with BLS projecting employment falling to about 2,843,600 people (about -10%) and about 542,600 job openings per year; this occupation page marks Bright Outlook; also used to explain that net change and annual openings are different measures, that the large volume of openings comes mainly from replacement demand, and that demand is affected by the retail format and equipment deployment and fluctuations in customer flow.",
-                  "2024—2034 projection framing; accessed 2026-09-16"
+                  "All 521,300 projected annual openings in 2025–2035 are expected to be replacements for workers who change occupations or leave the labor force.",
+                  "Replacement openings and net job change are different measures."
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-outlook",
-                "limitation": "This occupation page lists it as Job Zone 1-2 (SVP below 6.0) and marks Bright Outlook; the employment and projection use the 2024—2034 framing shown on this page (3,157,200 people employed in 2024, a change of Decline (-1% or lower), with BLS projecting employment falling to about 2,843,600 people (about -10%) and about 542,600 openings per year) and are statistics for the occupational group; net change and annual openings are different measures, and the large volume of openings comes mainly from replacement demand.",
+                "limitation": "This occupation page lists it as Job Zone 1-2 (SVP below 6.0) and marks Bright Outlook; the employment and projection use the 2025—2035 framing shown on this page (3,106,300 people employed in 2025, a change of Decline (-1% or lower), with BLS projecting employment falling to about 2,905,700 people (about -6.5%) and about 521,300 openings per year) and are statistics for the occupational group; net change and annual openings are different measures, and the large volume of openings comes all from replacement demand.",
                 "market": "United States",
-                "name": "BLS occupational employment and wage projections table (the employment and projection fields shown on this occupation page)",
-                "period": "2024—2034 projection framing; accessed 2026-09-16",
+                "name": "BLS Occupational Outlook Handbook: Cashiers",
+                "period": "2025—2035 projection framing; accessed 2026-09-16",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.bls.gov/ooh/sales/cashiers.htm"
               },
               {
                 "accessed_at": "2026-09-16",
                 "details": [
-                  "Supports the fact that Chinese mainland publishes average annual wages of urban employed persons by industry sector and unit type but does not establish a correspondence at the occupational level with this entry; this evidence route records the precise occupational wage as no data that can be used safely and requires showing the gap rather than using a proxy figure, so this page does not transcribe its values and only registers the source and the mapping boundary.",
-                  "2025; released 2026"
+                  "Tables 2 and 5 give 2025 annual industry averages. The page separately shows two dated job notices and does not provide nationwide cashier pay.",
+                  "Urban unit averages cannot be converted into cashier monthly pay."
                 ],
                 "evidence_type": "primary_document",
                 "id": "nbs-wages",
-                "limitation": "This release publishes average annual wages of urban employed persons by industry sector and unit type, and this round did not establish a wage distribution at the occupational level corresponding precisely to Cashiers (41-2011.00); this evidence route records the precise occupational wage as no data that can be used safely, requires showing the gap rather than using a proxy figure, and this page therefore does not transcribe its values and only registers the source and the mapping boundary.",
+                "limitation": "Tables 2 and 5 report annual pay averages for urban units by industry and ownership. This page uses them as industry context; they are not a national cashier wage distribution or a basis for calculating monthly cashier pay.",
                 "market": "Chinese mainland",
                 "name": "National Bureau of Statistics, Average Annual Wages of Urban Employed Persons (2025)",
                 "period": "2025; released 2026",
@@ -31479,7 +31522,7 @@
                 "name": "ILO working paper 140, Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
                 "period": "Published 2025-05-20; accessed 2026-09-16",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -31492,11 +31535,11 @@
                 "id": "editorial",
                 "limitation": "An editorial compilation record used to explain the framing and gaps; not a source of fact.",
                 "market": "United States",
-                "name": "FermatMind editorial design and fictional exercises",
+                "name": "FermatMind: fictional CA-18 exercise",
                 "period": "Compiled 2026-09",
                 "publisher": "FermatMind career content editorial team",
                 "scope": "editorial_synthesis",
-                "url": "https://www.onetonline.org/link/summary/41-2011.00"
+                "url": null
               },
               {
                 "accessed_at": "2026-09-16",
@@ -31595,7 +31638,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "No formal educational credential and on-the-job learning that can last up to a few weeks; part-time work is common; industry medians are hourly: building material and garden 16.87, food and beverage 16.45, food service 15.15, general merchandise 15.02, gasoline stations 14.68; self-checkout and online sales are factors in the decline."
+                  "All 521,300 projected annual openings in 2025–2035 are expected to be replacements for workers who change occupations or leave the labor force."
                 ],
                 "evidence_type": "primary_document",
                 "id": "cash-ooh-current",
@@ -31625,7 +31668,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "Retail 82%, accommodation and food service 11%, other 7%; not used to infer wages."
+                  "U.S. industry distribution: retail trade 82%, accommodation and food services 11%, other industries 7%."
                 ],
                 "evidence_type": "primary_document",
                 "id": "cash-industry-current",
@@ -31670,7 +31713,7 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "National Bureau of Statistics 2025 average annual wages for wholesale and retail trade: 135,749 CNY for non-private units and 69,622 CNY for private units; accommodation and food services: 62,461 CNY for non-private units and 55,123 CNY for private units (pre-tax). These are all-position references for urban unit industries, not cashier wages, starting pay or wage upper and lower limits. Urban legal entities with 5 or more employees, excluding sole traders and freelancers; part-time and similar forms are not excluded across the board."
+                  "Tables 2 and 5 give 2025 annual industry averages. The page separately shows two dated job notices and does not provide nationwide cashier pay."
                 ],
                 "evidence_type": "primary_document",
                 "id": "cash-nbs-2025",
@@ -31774,20 +31817,61 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Checkout and settlement｜receiving payment by cash, bank card, mobile payment and vouchers and checking items, prices, promotions and tax amounts｜payment, change and payment voucher records. — 75/100; weight=1/3; cashiers.profile.responsibilities-block.1[0]",
-                  "Customer service｜greeting and directing customers, answering questions about products, processes and policies and helping customers find items｜customer enquiry and guidance records. — 50/100; weight=1/3; cashiers.profile.responsibilities-block.1[2]",
-                  "Reconciliation and handover｜counting the starting till at the start of the shift and checking the total transaction amount and total sales and preparing reports｜till count and shift reconciliation records. — 75/100; weight=1/3; cashiers.profile.responsibilities-block.1[4]"
+                  "Paper exercise only; not evidence of AI adoption."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
                 "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "name": "FermatMind: CA-18 fictional exercise",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Two openings in Hongkou, high school or above, rotating shifts, with advertised piece-rate pay of CNY 4,500–5,000 per month. Applications closed June 17, 2026."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cash-shanghai-2026",
+                "limitation": "A dated job posting, not a nationwide occupational wage.",
+                "market": "Mainland China",
+                "name": "Shanghai Hongkou: cashier job notice",
+                "period": "2026-06-15",
+                "publisher": "Changning District People’s Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.shanghai.gov.cn/nw17239/20260615/5cbb9b97560a419fb5cc3d2553fe8217.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "One role, experience preferred, at an advertised CNY 2,600–3,500 per month. This notice does not establish current availability or national pay."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cash-mile-2026",
+                "limitation": "A dated job posting, not a nationwide occupational wage.",
+                "market": "Mainland China",
+                "name": "Mile, Yunnan: cashier job notice",
+                "period": "2026, issue 33",
+                "publisher": "Mile Municipal People’s Government",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/936502.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Article 6 requires sellers to make clear which goods or services a price applies to."
+                ],
+                "evidence_type": "primary_document",
+                "id": "cash-price-rule",
+                "limitation": "Seller duties, not a cashier credential.",
+                "market": "Mainland China",
+                "name": "SAMR: price disclosure and deceptive pricing rules",
+                "period": "2022-07-01",
+                "publisher": "SAMR",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/jls/art/2023/art_72865dc294a14432aff931038b02c210.html"
               }
             ]
           },
@@ -31909,6 +31993,22 @@
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "entry": "link-5",
+              "field": "entity"
+            }
+          },
+          {
+            "href": {
+              "$link": "cashiers.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-6",
+              "field": "url"
+            },
+            "label": {
+              "$link": "cashiers.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-6",
               "field": "entity"
             }
           }
@@ -33202,7 +33302,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "onet-details",
+            "id": "cash-shanghai-2026",
             "label": {
               "$link": "cashiers.path.career-path-block.10",
               "block": "path",
@@ -33225,7 +33325,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "onet-cert",
+            "id": "cash-mile-2026",
             "label": {
               "$link": "cashiers.path.career-path-block.10",
               "block": "path",
@@ -34063,7 +34163,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nasa-seh",
+              "cash-cn-consumer",
               "editorial"
             ],
             "id": "refund-and-discount-overreach",
@@ -34095,7 +34195,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "faa-design-approvals",
+              "cash-cn-minor",
               "food-law",
               "fda-t21"
             ],
@@ -34128,8 +34228,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-17-3021",
-              "nasa-seh"
+              "cash-cn-privacy",
+              "editorial"
             ],
             "id": "customer-and-payment-data",
             "mitigation": {
@@ -34212,7 +34312,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "nasa-seh",
+            "id": "cash-cn-consumer",
             "label": {
               "$link": "cashiers.risk.career-risk-cards.7",
               "block": "risk",
@@ -34258,7 +34358,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "id": "faa-design-approvals",
+            "id": "cash-cn-minor",
             "label": {
               "$link": "cashiers.risk.career-risk-cards.7",
               "block": "risk",
@@ -34281,7 +34381,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet-17-3021",
+            "id": "cash-cn-privacy",
             "label": {
               "$link": "cashiers.risk.career-risk-cards.7",
               "block": "risk",
@@ -34668,7 +34768,9 @@
             "cash-cn-retail-nonprivate-2025",
             "cash-cn-retail-private-2025",
             "cash-cn-food-nonprivate-2025",
-            "cash-cn-food-private-2025"
+            "cash-cn-food-private-2025",
+            "cash-shanghai-2026-pay",
+            "cash-mile-2026-pay"
           ],
           "sources_note": {
             "$item": "cashiers.china-salary.career-snapshot-primary-locale.57",
@@ -34679,7 +34781,7 @@
           "ui": {
             "ai_heading": "Will AI affect cashier wages?",
             "driver_heading": "Which industries and directions use this occupation?",
-            "official_heading": "Chinese mainland industry wage reference and the precise occupational gap",
+            "official_heading": "Industry averages, past job notices and the wage gap",
             "scenario_caption": "Educational background, job directions and notes (editorial, not wage statistics)",
             "scenario_heading": "Which job directions correspond to different educational backgrounds?",
             "scenario_interpretation_label": "Notes and suggested checks",
@@ -35121,7 +35223,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of person suits cashiers?"
+        "title": "Who may enjoy the day-to-day work of a cashier?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -35234,7 +35336,8 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "cash-ep-2025-2035",
+            "source_id": "onet-summary",
+            "source_ref": "cash-ooh-current",
             "value": {
               "$item": "cashiers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35279,7 +35382,8 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "cash-wages-2025",
+            "source_id": "onet-localwages",
+            "source_ref": "cash-wages-2025",
             "value": {
               "$item": "cashiers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35324,7 +35428,8 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "cash-nbs-2025",
+            "source_id": "nbs-wages",
+            "source_ref": "cash-nbs-2025",
             "value": {
               "$item": "cashiers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -35898,7 +36003,7 @@
             },
             "id": "iq",
             "label": "Intelligence quotient (IQ) and numerical reasoning",
-            "question": "If my IQ or maths is not good, can I be a cashier?",
+            "question": "What arithmetic do cashiers actually use?",
             "signals": {
               "$item": "cashiers.fit.personality-fit-block.20",
               "block": "fit",
@@ -36624,7 +36729,9 @@
     "contract_version": "career.detail.display.v1",
     "interface": {
       "interface.fit.directions_heading": "Which cashier direction are you more likely suited to?",
-      "interface.fit.interest_code_heading": "How to understand the CE interest code",
+      "interface.fit.interest_code_heading": "How to read CE and the detailed ratings",
+      "interface.quick_decision.experiment_heading": "How can you try the work on paper?",
+      "interface.quick_decision.suit_heading": "Who may enjoy the day-to-day work of a cashier?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
       "interface.us_salary.section_label": "U.S. salary reference",
@@ -36753,9 +36860,9 @@
         "market": "United States",
         "measure": "Annual median wage (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "May 2025; framing shown on the Cashiers (SOC 41-2011) occupation page",
+        "period": "May 2025 OEWS",
         "source_refs": [
-          "bls-pay"
+          "cash-wages-2025"
         ]
       },
       {
@@ -36765,69 +36872,70 @@
         "market": "United States",
         "measure": "Hourly median wage (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "May 2025; framing shown on the Cashiers (SOC 41-2011) occupation page",
+        "period": "May 2025 OEWS",
         "source_refs": [
-          "bls-pay"
+          "cash-wages-2025"
         ]
       },
       {
         "derivation": null,
-        "display_value": "3,157,200 people (2024)",
+        "display_value": "3,106,300 jobs in 2025",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Employment size (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "2024; framing shown on the Cashiers (SOC 41-2011) occupation page",
+        "period": "2025",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "about 2,843,600 people (2034)",
+        "display_value": "About 2,905,700 jobs projected in 2035",
         "fact_id": "us-employment-2035",
         "market": "United States",
         "measure": "Projected employment (framing shown on this occupation page and by the BLS projection)",
         "occupation_scope": "Cashiers",
-        "period": "2024—2034; framing shown on the Cashiers (SOC 41-2011) occupation page",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "change of Decline (-1% or lower)",
+        "display_value": "Decline of 6.5%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Direction of employment change (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "2024—2034; framing shown on the Cashiers (SOC 41-2011) occupation page",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "about -313,600 people (3,157,200 in 2024 → about 2,843,600 in 2034, about -10%)",
+        "display_value": "Net decline of about 200,600 jobs",
         "fact_id": "us-change-2025-2035",
         "market": "United States",
         "measure": "Employment net change (calculated from the employment size shown on this page and the BLS projection)",
         "occupation_scope": "Cashiers",
-        "period": "2024—2034; framing shown on the Cashiers (SOC 41-2011) occupation page",
+        "period": "2025–2035",
         "source_refs": [
           "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "542,600 per year",
+        "display_value": "About 521,300 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Average annual job openings over the projection period (framing on this occupation page)",
+        "measure": "Projected annual openings, all from replacement",
         "occupation_scope": "Cashiers",
-        "period": "2024—2034; framing shown on the Cashiers (SOC 41-2011) occupation page (mainly including replacement demand such as separations and retirements)",
+        "period": "2025–2035",
         "source_refs": [
-          "bls-outlook"
+          "cash-ooh-current",
+          "cash-ep-2025-2035"
         ]
       },
       {
@@ -36885,9 +36993,9 @@
         "market": "United States",
         "measure": "Annual wage 10th percentile (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "May 2025; framing shown on the Cashiers (SOC 41-2011) occupation page",
+        "period": "May 2025 OEWS",
         "source_refs": [
-          "bls-pay"
+          "cash-wages-2025"
         ]
       },
       {
@@ -36897,9 +37005,9 @@
         "market": "United States",
         "measure": "Annual wage 90th percentile (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "May 2025; framing shown on the Cashiers (SOC 41-2011) occupation page",
+        "period": "May 2025 OEWS",
         "source_refs": [
-          "bls-pay"
+          "cash-wages-2025"
         ]
       },
       {
@@ -36969,9 +37077,9 @@
         "market": "United States",
         "measure": "Annual wage 25th percentile (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "May 2025; framing shown on the Cashiers (SOC 41-2011) occupation page",
+        "period": "May 2025 OEWS",
         "source_refs": [
-          "bls-pay"
+          "cash-wages-2025"
         ]
       },
       {
@@ -36981,9 +37089,9 @@
         "market": "United States",
         "measure": "Annual wage 75th percentile (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "May 2025; framing shown on the Cashiers (SOC 41-2011) occupation page",
+        "period": "May 2025 OEWS",
         "source_refs": [
-          "bls-pay"
+          "cash-wages-2025"
         ]
       },
       {
@@ -36993,7 +37101,7 @@
         "market": "United States",
         "measure": "Annual median wage (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "2025 U.S. national wages (BLS)",
+        "period": "May 2025 OEWS",
         "source_refs": [
           "cash-wages-2025"
         ]
@@ -37015,10 +37123,11 @@
         "display_value": "521,300 per year",
         "fact_id": "cash-us-openings-2025-2035",
         "market": "United States",
-        "measure": "Average annual job openings (all replacement demand)",
+        "measure": "Projected annual openings, all from replacement",
         "occupation_scope": "Cashiers",
         "period": "2025—2035",
         "source_refs": [
+          "cash-ooh-current",
           "cash-ep-2025-2035"
         ]
       },
@@ -37029,7 +37138,7 @@
         "market": "United States",
         "measure": "Annual wage 10th percentile (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "2025 U.S. national wages (BLS)",
+        "period": "May 2025 OEWS",
         "source_refs": [
           "cash-wages-2025"
         ]
@@ -37041,7 +37150,7 @@
         "market": "United States",
         "measure": "Annual wage 90th percentile (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "2025 U.S. national wages (BLS)",
+        "period": "May 2025 OEWS",
         "source_refs": [
           "cash-wages-2025"
         ]
@@ -37053,7 +37162,7 @@
         "market": "United States",
         "measure": "Annual wage 25th percentile (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "2025 U.S. national wages (BLS)",
+        "period": "May 2025 OEWS",
         "source_refs": [
           "cash-wages-2025"
         ]
@@ -37065,7 +37174,7 @@
         "market": "United States",
         "measure": "Annual wage 75th percentile (framing on this occupation page)",
         "occupation_scope": "Cashiers",
-        "period": "2025 U.S. national wages (BLS)",
+        "period": "May 2025 OEWS",
         "source_refs": [
           "cash-wages-2025"
         ]
@@ -37177,45 +37286,69 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Two openings in Hongkou, high school or above, rotating shifts, with advertised piece-rate pay of CNY 4,500–5,000 per month.",
+        "fact_id": "cash-shanghai-2026-pay",
+        "market": "Mainland China",
+        "measure": "Advertised monthly pay",
+        "occupation_scope": "Shanghai Hongkou: cashier job notice",
+        "period": "2026-06-15",
+        "source_refs": [
+          "cash-shanghai-2026"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "One role, experience preferred, at an advertised CNY 2,600–3,500 per month. This notice does not establish current availability or national pay.",
+        "fact_id": "cash-mile-2026-pay",
+        "market": "Mainland China",
+        "measure": "Advertised monthly pay",
+        "occupation_scope": "Mile, Yunnan: cashier job notice",
+        "period": "2026, issue 33",
+        "source_refs": [
+          "cash-mile-2026"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
       "label": "AI Impact Score"
     },
     "badges": [
-      "O*NET 41-2011.00 · checkout and settlement / customer service, returns and exchanges / reconciliation and shift handover",
-      "Conventional / Enterprising · sales and personal service / accounting / office work / cash and payment tools",
-      "U.S. data use the framing shown on this occupation page (BLS May 2025 OEWS annual and hourly, a change of Decline (-1% or lower) over 2024—2034, page marks Bright Outlook) · this route obtained no occupational-level statistical framing for Chinese mainland"
+      "Prices and payments",
+      "Refund handoff and till reconciliation",
+      "CA-18: fictional checkout"
     ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. annual median wage (41-2011.00 framing)"
+        "label": "U.S. annual median wage (U.S. SOC 41-2011)"
       },
       {
         "availability": "available",
         "fact_ref": "cash-us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment change (2025–2035, 41-2011.00 framing)"
+        "label": "U.S. employment change (2025–2035)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. number employed (2024, 41-2011.00 framing)"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "cash-us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (2025–2035, 41-2011.00 framing)"
+        "label": "U.S. projected annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -37229,17 +37362,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What cashiers do, what education and qualifications they need, how salaries in the United States and Chinese mainland look, and which steps AI and automation will change; U.S. wages and employment follow the BLS May 2025 OEWS annual and hourly framing and the 2024—2034 projection shown on this occupation page (hourly median 15.81 USD, annual median 32,880 USD, 3,157,200 people employed in 2024, projected change of Decline (-1% or lower), page marks Bright Outlook); for Chinese mainland this evidence route obtained no precise national occupational wage framing for this occupation, and the route requires showing the gap rather than using a proxy figure, so this page publishes no Chinese mainland figure."
+      "text": "See what cashiers do, try a short checkout and till reconciliation exercise, and compare U.S. pay and job outlook with mainland China job examples."
     },
     "title": {
       "availability": "available",
       "text": "Cashiers"
     }
   },
-  "source_content_sha256": "c799da7a9b0f0126d9a1d88cbe2fdf8fd66fd6c2af6579d8f0482563a592d24c",
+  "source_content_sha256": "f8ee17717aef88fb57fb36a234191a2f6205725fe535ec3e7242a7007ce3b0b3",
   "subject": {
     "canonical_slug": "cashiers",
     "name": "Cashiers",
-    "summary": "This page entry corresponds to cashiers (O*NET-SOC 41-2011.00, Cashiers): receiving and paying out money in non-financial establishment settings, possibly using electronic scanning equipment and cash registers or related equipment, and possibly processing credit card and debit card transactions and verifying cheques — receiving payment by cash, cheque, bank card, mobile payment and vouchers, checking items, prices, promotions and tax amounts, issuing receipts and handling refunds and change, counting the till and checking the transaction and total sales amounts and preparing reports, handling returns, exchanges and complaints and escalating according to authority, and keeping the checkout area tidy and restocked; the work is mainly standing on the store floor and interpersonal contact (96% are in contact with others continuously, 79% have face-to-face discussions every day, 51% stand continuously or almost continuously, 26% deal with unpleasant, angry or discourteous people every day, 49% say the work is not automated at all), and its duties do not replace the determination of refunds, discrepancies and compliance matters by operator, finance and compliance positions; the occupation page marks Bright Outlook."
+    "summary": "Cashiers verify items, prices and payment status, issue receipts and balance the till. They keep a record and escalate duplicate payments, refunds outside their authority and cash discrepancies."
   }
 }

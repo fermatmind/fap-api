@@ -8844,18 +8844,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": {
@@ -8933,18 +8923,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.02.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            1,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.02.mitigation": {
         "ref": {
@@ -9022,18 +9002,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -9111,18 +9081,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -9200,18 +9160,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            4,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -9289,18 +9239,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -15865,8 +15805,14 @@
         "status": "unfilled"
       },
       "interface.fit.interest_code_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.fit.interest_code_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.fit.interest_experience_heading": {
         "ref": null,
@@ -15961,16 +15907,28 @@
         "status": "unfilled"
       },
       "interface.quick_decision.caution_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.caution_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.experiment_heading": {
         "ref": null,
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -23327,7 +23285,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Independently do the P1 to P5 fictional classroom resource plan: write a scope card, a resource conflict table, a 180 yuan proposal and a fallback proposal and a pending handover, and read the answers after sealing the first draft. Paper only, with no real military missions or materials, and no proof of command ability or selection eligibility."
+              "Try P1–P5, a fictional classroom exercise. List who can approve what, record versions and conflicts, calculate the main and alternative proposals, and prepare the handoff. Save your first draft before reading the answers."
             ]
           },
           "id": "special-forces-officers.quick-decision.fit-decision-checklist.2",
@@ -23415,7 +23373,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Officer appointment and the chain of command; the military summary does not provide occupational assessment scores."
+              "A public summary of U.S. officer duties. O*NET does not collect military occupational assessment data."
             ]
           },
           "id": "special-forces-officers.profile.onet-structured-fields-block.1",
@@ -23484,7 +23442,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Military pay grades and occupational percentiles must be distinguished."
+              "Basic pay depends on rank and years of service. No wage percentiles were verified for this officer occupation."
             ]
           },
           "id": "special-forces-officers.profile.onet-structured-fields-block.2",
@@ -23516,7 +23474,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Chinese officer pay scope is separate from the conscript supply system."
+              "Officers and noncommissioned officers receive wages; conscripts are covered by a separate subsistence support system."
             ]
           },
           "id": "special-forces-officers.profile.onet-structured-fields-block.3",
@@ -23548,7 +23506,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Official military summary; software adoption is not inferred from navigation."
+              "The projections cover civilian employment and cannot supply this military occupation’s employment figures."
             ]
           },
           "id": "special-forces-officers.profile.onet-structured-fields-block.4",
@@ -23580,7 +23538,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Professional training follows the service, and there is currently no military Job Zone data."
+              "This military occupation has no O*NET Job Zone. Check the specific service for its training and selection requirements."
             ]
           },
           "id": "special-forces-officers.profile.onet-structured-fields-block.5",
@@ -23868,7 +23826,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this occupation's precise Chinese and U.S. wage percentiles, headcount growth and openings and AI adoption rate were not obtained, and neither civilian manager nor member wages are borrowed."
+              "First check commissioning in the relevant jurisdiction. Then confirm the service’s selection criteria, assignment and authority. Mainland China’s general officer routes and the U.S. Army transfer route are separate."
             ]
           },
           "id": "special-forces-officers.profile.career-quick-answers-block.22",
@@ -24012,7 +23970,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "China's 2026–2027 direct officer recruitment and military academy growth officer materials are broad entries, and appointment and designated special forces positions are verified separately."
+              "China's 2026–2027 direct officer recruitment and military academy future commissioned officer materials are broad entries, and appointment and designated special forces positions are verified separately."
             ]
           },
           "id": "special-forces-officers.profile.career-quick-answers-block.31",
@@ -24113,6 +24071,12 @@
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/55-1017.00"
+              },
+              {
+                "entity": "O*NET Special Forces members (55-3018.00)",
+                "id": "link-6",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/55-3018.00"
               }
             ]
           },
@@ -24131,7 +24095,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The four adjacent occupations are all officer specialist roles, and the two internal directions are this occupation's plan materials and team feedback; a shared appointment status does not guarantee professional transfer or command authority."
+              "These U.S. O*NET profiles distinguish the main duties of officers, members and four other officer specialties. Check the relevant service for commissioning, transfer, assignment and authority."
             ]
           },
           "id": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.8",
@@ -24492,7 +24456,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Internal: plan material checking, not another military occupation code."
+              "Officers chiefly lead and coordinate; members chiefly carry out assigned specialist duties. Training and teamwork overlap."
             ]
           },
           "id": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.27",
@@ -24511,7 +24475,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Those willing to check objectives, limits, conflicts and open items should do the P three work."
+              "Check commissioning and member selection separately."
             ]
           },
           "id": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.28",
@@ -24530,7 +24494,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Submit the resource constraint table, the 180 yuan proposal and the pending items."
+              "Carry out assigned duties as members of a team, with training and coordination responsibilities."
             ]
           },
           "id": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.29",
@@ -24549,7 +24513,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Internal: plan and resource explanation"
+              "Special Forces members (55-3018.00)"
             ]
           },
           "id": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.30",
@@ -24708,10 +24672,10 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
-                "entity": "BLS military boundaries",
+                "entity": "NIST Generative AI Risk Management Profile",
                 "id": "link-7",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
                 "entity": "BLS military boundaries",
@@ -24750,10 +24714,10 @@
                 "url": "https://www.onetonline.org/link/details/55-1017.00"
               },
               {
-                "entity": "BLS military boundaries",
+                "entity": "U.S. Army: general entry requirements",
                 "id": "link-14",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://www.goarmy.com/how-to-join/requirements"
               },
               {
                 "entity": "GPTs are GPTs",
@@ -24768,7 +24732,7 @@
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "NIST AI600-1 generative AI risk framework",
+                "entity": "NIST generative AI risk profile",
                 "id": "link-17",
                 "relation": "career.evidence",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
@@ -24780,10 +24744,10 @@
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "BLS military boundaries",
+                "entity": "U.S. Army: general entry requirements",
                 "id": "link-19",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://www.goarmy.com/how-to-join/requirements"
               }
             ]
           },
@@ -24973,19 +24937,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the actual generative AI adoption, effects and job substitution rate for special forces officers were not obtained; public duties and general methods serve only as scope background and do not imply military system deployment or command authorization. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "No role-specific evidence was verified on generative AI adoption, hours, judgment quality or jobs. Use fictional P1–P5 to test summaries and version tracking and check for omitted open items. Military use, access and information controls follow the institution’s rules."
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "bls",
-            "employer",
-            "ilo",
-            "arxiv",
-            "nist",
-            "weforum",
-            "editor"
+            "source-fermatmind-ai-rubric",
+            "onet"
           ],
           "type": "prose"
         },
@@ -25246,19 +25204,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS officer training background"
+              "NIST Generative AI Risk Management Profile"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.31",
           "source_refs": [
-            "onet",
-            "bls",
-            "employer",
-            "ilo",
-            "arxiv",
-            "nist",
-            "weforum",
-            "editor"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -25267,19 +25218,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Formal development and training follow the military system, and a public introduction does not show that tools can replace qualifications."
+              "Does not estimate military adoption, replacement, productivity or pay or grant access, approval or command authority."
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.32",
           "source_refs": [
-            "onet",
-            "bls",
-            "employer",
-            "ilo",
-            "arxiv",
-            "nist",
-            "weforum",
-            "editor"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -25645,7 +25589,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO and GPTs methods"
+              "ILO: Generative AI and jobs"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.50",
@@ -25666,7 +25610,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The shared target's verified general task method; no applicable sample for officers was obtained."
+              "A study of task exposure across occupations. No applicable sample for this officer role was verified."
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.51",
@@ -26002,7 +25946,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "This Army officer transfer path."
+              "General U.S. Army entry requirements. See the entry section for the separate transfer route."
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.67",
@@ -26065,7 +26009,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS projections cover civilians only, so no 2035 officer increase or decrease can be derived from them, and the 4% for purchasing managers is not applied."
+              "BLS projections cover the civilian workforce and do not establish how this officer occupation will change by 2035."
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.70",
@@ -26107,7 +26051,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Tools cannot approve the P proposal, confirm the D amount or issue military orders; formal officer decisions follow lawful appointment and the chain of command."
+              "In the exercise, the supervisor approves the proposal and the recorder confirms the amount. Tool output is only a draft. Check the applicable service rules for real authority."
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.72",
@@ -26128,7 +26072,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "P1 A endorses and B confirms, and military jurisdictional authority is verified separately."
+              "See P1 in the entry section for approvals. NIST is a general reference for human review of tool output."
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.73",
@@ -26212,7 +26156,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Army appointment transfer and the P author's work."
+              "General U.S. Army entry requirements. See the entry section for the separate transfer route."
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.77",
@@ -26296,7 +26240,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Check the A/B two-resource conflict, priority A, the current 180 with 80 remaining, the D draft and the C pending E unknown."
+              "Use the paper exercise to check whether draft notes preserve both the proposal and its budget rationale."
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.81",
@@ -26758,7 +26702,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Give the main proposal of A plus D180 with 80 remaining"
+              "Calculate the main proposal and remaining budget"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.103",
@@ -26842,7 +26786,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Only a future confirmation would give 190 with 70 remaining"
+              "Calculate the conditional budget only after confirmation"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.107",
@@ -27756,7 +27700,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese growth officer development"
+              "Chinese future commissioned officer development"
             ]
           },
           "id": "special-forces-officers.china-salary.career-snapshot-primary-locale.37",
@@ -28003,7 +27947,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Ministry of National Defense September public targets on the 24th: the graduation period from 2025Dec to 2027Jun and the cutoff on the 30th in September; appointment and rank conferral follow assessment, and medical, housing and leave entitlements are not this occupation's complete wage."
+              "The Ministry of National Defense notice of September 24, 2026 covered eligible graduates from December 2025 through June 2027. Applications closed September 30, 2026. Successful candidates receive appointment and rank after assessment. The notice gives no occupational pay figure."
             ]
           },
           "id": "special-forces-officers.china-salary.career-snapshot-primary-locale.50",
@@ -28041,7 +27985,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Ministry of National Defense 23rd June interpretation lists conditions such as high school age and academics and growth officer development; the national total academy admissions are not special forces position numbers, and there is no amount for this occupation."
+              "The Ministry of National Defense 23rd June interpretation lists conditions such as high school age and academics and future commissioned officer development; the national total academy admissions are not special forces position numbers, and there is no amount for this occupation."
             ]
           },
           "id": "special-forces-officers.china-salary.career-snapshot-primary-locale.52",
@@ -28060,7 +28004,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Third precise amount sample | not obtained"
+              "Pay for this occupation | no exact data"
             ]
           },
           "id": "special-forces-officers.china-salary.career-snapshot-primary-locale.53",
@@ -28079,7 +28023,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round's Ministry of National Defense officer entries and bounded precise compensation queries did not yield a third amount, and military-related budgets and retirement subsidies do not stand in for active-duty special forces officer wages."
+              "This round's Ministry of National Defense officer entries and bounded precise compensation queries did not yield a usable occupational pay figure, and military-related budgets and retirement subsidies do not stand in for active-duty special forces officer wages."
             ]
           },
           "id": "special-forces-officers.china-salary.career-snapshot-primary-locale.54",
@@ -28182,7 +28126,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS military boundaries | https://www.bls.gov/ooh/military/military-careers.htm; O*NET55-1017 military data boundaries | https://www.onetonline.org/link/details/55-1017.00; BLS military boundaries | https://www.bls.gov/ooh/military/military-careers.htm"
+              "DFAS 2026 monthly officer basic pay | https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Basic-Pay/CO/; BLS military careers and projection coverage | https://www.bls.gov/ooh/military/military-careers.htm; O*NET 55-1017.00 | https://www.onetonline.org/link/details/55-1017.00"
             ]
           },
           "id": "special-forces-officers.us-salary.career-snapshot-secondary-locale.8",
@@ -28524,7 +28468,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "DFAS2026Jan1 officer monthly basic pay examples: O3 over2 is 6273.90 dollars, over4 is 7382.70 and over6 is 7737.00. Rank and seniority bands are not this occupation's median, starting salary or total take-home pay; those with more than 4 years of prior active enlisted or warrant service must check the O3E table and do not use this table."
+              "DFAS2026Jan1 officer monthly basic pay examples: O3 over2 is 6273.90 dollars, over4 is 7382.70 and over6 is 7737.00. Rank and seniority bands are not this occupation's median, starting salary or total take-home pay; those with more than 4 years of prior active enlisted or warrant service must check the O3E table and do not use this table. To open the original table, go to “Frequently asked questions and sources” below and look for “DFAS active-duty officer basic pay.”"
             ]
           },
           "id": "special-forces-officers.us-salary.career-snapshot-secondary-locale.26",
@@ -29599,7 +29543,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "No uniform IQ threshold was obtained, and a 180 yuan recalculation does not imply military ability."
+              "Calculate the main proposal and the remaining budget, and record your rationale."
             ]
           },
           "id": "special-forces-officers.fit.personality-fit-block.21",
@@ -30066,7 +30010,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Introversion does not mean an inability to communicate; observe whether the person can explain the A/B conflict and the basis for 180 yuan, and do not infer hiring."
+              "State the limits on approval and resources, then calculate the main proposal and remaining budget yourself."
             ]
           },
           "id": "special-forces-officers.fit.personality-fit-block.47",
@@ -30156,7 +30100,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The exercise calculation of 180 and the 80 remainder must keep its premises; DLAB is not an IQ, and officers cannot use the 18X ASVAB TECH110."
+              "Check each calculation against the exercise rules. DLAB is a language aptitude test, not an online IQ score."
             ]
           },
           "id": "special-forces-officers.fit.personality-fit-block.52",
@@ -30264,7 +30208,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Use 40–50 minutes to complete the P four works independently, seal the first draft before checking the answers and revising, record energy and questions, and do not give a suitability score."
+              "Use 40–50 minutes to complete the four paper deliverables independently, seal the first draft before checking the answers and revising, record energy and questions, and do not give a suitability score."
             ]
           },
           "id": "special-forces-officers.fit.personality-fit-block.58",
@@ -30465,10 +30409,10 @@
                 "url": "https://www.gfbzb.gov.cn/zbbm/zcfg/byfg/202108/20210821/2100962138.html"
               },
               {
-                "entity": "U.S. 10 USC 892 lawful orders",
+                "entity": "P1–P5 fictional exercise",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title10-section892"
+                "url": "#career-visual-group-path"
               }
             ]
           },
@@ -30753,7 +30697,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Uploading real personnel or mission materials to public tools"
+              "In mainland China, sharing material subject to confidentiality rules with an external service without authorization."
             ]
           },
           "id": "special-forces-officers.risk.career-risk-cards.22",
@@ -31000,7 +30944,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET officer high-level scope, with no incidence rate."
+              "General U.S. military work, training and relocation context."
             ]
           },
           "id": "special-forces-officers.risk.career-risk-cards.35",
@@ -31019,7 +30963,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS full-time relocation, training and danger."
+              "Requirements for current U.S. Army officers and the separate 18X route."
             ]
           },
           "id": "special-forces-officers.risk.career-risk-cards.36",
@@ -31038,7 +30982,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Army active-duty officer transfer and appointment are separate."
+              "Public summary of U.S. officer duties; no occupation-specific incident rates."
             ]
           },
           "id": "special-forces-officers.risk.career-risk-cards.37",
@@ -31077,7 +31021,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The jurisdictional scope of U.S. 10 USC 892 lawful orders."
+              "Applies only to versions, amounts and approvals in the fictional exercise."
             ]
           },
           "id": "special-forces-officers.risk.career-risk-cards.39",
@@ -31140,7 +31084,7 @@
                 "Does not guarantee a special forces unit or current registration"
               ],
               [
-                "Chinese military academy growth officers",
+                "Chinese military academy future commissioned officers",
                 "Formal development and graduation assignment",
                 "2026 admissions and specialty conditions",
                 "List appointment, training and position differences",
@@ -31182,7 +31126,7 @@
                 "id": "clearance",
                 "values": [
                   "Army regular appointment entry",
-                  "The public page requires U.S. citizenship and college graduation at appointment and completion of the path's background and security clearance materials; BLS officers usually hold a bachelor's degree and do not need the ASVAB.",
+                  "The public page requires U.S. citizenship and college graduation at appointment and completion of the path's background and security clearance materials.",
                   "Scope: appointment and special forces transfer selection are kept separate, and a green card allowing 18X training to begin does not equal officer appointment."
                 ]
               },
@@ -31199,7 +31143,7 @@
                 "values": [
                   "China 2026 military academy broad entry",
                   "The Ministry of National Defense June 23rd interpretation: regular high school graduates and former graduates may apply, with the 16–20 age band as of August 31, unmarried, passing the physical test and reaching the provincial special control line or the first-tier line in the college entrance examination.",
-                  "Scope: broad growth officer development background, which does not equal special forces officer appointment and unified selection; specific specialties and that year's admissions are verified separately."
+                  "Scope: broad future commissioned officer development background, which does not equal special forces officer appointment and unified selection; specific specialties and that year's admissions are verified separately."
                 ]
               }
             ]
@@ -31225,7 +31169,7 @@
                 "values": [
                   "The P1 to P5 materials | all are author-fictional classroom activity proposals, not military plans",
                   "P1 | You are the paper proposal writer and may only organize and suggest; supervisor A approves the final activities and trade-offs and recorder B confirms resources and amounts. You must not change original records, give final approval or publish implementation. Fictional deadline is 16:00 on October 3.",
-                  "P2 | Five requests, all confirmed versions v1, with amounts in yuan: A, 09:00, room 1, personnel B, approved, 120; B, 09:00, room 1, personnel B, approved, 80; C, 10:00, room 2, personnel D, pending approval, 90; D, 10:00, room 1, personnel B, approved, 60; E, 11:00, room 2, personnel D, approved, amount blank. Personnel are resource labels only, and sharing a name with recorder B is also fictional. Each activity occupies its full one-hour period; a room or a person may be assigned at most one item in the same period.",
+                  "P2 | Five requests, all five original records are v1, with amounts in yuan: A, 09:00, room 1, personnel B, approved, 120; B, 09:00, room 1, personnel B, approved, 80; C, 10:00, room 2, personnel D, pending approval, 90; D, 10:00, room 1, personnel B, approved, 60; E, 11:00, room 2, personnel D, approved, amount blank. Personnel are resource labels only, and sharing a name with recorder B is also fictional. Each activity occupies its full one-hour period; a room or a person may be assigned at most one item in the same period.",
                   "P3 | The paper proposable list contains only approved requests with confirmed amounts, and the budget ceiling is 260 yuan; if A and B conflict, keep A first. Different one-hour periods do not conflict. The pending C is not included in the proposable list; the unknown E is not filled with 0 and is not included in the verifiable budget. A proposal cannot be treated as final approval.",
                   "P4 | At 12:00 a v2 draft amount of 70 for D was received without recorder B's confirmation; keep the D v1 confirmed 60 and the v2 draft 70. Also ask whether, if C is later approved by A with all other conditions unchanged, A+D+C meets the budget; at present there is no approval of C, no confirmation of the new D amount and no filling in of E.",
                   "P5 | Submit four paper works: an authority scope card, a resource conflict and version table, the current budget and alternative or conditional proposals, and the pending handover. All personnel, locations, times and amounts are fictional, with no real military information; nothing is executed, and there is no dangerous training or equipment, weapons or medical operation."
@@ -31310,7 +31254,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "How do the P four works preserve the basis for the proposal?",
+          "title": "How do the four paper deliverables preserve the basis for the proposal?",
           "type": "cards"
         },
         {
@@ -31344,7 +31288,7 @@
               ],
               [
                 "Conditional judgment",
-                "Why 70 cannot be changed to the current 60",
+                "Why must the unconfirmed 70 not replace the confirmed 60?",
                 "Keep the v1 confirmation and the v2 unconfirmed draft",
                 "Paper habits do not equal leadership competence"
               ],
@@ -31487,7 +31431,7 @@
                 "University graduating students who meet the announcement",
                 "2026–2027 broad entry",
                 "The Ministry of National Defense September public materials on the 24th",
-                "Graduating between 2025Dec and 2027Jun and meeting the relevant standards; before the 30th in September",
+                "Eligible graduates from December 2025 through June 2027; application deadline September 30, 2026",
                 "The regular deadline has passed, and follow-up notices are verified separately",
                 "Not a unified direct hire threshold for special forces officers"
               ],
@@ -31566,16 +31510,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This round verified Army active-duty officer transfer and regular appointment, China's 2026–2027 university direct recruitment and the 2026 military academy broad entry separately. The regular Chinese direct recruitment closing on the 30th in September has passed, and it is not described as currently open or as a designated special forces position.",
-              "Insufficient evidence: three complete amounts for precise Chinese special forces officers were not obtained, with the precise amount n=0; the U.S. DFAS figures are officer pay grade and seniority monthly basic pay, not this occupation's recruitment median."
+              "Mainland 2026 military academy admissions used the national exam, political screening, interviews and military medical checks; see the province and academy rules. The 2026–27 direct officer example listed a September 30 application deadline, which has passed.",
+              "Both illustrate general officer pathways. Verify any special forces eligibility, selection and assignment separately with the competent authority."
             ]
           },
           "id": "special-forces-officers.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
             "nbs",
             "special-forces-officers",
-            "editor"
+            "cnclass"
           ],
           "title": "Public transfer and broad entry sample note",
           "type": "notice"
@@ -31586,28 +31529,28 @@
           "data": {
             "entries": [
               {
-                "entity": "BLS military duties and training",
+                "entity": "U.S. Army: requirements for current officers",
                 "id": "link-1",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://www.goarmy.com/careers-and-jobs/specialty-careers/special-ops/special-forces"
               },
               {
-                "entity": "China officer direct recruitment broad entry",
+                "entity": "Ministry of National Defense: 2026–27 direct officer intake",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.mod.gov.cn/gfbw/qwfb/16488992.html"
               },
               {
-                "entity": "Army active-duty officer transfer",
+                "entity": "Ministry of National Defense: 2026 military academy admissions",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.goarmy.com/careers-and-jobs/specialty-careers/special-ops/special-forces"
+                "url": "https://www.mod.gov.cn/gfbw/gffw/zs/16469121.html"
               },
               {
-                "entity": "O*NET55-1017 military data boundaries",
+                "entity": "Chinese Military Service Law",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/55-1017.00"
+                "url": "https://www.gfbzb.gov.cn/zbbm/zcfg/byfg/202108/20210821/2100962138.html"
               }
             ]
           },
@@ -31859,16 +31802,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS officer planning, organization, leadership and living background."
+              "This applies to the public Army officer route only. Eligibility does not guarantee selection, appointment or assignment."
             ]
           },
           "id": "special-forces-officers.path.career-path-block.24",
           "source_refs": [
-            "bls",
-            "cnclass",
-            "employer",
-            "onet",
-            "editor"
+            "employer"
           ],
           "type": "prose"
         },
@@ -31877,16 +31816,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Chinese military status, discipline and the Ministry of National Defense broad entry."
+              "The stated application period has passed. This is a general officer intake example, not a special forces opening or assignment."
             ]
           },
           "id": "special-forces-officers.path.career-path-block.25",
           "source_refs": [
-            "bls",
-            "cnclass",
-            "employer",
-            "onet",
-            "editor"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31895,16 +31830,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Army active-duty officer transfer and regular appointment are separate."
+              "Academy admission does not establish a commission, special forces selection or assignment."
             ]
           },
           "id": "special-forces-officers.path.career-path-block.26",
           "source_refs": [
-            "bls",
-            "cnclass",
-            "employer",
-            "onet",
-            "editor"
+            "special-forces-officers"
           ],
           "type": "prose"
         },
@@ -31913,16 +31844,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET55-1017 high-level summary with no Job Zone."
+              "Status, discipline and lawful approval, which do not equal a special forces position or officer command appointment"
             ]
           },
           "id": "special-forces-officers.path.career-path-block.27",
           "source_refs": [
-            "bls",
-            "cnclass",
-            "employer",
-            "onet",
-            "editor"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -33044,16 +32971,16 @@
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "BLS military boundaries",
+                "entity": "Ministry of National Defense: 2026–27 direct officer intake",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://www.mod.gov.cn/gfbw/qwfb/16488992.html"
               },
               {
-                "entity": "BLS military boundaries",
+                "entity": "O*NET55-1017 military data boundaries",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://www.onetonline.org/link/details/55-1017.00"
               },
               {
                 "entity": "Aircrew officers",
@@ -34057,7 +33984,7 @@
                 ]
               },
               {
-                "answer": "Military academy growth officer development and 2026–2027 university direct recruitment are broad background, and lawful appointment and designated special forces unit positions are verified separately; the regular direct recruitment closing on the 30th in September has passed.",
+                "answer": "Military academy future commissioned officer development and 2026–2027 university direct recruitment are broad background, and lawful appointment and designated special forces unit positions are verified separately; the regular direct recruitment closing on the 30th in September has passed.",
                 "id": "special-forces-officers.faq.4",
                 "question": "Do Chinese public entries guarantee a special forces position?",
                 "question_key": "career.faq.special-forces-officers.q4",
@@ -34087,7 +34014,7 @@
                 ]
               },
               {
-                "answer": "Insufficient evidence: direct empirical evidence of this occupation's AI adoption, net substitution and year of disappearance was not obtained. General exposure or enterprise employer expectations are not a military establishment, and tools do not confer appointment or training responsibility. BLS projects the civilian labor force only, and the military occupation 55-1017 has no applicable 2025–2035 base, end value, growth rate or annual average openings; total service figures and civilian managers cannot fill this in, and a coverage exclusion is not zero growth or an individual unemployment probability.",
+                "answer": "We did not verify adoption or job loss projections for this occupation. The fictional record check can reveal omissions and errors. It establishes neither future staffing nor authorization for real work.",
                 "id": "special-forces-officers.faq.7",
                 "question": "Will AI make this occupation disappear?",
                 "question_key": "career.faq.special-forces-officers.education-path",
@@ -34132,7 +34059,11 @@
             "onet",
             "bls",
             "employer",
-            "editor"
+            "editor",
+            "nbs",
+            "special-forces-officers",
+            "cnclass",
+            "source-fermatmind-ai-rubric"
           ],
           "type": "faq"
         },
@@ -34296,7 +34227,7 @@
                 "name": "BLS military boundaries",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
@@ -34312,7 +34243,7 @@
                 "name": "BLS military boundaries",
                 "period": "Military statistics coverage boundary; this round read as of 2026-10-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
@@ -34328,23 +34259,23 @@
                 "name": "BLS military boundaries",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "The broad university officer entry has no precise wage for this occupation, and the regular closing on the 30th in September has passed",
-                  "Direct opening of the Ministry of National Defense and DFAS pages failed, and official search returned the text and tables for checking; no claim is made that direct opening succeeded this round."
+                  "On September 24, 2026, the Ministry described the intake for eligible university graduates, with a September 30 application deadline.",
+                  "Published procedures included screening, physical and political review and professional assessment. Successful appointees become officers and receive rank."
                 ],
                 "evidence_type": "official public source",
                 "id": "nbs",
-                "limitation": "The broad university officer entry has no precise wage for this occupation, and the regular closing on the 30th in September has passed",
+                "limitation": "The stated application period has passed. This is a general officer intake example, not a special forces opening or assignment.",
                 "market": "Mainland China",
-                "name": "Ministry of National Defense 2026–2027 officer direct recruitment",
-                "period": "Public materials; accessed 2026-10-01",
+                "name": "Ministry of National Defense: 2026–27 direct officer intake",
+                "period": "2026-09-24",
                 "publisher": "Ministry of National Defense of the People's Republic of China",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.mod.gov.cn/gfbw/qwfb/16488992.html"
               },
               {
@@ -34360,7 +34291,7 @@
                 "name": "Chinese Military Service Law",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "Ministry of National Defense Conscription Office (national conscription website)",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.gfbzb.gov.cn/zbbm/zcfg/byfg/202108/20210821/2100962138.html"
               },
               {
@@ -34376,8 +34307,8 @@
                 "name": "U.S. 10 USC 892 lawful orders",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "U.S. House Office of the Law Revision Counsel",
-                "scope": "context",
-                "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title10-section892"
+                "scope": "contextual",
+                "url": "https://uscode.house.gov/us/usc/t10/s892/"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -34392,7 +34323,7 @@
                 "name": "O*NET aircrew officers",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1011.00"
               },
               {
@@ -34408,7 +34339,7 @@
                 "name": "O*NET aircraft launch and recovery officers",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1012.00"
               },
               {
@@ -34424,7 +34355,7 @@
                 "name": "O*NET armored assault vehicle officers",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1013.00"
               },
               {
@@ -34440,7 +34371,7 @@
                 "name": "O*NET artillery and missile officers",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1014.00"
               },
               {
@@ -34456,7 +34387,7 @@
                 "name": "Generative AI and jobs: refined occupational exposure index",
                 "period": "2025",
                 "publisher": "International Labour Organization",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -34472,7 +34403,7 @@
                 "name": "Author P1 to P5 fictional resource proposal",
                 "period": "Original, 2026-10-01",
                 "publisher": "FermatMind editorial",
-                "scope": "editorial",
+                "scope": "editorial_synthesis",
                 "url": "/en/career/jobs/special-forces-officers"
               },
               {
@@ -34488,7 +34419,7 @@
                 "name": "NIST AI600-1 generative AI risk framework",
                 "period": "2024-07",
                 "publisher": "NIST",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
@@ -34504,7 +34435,7 @@
                 "name": "GPTs are GPTs",
                 "period": "2023；v5",
                 "publisher": "arXiv paper authors",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://arxiv.org/abs/2303.10130"
               },
               {
@@ -34520,87 +34451,85 @@
                 "name": "WEF Future of Jobs Report 2025",
                 "period": "2025–2030 expectations; published 2025-01-07",
                 "publisher": "World Economic Forum",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "First lieutenant or captain, branch transfer, DLAB of 85 or above, top secret clearance eligibility, without applying the 18X recruit standard",
-                  "Public high-level scope, with formal appointment and professional training verified separately."
+                  "The Army lists first lieutenant or captain, transfer from the current branch, a DLAB score of at least 85 and eligibility for a top secret clearance.",
+                  "The separate 18X candidate route does not confer a commission.",
+                  "Army sources list 18A Special Forces Officer, 180A Special Forces Warrant Officer and enlisted specialties separately. Each has its own status and eligibility."
                 ],
                 "evidence_type": "official public source",
                 "id": "employer",
-                "limitation": "First lieutenant or captain, branch transfer, DLAB of 85 or above, top secret clearance eligibility, without applying the 18X recruit standard",
+                "limitation": "This applies to the public Army officer route only. Eligibility does not guarantee selection, appointment or assignment.",
                 "market": "United States",
-                "name": "Army active-duty officer transfer",
+                "name": "U.S. Army: requirements for current officers",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "U.S. Army",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.goarmy.com/careers-and-jobs/specialty-careers/special-ops/special-forces"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Growth officer development broad background, not a special forces officer position or amount",
-                  "Direct opening of the Ministry of National Defense and DFAS pages failed, and official search returned the text and tables for checking; no claim is made that direct opening succeeded this round."
+                  "Covers regular high-school graduates and requirements including the national exam, political screening, military medical examination, interviews and admission.",
+                  "Verify provincial, academy and program requirements from the official rules for the year."
                 ],
                 "evidence_type": "official public source",
                 "id": "special-forces-officers",
-                "limitation": "Growth officer development broad background, not a special forces officer position or amount",
+                "limitation": "Academy admission does not establish a commission, special forces selection or assignment.",
                 "market": "Mainland China",
-                "name": "Ministry of National Defense 2026 military academy broad entry",
-                "period": "Public materials; accessed 2026-10-01",
+                "name": "Ministry of National Defense: 2026 military academy admissions",
+                "period": "2026",
                 "publisher": "Ministry of National Defense of the People's Republic of China",
-                "scope": "context",
-                "url": "https://www.mod.gov.cn/gfbw/gffw/16469120.html"
+                "scope": "contextual",
+                "url": "https://www.mod.gov.cn/gfbw/gffw/zs/16469121.html"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "O3 over2 is 6273.90 dollars per month, 2026Jan1; not an occupational median net pay, and prior active enlisted or warrant service greater than 4 years requires checking O3E",
-                  "Direct opening of the Ministry of National Defense and DFAS pages failed, and official search returned the text and tables for checking; no claim is made that direct opening succeeded this round."
+                  "Effective January 1, 2026. O-3 Over 2 column: $6,273.90 monthly basic pay."
                 ],
                 "evidence_type": "official public source",
                 "id": "r2-pay-1",
-                "limitation": "O3 over2 is 6273.90 dollars per month, 2026Jan1; not an occupational median net pay, and prior active enlisted or warrant service greater than 4 years requires checking O3E",
+                "limitation": "General O-3 pay-grade example, not occupation-specific or take-home pay. Check separate O-3E rules for qualifying prior enlisted or warrant officer service.",
                 "market": "United States",
-                "name": "DFAS2026 O3 over2 monthly basic pay",
-                "period": "Public page read 2026-10-01; DFAS amount effective2026-01-01",
+                "name": "DFAS active-duty officer basic pay: O-3 Over 2",
+                "period": "2026-01-01",
                 "publisher": "Defense Finance and Accounting Service",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Basic-Pay/CO/"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "O3 over4 is 7382.70 dollars per month, 2026Jan1; not an occupational median net pay, and prior active enlisted or warrant service greater than 4 years requires checking O3E",
-                  "Direct opening of the Ministry of National Defense and DFAS pages failed, and official search returned the text and tables for checking; no claim is made that direct opening succeeded this round."
+                  "Effective January 1, 2026. O-3 Over 4 column: $7,382.70 monthly basic pay."
                 ],
                 "evidence_type": "official public source",
                 "id": "r2-pay-2",
-                "limitation": "O3 over4 is 7382.70 dollars per month, 2026Jan1; not an occupational median net pay, and prior active enlisted or warrant service greater than 4 years requires checking O3E",
+                "limitation": "General O-3 pay-grade example, not occupation-specific or take-home pay. Check separate O-3E rules for qualifying prior enlisted or warrant officer service.",
                 "market": "United States",
-                "name": "DFAS2026 O3 over4 monthly basic pay",
-                "period": "Public page read 2026-10-01; DFAS amount effective2026-01-01",
+                "name": "DFAS active-duty officer basic pay: O-3 Over 4",
+                "period": "2026-01-01",
                 "publisher": "Defense Finance and Accounting Service",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Basic-Pay/CO/"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "O3 over6 is 7737.00 dollars per month, 2026Jan1; not an occupational median net pay, and prior active enlisted or warrant service greater than 4 years requires checking O3E",
-                  "Direct opening of the Ministry of National Defense and DFAS pages failed, and official search returned the text and tables for checking; no claim is made that direct opening succeeded this round."
+                  "Effective January 1, 2026. O-3 Over 6 column: $7,737.00 monthly basic pay."
                 ],
                 "evidence_type": "official public source",
                 "id": "r2-pay-3",
-                "limitation": "O3 over6 is 7737.00 dollars per month, 2026Jan1; not an occupational median net pay, and prior active enlisted or warrant service greater than 4 years requires checking O3E",
+                "limitation": "General O-3 pay-grade example, not occupation-specific or take-home pay. Check separate O-3E rules for qualifying prior enlisted or warrant officer service.",
                 "market": "United States",
-                "name": "DFAS2026 O3 over6 monthly basic pay",
-                "period": "Public page read 2026-10-01; DFAS amount effective2026-01-01",
+                "name": "DFAS active-duty officer basic pay: O-3 Over 6",
+                "period": "2026-01-01",
                 "publisher": "Defense Finance and Accounting Service",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Basic-Pay/CO/"
               },
               {
@@ -34616,7 +34545,7 @@
                 "name": "Army regular appointment conditions",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "U.S. Army",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.goarmy.com/how-to-join/requirements"
               },
               {
@@ -34632,7 +34561,7 @@
                 "name": "O*NET55-1017 military data boundaries",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1017.00"
               },
               {
@@ -34647,7 +34576,7 @@
                 "name": "O*NET55-1017 military data boundaries",
                 "period": "Accessed 2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1017.00"
               },
               {
@@ -34662,7 +34591,7 @@
                 "name": "O*NET55-1017 military data boundaries",
                 "period": "Accessed 2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1017.00"
               },
               {
@@ -34678,25 +34607,51 @@
                 "name": "Law of the People's Republic of China on the Protection of the Status, Rights and Interests of Military Personnel",
                 "period": "Public materials; accessed 2026-10-01",
                 "publisher": "Ministry of National Defense of the People's Republic of China",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.mod.gov.cn/gfbw/fgwx/flfg/4890799_2.html"
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Team leadership | Organize a specialist team within formal appointment and command authority. | Submit approved objectives and division of labor, and do not confer command authority from an occupation name. — 25/100; weight=1/3; special-forces-officers.profile.responsibilities-block.1[0]",
-                  "Information assessment | Assess the mission information and limits described in the public summary. | Submit the basis for judgment and uncertainties, and provide no reconnaissance or intelligence collection tutorial. — 50/100; weight=1/3; special-forces-officers.profile.responsibilities-block.1[1]",
-                  "Planning and resources | Plan within approved objectives and coordinate personnel and resources. | Submit limits, alternatives and pending items; the P exercise is only a fictional classroom plan. — 50/100; weight=1/3; special-forces-officers.profile.responsibilities-block.1[3]"
+                  "General risks include confabulation, data integrity and human review. Use fictional P1–P5 to check recording errors."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "General risk management",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "Does not estimate military adoption, replacement, productivity or pay or grant access, approval or command authority.",
+                "name": "NIST Generative AI Risk Management Profile",
+                "period": "2024-07",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Army sources list 18A Special Forces Officer, 180A Special Forces Warrant Officer and enlisted specialties separately. Each has its own status and eligibility."
+                ],
+                "evidence_type": "official public source",
+                "id": "sf-army-officer-roles",
+                "limitation": "U.S. Army role distinctions only; not appointment rules for other services or mainland China.",
+                "market": "United States",
+                "name": "U.S. Army: 18A officer, 180A warrant officer and enlisted specialties",
+                "period": "Public materials; accessed 2026-10-01",
+                "publisher": "U.S. Army",
+                "scope": "contextual",
+                "url": "https://www.goarmysof.army.mil/SF/BPDJ/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Article 34 separates the wage system for officers and noncommissioned officers from the conscript subsistence support system."
+                ],
+                "evidence_type": "official public source",
+                "id": "sf-prc-pay-law",
+                "limitation": "Compensation framework; no pay figure for this occupation.",
+                "market": "Mainland China",
+                "name": "Military Status and Rights Protection Law, Article 34",
+                "period": "Effective August 1, 2021",
+                "publisher": "Ministry of National Defense of the People’s Republic of China",
+                "scope": "contextual",
+                "url": "https://www.mod.gov.cn/gfbw/fgwx/flfg/4890799_2.html"
               }
             ]
           },
@@ -34822,6 +34777,22 @@
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "entry": "link-5",
+              "field": "entity"
+            }
+          },
+          {
+            "href": {
+              "$link": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-6",
+              "field": "url"
+            },
+            "label": {
+              "$link": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-6",
               "field": "entity"
             }
           }
@@ -35209,7 +35180,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "Official occupational task materials",
+            "类型": "General risk management",
             "适用范围": {
               "$item": "special-forces-officers.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -35505,6 +35476,7 @@
             "问题": "Will special forces officers be replaced by AI?"
           },
           {
+            "source_ref": "employer",
             "回答": {
               "$item": "special-forces-officers.ai-impact.ai-impact-table.66",
               "block": "ai-impact",
@@ -35615,6 +35587,7 @@
             "问题": "In which year will this position disappear?"
           },
           {
+            "source_ref": "employer",
             "回答": {
               "$item": "special-forces-officers.ai-impact.ai-impact-table.76",
               "block": "ai-impact",
@@ -36069,7 +36042,7 @@
               "entry": "link-1",
               "field": "url"
             },
-            "id": "bls",
+            "id": "employer",
             "label": {
               "$link": "special-forces-officers.path.career-path-block.10",
               "block": "path",
@@ -36092,7 +36065,7 @@
               "entry": "link-2",
               "field": "url"
             },
-            "id": "nasa",
+            "id": "nbs",
             "label": {
               "$link": "special-forces-officers.path.career-path-block.10",
               "block": "path",
@@ -36115,7 +36088,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "onet-training",
+            "id": "special-forces-officers",
             "label": {
               "$link": "special-forces-officers.path.career-path-block.10",
               "block": "path",
@@ -36138,7 +36111,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "faa",
+            "id": "cnclass",
             "label": {
               "$link": "special-forces-officers.path.career-path-block.10",
               "block": "path",
@@ -36912,8 +36885,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "army"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -36944,8 +36916,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "privacy"
+              "paper"
             ],
             "id": "record-version",
             "mitigation": {
@@ -36976,8 +36947,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "prc-law"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -37008,8 +36978,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "paper"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -37040,7 +37009,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
               "bls"
             ],
             "id": "single-coverage",
@@ -37072,8 +37040,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "paper"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -37101,7 +37068,7 @@
               "entry": "link-2",
               "field": "url"
             },
-            "id": "onet",
+            "id": "bls",
             "label": {
               "$link": "special-forces-officers.risk.career-risk-cards.7",
               "block": "risk",
@@ -37124,7 +37091,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "bls",
+            "id": "army",
             "label": {
               "$link": "special-forces-officers.risk.career-risk-cards.7",
               "block": "risk",
@@ -37147,7 +37114,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "facilities",
+            "id": "onet",
             "label": {
               "$link": "special-forces-officers.risk.career-risk-cards.7",
               "block": "risk",
@@ -37170,7 +37137,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "id": "privacy",
+            "id": "prc-law",
             "label": {
               "$link": "special-forces-officers.risk.career-risk-cards.7",
               "block": "risk",
@@ -37193,7 +37160,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "paper",
             "label": {
               "$link": "special-forces-officers.risk.career-risk-cards.7",
               "block": "risk",
@@ -38124,6 +38091,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "ep",
             "value": {
               "$item": "special-forces-officers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -38169,6 +38137,7 @@
               "type": "prose"
             },
             "source_id": "bls",
+            "source_ref": "ep",
             "value": {
               "$item": "special-forces-officers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -38214,6 +38183,7 @@
               "type": "prose"
             },
             "source_id": "nbs",
+            "source_ref": "nbs",
             "value": {
               "$item": "special-forces-officers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -38558,7 +38528,7 @@
         "rows": [
           {
             "alternate_value": null,
-            "label": "O*NET special forces officer occupational profile (11-3061.00)",
+            "label": "O*NET Special Forces Officers (55-1017.00)",
             "secondary_value": null,
             "value": {
               "$item": "special-forces-officers.profile.onet-structured-fields-block.1",
@@ -38569,7 +38539,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "BLS: Military Careers",
             "secondary_value": null,
             "value": {
               "$item": "special-forces-officers.profile.onet-structured-fields-block.2",
@@ -38580,7 +38550,7 @@
           },
           {
             "alternate_value": null,
-            "label": "National Bureau of Statistics 2025 urban unit wages",
+            "label": "Military Status and Rights Protection Law, Article 34",
             "secondary_value": null,
             "value": {
               "$item": "special-forces-officers.profile.onet-structured-fields-block.3",
@@ -38591,7 +38561,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS employment projections Table 1.2 (2025–35)",
+            "label": "BLS: Scope of employment projections",
             "secondary_value": null,
             "value": {
               "$item": "special-forces-officers.profile.onet-structured-fields-block.4",
@@ -38602,7 +38572,7 @@
           },
           {
             "alternate_value": null,
-            "label": "Personal Information Protection Law of the People's Republic of China",
+            "label": "O*NET military data coverage",
             "secondary_value": null,
             "value": {
               "$item": "special-forces-officers.profile.onet-structured-fields-block.5",
@@ -39392,7 +39362,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit special forces officers",
+        "label": "Explore my career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -39513,12 +39483,14 @@
     "contract_version": "career.detail.display.v1",
     "interface": {
       "interface.fit.directions_heading": "Which work direction in this occupation are you more likely to fit?",
-      "interface.fit.interest_code_heading": "How to understand interest codes",
+      "interface.fit.interest_code_heading": "Why is there no official interest code?",
       "interface.profile.comparison.primary_header": "Duties and process",
       "interface.profile.comparison.secondary_header": "Explanation and comparison",
+      "interface.quick_decision.caution_heading": "When should you think twice about this career path?",
+      "interface.quick_decision.suit_heading": "Who may be a good fit for a Special Forces officer role?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to understand this value",
-      "interface.us_salary.section_label": "U.S. salary reference",
+      "interface.us_salary.section_label": "U.S. officer basic pay examples",
       "interface.us_salary.sources_label": "Sources and usage boundaries for U.S. wage and employment data"
     },
     "native_items": [
@@ -39907,13 +39879,13 @@
         ]
       },
       {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
+        "derivation": null,
+        "display_value": "No verified occupational impact measure",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "AI evidence status",
         "occupation_scope": "Special forces officers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -39922,15 +39894,15 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI evidence status"
     },
     "badges": [
-      "Military occupation · Special forces officers",
-      "Appointment · Planning and leadership · Statutory authority",
-      "Officer rank and seniority compensation; civilian projections excluded"
+      "Officer leadership and coordination",
+      "Commission, selection and assignment",
+      "P1–P5: fictional resource proposal"
     ],
     "metrics": [
       {
@@ -39969,17 +39941,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "The public leadership duties, appointment and command boundaries of special forces officers, the Army active-duty officer transfer conditions and Chinese officer broad entries; explain wages by rank and seniority and use a fictional classroom resource plan to complete the conflict check, budget and pending handover."
+      "text": "Compare special forces officer and member roles, check mainland officer pathways, U.S. Army requirements and basic pay, and try a fictional planning exercise."
     },
     "title": {
       "availability": "available",
-      "text": "Special forces officers"
+      "text": "Special Forces Officers: Duties, Entry and Military Pay"
     }
   },
-  "source_content_sha256": "2c60ba7c95c6f8f73a065909c4af5dd11913549ef6082c896ff3dd28b8c2721e",
+  "source_content_sha256": "2f6a6f955678b585e29c2c4b4ae3dee2ae8a2b6560b21f5a4955babf7fe5b2d3",
   "subject": {
     "canonical_slug": "special-forces-officers",
     "name": "Special forces officers",
-    "summary": "On this page, special forces officers correspond to U.S. 55-1017.00 and are responsible for leading specialist teams, assessing information, organizing personnel training and mission planning and communications coordination; officers plan, organize and lead, while 55-3018 members execute approved missions. Officer appointment, rank, professional training and specific command authority are verified separately, and Chinese officer entries are not mutually recognized with U.S. Army qualifications. Only public high-level scope is introduced, with no tactical or weapons operation."
+    "summary": "This page covers U.S. O*NET 55-1017.00. Special forces officers lead personnel, organize training, plan and coordinate. A commission, special forces selection, assignment and authority are separate. Mainland academy admission and direct recruitment are examples of general officer pathways."
   }
 }

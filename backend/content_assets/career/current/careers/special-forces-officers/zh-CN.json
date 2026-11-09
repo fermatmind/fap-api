@@ -8844,18 +8844,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": {
@@ -8933,18 +8923,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.02.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            1,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.02.mitigation": {
         "ref": {
@@ -9022,18 +9002,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -9111,18 +9081,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -9200,18 +9160,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            4,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -9289,18 +9239,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -15865,8 +15805,14 @@
         "status": "unfilled"
       },
       "interface.fit.interest_code_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.fit.interest_code_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.fit.interest_experience_heading": {
         "ref": null,
@@ -15961,16 +15907,28 @@
         "status": "unfilled"
       },
       "interface.quick_decision.caution_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.caution_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.quick_decision.experiment_heading": {
         "ref": null,
         "status": "unfilled"
       },
       "interface.quick_decision.suit_heading": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.quick_decision.suit_heading"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.risk.affected_roles_label": {
         "ref": null,
@@ -23327,7 +23285,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "独立做P1–P5虚构教室资源计划：写范围卡、资源冲突表、180元方案与替代方案、待决交接，封初稿后读答案。只做纸面，无真实军队任务或资料，不证明指挥能力或选拔合格。"
+              "先做 P1–P5 虚构教室资源题：列权限、版本和冲突，计算主方案与备选方案，写清待决事项。先交自己的初稿，再看参考答案。"
             ]
           },
           "id": "special-forces-officers.quick-decision.fit-decision-checklist.2",
@@ -23415,7 +23373,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "军官任命与指挥链；军事摘要不提供职业测评分。"
+              "美国特种部队军官的公开职责概要。O*NET 不采集军事职业测评数据。"
             ]
           },
           "id": "special-forces-officers.profile.onet-structured-fields-block.1",
@@ -23484,7 +23442,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "军事薪级和职业分位必须区分。"
+              "基本薪按军衔和服役年资确定；军官本职工资分位未核实。"
             ]
           },
           "id": "special-forces-officers.profile.onet-structured-fields-block.2",
@@ -23516,7 +23474,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国军官工资口径与义务兵供给制分开。"
+              "军官、军士实行工资制，义务兵实行供给制。"
             ]
           },
           "id": "special-forces-officers.profile.onet-structured-fields-block.3",
@@ -23548,7 +23506,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "官方军事摘要，不从导航推软件采用。"
+              "就业预测只覆盖民用劳动力，不能填补军事职业就业数据。"
             ]
           },
           "id": "special-forces-officers.profile.onet-structured-fields-block.4",
@@ -23580,7 +23538,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "专业训练依军种，暂无军人JobZone数据。"
+              "该军事职业没有 O*NET Job Zone；训练和选拔要求查具体军种。"
             ]
           },
           "id": "special-forces-officers.profile.onet-structured-fields-block.5",
@@ -23868,7 +23826,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：本职精确中美工资分位、人数增长空缺及AI采用率未取得，不借民用经理或成员工资。"
+              "先核适用法域与军官任命，再查军种的特种选拔、岗位分配及授权。中国大陆的一般军官入口和美国陆军现役军官转入是两套规则。"
             ]
           },
           "id": "special-forces-officers.profile.career-quick-answers-block.22",
@@ -24113,6 +24071,12 @@
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/55-1017.00"
+              },
+              {
+                "entity": "O*NET 特种部队成员（55-3018.00）",
+                "id": "link-6",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/55-3018.00"
               }
             ]
           },
@@ -24131,7 +24095,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "四相邻均为军官专门角色，两内部方向为本职计划资料与团队反馈；共同任官身份不保证专业转入或指挥权限。"
+              "美国 O*NET 的军官、成员和四个其他专业用于对比主要职责；实际任官、转入、岗位分配与权限由军种正式规定。"
             ]
           },
           "id": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.8",
@@ -24492,7 +24456,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "内部：计划资料核对，不是另一军事职业代码。"
+              "军官侧重领导、组织与协调；成员侧重履行专业任务。训练与团队协作有交集。"
             ]
           },
           "id": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.27",
@@ -24511,7 +24475,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "愿核目标限制、冲突和未决者做P三作品。"
+              "分别查军官任命和成员选拔，不能互相替代。"
             ]
           },
           "id": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.28",
@@ -24530,7 +24494,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "交资源约束表与180元提案及待决。"
+              "作为团队成员承担分配且获准的具体任务，参与训练和协作。"
             ]
           },
           "id": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.29",
@@ -24549,7 +24513,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "内部：计划与资源说明"
+              "特种部队成员（55-3018.00）"
             ]
           },
           "id": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.30",
@@ -24708,10 +24672,10 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
-                "entity": "BLS军事边界",
+                "entity": "NIST生成式AI通用风险框架",
                 "id": "link-7",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
                 "entity": "BLS军事边界",
@@ -24750,10 +24714,10 @@
                 "url": "https://www.onetonline.org/link/details/55-1017.00"
               },
               {
-                "entity": "BLS军事边界",
+                "entity": "美国陆军：一般任官要求",
                 "id": "link-14",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://www.goarmy.com/how-to-join/requirements"
               },
               {
                 "entity": "GPTs are GPTs",
@@ -24768,7 +24732,7 @@
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "NIST AI600-1生成式AI风险框架",
+                "entity": "NIST 生成式 AI 风险框架",
                 "id": "link-17",
                 "relation": "career.evidence",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
@@ -24780,10 +24744,10 @@
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "BLS军事边界",
+                "entity": "美国陆军：一般任官要求",
                 "id": "link-19",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://www.goarmy.com/how-to-join/requirements"
               }
             ]
           },
@@ -24973,19 +24937,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：特种军官生成AI真实采用、效果与岗位替代率未取得；公开职责和通用方法只作范围背景，不推军事系统部署或指挥授权。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "未核实生成式AI对特种部队军官的采用、工时、判断质量或岗位影响。可用虚构P1–P5测试摘要和版本整理，看工具是否丢掉待决事项。真实军务使用、权限及信息保护由所属机构确定。"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "bls",
-            "employer",
-            "ilo",
-            "arxiv",
-            "nist",
-            "weforum",
-            "editor"
+            "source-fermatmind-ai-rubric",
+            "onet"
           ],
           "type": "prose"
         },
@@ -25246,19 +25204,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS军官训练背景"
+              "NIST生成式AI通用风险框架"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.31",
           "source_refs": [
-            "onet",
-            "bls",
-            "employer",
-            "ilo",
-            "arxiv",
-            "nist",
-            "weforum",
-            "editor"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -25267,19 +25218,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "正式培养训练依军队体系，公开简介不说明工具能代资格。"
+              "不证明军事岗位采用、替代、效率或工资，不授实际访问、批准或指挥权。"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.32",
           "source_refs": [
-            "onet",
-            "bls",
-            "employer",
-            "ilo",
-            "arxiv",
-            "nist",
-            "weforum",
-            "editor"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -25645,7 +25589,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO与GPTs方法"
+              "国际劳工组织：生成式 AI 与工作"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.50",
@@ -25666,7 +25610,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "共享目标已核通用任务方法，未取军官适用样本。"
+              "跨职业的任务暴露研究；未核实适用于该军官岗位的样本。"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.51",
@@ -26002,7 +25946,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Army该军官转入路径。"
+              "美国陆军一般任官；现役军官转入看本页入行区的军方原文。"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.67",
@@ -26065,7 +26009,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS预测仅民用，不能据其给2035军官增减，不能套采购经理4%。"
+              "美国劳工统计局就业预测只覆盖民用劳动力，不能据此给出该军官职业的 2035 年增减。"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.70",
@@ -26107,7 +26051,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具不能批准P提案、确认D金额或发军事命令；正式军官决定依依法任命与指挥链。"
+              "在纸面题里，甲审批方案，乙确认金额；工具输出只能当草稿。真实职务权限应按所属机构的正式规则核实。"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.72",
@@ -26128,7 +26072,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "P1甲批示乙确认，军事法域权限另核。"
+              "审批与核对角色见本页入行区 P1；NIST 仅供工具输出的人工复核参考。"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.73",
@@ -26212,7 +26156,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Army任官转入与P作者作品。"
+              "美国陆军一般任官；现役军官转入看本页入行区的军方原文。"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.77",
@@ -26296,7 +26240,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核A/B两资源冲突、优先A、当前180余80、D草稿与C待批E未知。"
+              "核对两类资源冲突、优先规则、当前预算、草稿版本及待决事项。"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.81",
@@ -26758,7 +26702,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "给A+D180余80主提案"
+              "计算主方案并记录预算余量"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.103",
@@ -26842,7 +26786,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "未来确认才190余70"
+              "另算金额获确认后的条件方案"
             ]
           },
           "id": "special-forces-officers.ai-impact.ai-impact-table.107",
@@ -28003,7 +27947,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国防部9月24公开对象毕业期2025Dec–2027Jun及9月30前，考核后任官授衔；医疗住房休假权益非本职完整工资。"
+              "国防部2026年9月24日公告的毕业时间范围为2025年12月至2027年6月，报名截至2026年9月30日。经招录考核通过后任官授衔，公告未列本职业工资。"
             ]
           },
           "id": "special-forces-officers.china-salary.career-snapshot-primary-locale.50",
@@ -28060,7 +28004,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第三份精确金额样本｜未取得"
+              "本职业精确工资｜未取得"
             ]
           },
           "id": "special-forces-officers.china-salary.career-snapshot-primary-locale.53",
@@ -28079,7 +28023,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮国防部军官入口及有界精确待遇查询未得第三金额，涉军预算退役补助不代现役特种军官工资。"
+              "本轮国防部军官入口及有界精确待遇查询未取得可用的本职业金额，涉军预算退役补助不代现役特种军官工资。"
             ]
           },
           "id": "special-forces-officers.china-salary.career-snapshot-primary-locale.54",
@@ -28182,7 +28126,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS军事边界｜https://www.bls.gov/ooh/military/military-careers.htm；O*NET55-1017军事数据边界｜https://www.onetonline.org/link/details/55-1017.00；BLS军事边界｜https://www.bls.gov/ooh/military/military-careers.htm"
+              "DFAS 2026 军官月基本薪｜https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Basic-Pay/CO/；BLS 军事职业与预测覆盖｜https://www.bls.gov/ooh/military/military-careers.htm；O*NET 55-1017.00｜https://www.onetonline.org/link/details/55-1017.00"
             ]
           },
           "id": "special-forces-officers.us-salary.career-snapshot-secondary-locale.8",
@@ -28524,7 +28468,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "DFAS2026Jan1军官月基本薪示例：O3 over2为6273.90美元、over4为7382.70、over6为7737.00。军衔年资档不是本职中位、起薪或总到手；既往已计入超过4年active enlisted/warrant者须核O3E表，不套此表。"
+              "DFAS2026Jan1军官月基本薪示例：O3 over2为6273.90美元、over4为7382.70、over6为7737.00。军衔年资档不是本职中位、起薪或总到手；既往已计入超过4年active enlisted/warrant者须核O3E表，不套此表。 原表可在页末「常见问题与资料来源」打开，查找“DFAS现役军官基本工资”。"
             ]
           },
           "id": "special-forces-officers.us-salary.career-snapshot-secondary-locale.26",
@@ -29599,7 +29543,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "未得统一IQ门槛，不由180元复算推军事能力。"
+              "试做时核算主方案与预算余量，记录取舍依据。"
             ]
           },
           "id": "special-forces-officers.fit.personality-fit-block.21",
@@ -30066,7 +30010,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内向不等不能沟通，观察能否说明A/B冲突和180元依据，不推录用。"
+              "先写清权限和资源限制，再独立核算主方案及余量。"
             ]
           },
           "id": "special-forces-officers.fit.personality-fit-block.47",
@@ -30156,7 +30100,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "练习计算180及80余量要保前提；DLAB不当IQ，军官不能套18X的ASVAB TECH110。"
+              "按题面逐项核对计算依据。DLAB 是语言能力考试，不能换算为在线 IQ。"
             ]
           },
           "id": "special-forces-officers.fit.personality-fit-block.52",
@@ -30465,10 +30409,10 @@
                 "url": "https://www.gfbzb.gov.cn/zbbm/zcfg/byfg/202108/20210821/2100962138.html"
               },
               {
-                "entity": "美国10USC892合法命令",
+                "entity": "P1–P5 虚构纸面题",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title10-section892"
+                "url": "#career-visual-group-path"
               }
             ]
           },
@@ -30753,7 +30697,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "将真实人员或任务资料上传公共工具"
+              "在中国大陆依法处理涉及保密的材料时，未经授权把材料传给外部平台。"
             ]
           },
           "id": "special-forces-officers.risk.career-risk-cards.22",
@@ -31000,7 +30944,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET军官高层范围，无发生率。"
+              "美国军事职业的一般工作环境、训练与调动背景。"
             ]
           },
           "id": "special-forces-officers.risk.career-risk-cards.35",
@@ -31019,7 +30963,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS全职调动训练危险。"
+              "仅限美国陆军现役军官转入条件及与18X的区别。"
             ]
           },
           "id": "special-forces-officers.risk.career-risk-cards.36",
@@ -31038,7 +30982,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Army现役军官转入与任官分开。"
+              "美国特种部队军官公开职责概要，不含职业发生率。"
             ]
           },
           "id": "special-forces-officers.risk.career-risk-cards.37",
@@ -31077,7 +31021,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国10USC892 lawful orders法域范围。"
+              "仅用于虚构方案的版本、金额和审批练习。"
             ]
           },
           "id": "special-forces-officers.risk.career-risk-cards.39",
@@ -31182,7 +31126,7 @@
                 "id": "clearance",
                 "values": [
                   "Army普通任官入口",
-                  "公开页要求任官时美国公民、college graduate，并按路径完成背景及安全审查资料；BLS军官通常学士且不需ASVAB。",
+                  "公开页要求任官时美国公民、college graduate，并按路径完成背景及安全审查资料。",
                   "范围：先任官和特种转入选拔分开，绿卡可开始18X训练不等军官任命。"
                 ]
               },
@@ -31344,7 +31288,7 @@
               ],
               [
                 "条件判断",
-                "为何不能把70改当前60",
+                "为何不能用未确认的70替换当前已确认的60？",
                 "保v1确认与v2未确认草稿",
                 "纸面习惯不等领导胜任"
               ],
@@ -31487,7 +31431,7 @@
                 "符合公告的高校应届毕业生",
                 "2026–2027宽入口",
                 "国防部9月24公开资料",
-                "2025Dec–2027Jun毕业及相关标准；9月30前",
+                "毕业时间为2025年12月至2027年6月；报名截至2026年9月30日",
                 "常规截止已过，后续通知另核",
                 "不是特种军官统一直聘门槛"
               ],
@@ -31566,16 +31510,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本轮Army现役军官转入和普通任官、中国2026–2027高校直招与2026军校宽入口分别核。中国9月30常规直招截止已过，不称当前报名或指定特种岗位。",
-              "证据不足：中国三份精确特种军官完整金额未取得，精确金额n=0；美国DFAS为军官薪级年资月基本薪，不是本職招聘中位。"
+              "大陆2026年军校公开招生按高考、政治考核、面试和军检等条件；看本省和学校当年公告。2026–2027直招军（警）官公开样本列9月30日常规报名截止，已过该日期。",
+              "两者都是公开军官路径示例。是否符合特种岗位、由谁选拔及是否分配，须按实际主管机关和正式程序核。"
             ]
           },
           "id": "special-forces-officers.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
             "nbs",
             "special-forces-officers",
-            "editor"
+            "cnclass"
           ],
           "title": "公开转入与宽入口样本说明",
           "type": "notice"
@@ -31586,28 +31529,28 @@
           "data": {
             "entries": [
               {
-                "entity": "BLS军事职责与训练",
+                "entity": "美国陆军：现役军官转入特种部队要求",
                 "id": "link-1",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://www.goarmy.com/careers-and-jobs/specialty-careers/special-ops/special-forces"
               },
               {
-                "entity": "中国军官直招宽入口",
+                "entity": "国防部：2026–2027年度直招军（警）官答问",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.mod.gov.cn/gfbw/qwfb/16488992.html"
               },
               {
-                "entity": "Army现役军官转入",
+                "entity": "国防部：2026年军校招生政策解读",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.goarmy.com/careers-and-jobs/specialty-careers/special-ops/special-forces"
+                "url": "https://www.mod.gov.cn/gfbw/gffw/zs/16469121.html"
               },
               {
-                "entity": "O*NET55-1017军事数据边界",
+                "entity": "中国兵役法",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/55-1017.00"
+                "url": "https://www.gfbzb.gov.cn/zbbm/zcfg/byfg/202108/20210821/2100962138.html"
               }
             ]
           },
@@ -31859,16 +31802,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS军官计划组织领导及生活背景。"
+              "仅美国陆军这个公开军官入口，不是所有军种标准，符合条件不保证入选、任命或分配。"
             ]
           },
           "id": "special-forces-officers.path.career-path-block.24",
           "source_refs": [
-            "bls",
-            "cnclass",
-            "employer",
-            "onet",
-            "editor"
+            "employer"
           ],
           "type": "prose"
         },
@@ -31877,16 +31816,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国军人身份纪律与国防部宽入口。"
+              "已过公告所列报名期。是普通军（警）官入口示例，不代表某特种岗位报名或分配。"
             ]
           },
           "id": "special-forces-officers.path.career-path-block.25",
           "source_refs": [
-            "bls",
-            "cnclass",
-            "employer",
-            "onet",
-            "editor"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31895,16 +31830,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Army现役军官转入与普通任官分开。"
+              "军校公开入口，不意味着已经任官、特种选拔或具体岗位分配。"
             ]
           },
           "id": "special-forces-officers.path.career-path-block.26",
           "source_refs": [
-            "bls",
-            "cnclass",
-            "employer",
-            "onet",
-            "editor"
+            "special-forces-officers"
           ],
           "type": "prose"
         },
@@ -31913,16 +31844,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET55-1017高层摘要无JobZone。"
+              "身份纪律与依法批准，不等特种岗位或军官指挥任命"
             ]
           },
           "id": "special-forces-officers.path.career-path-block.27",
           "source_refs": [
-            "bls",
-            "cnclass",
-            "employer",
-            "onet",
-            "editor"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -33044,16 +32971,16 @@
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "BLS军事边界",
+                "entity": "国防部：2026–2027年度直招军（警）官答问",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://www.mod.gov.cn/gfbw/qwfb/16488992.html"
               },
               {
-                "entity": "BLS军事边界",
+                "entity": "O*NET55-1017军事数据边界",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
+                "url": "https://www.onetonline.org/link/details/55-1017.00"
               },
               {
                 "entity": "机组军官",
@@ -34087,7 +34014,7 @@
                 ]
               },
               {
-                "answer": "证据不足：本职AI采用净替代及消失年份直接实证未取得。通用暴露或企业雇主预期不是军事编制，工具不授任命训练责任。BLS只预测民用劳动力，55-1017军职没有适用的2025–2035基期、终期、增长率或年均空缺；军种总量民用经理不代填，覆盖排除非零增长或个人失业概率。",
+                "answer": "没有核实本职业生成式AI采用或失业预测。纸面版本核对只用于看错漏，不能推定军事岗位会消失或授权任何实际工作。",
                 "id": "special-forces-officers.faq.7",
                 "question": "AI会让本职消失吗？",
                 "question_key": "career.faq.special-forces-officers.education-path",
@@ -34132,7 +34059,11 @@
             "onet",
             "bls",
             "employer",
-            "editor"
+            "editor",
+            "nbs",
+            "special-forces-officers",
+            "cnclass",
+            "source-fermatmind-ai-rubric"
           ],
           "type": "faq"
         },
@@ -34296,7 +34227,7 @@
                 "name": "BLS军事边界",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
@@ -34312,7 +34243,7 @@
                 "name": "BLS军事边界",
                 "period": "军事统计覆盖边界；本轮核读2026-10-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
@@ -34328,23 +34259,23 @@
                 "name": "BLS军事边界",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "宽高校军官入口无精确本职工资，9月30常规截止已过",
-                  "国防部与DFAS直接打开失败，官方搜索返回本文和表可核，不称本轮直开成功。"
+                  "国防部2026年9月24日公开说明本轮针对符合条件的高校应届毕业生，常规报名截至9月30日。",
+                  "公开流程含考察筛选、体检和政治考核、专业考评；成功招录者成为军官并授衔。"
                 ],
                 "evidence_type": "official public source",
                 "id": "nbs",
-                "limitation": "宽高校军官入口无精确本职工资，9月30常规截止已过",
+                "limitation": "已过公告所列报名期。是普通军（警）官入口示例，不代表某特种岗位报名或分配。",
                 "market": "中国大陆",
-                "name": "国防部2026–2027军官直招",
-                "period": "公开资料；访问2026-10-01",
+                "name": "国防部：2026–2027年度直招军（警）官答问",
+                "period": "2026-09-24",
                 "publisher": "中华人民共和国国防部",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.mod.gov.cn/gfbw/qwfb/16488992.html"
               },
               {
@@ -34360,7 +34291,7 @@
                 "name": "中国兵役法",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "国防部征兵办公室（全国征兵网）",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.gfbzb.gov.cn/zbbm/zcfg/byfg/202108/20210821/2100962138.html"
               },
               {
@@ -34376,8 +34307,8 @@
                 "name": "美国10USC892合法命令",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "U.S. House Office of the Law Revision Counsel",
-                "scope": "context",
-                "url": "https://uscode.house.gov/view.xhtml?edition=prelim&num=0&req=granuleid%3AUSC-prelim-title10-section892"
+                "scope": "contextual",
+                "url": "https://uscode.house.gov/us/usc/t10/s892/"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -34392,7 +34323,7 @@
                 "name": "O*NET机组军官",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1011.00"
               },
               {
@@ -34408,7 +34339,7 @@
                 "name": "O*NET飞机起降与回收军官",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1012.00"
               },
               {
@@ -34424,7 +34355,7 @@
                 "name": "O*NET装甲突击车辆军官",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1013.00"
               },
               {
@@ -34440,7 +34371,7 @@
                 "name": "O*NET炮兵与导弹军官",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1014.00"
               },
               {
@@ -34456,7 +34387,7 @@
                 "name": "Generative AI and jobs: refined occupational exposure index",
                 "period": "2025",
                 "publisher": "International Labour Organization",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -34472,7 +34403,7 @@
                 "name": "作者P1–P5虚构资源提案",
                 "period": "2026-10-01原创",
                 "publisher": "FermatMind编辑",
-                "scope": "editorial",
+                "scope": "editorial_synthesis",
                 "url": "/zh/career/jobs/special-forces-officers"
               },
               {
@@ -34488,7 +34419,7 @@
                 "name": "NIST AI600-1生成式AI风险框架",
                 "period": "2024-07",
                 "publisher": "NIST",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
@@ -34504,7 +34435,7 @@
                 "name": "GPTs are GPTs",
                 "period": "2023；v5",
                 "publisher": "arXiv论文作者",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://arxiv.org/abs/2303.10130"
               },
               {
@@ -34520,87 +34451,85 @@
                 "name": "WEF Future of Jobs Report 2025",
                 "period": "2025–2030预期；2025-01-07发布",
                 "publisher": "World Economic Forum",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "中尉或上尉、转branch、DLAB≥85、top secret资格，不套18X新兵",
-                  "公开高层范围，正式任命与专业训练另核。"
+                  "陆军公开说明列中尉（first lieutenant）或上尉（captain）、从现有兵种转入、DLAB至少85，以及具有申请绝密许可资格。",
+                  "同页18X为新兵候选路径，不授军官任命。",
+                  "美国陆军公开资料区分 18A 特种部队军官、180A 特种部队准尉和士官专业。三个身份及各自选拔条件分别核对。"
                 ],
                 "evidence_type": "official public source",
                 "id": "employer",
-                "limitation": "中尉或上尉、转branch、DLAB≥85、top secret资格，不套18X新兵",
+                "limitation": "仅美国陆军这个公开军官入口，不是所有军种标准，符合条件不保证入选、任命或分配。",
                 "market": "美国",
-                "name": "Army现役军官转入",
+                "name": "美国陆军：现役军官转入特种部队要求",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "U.S. Army",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.goarmy.com/careers-and-jobs/specialty-careers/special-ops/special-forces"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "生长军官培养宽背景非特种军官职位或金额",
-                  "国防部与DFAS直接打开失败，官方搜索返回本文和表可核，不称本轮直开成功。"
+                  "面向普通高中毕业生。公开要求涉及高考、政治考核、军检、面试与院校录取。",
+                  "分省、学校及专业的条件以官方章程与当年公告为准。"
                 ],
                 "evidence_type": "official public source",
                 "id": "special-forces-officers",
-                "limitation": "生长军官培养宽背景非特种军官职位或金额",
+                "limitation": "军校公开入口，不意味着已经任官、特种选拔或具体岗位分配。",
                 "market": "中国大陆",
-                "name": "国防部2026军校宽入口",
-                "period": "公开资料；访问2026-10-01",
+                "name": "国防部：2026年军校招生政策解读",
+                "period": "2026",
                 "publisher": "中华人民共和国国防部",
-                "scope": "context",
-                "url": "https://www.mod.gov.cn/gfbw/gffw/16469120.html"
+                "scope": "contextual",
+                "url": "https://www.mod.gov.cn/gfbw/gffw/zs/16469121.html"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "O3 over2每月6273.90美元，2026Jan1；非职业中位实发，既往active enlisted/warrant>4年须核O3E",
-                  "国防部与DFAS直接打开失败，官方搜索返回本文和表可核，不称本轮直开成功。"
+                  "2026年1月1日生效，O-3 Over 2栏每月基本工资 $6,273.90。"
                 ],
                 "evidence_type": "official public source",
                 "id": "r2-pay-1",
-                "limitation": "O3 over2每月6273.90美元，2026Jan1；非职业中位实发，既往active enlisted/warrant>4年须核O3E",
+                "limitation": "一般O-3薪级例子，不是特种部队军官职业工资或实发；有符合条件的既往士兵/准尉年资者另核O-3E规则。",
                 "market": "美国",
-                "name": "DFAS2026 O3 over2月基本薪",
-                "period": "公开页核读2026-10-01；DFAS金额effective2026-01-01",
+                "name": "DFAS现役军官基本工资：O-3 Over 2",
+                "period": "2026-01-01",
                 "publisher": "Defense Finance and Accounting Service",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Basic-Pay/CO/"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "O3 over4每月7382.70美元，2026Jan1；非职业中位实发，既往active enlisted/warrant>4年须核O3E",
-                  "国防部与DFAS直接打开失败，官方搜索返回本文和表可核，不称本轮直开成功。"
+                  "2026年1月1日生效，O-3 Over 4栏每月基本工资 $7,382.70。"
                 ],
                 "evidence_type": "official public source",
                 "id": "r2-pay-2",
-                "limitation": "O3 over4每月7382.70美元，2026Jan1；非职业中位实发，既往active enlisted/warrant>4年须核O3E",
+                "limitation": "一般O-3薪级例子，不是特种部队军官职业工资或实发；有符合条件的既往士兵/准尉年资者另核O-3E规则。",
                 "market": "美国",
-                "name": "DFAS2026 O3 over4月基本薪",
-                "period": "公开页核读2026-10-01；DFAS金额effective2026-01-01",
+                "name": "DFAS现役军官基本工资：O-3 Over 4",
+                "period": "2026-01-01",
                 "publisher": "Defense Finance and Accounting Service",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Basic-Pay/CO/"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "O3 over6每月7737.00美元，2026Jan1；非职业中位实发，既往active enlisted/warrant>4年须核O3E",
-                  "国防部与DFAS直接打开失败，官方搜索返回本文和表可核，不称本轮直开成功。"
+                  "2026年1月1日生效，O-3 Over 6栏每月基本工资 $7,737.00。"
                 ],
                 "evidence_type": "official public source",
                 "id": "r2-pay-3",
-                "limitation": "O3 over6每月7737.00美元，2026Jan1；非职业中位实发，既往active enlisted/warrant>4年须核O3E",
+                "limitation": "一般O-3薪级例子，不是特种部队军官职业工资或实发；有符合条件的既往士兵/准尉年资者另核O-3E规则。",
                 "market": "美国",
-                "name": "DFAS2026 O3 over6月基本薪",
-                "period": "公开页核读2026-10-01；DFAS金额effective2026-01-01",
+                "name": "DFAS现役军官基本工资：O-3 Over 6",
+                "period": "2026-01-01",
                 "publisher": "Defense Finance and Accounting Service",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Basic-Pay/CO/"
               },
               {
@@ -34616,7 +34545,7 @@
                 "name": "Army普通任官条件",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "U.S. Army",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.goarmy.com/how-to-join/requirements"
               },
               {
@@ -34632,7 +34561,7 @@
                 "name": "O*NET55-1017军事数据边界",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1017.00"
               },
               {
@@ -34647,7 +34576,7 @@
                 "name": "O*NET55-1017军事数据边界",
                 "period": "访问2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1017.00"
               },
               {
@@ -34662,7 +34591,7 @@
                 "name": "O*NET55-1017军事数据边界",
                 "period": "访问2026-10-01",
                 "publisher": "O*NET OnLine",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-1017.00"
               },
               {
@@ -34678,25 +34607,51 @@
                 "name": "中国军人地位和权益保障法",
                 "period": "公开资料；访问2026-10-01",
                 "publisher": "中华人民共和国国防部",
-                "scope": "context",
+                "scope": "contextual",
                 "url": "https://www.mod.gov.cn/gfbw/fgwx/flfg/4890799_2.html"
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "团队领导｜在正式任命和指挥权限内组织专业团队。｜交获准目标与分工说明，不由职业名称授指挥权。 — 25/100; weight=1/3; special-forces-officers.profile.responsibilities-block.1[0]",
-                  "信息评估｜评估公开摘要所述任务信息与限制。｜交判断依据与不确定项，不提供侦察或情报收集教程。 — 50/100; weight=1/3; special-forces-officers.profile.responsibilities-block.1[1]",
-                  "计划与资源｜在获准目标内做计划并协调人员资源。｜交限制、备选及待决，P练习仅为虚构教室计划。 — 50/100; weight=1/3; special-forces-officers.profile.responsibilities-block.1[3]"
+                  "通用风险包括模型虚构、数据完整性和人工复核。可用虚构P1–P5检验记录错误。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "通用风险管理",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "不证明军事岗位采用、替代、效率或工资，不授实际访问、批准或指挥权。",
+                "name": "NIST生成式AI通用风险框架",
+                "period": "2024-07",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国陆军公开资料区分 18A 特种部队军官、180A 特种部队准尉和士官专业。三个身份及各自选拔条件分别核对。"
+                ],
+                "evidence_type": "official public source",
+                "id": "sf-army-officer-roles",
+                "limitation": "仅说明美国陆军公开岗位区分，不是其他军种或中国大陆任官规则。",
+                "market": "美国",
+                "name": "美国陆军：18A 军官、180A 准尉与士官专业",
+                "period": "公开资料；访问2026-10-01",
+                "publisher": "U.S. Army",
+                "scope": "contextual",
+                "url": "https://www.goarmysof.army.mil/SF/BPDJ/"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "第34条区分军官、军士工资制度与义务兵供给制。"
+                ],
+                "evidence_type": "official public source",
+                "id": "sf-prc-pay-law",
+                "limitation": "制度口径，不给特种岗位工资数。",
+                "market": "中国大陆",
+                "name": "军人地位和权益保障法第34条",
+                "period": "2021-08-01 生效",
+                "publisher": "中华人民共和国国防部",
+                "scope": "contextual",
+                "url": "https://www.mod.gov.cn/gfbw/fgwx/flfg/4890799_2.html"
               }
             ]
           },
@@ -34822,6 +34777,22 @@
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "entry": "link-5",
+              "field": "entity"
+            }
+          },
+          {
+            "href": {
+              "$link": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-6",
+              "field": "url"
+            },
+            "label": {
+              "$link": "special-forces-officers.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-6",
               "field": "entity"
             }
           }
@@ -35209,7 +35180,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "通用风险管理",
             "适用范围": {
               "$item": "special-forces-officers.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -35505,6 +35476,7 @@
             "问题": "特种部队军官会被 AI 取代吗？"
           },
           {
+            "source_ref": "employer",
             "回答": {
               "$item": "special-forces-officers.ai-impact.ai-impact-table.66",
               "block": "ai-impact",
@@ -35615,6 +35587,7 @@
             "问题": "哪一年这个岗位会消失？"
           },
           {
+            "source_ref": "employer",
             "回答": {
               "$item": "special-forces-officers.ai-impact.ai-impact-table.76",
               "block": "ai-impact",
@@ -36069,7 +36042,7 @@
               "entry": "link-1",
               "field": "url"
             },
-            "id": "bls",
+            "id": "employer",
             "label": {
               "$link": "special-forces-officers.path.career-path-block.10",
               "block": "path",
@@ -36092,7 +36065,7 @@
               "entry": "link-2",
               "field": "url"
             },
-            "id": "nasa",
+            "id": "nbs",
             "label": {
               "$link": "special-forces-officers.path.career-path-block.10",
               "block": "path",
@@ -36115,7 +36088,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "onet-training",
+            "id": "special-forces-officers",
             "label": {
               "$link": "special-forces-officers.path.career-path-block.10",
               "block": "path",
@@ -36138,7 +36111,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "faa",
+            "id": "cnclass",
             "label": {
               "$link": "special-forces-officers.path.career-path-block.10",
               "block": "path",
@@ -36912,8 +36885,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "army"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -36944,8 +36916,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "privacy"
+              "paper"
             ],
             "id": "record-version",
             "mitigation": {
@@ -36976,8 +36947,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "prc-law"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -37008,8 +36978,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "paper"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -37040,7 +37009,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
               "bls"
             ],
             "id": "single-coverage",
@@ -37072,8 +37040,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "paper"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -37101,7 +37068,7 @@
               "entry": "link-2",
               "field": "url"
             },
-            "id": "onet",
+            "id": "bls",
             "label": {
               "$link": "special-forces-officers.risk.career-risk-cards.7",
               "block": "risk",
@@ -37124,7 +37091,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "bls",
+            "id": "army",
             "label": {
               "$link": "special-forces-officers.risk.career-risk-cards.7",
               "block": "risk",
@@ -37147,7 +37114,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "facilities",
+            "id": "onet",
             "label": {
               "$link": "special-forces-officers.risk.career-risk-cards.7",
               "block": "risk",
@@ -37170,7 +37137,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "id": "privacy",
+            "id": "prc-law",
             "label": {
               "$link": "special-forces-officers.risk.career-risk-cards.7",
               "block": "risk",
@@ -37193,7 +37160,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "onet",
+            "id": "paper",
             "label": {
               "$link": "special-forces-officers.risk.career-risk-cards.7",
               "block": "risk",
@@ -38124,6 +38091,7 @@
               "type": "prose"
             },
             "source_id": "ep",
+            "source_ref": "ep",
             "value": {
               "$item": "special-forces-officers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -38169,6 +38137,7 @@
               "type": "prose"
             },
             "source_id": "bls",
+            "source_ref": "ep",
             "value": {
               "$item": "special-forces-officers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -38214,6 +38183,7 @@
               "type": "prose"
             },
             "source_id": "nbs",
+            "source_ref": "nbs",
             "value": {
               "$item": "special-forces-officers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -38558,7 +38528,7 @@
         "rows": [
           {
             "alternate_value": null,
-            "label": "O*NET 特种部队军官职业档案（11-3061.00）",
+            "label": "O*NET 特种部队军官（55-1017.00）",
             "secondary_value": null,
             "value": {
               "$item": "special-forces-officers.profile.onet-structured-fields-block.1",
@@ -38569,7 +38539,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "美国劳工统计局：军事职业",
             "secondary_value": null,
             "value": {
               "$item": "special-forces-officers.profile.onet-structured-fields-block.2",
@@ -38580,7 +38550,7 @@
           },
           {
             "alternate_value": null,
-            "label": "国家统计局 2025 年城镇单位工资",
+            "label": "军人地位和权益保障法第34条",
             "secondary_value": null,
             "value": {
               "$item": "special-forces-officers.profile.onet-structured-fields-block.3",
@@ -38591,7 +38561,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测表 1.2（2025–35）",
+            "label": "美国劳工统计局：就业预测覆盖",
             "secondary_value": null,
             "value": {
               "$item": "special-forces-officers.profile.onet-structured-fields-block.4",
@@ -38602,7 +38572,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中华人民共和国个人信息保护法",
+            "label": "O*NET 军事职业统计范围",
             "secondary_value": null,
             "value": {
               "$item": "special-forces-officers.profile.onet-structured-fields-block.5",
@@ -39392,7 +39362,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合特种部队军官",
+        "label": "探索我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -39513,12 +39483,14 @@
     "contract_version": "career.detail.display.v1",
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪条本职业工作方向？",
-      "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.fit.interest_code_heading": "为什么没有官方兴趣代码？",
       "interface.profile.comparison.primary_header": "职责与流程",
       "interface.profile.comparison.secondary_header": "说明与比较",
+      "interface.quick_decision.caution_heading": "哪些情况需要慎重考虑这条路径？",
+      "interface.quick_decision.suit_heading": "什么样的人可能适合特种部队军官的职责？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
-      "interface.us_salary.section_label": "美国薪资参考",
+      "interface.us_salary.section_label": "美国军官基本薪示例",
       "interface.us_salary.sources_label": "美国工资和就业数据来源与使用边界"
     },
     "native_items": [
@@ -39907,13 +39879,13 @@
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((25+50+50)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
+        "derivation": null,
+        "display_value": "未核实职业量化影响",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "AI证据状态",
         "occupation_scope": "特种部队军官",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -39922,15 +39894,15 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI证据状态"
     },
     "badges": [
-      "军事职业 · 特种部队军官",
-      "任命 · 计划领导 · 法定权限",
-      "军官军衔年资薪酬；民用预测排除"
+      "军官领导与协调",
+      "任官、选拔与岗位分配分别核",
+      "P1–P5：虚构资源提案"
     ],
     "metrics": [
       {
@@ -39969,17 +39941,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "特种部队军官的公开领导职责、任命与指挥边界，Army现役军官转入条件和中国军官宽入口；按军衔年资解释工资，用虚构教室资源计划完成冲突核对、预算与待决交接。"
+      "text": "区分特种部队军官与成员，了解大陆公开军官入口、美国陆军现役军官要求和基本薪级，并试做虚构资源提案。"
     },
     "title": {
       "availability": "available",
-      "text": "特种部队军官"
+      "text": "特种部队军官：职责、军官路径与薪级"
     }
   },
-  "source_content_sha256": "ea9c517f63a4fc3def4e762a47387a247d6fa3272dad17028954557a3494b30a",
+  "source_content_sha256": "977fc6d18e9105ed6e5b285a4908f651ac759357cf0551b9c0e3326f8b1565c2",
   "subject": {
     "canonical_slug": "special-forces-officers",
     "name": "特种部队军官",
-    "summary": "特种部队军官在本页对应美国55-1017.00，负责领导专门团队、评估信息、组织人员训练及任务计划与通信协作；军官计划组织领导，55-3018成员实施获准任务。军官任命、军衔、专业训练和具体指挥权限分别核，中国军官入口不与美国Army资格互认。只介绍公开高层范围，不提供战术或武器操作。"
+    "summary": "特种部队军官在本页对应美国O*NET 55-1017.00，承担人员领导、训练组织、计划和协调。任官、特种选拔、岗位分配及具体权限分别核。大陆军校和直招是公开军官入口示例，不能据此推定特种岗位。"
   }
 }
