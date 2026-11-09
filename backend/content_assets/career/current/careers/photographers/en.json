@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -8933,18 +8930,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.02.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            1,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.02.mitigation": {
         "ref": {
@@ -23311,7 +23298,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Photographers photograph people, landscapes, products, or other subjects, design lighting and composition, and use editing software to deliver images or photographs. Observable deliverables include traceable originals, selections, retouched versions, and images delivered for their intended uses. Consent of people depicted, location permits, copyright, usage scope, and image authenticity must be checked against project agreements and applicable law."
+              "Try A1–A5 before committing if you enjoy taking photos but dislike revisiting a brief, reviewing versions or reworking images. Client changes and repeated checks are part of delivery."
             ]
           },
           "id": "photographers.quick-decision.fit-decision-checklist.1",
@@ -23327,7 +23314,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Complete a paper exercise using entirely fictional materials A1—A5: a fictional product photography brief, descriptions of three sample images, a permission card, and delivery specifications. List only evidence, differences, review steps, and handover items; do not use real sensitive information."
+              "Try the fictional A1–A5 brief: read the product request and three sample descriptions, then list deliverables, permission gaps, open specs and the person who approves release."
             ]
           },
           "id": "photographers.quick-decision.fit-decision-checklist.2",
@@ -23359,7 +23346,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The 2025 median wage for US 27-4021 is USD 44,660 / year; employment for 2025—2035 is projected to fall by approximately 1,000 net jobs (a decline of 0.7%), with approximately 10,700 average annual openings including replacements for occupational transfers and labor force exits. Chinese industry pretax averages are listed separately; neither represents individual starting pay or AI unemployment probabilities."
+              "U.S. wage data show a 2025 median of $44,660 for employed photographers and exclude self-employed workers. Self-employment accounts for 66.7% of the U.S. employment base. Chinese mainland industry and historical hiring figures are separate context."
             ]
           },
           "id": "photographers.quick-decision.fermat-decision-card.6",
@@ -23511,13 +23498,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "China's GB/T 4754—2017 classifies 8060 photographic and photofinishing services under residential services, repairs, and other services. In 2025, this industry's pretax average annual wages were CNY 70,226 in urban nonprivate units and CNY 52,059 in private units; match the employer's main activity. These are not a national photographer median."
+              "China lists commercial photographers at 4-08-09-01: discuss the brief, set up the scene and lighting, capture people, scenes or products, then select and process images. Photographic processing (4-08-09-02), film and television camera work (2-09-03-03) and photojournalism (2-10-01-02) have separate entries. U.S. 27-4021.00 has a broader scope. See Entry and development for the official classification PDF."
             ]
           },
           "id": "photographers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "gb4754",
-            "nbs"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -23542,7 +23528,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "US EP Table 1.2 lists photographer employment of 145,000 in 2025 and a projected 144,000 in 2035, a net decline of 1,000 and a decrease of 0.7%, with average annual openings of 10,700 including replacements; typical entry education is high school or equivalent, with moderate-term on-the-job training. These are not Chinese education requirements."
+              "US EP Table 1.2 lists photographer employment of 145,000 in 2025 and a projected 144,000 in 2035, a net decline of 1,000 and a decrease of 0.7%, with average annual openings of 10,700 all expected to be replacement needs; typical entry education is high school or equivalent, with moderate-term on-the-job training. These are not Chinese education requirements."
             ]
           },
           "id": "photographers.profile.onet-structured-fields-block.4",
@@ -24120,7 +24106,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The first four rows compare film and video camera operators, video editors, graphic designers, and photographic processing workers; the last two compare commercial and documentary photography."
+              "The first four rows use U.S. O*NET occupations. The last two are directions within U.S. 27-4021. China lists commercial photographers and photojournalists separately; see the official classification link in Entry and development."
             ]
           },
           "id": "photographers.direction-comparison.adjacent-career-comparison-table.9",
@@ -24458,7 +24444,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Within the photographer occupation, focus on recording and explaining events."
+              "Photojournalism is included in the U.S. profile. China lists photojournalists separately as 2-10-01-02."
             ]
           },
           "id": "photographers.direction-comparison.adjacent-career-comparison-table.31",
@@ -24506,7 +24492,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "News and documentary direction (within this occupation)"
+              "News and documentary photography (within U.S. 27-4021)"
             ]
           },
           "id": "photographers.direction-comparison.adjacent-career-comparison-table.34",
@@ -24799,7 +24785,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Photo selection, editing, or material organization may serve as trial steps for assistance tools; people remain responsible for on-site shooting, requirements communication, and rights judgments. BLS expects generated images to affect some stock photographs, but provides neither individual replacement probabilities for photographers nor the share of net employment decline caused by AI. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Test tools on sample selection, export comparison or draft checklists. A person still verifies the original, packaging text, people and permissions. BLS expects generated images to affect some stock-photo work and does not quantify a replacement rate or the share of net job loss due to AI."
             ]
           },
           "id": "photographers.ai-impact.ai-impact-table.18",
@@ -25571,7 +25557,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Projected 2035 employment is 144,000, a net decrease of 1,000 from 2025; average annual openings of 10,700 include replacements and are not AI-caused unemployment counts."
+              "U.S. employment is projected at 144,000 in 2035, down about 1,000 from 2025. All 10,700 average annual openings are expected to be replacement needs; this is not an AI job-loss count."
             ]
           },
           "id": "photographers.ai-impact.ai-impact-table.70",
@@ -26688,7 +26674,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "CNY 2,200 / month (historical single-position pay offer)"
+              "See the two notices in Entry and development"
             ]
           },
           "id": "photographers.china-salary.career-snapshot-primary-locale.19",
@@ -27121,7 +27107,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "In this round on 2026-10-03, a photographer recruitment query verified 1 position in Zhangye's fifth 2025 notice; this is not a random sample. Pretax / after-tax status, bonuses, hours, and current position validity were undisclosed or unverified."
+              "The Zhangye notice lists one role titled Photographer but does not describe the shooting duties. Ankang includes short video. Pay components and current status were not verified; these are not occupational statistics."
             ]
           },
           "id": "photographers.china-salary.career-snapshot-primary-locale.46",
@@ -27245,7 +27231,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "CNY 2,200 / month (2025-04-29; check pay components separately)"
+              "Open the two original notices in Entry and development. Do not use them to compare regional wages."
             ]
           },
           "id": "photographers.china-salary.career-snapshot-primary-locale.54",
@@ -27328,7 +27314,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 27-4021 separate occupational projections | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET Photographers 2025 wages | https://www.onetonline.org/link/localwages/27-4021.00?zip=92101; O*NET occupational tasks | https://www.onetonline.org/link/details/27-4021.00"
+              "BLS 27-4021 separate occupational projections | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm; O*NET Photographers 2025 wages | https://www.onetonline.org/link/localwages/27-4021.00; O*NET occupational tasks | https://www.onetonline.org/link/details/27-4021.00"
             ]
           },
           "id": "photographers.us-salary.career-snapshot-secondary-locale.8",
@@ -27357,7 +27343,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 10th percentile is USD 30,820, not starting pay for newcomers.; O*NET wages page | https://www.onetonline.org/link/localwages/27-4021.00?zip=92101"
+              "The 2025 10th percentile is USD 30,820, not starting pay for newcomers.; O*NET wages page | https://www.onetonline.org/link/localwages/27-4021.00"
             ]
           },
           "id": "photographers.us-salary.career-snapshot-secondary-locale.10",
@@ -27387,7 +27373,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 25th percentile is USD 36,050 and does not correspond to specific experience or qualifications.; O*NET wages page | https://www.onetonline.org/link/localwages/27-4021.00?zip=92101"
+              "The 2025 25th percentile is USD 36,050 and does not correspond to specific experience or qualifications.; O*NET wages page | https://www.onetonline.org/link/localwages/27-4021.00"
             ]
           },
           "id": "photographers.us-salary.career-snapshot-secondary-locale.12",
@@ -27417,7 +27403,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 median annual wage is USD 44,660, not an individual pay offer.; O*NET wages page | https://www.onetonline.org/link/localwages/27-4021.00?zip=92101"
+              "The 2025 median annual wage is USD 44,660, not an individual pay offer.; O*NET wages page | https://www.onetonline.org/link/localwages/27-4021.00"
             ]
           },
           "id": "photographers.us-salary.career-snapshot-secondary-locale.14",
@@ -27447,7 +27433,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 75th percentile is USD 62,740 and does not represent a job grade.; O*NET wages page | https://www.onetonline.org/link/localwages/27-4021.00?zip=92101"
+              "The 2025 75th percentile is USD 62,740 and does not represent a job grade.; O*NET wages page | https://www.onetonline.org/link/localwages/27-4021.00"
             ]
           },
           "id": "photographers.us-salary.career-snapshot-secondary-locale.16",
@@ -27476,7 +27462,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 90th percentile is USD 91,810 and does not guarantee individual income.; O*NET wages page | https://www.onetonline.org/link/localwages/27-4021.00?zip=92101"
+              "The 2025 90th percentile is USD 91,810 and does not guarantee individual income.; O*NET wages page | https://www.onetonline.org/link/localwages/27-4021.00"
             ]
           },
           "id": "photographers.us-salary.career-snapshot-secondary-locale.18",
@@ -27566,7 +27552,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "US 27-4021 has average annual openings of 10,700 for 2025—2035, including replacements for occupational transfers and labor force exits; this is a different quantity from the net decline of 1,000 over ten years, not current recruitment or AI layoff counts. BLS projection table | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "US 27-4021 has average annual openings of 10,700 for 2025—2035, all expected to come from occupational transfers and labor-force exits; this is a different quantity from the net decline of 1,000 over ten years, not current recruitment or AI layoff counts. BLS projection table | https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "photographers.us-salary.career-snapshot-secondary-locale.24",
@@ -28131,7 +28117,7 @@
                 "entity": "O*NET Photographer wages",
                 "id": "link-16",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/27-4021.00?zip=92101"
+                "url": "https://www.onetonline.org/link/localwages/27-4021.00"
               },
               {
                 "entity": "O*NET Camera Operators",
@@ -28155,7 +28141,7 @@
                 "entity": "Personal Information Protection Law of the People's Republic of China",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               }
             ]
           },
@@ -28388,7 +28374,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "R/A/C: equipment operation, visual expression, detailed organization; check Chinese position requirements separately."
+              "O*NET uses RA (Realistic and Artistic) in its summary; Conventional ranks third in the detailed ratings. Try operating equipment, composing an image and tracking versions."
             ]
           },
           "id": "photographers.fit.riasec-fit-block.12",
@@ -29059,7 +29045,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Will pause and communicate when portrait or location permissions are insufficient, images are distorted, files are lost, delivery specifications are wrong, or on-site safety issues arise."
+              "If you dislike checking originals, usage and versions, or tend to publish before a permission question is settled, practice stopping and handing off an issue on the fictional brief."
             ]
           },
           "id": "photographers.fit.personality-fit-block.57",
@@ -29089,7 +29075,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Occupational Interests supports R/A/C descriptions, not this site's test validity for career prediction."
+              "O*NET occupational interests do not establish a way to predict an individual’s photography performance."
             ]
           },
           "id": "photographers.fit.personality-fit-block.59",
@@ -29240,7 +29226,7 @@
                 "entity": "Personal Information Protection Law of the People's Republic of China",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "entity": "Chinese Copyright Law (2020 revision)",
@@ -29401,7 +29387,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Check purpose, territory, and duration."
+              "Check the venue agreement and project terms for shooting, publication, duration, territory and the approval owner."
             ]
           },
           "id": "photographers.risk.career-risk-cards.17",
@@ -29701,7 +29687,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Articles 1018—1020 of China's Civil Code address portraits and specific permitted use conditions; assess permissions and statutory exceptions according to actual uses, without extending them to unrestricted publication authority."
+              "In mainland China, Civil Code Articles 1018–1020 generally require consent to make, use or publish an identifiable portrait, subject to statutory exceptions for specific purposes. Permission for an internal proposal does not by itself cover a public portfolio."
             ]
           },
           "id": "photographers.risk.career-risk-cards.37",
@@ -29729,7 +29715,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Rights may differ for client commissions, employed photography, and portfolio displays; Articles 18, 19, and 26—29 of China's Copyright Law help check employment-related or commissioned works and licensing arrangements, without replacing specific contracts."
+              "For commissioned photography in mainland China, check the contract first. Under Copyright Law Article 19, the commissioned creator owns copyright if the contract is absent or silent about ownership. Work made for an employer is addressed separately in Article 18. Delivering the original does not transfer copyright; Article 20 separately addresses exhibition of the original. Portfolio use also requires checking portrait and use permissions."
             ]
           },
           "id": "photographers.risk.career-risk-cards.39",
@@ -29868,7 +29854,7 @@
                 "id": "exercise-materials",
                 "values": [
                   "Materials and scenario | Entirely fictional",
-                  "You are a photography learner at fictional Qinghe Studio, doing paper planning only. A1: the client brief requires three product images on a neutral gray background, with one square and one landscape version of each delivered.",
+                  "You are planning a paper exercise at Qinghe Studio. A1: the brief calls for three product photos on neutral gray, each delivered in a square and a landscape version.",
                   "A2: sample A has normal exposure, but retouching changed the packaging text; the original remains usable.",
                   "A3: sample B includes a person, and the permission card specifies internal proposal use only."
                 ]
@@ -29878,22 +29864,22 @@
                 "values": [
                   "Tasks and stopping rules",
                   "A4: sample C is on the only memory card; the delivery directory contains two same-name versions with different color spaces.",
-                  "A5: fictional rules require pausing public delivery and referring to project lead Lin Lan when permissions, originals, retouching authenticity, or export specifications are unverified."
+                  "A5: pause public delivery and refer to the project lead when permissions, originals, edits or export specs are unverified. Submit an image-by-format matrix, a decision for each sample, open specs and one handoff note. Use only these materials."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
                   "Suggested approach (complete independently first)",
-                  "A1 lists three product images with one square and one landscape version of each; exact pixel dimensions, file formats, and color standards are unspecified and marked for confirmation, without guessing values. A2 retains originals and marks changed packaging text; A3 permits internal proposals only, so pause public use; A4 first backs up and checks the color spaces of same-name files.",
-                  "A5 states unresolved items and the approver; do not publish independently."
+                  "A1: images 1, 2 and 3 each have a square and a landscape version, for 6 planned files. Pixel size, file format and target color space still need confirmation. A: preserve the original and hold the altered packaging image until the wording is restored or reshot. B: keep internal only and hold public use. C: back up the sole card and compare the two color spaces before selecting an export.",
+                  "Example handoff: A needs packaging review, B needs public-use permission and C needs color-space and backup checks. Ask the project lead to confirm specs and permissions before approving public delivery."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Deliverables and boundaries",
-                  "Work samples include a brief checklist, sample descriptions, permission gaps, and a delivery checklist; no real client or subject materials."
+                  "Review",
+                  "No real clients, people or photos are involved. Check whether you can explain each hold, open question and approval owner."
                 ]
               }
             ]
@@ -29902,7 +29888,7 @@
           "source_refs": [
             "editor"
           ],
-          "title": "Entry exercise: fictional fictional product photography brief, descriptions of three sample images, a permission card, and delivery specifications",
+          "title": "Try the work: Plan a product-photo delivery",
           "type": "cards"
         },
         {
@@ -29988,7 +29974,7 @@
               [
                 "Delivery",
                 "Versions and color spaces in A4 and handover in A5",
-                "Name Lin Lan as recipient",
+                "List the project lead as the recipient",
                 "Do not publish without authorization"
               ]
             ]
@@ -30023,7 +30009,7 @@
                 "id": "entry-trial-day-3",
                 "values": [
                   "Day three",
-                  "Check originals and retouching in A2."
+                  "Write an original-image review plan for A2; no real images are supplied."
                 ]
               },
               {
@@ -30037,7 +30023,7 @@
                 "id": "entry-trial-day-5",
                 "values": [
                   "Day five",
-                  "Create backup and version lists for A4."
+                  "List backup steps and versions for A4 on paper; there is no real card to copy."
                 ]
               },
               {
@@ -30201,13 +30187,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no currently valid photographer recruitment sample disclosing complete remuneration, shifts, and tasks has been verified. The query in this round on 2026-10-03 verified Zhangye Human Resources and Social Security Bureau's fifth historical notice dated 2025-04-29: Gansu Chanying Film and Television Media Co., Ltd. sought 1 photographer in Sunan County, with a media-related major and preference for experience, offering CNY 2,200 / month. The notice did not disclose pretax / after-tax status, bonuses, or hours and cannot represent current hiring or national income. A1—A5 are entirely fictional and unrelated to that notice."
+              "Ankang’s January 21, 2026 notice listed one photography role at CNY 5,000 per month. It asked for portrait, product and short-video experience, so it was a mixed role. Zhangye’s April 29, 2025 row 70 listed one photographer at CNY 2,200 per month without describing whether the work was stills or video. These are historical listings, not national pay or current openings."
             ]
           },
           "id": "photographers.path.recruitment-sample.1",
           "source_refs": [
             "zhangye-2025",
-            "editor"
+            "ankang-2026"
           ],
           "title": "Recruitment sample note",
           "type": "notice"
@@ -30230,16 +30216,16 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET Photographer wages",
+                "entity": "China’s Occupational Classification (2022 edition)",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/27-4021.00?zip=92101"
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               },
               {
-                "entity": "Zhangye's fifth historical recruitment notice of 2025",
+                "entity": "Ankang public employment notice, first batch of 2026",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.zhangye.gov.cn/rsj/dzdt/tzgg/202504/t20250429_1395027.html"
+                "url": "https://rsj.ankang.gov.cn/Content-2888848.html"
               }
             ]
           },
@@ -30247,7 +30233,8 @@
           "source_refs": [
             "onet",
             "ep",
-            "onet-wages",
+            "cnclass",
+            "ankang-2026",
             "zhangye-2025"
           ],
           "type": "links"
@@ -30392,7 +30379,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Start with photographing people, landscapes, products, or other subjects, designing lighting and composition, using editing software to deliver images or photographs, and supervised practice. Practice reviewing client briefs, subjects, lighting, original images, permissions, and delivery specifications and producing traceable originals, selections, retouched versions, and images for intended uses; check job qualifications and authority separately."
+              "Start with a small set of images you are allowed to show. Agree on purpose, quantity and specs, then submit a contact sheet and revision log. BLS lists a high school diploma or equivalent as typical for U.S. entry; use specific listings to check portfolio, assisting or specialist training requirements."
             ]
           },
           "id": "photographers.path.career-path-block.20",
@@ -30437,7 +30424,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "US BLS lists high school or equivalent and moderate-term on-the-job training as typical; Chinese positions require checking specific notices and project conditions. Zhangye's single 2025 position is a historical sample, not a national education or income threshold."
+              "BLS lists high school or equivalent and moderate on-the-job training as typical in the U.S. For a Chinese mainland role, check portfolio expectations, whether video editing is included, hours and pay terms in the actual posting."
             ]
           },
           "id": "photographers.path.career-path-block.23",
@@ -30481,7 +30468,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The O*NET occupational wages page supports US national 2025 wage percentiles, not Chinese qualification recognition, portrait permission, or training certificate requirements."
+              "China lists commercial photographers at 4-08-09-01: discuss the brief, set up the scene and lighting, capture people, scenes or products, then select and process images. Photographic processing (4-08-09-02), film and television camera work (2-09-03-03) and photojournalism (2-10-01-02) have separate entries. U.S. 27-4021.00 has a broader scope."
             ]
           },
           "id": "photographers.path.career-path-block.26",
@@ -30495,13 +30482,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The historical Zhangye notice dated 2025-04-29 supports 1 photographer position in Sunan County and its remuneration requirements; pay components and current validity are unverified. It is not a national threshold."
+              "The January 21, 2026 Ankang notice listed one photography role at CNY 5,000 per month, with portrait, product and short-video experience. It is a historical mixed role; current vacancy status and pay components were not verified."
             ]
           },
           "id": "photographers.path.career-path-block.27",
           "source_refs": [
-            "zhangye-2025",
-            "editor"
+            "ankang-2026"
           ],
           "type": "prose"
         },
@@ -31517,7 +31503,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "US EP projects photographer employment for 2025—2035 at 145,000 → 144,000, a net decline of 1,000 (down 0.7%); average annual openings of 10,700 include replacements. Chinese industry wages and single historical recruitment positions provide context with different definitions, not Chinese employment growth or AI unemployment rates."
+              "BLS projects U.S. photographer employment to fall from 145,000 in 2025 to 144,000 in 2035 (−0.7%). The 10,700 average annual openings are expected to come entirely from replacing people who change occupations or leave the labor force. Chinese mainland historical posts do not establish a national trend."
             ]
           },
           "id": "photographers.market-signals.market-signal-card.8",
@@ -31675,7 +31661,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Average annual openings include replacements for occupational transfers or labor force exits; openings can exist despite declining employment."
+              "BLS expects all projected openings to come from occupational transfers or labor-force exits. Openings can persist even as total employment declines."
             ]
           },
           "id": "photographers.market-signals.market-signal-card.18",
@@ -32355,7 +32341,7 @@
                 "question_key": "career.faq.photographers.risk-boundary"
               },
               {
-                "answer": "The US projection for 2025—2035 is a net decline of 1,000, down 0.7%, with average annual openings of 10,700 including replacements for occupational transfers and labor force exits; these are not current recruitment counts or AI-caused unemployment counts, nor do they establish individual employment outcomes in China.",
+                "answer": "The US projection for 2025—2035 is a net decline of 1,000, down 0.7%, with average annual openings of 10,700 all expected to come from occupational transfers and labor-force exits; these are not current recruitment counts or AI-caused unemployment counts, nor do they establish individual employment outcomes in China.",
                 "id": "photographers.faq.10",
                 "question": "What is the outlook?",
                 "question_key": "career.faq.photographers.outlook-transition"
@@ -32429,7 +32415,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The Chinese page explains the US occupational scope of photographers and Chinese applicability boundaries; A1—A5 are entirely fictional and not for real decisions."
+              "This guide separates U.S. photographer statistics from Chinese mainland classification and local examples. A1–A5 is a fictional paper exercise."
             ]
           },
           "id": "photographers.sources.source-card.4",
@@ -32542,8 +32528,8 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Interpret only within the occupation, jurisdiction, and period covered by the material.",
-                  "Fictional exercises do not replace real job training or authorization."
+                  "2025–2035: 145,000 to 144,000 (−0.7%), 10,700 annual openings, and 66.7% self-employed in 2025.",
+                  "The outlook explains the source of openings; projected openings are not a count of live postings."
                 ],
                 "evidence_type": "official projection table",
                 "id": "ep",
@@ -32563,13 +32549,13 @@
                 ],
                 "evidence_type": "official wage distribution",
                 "id": "oews",
-                "limitation": "Use according to the source occupation, jurisdiction, and period; these do not represent Chinese single-occupation wages or individual outcomes.",
+                "limitation": "OEWS is U.S. employee wage data and excludes the self-employed. Do not use it to estimate freelance billings or profit.",
                 "market": "United States",
                 "name": "O*NET 2025 wages 27-4021.00",
                 "period": "2025 wages",
                 "publisher": "O*NET OnLine citing BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/27-4021.00?zip=92101"
+                "url": "https://www.onetonline.org/link/localwages/27-4021.00"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32588,36 +32574,36 @@
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Interpret only within the occupation, jurisdiction, and period covered by the material.",
-                  "Fictional exercises do not replace real job training or authorization."
+                  "China lists commercial photographers at 4-08-09-01: discuss the brief, set up the scene and lighting, capture people, scenes or products, then select and process images. Photographic processing (4-08-09-02), film and television camera work (2-09-03-03) and photojournalism (2-10-01-02) have separate entries. U.S. 27-4021.00 has a broader scope.",
+                  "See PDF page 253 for commercial photographers and lab workers, page 156 for film and television photography, and page 163 for photojournalists."
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "cnclass",
-                "limitation": "Use according to the source occupation, jurisdiction, and period; these do not represent Chinese single-occupation wages or individual outcomes.",
-                "market": "United States",
-                "name": "O*NET Photographers occupational scope",
-                "period": "2026 occupational profile",
-                "publisher": "O*NET OnLine",
-                "scope": "Background, adjacent occupations, or Chinese statistical definitions",
-                "url": "https://www.onetonline.org/link/details/27-4021.00"
+                "limitation": "Classification does not establish employer industry, wages or individual eligibility.",
+                "market": "Chinese mainland",
+                "name": "China’s Occupational Classification (2022 edition)",
+                "period": "2022",
+                "publisher": "China Ministry of Human Resources and Social Security et al., reproduced by Guangyuan HRSS",
+                "scope": "exact",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               },
               {
                 "accessed_at": "2026-09-26",
                 "details": [
-                  "Interpret only within the occupation, jurisdiction, and period covered by the material.",
-                  "Fictional exercises do not replace real job training or authorization."
+                  "China's Personal Information Protection Law helps check purposes, necessary scope, and lawful basis for handling identifiable images of people; not every photograph is sensitive personal information.",
+                  "Check the lawful basis and necessary scope of processing. The law does not determine photographic copyright."
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "official law",
                 "id": "privacy",
-                "limitation": "Use according to the source occupation, jurisdiction, and period; these do not represent Chinese single-occupation wages or individual outcomes.",
-                "market": "United States",
-                "name": "O*NET Photographers tasks",
-                "period": "2026 occupational profile",
-                "publisher": "O*NET OnLine",
-                "scope": "Background, adjacent occupations, or Chinese statistical definitions",
-                "url": "https://www.onetonline.org/link/details/27-4021.00"
+                "limitation": "Sensitivity and additional requirements depend on the data, use and jurisdiction.",
+                "market": "Chinese mainland",
+                "name": "Personal Information Protection Law of the People's Republic of China",
+                "period": "Effective November 1, 2021",
+                "publisher": "Adopted by the NPC Standing Committee; republished by the Cyberspace Administration of China",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32835,13 +32821,13 @@
                 ],
                 "evidence_type": "official wage distribution",
                 "id": "r2-pay-3",
-                "limitation": "Use according to the source occupation, jurisdiction, and period; these do not represent Chinese single-occupation wages or individual outcomes.",
+                "limitation": "OEWS is U.S. employee wage data and excludes the self-employed. Do not use it to estimate freelance billings or profit.",
                 "market": "United States",
                 "name": "O*NET 27-4021.00 2025 wage percentiles",
                 "period": "2025 wages",
                 "publisher": "O*NET OnLine citing BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/27-4021.00?zip=92101"
+                "url": "https://www.onetonline.org/link/localwages/27-4021.00"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -32883,13 +32869,13 @@
                 ],
                 "evidence_type": "official wage distribution",
                 "id": "onet-wages",
-                "limitation": "Use according to the source occupation, jurisdiction, and period; these do not represent Chinese single-occupation wages or individual outcomes.",
+                "limitation": "OEWS is U.S. employee wage data and excludes the self-employed. Do not use it to estimate freelance billings or profit.",
                 "market": "United States",
                 "name": "O*NET National Wages 27-4021.00",
                 "period": "2025 wages",
                 "publisher": "O*NET OnLine citing BLS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/27-4021.00?zip=92101"
+                "url": "https://www.onetonline.org/link/localwages/27-4021.00"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -32960,12 +32946,12 @@
                 "evidence_type": "official law",
                 "id": "pipl",
                 "limitation": "Check identifiable personal images against processing purpose and necessary scope; not all photographs are sensitive.",
-                "market": "Mainland China",
+                "market": "Chinese mainland",
                 "name": "Personal Information Protection Law of the People's Republic of China",
-                "period": "Effective 2021-11-01",
-                "publisher": "Law published by the Ministry of Industry and Information Technology",
+                "period": "Effective November 1, 2021",
+                "publisher": "Adopted by the NPC Standing Committee; republished by the Cyberspace Administration of China",
                 "scope": "contextual",
-                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -33059,20 +33045,31 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Task execution | Photograph people, landscapes, products, or other subjects, design lighting and composition, and use editing software to deliver images or photographs | Follow the position's scope and rules. — 50/100; weight=1/3; photographers.profile.responsibilities-block.1[1]",
-                  "Quality review | Check traceable originals, selections, retouched versions, and images delivered for their intended uses against original materials | Retain discrepancies. — 75/100; weight=1/3; photographers.profile.responsibilities-block.1[2]",
-                  "Communication and collaboration | Communicate with clients, subjects, stylists, editors, and production teams | State matters awaiting responses. — 25/100; weight=1/3; photographers.profile.responsibilities-block.1[3]"
+                  "Practice in checking delivery and permissions."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_synthesis",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "Does not estimate an occupational AI score or replacement rate.",
+                "name": "FermatMind: fictional A1–A5 exercise",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The January 21, 2026 Ankang notice listed one photography role at CNY 5,000 per month, with portrait, product and short-video experience. It is a historical mixed role; current vacancy status and pay components were not verified."
+                ],
+                "evidence_type": "recruitment notice",
+                "id": "ankang-2026",
+                "limitation": "Historical quote for a mixed role including short video, not a current vacancy, pure still-photo wage or national estimate.",
+                "market": "Chinese mainland",
+                "name": "Ankang public employment notice, first batch of 2026",
+                "period": "2026-01-21",
+                "publisher": "Ankang Employment and Entrepreneurship Service Center",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.ankang.gov.cn/Content-2888848.html"
               }
             ]
           },
@@ -34487,7 +34484,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "onet-training",
+            "id": "cnclass",
             "label": {
               "$link": "photographers.path.career-path-block.10",
               "block": "path",
@@ -34510,7 +34507,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "faa",
+            "id": "ankang-2026",
             "label": {
               "$link": "photographers.path.career-path-block.10",
               "block": "path",
@@ -35317,8 +35314,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "employer",
-              "onet"
+              "editor"
             ],
             "id": "location",
             "mitigation": {
@@ -35580,6 +35576,12 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "#career-visual-group-path",
+            "id": "editor",
+            "label": "A1–A5: Handoff when permission is uncertain",
+            "scope": "A1–A5 illustrates a permission handoff and includes no venue agreement. Check the actual agreement on a live project."
           }
         ]
       },
@@ -36541,7 +36543,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "photographers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36953,7 +36955,7 @@
           },
           {
             "alternate_value": null,
-            "label": "National Bureau of Statistics 2025 Urban Unit Wages",
+            "label": "Chinese mainland occupational classification (2022)",
             "secondary_value": null,
             "value": {
               "$item": "photographers.profile.onet-structured-fields-block.3",
@@ -37979,7 +37981,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and task changes",
       "china-salary": "Mainland China pay references",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38097,7 +38099,7 @@
         "display_value": "Average annual openings: 10,700",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "2025—2035 average annual job openings (including replacements for occupational transfers and exits)",
+        "measure": "2025–2035 projected annual openings (all replacement needs)",
         "occupation_scope": "Separate US occupation: Photographers 27-4021 / 27-4021.00",
         "period": "2025—2035 projections; 2025 employment base period",
         "source_refs": [
@@ -38251,32 +38253,20 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Photographers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and task changes"
     },
     "badges": [
-      "Composition · Lighting · Delivery",
-      "Permissions and traceable originals",
-      "Separate US occupational data · Chinese industry references"
+      "Still photography and delivery",
+      "Originals, permissions and authenticity",
+      "A1–A5 product photo exercise"
     ],
     "metrics": [
       {
@@ -38304,10 +38294,10 @@
         "label": "US average annual job openings"
       },
       {
-        "availability": "available",
-        "fact_ref": "cn-private-2025",
+        "availability": "missing",
+        "fact_ref": null,
         "key": "china_pay",
-        "label": "Chinese industry pretax annual average reference"
+        "label": "Chinese mainland occupational pay (no verified national figure)"
       }
     ]
   },
@@ -38315,17 +38305,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Explore photographers' composition, exposure, selection, and delivery, along with portrait, copyright, and authenticity boundaries; view Chinese 2025 industry pretax average wage references, US 2025 wages, and 2025—2035 employment context."
+      "text": "See what photographers do, how to build a portfolio, and what U.S. wages exclude. Try a product-photo delivery brief and compare still photography with video and lab work."
     },
     "title": {
       "availability": "available",
       "text": "Photographers"
     }
   },
-  "source_content_sha256": "166b3582a184e4b82656dcbd965897f65b1abed6bce9ff3549944c2ec74830ee",
+  "source_content_sha256": "aced8665e81205acb8f41181b7e76b33f4654d1b9474402bae2460759ab4b8ab",
   "subject": {
     "canonical_slug": "photographers",
     "name": "Photographers",
-    "summary": "Photographers (O*NET 27-4021.00) photograph people, landscapes, products, or other subjects, design lighting and composition, and use editing software to deliver images or photographs. Working with client briefs, subjects, lighting, original images, permissions, and delivery specifications, they produce traceable originals, selections, retouched versions, and images delivered for their intended uses. Consent of people depicted, location permits, copyright, usage scope, and image authenticity must be checked against project agreements and applicable law. Work settings, qualifications, and final responsibility must be checked against local and institutional rules."
+    "summary": "Photographers plan and produce still images for clients, publications or records. They clarify the brief, light and frame the shot, select and edit photos, retain originals and deliver approved files. Try the A1–A5 product-photo brief to see how those decisions fit together."
   }
 }
