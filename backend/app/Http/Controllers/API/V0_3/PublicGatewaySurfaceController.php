@@ -37,12 +37,16 @@ final class PublicGatewaySurfaceController extends Controller
 
     public function help(Request $request): JsonResponse
     {
-        return response()->json([
+        $locale = $this->resolveLocale($request, allowTaiwan: true);
+        $payload = [
             'ok' => true,
-            'landing_surface_v1' => $this->publicGatewaySurfaceService->buildHelpIndexSurface(
-                $this->resolveLocale($request)
-            ),
-        ]);
+            'landing_surface_v1' => $this->publicGatewaySurfaceService->buildHelpIndexSurface($locale),
+        ];
+        if ($locale === 'zh-TW') {
+            $payload['locale'] = $locale;
+        }
+
+        return response()->json($payload);
     }
 
     public function helpDetail(Request $request, string $slug): JsonResponse
@@ -63,7 +67,7 @@ final class PublicGatewaySurfaceController extends Controller
         return response()->json(array_merge(['ok' => true], $payload));
     }
 
-    private function resolveLocale(Request $request): string
+    private function resolveLocale(Request $request, bool $allowTaiwan = false): string
     {
         $raw = trim((string) (
             $request->query('locale')
@@ -72,6 +76,10 @@ final class PublicGatewaySurfaceController extends Controller
         ));
 
         $normalized = strtolower(str_replace('_', '-', $raw));
+
+        if ($allowTaiwan && $normalized === 'zh-tw') {
+            return 'zh-TW';
+        }
 
         return str_starts_with($normalized, 'zh') ? 'zh-CN' : 'en';
     }

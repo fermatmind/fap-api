@@ -154,8 +154,18 @@ final class PublicGatewaySurfaceService
      */
     public function buildHelpIndexSurface(string $locale): array
     {
-        $segment = $this->frontendLocaleSegment($locale);
-        $pages = $this->helpPages($locale);
+        $taiwan = $locale === 'zh-TW';
+        $sourceLocale = $taiwan ? 'zh-CN' : $locale;
+        $segment = $this->frontendLocaleSegment($sourceLocale);
+        $pages = $this->helpPages($sourceLocale);
+        $taiwanCards = [
+            'faq' => ['常見問題', '先用正式入口處理找回報告、電子郵件偏好、退訂和付款支援，再檢視常見問題。'],
+            'about' => ['關於費馬測試', '瞭解費馬測試的測評定位、內容的適用範圍和公開可讀入口。'],
+            'team' => ['團隊資訊', '檢視團隊與協作邊界，了解誰負責這些公開內容與測評入口。'],
+            'used-and-mentioned' => ['使用與提及', '檢視產品被使用、被提及與公開引用的情境。'],
+            'for-business-and-research' => ['企業與研究合作', '說明企業和研究使用情境與授權邊界。'],
+            'contact' => ['聯絡支援', '請先使用適合的自助入口，再聯絡支援，減少重複提出申請與不必要的來回確認。'],
+        ];
 
         return $this->landingSurfaceContractService->build([
             'landing_scope' => 'public_indexable_hub',
@@ -164,20 +174,26 @@ final class PublicGatewaySurfaceService
             'summary_blocks' => [
                 [
                     'key' => 'help_home',
-                    'title' => $locale === 'zh-CN' ? '支持与信任中心' : 'Support & Trust Center',
-                    'body' => $locale === 'zh-CN'
-                        ? '从找回报告，到读懂结果，再到方法边界与数据控制，把最常见的问题放在正式入口里。'
-                        : 'From report recovery, to understanding results, to method boundaries and data controls, the most common questions live behind formal entry points.',
+                    'title' => match ($locale) {
+                        'zh-TW' => '支援與信任中心',
+                        'zh-CN' => '支持与信任中心',
+                        default => 'Support & Trust Center',
+                    },
+                    'body' => match ($locale) {
+                        'zh-TW' => '從找回報告、理解結果，到掌握測驗方法的適用範圍與管理資料，都可由這裡找到相關入口。',
+                        'zh-CN' => '从找回报告，到读懂结果，再到方法边界与数据控制，把最常见的问题放在正式入口里。',
+                        default => 'From report recovery, to understanding results, to method boundaries and data controls, the most common questions live behind formal entry points.',
+                    },
                     'kind' => 'answer_first',
                 ],
             ],
             'discoverability_items' => array_map(fn (array $page): array => [
                 'key' => $page['slug'],
-                'title' => $page['title'],
-                'summary' => $page['summary'],
+                'title' => $taiwan ? $taiwanCards[$page['slug']][0] : $page['title'],
+                'summary' => $taiwan ? $taiwanCards[$page['slug']][1] : $page['summary'],
                 'href' => '/'.$segment.'/help/'.$page['slug'],
                 'kind' => 'help_detail',
-                'badge_label' => $locale === 'zh-CN' ? '帮助' : 'Help',
+                'badge_label' => $taiwan ? '說明' : ($locale === 'zh-CN' ? '帮助' : 'Help'),
             ], $pages),
             'discoverability_keys' => array_column($pages, 'slug'),
             'continue_reading_keys' => array_column($pages, 'slug'),
@@ -185,30 +201,46 @@ final class PublicGatewaySurfaceService
             'cta_bundle' => [
                 [
                     'key' => 'order_lookup',
-                    'label' => $locale === 'zh-CN' ? '订单查询' : 'Order lookup',
+                    'label' => match ($locale) {
+                        'zh-TW' => '訂單查詢',
+                        'zh-CN' => '订单查询',
+                        default => 'Order lookup',
+                    },
                     'href' => '/'.$segment.'/orders/lookup',
                     'kind' => 'formal_entry',
                 ],
                 [
                     'key' => 'email_preferences',
-                    'label' => $locale === 'zh-CN' ? '邮件偏好' : 'Email preferences',
+                    'label' => match ($locale) {
+                        'zh-TW' => '電子郵件偏好',
+                        'zh-CN' => '邮件偏好',
+                        default => 'Email preferences',
+                    },
                     'href' => '/'.$segment.'/email/preferences',
                     'kind' => 'formal_entry',
                 ],
                 [
                     'key' => 'unsubscribe',
-                    'label' => $locale === 'zh-CN' ? '退订邮件' : 'Unsubscribe',
+                    'label' => match ($locale) {
+                        'zh-TW' => '取消訂閱電子郵件',
+                        'zh-CN' => '退订邮件',
+                        default => 'Unsubscribe',
+                    },
                     'href' => '/'.$segment.'/email/unsubscribe',
                     'kind' => 'formal_entry',
                 ],
                 [
                     'key' => 'privacy_data',
-                    'label' => $locale === 'zh-CN' ? '隐私与数据说明' : 'Privacy and data information',
+                    'label' => match ($locale) {
+                        'zh-TW' => '隱私權與資料說明',
+                        'zh-CN' => '隐私与数据说明',
+                        default => 'Privacy and data information',
+                    },
                     'href' => '/'.$segment.'/privacy',
                     'kind' => 'formal_entry',
                 ],
             ],
-            'indexability_state' => 'indexable',
+            'indexability_state' => $taiwan ? 'noindex' : 'indexable',
             'attribution_scope' => 'public_help_landing',
             'surface_family' => 'help',
             'primary_content_ref' => 'help_home',

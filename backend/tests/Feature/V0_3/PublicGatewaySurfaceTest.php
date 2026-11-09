@@ -64,4 +64,32 @@ final class PublicGatewaySurfaceTest extends TestCase
             ->assertJsonPath('answer_surface_v1.surface_type', 'help_detail')
             ->assertJsonPath('answer_surface_v1.faq_blocks.0.key', 'faq_report');
     }
+
+    public function test_taiwan_help_gateway_keeps_original_targets_and_marks_exact_locale(): void
+    {
+        $url = '/api/v0.3/public-gateways/help';
+        $zh = $this->getJson($url.'?locale=zh-CN')->assertOk()->assertJsonMissingPath('locale')->json('landing_surface_v1');
+        $en = $this->getJson($url.'?locale=en', ['X-FAP-Locale' => 'zh-TW'])
+            ->assertOk()->assertJsonMissingPath('locale')->json('landing_surface_v1');
+        $response = $this->getJson($url.'?locale=zh-TW')->assertOk()
+            ->assertJsonPath('locale', 'zh-TW')
+            ->assertJsonPath('landing_surface_v1.summary_blocks.0.title', '支援與信任中心')
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex')
+            ->assertJsonMissingPath('answer_surface_v1');
+        $taiwan = $response->json('landing_surface_v1');
+
+        $this->assertSame('Support & Trust Center', $en['summary_blocks'][0]['title']);
+        $this->assertSame('indexable', $en['indexability_state']);
+        $this->assertSame('indexable', $zh['indexability_state']);
+        $this->assertNotSame($zh['landing_fingerprint'], $taiwan['landing_fingerprint']);
+        $this->assertSame($zh['discoverability_keys'], $taiwan['discoverability_keys']);
+        foreach (['discoverability_items', 'cta_bundle'] as $section) {
+            $this->assertSame(array_column($zh[$section], 'key'), array_column($taiwan[$section], 'key'));
+            $this->assertSame(array_column($zh[$section], 'href'), array_column($taiwan[$section], 'href'));
+        }
+        $this->getJson($url, ['X-FAP-Locale' => 'zh_TW'])->assertOk()->assertJsonPath('locale', 'zh-TW');
+        $this->getJson($url.'/faq?locale=zh-TW')->assertOk()
+            ->assertJsonMissingPath('locale')
+            ->assertJsonPath('landing_surface_v1.summary_blocks.0.title', '常见问题');
+    }
 }
