@@ -1261,3 +1261,24 @@ test('Traditional Big Five articles retain the production English relationships 
   }
  }
 });
+
+test('Traditional assessment guides preserve the published FAQ and each assessment destination',()=>{
+ const selection='traditional-article-assessment-guides';
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,2);
+ for (const [env,sourceRevisions] of [['staging',[708,760]],['production',[1173,920]]]) {
+  const rows=readCandidateRows(root,binding.package_sha256,env).candidates;
+  assert.deepEqual(rows.map(row=>row.source_expectations.source.published_revision_id),sourceRevisions);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection.faq.length),[5,5]);
+  for (const row of rows) {
+   const {faq,ctas}=row.snapshot.editorial_projection;
+   const links=ctas??[{label:'開始測驗',href:'/zh/tests/'+row.article_metadata.related_test_slug}];
+   const fixture={...row,snapshot:{content_md:'繁體文章',editorial_projection:{faq,ctas}}};
+   const html='<html lang="zh-TW"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="https://fermatmind.com'+pathFor(row)+'"></head><body><main><h1>繁體文章</h1>'+faq.map(({question})=>'<p>'+question+'</p>').join('')+links.map(({label,href})=>'<a href="'+href+'">'+label+'</a>').join('')+'</main></body></html>';
+   assert.doesNotThrow(()=>assertDom(fixture,html,{missing:true},env));
+   assert.throws(()=>assertDom(fixture,html.replace(links.at(-1).href,'/zh/tests/missing'),{missing:true},env),/TRADITIONAL_ARTICLE_(ASSESSMENT_LINK|EDITORIAL_DOM)/);
+  }
+ }
+});

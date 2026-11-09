@@ -415,7 +415,8 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
         || (testSlug && !(dom.link_labels['/en/tests/'+testSlug] ?? []).some(label=>compact(label) === '開始測驗')))
         throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_ENGLISH_READER_LINK');
     }
-    const assessment = row.source_expectations?.source_snapshot_kind === 'published_projection' && row.article_metadata?.related_test_slug;
+    const assessment = row.source_expectations?.source_snapshot_kind === 'published_projection'
+      && !row.editorial_package_v1?.cta_slots?.length && row.article_metadata?.related_test_slug;
     if (assessment && !(dom.link_labels['/zh/tests/'+assessment] ?? []).some(label=>compact(label) === '開始測驗'))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_ASSESSMENT_LINK_${row.page_id}`);
     const editorial = row.snapshot.editorial_projection;
