@@ -14,10 +14,7 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
-      "fact:us-employment-2024": {
+      "fact:us-employment-2025": {
         "status": "pending_mapping"
       },
       "fact:us-growth": {
@@ -144,6 +141,12 @@
         "status": "pending_mapping"
       },
       "item:machinists.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:machinists.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
+      "item:machinists.path.recruitment-sample.1": {
         "status": "pending_mapping"
       },
       "item:machinists.profile.career-quick-answers-block.8": {
@@ -7208,7 +7211,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The following judgments concern how machinists perform machine-tool work. They do not predict hiring, qualifications, authorization, or contract outcomes."
+              "The paper exercise shows whether you are willing to check drawing revisions, gauge status and deviations. Workplace authorization, actual inspection and release are separate decisions."
             ]
           },
           "id": "machinists.quick-decision.fermat-decision-card.1",
@@ -7236,7 +7239,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "M01 author-created fictional paper task: cylindrical part v1 has diameter 20.00±0.05mm and length 30.00±0.10mm. Appendix readings for three parts are A(20.03,30.08), B(20.08,29.98), and C(19.94,30.12), in diameter / length order. Assume the task's readings are valid and boundaries inclusive. The measuring-tool ledger records identifier Q1 but provides no calibration status; the drawing lacks material / surface / datum / workholding / cutting parameters. This task cannot authorize machine startup or release. Allocate 60 minutes as 15+15+15+15: list drawing knowns and unknowns, calculate dimension intervals and compare each part on paper, write a proposed verification checklist and pending-review status, and review versions. Use this task only, with no real drawings or equipment."
+              "Try M01 in the entry section. Check the fictional diameter and length readings for A, B and C, then repeat with revision v2. Write a handoff that identifies the pending drawing, the deviations and what must not be released."
             ]
           },
           "id": "machinists.quick-decision.fermat-decision-card.3",
@@ -7250,7 +7253,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "M01 reference: v1 diameter [19.95,20.05] and length [29.90,30.10]mm. Both A dimensions fall within the task's ranges; B's diameter exceeds the upper limit by 0.03; C's diameter is 0.01 below the lower limit and its length exceeds the upper limit by 0.02. In-task comparison is not real-world conformity. Unknowns such as Q1 calibration leave all actual releases unconfirmed; do not invent rework, scrapping, or first-article approval. Four paper deliverables are a v1 requirements / unknowns table, intervals and A / B / C comparisons, a proposed checklist for the quality lead with no acknowledgment, and a v1/v2 difference record. Spend 15 minutes daily for seven days: 1 copy inputs and unknowns; 2 calculate intervals; 3 compare each part; 4 check missing items; 5 change only v2 diameter to 20.00±0.10 and recalculate [19.90,20.10], placing all A / B / C diameters within the task's range while C's length still exceeds by 0.02; 6 compare versions and optionally ask someone to verify calculations, without inventing approval if no feedback is received; 7 ask whether you are willing to record unresolved conditions truthfully. Paper records do not prove operating ability."
+              "Consider this work if you like reading drawings, repeating measurements and recording evidence, and you will pause when a drawing or gauge is unresolved. Use interests to decide what to explore next."
             ]
           },
           "id": "machinists.quick-decision.fermat-decision-card.4",
@@ -7272,13 +7275,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Machinist on this page refers to O*NET 51-4041.00: setting up and operating various machine tools to produce precision metal parts and instruments. This includes precision instrument makers who fabricate, modify, or repair mechanical instruments and those who modify parts, repair machine tools, or maintain industrial equipment using knowledge of mechanics, mathematics, metal properties, layout, and machining processes. Work includes dimension and tolerance calculations, machining, measurement and inspection, machine-tool setup and operation, CNC programming, drawing interpretation, feed and speed monitoring, machine maintenance, and fixture and tool assembly and alignment. Work focuses on on-site machine-tool operation and precision inspection. This page excludes adjacent roles such as CNC programmers, tool and die makers, lathe operators, and grinding operators."
+              "This guide follows U.S. O*NET 51-4041.00. Machinists read drawings, set up machine tools, make precision parts, check tolerances, and record deviations. They may also program CNC tools or maintain equipment. U.S. pay and employment use the separate machinist occupation. Compare mainland China roles by the machines they use and the work they deliver."
             ]
           },
           "id": "machinists.profile.definition-block.1",
           "source_refs": [
             "onet-details",
-            "onet-summary"
+            "cn-machining-class"
           ],
           "type": "prose"
         },
@@ -7401,12 +7404,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Boundaries with adjacent roles: this page covers machinists only. CNC programmers develop programs and process documentation; tool and die makers make tooling and dies; lathe and grinding operators perform the corresponding machine-tool processes. Process authority and final quality responsibility cannot be interchanged with this role."
+              "Machinists have a separate U.S. statistical classification, but may use lathes, mills, or grinders and may write CNC programs. Mainland China lists lathe and milling occupations by their equipment and tasks. Their duties can overlap."
             ]
           },
           "id": "machinists.profile.definition-block.10",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "cn-machining-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -7495,12 +7499,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Lathe operators machine rotational parts on lathes, while grinding operators grind and finish parts. Machinists set up and operate multiple machine tools and take responsibility for overall machining accuracy and inspection."
+              "Mainland China lists lathe work (6-18-01-01) for surfaces of revolution and milling (6-18-01-02) for surfaces such as flats and grooves. Both include CNC trades. U.S. machinists may use either type of machine; a mainland posting does not map directly to the U.S. occupation."
             ]
           },
           "id": "machinists.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-summary"
+            "cn-machining-class",
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7546,7 +7551,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial trial candidate: organize and verify fictional dimensions and inspection records only. CAM and toolpath tools do not equal generative AI adoption. Authorized personnel must review real programs, workholding, toolpaths, first articles, and accuracy handling under machine processes. This page's M01 does not generate real cutting programs. AI Impact Score 33% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Test whether a tool flags a deviation or revision conflict in fictional readings. CAM is not evidence of generative AI adoption. Authorized staff still review real programs, drawings, processes, gauges and first-part checks. The available sources do not establish adoption or replacement rates for machinists."
             ]
           },
           "id": "machinists.ai-impact.ai-impact-table.2",
@@ -7652,7 +7657,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Industry materials reviewed this round did not establish a Chinese nationwide occupational median wage mapping for 51-4041.00. NBS2025 manufacturing figures of 113594 / 76055 yuan and the nationwide non-private figure of 129441 yuan are industry proxies only. Do not fill gaps with US data, related-position quotes, or skill levels."
+              "The available sources do not establish a nationwide mainland China occupational median comparable to U.S. 51-4041. Read the industry averages below and the two historical job quotes in the entry section separately."
             ]
           },
           "id": "machinists.china-salary.career-snapshot-primary-locale.1",
@@ -7666,7 +7671,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Statistical scope: the National Bureau of Statistics 2025 average annual wage for employed persons in manufacturing was {{fact:cn-mfg-nonprivate-wage}} for urban non-private units and {{fact:cn-mfg-private-wage}} for urban private units. The nationwide total for urban non-private units was {{fact:cn-national-nonprivate-wage}}. All are industry-level statistics, not this occupation's median or starting pay."
+              "China’s National Bureau of Statistics reports 2025 average annual manufacturing wages of CNY 113,594 in urban non-private units and CNY 76,055 in urban private units. The all-industry average for urban non-private units was CNY 129,441. None is an occupational median or starting wage."
             ]
           },
           "id": "machinists.china-salary.career-snapshot-primary-locale.2",
@@ -7738,7 +7743,7 @@
           },
           "fact_refs": [
             "us-wage-median",
-            "us-employment-2024",
+            "us-employment-2025",
             "us-growth",
             "us-openings"
           ],
@@ -7787,15 +7792,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2025 manufacturing employment share for this occupation: 84%. This describes US industry settings, not Chinese composition, detailed manufacturing industry wages, or demand projections."
+              "U.S. machinists: May 2025 median annual wages in selected industries"
             ]
           },
           "fact_refs": [
-            "us-employment-2024"
+            "us-employment-2025"
           ],
           "id": "machinists.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry"
+            "bls-ooh"
           ],
           "type": "prose"
         },
@@ -7808,7 +7813,7 @@
             ]
           },
           "fact_refs": [
-            "us-employment-2024",
+            "us-employment-2025",
             "us-growth"
           ],
           "id": "machinists.us-salary.career-snapshot-secondary-locale.6",
@@ -8044,12 +8049,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET36% of respondents consider high school or equivalent necessary for new entrants, 33% a postsecondary certificate, and 17% some college without a degree. These are not current workers' educational attainments. JobZone3 training of one to two years describes the group; verify target machine tools, processes, and employer training separately."
+              "For U.S. machinists, BLS lists a high school diploma or equivalent, no prior work experience in a related occupation, and long-term on-the-job training as typical. An apprenticeship is one option. Check equipment, training, and authorization with the employer."
             ]
           },
           "id": "machinists.path.career-path-block.2",
           "source_refs": [
-            "onet-education"
+            "bls-ep",
+            "bls-ooh"
           ],
           "type": "prose"
         },
@@ -8058,12 +8064,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "US vocational school / on-the-job training describes job preparation; certification is not equipment operation authorization. In China, verify education, skills, and permits against actual tasks, equipment, industry, and applicable regulations. This page established no one-to-one qualification mapping for 51-4041.00 and does not infer that occupational qualifications do not exist nationwide."
+              "China lists lathe operators (6-18-01-01) and milling operators (6-18-01-02) separately, with CNC variants in each. U.S. Machinists 51-4041 covers a wider range of machines. Compare the equipment and process in the specific role."
             ]
           },
           "id": "machinists.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "cn-machining-class",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8115,7 +8122,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Next step: verify the target employer's process requirements, equipment and safety procedures, inspection standards, and authorization scope, then validate precision and inspection skills through supervised real machining."
+              "Ask which machine is used, whether you write programs, who checks the first part, and who owns the gauges and deviations. Check the role’s certificates, equipment authorization and applicable rules."
             ]
           },
           "id": "machinists.path.career-path-block.7",
@@ -8137,6 +8144,59 @@
             "onet-summary"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "Changde’s May 26, 2026 issue lists 17 CNC lathe positions at Hunan Teli Hydraulics. It asks for secondary vocational education or above, familiarity with the controls, programming and independent operation. It quotes CNY 7,000–11,000 per month on piece rate.",
+              "The April 8, 2026 Miyun job fair lists two CNC lathe roles at the Beijing Research Institute of Extraction and Application Technology, with junior college education. The row gives 4,700–9,000 without a pay period, so it cannot be reported as monthly pay. Both examples are historical, not national wages or current vacancies."
+            ]
+          },
+          "id": "machinists.path.recruitment-sample.1",
+          "source_refs": [
+            "changde-cnc",
+            "miyun-cnc"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Materials | Entirely fictional",
+                  "v1: diameter 20.00 ± 0.05 mm and length 30.00 ± 0.10 mm, inclusive. Readings (diameter, length): A 20.03 / 30.08, B 20.08 / 29.98, C 19.94 / 30.12. Gauge Q1 is identified but its calibration is unknown.",
+                  "v2 only widens the diameter to 20.00 ± 0.10 mm. Length is unchanged. v2 is not approved, and material, finish and actual process details are unknown."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Submit four records first",
+                  "List knowns and unknowns, the two tolerance ranges and each part’s status, a review checklist, and one handoff. Separate paper comparison from actual release. Use no equipment or production program."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Reference answer",
+                  "v1 diameter 19.95–20.05 and length 29.90–30.10 mm. A is within both ranges. B is 0.03 mm over on diameter. C is 0.01 mm under on diameter and 0.02 mm over on length.",
+                  "v2 diameter 19.90–20.10 puts all three diameters within range. C remains 0.02 mm over on length. Handoff: v2 is unapproved and gauge Q1 calibration is unknown. Record paper results without authorizing release."
+                ]
+              }
+            ]
+          },
+          "id": "machinists.path.entry-work-sample-data.1",
+          "source_refs": [
+            "source-fermatmind-ai-rubric"
+          ],
+          "title": "M01 | Compare two drawing revisions",
+          "type": "cards"
         }
       ]
     },
@@ -8165,7 +8225,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "US O*NET / BLS: employment of 288,300 in 2025, projected 291,200 in 2035, 1% growth over 2025—2035, and 26,100 average annual openings from growth and replacement. Occupational projections are neither current hiring samples nor individual hiring probabilities."
+              "BLS projects U.S. machinists (51-4041) from about 288,300 in 2025 to 291,200 in 2035 (+1.0%), with about 26,100 annual openings from growth and replacement. Tool and die makers are counted separately. These projections do not measure hiring in China."
             ]
           },
           "id": "machinists.market-signals.market-signal-card.2",
@@ -8179,7 +8239,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2025 manufacturing employment share for this occupation: 84%. This describes US industry settings, not Chinese composition, detailed manufacturing industry wages, or demand projections."
+              "Manufacturing accounts for 84% in the O*NET industry distribution, a separate measure from employment projections."
             ]
           },
           "id": "machinists.market-signals.market-signal-card.3",
@@ -8230,23 +8290,25 @@
           "data": {
             "entries": [
               {
-                "answer": "Machinist on this page refers to O*NET 51-4041.00: setting up and operating multiple machine tools to produce precision metal parts and instruments. Work includes dimension and tolerance calculations, drawing and engineering information interpretation, workholding and alignment, machine setup, CNC programming, feed and speed monitoring, finished-part measurement and inspection, machine maintenance, and fixture and tool assembly and alignment. Work focuses on on-site machine-tool operation and precision inspection. Most respondents wear protection daily, work continuously with their hands, and stand, with accuracy extremely important. This is distinct from CNC programmers, tool and die makers, lathe operators, or grinding operators.",
+                "answer": "Machinists read drawings, set up machines, and make and measure parts in the shop. They may also write CNC programs. BLS describes machinists and tool and die makers together: many work full time during regular business hours. Some work nights and weekends, and some work more than 40 hours a week. Ask the employer about shifts.",
                 "id": "machinists.faq.1",
                 "question": "What are daily work and working hours like?",
                 "question_key": "career.faq.machinists.daily-work",
                 "source_refs": [
                   "onet-details",
-                  "onet-tasks"
+                  "onet-tasks",
+                  "bls-ooh"
                 ]
               },
               {
-                "answer": "CNC programmers write and optimize programs and process documents; tool and die makers make tooling and dies; lathe and grinding operators perform the corresponding machine-tool processes; welding and brazing equipment operators handle joining processes. Machinists set up and operate multiple machine tools and take responsibility for overall machining accuracy and inspection. Compare equipment, processes, and quality responsibility to distinguish them.",
+                "answer": "Machinists may use lathes, mills, or grinders or write CNC programs. Compare the main output: machined and inspected parts, CNC programs, or specialized tooling. Mainland China lists lathe work and milling separately by equipment and process.",
                 "id": "machinists.faq.2",
                 "question": "How does this occupation differ from adjacent occupations?",
                 "question_key": "career.faq.machinists.role-comparison",
                 "source_refs": [
                   "onet-summary",
-                  "onet-details"
+                  "onet-details",
+                  "cn-machining-class"
                 ]
               },
               {
@@ -8278,7 +8340,7 @@
                 ]
               },
               {
-                "answer": "Insufficient evidence: National Bureau of Statistics industry wage and human resources enterprise compensation materials reviewed on this page did not provide a Chinese nationwide occupational median wage safely corresponding to 51-4041.00 precision machining roles. Industry means, related-position quotes, and US figures do not fill the gap. Original 2025 manufacturing non-private 113,594, private 76,055, and nationwide non-private 129,441 yuan per year figures are industry proxies only. Human resources enterprise compensation information is a related lookup entry point.",
+                "answer": "China’s National Bureau of Statistics reports 2025 average annual manufacturing wages of CNY 113,594 in urban non-private units and CNY 76,055 in urban private units. The all-industry average for urban non-private units was CNY 129,441. None is an occupational median or starting wage. See the entry section for two historical job quotes.",
                 "id": "machinists.faq.6",
                 "question": "What is the pay evidence for mainland China?",
                 "question_key": "career.faq.machinists.china-pay",
@@ -8297,13 +8359,14 @@
                 ]
               },
               {
-                "answer": "US Job Zone3 describes vocational school / related experience / associate degree and one to two years of job preparation, not uniform education or licensing requirements for every employer. In China, verify actual tasks, equipment, industry, and applicable rules. This page established no one-to-one qualification mapping for 51-4041.00 and does not infer that occupational qualifications do not exist nationwide.",
+                "answer": "For U.S. machinists, BLS lists a high school diploma or equivalent, no prior work experience in a related occupation, and long-term on-the-job training as typical. An apprenticeship is one option. Check equipment, training, and authorization with the employer. In mainland China, check the job, equipment, and applicable local requirements.",
                 "id": "machinists.faq.8",
                 "question": "What are the entry and training paths?",
                 "question_key": "career.faq.machinists.education-path",
                 "source_refs": [
-                  "onet-summary",
-                  "onet-education"
+                  "bls-ep",
+                  "bls-ooh",
+                  "cn-machining-class"
                 ]
               },
               {
@@ -8312,17 +8375,17 @@
                 "question": "What are the main risks and control boundaries?",
                 "question_key": "career.faq.machinists.risk-boundary",
                 "source_refs": [
-                  "onet-details",
-                  "internal-rubric"
+                  "osha-guarding",
+                  "osha-energy-control"
                 ]
               },
               {
-                "answer": "Employment in 2024 was 299,500. The official 2024—2034 projection is 0%, Little or no change, with 299,600 projected in 2034. Average annual openings of 29,500 include growth and replacement and are not net additions or current vacancies. These are occupational statistics, not individual hiring probabilities.",
+                "answer": "BLS projects U.S. machinists (51-4041) from about 288,300 in 2025 to 291,200 in 2035 (+1.0%), with about 26,100 annual openings from growth and replacement. Tool and die makers are counted separately. These projections do not measure hiring in China.",
                 "id": "machinists.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.machinists.outlook-transition",
                 "source_refs": [
-                  "onet-trends"
+                  "bls-ep"
                 ]
               },
               {
@@ -8538,7 +8601,7 @@
               {
                 "accessed_at": "2026-10-02",
                 "details": [
-                  "Employment in 2024 was 299,500. The official 2024—2034 projection is 0%, Little or no change, with 299,600 projected in 2034. Average annual openings of 29,500 include growth and replacement, not net additions or current vacancies.",
+                  "BLS projects U.S. machinists (51-4041) from about 288,300 in 2025 to 291,200 in 2035 (+1.0%), with about 26,100 annual openings from growth and replacement. Tool and die makers are counted separately. These projections do not measure hiring in China.",
                   "Projections do not guarantee hiring."
                 ],
                 "evidence_type": "official employment data",
@@ -8546,15 +8609,15 @@
                 "limitation": "Projections do not guarantee hiring; little change does not mean individual opportunities remain unchanged.",
                 "market": "United States",
                 "name": "O*NET 51-4041.00 National Employment Trends",
-                "period": "2024—2034 projections; accessed 2026-09-25",
+                "period": "2025–2035",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/51-4041.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "The main industry on this page in 2024 was Manufacturing.",
+                  "The O*NET occupational profile lists manufacturing at 84% of employment in 2025.",
                   "Industry distribution signals employer settings, not growth or demand projections."
                 ],
                 "evidence_type": "official industry distribution",
@@ -8562,15 +8625,15 @@
                 "limitation": "Industry distribution signals employer settings, not growth or demand projections.",
                 "market": "United States",
                 "name": "Industries: 51-4041.00",
-                "period": "O*NET industry data current 2026; accessed 2026-09-25",
+                "period": "2025 industry employment; accessed 2026-11-09",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/51-4041.00"
+                "url": "https://www.onetonline.org/link/details/51-4041.00#WagesEmployment"
               },
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Job Zone 3, medium preparation: typically requires vocational school training, related on-the-job experience, or an associate degree, plus one to two years of training.",
+                  "Job Zone 3 is an O*NET occupational preparation category.",
                   "The education distribution does not represent mandatory requirements for every employer."
                 ],
                 "evidence_type": "official occupation profile",
@@ -8680,20 +8743,106 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Select processes and write CNC programs — 75/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Workholding, alignment, and machine-tool machining — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Measurement, inspection, and conformity determination — 25/100; weight=1/3; display.ai_impact_table.task_rows.2[0]"
+                  "Use fictional readings and a handoff only."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "Fictional paper exercise",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
+                "limitation": "Does not estimate AI replacement or authorize machinery.",
+                "name": "FermatMind fictional M01 exercise",
                 "period": "2026-10-18",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "BLS projects U.S. machinists (51-4041) from about 288,300 in 2025 to 291,200 in 2035 (+1.0%), with about 26,100 annual openings from growth and replacement. Tool and die makers are counted separately. These projections do not measure hiring in China."
+                ],
+                "evidence_type": "official occupation detail",
+                "id": "bls-ep",
+                "limitation": "BLS projects U.S. machinists (51-4041) from about 288,300 in 2025 to 291,200 in 2035 (+1.0%), with about 26,100 annual openings from growth and replacement. Tool and die makers are counted separately. These projections do not measure hiring in China.",
+                "market": "United States",
+                "name": "BLS 51-4041 projections",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The pay section separates machinists and gives May 2025 annual medians for five major industries. The work environment section covers machinists and tool and die makers together."
+                ],
+                "evidence_type": "official occupation detail",
+                "id": "bls-ooh",
+                "limitation": "Industry pay gives annual medians for selected industries; employment projections use the separate BLS 51-4041 line.",
+                "market": "United States",
+                "name": "BLS Occupational Outlook Handbook: Machinists and Tool and Die Makers",
+                "period": "May 2025 industry wages; accessed 2026-11-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/production/machinists-and-tool-and-die-makers.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "China lists lathe operators (6-18-01-01) and milling operators (6-18-01-02) separately, with CNC variants in each. U.S. Machinists 51-4041 covers a wider range of machines. Compare the equipment and process in the specific role."
+                ],
+                "evidence_type": "official occupation detail",
+                "id": "cn-machining-class",
+                "limitation": "China lists lathe operators (6-18-01-01) and milling operators (6-18-01-02) separately, with CNC variants in each. U.S. Machinists 51-4041 covers a wider range of machines. Compare the equipment and process in the specific role.",
+                "market": "Chinese mainland",
+                "name": "China’s Occupational Classification (2022 edition)",
+                "period": "2022",
+                "publisher": "人社部等；广元市人社局转载 / MOHRSS et al., Guangyuan HRSS republication",
+                "scope": "exact",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Changde’s May 26, 2026 issue lists 17 CNC lathe positions at Hunan Teli Hydraulics. It asks for secondary vocational education or above, familiarity with the controls, programming and independent operation. It quotes CNY 7,000–11,000 per month on piece rate."
+                ],
+                "evidence_type": "official occupation detail",
+                "id": "changde-cnc",
+                "limitation": "Changde’s May 26, 2026 issue lists 17 CNC lathe positions at Hunan Teli Hydraulics. It asks for secondary vocational education or above, familiarity with the controls, programming and independent operation. It quotes CNY 7,000–11,000 per month on piece rate.",
+                "market": "Chinese mainland",
+                "name": "Changde High-Tech Zone 2026 issue 18",
+                "period": "2026-05-26",
+                "publisher": "常德高新区 / Changde High-Tech Zone",
+                "scope": "recruitment_proxy",
+                "url": "https://cdgxq.changde.gov.cn/slzq/gxdt__xxyw/gzdt/content_78204507"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The April 8, 2026 Miyun job fair lists two CNC lathe roles at the Beijing Research Institute of Extraction and Application Technology, with junior college education. The row gives 4,700–9,000 without a pay period, so it cannot be reported as monthly pay. Both examples are historical, not national wages or current vacancies."
+                ],
+                "evidence_type": "official occupation detail",
+                "id": "miyun-cnc",
+                "limitation": "The April 8, 2026 Miyun job fair lists two CNC lathe roles at the Beijing Research Institute of Extraction and Application Technology, with junior college education. The row gives 4,700–9,000 without a pay period, so it cannot be reported as monthly pay. Both examples are historical, not national wages or current vacancies.",
+                "market": "Chinese mainland",
+                "name": "Miyun job fair, April 8, 2026",
+                "period": "2026-04-08",
+                "publisher": "北京市密云区人社局 / Miyun District HRSS",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjmy.gov.cn/zwgk/jy1/202604/t20260401_536390.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "U.S. guarding requirements, not shop-floor instructions or Chinese law."
+                ],
+                "evidence_type": "official occupation detail",
+                "id": "osha-guarding",
+                "limitation": "U.S. guarding requirements, not shop-floor instructions or Chinese law.",
+                "market": "United States",
+                "name": "OSHA 1910.212 machine guarding",
+                "period": "Accessed 2026-11-09",
+                "publisher": "U.S. OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212"
               }
             ]
           },
@@ -8773,15 +8922,15 @@
             "职业方向": "Tool and Die Makers"
           },
           {
-            "关键区别": "Perform specialized machining on the corresponding machine tools.",
-            "更适合什么选择": "Compare if you prefer specializing in one machine-tool type.",
+            "关键区别": "Lathes typically cut rotational surfaces; mills can cut flats and grooves.",
+            "更适合什么选择": "Compare the machines, setups, and inspection tasks you want to learn.",
             "核心工作与产出": {
               "$item": "machinists.direction-comparison.adjacent-career-comparison-table.4",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": "Lathe Operators and Grinding Operators"
+            "职业方向": "Mainland China: lathe work and milling"
           },
           {
             "关键区别": "Handle welding and joining processes.",
@@ -9275,6 +9424,7 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
+        "entry_heading": "Try the work and check job requirements",
         "heading": {
           "$item": "machinists.path.career-path-block.1",
           "block": "path",
@@ -9387,6 +9537,24 @@
               "item": "machinists.source-register.published.1"
             },
             "scope": "Chinese industry wage scope; not exact wages for this occupation."
+          },
+          {
+            "href": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf",
+            "id": "cn-machining-class",
+            "label": "Chinese classifications for lathe and milling operators",
+            "scope": "China lists lathe operators (6-18-01-01) and milling operators (6-18-01-02) separately, with CNC variants in each. U.S. Machinists 51-4041 covers a wider range of machines. Compare the equipment and process in the specific role."
+          },
+          {
+            "href": "https://cdgxq.changde.gov.cn/slzq/gxdt__xxyw/gzdt/content_78204507",
+            "id": "changde-cnc",
+            "label": "Changde original notice",
+            "scope": "Changde’s May 26, 2026 issue lists 17 CNC lathe positions at Hunan Teli Hydraulics. It asks for secondary vocational education or above, familiarity with the controls, programming and independent operation. It quotes CNY 7,000–11,000 per month on piece rate."
+          },
+          {
+            "href": "https://www.bjmy.gov.cn/zwgk/jy1/202604/t20260401_536390.html",
+            "id": "miyun-cnc",
+            "label": "Miyun original notice",
+            "scope": "The April 8, 2026 Miyun job fair lists two CNC lathe roles at the Beijing Research Institute of Extraction and Application Technology, with junior college education. The row gives 4,700–9,000 without a pay period, so it cannot be reported as monthly pay. Both examples are historical, not national wages or current vacancies."
           }
         ],
         "tracks": [
@@ -9607,7 +9775,7 @@
             }
           },
           {
-            "answer": "In the United States, this occupation falls in Job Zone 3, typically requiring vocational school training, related experience, or an associate degree and one to two years of training. Certification and training do not equal equipment operation or special-operation qualifications. This page does not assess individual eligibility.",
+            "answer": "For U.S. machinists, BLS lists a high school diploma or equivalent, no prior work experience in a related occupation, and long-term on-the-job training as typical. An apprenticeship is one option. Check equipment, training, and authorization with the employer.",
             "key": "qa1",
             "question": "What are the qualification boundaries?",
             "table": {
@@ -9663,18 +9831,18 @@
           }
         ],
         "direct_answer": "Risks must be handled in terms of triggers, consequences, controls, and escalation boundaries.",
-        "evidence_scope": "Machine tools, tolerances, workholding, drawings, noise, and anomaly tasks form editorial risk scenarios, not accident rates. Verify applicable servicing energy control under US OSHA1910.147; equipment protection and permits follow target approved procedures.",
+        "evidence_scope": "Check guarding separately from energy control during servicing. U.S. 1910.212 addresses machine guarding; 1910.147 covers applicable servicing with unexpected start-up or stored-energy hazards. Use the site’s authorized rules and local requirements.",
         "heading": "Machinists' Work Risks and Boundaries",
         "risks": [
           {
             "affected_roles": "Machine-tool operating positions",
             "consequence": "May cause machinery and cutting-tool injuries.",
             "evidence_refs": [
-              "machinists.display.source.onet-context"
+              "osha-guarding"
             ],
             "id": "risk-1",
-            "mitigation": "Follow operating procedures and wear protection.",
-            "scenario": "When machine tools are operated outside procedures or protection is not worn.",
+            "mitigation": "Do not start or continue using the machine. Stop work and report under site procedures. Personal protective equipment does not replace machine guarding.",
+            "scenario": "When a machine guard is missing, faulty, or bypassed.",
             "title": {
               "$item": "machinists.risk.career-risk-cards.1",
               "block": "risk",
@@ -9750,10 +9918,11 @@
             "affected_roles": "Machine-tool operating positions",
             "consequence": "May cause batches of scrap and safety problems.",
             "evidence_refs": [
-              "machinists.display.source.onet-tasks"
+              "osha-energy-control",
+              "osha-guarding"
             ],
             "id": "risk-6",
-            "mitigation": "Stop relevant hazardous work and report under the machine tool's approved anomaly procedures. Authorized personnel must verify energy control before blockage clearing or maintenance. A stop button is not energy isolation; do not bypass guards.",
+            "mitigation": "Stop hazardous work and report under site procedures. If clearing a blockage or servicing exposes workers to unexpected startup or stored energy, authorized personnel verify energy control under the applicable procedure. A stop button does not isolate energy. Do not bypass guards.",
             "scenario": "When machining continues despite tool wear or equipment anomalies.",
             "title": "Handling equipment or tool anomalies without stopping"
           }
@@ -9831,6 +10000,18 @@
               "item": "machinists.source-register.published.1"
             },
             "scope": "Identity and scope; does not replace safety procedures."
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212",
+            "id": "osha-guarding",
+            "label": "U.S. OSHA machine guarding",
+            "scope": "For covered U.S. workplaces. Check the machine and site requirements."
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147",
+            "id": "osha-energy-control",
+            "label": "U.S. OSHA control of hazardous energy",
+            "scope": "Applies to covered servicing and maintenance with hazards from unexpected startup or release of stored energy."
           }
         ]
       },
@@ -9897,7 +10078,7 @@
               "需求": "76,055 yuan per year"
             },
             {
-              "行业": "Nationwide total for urban non-private units",
+              "行业": "All industries, nationwide urban non-private units",
               "需求": "129,441 yuan per year"
             }
           ],
@@ -10218,7 +10399,7 @@
             }
           }
         ],
-        "boundary": "Nationwide United States: interpret 2025 OEWS wages and 2025—2035 employment projections separately. Do not combine across occupations / jurisdictions or treat them as personal pay quotes.",
+        "boundary": "Nationwide United States: interpret 2025 OEWS wages and 2025—2035 employment projections separately. Do not combine across occupations / jurisdictions or treat them as personal pay quotes. The five industry medians are from the machinists section of the BLS Occupational Outlook Handbook. O*NET manufacturing employment share is a separate measure.",
         "direct_answer": {
           "$item": "machinists.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10227,7 +10408,7 @@
         },
         "factor_rows": [
           {
-            "answer": "36 / 33 / 17 are opinions on new entrants' educational needs. Job Zone does not prescribe one to two years for this position. Verify equipment and process authorization separately.",
+            "answer": "BLS lists a high school diploma or equivalent and long-term on-the-job training as typical. National wage percentiles do not measure the effect of training on pay.",
             "factor": "Qualifications"
           },
           {
@@ -10258,30 +10439,35 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2025",
+        "industry_period": "May 2025",
         "industry_rows": [
           {
-            "industry": "Manufacturing",
-            "median": "Not separately listed",
-            "note": "Insufficient evidence: this round obtained no wage subtable for this occupation by industry. Overall percentiles cannot stand in for industry-specific median wages."
+            "industry": "Transportation equipment manufacturing",
+            "median": "$61,920",
+            "note": "BLS machinists table"
           },
           {
-            "industry": "Industry scope note one",
-            "median": "See employment row",
-            "note": "Insufficient evidence: this round obtained no wage subtable for this occupation by industry. Overall percentiles cannot stand in for industry-specific median wages."
+            "industry": "Computer and electronic product manufacturing",
+            "median": "$60,790",
+            "note": "BLS machinists table"
           },
           {
-            "industry": "Industry scope note two",
-            "median": "See employment row",
-            "note": "Insufficient evidence: this round obtained no wage subtable for this occupation by industry. Overall percentiles cannot stand in for industry-specific median wages."
+            "industry": "Machinery manufacturing",
+            "median": "$59,590",
+            "note": "BLS machinists table"
           },
           {
-            "industry": "Industry scope note three",
-            "median": "See employment row",
-            "note": "Insufficient evidence: this round obtained no wage subtable for this occupation by industry. Overall percentiles cannot stand in for industry-specific median wages."
+            "industry": "Fabricated metal product manufacturing",
+            "median": "$54,910",
+            "note": "BLS machinists table"
+          },
+          {
+            "industry": "Wholesale trade",
+            "median": "$54,220",
+            "note": "BLS machinists table"
           }
         ],
-        "industry_value_label": "Industry value",
+        "industry_value_label": "Median annual wage (USD)",
         "interpretation_heading": {
           "$item": "machinists.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10372,7 +10558,7 @@
         "title": "Who is suited to work as a machinist?"
       },
       "fit_decision_checklist": {
-        "boundary": "This is a review of an entirely fictional part-machining scenario, not a personality diagnosis, hiring conclusion, or qualification assessment.",
+        "boundary": "If you dislike checking tolerances repeatedly, recording deviations or stopping when guarding is unresolved, try the paper task before considering supervised training.",
         "how": {
           "$item": "machinists.quick-decision.fermat-decision-card.3",
           "block": "quick-decision",
@@ -10420,16 +10606,17 @@
           {
             "geography": "Nationwide United States",
             "horizon": "2025—2035",
-            "interpretation": "Employment size, change, and job openings must be interpreted separately.",
-            "limitation": "Occupational statistics cannot serve as an individual employment guarantee.",
-            "metric": "Employment size and change",
-            "occupation_scope": "Display scope: Machinists (51-4041.00)",
-            "value": {
+            "interpretation": {
               "$item": "machinists.market-signals.market-signal-card.3",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
-            }
+            },
+            "limitation": "Occupational statistics cannot serve as an individual employment guarantee.",
+            "metric": "Employment size and change",
+            "occupation_scope": "Display scope: Machinists (51-4041.00)",
+            "source_id": "bls-ep",
+            "value": "About 288,300 in 2025 → about 291,200 in 2035; 1.0% projected growth"
           },
           {
             "geography": "Nationwide United States",
@@ -10438,6 +10625,7 @@
             "limitation": "Cannot serve as an individual hiring probability.",
             "metric": "Job openings (annual average)",
             "occupation_scope": "Display scope: Machinists (51-4041.00)",
+            "source_id": "bls-ep",
             "value": "26,100 openings per year (growth and replacement)"
           },
           {
@@ -10447,6 +10635,7 @@
             "limitation": "2025 nationwide wage percentiles are published; they are not starting pay or take-home income.",
             "metric": "Median annual wage",
             "occupation_scope": "Display scope: Machinists (51-4041.00)",
+            "source_id": "onet-wages",
             "value": "$58,750 per year"
           }
         ],
@@ -10523,6 +10712,18 @@
               "item": "machinists.source-register.published.1"
             },
             "scope": "Tasks and work context; used only to suggest transition hypotheses."
+          },
+          {
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "id": "bls-ep",
+            "label": "BLS 51-4041 projections",
+            "scope": "Separate U.S. occupation, 2025–2035; not a hiring probability."
+          },
+          {
+            "href": "https://www.onetonline.org/link/localwages/51-4041.00",
+            "id": "onet-wages",
+            "label": "O*NET U.S. national wages (BLS OEWS)",
+            "scope": "2025 employee wages, not starting or take-home pay."
           }
         ],
         "transitions": [
@@ -11079,7 +11280,7 @@
             "item": "machinists.source-register.published.1"
           }
         },
-        "note": "51-4041.00 is a precision machining role. The 2025 five percentile pay figures of 39200/47570/58750/67700/80010 and hourly pay of 28.24 have been verified; employment for 2025–2035 is 288300→291200, with 1% growth and 26100 openings, and manufacturing accounted for 84% in 2025. The education figures of 36/33/17 describe requirements for new entrants, and RCI R100C57I45 describes activity preferences; JobZone does not specify a fixed training period. Manufacturing under NBS2025 is a proxy; OSHA1910.147 verifies only energy control for covered maintenance work in the US and does not cover complete machine tool procedures or China. The M01 exercise is retained and is not actual inspection release. Older projections, industry figures, and training statements shared in the protected FAQ await review; precise Chinese pay and entry requirements, AI and personality evidence, and pay for detailed industries remain unavailable."
+        "note": "Use OEWS for national U.S. wages, the BLS Occupational Outlook Handbook for industry medians, and BLS Employment Projections for outlook. Mainland China industry averages and historical job ads answer different questions. M01 is fictional; follow site procedures and authorization for real operation, inspection, and release."
       },
       "work_context_block": {
         "$item": "machinists.profile.work-context-block.5",
@@ -11101,11 +11302,25 @@
         "id": "machinists.source-register.published.1",
         "location": "sources",
         "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "machinists.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "machinists.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
       }
     ],
     "path": "/en/career/jobs/machinists",
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and task changes",
       "china-salary": "Mainland China pay",
       "direction-comparison": "Comparison with adjacent occupations",
       "fit": "Fit signals",
@@ -11136,38 +11351,38 @@
       },
       {
         "derivation": null,
-        "display_value": "299,500 workers",
-        "fact_id": "us-employment-2024",
+        "display_value": "About 288,300 people",
+        "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment in 2024",
+        "measure": "2025 base-year employment",
         "occupation_scope": "O*NET display scope: this occupation, Machinists (51-4041.00)",
-        "period": "2024; accessed 2026-09-25",
+        "period": "2025",
         "source_refs": [
-          "onet-trends"
+          "bls-ep"
         ]
       },
       {
-        "derivation": "Employment in 2024 was 299,500. The official 2024—2034 projection is 0%, Little or no change, with 299,600 projected in 2034. Average annual openings of 29,500 include growth and replacement, not net additions or current vacancies. 0% is the official displayed precision; do not recalculate the 100-worker difference into an alternative growth rate.",
-        "display_value": "0%（2024—2034，Little or no change）",
+        "derivation": "BLS projects U.S. machinists (51-4041) from about 288,300 in 2025 to 291,200 in 2035 (+1.0%), with about 26,100 annual openings from growth and replacement. Tool and die makers are counted separately. These projections do not measure hiring in China.",
+        "display_value": "1.0% projected growth",
         "fact_id": "us-growth",
         "market": "United States",
-        "measure": "Projected employment growth",
+        "measure": "2025–2035 projected employment",
         "occupation_scope": "O*NET display scope: this occupation, Machinists (51-4041.00)",
-        "period": "2024—2034; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep"
         ]
       },
       {
-        "derivation": "O*NET National Employment Trends displays Projected annual job openings (2024-2034) as 29,500. BLS defines occupational openings as an annual average over the projection period, so this page labels them an annual average.",
-        "display_value": "Approximately 29,500 openings per year (2024—2034 annual average)",
+        "derivation": "BLS projects U.S. machinists (51-4041) from about 288,300 in 2025 to 291,200 in 2035 (+1.0%), with about 26,100 annual openings from growth and replacement. Tool and die makers are counted separately. These projections do not measure hiring in China.",
+        "display_value": "About 26,100 projected annual openings",
         "fact_id": "us-openings",
         "market": "United States",
-        "measure": "Average annual job openings (2024—2034 projection-period annual average)",
+        "measure": "2025–2035 annual openings (growth and replacements)",
         "occupation_scope": "O*NET display scope: this occupation, Machinists (51-4041.00)",
-        "period": "2024—2034; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-trends"
+          "bls-ep"
         ]
       },
       {
@@ -11217,32 +11432,20 @@
         "source_refs": [
           "nbs-wages"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+0+25)/3+0.5)=33; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "33%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Machinist",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and task changes"
     },
     "badges": [
-      "Machine-tool setup and operation",
-      "Dimensional tolerances and inspection",
-      "CNC programming and maintenance"
+      "Precision machining",
+      "Tolerances and first-part inspection",
+      "M01 paper exercise"
     ],
     "metrics": [
       {
@@ -11259,15 +11462,15 @@
       },
       {
         "availability": "available",
-        "fact_ref": "us-employment-2024",
+        "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "US employment count"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "US average annual job openings (2024—2034 annual average)"
+        "label": "U.S. projected annual openings (2025–2035)"
       },
       {
         "availability": "missing",
@@ -11281,17 +11484,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Machinist on this page refers to O*NET 51-4041.00: setting up and operating lathes, milling machines, and other machine tools to produce precision metal parts and instruments; calculating dimensions and tolerances from drawings, measuring and inspecting, programming CNC equipment, and maintaining machine tools. When assessing this career path, verify the full work cycle, precision and safety boundaries, evidence scope, risk controls, and observable entry-level work samples together."
+      "text": "See how machinists read drawings and check tolerances. Compare training, mainland China job examples, and U.S. pay, then try a paper exercise."
     },
     "title": {
       "availability": "available",
-      "text": "Machinist Career Assessment: Work, Entry Paths, and Risk Boundaries"
+      "text": "Machinist Career Guide: Work, Training, and Safety"
     }
   },
-  "source_content_sha256": "d5090d19e06481b9b772556f3e6e50ebb5971786fd0627c3359ae061c8a3a974",
+  "source_content_sha256": "6375c8ff249f67a48c343cb7a9dcf1967c90adc4a4e47670a0298c5e33bbe25c",
   "subject": {
     "canonical_slug": "machinists",
     "name": "Machinist",
-    "summary": "Machinist on this page refers to O*NET 51-4041.00: setting up and operating multiple machine tools to produce precision metal parts and instruments, calculating dimensions and tolerances from drawings and processes, and ensuring accuracy."
+    "summary": "Machinists set up and run machine tools to make precision parts. They check drawings and tolerances, measure parts during production and document deviations. For a mainland China role, check which machines and processes the posting covers."
   }
 }
