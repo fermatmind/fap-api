@@ -116,7 +116,13 @@ final class ArticleReviewedCounterpartService
 
     public function canonical(Article $article): string
     {
-        return CanonicalFrontendUrl::APEX_URL.'/'.app(ArticleSeoService::class)->mapBackendLocaleToFrontendSegment((string) $article->locale).'/articles/'.$article->slug;
+        $segment = match ($article->locale) {
+            'zh-CN' => 'zh',
+            'zh-TW' => 'zh-TW',
+            default => 'en',
+        };
+
+        return CanonicalFrontendUrl::APEX_URL.'/'.$segment.'/articles/'.$article->slug;
     }
 
     /** Keep raw, even expired endpoints for bounded removal of both sides' cached tags. */
