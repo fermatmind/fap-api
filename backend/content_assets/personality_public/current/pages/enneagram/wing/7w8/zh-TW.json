@@ -1,0 +1,204 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/7w8",
+    "entity_key": "7w8",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/7w8"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/7w8"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/7w8",
+      "code": "7w8",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "7w8",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能只憑這個排序確定。翼要求相鄰關係，但相鄰且分數較高仍不足以確認影響方式。先檢驗七號動機，再比較六號與八號怎樣修飾它；不同問卷的分數也不能不加區分地當作同一把尺。",
+          "question": "七號最高、八號第二高，就一定是 7w8 嗎？"
+        },
+        {
+          "answer": "可能。處理衝突也可能服務於七號恢復選擇與滿足的願望，八號翼描述的則是反覆直接爭取這些願望的方式。若自主與避免受控持續更重要，就需要重新比較八號核心。本能關注問的是哪些需要反覆優先進入視野，例如日常資源，或群體中的參與和歸屬。交涉退款、替同行者發言都可能涉及這些需要，但任何一項都不足以確定本能或八號翼。分別問：旅行落空為何難受，直接爭取是否為七號解釋增加資訊，以及注意力長期落在哪類生活需要上。7w8 這個名稱不指定本能。",
+          "question": "我會正面處理衝突，還可能是七號核心嗎？"
+        },
+        {
+          "answer": "一次這樣的選擇更可能說明靈活性。只有在多個相近情境中，八號式直接爭取對理解你的七號模式始終沒有增加解釋價值，才更有理由暫緩這個翼判斷。",
+          "question": "我主動收窄計畫、尊重他人拒絕，會削弱 7w8 嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/7w8",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:7w8",
+        "x-default": "/en/personality/enneagram/wings/7w8",
+        "zh-CN": "/zh/personality/enneagram/wings/7w8"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7",
+          "label": "九型人格7號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8",
+          "label": "九型人格8號核心型",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/7w6",
+          "label": "7w6翼型",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:7w6"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "7w8 中的 7 是核心，w8 是相鄰翼影響。這裡的「核心不變」指這個名稱仍以七號的動機解釋為主，並不是說一個人的人格已經被證明終生不變。\n\n傳統七號描述關注可期待的滿足、選擇空間，以及擺脫匱乏、痛苦或被困住的感受。八號翼可能增加一種直接的回應：與其繼續想像，不如明確提出想要什麼、爭取資源，並親自處理阻礙。因此，一個符合這種描述的人可能既不斷看見新機會，也願意把機會變成實際行動。七號的動機口徑可參見 [Enneagram Institute 的七號介紹](https://www.enneagraminstitute.com/type-7/)。\n\n例如，原定旅行突然取消，你立即找替代路線，也願意打電話、詢問退款、協調出發時間。能支持七號解釋的不是打了多少電話，而是內在的急迫感是否在說：「不能就這樣失去期待，我還需要一個值得期待的選擇。」八號修飾則體現在你怎樣爭取選擇：直接說明需求、承擔交涉，而非只在腦中尋找可能性。\n\n翼不是兩種人格各佔一半，也不是測試第二高分自動變成翼。七號的相鄰翼是六號或八號；先看七號核心是否解釋得通，再比較相鄰修飾。[Enneagram Institute 的翼說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)也記錄了不同傳統對一個翼、兩個翼及翼影響強弱的分歧。",
+          "key": "core_first_modifier",
+          "title": "八號改變爭取方式，七號仍決定為何爭取"
+        },
+        {
+          "body_md": "在旅行取消的例子中，直接行動可以減少無謂等待：有人確認退費與改期規則，有人找到可行路線，原本停滯的事情重新有了進展。這是「看見機會並願意處理阻力」的有效作用，不能僅因為動作快就把它說成衝動。\n\n代價出現在直接推進被反覆用來跳過失望時。你可能還沒承認這次旅行確實重要，就把行程排得更滿；還沒詢問同行者是否願意，就先替大家訂好。短期上保住了興奮，長期卻可能留下費用、收尾任務和關係摩擦。真正想要的休息或相處，反而被不斷尋找下一件事擠走。\n\n辨別問題是：新路線解決了實際問題，還是讓我暫時不用面對「這件事無法如願」？別人說「不」時，我能否繼續表達願望，同時允許對方保留自己的選擇？果斷可以是一種技能；它的結果仍要看安排是否可行、承諾是否完成，以及滿足感是否真實增加。",
+          "key": "observable_situations",
+          "title": "直接行動什麼時候有效，什麼時候越忙越不滿足"
+        },
+        {
+          "body_md": "讓三種解釋面對同一件事：行程取消，預算有限，同行者都可以拒絕新方案。以下是比較用的假設場景，不是行為判型規則。\n\n7w6 和 7w8 都可能很想恢復一個值得期待的計畫。7w6 的修飾可能更多表現為找可靠同伴商量、核對退款條件、留一條備用路線；7w8 的修飾可能更多表現為直接與服務方交涉、明確提出方案並親自推進。兩者都可以勇敢、謹慎或合作，差別不能簡化成「膽小」和「強勢」。\n\n7w8 與 [8w7](/zh-TW/personality/enneagram/wings/8w7) 都可能快速尋找替代路線。要分辨順序，可問：假設另一位同行者提供了一個同樣令人期待的方案，但由對方主持，我最難接受什麼？如果問題主要是選擇被關閉、快樂落空或自己要被困在失望裡，七號核心更值得繼續檢驗。如果路線本身已經令人滿意，我卻仍特別在意自己是否被別人安排、能否守住決定權，八號核心更值得檢驗。\n\n反過來，獲得自主決定權但只能接受一個無趣的安排時，什麼仍讓我不安？比較兩種條件下的反應，比觀察誰打斷別人、誰笑得多更有資訊量。[Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供了六與七、七與八在關注點上的傳統區別；這裡的旅行情境用於把這些區別變成可以自問的問題。",
+          "key": "sibling_core_comparison",
+          "title": "同一次取消，怎樣比較 7w6、7w8 與 8w7"
+        },
+        {
+          "body_md": "如果你是唯一掌握訂單、負責退款或熟悉語言的人，直接交涉可能只是合理分工。可用時段、預算和別人是否有能力參與，也會改變行動方式。可以比較一次你負責的安排與一次別人負責、風險相近的安排：你是否仍習慣直接爭取選擇？你在沒有正式權限時，是否也願意把需求說清楚？\n\n如果你只有在緊急情況下行動很快，平時並沒有反覆追求新選擇、抗拒落空的內在關注，這個事件就只能為 7w8 的解釋提供有限證據。職業、談判訓練或外向表現不能替代動機解釋。\n\n也不要把尊重拒絕視為「八號翼不存在」。一個人可以直接、堅定，又能合作。需要觀察的是直接推進是否反覆修飾七號的追求方式，而不是是否足夠強硬。",
+          "key": "alternative_explanations",
+          "title": "先看職責是否已經解釋了直接推進"
+        },
+        {
+          "body_md": "核心可能不合：在幾件不同的事情中，恢復滿足與選擇並不是你的主要關注；你更持續在意被誰控制、是否失去自主。此時應重新比較七號與八號核心，而不是用「八號翼很強」解釋一切。\n\n修飾依據不足：七號動機確實反覆出現，但你是否直接推進幾乎完全取決於職位授權、熟練程度或緊迫性。可以暫時保留七號候選，不急著確定八號翼。\n\n情境或靈活性：你這次選擇等待、聽取意見，或在失望後把一個普通週末過好。一次這樣的選擇不能否定 7w8；它可能說明你能根據情況調整策略。若在多個相近情境裡，另一種修飾方式持續更貼合，才值得降低對八號翼的確信。\n\n有用的反例會讓解釋更具體，而不是把你逼到「必須一直強勢，標籤才成立」。",
+          "key": "counterexample",
+          "title": "哪些觀察應該改變哪一層判斷"
+        },
+        {
+          "body_md": "選擇一次低風險的計畫變動，不必特意製造衝突。\n\n1. 在找替代方案前，寫一句具體的損失：「我失去的是期待已久的相處時間」，而不只寫「行程不方便」。再寫一句當下願望：「我仍希望這個週末有一點新鮮感。」\n2. 找出兩條真實可行的路線，比較費用、時間和同行者意願，然後選一條。先不要為了重新興奮而不斷追加安排。\n3. 直接提出請求，但把自己的願望和別人的義務分開：「我想試這個方案，你願意參加嗎？」若對方拒絕，保留自己的選擇，也允許對方退出。\n4. 完成這條路線的退款、通知或預約收尾。事後問：我是否得到了原本需要的休息、體驗或連線？還是只享受了啟動新計畫的瞬間？\n\n這個練習同時保留 7w8 描述中的行動力，並檢驗它是否真的服務於滿足。若你能承認失望、完成一個有限方案，不必把這種進步解釋成翼型消失。",
+          "key": "observation_exercise",
+          "title": "下一次計畫落空，先處理失望，再選擇一條路"
+        },
+        {
+          "body_md": "如果七號動機還不清楚，先讀 [七號核心：滿足、選擇與落空]( /zh-TW/personality/enneagram/type-7)。如果核心較貼合，再比較 [7w6：七號核心與六號翼]( /zh-TW/personality/enneagram/wings/7w6)，留意同樣的願望是否透過不同方式實現。\n\n這頁使用傳統九型的核心與翼解釋，並把它們轉成生活觀察；情境和練習不構成一套經過驗證的翼型判定程序。2021 年 [Hook 等人的系統綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告：104 個獨立樣本的信度與效度的證據並不一致，翼等次級理論的支持證據有限。這些研究不能自動證明費馬題本、分數或某個人的 7w8 判斷有效。\n\n可以帶著一個暫時的解釋繼續觀察，也可以暫時不確定翼。7w8 不說明領導能力、道德品質、職業適配或未來成就。",
+          "key": "wing_boundary",
+          "title": "怎樣繼續比較，也怎樣保留不確定"
+        }
+      ],
+      "seo": {
+        "description": "7w8 以七號對滿足、選擇和期待落空的關注為核心，八號翼可能讓爭取方式更直接。本頁用旅行取消的情境比較 7w6 與 8w7，說明直接行動的作用、代價和現實條件；速度或強勢不足以確定翼。",
+        "title": "7w8 九型人格：七號核心、八號翼與常見誤判"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/7w8",
+      "source_hash": "dbf70da9f929d26949fdcde8cd81eebfeae9789777809325c22646caf32ff96a",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "7w8 描述一種傳統九型解釋：七號對滿足、選擇和不被困住的關注居於核心，八號翼可能讓爭取這些東西的方式更直接、更願意承擔阻力。分辨重點不是誰更強勢，而是行動究竟在保住什麼，以及直接推進如何幫助或妨礙真正的滿足。",
+      "title": "7w8：七號核心如何藉助八號翼直接打開出路"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "f2657d296a1d895e2c5a8041f9cb3d0574e5856b70cebc3c98dbd2172bb6f2b2"
+}

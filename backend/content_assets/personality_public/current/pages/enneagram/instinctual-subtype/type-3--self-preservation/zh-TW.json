@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-3/instincts/self-preservation",
+    "entity_key": "type-3/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-3/instincts/self-preservation"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-3/instincts/self-preservation"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-3/instincts/self-preservation",
+      "code": "type-3/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-3/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "在傳統框架中有這種可能。一個人可以透過可靠、能幹來確認價值，而不是追求公開掌聲。但不愛出風頭本身無法作為判型依據，隱私偏好、文化和安全條件也能解釋。需要觀察表現與個人價值感之間反覆出現的聯絡。",
+          "question": "不愛出風頭的人也可能是第三型嗎？"
+        },
+        {
+          "answer": "不是。存錢可能只是應對收入變化、照護責任或具體目標的合理方式。這項解釋關注物質能力對你意味著什麼，尤其是挫折是否變成對個人價值的否定，並不衡量一個人有多節儉。",
+          "question": "很會存錢就是自保第三型嗎？"
+        },
+        {
+          "answer": "不能。有用的工作可以因許多原因受到重視。在責任與實際後果可比較時，無署名任務提供了一次觀察標準和感受的機會。私下的成就仍可能承載價值壓力，穩定貢獻也可能只是普通的投入與承諾。",
+          "question": "沒有署名也願意做事，能證明這個副型嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-3/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-3/self-preservation",
+        "x-default": "/en/personality/enneagram/type-3/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-3/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3",
+          "label": "第三型：成就與價值感",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3/instincts/social",
+          "label": "第三型社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3/instincts/one-to-one",
+          "label": "第三型一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在傳統的[第三型描述](https://www.enneagraminstitute.com/type-3/)中，成就與個人價值感緊密相連。自保副型把這種追求更多放在資源、能力和日常生活能否穩妥運轉上。\n\n一種可能的內心標準是：「我能養活自己、把事情做好、不成為負擔，才算是有價值的人。」這裡也可能有形象要求，只是理想形象更像可靠、能幹、無需別人操心的人。一個人可以不喜歡炫耀，卻很難承認自己需要幫助。\n\n[Narrative 的副型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)把這一變化與物質成就聯絡起來。下面的生活情境用於檢驗理解，不是憑表現給人定型的清單。",
+          "key": "competence_and_security",
+          "title": "當「我能扛住」變成對自己的評價"
+        },
+        {
+          "body_md": "設想幾位朋友準備一場週末小型工作坊。有人核預算，有人聯絡場地，有人調整展示內容。大家都忙到很晚，努力程度本身並不能區分副型。\n\n自保第三型的解釋更適合討論這種關注：費用能否覆蓋、設備是否可靠、自己有沒有能力把整件事穩妥交付。即使沒有掌聲，「我把事情撐起來了」也可能成為私下衡量成就的標準。\n\n社群第三型的解釋更關注活動能否為團隊贏得認可、貢獻是否被看見，以及由此形成的群體位置。一對一第三型的解釋則可能關注某位重要搭檔是否欣賞自己、自己能否成為有吸引力的合作者，以及這段合作是否充滿活力。\n\n這些關心可以同時存在。更有辨別力的問題是：哪個環節最容易把一次普通失誤變成對自己的否定？投影機壞了，可以只是「需要換設備」，也可能變成「真正能幹的人不會讓這種事發生」。後者提供了值得繼續觀察的具體過程。",
+          "key": "weekend_workshop",
+          "title": "同辦一場活動，什麼才算成功"
+        },
+        {
+          "body_md": "提前準備、學習實用技能、說到做到，可以減少家庭或合作中的混亂。這些行為本身有價值，不需要透過人格標籤來肯定。\n\n這項解釋要提醒的是：如果每個需要都必須先用表現來換取，可靠就可能成為負擔。在工作坊裡，你可能包辦設備維修、拒絕已經安排好的交接，連午飯也推遲，因為開口求助似乎會破壞「我能處理一切」的形象。\n\n可以記錄這樣的過程：問題出現，你接下責任，有人能夠接手，你拒絕，之後疲憊或怨氣增加。比起簡單寫「我很負責」，這個過程更能幫助你理解發生了什麼。\n\n關注生活安全也不保證照顧好了身體。為了證明自己能提供保障，一個人反而可能忽略休息和吃飯。但這只能是有待檢查的解釋；缺少自我照顧不能自動被說成更深、更隱蔽的自保模式。",
+          "key": "reliability_and_cost",
+          "title": "可靠有實際價值，過用時卻容不下自己的需要"
+        },
+        {
+          "body_md": "債務、收入不穩、照護責任、職位缺少替補，都可能要求一個人持續可靠地工作。如果這些條件已經足以解釋投入，就不必再加上副型推斷。節儉、焦慮和維運工作都不能證明自保第三型。\n\n可以觀察一個資源與支援較充足的普通時段：結果已經合格，是否仍因沒有親自證明能力而覺得不夠？沒有實際懲罰的求助，是否仍讓你覺得自己價值下降？反覆出現的具體記錄可以讓這項解釋值得繼續探索，卻不能構成診斷。\n\n還要保留其他核心動機的可能。[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供了成就認可、正確標準與不確定感等不同解釋。回到自己的事件，問問壓力更接近「我要證明自己值得」、「這件事必須做對」，還是「我要找到可信的保障，避免出問題」。這些主題可能重疊，一句話不能定型。\n\n如果物質約束緩解後壓力持續消退，實用安排並不牽動自我價值，或者多次可比較的選擇都更圍繞群體位置或某個人的欣賞，應減弱或撤回自保第三型解釋。一次輕鬆不必推翻全部理解，但反覆的反例必須能改變結論；不能一律用隱藏野心或更強壓抑來維持分類。",
+          "key": "limits_and_alternatives",
+          "title": "先分清真實生計壓力與價值感壓力"
+        },
+        {
+          "body_md": "選擇一件低風險、有人願意且能夠接手的小事，先約定必要結果與補救辦法。重要照護、生計和安全責任必須繼續得到保障。\n\n交接前寫下你的擔心：是具體問題、失去控制，還是「別人接手後我就不夠有用」？之後記錄實際結果、自己的行動，以及結果是否達到約定要求。如果重新做了已經合格的工作，說明理由，不要直接把重做歸為副型證據。\n\n也可以練習直接說明一個需要：「這部分我能完成，那部分需要你接手。」有效支援應真正改變負擔，而不只是稱讚你不可替代。如果沒有可靠替補，或拒絕會帶來現實懲罰，先改善安排；不要為了觀察人格而製造不安全。",
+          "key": "supported_handover",
+          "title": "從一次有支援的交接開始"
+        },
+        {
+          "body_md": "傳統模型認為一個人具有三種本能關注，自保只是可能更突出的領域，不意味著缺少社群與一對一關注。翼是另一層解釋，討論第三型可能帶有的第二型或第四型修飾。測評分數第二高，不能單獨確定翼或本能副型。在工作坊情境裡，本頁討論的是第三型價值追求與自保主導的組合，屬於「九種核心型×三種主導本能」的27 個副型。六種堆疊另指三種本能的完整排序；擔心自己能否撐起活動，不能排定群體位置與個體聯結的先後，也不能判斷本能盲點。自保關注不會把心／感受中心的第三型變成身體中心型。\n\nChestnut–Paes（CP）學派把自保第三型稱為「反型」，側重描述希望被欣賞、卻較少公開尋求認可的外觀；Narrative 則強調物質成就與工作角色認同。這些是學派描述，不能充當效度證明。安靜不能證明反型，反型也不能用來挽救被實際觀察反覆否定的解釋。\n\n學派命名也有差別：Narrative 的 one-to-one 包含親密夥伴與活力，Enneagram Institute 的 sexual/attraction 更強調吸引與強度。兩者有交集而非完全同義，也都不限於性行為或戀愛。可參閱[Enneagram Institute 的本能說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。\n\n[Hook 綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)彙總104 個樣本，報告信度與效度的證據並不一致。這不能證明本副型或費馬評分有效。27 個副型屬於理論傳統，不等於可重複的科學診斷或已證實的神經機制。\n\n理解核心動機可讀[第三型](/zh-TW/personality/enneagram/type-3)；若壓力似乎落在其他領域，可比較[第三型社群副型](/zh-TW/personality/enneagram/type-3/instincts/social)與[第三型一對一副型](/zh-TW/personality/enneagram/type-3/instincts/one-to-one)。",
+          "key": "reading_the_model",
+          "title": "讓這項解釋始終可以修正"
+        }
+      ],
+      "seo": {
+        "description": "第三型自保副型討論：維持生活、證明可靠能力，何時變成確認個人價值的條件？分清真實生計責任與表現壓力，比較同核心的其他本能關注，嘗試有支援的交接；勤奮、節儉或不愛出風頭都不能單獨判型。",
+        "title": "第三型自保副型：可靠能力、生活安全與價值感"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-3/instincts/self-preservation",
+      "source_hash": "0da75ca3d0d0aee419805fc286f6e7f12300cea4d4323c6c73e743399cdf839d",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "這一傳統副型描述關注投向物質安全與可靠能力的成就追求。值得辨別的是：做好工作、維持生活是否成了證明自己有價值的條件，而不是你是否勤奮、節儉或擅長安排。",
+      "title": "第三型自保副型：透過把生活撐起來確認自己的價值"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "bad5d2c0d811dd01bc1d91959ca3584cf2140b831495885cb62592ba0d8e2936"
+}

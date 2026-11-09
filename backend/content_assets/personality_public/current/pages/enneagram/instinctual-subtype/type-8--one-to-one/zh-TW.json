@@ -1,0 +1,208 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-8/instincts/one-to-one",
+    "entity_key": "type-8/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-8/instincts/one-to-one"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-8/instincts/one-to-one"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-8/instincts/one-to-one",
+      "code": "type-8/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-8/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不是。Narrative 的口徑包括重要夥伴、親近朋友與活力；EI 的 sexual/attraction 更強調吸引和投入強度。兩者有交集但不完全相同，性慾強弱、戀愛次數或外顯魅力都不能決定副型。",
+          "question": "一對一副型是不是指性慾強或特別愛談戀愛？"
+        },
+        {
+          "answer": "可以作為情境，但不能由此直接歸型。需要辨別在意的是工作條件、共同責任、特定連結中的投入，還是期限與溝通問題，並說明採用的學派口徑。",
+          "question": "與創作搭檔關係強烈，也能拿來觀察嗎？"
+        },
+        {
+          "answer": "不會僅憑一次行為否定。它能挑戰必須佔有或主導的具體解釋。若長期沒有相應的注意模式，或者現實安排足以解釋緊張，就應該降低或撤回副型假設；不能把不符合說成更深的壓抑。",
+          "question": "接受拒絕、願意被對方影響，會否定一對一第八型嗎？"
+        },
+        {
+          "answer": "不能。爭吵可能來自實際分歧、溝通習慣、資源不平等或傷害。雙方能否自由拒絕、提出修改並保留必要資源，比衝突強度更有助於理解實際關係；類型不能證明關係安全或適配。",
+          "question": "持續爭吵能說明連結很有活力嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-8/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-8/one-to-one",
+        "x-default": "/en/personality/enneagram/type-8/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-8/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8",
+          "label": "第八型核心",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8/instincts/self-preservation",
+          "label": "第八型自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8/instincts/social",
+          "label": "第八型社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "第八型維護自主、抵抗傷害或控制的核心主題，並不會因為關注親近者而消失。一對一副型的傳統解釋提出一個張力：既希望與重要的人充分投入，又可能擔心對方影響自己太多。核心背景可參考 [Enneagram Institute 的第八型說明](https://www.enneagraminstitute.com/type-8/)。\n\n[Narrative Enneagram 的一對一第八型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)以佔有與放下控制描述這份張力。本頁把它轉成可觀察的問題：我是否特別在意這個人能否直接回應我、承受分歧、與我保持鮮活投入？當對方按自己的節奏行動時，我是表達需要，還是從想接近對方變成替對方做決定？\n\n這不意味著所有重要關係都存在佔有，也不意味著第八型必須控制別人。接受對方影響、願意修正自己，可以保留自主而增加連結。相反，若核心經歷一直不是抵抗受制或維護自主，就應重新考慮第八型解釋，不能僅憑關係強烈維持分類。",
+          "key": "connection_without_surrendering_agency",
+          "title": "想被充分回應，又不想失去自主"
+        },
+        {
+          "body_md": "Narrative 的 one-to-one 包括重要夥伴、親近朋友，以及它所說的生命活力。[Enneagram Institute 的 sexual/attraction 說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)則更突出吸引、刺激強度與使人投入的活力，也提醒：喜歡一對一關係本身不能區分本能。\n\n因此，長期友誼或創作搭檔可以是本頁的觀察情境；吸引與活力也可以出現在活動和興趣裡，而不必是戀愛。不過，重視友誼不等於符合 EI 的 attraction 口徑，覺得某項活動刺激也不等於符合 Narrative 的重要連結解釋。使用哪個詞，要說明觀察的是哪一部分。\n\n這兩個傳統名稱都不能從性慾強弱、戀愛次數或外顯魅力判斷。本頁使用一對一作為主要名稱，同時保留學派差異；這裡的活力是傳統描述語言，不是已經驗證的身體或神經機制。",
+          "key": "one_to_one_and_attraction",
+          "title": "一對一與 sexual/attraction 有交集，但並不相同"
+        },
+        {
+          "body_md": "設想兩位長期創作搭檔準備一個展示。許發現韓減少共同討論，並決定邀請另一人處理部分作品。許立即約談：「我想知道，我們還要不要一起把這件事做好？」直接表達可以及時澄清投入、工作量和彼此的期待。這是用於比較動機的原創場景，不是研究樣本。\n\n若談話進一步變成「既然你選了別人，就不能再用我們的資料」，專案資源便可能被用來逼迫關係回應。需要分開兩件事：實際資料使用約定是什麼；許是否因為連結不如預期而追加限制。對方同意繼續合作，可能只是擔心失去資源，不能據此證明連結恢復。\n\n也有另一條路線：許說出失落，詢問韓是否還希望共同創作，允許韓減少投入，雙方再按已同意的規則安排資料和署名。許可能仍非常在意這段關係，但不需要靠強迫延續它。\n\n可觀察的是從察覺投入變化，到表達需要、解釋對方選擇、施加或避免壓力、接受影響的過程。清楚與投入能幫助合作；過度強調強度，可能把平靜誤讀為疏遠，把不同節奏誤讀為不在乎，並讓對方越來越不敢直接回答。",
+          "key": "creative_partners",
+          "title": "創作搭檔改變安排：在意的是專案，還是這段投入"
+        },
+        {
+          "body_md": "三個第八型副型的解釋都可能產生直接約談，但約談後仍放不下的部分可以不同。\n\n- 自保關注可能落在資料、費用、工作空間和交付是否可靠，尤其在意變動是否讓自己失去實際選擇。可靠安排恢復後，主要緊張可能下降。\n- 社群關注可能落在團隊位置、共同責任、成員如何獲得發言機會，以及變動是否違背群體已經同意的分工。只安撫兩人的感受，未必解決這些問題。\n- 一對一關注可能落在這個人是否仍願意充分投入、是否能直接面對彼此，以及關係有沒有失去鮮活感。即使專案照常完成，重要連結的變化仍可能難以放下。\n\n還可以比較一項條件：如果韓減少討論是因為短期照護責任，但明確保持合作意願，許是否能接受？如果資源與團隊分工都已理順，仍反覆追問專屬投入，一對一關注的解釋才更值得研究。它仍需要本人觀點和其他經歷的支持，不能從追問本身定型。",
+          "key": "same_partner_change",
+          "title": "同一次搭檔變動，三個副型可能抓住不同問題"
+        },
+        {
+          "body_md": "期限緊、溝通斷裂、實際違約或以往不可靠的合作，足以使人追問投入。經濟依賴、上下級關係、照護需要或對方掌握必要資源，也會改變雙方能否自由拒絕。先把這些事實說明白，不能把所有壓力歸入人格。\n\n[Narrative Enneagram 的相關類型比較](https://www.narrativeenneagram.org/type-comparisons/)也提醒，第四型、第六型與第八型可能有相似的強度或對抗外觀。可以研究自己主要在維護自主，還是在處理被理解、真實性或可信性的困惑；不要用情緒深淺、勇敢程度或有沒有猶豫做排他判斷。\n\n如果專案角色澄清、溝通恢復或現實依賴解除後，緊張隨之消退，這些條件可能比副型更有解釋力。如果平穩關係中並不持續關注這種投入與相互影響，應撤回一對一副型假設。低調、無性關係或不爭吵也不能反向證明它被壓抑；沒有相應觀察，就保留不確定。",
+          "key": "intensity_has_other_causes",
+          "title": "關係強度、警覺和對抗，都可能有別的來源"
+        },
+        {
+          "body_md": "在雙方都能安全拒絕的關係裡，選擇一項有限請求，例如約一次二十分鐘的專案討論。說明想討論什麼、為何在意，也接受對方給出其他時間或不參加。不要故意製造失聯、嫉妒或衝突來試探連結。\n\n對方拒絕或修改請求時，記錄自己最想做的下一步：了解原因、提出替代，還是提高音量、追加條件、動用專案資源？同時問自己：我真正希望獲得的是更多資訊、確定的分工，還是這個人更強烈的投入？不要替對方推斷拒絕的意思。\n\n觀察一次沒有懲罰的拒絕，以及自己是否能夠接受對方改變原計畫。它可以反駁「必須佔有或持續主導才能建立連結」的具體說法。願意被影響不自動否定一對一關注；但若明確安排已解決問題，且類似關注在其他穩定關係裡也不出現，就應該減少或撤回副型解釋。\n\n若拒絕會招致報復、基本資源損失或真實危險，不做這個觀察嘗試。優先處理具體的資源與安全問題，並尋求適合情境的支援；關係強度或類型名稱不能使壓力、騷擾或傷害合理化。",
+          "key": "request_without_pressure",
+          "title": "表達一次具體需要，保留對方拒絕的空間"
+        },
+        {
+          "body_md": "三種本能在這些傳統裡並不是三類人只擁有一種需要。一對一關注可以與物質保障、群體責任並存。27 個副型把九種核心型各與一種主導本能組合；把三種本能全部排出先後，則是有六種完整排序的另一層解釋。在意某位搭檔的投入，不能據此判斷物質保障和群體歸屬誰排第二、誰排第三，或認定某種「盲點」；本頁不作這些推斷。第八型與第九型、第一型同屬身體中心，討論的是核心型的共同主題，並不是上述三種生活關注的排序。第七型或第九型翼討論相鄰類型修飾，和一對一副型是不同解釋層；第二高分、職業或名人形象不能自動確定副型。\n\n27 個副型屬於學派傳統；Chestnut–Paes（CP）用「反型」描述與核心型常見外觀不同的副型。它們不等同於可重複科學診斷、實證神經機制或已驗證的費馬評分。[Hook 等人的 2021 年綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告：104 個獨立樣本中的信度與效度證據並不一致。它不能驗證本頁的個體解釋，也不能直接轉為費馬產品證據。本頁情境與嘗試屬於反思建議，不能預測關係適配、忠誠或關係結果。\n\n如果重要的人尊重你的自主，同時有自己的需要和節奏，觀察它是否有助於維持一段雙方都能自由選擇的連結。若實際經歷不符合本頁解釋，不必尋找更深的隱藏佔有來挽救分類；採用更符合事實的說法就可以。\n\n下一步可閱讀 [第八型核心](/zh-TW/personality/enneagram/type-8)，再對照 [第八型自保副型](/zh-TW/personality/enneagram/type-8/instincts/self-preservation)與 [第八型社群副型](/zh-TW/personality/enneagram/type-8/instincts/social)。",
+          "key": "evidence_and_next_steps",
+          "title": "保留重要連結，也保留解釋可以被推翻"
+        }
+      ],
+      "seo": {
+        "description": "從九型人格的傳統解釋，理解第八型如何在重要連結中維護自主、表達投入並允許相互影響。透過創作搭檔改變安排的場景，區分關係需要與現實分工，觀察雙方能否接受不同節奏和拒絕。連結強烈或經常爭吵，都不能單獨判型。",
+        "title": "第八型一對一副型：重要連結、自主與相互影響"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-8/instincts/one-to-one",
+      "source_hash": "e23232291ad1edc39cd40824208415d92234564d5dccb974f6fd4971798a92d4",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "一對一第八型的傳統解釋，關注維護自主的力量如何進入重要連結：投入、直接接觸、影響對方，以及允許自己被影響。連結的強度不能直接判型；更值得觀察的是，當雙方的節奏或選擇不同時，怎樣表達需要，又怎樣保留彼此的自由。",
+      "title": "第八型一對一副型：強烈連結與相互影響"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "f6dde138281a4ba4cc2acd3d17434e275da6cca18e4baeb925fdc8f1f76c428b"
+}

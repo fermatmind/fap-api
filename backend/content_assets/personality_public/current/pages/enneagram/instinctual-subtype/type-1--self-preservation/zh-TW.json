@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-1/instincts/self-preservation",
+    "entity_key": "type-1/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-1/instincts/self-preservation"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-1/instincts/self-preservation"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-1/instincts/self-preservation",
+      "code": "type-1/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-1/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。預算、短缺經歷、購買習慣和實際責任都可能造成這些表現。需要同時觀察一號式自我標準、資源領域的反覆優先，以及現實條件變化後這個過程是否仍出現；不能從單一行為得出標籤。",
+          "question": "節儉、儲備很多東西或經常焦慮，能說明我是自保一號嗎？"
+        },
+        {
+          "answer": "不是。這裡的關注可以包括家人或共同生活者的供給與維護。但付出多少不能證明副型，更不能說明誰更無私。應看承擔了什麼責任、是否有清楚分工，以及是否把他人的不同做法誤當成不負責。",
+          "question": "自保關注一定只顧自己嗎？"
+        },
+        {
+          "answer": "翼討論相鄰九號或二號的風格如何影響一號的表達；副型討論關注較常落在生活資源、群體責任還是特定關係的連結。它們是不同解釋層。不能把測評第二高分直接當作翼，也不能憑職業、名人相似度或某個高分給出副型結論。",
+          "question": "翼和自保副型有什麼關係？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-1/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-1/self-preservation",
+        "x-default": "/en/personality/enneagram/type-1/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-1/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1",
+          "label": "第1型核心類型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1/instincts/social",
+          "label": "第1型社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1/instincts/one-to-one",
+          "label": "第1型一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在一號的傳統解釋中，核心問題是能否按自己認可的標準行事、避免做錯，並維持對自己行事正直的感受；副型改變的是這份關注經常落在哪裡。一號自保的觀察方向，是生活是否被妥善照料：必需品有沒有準備、預算能否長期維持、設備有沒有維護、自己和家人的基本需要是否得到安排。一號核心動機的傳統來源可見 [Enneagram Institute 一號介紹](https://www.enneagraminstitute.com/type-1/)。\n\n一個值得檢驗的過程是：看到日常疏漏，先想到自己本應預防，隨即補充清單或接手任務；完成之後暫時安心，卻又發現下一項還不夠好。這裡的關鍵並非物資多少，而是實際維護是否同時承擔了證明自己負責的任務。\n\n[Narrative 副型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)把這一組合描述為將安全顧慮與物質生活安排和做好人的自我要求連在一起，也提醒過度自我犧牲可能累積緊張和怨氣。這是學派描述，不能據此認定每個認真料理生活的人都有相同動機。",
+          "key": "responsibility_in_daily_life",
+          "title": "為什麼小小的疏漏會讓人覺得自己不夠負責"
+        },
+        {
+          "body_md": "設想兩位室友邀請朋友來吃飯。林先確認預算、現有餐具和食材，事先修好鬆動的桌腿。客人到來時，大家不用臨時找東西，費用也沒有失控。這些準備解決了真實問題。\n\n隨後，林把原本能用的餐具換成同一款式，反覆整理儲物架，又接手室友已經完成的擺桌任務。他想的是：既然由我接待，就不該讓任何細節顯得將就。聚餐開始後，他仍在廚房忙，心裡卻抱怨別人都能輕鬆聊天。有效的維護此時變成了不斷提高的完成標準，也讓自己的休息和參與被壓縮。\n\n這是一則原創觀察情境，不是典型人物的證明。如果林剛經歷過一次費用超支，承擔了明確的無障礙安排，或室友反覆沒有完成約定任務，他的準備可能首先是在補救實際的問題。要分別詢問：哪些工作有具體後果，哪些只是個人偏好，哪些原本需要重新分工。",
+          "key": "hosting_without_finishing",
+          "title": "一次聚餐：準備有用，為什麼人卻越來越累"
+        },
+        {
+          "body_md": "保持人數、預算和分工相同，可以比較三個問題：\n\n- 自保關注可能先問：現有東西夠不夠，哪些準備能讓這次接待可靠完成？標準進入了供給和維護。\n- 社群關注可能先問：大家承擔的責任是否公平，新加入的人知不知道共同約定？標準進入了群體中的位置與責任。\n- 一對一關注可能先問：我和這位重要的人能不能一起投入，把這件事做成我們都認可的樣子？標準進入了特定關係的連結與共同投入。\n\n三個人都可能列清單、提醒別人或親自收拾；同一人也可能同時關心三件事。要觀察的是在這些需要衝突時，哪一項先獲得精力，以及為什麼。\n\n本能在這裡是傳統的注意力分類詞，不表示某類人缺少另外兩種需要。另一條閱讀路徑中的 one-to-one 涉及親密夥伴、親近的朋友與活力；Enneagram Institute 的 sexual/attraction 更強調吸引力與刺激的強度。兩者有交集，不能完全互換，也都不只指性或戀愛。具體用語可對照 [本能模型介紹](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。",
+          "key": "three_priorities_at_one_table",
+          "title": "同樣是聚餐，三種一號關注先落在哪裡"
+        },
+        {
+          "body_md": "預算很緊、住處不穩定、照護負擔較重或工作必須留有備份時，增加準備往往有充分理由。清單也可能是記憶輔助或團隊協調工具。先檢查這些條件，再考慮副型解釋；不能把客觀資源不足改寫成一個人的性格問題。\n\n一號與六號都可能反覆檢查。[Narrative 類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供的傳統區別，是糾正不合標準與尋求安全確定性的關注差異。可以用一個低風險問題追問：即使已確認不會出大問題，我仍然覺得沒按正確方法做就不可接受嗎？還是我最需要知道資訊可靠、有人提供支持、風險有後備方案？兩個答案可能共存，也可能都不符合。\n\n若資源改善、分工明確後，額外檢查明顯減少，現實條件解釋就更有力。若反覆回顧發現，你主要在意群體中的責任安排，或某段關係的共同投入，則應降低自保優先的假設。一次輕鬆應變不足以確定副型；多次相近情境中缺少預期過程，才是重新考慮解釋的理由。",
+          "key": "anxiety_is_not_a_subtype",
+          "title": "先分清現實風險、自我要求和不確定感"
+        },
+        {
+          "body_md": "選一件可逆、低風險的準備任務，例如一次普通聚會的桌面布置。事前和共同參與者約定完成條件、分工與停止時間，把必要安排和個人審美偏好分開。涉及安全、照護或專業要求的事項繼續按實際要求執行。\n\n達到約定後，如果想重做別人的成果，先記錄：我看到的具體問題是什麼？不重做會發生什麼？這是誰的責任？然後詢問對方是否需要協助，而不是自動接手。支持你的人可以幫忙明確交接、承認已經完成的工作，也可以提醒休息本身有現實價值。\n\n回顧兩三次相似任務，比較額外投入、實際遺漏、自己參與活動的時間和雙方的感受。這只能幫助觀察某個過程，不能形成副型分數。如果確認完成後能自然停止，或額外投入僅出現在資源不足的那次，應撤回「用持續完善證明負責」這項具體解釋；不要改稱它被隱藏或壓抑得更深。若試驗導致真實需要沒被滿足，恢復必要安排，先修正任務設計。",
+          "key": "agree_on_enough",
+          "title": "把「完成」說清楚，再觀察多做的衝動"
+        },
+        {
+          "body_md": "九個核心型各與三種主導本能之一組合（9 × 3），構成學派所說的二十七副型；所謂 countertype 或反型，也屬於學派用語。它們不是能重複驗證的科學診斷，不能用來證明神經機制，或讓任何相反表現都變成分類正確的證據。\n\nEI 所說的本能堆疊，是把三種關注完整排為主導、次要和較少關注，共有六種順序。例如 sp/so/sx 與 sp/sx/so 都把自保放在首位，社群（so）與 EI 的 sexual/attraction（sx）分列另外兩個位置。兩者仍可討論同一個自保一號組合；認真準備本身分不出完整排序。本頁不憑生活維護行為、翼或核心型分數判定第二、第三本能、盲點或堆疊分數。\n\n[Hook 等人 2021 年系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告了信度和效度證據不一致。這份研究摘要、上述傳統描述與費馬測評的產品驗證是不同層級；它們沒有驗證費馬的一號自保評分。本文情境與練習是用於討論的原創例子。\n\n想繼續比較，可閱讀 [一號核心類型](/zh-TW/personality/enneagram/type-1)、[一號社群副型](/zh-TW/personality/enneagram/type-1/instincts/social)和[一號一對一副型](/zh-TW/personality/enneagram/type-1/instincts/one-to-one)。",
+          "key": "tradition_and_reading",
+          "title": "把副型當作可討論的解釋"
+        }
+      ],
+      "seo": {
+        "description": "一號自保副型是九型傳統中的觀察假設，探索正確與負責的要求如何進入生活所需、準備和維護。透過聚餐情境比較自我標準、資源條件與實際責任；清單、儲備或焦慮本身不能確定副型。",
+        "title": "一號自保副型：準備、維護與資源條件的觀察"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-1/instincts/self-preservation",
+      "source_hash": "6d7020b5627e44bd796c4a0661123255a59538ea00f6919740058b44a850cc7a",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "一號自保副型把對正確、負責和改進的關注，更多放在生活所需、資源維護與日常可靠性上。辨別重點是準備背後的自我要求，以及條件改變後仍優先關注什麼；清單、節儉或焦慮本身不能確定副型。",
+      "title": "一號自保副型：把日常照顧好，也允許自己夠好"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "eb20d14ecb737e86e80a5b85f95afa5c9240542dfcfac9ddff83e513aeeb5eb2"
+}

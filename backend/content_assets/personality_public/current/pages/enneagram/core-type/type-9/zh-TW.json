@@ -1,0 +1,223 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-9",
+    "entity_key": "type-9",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-9"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-9"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-9",
+      "code": "type-9",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-9",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不是。需要觀察的是自己的立場如何影響決定，以及氣氛緊張時，是否容易把自己的立場擱在一旁。憤怒也可以提供線索，提醒你有需求或邊界尚未表達；它本身不決定類型。",
+          "question": "9號是不是沒有主見或沒有憤怒？"
+        },
+        {
+          "answer": "不算。兩種安排都能接受是一種清楚的選擇。更值得檢查的是你明明不願意，卻為了儘快結束討論說都可以，或者事後反覆感到不滿卻說不清當時希望怎樣。",
+          "question": "真心不在意選哪一家餐廳，也算失去自己的偏好嗎？"
+        },
+        {
+          "answer": "忙碌不排除這一解釋。看看時間主要用來完成自己認同的事項，還是被零碎請求帶走，以至於自己的重要事情持續延後。先核對負荷和資源，再討論動機。",
+          "question": "我很忙，也可能是9號嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-9",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-9",
+        "x-default": "/en/personality/enneagram/type-9",
+        "zh-CN": "/zh/personality/enneagram/type-9"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/gut",
+          "label": "本能中心：8、9、1號的邊界與行動",
+          "relationship": "center_membership",
+          "target_identity_key": "center:gut"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/9w8",
+          "label": "9w8：9號與8號相鄰翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:9w8"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/9w1",
+          "label": "9w1：9號與1號相鄰翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:9w1"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9/instincts/self-preservation",
+          "label": "9號自保本能：日常舒適與優先順序",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9/instincts/social",
+          "label": "9號社交本能：參與群體與自己的位置",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9/instincts/one-to-one",
+          "label": "9號一對一本能：連結與自己的聲音",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在傳統九型框架中，第九型主要關注內在平穩、維持連結，以及避免分離與持續緊張。[Enneagram Institute 的第九型說明](https://www.enneagraminstitute.com/type-9/)提供了這項理論描述。它不表示9號沒有個性、沒有憤怒，或必須安靜。\n\n一種可以觀察的策略是：大家意見不同時，先看見各方為什麼都有道理；為了讓局面舒服些，把自己尚未說出的偏好往後放。這樣短期可能少一次爭執，但下一次決定又由外界的請求帶走，自己的事便越來越難排進行程。\n\n例如，你原本打算週末完成一項個人計畫，家人提出臨時安排，你說「都可以」。請回到答應之前：你真的覺得兩種安排都好，還是覺得說明偏好會讓談話變麻煩？如果連自己原先想做什麼都越來越難想起來，問題不只是會不會拒絕，也包括是否給自己的願望足夠注意。",
+          "key": "motivation_attention",
+          "title": "想讓事情平穩，為什麼會忘了自己想要什麼"
+        },
+        {
+          "body_md": "能聽懂幾種意見，有助於找出共同點。比如兩位同事對排程有爭議，你可以把他們各自擔心的損失說清，再尋找雙方都能執行的安排。有效調和需要差異被看見，而不是把差異說成不存在。\n\n當「先別爭」變成唯一目標，問題可能只是延後。你答應幫忙卻沒有調整原有事項，到了期限仍做不完；別人以為得到承諾，你卻覺得被催促。先前沒有說出的限制，最終會以延期、不滿或迴避的形式再次影響關係。\n\n穩定也可以包含明確意見：「我理解你希望週六出發，我更希望週日，因為週六已有安排。」自己的立場不會讓理解他人的能力失效。把差異說清，大家才知道真正需要協商的是什麼。",
+          "key": "strengths_tradeoffs",
+          "title": "容納多個立場，也讓自己的立場有位置"
+        },
+        {
+          "body_md": "**願意讓步：** 你知道自己的偏好，也了解另一方案的成本，決定這一次採用對方的安排。可以說：「我原本想晚些出發，這次願意配合早班車。」\n\n**還沒決定：** 你需要時間辨別自己想要什麼。可以說：「我還沒有想清楚，今晚八點前給你答覆。」需要考慮與同意不是同一回事。\n\n**暫時不願表達異議：** 你知道自己不願意，但希望答應後壓力先消失。先找一個可以安全說清的小範圍：「今天不能完成，不過明天下午可以做這一部分。」如果拒絕會帶來真實危險，先確保安全並尋求支持，不用強迫自己進行表達實驗。\n\n在工作裡，主持人暫緩爭論可能是在維護會議流程；員工沉默可能與權力差異有關；另一人也可能透過淡化自己的立場避免緊張。相似表現需要不同理解。關係裡也一樣：觀察後來是否自主執行、是否一再累積不滿，能幫助你檢驗當初的「同意」是否清楚。",
+          "key": "decision_feedback_conflict",
+          "title": "把「都可以」拆成三種不同情況"
+        },
+        {
+          "body_md": "傳統比較將第九型的平穩與連結、第[二型的照顧與被重視](/zh-TW/personality/enneagram/type-2)、第[六型的可靠的支持](/zh-TW/personality/enneagram/type-6)區分開。[Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供了比較不同關注的參照，而非分類標準。\n\n**如果你總是優先照顧別人，比較9與2。** 回到一次並不輕鬆的幫忙：你最希望發生的是大家別再緊張，還是對方感受到你的關心、你在關係中得到回應？別人不再需要這項幫助時，你更多感到輕鬆，還是失落？兩種感受都可能存在；不能用一次回應判型，更不能把2號的照顧一概說成交換。\n\n**如果你希望關係穩定，比較9與6。** 當大家態度友好，但計畫細節和可靠性仍不清楚時，你能否安心？當資訊已核實、也有可靠的支持，但對方仍不同意你時，哪種困擾最難放下？這能幫助你比較關係緊張與對支持沒有把握的分量，先排除真實風險。\n\n9w8與9w1是相鄰翼的理論描述，分別可用來探討守住空間、直接表達，或原則和秩序怎樣修飾9號模式。繼續讀[9w8](/zh-TW/personality/enneagram/wings/9w8)或[9w1](/zh-TW/personality/enneagram/wings/9w1)，不必把安靜或強硬當作翼型結論。",
+          "key": "wings_mistypes",
+          "title": "照顧別人時，比較9號與2號；尋求安穩時，比較9號與6號"
+        },
+        {
+          "body_md": "一次明確拒絕、一次爭執，或持續完成個人目標，不會自動否定9號解釋。這些可能是情境中的靈活選擇，也可能是練習後更清楚的表達。9號並不等於被動；生氣有時正能提醒你，一項偏好或邊界還沒有被認真對待。\n\n更能說明核心解釋不合的，是在多種安全、平等的情境中，當事人持續清楚自己的優先順序，關係緊張很少使它模糊；他反覆幫助別人的主要考慮是被需要，或反覆退讓主要為了獲得可靠的支持，並且後續選擇也支持這些解釋。此時應比較2號、6號，或考慮不使用類型。\n\n疲勞、照護負擔和較少的決定權，也可能讓個人計畫難以推進。不要把實際資源不足寫成「不知道自己想要什麼」，更不要把完成慢一概稱為懶惰。",
+          "key": "counterexample",
+          "title": "有主見、會生氣，仍可以探索9號"
+        },
+        {
+          "body_md": "選一次安全、低風險的共同安排。先獨自寫下偏好、一個理由和可以接受的替代方案，再聽其他人的意見。你可以改變選擇，但保留這張記錄，看看改變是出於新資訊，還是只為了讓緊張立即消失。\n\n表達時使用一句具體的話：「我傾向……，因為……；如果採用另一方案，我需要……。」不必說得很強硬，也不必讓所有人完全滿意。若仍未決定，就約定答覆時間。\n\n另外，給一件自己在意的小事留出明確時段，並完成最初一步。事後檢查：偏好有沒有說出口？行程有沒有因別人的失望而悄悄取消？如果你選擇讓步，這次代價是否是自己願意承擔的？練習目標是讓選擇更清楚，不是靠一次拒絕證明你屬於哪一型。",
+          "key": "observation_exercise",
+          "title": "在聽見別人的意見前，先留下一點自己的聲音"
+        },
+        {
+          "body_md": "本頁的情境與練習用於理解日常選擇，不是關於性格好壞或關係前景的判定。涵蓋104個樣本的[九型研究系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)指出信度與效度的研究證據並不一致；翼和類型間移動的研究支持有限。這些研究結果無法證明費馬測試的效度。\n\n可閱讀[本能中心](/zh-TW/personality/enneagram/centers/gut)，比較9號與8、1號怎樣處理邊界和行動。這裡的本能中心也稱身體中心，指8、9、1號的傳統分組；它與自保、社交、一對一這三種本能關注屬於不同的分類。如果核心仍不確定，回到[九型人格總覽](/zh-TW/personality/enneagram)比較主要關注。你可以先練習清楚表達立場並參與決定，讓關係中的和平也包含自己的聲音。",
+          "key": "use_boundary",
+          "title": "讓平穩包含真實的參與"
+        }
+      ],
+      "seo": {
+        "description": "九型人格9號的傳統解釋關注內在平穩與關係連結。本頁分清「都可以」背後的願意讓步、尚未決定和沒有表達的異議，並提供讓自己的偏好進入共同決定的練習。溫和或配合不能單獨判型，疲勞、照護負擔與較少的決定權也可能影響選擇。",
+        "title": "九型人格9號：內在平穩、自己的偏好與表達立場"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-9",
+      "source_hash": "bd172abe9190dfed237b445f89e066e1b5b63a0f4f8705ccb327be18008aa612",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "第九型關注內在平穩與關係中的連結。它可以讓人容納不同立場，也可能讓自己的偏好在「都可以」之中漸漸模糊。本頁幫助你分清願意讓步、尚未決定和沒有說出口的異議，把自己的需要帶回合作與關係。",
+      "title": "九型人格9號：內在平穩、關係和諧與自己的優先順序"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "a4f8c78bc395a8297b18cd7d459edb667b9013f573749176aa2a1fdb3947d625"
+}

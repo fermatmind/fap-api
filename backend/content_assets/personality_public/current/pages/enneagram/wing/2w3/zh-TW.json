@@ -1,0 +1,208 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/2w3",
+    "entity_key": "2w3",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/2w3"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/2w3"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/2w3",
+      "code": "2w3",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "2w3",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不一定。外向程度、表達技能與關係動機是不同問題。安靜地協調資源也可能呈現這裡討論的方式；活躍的社交表現則可能來自訓練、職責或普通興趣。",
+          "question": "2w3 一定外向、擅長社交嗎？"
+        },
+        {
+          "answer": "不能自動確定。翼在傳統定義中是相鄰修飾，分數排名不能替代核心動機和跨情境觀察。即使第二名恰好是相鄰型，也要檢查修飾是否反覆出現，以及職責和激勵能否充分解釋它。",
+          "question": "二號最高、三號第二高，就能確定 2w3 嗎？"
+        },
+        {
+          "answer": "不會。這可能是關心、邊界清楚或行為靈活的表現。只有在更廣泛的觀察中，相關動機和修飾持續缺少解釋力，才需要降低這個假設的權重。",
+          "question": "沒有感謝也願意幫忙，會推翻 2w3 嗎？"
+        },
+        {
+          "answer": "兩者都可能溫暖、有效並希望被認可。2w3 要先解釋關係中的愛、需要與位置；3w2 要先解釋透過成果確認價值的關注。要比較同一事情中反覆擔心失去什麼，不能靠幫助多少或工作效率分辨。",
+          "question": "2w3 與 3w2 的關鍵區別是什麼？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/2w3",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:2w3",
+        "x-default": "/en/personality/enneagram/wings/2w3",
+        "zh-CN": "/zh/personality/enneagram/wings/2w3"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2",
+          "label": "九型人格2號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3",
+          "label": "九型人格3號核心型",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/2w1",
+          "label": "2w1翼型",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:2w1"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "你幫朋友組織了一次聚會：協調時間、照顧新人、調整氣氛，讓大家玩得盡興。朋友後來請另一位夥伴負責下一次活動，並說你終於可以休息了。你知道這是一番好意，卻有一點失落。\n\n這件事可以有不同解釋。你可能擔心組織成果沒有被看見，也可能擔心自己不再是朋友首先想到、願意依靠的人；還可能只是喜歡組織活動，捨不得把熟悉的事情交出去。它們會產生相似行為，卻指向不同問題。\n\n若用 2w3 來理解自己，值得追問的是：**活動做得好，是否也在替我回答「我對這些人很重要，他們願意靠近我」這個問題？** 三號式的呈現與執行，可以成為建立二號式連結的方式。一個成功的活動本身不能確認這種解釋；還要看你在沒有舞臺的關係裡，是否反覆用「我能為你做什麼」爭取自己的位置。\n\n下面的情境是用於比較動機的練習，不是經過驗證的判型題。",
+          "key": "observable_situations",
+          "title": "活動成功了，為什麼還覺得失落？"
+        },
+        {
+          "body_md": "在九型傳統中，[二號的核心主題](https://www.enneagraminstitute.com/type-2/)與愛、需要和關係回應有關。這裡的「幫助」不僅是看見實際需求，也包括透過有用的角色確認自己受到重視。\n\n2w3 的三號修飾，可以理解為更關注怎樣讓幫助奏效、怎樣把自己的貢獻表達清楚、怎樣隨對象調整方式。例如，你不只安慰一位遇到困難的朋友，也會迅速整理資源、介紹合適的人，並把複雜安排說得容易接受。若這些動作主要服務於「讓我們更親近、讓我在你生活中有位置」，二號仍是核心。\n\n這裡討論的三號翼，要與本能關注分開。二號核心解釋連結動機，翼解釋可能的相鄰修飾，本能關注則問注意力反覆優先落在哪個生活領域：資源與安穩、社會歸屬與角色，或 Narrative Enneagram 一對一口徑中的親密關係與密切友誼。Narrative 對社會二號的傳統說明也涉及社會認可、可見成果和組織中的重要位置，兩套描述因而可能重疊。展示貢獻或照顧群體，不能單獨確定三號翼或社會本能；幫助一位親近朋友也不能決定本能。應跨情境分別比較這些問題，翼與本能均可保持未定。\n\n這種策略的有效作用是把關心落實：對方既能感受到支援，也能得到具體幫助。過用時，你可能選擇最容易得到回應的幫助，忙著維持「可靠又討人喜歡」的形象，或者答應了超出精力的事情，卻沒有直接說出自己也希望被關心。\n\n2w3 不是二號與三號各佔一半，也不意味著你有兩個核心。按照[傳統的相鄰翼概念](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)，二號的相鄰方向是一號和三號；測評分數的第二名不能自動決定翼。",
+          "key": "core_first_modifier",
+          "title": "三號翼改變幫助方式，二號核心保留關係主題"
+        },
+        {
+          "body_md": "假設朋友需要辦一場小型活動，你既可以負責現場接待，也可以整理準確可靠的流程。\n\n**比較 2w3 與 2w1：** 兩種解釋都要先有二號的關係主題。2w3 的觀察方向是「怎樣讓這份支援更有效、更容易被接受，體現我能為你帶來的幫助」；2w1 則可以從「怎樣把照顧做得妥當、負責，符合我認為應有的標準」來理解。現場活躍和流程細緻都不是專屬行為；要問什麼標準反覆決定你怎樣提供幫助、怎樣評價自己。\n\n比較 2w3 與反向組合 [3w2](/zh-TW/personality/enneagram/wings/3w2)： 當朋友說「活動很成功，但之後我想自己來」時，你更難放下的是哪個部分？在 2w3 的解釋裡，困擾可能圍繞關係位置：不再需要我，是否意味著不再那麼親近？在 3w2 的解釋裡，困擾可能圍繞成果價值：我的貢獻有沒有充分證明我的能力，成功是否被正確看見？\n\n這不是一道必須二選一的題。兩種感受可以同時出現。[Narrative Enneagram 的二號與三號比較](https://www.narrativeenneagram.org/type-comparisons/)也提示兩者在幫助、行動與認可上可能相似。辨別需要多件事情中的動機、取捨和後續選擇，不能用一時的失落判型。",
+          "key": "sibling_core_comparison",
+          "title": "同一次幫助，比較 2w1 和 3w2"
+        },
+        {
+          "body_md": "調整表達、協調資源和展示成果，都可能來自訓練或職責。負責接待的人需要讓大家感到自在；專案負責人需要說明成果；家裡長期承擔協調的人，可能已經習慣把需求提前安排好。\n\n先問你有沒有真實選擇。若不熱情會被扣績效、不主動照顧會引發家庭衝突，行為就受到明顯約束。若你只在這些條件下呈現這種風格，情境已經提供了重要解釋。\n\n再比較職責較少的場合：沒有人要求你幫忙時，你是否仍會透過有用的角色尋找親近？你是否也習慣考慮如何讓幫助顯得可信、有效、容易獲得回應？只有當三號修飾在二號核心之外增加了反覆出現的解釋，2w3 這個名稱才有額外用途。\n\n這不要求把善意拆解成算計。真心關心別人與希望自己受到重視可以並存；觀察的目標是讓期待更清楚，而不是否定自己的善意。",
+          "key": "alternative_explanations",
+          "title": "會照顧場面，也可能只是你學會了這項技能"
+        },
+        {
+          "body_md": "**核心不合：** 若多種有選擇空間的事情中，你主要追蹤成績、評價和價值證明，而關係親近、被需要的角色並不反覆組織你的注意力，應重新比較三號核心等解釋，不能靠「我也會幫助人」保住二號。\n\n**修飾依據不足：** 若二號的關係主題很清楚，但適應表達、展示成效等特點只在某一職責裡出現，暫時寫「二號核心，翼不確定」比硬選 2w3 更合適。若原則、責任和正確服務的標準更常決定幫助方式，也可以繼續比較 2w1。\n\n**職責或情境：** 一次精心安排的公開活動，若完全可以由任務要求與經驗解釋，對能支持這項翼型解釋的證據很有限。\n\n**正常靈活性：** 私下幫助、讓別人獲得署名、接受拒絕，以及沒有得到感謝仍然關心對方，都不會自動否定 2w3。你可以保留某種關注模式，同時做出不依賴認可的選擇。真正有資訊量的是反覆出現的優先考慮及其理由，而不是要求自己每次都需要掌聲。",
+          "key": "counterexample",
+          "title": "什麼削弱核心，什麼只讓翼暫時不確定？"
+        },
+        {
+          "body_md": "下次自然出現一個幫忙機會時，先做一次簡短確認：「你現在更需要我聽一聽、給建議，還是幫你處理某件事？」明確對方願意接受的幫助，再說出自己的範圍，例如：「我今晚可以幫你整理半小時，後面的安排需要你自己接手。」\n\n如果對方拒絕，先不追加一個更出色的方案。記下你最想挽回的是什麼：實際需求沒有解決、自己顯得不夠能幹，還是那種「你仍然需要我」的感覺？這些記錄幫助你比較解釋，不用於替自己的類型打分。\n\n幫助結束後，把兩件事分別寫清楚：對方實際得到了什麼；你希望關係中發生什麼。若後者是「也希望有人主動問問我」，試著在合適的關係裡直接表達這項需要，不用額外貢獻換取猜測中的回應。\n\n回顧時看一個具體變化：你有沒有更準確地回應對方，同時少答應一件超出精力的事？關係回應如何變化可以繼續觀察；不要故意讓人不感謝你，也不要把一次邊界練習當成翼型確證。",
+          "key": "observation_exercise",
+          "title": "讓幫助有邊界，也讓自己的需要有聲音"
+        },
+        {
+          "body_md": "[Hook 等人的系統綜述摘要](https://doi.org/10.1002/jclp.23097)指出，支持翼等次級概念的研究很少。這裡提供的是傳統框架下的觀察方式，不能據此確認固定身分或證明費馬測評效度。\n\n若關係主題仍不清楚，先讀[二號核心型](/zh-TW/personality/enneagram/type-2)，並與[三號核心型](/zh-TW/personality/enneagram/type-3)比較。若二號解釋較貼近，再用[2w1 翼型](/zh-TW/personality/enneagram/wings/2w1)檢查另一種幫助方式。\n\n你可以暫時不選翼。一個有用的閱讀結果，是更早看見自己在幫助中隱藏的期待，並能直接表達需要；不必把每次行動都解釋成 2w3。",
+          "key": "wing_boundary",
+          "title": "先理解二號，再決定翼是否有幫助"
+        }
+      ],
+      "seo": {
+        "description": "2w3 是以二號需要與連結關注為核心、用三號相鄰特徵解釋適應表達、呈現和可見成效的傳統次級假設。比較 2w3 與 2w1、3w2 時，應回看關係位置與成果價值怎樣反覆影響選擇，並檢查職責、訓練或激勵能否解釋表現。",
+        "title": "九型人格2w3 觀察頁：可見成效、適應表達與連結"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/2w3",
+      "source_hash": "5d9f79281d68b8249e147490a727c1e941c69214f37fbdc4133f45fddf2f7ae0",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "2w3 指二號核心受到三號相鄰主題修飾的傳統翼型描述：希望被愛、被需要、在關係中有位置，可能透過更靈活的表達、組織和可見成效來實現。它與 3w2 的區別在於什麼讓你覺得自己有價值，而不在於誰更熱情、更能幹。",
+      "title": "2w3：用有效的幫助建立連結"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "949852ff6437bfa913c3134e5a9369cdb45992ad1a583aeb421c97ba1beb1750"
+}

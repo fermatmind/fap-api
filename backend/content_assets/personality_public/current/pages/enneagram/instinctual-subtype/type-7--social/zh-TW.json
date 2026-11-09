@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-7/instincts/social",
+    "entity_key": "type-7/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-7/instincts/social"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-7/instincts/social"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-7/instincts/social",
+      "code": "type-7/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-7/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "可能。社群關注可以落在群體規則、參與位置、共同理想和責任上，不要求大量社交。一個人也可能因為工作壓力而關注這些問題，所以還要看相近、自由選擇的情境中，群體關注怎樣與第七型動機連結。",
+          "question": "不喜歡聚會，也可能有社群關注嗎？"
+        },
+        {
+          "answer": "不能。犧牲可能是自選價值、必要職責、身分期待或不公平勞動，也可能與共同可能性有關。評價現實行動需要看自由選擇、兌現結果、受益者和成本分配，副型名稱不能給行為排道德等級。",
+          "question": "為群體放棄享受，是否說明比其他副型更無私？"
+        },
+        {
+          "answer": "它會削弱以認可為主要驅動的解釋，但不會自動推翻對共同理想和歸屬的關注。若多次觀察也沒有第七型的可能性、滿足與受限張力，而明確職責或價值觀更充分地解釋行動，則應降低整個副型解釋的適用性。",
+          "question": "匿名服務且不求認可，會否推翻社群第七型？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-7/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-7/social",
+        "x-default": "/en/personality/enneagram/type-7/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-7/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7",
+          "label": "第七型核心介紹",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7/instincts/self-preservation",
+          "label": "第七型自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7/instincts/one-to-one",
+          "label": "第七型一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "如果第七型與滿足、選擇和可能性有關，為什麼社群第七型的傳統描述會談到犧牲？[Narrative Enneagram](https://www.narrativeenneagram.org/instinctual-subtypes/)指出的張力，是個人的開闊計畫與參與群體所要求的限制之間的關係。想讓大家一起擁有更好的未來，本身可以成為一種令人興奮的可能性；為了它，個人願意暫緩享受或接下責任。\n\n這裡的第七型動機沒有自動變成另一種核心。一個人可能一邊認真服務，一邊期待這項事業讓生活變得有意義、有活力，而不必停留在失望與無力中。[Enneagram Institute 的第七型介紹](https://www.enneagraminstitute.com/type-7/)提供核心動機的傳統背景。但這只是可以詢問的原因，不能看到服務行為就替當事人認定他在避開痛苦。\n\n例如，朋友提出縮小活動規模，有人立即說「我們可以做得更好，大家都值得有機會」。這句話可以是有效的鼓勵，也可能在尚未核對人手時，把一個美好的未來變成新的義務。要繼續看：本人能否承認能力有限，是否給別人留下拒絕的空間，承諾後來由誰完成。",
+          "key": "chosen_limits",
+          "title": "為什麼願意限制自己，卻仍保留第七型核心"
+        },
+        {
+          "body_md": "社群第七型可以顯得認真、節制，甚至比周圍的人更願意放棄私人娛樂。解釋上的關鍵是，這份克制是否與共同理想、歸屬位置和對更好可能性的期待相連。若只用「第七型愛玩」作標準，就會漏掉這種外觀差異；若反過來把自我犧牲當成副型證明，也同樣過快。\n\n即便某些學派使用「反型」來說明與常見外觀不同的組合，它也只是傳統命名，不是特殊心理機制，更不能把不符合的表現都解釋成壓抑得更強。一個人持續因價值觀或明確職責做事，而沒有本頁所說的可能性與受限張力，就應允許這套解釋不適用。\n\n認可可以是一個因素，但不是社群關注的全部。匿名貢獻仍可能承載共同理想；因此，願意做無署名工作，只能削弱「主要為了得到認可」這個具體解釋，不能單獨排除社群第七型。反過來，想獲得公平署名也可能是合理的勞動權益要求。",
+          "key": "sacrifice_without_rank",
+          "title": "克制的外觀，不是美德或反型的證明"
+        },
+        {
+          "body_md": "朋友籌辦週末修理工作坊，場地取消、預算減半，一位合作者只能參加兩小時。社群第七型的解釋會特別關注：活動還怎樣讓大家參與，自己的投入在群體中意味著什麼，以及共同目標能否繼續令人期待。\n\n策略有效時，組織者會先問大家最看重哪項收益，再把活動縮成能完成的一部分；他說明自己的可用時間，也允許別人調整承諾。理想因此成為協調資源的方向。過用時，他可能承諾「缺的都由我補」，隨後又提出更熱鬧的新計畫，最後把清理、聯絡和收尾轉給並未同意的人。也可能把提出邊界的人看成不夠投入。可觀察的代價是工作分配和承諾與實際完成之間的落差，不需要猜測他是否高尚或自私。\n\n同一事件下，自保第七型的解釋更關注可用場地、工具與舒適又可行的安排；一對一第七型的解釋更關注某位合作者帶來的興奮與新方向。社群解釋則把共同目的和參與位置放在前面。三者都可能犧牲時間或提供物資，區別在這些行動服務的主要關注，以及哪項限制最難接受。\n\n這些是原創比較情境。它們幫助提問，不把實際合作中的人分成三類固定角色。",
+          "key": "shared_workshop",
+          "title": "預算減半時，共同願景怎樣變成公平的分工"
+        },
+        {
+          "body_md": "社群第七型容易與其他核心解釋相遇。與第一型比較時，不妨問：如果一個樸素、合規的方案已經足夠，仍難放下的是「還沒做到應該的標準」，還是「這樣會不會丟掉更好的可能性」？與第二型比較時，問：別人不再需要幫助後，失去被需要的位置與失去共同創造的機會，哪一個更牽動自己？與第三型比較時，問：計畫受阻後，主要想恢復成果與能力形象，還是重新開啟值得期待的未來？[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供這些傳統上的區分方向，實際答案仍須來自多次具體經歷。\n\n職業職責、照護義務、信仰、互助需要、考核和排斥風險，都可能要求相同的服務行為。不能自由拒絕的人，其投入首先可能是在應對制度條件。先檢查工作量、補償、退出條件與受益者，再談人格。\n\n如果調整職責或消除晉升激勵後，所謂犧牲隨之停止，應提高角色解釋的權重。若在相近且自由選擇的情境中，一個人並不反覆依靠共同願景繞開失望，也不因責任縮小個人選項而產生本頁所說的張力，就應降低或撤回這個副型解釋。穩定完成常規任務本身不是反例；它可能只是說明這套策略使用得有邊界。",
+          "key": "mistaken_motives",
+          "title": "相似的責任感，可能來自不同原因"
+        },
+        {
+          "body_md": "在下一次低風險的群體任務中，先分別寫下三件事：我真實願意做什麼；大家已經同意需要什麼；我希望透過這個計畫出現什麼更好的未來。不要把第三項直接當成第一項和第二項已經達成。\n\n承諾前，說明自己可投入的時間、能完成的最小結果和需要別人明確同意的部分。保留一項正常的私人安排；若確實需要調整，討論由誰分擔，而不是自動由最熱心的人補足。新想法可以記錄，但先完成當前約定再決定是否增加。\n\n任務結束後，比較自己在靈感階段與常規收尾中的感受。失去署名、活動變小和必須錯過另一件有趣的事，分別帶來了什麼變化？是缺少認可、擔心群體落空、對勞動不公的憤怒，還是難以接受生活選項被縮小？這些原因需要分開。\n\n合作者可以回應具體收益、明確分工，並允許你同時有個人需要。若明確可投入的時間、能承擔的工作與分工後，張力明顯消失，說明工作設計可能比副型更有解釋力；若反覆出現用擴大願景代替處理遺憾的過程，才值得繼續探索。不要用一次任務給自己或別人定型。",
+          "key": "promise_with_capacity",
+          "title": "讓共同理想接受一次可投入心力的核對"
+        },
+        {
+          "body_md": "社群關注不是外向程度。一個人可以同時重視資源、群體與親密連結。第七型歸頭／思考中心；六翼或八翼討論相鄰核心的修飾，社群副型討論核心動機怎樣落在共同目的與參與上。第二高分、職業名稱和名人猜測都不能確定翼或本能。\n\n社群第七型屬於九種核心型×三種主導本能的二十七個組合；三個本能的六種完整排序是另一個層次。優先維護工作坊的共同目標，不能說明資源與親密連結誰排第二、誰排第三，也不能推出盲點。貢獻可能由職責或價值觀解釋，核心動機與主導本能都可以暫時未定。\n\nNarrative 的 one-to-one 包含親密夥伴、密友與活力；[Enneagram Institute 的 sexual／attraction 模型](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)突出吸引強度。兩者部分重合，不能完全互換，更不能按性慾強弱理解。CP Enneagram Academy 將社群第七型稱為反型，側重犧牲與被視為好人；Narrative 側重共同理想與個人擴張受到的限制。這些是不同學派的解釋，不是已驗證的神經機制或科學診斷。反型名稱不能證明其中任何解釋符合某個人。\n\n[Hook 等人 2021 年綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告的證據並不一致。本頁不能證明費馬副型測量有效，也不衡量道德、領導力或社會價值。傳統描述、特定工具的量表研究與費馬產品驗證是不同層級，不能互相代替。\n\n要確認共同理想是否仍承載第七型動機，可讀[第七型核心介紹](/zh-TW/personality/enneagram/type-7)；若更想辨別著迷於某位合作者的過程，可讀[第七型一對一副型](/zh-TW/personality/enneagram/type-7/instincts/one-to-one)。",
+          "key": "tradition_and_evidence",
+          "title": "使用這套傳統時，保留哪些邊界"
+        }
+      ],
+      "seo": {
+        "description": "第七型社群副型是傳統且證據有限的假設，關注第七型尋找可能性的動機如何在共同理想、貢獻和個人餘地之間呈現。認可可以是因素，服務或犧牲本身不能證明副型；無償勞動、職業責任、互助需要、地位激勵、歧視與角色期待都可能形成相似行為。",
+        "title": "第七型社群副型：共同理想、貢獻與個人餘地的觀察假設"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-7/instincts/social",
+      "source_hash": "e339d68522c26fbf7e54cf4070641df8cc01f92de0ef326f1c5b6b742c33353b",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "社群第七型的傳統解釋關注一種張力：希望與大家創造更好的可能性，也不願因責任失去個人自由和生活樂趣。主動服務、克制享受或鼓舞群體都可能出現在這裡，但要看共同理想怎樣影響選擇、承諾和收尾，不能靠志工服務或社交人數判型。",
+      "title": "第七型社群副型：共同理想與個人餘地怎樣共存"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "9c59b9780edbc5b6733f0229f6eb8ff6ec890a7ebc816b77c10415ad5eaeff24"
+}

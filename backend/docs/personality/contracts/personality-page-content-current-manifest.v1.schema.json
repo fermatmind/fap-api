@@ -11,12 +11,12 @@
       "additionalProperties": false,
       "properties": {
         "baseline_locale_pages": { "minimum": 0, "type": "integer" },
-        "by_framework": { "const": { "big_five": 104, "enneagram": 116, "mbti": 144 } },
+        "by_framework": { "enum": [{ "big_five": 104, "enneagram": 116, "mbti": 144 }, { "big_five": 156, "enneagram": 174, "mbti": 216 }] },
         "by_page_kind": { "type": "object" },
         "enhanced_locale_pages": { "minimum": 0, "type": "integer" },
-        "files": { "const": 364 },
-        "locale_pages": { "const": 364 },
-        "locales": { "const": 2 },
+        "files": { "enum": [364, 546] },
+        "locale_pages": { "enum": [364, 546] },
+        "locales": { "enum": [2, 3] },
         "pages_per_locale": { "const": 182 }
       },
       "required": ["baseline_locale_pages", "by_framework", "by_page_kind", "enhanced_locale_pages", "files", "locale_pages", "locales", "pages_per_locale"],
@@ -27,16 +27,16 @@
         "additionalProperties": false,
         "properties": {
           "bytes": { "minimum": 1, "type": "integer" },
-          "canonical_path": { "pattern": "^/(en|zh)/personality(?:/.*)?$", "type": "string" },
+          "canonical_path": { "pattern": "^/(en|zh|zh-TW)/personality(?:/.*)?$", "type": "string" },
           "compatibility_projection_sha256": { "$ref": "#/$defs/hash" },
           "content_state": { "enum": ["baseline", "enhanced"] },
           "entity_key": { "type": "string" },
           "entity_type": { "type": "string" },
           "framework": { "enum": ["mbti", "big_five", "enneagram"] },
           "identity_key": { "type": "string" },
-          "locale": { "enum": ["en", "zh-CN"] },
+          "locale": { "enum": ["en", "zh-CN", "zh-TW"] },
           "page_kind": { "type": "string" },
-          "path": { "pattern": "^pages/(mbti|big-five|enneagram)/[a-z0-9-]+/[a-z0-9-]+/(en|zh-CN)\\.json$", "type": "string" },
+          "path": { "pattern": "^pages/(mbti|big-five|enneagram)/[a-z0-9-]+/[a-z0-9-]+/(en|zh-CN|zh-TW)\\.json$", "type": "string" },
           "sha256": { "$ref": "#/$defs/hash" },
           "slug": { "type": "string" },
           "source_content_sha256": { "$ref": "#/$defs/hash" }
@@ -44,11 +44,11 @@
         "required": ["bytes", "canonical_path", "compatibility_projection_sha256", "content_state", "entity_key", "entity_type", "framework", "identity_key", "locale", "page_kind", "path", "sha256", "slug", "source_content_sha256"],
         "type": "object"
       },
-      "maxItems": 364,
+      "maxItems": 546,
       "minItems": 364,
       "type": "array"
     },
-    "locales": { "const": ["en", "zh-CN"] },
+    "locales": { "enum": [["en", "zh-CN"], ["en", "zh-CN", "zh-TW"]] },
     "schema_version": { "const": "personality.page.content.v1" },
     "set_hashes": {
       "additionalProperties": false,
@@ -63,6 +63,19 @@
     }
   },
   "required": ["aggregate_sha256", "authority_path", "compiler_version", "contract_version", "coverage", "files", "locales", "schema_version", "set_hashes"],
+  "if": { "properties": { "locales": { "const": ["en", "zh-CN", "zh-TW"] } } },
+  "then": {
+    "properties": {
+      "coverage": { "properties": { "files": { "const": 546 }, "locale_pages": { "const": 546 }, "locales": { "const": 3 }, "by_framework": { "const": { "big_five": 156, "enneagram": 174, "mbti": 216 } } } },
+      "files": { "minItems": 546 }
+    }
+  },
+  "else": {
+    "properties": {
+      "coverage": { "properties": { "files": { "const": 364 }, "locale_pages": { "const": 364 }, "locales": { "const": 2 }, "by_framework": { "const": { "big_five": 104, "enneagram": 116, "mbti": 144 } } } },
+      "files": { "maxItems": 364, "items": { "properties": { "locale": { "enum": ["en", "zh-CN"] } } } }
+    }
+  },
   "type": "object",
   "$defs": { "hash": { "pattern": "^[a-f0-9]{64}$", "type": "string" } }
 }

@@ -1,0 +1,172 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/big-five/neuroticism-mid",
+    "entity_key": "neuroticism-mid",
+    "entity_type": "polarity",
+    "framework": "big_five",
+    "page_kind": "polarity",
+    "slug": "big-five/neuroticism-mid"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "path": "/zh-TW/personality/big-five/neuroticism-mid"
+      },
+      "canonical_path": "/zh-TW/personality/big-five/neuroticism-mid",
+      "code": "neuroticism-mid",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "neuroticism-mid",
+      "entity_type": "polarity",
+      "evidence_notes": [],
+      "faq": [
+        {
+          "answer": "不是。「中間」是具體工具的分數描述，正常與否不是它能判斷的問題。它也不能證明你處在群體中位數或最常見的區間。",
+          "question": "中間位置就是正常人的水準嗎？"
+        },
+        {
+          "answer": "不能這樣推斷。分數中段沒有測出靈活切換、判斷準確性或因應技能。適應某件事需要看任務要求、資源和實際行為。",
+          "question": "是不是既不敏感也不遲鈍，所以適應能力最好？"
+        },
+        {
+          "answer": "單次強烈反應不足以判定結果錯誤。先看事件、近期狀態和結果的作答範圍；若描述長期不貼近，再核對工具與作答條件，而不是用一個事件重定人格。",
+          "question": "某次反應很強，是不是結果錯了？"
+        },
+        {
+          "answer": "可以同時讀當前區間和相鄰區間，把具體描述作為觀察線索。不要因此自行改分，也不要把邊界兩側理解為不同人格類型。",
+          "question": "靠近高低邊界時應該讀哪一頁？"
+        },
+        {
+          "answer": "不能。總體位置不足以重建個人面向組合。只有報告實際提供相應面向分數時，才能按該工具說明閱讀。",
+          "question": "中段總分能說明哪些面向比較高嗎？"
+        },
+        {
+          "answer": "可以。是否需要支援取決於實際痛苦、日常影響和你的需要，不要求人格分數進入較高區間。也不必等待一週記錄完成。",
+          "question": "分數在中間但我持續難受，還可以尋求幫助嗎？"
+        }
+      ],
+      "framework": "big_five",
+      "hreflang": {
+        "en": "/en/personality/big-five/neuroticism-mid",
+        "zh-CN": "/zh/personality/big-five/neuroticism-mid"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/big-five/neuroticism",
+          "intent": "domain",
+          "label": "神經質"
+        },
+        {
+          "href": "/zh-TW/personality/big-five/neuroticism-high",
+          "intent": "range",
+          "label": "高神經質"
+        },
+        {
+          "href": "/zh-TW/personality/big-five/neuroticism-mid",
+          "intent": "range",
+          "label": "神經質中間位置"
+        },
+        {
+          "href": "/zh-TW/personality/big-five/neuroticism-low",
+          "intent": "range",
+          "label": "低神經質"
+        },
+        {
+          "href": "/zh-TW/personality/big-five/facets",
+          "intent": "facet_hub",
+          "label": "30 個面向總覽"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "not_for": [
+          "本頁內容不可用於臨床診斷，也不可單憑本頁內容決定是否聘用或錄取。"
+        ],
+        "summary": "本頁協助理解人格概念，並對照日常行為。解讀實際分數時，應以所用工具的計分方式、參考樣本與適用範圍為準。"
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body": "神經質描述體驗負面情緒的傾向。「中間位置」首先表示你的分數被具體工具放在中段，而不是已經證明你的反應總能與事件相匹配。\n\n這個標籤不能告訴你每次擔憂有多強、多久平復、是否擅長處理衝突，也不能保證你能在敏感與平靜之間自由切換。一個中段結果仍然可以和某些明顯的困擾共存；某次強烈反應也不必推翻整個結果。\n\n中段最值得追問的不是「我是否剛剛好」，而是「這個總體描述遺漏了哪些差異」。答案可能涉及情境、近期狀態或不同感受，但需要實際資訊，不能從標籤直接選定一種解釋。",
+          "heading": "中段是一個位置，不是一種最佳情緒狀態",
+          "key": "section-01-b55f7afbdb",
+          "kind": "markdown"
+        },
+        {
+          "body": "量尺的數值中點、群體分數的中位數、工具命名的中間區間，是不同概念。只有計分說明明確給出依據，才能知道當前結果採用了哪一種。「中間」不能自行解釋為超過一半的人，也不能證明這是群體最常見的水準。\n\n先檢視工具版本、語言、分數方向和區間規則。如果確實使用百分位，再核對參考群體和換算說明。百分制不等於百分位；閱讀其他工具的區間邊界也不能填補當前工具的資訊缺口。\n\n若分數貼近一端，可同時讀相鄰區間，但不要按哪個故事更像自己重新劃分分數。同一維度連續變化，解釋區間只是閱讀輔助，不能把相近的分數變成互斥類型。",
+          "heading": "量尺中點、群體中位數和區間名稱要分清",
+          "key": "section-02-2548534dfe",
+          "kind": "markdown"
+        },
+        {
+          "body": "一個中段總分不說明所有相關體驗都中等，也不證明某個面向一定特別突出。只有結果提供對應測量，才能討論個人面向分數；不能從「中段」編出一組彼此抵消的高低面向。\n\n本站的面向目錄採用 NEO/IPIP-NEO 解釋詞彙。不同工具並不都採用同一面向結構，例如[BFI-2 作者說明](https://www.ocf.berkeley.edu/~johnlab/bfi.html)介紹的是五個維度及 15 個面向。這說明工具需要分別理解，不能把其他問卷的面向或計分套在自己的結果上。\n\n自我觀察可以幫助區分你正在擔憂、易怒、低落還是怕難堪，但這些詞也不構成面向測量或診斷。先把具體體驗說清，通常比替總分尋找一個人格稱號更有用。",
+          "heading": "總分沒有替你說明不同感受的組合",
+          "key": "section-03-e0174eb4db",
+          "kind": "markdown"
+        },
+        {
+          "body": "以下是假設情境。一次普通出行的集合地點臨時改變。地點熟悉時，你確認地址後很快繼續做自己的事；地點陌生時，你已經選好了路線，卻仍多次返回地圖檢視同一條路線，並覺得不安。\n\n不要把這兩個片段稱為「中段的靈活適應」。更具體的觀察對象是：普通出行安排改變、路線已選且沒有新訊息後，是否因不安反覆檢視同一條路線。熟悉程度可能與差異有關，但也可能是到達時間更緊、指路資訊不完整、最近曾走錯路，或當時疲憊。\n\n真正需要解決的也許是路線資訊、可用時間或對不確定的困擾。記錄自己怎麼想、感受如何，以及實際做了什麼。只知道你查了地圖，不能判斷你有多焦慮；只知道準時到達，也不能判斷過程是否輕鬆。",
+          "heading": "同樣是路線臨時變更，為何反應不同",
+          "key": "section-04-dcf7d169e0",
+          "kind": "markdown"
+        },
+        {
+          "body": "可以先保留一個具體假設：「普通出行臨時改地點後，我在陌生路線中通常會因不安重複檢視已選路線，熟悉路線中較少如此。」兩類情境都以路線已選、沒有新通知或路線資訊、仍有機會再次檢視為條件。分別記錄熟悉與陌生路線中查看出現或未出現的機會、真實感受，以及時間壓力、資訊是否完整等差別。\n\n一次自然例外可以是陌生地點臨時變更，但你沒有主動增加新的安排，自述不安不多，也沒有重複檢視。熟悉路線中仍因不安反覆檢視，也與所提的情境差異有關。若不安明顯卻沒檢視，要分別記下情緒存在、行為未出現。沒有地點變更、無需自己找路線、仍在第一次查清路線，或收到新的路線資訊，都不屬於同一種機會。沒有記下當時的感受就標為未知，不能從未檢視推斷內心平靜。\n\n只有兩類都有數次相近機會，才可以暫時保留這項情境比較。若這一週只遇到陌生路線，可以保留對這些具體出行的描述，同時擱置與熟悉路線的比較；只有熟悉路線時也一樣。若重複檢視主要出現在指路不清或時間緊迫時，就把假設縮小到相應條件；若可比記錄沒有呈現所提差異，就擱置這項比較，不必讓每次經歷都符合標籤。\n\n沒有找到例外不等於假設已經證實，一次例外也不推翻「通常」。短期記錄不能驗證中段標籤，更不能測出所謂情緒反應是否恰當。",
+          "heading": "比較機會，而不是把一週平均成一個性格結論",
+          "key": "section-05-d6295678b4",
+          "kind": "markdown"
+        },
+        {
+          "body": "如果陌生路線確實占用很多注意，可以在下一次普通、低風險出行中，事先確認集合地址、可用路線和一個真實需要檢視的時間點。遇到交通變化、新通知或安全問題，應按實際情況處理，不機械遵守記錄安排。\n\n把這次標為「主動增加了資訊與安排」，另外記錄是否仍重複檢視、自己當時的不安、是否漏掉變化和能否繼續原定事情。它改變了條件，不能當成未主動改變條件的自然例外，也不能混入原本熟悉路線的觀察來確認兩類差異。保留已經有效的資訊幫助或其他支援，不需要為了找例外而撤掉它們。\n\n若資訊更清楚後重複查看減少，只能先說這項安排對這類出行有幫助；若行為減少但不安沒有減輕，也要保留這一差別。若沒有幫助或增加負擔，可以停用這項嘗試並討論其他幫助方式。不要把練習解釋為已經變得更平衡，也不要為證明適應能力而製造壓力。",
+          "heading": "把具體缺口補清，再評估幫助在哪裡",
+          "key": "section-06-f51843e863",
+          "kind": "markdown"
+        },
+        {
+          "body": "別人說你「分數不高，應該沒事」，並不能回答你正在經歷什麼。同樣，你在某項熟悉任務中很平靜，也不能說明另一段關係中的困擾不值得支援。\n\n反應會受到真實事件、累積壓力、資源和當時狀態影響。僅憑結果或幾個片段，無法確定這些因素的因果關係。若痛苦持續或影響日常功能，可以尋求合格專業人員的評估，不必先把自己歸入較高區間。[NIMH 求助說明](https://www.nimh.nih.gov/health/publications/my-mental-health-do-i-need-help)提供了從實際生活影響出發的閱讀入口。\n\n比較區間時，[較高位置](/zh-TW/personality/big-five/neuroticism-high)更偏向較多負面情緒體驗，[較低位置](/zh-TW/personality/big-five/neuroticism-low)更偏向較少；這不是能力、健康或因應能力的等級。中段也不是兩端優點的總和。",
+          "heading": "中段不能作為忽略困擾的理由",
+          "key": "section-07-6524f739ff",
+          "kind": "markdown"
+        },
+        {
+          "body": "先讀[神經質維度](/zh-TW/personality/big-five/neuroticism)，確認它和一次心情、技能或診斷各在回答什麼問題。讀[面向總覽](/zh-TW/personality/big-five/facets)，可以進一步區分不同體驗，但不要把目錄當作個人面向結果。\n\n閱讀相鄰區間時，帶著一個具體問題比較，例如「這類安排變化中，我的擔憂是否經常打斷做事」，比尋找一個包辦所有生活表現的標籤更有資訊。",
+          "heading": "繼續釐清維度與面向",
+          "key": "section-08-df13ae0753",
+          "kind": "markdown"
+        }
+      ],
+      "seo": {
+        "description": "理解大五人格神經質中等分數：分清量尺中段與群體中位數，比較熟悉和陌生路線中的擔憂與檢視行為，不把中段當作最佳情緒狀態。",
+        "title": "大五人格神經質中等是什麼意思？分數與情境怎麼讀"
+      },
+      "sitemap_eligible": true,
+      "slug": "big-five/neuroticism-mid",
+      "source_hash": "52511bc55327343b4e0877ed51398ff80c8fca8e5aa683d300f20aa549e4ae6b",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "大五人格神經質的中間位置，是具體計分規則下的描述，不能自動解釋為正常、平衡或抗壓能力適中。理解結果需要檢視分數條件，並觀察相同事情在不同情境中的反應。",
+      "title": "大五人格神經質中段：怎樣理解情境中的差異"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": [],
+      "schema_eligible": false,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "48065ff4b272d9327dda0e1ed0d8038c4d552b6bdf4836301084a19f06a6ed2b"
+}

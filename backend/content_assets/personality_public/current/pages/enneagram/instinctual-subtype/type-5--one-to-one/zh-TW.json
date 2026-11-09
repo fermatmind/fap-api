@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-5/instincts/one-to-one",
+    "entity_key": "type-5/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-5/instincts/one-to-one"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-5/instincts/one-to-one"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-5/instincts/one-to-one",
+      "code": "type-5/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-5/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。共同興趣、久別重逢、保密條件、危機或對方的專業角色，都可能促成這種交流。需要分別考察信任、吸引活力和5號核心動機，並接受其他解釋更有力的可能。",
+          "question": "一次特別深入或令人興奮的談話，能證明一對一5號嗎？"
+        },
+        {
+          "answer": "不能這樣推出。疲勞、工作、感官負擔和普通恢復需要都可能導致獨處。更有幫助的是說明所需時間、保留自願的聯絡，並觀察休息後能否繼續交流；副型語言不替代對關係問題的具體溝通。",
+          "question": "分享之後想獨處，是否說明自己害怕親密？"
+        },
+        {
+          "answer": "不是。翼與本能是不同解釋層：5w4涉及相鄰4號對核心風格的可能修飾，一對一涉及關注領域。多段親密關係可以共存；不能用第二高類型分數、職業、名人猜型或關係數量決定副型。",
+          "question": "一對一副型就是5w4，或必須只有一段特別關係嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-5/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-5/one-to-one",
+        "x-default": "/en/personality/enneagram/type-5/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-5/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5",
+          "label": "第5型核心類型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5/instincts/self-preservation",
+          "label": "第5型自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5/instincts/social",
+          "label": "第5型社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "5號的候選核心動機，是透過理解、準備和自主安排維持應付要求的能力。一對一關注可能把這套策略帶入具體聯結：我想讓你進入我的內在世界，但也需要決定分享多少、何時停下。\n\n因此，一個人可能在某段交流裡顯得溫暖、投入，之後又需要獨處。需要理解的是這個來回的過程：深入交流是否帶來活力？新增要求會不會讓人覺得再也無法掌握自己的節奏？退後時能否說明，並在約定時間重新聯絡？\n\n[Narrative 的一對一5號描述](https://www.narrativeenneagram.org/instinctual-subtypes/) 是傳統參照。它不要求每個人都有秘密，也不把保留等同於不信任。若行為主要跟隨疲勞、工作安排或關係不安全，就應先採用這些解釋。",
+          "key": "connection_without_surrendering_autonomy",
+          "title": "靠近與保留，並不一定互相否定"
+        },
+        {
+          "body_md": "本頁採用 one-to-one 的一對一名稱。Narrative 的口徑包括親密夥伴、好友和活力；[Enneagram Institute 的 sexual/attraction 描述](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) 更強調吸引、交流中的化學反應和強度。兩者有交集，但並非完全同義。\n\n一段安全的好友關係，可以承載私密分享，卻不一定有強烈吸引。一次令人振奮的合作，可以充滿活力，卻不意味著浪漫關係、性行為或已經建立信任。記錄「安全讓我願意分享」與「交流吸引我，讓我感到有活力」時，最好分別描述。\n\n所有本能關注下的人都可能需要親密。不能用戀愛次數、性慾強弱、是否有伴侶或偏愛兩人聊天來判斷，也不能把強度要求變成對他人的義務。",
+          "key": "one_to_one_and_attraction",
+          "title": "一對一、吸引與強度，要分開看"
+        },
+        {
+          "body_md": "設想你和一位朋友製作一段聲音作品。你分享了一份通常不公開的草稿，對方的回應讓你覺得被理解。下面是原創情境，不是相容性預測。\n\n一對一關注較突出的5號，可能重視這段具體交流帶來的開啟與活力：願意讓對方看到尚未成形的想法，又希望這種接近不會變成隨時必須回應。有效時，雙方能深入探索，也能各自休息。過用時，只有足夠特別的回應才算理解，普通回饋變得難以接受，隨後不說明原因便退出。\n\n自保關注較突出的5號，也可能分享草稿，但首先在意可投入的時間、設備、恢復精力的時間和後續請求是否有邊界。\n\n社群關注較突出的5號，也可能很投入這段兩人合作，但更留意共同語言、知識貢獻，以及作品在所屬群體中怎樣被理解。\n\n三者都可能長談、保密、熱情或退後。一個人也可能同時在意三個方面。能幫助比較的是：你最先注意到了什麼，什麼變化讓你願意繼續，什麼變化讓你收回投入。",
+          "key": "creative_project_comparison",
+          "title": "同樣合作一段聲音作品，三種關注在哪裡"
+        },
+        {
+          "body_md": "導師、諮詢師、研究夥伴或長期好友，可能有其他人沒有的保密條件、共同知識和相處時間。身處不安全環境的人也可能只能向少數對象表達。這些差異可以解釋選擇性分享，不必增加副型假設。\n\n比較時選私密程度相近的話題，並記錄關係角色、保密規則、權力差異、相識時間和拒絕的後果。主管掌握工作機會，不能與平等朋友視為同一種條件；難以拒絕的揭露也不能當作主動追求深度。\n\n核心動機仍需開放：希望透過給予維持被需要，可以與2號比較；希望在關係中被看見獨特身分與情感意義，可以與4號比較；依靠理解和邊界避免無法應付，則更接近5號候選問題。可參照 [Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)，但情感強烈、關心別人或談得深入都不是定型依據。\n\n若分享主要隨安全和保密改變，選擇性可能已由這些條件解釋。多段安全關係都能承載深度，首先削弱的是「必須只有一個特別對象才能分享」；不需要特別強度也能持續參與，削弱的是「必須有強烈交流才能維持聯絡」。這兩點都不能單獨排除特定聯結的關注或5號核心動機。分別在條件相近的事件裡繼續觀察；若關係條件已足夠解釋過程，而候選動機並不反覆出現，就應撤回副型候選。不能把反例改寫成更深的壓抑。",
+          "key": "selectivity_and_relationship_conditions",
+          "title": "只向一個人說，可能是關係條件的結果"
+        },
+        {
+          "body_md": "在一段雙方都能自由拒絕的關係裡，選擇一件低風險、可以保留細節的話題，例如分享一小段未完成作品。先詢問對方是否願意聊十五分鐘，說明今天想聽的是感受、建議還是單純傾聽。任何一方都可以暫停；不以秘密交換、忠誠測試或超出意願的揭露證明聯結。\n\n交流後記錄三個過程：對方哪一種回應讓你願意敞開心扉；你在哪個時刻開始感到要求增加；表達暫停後，聯絡是否仍可繼續。可以約定下次聯絡時間，避免讓退出成為無法解釋的消失。\n\n若清楚邊界使交流更自由，可以保留這種方式；若對方施壓、保密無法保證或暫停會招致懲罰，就結束嘗試，優先處理關係條件。不要為了檢驗副型增加強度。\n\n若普通、並不特別強烈的交流也持續滿足你，就修正「只有特別強度才能維持聯絡」的預期；若不同安全對象都能提供支援，就修正「某個唯一對象不可替代」的預期。這些觀察本身不決定本能關注或核心型。這項練習用來改善溝通，無法證明副型或預測關係未來。",
+          "key": "bounded_exchange",
+          "title": "把深度做成可協商的交流"
+        },
+        {
+          "body_md": "27 個副型是九個核心型與三種主導本能關注的組合。本頁討論5號模式怎樣進入特定聯結，不排列其餘兩種本能；三種本能從第一到第三的六種完整排序是另一層，不能因溫暖、暫停或關心群體就推出第二、第三種本能或「盲點」。願意開啟內在世界也不能決定5w4或5w6，翼討論相鄰核心型的可能修飾；5號屬於思維中心，是核心型主題的分組，不是本能名稱。CP Enneagram 將其 sexual 5號稱為「反型」，這是該學派的解釋，不為本頁的一對一候選提供科學驗證。外觀與動機可能不同，具體解釋仍須接受關係條件、過程和反例的修正。\n\n[Enneagram Institute 的5號頁面](https://www.enneagraminstitute.com/type-5/) 提供核心動機的傳統參照；[Hook 等人的2021 年系統綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/) 報告九型信度與效度證據並不一致。它沒有為本頁的一對一解釋、吸引機制、關係相容性或費馬評分提供驗證。本文的情境與嘗試是原創反思材料。\n\n回到 [5號核心類型](/zh-TW/personality/enneagram/type-5)，先核對理解與自主是否確實組織了你的選擇；再讀 [5號社群副型](/zh-TW/personality/enneagram/type-5/instincts/social)，比較特定交流帶來的活力與群體位置的關注。兩人合作也可能主要服務於社群需要。",
+          "key": "limits_and_next_reading",
+          "title": "保留解釋，也保留撤回的空間"
+        }
+      ],
+      "seo": {
+        "description": "一對一關注可能讓5號在特定聯結中開啟內在世界，同時保留自主節奏。本頁用共同創作的情境區分信任與交流活力，比較自保、社群關注，並說明保密、角色和關係安全何時更能解釋選擇性分享。",
+        "title": "5號一對一副型：特定聯結、交流活力與自主節奏"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-5/instincts/one-to-one",
+      "source_hash": "ee5a73d4d5407071ca6f846176371e6c0e02e0eeb8a9807692f5479c7fc9c46c",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "一對一關注下的5號可能在特定聯結中分享平時保留的想法、感受和探索，同時擔心過多要求削弱自主。深入交流與退後恢復可以同時出現，但深談、秘密或強烈吸引都不能自動定副型。本頁區分信任、吸引活力與現實保密條件，並用共同創作的情境比較三個5號副型。",
+      "title": "5號一對一副型：願意開啟內在世界，也保留自己的節奏"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "41333415b934568ea4a5c313db204ba3f6b157898d262046b7f494ece6a3f46e"
+}

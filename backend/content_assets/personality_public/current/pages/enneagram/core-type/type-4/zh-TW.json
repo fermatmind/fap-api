@@ -1,0 +1,237 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-4",
+    "entity_key": "type-4",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-4"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-4"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-4",
+      "code": "type-4",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-4",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不一定。這些是感受、表現或能力，不能替代動機判斷。第四型的傳統解釋關注身分、個人意義與被理解的需要；同樣的關注可以有安靜或外向的表達，也不能證明藝術能力。",
+          "question": "第四型一定悲傷、內向或有藝術天賦嗎？"
+        },
+        {
+          "answer": "可能。差異感可以是你擔心不被理解或覺得自己缺少什麼，並不一定是主動追求獨特。要看身分與意義是否反覆影響你的選擇，而不是你是否喜歡顯眼。",
+          "question": "不想與眾不同，還可能認同第四型嗎？"
+        },
+        {
+          "answer": "採用常見做法的同時，也可以保有對自己重要的意義。可以具體辨認哪些選擇體現你的價值，哪些只是維持生活和合作所需。情境中的靈活性不自動否定第四型解釋。",
+          "question": "接受普通生活，會不會失去自己的特色？"
+        },
+        {
+          "answer": "第四型是核心模式，4w5是在第四型核心仍成立的前提下，借助相鄰第五型所重視的面向來解釋某些表現。喜歡獨處或讀書不能單獨證明4w5，應先比較核心問題。",
+          "question": "第四型與4w5有什麼關係？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-4",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-4",
+        "x-default": "/en/personality/enneagram/type-4",
+        "zh-CN": "/zh/personality/enneagram/type-4"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/heart",
+          "label": "情感中心：價值與被看見",
+          "relationship": "center_membership",
+          "target_identity_key": "center:heart"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/4w3",
+          "label": "4w3：第四型與第三型翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:4w3"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/4w5",
+          "label": "4w5：第四型與第五型翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:4w5"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4/instincts/self-preservation",
+          "label": "第四型的自保本能副型",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4/instincts/social",
+          "label": "第四型的社交本能副型",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4/instincts/one-to-one",
+          "label": "第四型的一對一本能副型",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在傳統九型解釋中，第四型希望確認自己是有意義、有個人特色的人，擔心自己的體驗被忽略、被誤解，或被一個通用標籤替代。注意力因此容易回到「這是否表達了我」「別人擁有的那部分，我為什麼沒有」。\n\n這套策略的邏輯是：把感受辨認清楚，把個人經驗表達出來，便能更接近自己，也更可能遇到真正理解自己的人。它不一定表現為張揚。一位安靜的人也可能在心裡反覆比較歸屬、差異和缺失；一位健談的人則可能透過分享經歷尋找共鳴。\n\n這裡解釋的是一種慣常策略如何運作，並沒有證明它來自某種固定的童年經歷。若你對其中一部分有共鳴，可以把它作為待檢驗的解釋，而不必據此確定終身身分。",
+          "key": "motivation_attention",
+          "title": "為什麼意義與差異會變得格外重要"
+        },
+        {
+          "body_md": "同樣是在聚會後難過，原因可能很不一樣：有人在意自己沒有被理解，有人在意照顧別人卻沒有得到回應，有人擔心關係出了問題，也有人只是疲憊或正經歷某種失去。\n\n第四型的解釋更關注：你是否反覆把這些體驗連到「我是誰、我與別人有什麼不同、我的生活少了什麼」。情緒強度本身並不提供這個答案。流淚、寫詩、審美獨特或願意談感受，可能來自興趣、訓練、文化或當時的經歷。\n\n可以追問一個具體問題：「如果對方準確理解了我的體驗，但沒有讚美我，我最重要的需要是否已經被回應？」答案可以幫助你辨認需要，但一次回答仍不足以判型。",
+          "key": "behavior_motive",
+          "title": "情緒敏感，為什麼還不能說明是第四型"
+        },
+        {
+          "body_md": "你為團隊寫了一段介紹，同事建議改成更簡單的表達。若第四型模式正在起作用，你可能首先感到：「刪掉這些細節，我想表達的經驗就不見了。」接著，你可能會把這個意見聽成對自己的否定，而不僅是對文字的調整。\n\n先區分兩件事：對方是否真的忽略了重要內容，以及你是否把一種表達方式當成唯一能呈現自己的方式。你可以問：「哪些細節影響理解？哪些個人觀點仍需保留？」這樣既能維護意義，也能讓作品繼續修改。\n\n選擇一般做法、準時交付或接受批評，都不代表你不重視真實表達。關鍵是，個人意義能否與讀者的需要和實際責任一起納入考量。",
+          "key": "decision_feedback_conflict",
+          "title": "從一次修改意見，看見作品與自我怎樣相連"
+        },
+        {
+          "body_md": "關注個人意義，可能幫助你為難以表達的感受找到名稱，發現別人忽略的體驗，並容納一件事中同時存在的愛、失落和矛盾。它也可能讓你認真對待作品、關係或生活方式為何值得投入。\n\n過度使用同一策略時，尚未擁有的東西可能比已獲得的支持更醒目。別人的自在被看見，背後的努力卻沒有；眼前可行的選擇被嫌棄，因為它不像想像中那樣特別。另一個代價是等到情緒或靈感合適才行動，結果讓重要的事情一直停留在想像裡。\n\n觀察代價時，不需要否定感受。更具體的問題是：「這份感受提供了什麼資訊？它又讓我遺漏了哪些事實和行動機會？」這些作用與代價是理解模式的線索，不是對創造力或表現的保證。",
+          "key": "strengths_tradeoffs",
+          "title": "細膩的作用，以及比較過多的代價"
+        },
+        {
+          "body_md": "伴侶沒有及時回覆你分享的經歷，你既失落，又想撤回訊息，看看對方會不會主動追問。若你真正需要的是對方認真理解你的經驗，可以直接說：「這件事對我很重要。我希望你先聽我說完，告訴我你理解了什麼，再一起想辦法。」\n\n同樣的撤回也可能為了休息、保護隱私或停止爭執；不能只憑退出行為認定動機。在協作中也是如此：堅持一個觀點可能為了保留真實經驗，也可能因為事實準確、職責要求或不公平待遇。\n\n即使對方的感受和你不同，也能認真理解你。把需要說清楚，也讓對方有空間說明自己能做到什麼、可用的時間和不同看法，比要求對方猜中更便於協商。",
+          "key": "work_relationship_examples",
+          "title": "被理解，可以從猜測變成明確請求"
+        },
+        {
+          "body_md": "這些比較來自傳統九型方法，適合用具體經歷逐步核對，不能憑形容詞分類。\n\n- 與[第二型](/zh-TW/personality/enneagram/type-2)比較：兩者都可能敏感、熱情並重視關係。第四型解釋更關注個人體驗是否被理解；第二型解釋更關注愛、被需要與關係連結，可能透過照顧和付出維繫關係。兩種需要可以同時存在，應比較哪一種更常影響行動。\n- 與[第三型](/zh-TW/personality/enneagram/type-3)比較：兩者都可能希望獲得認可，也可能認真經營表達。第四型更關注表達是否符合個人意義；第三型更關注成果能否證明自己的價值並獲得認可。例如，簡化一份作品更容易獲得認可，卻會刪去你在意的意義。比較最難放下的是失去個人意義，還是成果不被認可後覺得自己沒有價值。兩型都可以私下努力或調整表達，應觀察什麼反覆決定取捨，而不是用「真實」和「虛假」給人排序。\n- 與[第五型](/zh-TW/personality/enneagram/type-5)比較：兩者都可能獨處、內省或深入鑽研。第四型退出可能為了整理體驗、保留個人意義；第五型退出可能為了理解問題、準備參與並保護時間與精力。回來之前，可以分別核對：是否需要整理自己的體驗、確認個人意義，也可能希望別人理解；是否需要弄清問題，並有足夠的時間與精力參與。這些關注可以並存，要看什麼反覆決定你何時、怎樣回來。\n\n確認核心問題後，再看相鄰翼是否有幫助：4w3用第三型的呈現與目標關注修飾第四型，4w5用第五型的探索與私人空間關注修飾第四型。它們不是把兩個核心各分一半。可繼續閱讀[4w3](/zh-TW/personality/enneagram/wings/4w3)或[4w5](/zh-TW/personality/enneagram/wings/4w5)。",
+          "key": "wings_mistypes",
+          "title": "與2、3、5號比較：反覆在意的是什麼"
+        },
+        {
+          "body_md": "一次愉快地參加活動、使用標準方案或接受修改，不會自動排除第四型。你可能仍重視意義，只是能選擇更適合當時的行動。\n\n更有力的反例是：回顧不同生活領域後，身分、差異與缺失始終不是主要關注；困擾主要隨工作壓力、失去或具體關係問題變化，並在這些問題改善後明顯消退。此時，情境解釋可能比第四型更充分。\n\n也要允許新事實修改自己的敘述。若你一直認為「沒有人理解我」，卻能列出對方認真傾聽和持續支持的事例，需要修正的可能是這句話，而不是給對方要求對方達到更難做到的理解標準。",
+          "key": "counterexample",
+          "title": "哪些經歷會削弱解釋，哪些只是說明你有彈性"
+        },
+        {
+          "body_md": "[Enneagram Institute 的第四型說明](https://www.enneagraminstitute.com/type-4/)討論身分、個人意義與差異；[The Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供相似行為背後的不同關注。這些是傳統方法來源，不能證明每個人都屬於一個先天永久類型。\n\n[Hook 等人的2021年系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告九型研究的信度與效度證據並不一致，翼和類型間移動的研究支持有限。本頁據此把模式用於自我探索，不把它當作情緒診斷、創造力評價或費馬測評效度的證明。\n\n若還不確定核心，可回到[九型人格總覽](/zh-TW/personality/enneagram)比較各型關注的不同問題；若想理解第四型與2、3號的共同主題，可閱讀[情感中心](/zh-TW/personality/enneagram/centers/heart)。",
+          "key": "use_boundary",
+          "title": "傳統解釋與研究證據，各能告訴你什麼"
+        },
+        {
+          "body_md": "選擇一件你在意、但因「不像我」或「還沒有感覺」而遲遲未做的小事，例如寫一段說明、聯絡一位朋友或整理一處空間。\n\n先寫下三句話：「現在的感受是……」「我希望表達的意義是……」「今天可以採取的行動是……」。讓動作足夠小，例如寫出初稿的一段，或傳送一則明確表達想聯絡對方的訊息。完成它不要求情緒先消失。\n\n之後回看：行動是否保留了你看重的意義？普通做法是否也容納了個人選擇？若有回饋，分開記錄對作品的意見和你對自己的判斷。也保留一個更能由時間、技能或現實條件解釋的困難。\n\n這是嘗試另一種行動方式，不是判型測試，也沒有規定你必須得到某種感受。",
+          "key": "observation_exercise",
+          "title": "試一次：讓意義進入行動，不等待完美狀態"
+        }
+      ],
+      "seo": {
+        "description": "第四型是一種傳統九型觀察假設：注意力可能反覆回到身分、個人意義、感到不同，以及尚未擁有或正在嚮往的部分。創作、悲傷、獨特的審美品味和情緒語言都不能證明動機；文化表達、專業訓練、失去、排斥和當下處境可能產生相似表現。",
+        "title": "九型人格4號：身分、意義與被理解"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-4",
+      "source_hash": "51573b956a304506876ba1ace449f9e448268b2d307fef0c1c6d99f4f6a8f138",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "第四型關注的核心問題是：什麼對我有真實意義，我獨特的體驗能否被看見？它描述一種藉由感受、表達與差異來確認自我價值的傳統九型模式。細膩、悲傷或愛創作都不足以判型；更有用的是觀察，身分與意義為何反覆成為選擇、回饋和關係中的關鍵。",
+      "title": "九型人格4號：身分、意義與被理解的需要"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "b82cf4660673a80671bff0a6a6cf33e7e6461326c763d87bed5575e23fb296a0"
+}

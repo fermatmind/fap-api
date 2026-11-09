@@ -1,0 +1,204 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-7/instincts/one-to-one",
+    "entity_key": "type-7/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-7/instincts/one-to-one"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-7/instincts/one-to-one"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-7/instincts/one-to-one",
+      "code": "type-7/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-7/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不是。不同學派的口徑涉及親密夥伴、密友、活力或吸引強度，範圍並不完全相同。友誼或合作也可以值得觀察，但單純投入、喜歡深聊或享受創作，不能確認副型。還要看連結怎樣與第七型動機共同影響行動。",
+          "question": "只有戀愛很投入，才算一對一關注嗎？"
+        },
+        {
+          "answer": "接受拒絕會削弱忽略事實、施壓維持強度的具體解釋，不會單獨排除連結與活力關注。若多次經歷也沒有本頁描述的想像擴張或繞開失望過程，則應進一步降低整個解釋的權重，不用壓抑或隱藏副型來維持它。",
+          "question": "我願意接受拒絕，會不會說明不是這個副型？"
+        },
+        {
+          "answer": "不夠。新鮮感、專業興趣、創作狀態和稀缺機會都可能造成同樣的興奮。要分別記錄個體連結的作用、事實與想像的差距，以及後來如何修改行動。專案很有趣不等於一對一本能，興奮很強也不等於第七型。",
+          "question": "很容易被一個新點子吸引，已經足夠判斷嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-7/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-7/one-to-one",
+        "x-default": "/en/personality/enneagram/type-7/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-7/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7",
+          "label": "第七型核心介紹",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7/instincts/self-preservation",
+          "label": "第七型自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7/instincts/social",
+          "label": "第七型社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "有人遇到一個談得來的夥伴，很快想到一起旅行、合作或改變生活。這可以是真實的靈感，也可能是在有限了解上提前建立了一整幅未來。一對一第七型的解釋關注後一個過程如何發生：令人興奮的連結讓選擇與滿足顯得近在眼前，而平淡、遺憾和限制暫時退到了背景。\n\n核心仍是第七型對於滿足、自由和值得期待的可能性的關注。[Enneagram Institute 的第七型介紹](https://www.enneagraminstitute.com/type-7/)提供的是傳統動機背景，而不是關於某個人的事實判斷。一個人可以在關係中保持承諾、容納悲傷，也可以安靜地著迷；外顯熱烈或始終快樂都不是必要條件。\n\n可以觀察一條具體鏈條：對方實際說了什麼；自己從中想到了什麼；因此增加了哪些計畫；後來出現的普通事實有沒有改變行動。如果這種鏈條沒有出現，單純喜歡一個人或投入一項創作，不足以支持本頁的解釋。",
+          "key": "future_in_encounter",
+          "title": "相遇為什麼會像一個新世界的入口"
+        },
+        {
+          "body_md": "[Narrative Enneagram 的 one-to-one 口徑](https://www.narrativeenneagram.org/instinctual-subtypes/)包含親密夥伴、密友與活力；[Enneagram Institute 的 sexual／attraction 口徑](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更強調吸引、刺激與交流中的強度。兩者有交集，但一段穩定的親密關係與強烈的吸引體驗不是同一件事，不能把兩個標籤完全互換。\n\n本頁使用一對一作為頁面身分，並在需要時說明吸引與著迷。它不只討論性或戀愛，也可以涉及一位朋友、創作夥伴，或一段令人特別投入的交流。不過，只有一個專案很有趣，仍不能據此認定一對一本能；還要辨別個體連結、活力與第七型可能性怎樣參與其中。\n\n喜歡深度談話、性生活多或少、戀愛頻率和社交人數，都沒有足夠資訊完成這種辨別。",
+          "key": "school_terms",
+          "title": "一對一與 sexual／attraction 的交集和差別"
+        },
+        {
+          "body_md": "設想朋友籌辦週末修理工作坊：場地取消、預算減半，一位合作者明確說自己只能參加兩小時。你們剛剛聊出一個很有吸引力的新方向，他也表達了興趣。\n\n一對一第七型的解釋會追問：你是否把這次交流理解成一個更大的共同未來？有效的策略是把興奮轉成兩小時內能完成的小嘗試，再請對方確認。過用時，你可能繼續介紹長期合作、忽略普通籌備，或把「有興趣」當成對方已經願意持續投入。可觀察的差距，是對方已經確認的兩小時參與與自己推定的長期合作承諾；後者尚未得到對方同意，不必猜測任何人的依戀或內心。\n\n在同一事件下，自保第七型的解釋優先找可用場地、工具和方便舒服的安排；社群第七型的解釋優先維持共同目的、參與位置和責任分配；一對一解釋更關注這位合作者帶來的鮮活方向。三者都可能提新方案，區別在什麼讓方案值得追，以及事實收緊之後如何修正。\n\n尊重兩小時限制，能削弱「必須維持強度而忽略事實」的解釋，卻不會自動排除對連結與活力的關注。這些原創情境用於比較過程，不把尊重邊界或失望反應當成單一判型題。",
+          "key": "two_hour_partner",
+          "title": "合作者說「只有兩小時」之後"
+        },
+        {
+          "body_md": "Narrative 對這個副型的傳統描述不僅談被吸引，也談透過個人感染力把別人帶進新想法。日常合作中，好的版本可能是把一個還模糊的方向講得生動，讓別人願意試一次。過用時，敘述的吸引力可能超過事實：一個尚未確認的機會被說成即將發生，別人的沉默被當成贊成。\n\n先區分自己的興奮與對方的同意。邀請可以說明哪些已知、哪些只是願景、需要什麼投入，以及對方怎樣拒絕而不付出關係代價。對方沒有義務維持你的興奮，也不需要證明自己足夠開放才有資格拒絕。\n\n孤獨、新環境、創作初期、稀缺機會、銷售激勵或權力不等，都可能放大同樣的表現。如果興奮主要來自這些條件，條件改變後就消退，應採用更直接的解釋。若存在強迫、欺騙或不能安全退出的事實，先處理具體關係條件，不用副型語言把它們重新解釋成魅力或深度連結。",
+          "key": "suggestion_both_ways",
+          "title": "著迷可以被帶動，也可以帶動別人"
+        },
+        {
+          "body_md": "第四型與第七型的傳統解釋都可能涉及強烈體驗和理想化。遇到令人失望的事時，可以問：我更在意這段經歷是否真實表達自己、哪裡缺少深刻滿足，還是急於尋找另一個可能性，讓生活繼續值得期待？第四型也會期待未來，第七型也會認真悲傷，所以一次反應不能決定核心。[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供的是觀察方向，不是固定情緒清單。\n\n與第二型比較時，吸引力和熱情都可能很突出。對方不需要幫助、也不願繼續這個計畫之後，最難放下的是被喜歡和被需要的位置，還是那個已經展開的興奮未來？答案需要本人確認，也可能顯示幾種關注共同存在。\n\n若跨多個相近情境，連結中的想像並未反覆承擔繞開失望、擴張選擇的作用，就應降低對本頁解釋的信心。不要把缺少這種過程改稱為隱藏的一對一第七型。若只是「忽略事實」的假設不成立，則撤回這一假設即可，不需要否認所有親密與活力關注。",
+          "key": "similar_intensity",
+          "title": "與第四型、第二型相似時，繼續問什麼"
+        },
+        {
+          "body_md": "選擇一次自願、低風險的交流或合作邀請。寫三欄：對方明確說過、做過什麼；我據此推斷了什麼；我希望發生什麼。把後兩欄當成自己的內容，不能當作對方的承諾。\n\n提出一個雙方都能撤回的小步驟，並請對方確認時間、範圍與意願。後續遇到不方便的事實，例如只能參與一次、不願公開展示、節奏比預期慢，先修改計畫，不立即用更大的願景淡化限制。保留原有責任，也讓這次接觸出現普通、不那麼精彩的部分。\n\n回顧時記錄：我有沒有真的調整；雙方是否有自由拒絕的條件；新鮮感下降後還有什麼值得了解；下一步是基於確認事實，還是主要為了恢復興奮？合作者可以幫助區分靈感與約定，用清楚、友善的表達代替模糊附和。\n\n這不是延遲必要決定或要求別人配合觀察。若交流涉及現實風險，先處理風險。若想像能持續隨事實調整，也沒有反覆用新連結繞開失望，就撤回本頁中有關理想化或迴避的解釋。對真實關係保持好奇，比保住副型名稱更有用。",
+          "key": "facts_and_small_step",
+          "title": "讓想像接受事實檢驗"
+        },
+        {
+          "body_md": "三種本能是傳統的生活關注模型，不意味著一個人只有一類需要。第七型歸頭／思考中心；六翼或八翼討論相鄰核心的修飾，不代替連結領域的關注，也不能由第二高分直接確定翼或本能。\n\n本頁討論第七型與一對一主導關注結合的可能解釋，屬於九種核心型×三種主導本能的二十七個組合。把三個本能全部排出先後，會得到六種完整排序，回答的是另一個層次的問題。著迷於這位合作者，不能說明資源與群體參與誰排第二、誰排第三，也不能推出哪項是盲點。核心動機與主導關注都可以暫時未定。「反型」等名稱屬於學派傳統，不是科學診斷或已驗證的神經機制。\n\n[Hook 等人 2021 年綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告信度與效度的證據並不一致。本頁沒有證明費馬題本或副型評分有效，也不能推斷親密能力、性慾、創造力、關係相容性或未來結果。傳統來源和特定量表研究不能自動變成費馬的產品證據。\n\n如果還不確定一段興奮是否來自第七型核心，可讀[第七型核心介紹](/zh-TW/personality/enneagram/type-7)。若吸引其實主要圍繞群體參與和共同目的，可對照[第七型社群副型](/zh-TW/personality/enneagram/type-7/instincts/social)。",
+          "key": "evidence_and_next",
+          "title": "這是一種解釋，不是相容性結論"
+        }
+      ],
+      "seo": {
+        "description": "第七型一對一副型是傳統且證據有限的假設，把第七型可能性與著迷、理想化可能性、強度及對人或體驗的投射結合。興奮不能證明副型；新鮮感、吸引、創作投入、操縱與權力不等、未滿足需要與關係初期熱情都可能產生相似表現。",
+        "title": "第七型一對一副型：著迷、理想化可能性與強度的觀察假設"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-7/instincts/one-to-one",
+      "source_hash": "7a6223dd3dcfae82d078f3c5616541da6c6bb8934dfab7d152d81421aa3152d8",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "一對一第七型的傳統解釋關注：某個人、交流或體驗如何承載一個令人興奮的未來。它保留第七型尋找滿足與選擇餘地的動機，同時把注意力帶到連結、吸引和活力。要辨別的是想像怎樣影響行動、怎樣接受事實修正，而不是興奮有多強或戀愛有多少。",
+      "title": "第七型一對一副型：讓著迷遇見真實的連結"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "b8427cfe5639430b4c0ea8b6a4fca791d6989a47ae592c4258bec92d495fa1f8"
+}

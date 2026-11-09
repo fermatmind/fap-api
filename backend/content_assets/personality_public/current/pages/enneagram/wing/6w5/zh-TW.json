@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/6w5",
+    "entity_key": "6w5",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/6w5"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/6w5"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/6w5",
+      "code": "6w5",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "6w5",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能自動確定。傳統翼只討論核心型的相鄰影響，分數排序本身沒有解釋五號相關做法為何出現。應先比較六號核心，再看獨立理解和準備是否在多種情境中形成有區分力的修飾，並檢查職責、訓練和近期經歷。",
+          "question": "六號最高、五號第二高，就可以確定是 6w5 嗎？"
+        },
+        {
+          "answer": "不必。這些外在特徵不能替代動機。一個人可以很健談，同時偏好先弄懂依據；也可以安靜謹慎，但主要是在遵守工作要求。職業、表達方式和能力無法據此確定翼型。\n\n私下準備也不能直接證明自保本能佔主導。用維修例子分別追問：可靠支援是否是反覆出現的六號核心關注，獨立理解是否增加了五號翼的側重？再另外觀察這種關注更牽動哪個領域：家庭資源、群體中的角色，還是親密關係。安靜地審查條款可以服務於這些不同需要，也可能只是現實要求；保留隱私不能同時確定翼和本能。",
+          "question": "6w5 必須內向、冷靜或擅長技術嗎？"
+        },
+        {
+          "answer": "一次及時停止更可能說明策略使用得合適。若長期觀察發現獨立準備並非你的偏好，或核對關注的中心並不貼近六號，再重新評估相應解釋。無需把有效行動視作人格標籤的反例。",
+          "question": "如果我能不再檢查，是否說明原來的 6w5 判斷錯了？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/6w5",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:6w5",
+        "x-default": "/en/personality/enneagram/wings/6w5",
+        "zh-CN": "/zh/personality/enneagram/wings/6w5"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6",
+          "label": "九型人格 6 號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5",
+          "label": "九型人格 5 號核心型",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/6w7",
+          "label": "6w7 翼型",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:6w7"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在傳統九型框架中，六號的核心問題涉及可靠感：依據能否信賴，支援是否穩固，遇到變化時怎樣因應。五號翼可能讓這份關注更多透過理解原理、核對來源、事先準備來表達。6w5 因而可以同時表現出獨立分析和尋求可靠支援，兩者並不矛盾。\n\n比如，接受一項新安排之前，你可能先讀清條款，再詢問對方出了問題如何處理。讀條款是在檢查依據，追問後續是在檢查支援是否真實存在。即使準備方式帶有五號色彩，關注的中心仍可能是「這件事是否靠得住」。這是對[六號傳統動機描述](https://www.enneagraminstitute.com/type-6/)與五號準備方式的解釋，不是已經證實的人格機制。\n\n翼不是兩個核心型各佔一半，也不是在六號之後再加一個完整的五號身分。在這裡，6 回答反覆關注什麼，w5 提供一種可能的處理方式。",
+          "key": "core_and_modifier",
+          "title": "想弄明白，仍然是為了找到可以信賴的立足點"
+        },
+        {
+          "body_md": "設想家中一件普通電器需要維修，兩個方案價格接近，都在預算內，也都沒有緊急安全問題。以下是幫助比較的假設場景，不是判型題。\n\n6w5 的解釋會關注：故障判斷是否有依據，維修承諾是否清楚，自己能否先弄懂關鍵步驟，再把事情交出去。6w7 同樣可能關心可靠性，卻更傾向於找有經驗的人商量、尋找可行替代辦法，或安排一個小範圍試用，讓支援和選擇推動決定。兩者的差別在於建立把握的路徑，而不是誰更聰明、誰更愛說話。\n\n[5w6](/zh-TW/personality/enneagram/wings/5w6) 也可能認真查資料。需要追問的是：你更難放下的是「這份安排是否可靠，出問題時有沒有支援」，還是「我尚未真正理解，接下來會不會超出自己的能力、時間和精力」？前者更接近六號核心的問題，後者提示應重新比較五號核心。一個人可以同時有兩種顧慮，要看它們怎樣反覆影響決定。\n\n一個有用的變化是：讓可靠性疑問得到回答，但保留一些不影響決定的原理細節。你是否已經願意行動？再反過來，假設原理已懂，合作承諾卻仍含糊，你是否重新開始核對？這些變化比「我喜歡研究」更有資訊量。",
+          "key": "repair_decision",
+          "title": "同一項維修決定：6w5、6w7 和 5w6 看什麼"
+        },
+        {
+          "body_md": "這種策略用得合適時，能發現含糊條款、辨別尚未查證的資訊，並讓交接更清楚。你不必依賴一句籠統的「相信我」，而可以說明自己依據什麼作出選擇。\n\n過用的代價是，原本為了行動的準備變成了新的前置條件：一份資料引出更多疑問，一次確認又要求下一次確認，別人看不到你正在擔心什麼，也不知道什麼時候才能開始。延誤還可能帶來額外成本，例如錯過可用時段、讓共同承擔任務的人只能等待。\n\n辨別額外核對是否必要，可以問：「它回答了哪個尚未解決、會改變決定的問題？」新的實際風險值得繼續查；如果事實沒有變化，只是暫時安心之後又想再查一次，就適合先明確停止條件。目標是讓準備支援行動，而不是要求自己獲得完全確定。",
+          "key": "preparation_use_and_cost",
+          "title": "準備能保護決定，也可能不斷推高行動門檻"
+        },
+        {
+          "body_md": "如果跨多種日常情境，你並不反覆關注可信依據、支援或備案，而主要在保護精力、保持獨立理解，那麼需要重新考慮六號核心是否合適，不能只調整翼標籤。\n\n如果六號核心仍有解釋力，但在沒有職位要求、保密限制或時間差異時，你通常更願意透過討論和嘗試建立把握，很少主動選擇較深入的獨立準備，那麼五號翼的依據可能不足。也可以暫時只用「六號」描述，不必在兩個翼之間強行選一個。\n\n如果深入核對只發生在稽核任務、專業學習或一次故障之後，職責和近期經歷可能已足夠解釋它。應當比較這些要求減弱後的行為。\n\n及時接受同事的結論、分享未完成的分析，或在條件充分後停止核對，通常只能說明你能靈活使用策略。它們不會自動否定 6w5。真正需要重新評估的是：換了情境以後，五號式準備是否仍是一種有辨別力的偏好，而不是任何行為都能被這個標籤解釋。",
+          "key": "different_counterexamples",
+          "title": "不同反例，削弱的是不同解釋"
+        },
+        {
+          "body_md": "選擇一件可逆、低風險的小事，例如預約普通維修或確定一項家庭採購。不要用涉及重大安全後果的決定來試驗停止核查。\n\n開始前寫下三項內容：真正會改變選擇的問題、可接受的證據、作出決定的時間。例如：「確認費用範圍和送回重修時的處理方式；以書面說明及一次明確答覆為依據；今晚決定。」把只是想進一步了解、但不會改變選擇的問題另列出來。\n\n達到條件後，把決定和仍存在的不確定性一起告訴共同參與的人：「這些關鍵點已確認，剩下這點我還不知道，但它不影響這次選擇。」如想重新開啟核對，先指出出現了什麼新事實。\n\n事後比較：核對是否發現了實際問題？哪一部分只是延長準備？開始行動後得到的資訊，是否比繼續私下推演更有用？這項練習幫助調整準備方式，不負責證明翼型。",
+          "key": "enough_preparation_practice",
+          "title": "給下一次核對寫一個「準備足夠」的條件"
+        },
+        {
+          "body_md": "相鄰翼來自九型傳統；[Enneagram Institute 的翼說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)也討論了翼影響不明顯及不同學派的分歧。[2021 年系統綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)指出，支持翼理論的研究很少。因此，本頁適合幫助你提出和比較解釋，不用來確定永久身分、診斷、能力或未來表現；引用的傳統和研究也不證明費馬測評的效度。\n\n如果仍不確定為什麼核對，先讀[六號核心型](/zh-TW/personality/enneagram/type-6)。如果六號核心較貼近，但想比較另一種建立把握的方式，再讀[6w7：六號與七號翼影響](/zh-TW/personality/enneagram/wings/6w7)。",
+          "key": "evidence_and_next",
+          "title": "把 6w5 當作可檢驗的解釋，再決定讀什麼"
+        }
+      ],
+      "seo": {
+        "description": "6w5 是證據有限的翼型觀察：六號對不確定性、信任與備案的關注仍是核心，五號可能增加證據審查、分析和私下準備。這些行為不能單獨確認 6w5；研究、技術審查、保密、合規工作和專家職位也會要求相似做法。",
+        "title": "6w5 九型人格：六號核心、五號翼與常見誤判"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/6w5",
+      "source_hash": "a3f04c9fd18a3f6b2876d839110a842dff6b451136cf46142622c0afcbb2ce4e",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "6w5 是以六號為核心、五號為相鄰翼影響的傳統描述。它關注可靠的依據、支援和備案，並可能偏向透過理解問題、審查資訊和獨立準備獲得行動把握。關鍵不是「夠不夠理性」，而是準備最終服務於什麼，以及什麼時候能夠開始行動。",
+      "title": "6w5：六號核心如何受到五號翼影響"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "3e3d02d06810f65893845675b2ad1d07faf560bad49de45a8b6683f3849feced"
+}

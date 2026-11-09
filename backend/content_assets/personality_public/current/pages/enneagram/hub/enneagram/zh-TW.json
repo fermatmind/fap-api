@@ -1,0 +1,324 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram",
+    "entity_key": "enneagram",
+    "entity_type": "hub",
+    "framework": "enneagram",
+    "page_kind": "hub",
+    "slug": "enneagram"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram",
+      "code": "enneagram",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "enneagram",
+      "entity_type": "hub",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不必。很多關注可以共存，情境與角色也會影響行動。先比較兩三種候選在重要事情衝突時優先保護什麼，再找相似經歷與反例。共鳴可以幫助提出問題，不能獨自確認類型。",
+          "question": "好幾種模式都像我，必須馬上確定一個嗎？"
+        },
+        {
+          "answer": "不能。最高分提供一個值得比較的候選，並不確認類型。還需與其他候選一起檢查動機、反覆出現的代價和反例。結果不能單獨證明能力、醫學狀態、職業適合度或未來成就，其他量表的研究也不能自動證明費馬題本的這些用途。",
+          "question": "九型測驗中，最高分就能確定我的類型嗎？"
+        },
+        {
+          "answer": "前面的數字表示主模式。6w5 仍主要比較可靠依據、支援與保障；5w6 仍主要比較理解、能力和有限資源。它們都可能分析和查資料，不能僅憑外在風格或第二高分互換。",
+          "question": "6w5 和 5w6 有什麼關鍵差別？"
+        },
+        {
+          "answer": "先分別理解程度選擇和成對取捨的含義，不直接比較兩份數值。保留各自較突出的候選，檢查它們是否能解釋不同情境中的動機與代價；候選順序變化本身不證明人格變化，也不要求反覆重測直到得到唯一號碼。",
+          "question": "105 題與 144 題結果不同，該怎麼繼續？"
+        },
+        {
+          "answer": "不能。中心將 8／9／1、2／3／4、5／6／7 按傳統共同主題分組；本能討論自我保存、社會和一對一等生活領域的注意。每種核心模式都可以討論三種本能關注。",
+          "question": "中心和本能都分三組，能一一對應嗎？"
+        },
+        {
+          "answer": "要先看來源採用的定義。Narrative 的 one-to-one 涵蓋親密關係、密切友誼、性與生命活力；Enneagram Institute 的 sexual／attraction 特別強調吸引、刺激和強度，並提醒所有本能關注都可能重視一對一關係。不能只靠喜歡深談判定，也不能據此判斷性取向。",
+          "question": "one-to-one 與 sexual 是不是同一個意思？"
+        },
+        {
+          "answer": "不能這樣判斷。幫助可能來自關心、責任或維持和平；整潔可能是工作要求；強勢也可能來自檢驗危險或堅持原則。需要比較行為背後的關注和反覆出現的代價。",
+          "question": "幫助別人、愛整潔或很強勢，分別就是 2、1、8 嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram",
+        "reciprocal": true,
+        "translation_group": "enneagram:hub:enneagram",
+        "x-default": "/en/personality/enneagram",
+        "zh-CN": "/zh/personality/enneagram"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram/centers/gut",
+          "label": "九型人格本能中心",
+          "relationship": "framework_center",
+          "target_identity_key": "center:gut"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/heart",
+          "label": "九型人格情感中心",
+          "relationship": "framework_center",
+          "target_identity_key": "center:heart"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/head",
+          "label": "九型人格思維中心",
+          "relationship": "framework_center",
+          "target_identity_key": "center:head"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1",
+          "label": "九型人格1號核心型",
+          "relationship": "framework_core_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2",
+          "label": "九型人格2號核心型",
+          "relationship": "framework_core_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3",
+          "label": "九型人格3號核心型",
+          "relationship": "framework_core_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4",
+          "label": "九型人格4號核心型",
+          "relationship": "framework_core_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5",
+          "label": "九型人格5號核心型",
+          "relationship": "framework_core_type",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6",
+          "label": "九型人格6號核心型",
+          "relationship": "framework_core_type",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7",
+          "label": "九型人格7號核心型",
+          "relationship": "framework_core_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8",
+          "label": "九型人格8號核心型",
+          "relationship": "framework_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9",
+          "label": "九型人格9號核心型",
+          "relationship": "framework_core_type",
+          "target_identity_key": "core_type:type-9"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "九型人格是一套傳統的人格解釋框架，用九種模式討論反覆出現的關注與動機：你最容易注意什麼，什麼讓你覺得自己有價值或能應對生活，以及重要的東西受到威脅時，你習慣怎樣回應。\n\n閱讀目錄：[九種動機速查](#shared_event) · [三中心](#centers) · [側翼](#wings) · [三本能](#instincts) · [105／144 題本與結果](#forms) · [科學證據](#evidence) · [常見問題](#faq)。\n\n跳到本頁類型說明：[1號](#type_1) · [2號](#type_2) · [3號](#type_3) · [4號](#type_4) · [5號](#type_5) · [6號](#type_6) · [7號](#type_7) · [8號](#type_8) · [9號](#type_9)。\n\n這裡的“模式”不只是性格優點或缺點，而是一條可以觀察的連結：在意某件事，採用一種策略，得到一些幫助，也可能因策略用得過多而付出代價。數字沒有好壞與高低之分。\n\n[Enneagram Institute 的系統說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)與[The Narrative Enneagram 的總覽](https://www.narrativeenneagram.org/the-enneagram/)都重視內在動機，但它們屬於九型傳統的解釋來源。閱讀時可以先問“這個解釋是否照亮了我的經驗”，並把它與“這個分類是否得到充分科學支持”分別考慮。\n\n一個人可能同時在意標準、關係和成果。主模式候選要比較的是：這些關注發生衝突時，哪一種反覆取得優先位置。一次行動、一個職業或一個討喜的暱稱，都不足以確認類型。\n\n想進一步理解如何把類型結果當作觀察線索，可讀[九型人格結果解讀：核心動機與候選比較](/zh/articles/enneagram-personality-test-explained)。",
+          "key": "understanding_motivation",
+          "title": "九型人格是什麼？先看行為背後的動機"
+        },
+        {
+          "body_md": "你和幾位朋友籌備一場社群分享會。活動臨時換了場地，負責人準備立即發布通知。幾個人都說：“再等十分鐘，我們先討論一下。”外在行動相同，卻可能服務於下面這些不同關注。\n\n| 類型 | 這十分鐘可能想保護什麼 | 可能想先解決的問題 |\n| --- | --- | --- |\n| [1號](/zh-TW/personality/enneagram/type-1) | 正確、公平與負責 | 新安排是否讓部分參與者受到不合理對待？ |\n| [2號](/zh-TW/personality/enneagram/type-2) | 關心與被需要所帶來的連結 | 那位已經忙了一天的朋友需要什麼支援？ |\n| [3號](/zh-TW/personality/enneagram/type-3) | 有價值、得到認可的成果 | 怎樣調整才不至於讓活動失去成效？ |\n| [4號](/zh-TW/personality/enneagram/type-4) | 真實表達與個人意義 | 換場地後，活動還能呈現我們真正想說的東西嗎？ |\n| [5號](/zh-TW/personality/enneagram/type-5) | 理解、應對能力與有限資源 | 新場地具體需要做什麼，我能承擔多少？ |\n| [6號](/zh-TW/personality/enneagram/type-6) | 可靠依據、支援與保障 | 場地確認了嗎，失敗時有沒有可信的備選安排？ |\n| [7號](/zh-TW/personality/enneagram/type-7) | 選擇空間與值得期待的體驗 | 能不能換一種更有趣、不會被限制住的形式？ |\n| [8號](/zh-TW/personality/enneagram/type-8) | 自主與保護邊界的力量 | 誰決定了這件事，大家是否被迫接受了不合理條件？ |\n| [9號](/zh-TW/personality/enneagram/type-9) | 內心平穩與關係和平 | 能否讓不同意見被聽見，避免大家因此分裂？ |\n\n這些是供比較的可能理由，不是九種人的固定臺詞。同一種關注也可能支援立即發通知：1 為了及時履行告知責任，2 為了讓參與者少擔心，6 為了避免資訊不明，9 為了結束懸而未決的緊張。\n\n更有區分力的問題是：如果標準、成果、資源和關係無法同時照顧，你最不願犧牲哪一個？還要檢查，這十分鐘是否只是完成你擔任負責人的必要職責。",
+          "key": "shared_event",
+          "title": "九種動機速查：同樣等十分鐘，理由有何不同"
+        },
+        {
+          "body_md": "1 模式容易看見現實與應有標準的落差，希望自己的行動經得起良心與原則的檢驗。它在意的不只是“不能出錯”，還可能是“如果明知不妥卻放任，我就沒有盡到責任”。這種完整性與正確性的關注，是[1 型傳統描述](https://www.enneagraminstitute.com/type-1/)的重點。\n\n它的有效作用是把問題指出來，建立公平、清晰和可遵守的標準。分享會換場地時，這種關注可能促使團隊確認無障礙條件或兌現原有承諾。代價出現在所有偏差都變成必須糾正的過錯時：必要改進與個人偏好難以分開，對自己和別人持續不滿，休息也顯得不夠正當。\n\n與 6 比較時，可以問：即使可靠的人已確認方案安全，我是否仍因它違背原則而反對？與 3 比較時，可以問：即使結果很受歡迎，我是否仍無法接受取得成果的方式？\n\n一次小調整是先說清哪項標準必須滿足，哪項只是自己的偏好，再觀察這種區分是否讓討論更具體。",
+          "key": "type_1",
+          "title": "1號：維護原則，努力把事情做得正確"
+        },
+        {
+          "body_md": "2 模式容易把注意力放在人身上：誰需要幫助，我怎樣才能讓對方感到被關心，我們的關係是否仍然親近？它可能透過提供支援感到自己值得被愛、對別人有意義。[2 型傳統描述](https://www.enneagraminstitute.com/type-2/)既討論溫暖與慷慨，也討論被需要和得到回應的願望。\n\n這種策略能讓實際困難得到及時照顧。籌備活動時，它可能發現那個始終說“我沒事”的朋友已經承擔太多。代價是自己的需要被隱藏在幫助之中：沒有說出口的期待不斷增加，對方沒有回應時，失落容易變成委屈、提醒付出或干預。\n\n與 9 比較時，留意你更怕“我不再被需要或重視”，還是“表達不同意見會打破平靜”。兩者都可能答應幫忙，但理由並不一樣。幫助別人也可能只是責任、友情或專業訓練，不能單獨確認 2。\n\n可以先詢問對方是否需要這份幫助，同時直接說明自己能做多少、需要什麼，觀察不靠額外付出維持關係時會有什麼感受。",
+          "key": "type_2",
+          "title": "2號：希望被愛，透過照顧建立親近"
+        },
+        {
+          "body_md": "3 模式關心什麼算成功，以及怎樣讓自己的貢獻得到認可。成功不一定指收入或職位，也可能是可靠的家長、優秀的學生，或能把社群活動辦好的人；具體標準會隨環境而變。[3 型傳統描述](https://www.enneagraminstitute.com/type-3/)把這種追求與個人價值感連結起來。\n\n它的有效作用是抓住目標、適應條件，把投入轉化為可見結果。場地變化後，它可能迅速重排流程，保住活動最重要的成果。代價是受到獎勵的表現逐漸替代真實意願：總要顯得能幹，承認疲憊和失敗變難，也可能把感受當作妨礙推進的事情。\n\n與 1 比較時，看原則與成績衝突後哪一個更難放下；與 7 比較時，看你更想完成一個能證明價值的目標，還是保留更多令人期待的體驗。\n\n可以分別寫下“別人會認可什麼”和“我自己真正想完成什麼”。兩者有差異時，先承認差異，不急著把它包裝成同一個目標。",
+          "key": "type_3",
+          "title": "3號：希望有價值，把能力變成被看見的成果"
+        },
+        {
+          "body_md": "4 模式關注自己是誰、什麼對自己有特殊意義，以及內在經驗是否得到忠實表達。注意力也可能落在缺失上：別人似乎擁有某種輕鬆、歸屬或完整，而自己沒有。[4 型傳統描述](https://www.enneagraminstitute.com/type-4/)討論的是身份與意義的關注，不能簡化成“有藝術天賦”或“情緒多”。\n\n這種關注能保留細微感受，發現統一方案遺漏的個人經驗。分享會換場地時，它可能提醒大家：流程仍然完整，但原本想營造的交流意義已經改變。代價是不斷與理想狀態或別人比較，讓眼前已有的東西顯得不夠，行動也可能一直等待合適的感受。\n\n與 3 比較時，可以問：獲得認可但表達不再像自己，是否比成果不夠出色更難承受？與 5 比較時，看退後獨處主要是在整理個人感受，還是保護精力並弄清問題。\n\n可以同時記錄“還缺少什麼”和“現在已經有什麼”，再做一項不必等到情緒完全合適的小行動。這是一種觀察選擇，不是成長效果保證。",
+          "key": "type_4",
+          "title": "4號：尋找真實身份，希望個人經驗被理解"
+        },
+        {
+          "body_md": "5 模式容易追問自己是否理解得足夠，以及時間、精力、知識和空間能否承受外界要求。面對複雜任務，它可能先退後研究，儘量在參與之前建立可獨立使用的理解。[5 型傳統描述](https://www.enneagraminstitute.com/type-5/)的核心涉及能力感，而非智力等級。\n\n這種策略能帶來深入分析、獨立判斷和清楚的投入邊界。在新場地的資訊混亂時，它可能整理出真正需要解決的技術或安排問題。代價是準備不斷延長，保存資源變成迴避參與，實際合作與關係需要反而越來越陌生。\n\n與 6 比較時，問自己：缺的是“我還沒理解到足以應對”，還是“方案和支援還沒有可信到足以行動”？與 9 比較時，留意退後是在維護個人邊界，還是為了減少意見碰撞。\n\n可以為準備設一個具體終點，例如弄清兩項關鍵條件後參與一次短討論。隨後看實際消耗與預期是否相同，而不是預先認定自己一定承受不了。",
+          "key": "type_5",
+          "title": "5號：希望能夠應對，透過理解和邊界保存資源"
+        },
+        {
+          "body_md": "6 模式關注依據是否可信、承諾是否可靠、困難出現時能否得到支援與指引。它可能信任熟悉的夥伴或既有程序，也可能不斷檢驗甚至挑戰這些依靠。[6 型傳統描述](https://www.enneagraminstitute.com/type-6/)同時包含謹慎與主動對抗威脅的表現，因此外表大膽並不能排除這項關注。\n\n它的有效作用是發現漏洞、把責任說清楚，維護經得起考驗的合作。活動臨時換場地時，它可能要求確認聯絡人、開放時間和備用方案。代價是確認沒有終點：剛得到的保證又成為新的疑點，遲遲不能決定，或者把尚未發生的危險當成已經確定的事實。\n\n與 1 比較時，問自己更擔心違背標準，還是失去可靠保障；與 8 比較時，看挑戰主要是在檢驗危險與可信度，還是維護自主、拒絕被控制。\n\n可以先確定什麼資訊足夠支援這次決定，並區分已發生的問題與設想的風險。新證據出現時再調整，觀察不斷索取確認是否真的增加了可用資訊。",
+          "key": "type_6",
+          "title": "6號：尋找可靠的支援，在不確定中確認可信依據"
+        },
+        {
+          "body_md": "7 模式容易被值得期待的選項吸引，希望生活仍有空間、樂趣與滿足。限制、失落或痛苦出現時，它可能迅速提出新計畫、換一種解釋，或者把注意力移向下一個機會。[7 型傳統描述](https://www.enneagraminstitute.com/type-7/)將這些行為與避免匱乏和痛苦的動機連結起來。\n\n這種策略能讓受阻的局面出現新入口。新場地不適合原方案時，它可能提出輪流分享、戶外討論或其他可行形式。代價是尋找可能逐漸取代作出選擇：新點子很多，承諾難以收尾，需要面對的失望與重複工作不斷被推到以後。\n\n與 3 比較時，看忙碌更多服務於成果認可，還是可期待的體驗；與 9 比較時，看避免不舒服主要依靠開啟新選項，還是降低衝突的存在感。熱愛旅行或有很多興趣，都不能單獨確認 7。\n\n可以選定一個可完成的方案，並留意自己在不能繼續加選項時最想逃開什麼。真實的資源限制同樣需要被考慮。",
+          "key": "type_7",
+          "title": "7號：保有自由與滿足，尋找新的可能"
+        },
+        {
+          "body_md": "8 模式關注是否有行動自主權，自己和在意的人是否會被傷害、控制或迫使退讓。它可能用明確立場與直接行動建立保護。[8 型傳統描述](https://www.enneagraminstitute.com/type-8/)也討論了接受幫助與承認脆弱時的困難。\n\n它的有效作用是在問題被迴避時承擔壓力，把不合理條件擺到桌面上。活動場地突然附加條件時，它可能為大家爭取談判空間。代價是過度依靠力量：不同意見都像挑戰，協商變成較量，原本想保護的人也可能失去表達機會。\n\n與 1 比較時，看反對主要來自原則要求，還是無法接受自主權被奪走；與 6 比較時，看行動主要在抵抗控制，還是檢驗並解除不確定的威脅。嗓門大、擔任領導或敢於爭論，都不是充分依據。\n\n可以先明確自己真正需要保護的邊界，再給別人一個完整說話的機會，觀察聽取意見是否真的削弱了自主。",
+          "key": "type_8",
+          "title": "8號：掌握自己的生活，直接保護邊界"
+        },
+        {
+          "body_md": "9 模式希望內心和關係不被持續衝突打斷，容易看見各方都有道理，尋找能讓生活繼續順暢的共同點。[9 型傳統描述](https://www.enneagraminstitute.com/type-9/)同時提醒，維持和平可能伴隨對自己優先事項的忽略。\n\n它的有效作用是傾聽、容納差異，讓緊張的人重新找到合作空間。換場地引發爭執時，它可能幫助大家把各自擔心的事說出來。代價是“先不說”變成長期擱置，表面的和氣遮住真實分歧；沒有表達的反對也可能透過拖延和不行動出現。\n\n與 2 比較時，看答應別人主要為了獲得親近與回應，還是保持關係不受擾動；與 5 比較時，看不參與是在保護有限資源，還是不想進入衝突。安靜和慢節奏都不能確認 9，一個人也可能很忙，卻一直在做別人更重視的事。\n\n可以在聽完別人的意見前先寫下一項自己的偏好，並在討論中說出來，觀察表達不同是否一定破壞連結。",
+          "key": "type_9",
+          "title": "9號：維持平穩與連結，讓不同要求能夠共存"
+        },
+        {
+          "body_md": "傳統九型把 8、9、1 放在腹／身體中心，2、3、4 放在心中心，5、6、7 放在頭／腦中心。[Enneagram Institute 的中心說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)分別以憤怒、羞恥與恐懼組織這些主題。它們是傳統解釋分組，不是腦區、神經系統或能力等級；所有人都能思考、感受和行動，也都可能體驗這些情緒。\n\n**腹／身體中心：怎樣處理邊界、行動與不滿？** 8 較傾向於直接運用力量維護自主；9 較傾向於降低衝突和不滿的存在感，保住平穩；1 較傾向於約束衝動，把不滿轉成改進要求。面對“你們只能接受這個安排”，可能的區別是直接爭取決定權、先緩和分歧，或指出安排不符合什麼標準。它們不是分別等於暴躁、沒脾氣和愛批評。\n\n**心中心：怎樣確認個人價值與身份？** 2 較傾向於從親近、照顧和他人回應中確認價值；3 較傾向於透過成功表現確認價值，有時暫時擱置感受；4 較傾向於維護獨特而真實的個人經驗，也可能反覆注意缺失。貢獻沒有被看見時，三者可能分別嘗試提供更多照顧、拿出更有說服力的成果，或說明未被理解的意義。心中心不等於人人都善於表達情緒。\n\n**頭／腦中心：怎樣應對不確定與恐懼？** 5 較傾向於退後理解，減少消耗，準備到足以應對；6 較傾向於尋找並檢驗可靠依據與支援；7 較傾向於開啟選項，用期待和新可能應對限制。原計畫失效時，可能分別先弄清具體條件、確認備用保障，或設計新的玩法。頭中心不等於智力較高，也不要求外表顯得害怕。\n\n中心能指出共同問題；要區分具體候選，還需回到每一種模式處理這個問題的方式。",
+          "key": "centers",
+          "title": "三中心：共同主題與組內差異一起看"
+        },
+        {
+          "body_md": "翼是傳統九型對相鄰影響的描述，相鄰按圓周位置計算。1 的鄰位是 9 和 2，6 的鄰位是 5 和 7，9 的鄰位是 8 和 1。6w5 表示以 6 為主模式、借用 5 鄰位來描述某些表達特點，不表示兩種人格各佔一半。\n\n仍在擔心活動安排是否可靠時，一個暫用 6w5 描述的人，可能偏向獨自查清資訊、保留投入；一個暫用 6w7 描述的人，可能較常透過交談、夥伴與替代選項取得支援。這裡共同的比較重點仍是 6 的可靠與保障關注。學會活躍氣氛不自動否定 6w5，會認真研究也不自動證明 6w5。\n\n**6w5 與 5w6 不是同一個組合。** 兩者都可能查資料，但 6w5 的主要問題可能是“這樣做是否可靠，有沒有可信支援”；5w6 的主要問題可能是“我能否理解並應對，資源會不會被耗盡”。先檢驗主模式，再談修飾，不能靠是否內向區分。\n\n**第二高分不是翼的定義。** 第一候選為 6、第二候選為 3，不能寫成 6w3。第二候選恰好為 5 時，也還需要比較 5 是表達風格，還是更適合解釋主要動機。\n\n[Enneagram Institute 的翼說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)承認傳統之間對一翼、兩翼及其作用有分歧。翼的研究支持也有限，保留“主模式暫有候選，翼尚不確定”比強行補齊組合更合適。",
+          "key": "wings",
+          "title": "側翼是什麼？6w5 和 5w6 為什麼不同"
+        },
+        {
+          "body_md": "本能關注回答的是“注意力優先落在生活的哪一塊”，中心回答的是“哪些類型共享一個情緒與應對主題”。身體中心不等於自我保存，心中心不等於一對一，頭中心也不等於社會。傳統上，每個主模式都可以討論三種本能關注。\n\n**自我保存（self-preservation）** 關注維持生活的條件，例如身體需要、休息、食物、住所、金錢和可持續的精力。它不等於自私；照顧家人的資源也可能屬於這個領域。\n\n**社會（social）** 關注歸屬、群體角色、共同規則、責任與連結。它不等於外向或愛參加聚會。很少發言的人，也可能持續關心自己是否被納入、團隊責任是否清楚。\n\n**一對一（one-to-one）** 需要結合使用它的傳統來理解。[The Narrative Enneagram 的本能說明](https://www.narrativeenneagram.org/instinctual-subtypes/)使用這一名稱，涵蓋伴侶關係、親密關係、密切友誼、性與生命活力，也稱其為 sexual 副型。[Enneagram Institute 的 sexual／attraction 說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)則特別突出吸引、彼此之間的化學反應、刺激與投入強度，並明確指出三種本能關注都可能重視一對一關係。因此，“喜歡與一個人深談”不足以確認 sexual，兩個學派的名稱也不能不加說明就當成完全相同的定義。它們不是性取向分類。\n\n以暫時保留的 6 候選為例，同樣關注可靠保障，有人最先問新場地是否讓體力與交通費用可承受；有人最先問團隊分工、規則與歸屬；有人最先在意一位重要夥伴之間的信任與投入。這是同一動機在不同領域的比較，不是三種新的核心動機，也不要求照搬某學派的全部副型描述。\n\n“頭中心、6、5 翼、社會關注”可以放在一起理解：中心給出共同的不確定主題，6 給出主要動機，5 翼描述相鄰修飾，社會關注指出經常在意的生活領域。任何一層都不能由一次聊天或一次排名自動確定。",
+          "key": "instincts",
+          "title": "三本能：同一種動機經常落在哪個生活領域"
+        },
+        {
+          "body_md": "| 題本 | 作答方式 | 結果幫助比較什麼 |\n| --- | --- | --- |\n| 105 題 | 對每個描述作五級程度回應 | 對不同描述的認同程度；多個描述可以同時獲得較強回應 |\n| 144 題 | 每對描述選 A 或 B | 在這些配對中的相對取捨 |\n\n假設兩個描述是“先弄清問題再加入討論”與“先確認夥伴能提供支援”，選擇前者並不表示後者完全不適用。這個例子只說明作答方式，不是題本原題。\n\n105 題的程度回應與 144 題的選擇次數來自不同任務，數值不能直接互換。兩種展示分數都不是人群百分位；看到 80，不能理解為超過了 80% 的人。144 題的相對選擇尤其不能直接當作跨人群的絕對人格強度，也不能把某種描述較少被選解釋成缺乏能力或需求。\n\n候選順序不同，不能單獨說明人格改變、某一版不準，或其中一版揭示了更真實的你。先按各自作答方式理解結果，再用本頁的動機區別比較真實經歷。其他九型量表的研究不能自動證明費馬這兩份題本的信度或效度。",
+          "key": "forms",
+          "title": "105 題與 144 題九型測驗：作答方式與結果讀法"
+        },
+        {
+          "body_md": "[Hook 等人的系統性回顧（2021，PubMed 摘要）](https://pubmed.ncbi.nlm.nih.gov/33332604/)總結了 104 個獨立樣本，指出信度與效度有部分支持證據，也有研究限制。摘要提到，部分因素分析與理論有一定符合，部分分量表與大五等其他構念呈現符合理論預期的關係；同時，因素分析通常得到少於九個因素，翼與跨型移動等次級理論的研究支持較少。\n\n回顧摘要還指出，在它所回顧的研究中，沒有研究用分群方法推導出九種類型。這是那篇回顧對所納入文獻的判斷，不能直接改寫成“截至今天仍沒有這樣的研究”。本頁使用的是權威摘要，沒有把摘要當成全文來推斷具體樣本的語言、研究設計或效果大小。\n\n摘要提到若干研究報告個人或靈性成長方面的幫助，但僅憑這些摘要資訊，不能承諾測評會改善關係、職業或心理健康，也不能判斷費馬題本具有同樣效果。覺得描述很像自己，也不能替代對分類、測量和具體用途的驗證。\n\n因此，本頁將九種動機、中心、翼與本能作為傳統的比較詞彙。它們可以成為進一步提問的起點，不能單獨用於醫學判斷、招聘篩選、職業匹配或關係定論。\n\n如需核對費馬當前兩種題本的方法、證據狀態和使用邊界，請閱讀[九型人格技術說明](/zh/tests/enneagram-personality-test-nine-types/technical-note)。",
+          "key": "evidence",
+          "title": "科學證據支持到哪裡"
+        },
+        {
+          "body_md": "九型圖內部的連線，讓一些傳統進一步討論人在壓力、放鬆或成長時怎樣借用其他模式的反應。例如，Riso–Hudson 的說明把 1 與 4、7 連結起來。The Narrative Enneagram 使用壓力點與安全點，並對情境作出自己的解釋；不同傳統的含義不必完全相同。\n\n發展層級則試圖討論同一種關注怎樣變得靈活，或怎樣變得僵硬：維護標準可以幫助改進，也可能成為不斷苛責；關心別人可以支援關係，也可能遮住自己的需要。\n\n這些都是傳統解釋，不能當作必然發生的轉換路線、臨床分級或健康評分。一個 1 候選在壓力下表現不同，不表示“變成了 4”；採取一個看起來像 7 的行動，也不能證明已經成長。理解真實變化，仍要看當時的壓力、資源、責任與行動後果。",
+          "key": "other_traditional_ideas",
+          "title": "箭頭與發展層級為什麼會出現"
+        },
+        {
+          "body_md": "先選兩種有真實理由值得保留的候選，閱讀它們的核心型頁面。例如，反覆檢查可能值得比較 1 與 6；退後研究可能值得比較 5 與 6；不斷答應別人可能值得比較 2 與 9。[The Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)示範了先找相似處、再找內在差異的讀法，不能把其中的概括當作每個人必然符合的規則。\n\n拿一個真實事件，分別寫下當時可選的行動、你最早擔心的事情、你不願失去的東西，以及策略實際幫了什麼、帶來什麼代價。先記錄當時說過的話，再寫事後對動機的解釋，避免把解釋當作直接觀察。\n\n例如，5 與 6 都可能在新場地確認前不行動。可以繼續問：如果聯絡人很可信，但你尚未理解工作量，你仍不願參與嗎？如果工作量已經清楚，但承諾沒有得到確認，你仍不願參與嗎？前後兩個條件分別幫助比較能力與資源、可靠與支援的關注；答案也可能顯示兩者都很重要。\n\n再找條件相近卻反應不同的經歷。一個人在熟悉任務中願意立即參與，不自動否定 5；它可能說明準備已足夠。一個人在有可信保障時敢於行動，不自動否定 6。若“害怕不被支援”的解釋在有無支援的情境中都缺少對應經驗，而職責更能解釋檢查行為，就應降低對 6 的把握。\n\n主模式較清楚後，再比較相鄰翼及反向組合；想理解同一動機為何在不同生活領域表現不同，再讀本能副型頁面。中心頁面適合進一步比較同組的共同主題與內部差異。保留兩種候選或暫時不定翼，都可以是合理的下一步。\n\n例如，以六號為主模式候選時，可從 [6w5](/zh-TW/personality/enneagram/wings/6w5) 和 [6w7](/zh-TW/personality/enneagram/wings/6w7) 比較同一核心的不同修飾，再用 [5w6](/zh-TW/personality/enneagram/wings/5w6) 對照反向組合是否改變了核心關注。想比較生活領域，可讀六號的 [自我保存](/zh-TW/personality/enneagram/type-6/instincts/self-preservation)、[社會](/zh-TW/personality/enneagram/type-6/instincts/social)與[一對一](/zh-TW/personality/enneagram/type-6/instincts/one-to-one)頁面。這些是閱讀路徑示例，不表示你應選擇六號；可按自己的核心候選繼續比較。\n\n若想繼續對照回饋、會議和邊界溝通，可讀[職場摩擦與溝通練習](/zh/articles/enneagram-workplace-friction-core-motivations)中的虛構情境。",
+          "key": "compare_next",
+          "title": "怎樣把兩種候選真正放在一起比較"
+        }
+      ],
+      "seo": {
+        "description": "九型人格是什麼，九種類型如何區分？用同一情境比較各型動機、策略與代價，了解三中心、側翼和本能，分清 105 題與 144 題結果的讀法與科學證據邊界。",
+        "title": "九型人格是什麼？九種類型與動機詳解"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram",
+      "source_hash": "d49806d8d46eaa8be28522c28a3d444075fba5b4ea273eca9f2c4cc6d0b46607",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "九型人格是一套傳統的人格解釋框架，用九種動機模式理解同一行為背後不同的理由。比較各型策略的作用與代價，再了解三中心、側翼、本能，以及 105 題和 144 題的結果讀法。",
+      "title": "九型人格總覽：九種類型的動機與差異"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "83c6e3991d8039ddcc2c1bf8be7d903681c0da91f7f669307852484fa531ffc5"
+}

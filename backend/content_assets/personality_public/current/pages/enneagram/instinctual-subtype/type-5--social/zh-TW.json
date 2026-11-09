@@ -1,0 +1,204 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-5/instincts/social",
+    "entity_key": "type-5/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-5/instincts/social"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-5/instincts/social"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-5/instincts/social",
+      "code": "type-5/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-5/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不必。這裡考察群體位置和參與方式，不考察社交次數。安靜的人和健談的人都可能在意知識如何幫助自己進入群體；但只有這一點仍不足以判斷副型。",
+          "question": "社群5號必須愛聚會、善於社交嗎？"
+        },
+        {
+          "answer": "未必。對方可能缺少資訊，任務可能要求精確，也可能存在誤解。觀察能否在已澄清的低風險情境裡停下解釋、接受共同探索，以及知識角色是否仍是留下來的必要條件。實際責任能解釋的部分不應再歸於副型。",
+          "question": "受到質疑時解釋很多，就是在守住專家身分嗎？"
+        },
+        {
+          "answer": "翼與副型討論不同層面：5w6是相鄰6號對5號風格的可能修飾，社群副型是本能關注與核心動機的組合。第二高類型分數不能決定本能；證書、職業或名人猜型也不能替代對本人動機與反例的觀察。",
+          "question": "5w6、第二高分和社群副型有什麼關係？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-5/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-5/social",
+        "x-default": "/en/personality/enneagram/type-5/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-5/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5",
+          "label": "5號核心類型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5/instincts/self-preservation",
+          "label": "5號自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5/instincts/one-to-one",
+          "label": "5號一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在5號核心動機仍然成立的前提下，社群關注可能讓應付能力與群體位置聯絡起來：我知道什麼，能為這裡帶來什麼？理解共同語言、重要概念或被認可的知識，可能成為接近他人的方式。\n\n一個人可以安靜地整理資料，也可以熱情地講解。外向程度不是區別。需要觀察的是，知識是否成為參與的橋樑，還是成為必須一直守住的入場資格：當我暫時沒有答案，是否仍允許自己留在群體裡？\n\n[Narrative 的社群5號描述](https://www.narrativeenneagram.org/instinctual-subtypes/) 是這一關注的傳統參照；本頁把它展開為可討論的生活問題，不把專長寫成人格本質。",
+          "key": "belonging_through_understanding",
+          "title": "想加入，卻希望先有一項拿得出手的理解"
+        },
+        {
+          "body_md": "設想你加入社區維修活動，幫大家檢查一盞不亮的檯燈。以下為原創合作情境。\n\n你提前研究常見故障，現場能把找出故障的思路解釋得清楚。這讓大家少走彎路，也讓新成員學到方法。這些知識確實幫助大家一起工作。\n\n當一個新成員提出你沒有考慮到的原因時，你可能開始長時間補充理論，或者退到旁邊查資料，等有把握後再回來。若背後的擔心是「沒有足夠理解，我就沒有合適的位置」，社群5號是可以保留的候選解釋。代價可能是其他人難以共同探索，你也失去了在實際嘗試中學習的機會。\n\n另一種過程是：你承認「不確定」，請對方演示，並承擔一個不需要專家身分的普通任務。這裡的能力感不再只依賴掌握答案，也來自與別人共同完成事情。無需把這次靈活表現重新解釋成隱藏的防禦。",
+          "key": "community_repair_workshop",
+          "title": "一次社區維修活動：懂原理與一起動手"
+        },
+        {
+          "body_md": "面對同一場修理活動，自保關注可能先計算裝置、工作時間和結束後的恢復，想知道這次投入是否在可承受範圍內。\n\n社群關注可能先了解大家承認哪些方法、誰負責解釋、自己的知識怎樣進入共同工作。即使沒有正式頭銜，也可能很在意自己是否提供了有分量的理解；這不等於追逐地位。\n\n一對一關注可能先被某位夥伴的交流方式或共同探索的活力吸引，願意在這段具體合作中分享更私人的想法，同時保留自主節奏。\n\n三者都可能研究電路、講解或默默幫忙；不能從這些行為判型。三種關注也可以同時存在。副型比較討論的是哪種問題反覆組織了選擇，不是宣佈一個人缺少其餘兩種本能。",
+          "key": "three_focuses_same_task",
+          "title": "三個5號都可能先查資料，查的是不同問題"
+        },
+        {
+          "body_md": "維修安全、正式教學、專業執照和受託責任，都可能要求先確認知識再行動。在不能安全試錯的任務裡，謹慎準備是合理職責，不能為了練習普通參與而放棄專業標準。\n\n再看群體條件：新人是否真的可以提問？錯誤會不會帶來羞辱？語言、教育機會、無障礙條件和資歷是否決定了誰能發言？如果一個人只能透過專長獲得基本尊重，保護這個角色可能是現實因應。\n\n更有用的比較，是在無安全風險、機會較平等的共同活動中，看相同過程是否仍然出現。若換到友善群體後，自然願意提基礎問題、承擔普通任務並分享未完成想法，環境解釋可能更強。\n\n群體責任可以是社群關注的一部分，但負責、持證或擔任教師都不是社群5號的證明。也不要把別人沒有解釋清楚的行為直接稱為傲慢或排斥。",
+          "key": "role_and_access",
+          "title": "「我必須懂」可能來自職位，而非副型"
+        },
+        {
+          "body_md": "你可能同時重視理解、認可、責任和正確性。比較時，問一次具體事件裡，什麼後果最難接受。\n\n若主要擔心自己理解不足、沒有能力獨立應付，5號核心解釋更值得繼續考察。若最難接受的是成果不被認可、自己顯得不成功，可以與3號比較；若主要擔心支援體系和可靠約定失效，可以與6號比較；若核心是沒有做到應當做到的正確標準，可以與1號比較。這些問題參照 [Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)，仍需結合多個事件，不是四選一測試。\n\n若知識角色主要由職位決定，這個角色本身並無法為副型解釋增添多少證據。在普通成員位置也長期自在，首先削弱的是「必須擁有知識優勢才能留下」的解釋，並不單獨否定對共同理解或群體參與的關注；這些關注與5號核心動機仍應分別觀察。若職位和機會條件已足夠解釋過程，而候選動機並不反覆出現，就撤回副型候選。若5號核心動機同樣不貼合，也不必先認定自己是5號，再用副型把不符之處補上。",
+          "key": "core_motive_comparison",
+          "title": "相似的知識角色，也可能服務於不同核心動機"
+        },
+        {
+          "body_md": "在下一次低風險活動裡，選擇一個小動作：提出一個真問題、分享一句明確標為初步的想法，或者承擔一個普通協作任務。不要從電氣維修、醫療或其他需要專業資格的專業操作開始。\n\n事前記錄你預計會失去什麼，例如「別人會覺得我沒有價值」；事後記錄別人怎樣回應、活動是否繼續、你是否急於補回專家位置，以及自己能否繼續參與。經對方同意，可以詢問哪項貢獻真正有幫助，不要求對方為你判型。\n\n若普通參與帶來了聯絡，可以在相近情境再嘗試一次；若群體確實懲罰提問或排斥新人，應改變參與條件或尋找支援，而不是要求自己更開放。穩定地接受糾正、與人共同探索並在沒有知識優勢時仍有歸屬，削弱的是「必須守住專家位置才能留下」的預期。接受這個反例，不把靈活性改寫成隱藏的防禦。共同理解仍可能組織參與，也可能另有更好的解釋；一次成功不會證明或否定終身不變的類型。",
+          "key": "participation_without_expertise",
+          "title": "給共同工作留一個不需要證明自己的入口"
+        },
+        {
+          "body_md": "27 個副型將九個核心型與三種主導本能關注組合。社群5號討論理解與群體參與的可能聯絡，不決定自保或一對一哪項排第二；三種本能從第一到第三的六種完整排序是另一層。一個知識角色不能推出第二、第三種本能或親密方面的「盲點」，也不能決定5w6：翼討論相鄰核心型的可能修飾，5號所屬的思維中心歸納核心主題，二者都不是社群關注的別名。CP Enneagram 的「反型」屬於其學派分類，不等同於科學診斷、已經證實的神經機制或驗證過的費馬評分。傳統描述也不能保證職業能力、群體地位或合作結果。\n\n本能詞義並非所有學派一致。Narrative 的 one-to-one 包括親密關係、好友和活力；[Enneagram Institute 的 sexual/attraction](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) 更強調吸引強度。兩者有交集，但都不能簡化為性慾強弱，也不能因社群關注就推定一個人缺少親密需要。\n\n[Hook 等人的2021 年綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/) 所報告的混合證據，不是這項社群解釋的準確率證明，更不是費馬產品驗證。本頁比較情境和嘗試是原創反思材料。\n\n先讀 [5號核心類型](/zh-TW/personality/enneagram/type-5)，核對理解與自主的動機；再與 [5號自保副型](/zh-TW/personality/enneagram/type-5/instincts/self-preservation) 比較，看看反覆組織選擇的是可用精力，還是群體中的知識位置。",
+          "key": "evidence_and_navigation",
+          "title": "知識框架的用途，不能代替量表證據"
+        }
+      ],
+      "seo": {
+        "description": "5號社群副型關注怎樣透過理解、專長和共同知識參與群體。本頁用社區維修情境說明知識何時是合作的橋樑、何時變成必須守住的入場資格，並區分職位責任、不平等機會與個人動機；教學、持證或健談本身不能判型。",
+        "title": "第五型社群副型：知識角色、專長與群體交換的假設"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-5/instincts/social",
+      "source_hash": "302408ec9619aed4b9e2900bac189b060d78f53706429fd2a6ff9c3dd124478a",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "5號社群副型關注的不是參加多少聚會，而是怎樣透過理解、專長和共同認可的知識在群體中找到自己的位置。這條路徑可以帶來清楚的解釋和可靠的貢獻；過用時，參與可能被推遲到「我足夠懂」以後。本頁比較知識角色、實際責任與普通成員身分，幫助讀者判斷這項解釋是否真的增加了理解。",
+      "title": "5號社群副型：用知識找到位置，也練習共同參與"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "484e57abfb23fa11837afbe868335d1b45eb3d547b3f1a01b60780a7809d870d"
+}

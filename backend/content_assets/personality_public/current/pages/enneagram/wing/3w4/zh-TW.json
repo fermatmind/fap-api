@@ -1,0 +1,208 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/3w4",
+    "entity_key": "3w4",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/3w4"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/3w4"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/3w4",
+      "code": "3w4",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "3w4",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能這樣判斷。翼描述不是創造力測量，也不提供能力排名。個人表達是否重要，與實際創意能力、訓練和成果品質是不同問題。",
+          "question": "3w4 一定比 3w2 更有創造力嗎？"
+        },
+        {
+          "answer": "不是。這些偏好可能來自興趣、訓練、工作要求或精力管理。還需要檢查三號核心是否貼近，以及個人意義和辨識度是否反覆修飾成果價值的判斷。\n\n私人打磨也不能確定自保本能。獨自準備作品集，可能為了維持收入、體現個人貢獻，或兩者兼有。三號核心關注成果怎樣證明價值，四號翼關注個人表達怎樣改變成功標準；傳統本能討論中的自保，關注物質保障和身體資源。比較一次修改主要是保障穩定收入、讓成果體現自己的判斷，還是滿足任務要求。僅憑獨處，無法確定這些解釋中的任何一個。",
+          "question": "喜歡藝術、獨處或深度工作，就是 3w4 嗎？"
+        },
+        {
+          "answer": "比較兩者之間的關係。3w4 要先解釋價值證明，獨特表達可能成為成功標準；4w3 要先解釋身分與意義，成果和認可可能幫助表達它們。不能只用「重結果」或「有感情」分辨，也不能用一次取捨確認。",
+          "question": "3w4 與 4w3 都追求獨特和認可，怎樣比較？"
+        },
+        {
+          "answer": "不會。它們可以是任務需要或靈活選擇。只有在多種有選擇空間的情境中，個人表達這一修飾持續沒有額外解釋力，才應讓翼保持不確定或降低該解釋的權重。",
+          "question": "接受通用方案或匿名交付，會否定 3w4 嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/3w4",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:3w4",
+        "x-default": "/en/personality/enneagram/wings/3w4",
+        "zh-CN": "/zh/personality/enneagram/wings/3w4"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3",
+          "label": "九型人格 3 號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4",
+          "label": "九型人格 4 號核心型",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/3w2",
+          "label": "3w2 翼型",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:3w2"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "你完成了一份方案。它準確、實用，也得到了不錯的評價，卻與你心目中代表自己的作品很不一樣。你想再改一點：也許換一種呈現方式，也許加入自己的判斷，讓它不只是「合格」，還能體現這是你的貢獻。\n\n先區分修改在解決什麼問題。它可能提升讀者理解、體現長期訓練，也可能主要回應「如果成果沒有我的特點，就不足以證明我值得」的擔心。不同理由可以同時存在。\n\n用 3w4 來觀察時，要看個人表達怎樣參與價值證明：你是否反覆希望別人不僅看見結果好，也看見一種有辨識度、難以替代的貢獻？這比「我喜歡有創意的東西」更接近本頁的問題。\n\n本頁的作品、方案和修改情境是原創比較練習，不是研究中已經驗證的判型題。作品也不只指藝術創作；一次解釋、安排或解決問題的方案，同樣可以拿來觀察。",
+          "key": "observable_situations",
+          "title": "做得很好，卻不像自己的成果"
+        },
+        {
+          "body_md": "傳統的[三號描述](https://www.enneagraminstitute.com/type-3/)關注成就與認可，[四號描述](https://www.enneagraminstitute.com/type-4/)關注身分與個人意義。3w4 的觀察方向，是後者怎樣修飾前者，而不是把兩個核心並在一起。\n\n例如，同樣要交出可靠的成果，你可能更在意其中有沒有自己的判斷、表達或獨特貢獻。個人標準讓你願意深化內容，而不只是套用一個容易得到認可的現成答案。\n\n這種方式的有效作用，是把成果做得更有內容、更能表達具體貢獻。過用時，你可能把「必須顯得獨特」變成新的成績要求：有用但普通的成果不再值得滿意，每次修改都想拉開與別人之間的差距，或者把別人受到的認可理解成自己不夠有價值。\n\n這些是需要檢查的可能性，不是對 3w4 的必然預測。按照[相鄰翼的傳統定義](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)，三號的翼方向是二號與四號；不是均分混合，也不是分數第二名的自動命名。",
+          "key": "core_first_modifier",
+          "title": "四號修飾成功標準，三號核心仍關注價值"
+        },
+        {
+          "body_md": "**3w4 與 3w2：** 兩種解釋都先看三號式價值證明。成果已達到要求時，3w4 可以從「怎樣體現個人貢獻與辨識度」來觀察進一步修改；3w2 可以從「怎樣讓更多人理解、參與和認可」來觀察進一步推進。兩者都可能溝通，也都可能打磨作品。要比較重複出現的理由，而不是把社交和獨處分別分配給兩種翼。\n\n3w4 與反向組合 [4w3](/zh-TW/personality/enneagram/wings/4w3)： 想像一份非常實用、廣受好評但表達較為通用的成果，以及一份更符合個人意義、暫時少有人理解的成果。不要急著選一個。先問兩者分別讓你覺得失去了什麼。\n\n3w4 的解釋，要繼續檢查獨特表達怎樣幫助你證明自己的價值；個人特色可能成為你心目中「優秀成果」的一部分。4w3 的解釋，要繼續檢查成果與認可怎樣幫助你表達、確認自己的身分和意義。若一份成果成功卻不像自己，你是在擔心它不足以體現自己的價值，還是覺得它錯置了「我是誰」的表達？\n\n[Narrative Enneagram 的三號與四號比較](https://www.narrativeenneagram.org/type-comparisons/)提供傳統參照，但不是經過驗證的二選一規則。四號可以認真追求成果，三號也可以堅持個人價值；一項選擇不能判定核心型。",
+          "key": "sibling_core_comparison",
+          "title": "同一份成果，比較 3w2 與 4w3"
+        },
+        {
+          "body_md": "某些任務明確要求原創性、品牌一致性或可辨識的風格。在這些條件下，你保留特點是履行要求。長期練習和專業分工，也會自然形成個人方法，並不需要翼型解釋。\n\n比較任務之外的選擇：當別人不要求原創、署名不重要、通用方法已經足夠時，個人表達是否仍反覆改變你對成果價值的判斷？它具體帶來了什麼改進，又增加了什麼成本？\n\n不要把匿名與公開的表現差異理解得太簡單。匿名任務也可能有嚴格評價；私人練習也可能是為以後交付做準備。觀察前先記錄真實受眾、用途、資源和可調整範圍，才知道「沒人看見」是否真的成立。\n\n你也可以單純享受探索，不把它轉化成價值證明。這樣的一次經歷不否定 3w4，卻提醒你不必讓這個名稱解釋全部興趣。",
+          "key": "alternative_explanations",
+          "title": "獨特性可能來自任務，也可能來自熟練"
+        },
+        {
+          "body_md": "**核心不合：** 如果多種情境裡反覆居於中心的是身分表達和個人意義，成果認可主要用來承載這些主題，而不是成果價值組織了你的選擇，應重新比較四號核心等解釋。取得成就不能替三號核心提供充分依據。\n\n**修飾依據不足：** 如果成果主題較貼近，但作品中的個人特色只在某類被要求原創的任務中出現，四號修飾的依據仍不足。你可以暫時保留三號核心、不選翼，或繼續比較 3w2。\n\n**任務解釋：** 一份必須符合個人品牌的方案，即使極有特色，也可能完全由要求和熟練程度解釋。\n\n**正常靈活性：** 接受標準化做法、交付一份沒有個人署名的好成果、純粹為樂趣創作，或者願意放棄一次風格修改，都不會自動推翻 3w4。翼描述不要求你每次都追求獨特；更值得觀察的是，在有選擇空間時，什麼考慮反覆進入成功標準。",
+          "key": "counterexample",
+          "title": "反例應指向具體解釋"
+        },
+        {
+          "body_md": "選擇一項正在進行、可以安全調整的小成果。在下一輪修改前，分別寫下「必須完成的要求」和「我想保留的個人判斷或表達」。再確認一個可執行的停止點，例如達到約定標準後只保留一項確有作用的表達改進。\n\n每次想修改時，用一句話說明它的作用：解決錯誤、改善理解、表達重要判斷，還是讓成果看起來更像自己？同一處修改可以有兩個理由，不必強行歸類。關鍵是看清它是否值得所需時間。\n\n可以請一位合適的讀者只回答具體問題：「哪裡仍不好理解？哪一處判斷真正改變了你的理解？」不要把對方是否稱讚你的獨特性當作唯一回饋。保留重要表達時，也說清它對這份成果的意義，而不是隻說「這不是我的風格」。\n\n交付後，做一件無需公開展示的小探索，讓它暫時停留在興趣中。回顧時看兩件事：成果有沒有按要求完成；你有沒有減少一次僅為維護辨識度而進行的修改。允許「很好但普通」和「有意思但尚未成為成果」分別成立，不用它們給自己判型。",
+          "key": "observation_exercise",
+          "title": "讓修改回到理由，讓成果有停止點"
+        },
+        {
+          "body_md": "[Hook 等人的綜述摘要](https://doi.org/10.1002/jclp.23097)指出，支持翼概念的研究很少。本頁是在傳統主題上設計的觀察方式，不能確定創造力、藝術身分或未來成就，也不證明費馬測評效度。\n\n如果還不確定什麼居於核心，先比較[三號核心型](/zh-TW/personality/enneagram/type-3)與[四號核心型](/zh-TW/personality/enneagram/type-4)。若三號主題較貼近，再讀[3w2 翼型](/zh-TW/personality/enneagram/wings/3w2)，檢查另一種成果推進方式。\n\n暫時不選翼也能繼續練習。一個有用的結果，是能夠說清哪項個人表達確實重要、哪次修改只是在維護形象，並在成果已經足夠時允許自己停下來。",
+          "key": "wing_boundary",
+          "title": "理解表達與成果，不用翼評定創造力"
+        }
+      ],
+      "seo": {
+        "description": "3w4 是證據有限的翼型觀察：三號對可見成果的關注仍是核心，四號可能增加獨特表達和理想比較。作品有辨識度不能單獨確認 3w4；專業分工、作品集要求和審美訓練也會產生相似結果。",
+        "title": "九型人格3w4：三號核心、四號翼與3w2的區別"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/3w4",
+      "source_hash": "83781bd1ba64990979cce890d9739a1d102a5f3eff13927f98c043b0d18b6c3f",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "3w4 指三號核心受到四號相鄰主題修飾的傳統翼型描述。對成果與價值證明的關注仍在，個人表達、辨識度和意義可能改變「怎樣的成果才算成功」。它不是創造力等級，也不靠藝術興趣或內向程度確定。",
+      "title": "3w4：讓成果體現自己的獨特貢獻"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "6739b61d370f60aa458417fe67b6cae3167821ed713b035c46e18cefa1befaa9"
+}

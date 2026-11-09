@@ -1,0 +1,203 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-4/instincts/self-preservation",
+    "entity_key": "type-4/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-4/instincts/self-preservation"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-4/instincts/self-preservation"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-4/instincts/self-preservation",
+      "code": "type-4/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-4/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "Narrative 的描述容納這種可能，尤其當一個人覺得更真實或更可持續的生活在別處時。但冒險本身不是辨別證據。要比較本人說明的原因、可用選項、現實限制，以及能保留同樣價值的較安全方案是否改變了選擇。",
+          "question": "自保第四型也可能冒財務風險嗎？"
+        },
+        {
+          "answer": "不能。缺乏支援、照護責任、不安全的表達環境和習得的期待，都可能造成相同行為。先確認幫助真正可用，並看安全接受幫助後有什麼變化。如果沒有反覆出現的身分或個人意義關注，所提出的副型機制就缺少證據支持。",
+          "question": "不訴苦、什麼都自己做，就能確定這個副型嗎？"
+        },
+        {
+          "answer": "舒適日常可以出現在許多核心模式與本能關注中。它可能維持對自己有意義的生活，也可能只是滿足普通需要。不能從舒適判斷類型，也不應在當事人報告滿意時，額外發明隱藏的不滿。",
+          "question": "滿足於舒適日常，會不會與第四型矛盾？"
+        },
+        {
+          "answer": "如果選擇一直跟隨現實限制變化，靈活調整能夠保留重要活動而不產生身分衝突，或者資源與安全改善後原有模式消退，就應降低這項解釋。反例應推動修正，而非被重新包裝成同一種副型。",
+          "question": "哪些觀察會讓我放下這個解釋？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-4/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-4/self-preservation",
+        "x-default": "/en/personality/enneagram/type-4/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-4/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4",
+          "label": "九型人格4號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4/instincts/social",
+          "label": "第四型社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4/instincts/one-to-one",
+          "label": "第四型一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "第四型的起點是身分與個人意義：我是誰，我的生活中有什麼屬於我。這個核心關注可參照[九型人格研究所的第四型介紹](https://www.enneagraminstitute.com/type-4/)。從自保角度看，它會與維持生活的具體條件相遇。\n\n一個人可能維持簡單的住所、保護某項重要活動的時間，也可能承擔辛苦的有償工作，來支援自己認同的生活方式。值得探索的是現實安排與個人意義之間的連線：這個安排讓我能夠繼續按自己的方式生活。節儉、勤奮、喜歡舒適，本身都缺少辨別力。\n\n張力可能出現在這裡：穩定安排原本支援了自己想要的生活，後來卻開始擠掉那部分生活。[Narrative Enneagram 的副型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)描述了自保第四型在安全受到觸動、或覺得真實生活在別處時行動和冒險的傾向。這是該學派的傳統描述，不能證明所有搬家、轉行或冒險都有相同原因。",
+          "key": "security_and_identity",
+          "title": "你想保住的，究竟是什麼？"
+        },
+        {
+          "body_md": "設想一個人的房租上漲。另一間房可以明顯減輕支出，但合住規則會取消他晚上安靜做個人專案的時間。算完帳，他鬆了一口氣；想到日常安排，又覺得重要的一部分生活要消失了。\n\n有用的策略可能是先詢問規則、協商一小段固定時間，或者比較另一項可負擔的選擇。對意義的關注，幫助他辨識一個表面上划算、實際難以維持的安排；對資源的關注，則讓重要活動有條件繼續。\n\n過用的代價在於，把每一次妥協都讀成對自我的背叛。他可能拒絕尚可調整的住所、反覆搬家，或為了保留全部理想安排而承擔超出精力的工作。另一種外觀是長期忍受不合適的環境，並把獨自撐住當成自己有價值的證明。冒險與克制看起來相反，有時卻可能圍繞同一個個人故事；這需要當事人的具體說明來支持，不能只憑旁觀者推測。\n\n觀察過程時，依次區分實際難題、本人賦予它的意義、真正可選的方案，以及小幅調整之後的結果。如果他接受較便宜的住所，仍能繼續專案，也沒有失去身分的衝突，這就削弱了本情境中的解釋。不要再把這種靈活說成隱藏得更深的同一種副型。",
+          "key": "a_move_with_two_costs",
+          "title": "房租更便宜，生活卻好像少了自己"
+        },
+        {
+          "body_md": "設想一次社群小型展覽：預算減少，一位合作者得到公開表揚，所有人都要調整作品。下面是幫助比較的情境推演，不能據此給參與者分類。\n\n- 自保第四型的假設關注維持個人表達的條件：我還承擔得起嗎，還能做出自己認同的東西嗎？行動可能是縮小規模、補充收入，或重新決定是否參與。\n- 社群第四型的假設關注自己的群體位置：誰的貢獻被看見，我的貢獻有沒有受到尊重的位置？行動可能是確認署名，或討論哪些人的工作被忽略。\n- 一對一第四型的假設關注某個重要對象的回應：為什麼那個人的貢獻能打動他，我的卻不能？行動可能是尋求直接交流，或把更多精力放進競爭。\n\n三種關注都可能表現為熬夜、反對預算調整或退出合作。要問的是，這個行動想恢復什麼。報酬減少、不公平的署名制度和已經緊張的合作關係，也都是實際問題，不能被副型語言帶過。",
+          "key": "one_project_three_priorities",
+          "title": "同一個合作變化，三種關注可能落在哪裡"
+        },
+        {
+          "body_md": "安靜地努力，不能證明自保第四型。照護責任、資金不足、不安全的上級，以及沒有可靠的求助對象，都可能讓克制成為必要，而非一種身分策略。\n\n解釋「我必須自己扛」之前，先看支援是否負擔得起、是否有效、安全，是否附帶羞辱或控制。如果幫助真正可用後，當事人能夠接受，也沒有所推測的身分衝突，就應降低「透過獨自承受證明自己」的解釋。如果選擇始終跟隨房租、健康和工作量變化，沒有反覆出現的個人意義關注，這個副型視角可能並未增加理解。\n\n其他核心模式也能帶來投入和堅持。[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)可以提供辨別原因的提示。在這個例子裡，可以問：最難放下的是必須做對、防止出錯、儲存有限精力，還是維持自己認同的生活？這些原因可能同時存在，一次回答不能確定整個人的類型。\n\n部分學派把偏離常見核心型外觀的描述稱為「反型」。這是傳統內部的術語，不是可以挽救所有失敗解釋的科學分類。一個人務實、快樂、不外顯情緒，不能自動證明他是把感受藏得更深的第四型。",
+          "key": "restraint_is_not_a_type",
+          "title": "為什麼能吃苦和獨立，並不足以辨別副型"
+        },
+        {
+          "body_md": "選一個現實條件與個人意義看似衝突的決定，從安排一個晚上、縮小一次自願專案開始，不要為了驗證標籤而冒住房或收入的風險。\n\n寫下具體需要、想保留的活動或價值，再找一個成本較低的保留方式。例如：我需要足夠睡眠和有償工作時間；這個專案對我有意義；這次保留一小段固定時間，而不是每晚都做。如果存在安全可靠的幫助，提出一個明確請求，不必等別人先理解全部處境。\n\n嘗試後觀察：重要活動是否繼續，現實壓力是否變化，接受限制或支援是否讓你覺得失去了自己。如果在相對安全的條件下，這種張力仍反覆出現，這個視角可以繼續探索。如果行為主要由資源短缺、疲勞或職責解釋，應把注意力轉向這些條件。所推測的身分衝突沒有出現，就放下這項假設。\n\n練習的收益是一項更可行的選擇。你不需要證明自己是哪種副型，也不需要用更多承受或不可逆的改變換取答案。",
+          "key": "protect_one_meaningful_activity",
+          "title": "用較小代價保留一件重要的事"
+        },
+        {
+          "body_md": "三種本能在這些傳統中是關注領域，每個人在三個領域都有需要。第四型是核心模式，傳統上歸入心／感受中心；中心是核心型分組，與自保、社交、sexual/attraction 三種本能關注不同。三號翼或五號翼討論相鄰類型怎樣修飾第四型，自保副型則討論身分關注怎樣進入資源與生活延續；核心型第二高分不能直接確定翼或本能。\n\n27 種組合來自九個核心型分別與三種主導本能相配；本能堆疊則將三種本能完整排序，共有六種順序。預算有限時保護重要活動，並不能告訴我們其餘兩種本能的順序。本頁因此不判斷 sp/so/sx 與 sp/sx/so，也不認定本能盲點。這裡 sp 指自保、so 指社群、sx 指 sexual/attraction，仍須保留學派口徑差異。\n\n學派名稱也有差異。Narrative 的一對一涵蓋親密關係、密友和活力，九型人格研究所的 sexual/attraction 更強調吸引與刺激強度。二者有交集，不是完全同義，也不只指性或戀愛。可對照[Narrative 本能介紹](https://www.narrativeenneagram.org/instinctual-subtypes/)與[九型人格研究所的本能說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。\n\nNarrative 以 Dauntlessness 描述行動與冒險，Chestnut–Paes 以 Tenacity 強調堅忍，並把自保第四型稱為「反型」。這是不同的傳統描述，不要求一個人同時符合，也不能讓相反行為都成為同一副型的證明。這些描述不能當作已確立的診斷類別或已證實的神經機制。[2021 年系統綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告，104 個樣本的信度與效度證據並不一致；它沒有驗證這些生活例子或費馬評分。某個副型問卷的研究，也只能在該工具與樣本的範圍內理解。\n\n繼續閱讀時，可以先回到[第四型核心模式](/zh-TW/personality/enneagram/type-4)，再比較[社群第四型](/zh-TW/personality/enneagram/type-4/instincts/social)與[一對一第四型](/zh-TW/personality/enneagram/type-4/instincts/one-to-one)。",
+          "key": "scope_and_further_reading",
+          "title": "這個解釋可以用到哪裡"
+        }
+      ],
+      "seo": {
+        "description": "了解第四型自保副型的傳統解釋：住房、收入與精力怎樣支援自己認同的生活，現實限制與身分衝突如何區分，以及怎樣用較小代價保留重要活動。節儉、能吃苦或冒險都不能單獨判型。",
+        "title": "第四型自保副型：資源、安全與個人意義"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-4/instincts/self-preservation",
+      "source_hash": "32329c5718a6af1e8f212e8d2842a336b1bc527714535358a5c642690876041c",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "這一傳統副型視角關注：對身分與個人意義的追尋，怎樣進入住房、收入、精力和生活能否延續。值得觀察的是安全要保護什麼，以及追求更真實的生活何時反而消耗了維持生活的條件。",
+      "title": "第四型自保副型：讓真實的生活有條件繼續"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "5dc33468802211630356048d33bbbd9954eb5f1df13720e00f045a4660da8437"
+}

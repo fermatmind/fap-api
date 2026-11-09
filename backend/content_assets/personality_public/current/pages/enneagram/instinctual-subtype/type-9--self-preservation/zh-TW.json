@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-9/instincts/self-preservation",
+    "entity_key": "type-9/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-9/instincts/self-preservation"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-9/instincts/self-preservation"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-9/instincts/self-preservation",
+      "code": "type-9/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-9/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。這些行為可能來自個人愛好、文化、收入、無障礙需要或合理規劃。應觀察多次選擇、個人重要事項為什麼被推遲，以及資源和支援改善後會發生什麼。單一行為既不能確定核心型，也不能確定副型。",
+          "question": "喜歡舒適、收藏或省錢，就說明是九號自保嗎？"
+        },
+        {
+          "answer": "按傳統框架，可以。這是不同解釋層：本能關注生活領域，九號的翼關注相鄰八號或一號的修飾。三種本能關注都可以存在。不能簡單把核心類型第二高分當成翼或本能排序。",
+          "question": "自保九號還能重視社交，或帶八翼、一翼嗎？"
+        },
+        {
+          "answer": "兩種學派口徑有交集，但不完全相同。Narrative 的一對一涵蓋親密夥伴、友誼和活力；Enneagram Institute 的性或吸引本能更強調吸引與強度。兩者都不只指性或戀愛，而且所有人都可能重視個體關係。",
+          "question": "一對一與性本能是完全一樣的說法嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-9/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-9/self-preservation",
+        "x-default": "/en/personality/enneagram/type-9/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-9/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9",
+          "label": "九型人格9號",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9/instincts/social",
+          "label": "9號：社群本能",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9/instincts/one-to-one",
+          "label": "9號：一對一本能",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "傳統九型把九號的關注描述為維持平和與連結，有時為了避免擾動而暫緩自己的偏好。可參閱 [Enneagram Institute 的九號說明](https://www.enneagraminstitute.com/type-9/)。自保這一層關注的，是這種傾向是否首先落在資源夠不夠、住處是否舒適、每天能否順暢運轉上。\n\n[Narrative Enneagram 的副型說明](https://www.narrativeenneagram.org/instinctual-subtypes/)強調日常維護與舒適，也提醒個人優先事項可能因此被忽略。把它用於自我觀察時，可以問：一件熟悉活動與我已經選定的重要事情爭奪時間，最後發生了什麼？\n\n做飯、維修、整理和照顧生活，都可以體現能力與關懷。值得檢驗的困難，是每次遇到尚未解決的選擇，都先回到能讓當下安穩的事務裡。一個人可能完成很多有用的事情，卻遲遲沒有處理那件自己真正想改變的事。忙碌程度本身無法說明原因。",
+          "key": "daily_support",
+          "title": "先把生活安頓好，什麼時候會變成一直等下去？"
+        },
+        {
+          "body_md": "看一個用於比較的虛構情境。小林想與室友重新討論不公平的房租和家務分配。開口之前，小林先做飯、洗碗、整理物資，覺得家裡舒服一些，談話也會順利一些。\n\n這套準備可能有效：吃過飯、減少瑣事幹擾，確實能讓人更有餘力溝通。但如果每個可以談的晚上都變成另一輪維護，策略的作用就變了。難開口的事情暫時不必面對，舊分工卻繼續存在；之後的不滿可能表現為拖著不做新請求，或對小事突然很堅持。\n\n可以觀察的過程是：先說出想改變什麼，預想到關係會有波動，轉入熟悉事務，暫時輕鬆下來，卻沒有回到原來的話題。這只能支持對這些事件的解釋，不能證明一個副型。如果小林剛下夜班、有疼痛，或連足夠的食物都缺乏，先照顧基本需要可能就是合理的優先順序。此時應先改善資源與支援。",
+          "key": "household_example",
+          "title": "屋子整理好了，房租分攤卻始終沒談"
+        },
+        {
+          "body_md": "假設你原本留了週六做個人專案，卻收到社群活動的幫忙邀請。下面是三種可以比較的注意順序，不是三類人必須照做的劇本。\n\n自保的解釋會問：你是否先想到體力、吃飯、交通費，以及熟悉的週末節奏會不會被打亂？你可能提議在家準備材料，因為這樣比較可控。若活動去不去、個人專案做不做都遲遲沒決定，熟悉家務卻佔滿了一天，這才形成需要進一步檢查的線索。\n\n社群的解釋會問：你是否先想到自己在群體中的位置、誰缺人手、可靠成員應該做什麼，以及拒絕會不會影響歸屬？自己的專案可能在承接公共事務時失去位置。\n\n一對一的解釋會問：是不是某個重要的人參加了，活動才顯得有吸引力？你可能先接上對方的週六安排，之後才發現自己的偏好沒被問到。\n\n三種關注都可能讓人答應、拒絕或帶一份食物。應比較什麼先佔據注意，以及什麼後來被放下。每個人都有資源、歸屬和親近的需要；關注一處不代表缺少其餘兩處。",
+          "key": "shared_saturday",
+          "title": "同樣是週六被邀請幫忙，注意力可以落在哪裡？"
+        },
+        {
+          "body_md": "找兩次任務相近、資源足夠且確實可以選擇的日常情境。進入熟悉活動前，寫下之後準備回到哪件事；結束後記錄活動有沒有恢復體力或注意力、是否在合適的時間結束，以及重要行動有沒有重新開始。不要為了比較而少吃飯、取消必要照護或撤掉無障礙支援。\n\n如果有足夠時間與支援，已選定的談話或專案仍反覆在可能擾動現狀時被放下，推遲選擇的解釋會得到一些證據支持。若慣例有清楚終點，並且能讓你主動回到難做的事，這個解釋就應降低。若拖延主要跟隨睡眠不足、疼痛、照護或生活資源不穩變化，條件改善後也隨之減少，應優先考量現實負荷。持續出現相反觀察時，可以撤回這一解釋，不能說它只是藏得更深。\n\n安靜和退開也有不同原因。[Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供了相似外觀的區分入口。實際回顧時，可比較自己是在維持安穩氣氛、保護有限的時間和空間，還是檢查方案是否可靠。必要時應重新考慮核心類型，而不是把所有遲疑都塞進九號。",
+          "key": "recovery_check",
+          "title": "休息是在恢復能力，還是在替代選擇？"
+        },
+        {
+          "body_md": "在條件允許的一天，試著先滿足當下需要，再完成一個有範圍的行動。小林可以吃完飯後發出一句：「明晚能留十五分鐘談一下房租分攤嗎？」這一步只為談話安排位置，不要求立刻解決全部分歧。\n\n支持者可以一起確認哪些維護任務確實必要，並保護已經約好的談話時間。不斷催促、批評，或追加家務，可能反而讓真正的障礙更難辨認。如果室友會威脅或報復，應先處理安全與住房選擇，不能把冒險表達當成檢驗副型的要求。\n\n用實際效果判斷嘗試：它是否讓重要行動更可行，同時沒有犧牲基本需要？如果休息能穩定地幫助你回來，就保留它；如果改善工作量或資源之後，所謂迴避隨之消失，就修正解釋。",
+          "key": "small_commitment",
+          "title": "保留日常支援，再給重要事情一個小入口"
+        },
+        {
+          "body_md": "九種核心型與三種可能居於主導的本能關注組成 27 個副型；本頁討論九號對安穩的關注，是否主要落在資源與日常支援上。六種本能堆疊則把三種關注全部排出先後。重視住處和生活維護，並不能告訴你社群還是一對一排第二，也不能確定第三本能或所謂「盲點」。九號仍歸入身體中心，中心分組不是本能排序；八翼或一翼是另一層解釋。\n\n這些屬於九型教學傳統，不能當成已確立的可重複科學診斷或神經機制。Chestnut–Paes 教學傳統用「反型」描述外表與常見核心型印象不同的副型；這個名稱本身不能消除反例。\n\n[Hook 等人 2021 年綜述的摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)彙總了 104 個獨立樣本，報告信度與效度的證據並不一致。它不驗證本頁某一次副型判斷，也不驗證費馬分數。特定工具的研究還需按其樣本與方法分別理解。\n\n若核心動機尚不清楚，先讀[九號核心類型](/zh-TW/personality/enneagram/type-9)。若想比較關注領域，可繼續讀[九號社群副型](/zh-TW/personality/enneagram/type-9/instincts/social)與[九號一對一副型](/zh-TW/personality/enneagram/type-9/instincts/one-to-one)。",
+          "key": "tradition_and_next_reading",
+          "title": "把副型當作可以修正的問題"
+        }
+      ],
+      "seo": {
+        "description": "從九型傳統的自我觀察角度，理解九號自保副型：生活資源與熟悉節奏是在幫助恢復、回到重要行動，還是反覆推遲選擇？透過房租談話的例子，比較休息、現實負荷與選擇被擱置的不同過程。",
+        "title": "九號自保副型：日常支援、休息與重要選擇"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-9/instincts/self-preservation",
+      "source_hash": "e20dc7568fb2835eee42927afca965b9e83bd6d1b4c7e68e1c8d8e216b3e8274",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "九號對安穩的追求，可能首先落在住處、資源、舒適和熟悉的生活節奏上。觀察重點是：這些支援讓你更能做重要的事，還是反覆佔據了重要事情的位置。",
+      "title": "九號自保副型：讓日常穩定，也給自己的選擇留位置"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "fd8a7336d897e21098270d23af44208e1f57f3004ee9ae001c1902f0168e5a03"
+}

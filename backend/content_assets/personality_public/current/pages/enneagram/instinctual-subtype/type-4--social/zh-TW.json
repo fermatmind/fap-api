@@ -1,0 +1,198 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-4/instincts/social",
+    "entity_key": "type-4/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-4/instincts/social"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-4/instincts/social"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-4/instincts/social",
+      "code": "type-4/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-4/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "可能。關注歸屬並不要求喜歡人多的場合，但不喜歡活動也有許多普通原因。可以觀察參與之前、期間與之後，注意力具體被什麼佔據，不用出席頻率或社交性作為標準。",
+          "question": "偏重社群關注的人，也可能不喜歡群體活動嗎？"
+        },
+        {
+          "answer": "單憑這種感受不夠。先檢查資訊入口、選擇規則、署名、語言、無障礙條件和權力。如果真實障礙足以解釋體驗，移除之後疑慮消退，副型解釋就沒有增加多少理解。",
+          "question": "感到被排斥，就是社群第四型的證據嗎？"
+        },
+        {
+          "answer": "不能這樣推斷。批評可能指出真實錯誤或不公。看他提出了什麼、有什麼證據，以及實際修正能否回應關切。不能僅因申訴讓群體不舒服，就推測它來自身分動機。",
+          "question": "批評群體，說明一個人在刻意與眾不同嗎？"
+        },
+        {
+          "answer": "關切始終跟隨真實排斥、公平的參與條件建立後消退，或在其他友善群體不再重複時，應降低這項解釋。無需爭取特殊身分，也能完成普通共同貢獻的經驗，同樣是對所提出機制的反例。",
+          "question": "什麼時候應該停止採用這個假設？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-4/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-4/social",
+        "x-default": "/en/personality/enneagram/type-4/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-4/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4",
+          "label": "第四型：身分與個人意義",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-4"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4/instincts/self-preservation",
+          "label": "第四型自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4/instincts/one-to-one",
+          "label": "第四型一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-4/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "第四型對身分與個人意義的關注仍是起點，可參照[九型人格研究所的核心型描述](https://www.enneagraminstitute.com/type-4/)。社群關注把這個問題帶入人與人共同參與的生活：我怎樣在這裡屬於大家，又不丟掉自己？\n\n[Narrative 的副型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)把社群第四型與歸屬中的比較、個人真實感與社會期待之間的張力聯絡起來。日常可以探索的問題是：這裡是否有一個受到尊重、又能容納我的位置？尋找答案的方式可能是參與、觀察、批評，也可能是退出。愛不愛交際不足以區分這些情況。\n\n這種注意力可以有價值：一個人可能發現群體只稱讚某種貢獻，或者忽略了重要經驗。過用的代價在於，反覆把某項差異讀成「別人自然有資格屬於這裡，我卻沒有」。這是一項關於解釋過程的假設，不能從害羞、難過或批評直接得出。",
+          "key": "belonging_with_difference",
+          "title": "希望被接納，也希望是以自己的樣子"
+        },
+        {
+          "body_md": "設想你加入一個籌辦活動的鄰里小組。大家邀請了你，卻不斷談起共同經歷，許多決定似乎早在別處作好了。另一位成員的建議很快得到歡迎，你提出的相近建議卻沒有多少回應。\n\n這裡可能確實存在參與障礙。先問：誰能收到準備材料，建議怎樣被選擇，每個人有沒有表達機會？名義上是成員，仍可能缺乏資訊、署名、參與決策的機會或安全保障。欠缺的參與條件需要實際調整，不能先解釋成人格問題。\n\n再設想小組共享了材料，明確認可你的貢獻，並給你一個有實際影響的角色。如果比較仍持續，可以觀察下一步：你是否把認可折算成客氣，又找到一個自己根本不同的跡象，或者認為普通的共同角色不足以代表自己的經驗？如果這種身分與歸屬的連線在多個相對友善的群體反覆出現，假設會得到更多證據支持，但仍不能據此確定副型。\n\n同樣的敏感也可以成為有效貢獻：指出缺口、提出公平流程，再參與其中。過用時，可能在別人來得及回應前退出，只透過批評表達，或覺得任何角色都太普通、沒有意義。記錄實際發生了什麼、自己怎樣理解、提出過什麼請求，以及群體如何回應。公平的參與條件已經解決問題，就應據此修正解釋。",
+          "key": "joining_a_local_group",
+          "title": "受到邀請，不等於真的有參與空間"
+        },
+        {
+          "body_md": "在一次社群小型展覽裡，預算減少，一位合作者得到公開稱讚。社群第四型的假設會問：這是否變成了誰的工作算數、自己處於什麼位置的問題？行動可能是確認署名、比較角色，或嘗試承擔表達群體被忽略感受的責任。\n\n另外兩個副型可能優先處理不同問題。自保第四型關注資源與精力是否還足以維持個人認同的貢獻；一對一第四型關注某個欣賞的對象或競爭者的回應，是否開始決定自己的價值。即使三個人都反對安排或加倍努力，他們想解決的問題也可能不同。\n\n追求稱讚也不能直接確定核心型。[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供了從原因區分相似行為的入口。在這個情境裡，可以問：想得到的是成功的認可、被需要的感激、可靠角色的明確，還是個人經驗被理解？當事人的說明與反覆選擇，比動作本身更有解釋力。\n\n真實的分配問題也可能已經足夠解釋一切。署名確實不公，而糾正之後疑慮消退，就不需要再新增隱藏的副型動機。",
+          "key": "credit_resources_or_a_person",
+          "title": "合作者被稱讚時，你最在意什麼變化？"
+        },
+        {
+          "body_md": "選擇一個參與相對安全的群體。有實際障礙時，先請求必要資訊、可使用的材料格式、清晰的表達機會或約定好的署名。你不需要為了練習留在歧視或強迫環境裡。\n\n具備參與條件時，做一次範圍有限、體現自己在意之事的貢獻。與其要求群體確認整個自我，不如問一個具體問題：這個建議哪部分有用，哪部分需要調整？觀察自己能否使用回饋，而不是把它當成個人價值的判決。\n\n把群體行為與自己的解釋分開記錄，也保留一個反例：一次普通的共同任務、一次有用的回饋，或一次無需建立特殊角色也能歸屬的經驗。它挑戰的是「必須透過差異確保歸屬」這項機制，不會自動否定整個核心型。\n\n如果困難只出現在資訊不平等、語言不熟悉、新人職責不清或某個不安全群體，並隨條件改變而減輕，應優先採用情境解釋。如果在更安全的場合沒有反覆出現身分比較，就放下社群第四型假設。比較反覆出現可以繼續反思，但不是診斷結論。",
+          "key": "participate_without_a_verdict",
+          "title": "先完成一次貢獻，再判斷它說明了什麼"
+        },
+        {
+          "body_md": "社群關注討論成員身分、角色與共同參與，不是朋友數量或參加聚會的熱情；資源安全與親密關係仍然重要。第四型是核心模式，傳統上歸入心／感受中心，中心是核心型分組，不是本能排序。三號翼或五號翼討論相鄰類型的影響，社群副型則問第四型的身分關注怎樣進入群體生活；核心型第二高分不能直接確定翼或本能。\n\n27 種組合來自九個核心型分別與三種主導本能相配；本能堆疊另將三種本能完整排序，共有六種順序。希望在群體中受到尊重，不能確定接下來更關注資源還是吸引。本頁不判斷 so/sp/sx 與 so/sx/sp，不推斷第二、第三種本能或本能盲點。這裡 so 指社群、sp 指自保、sx 指 sexual/attraction。\n\n比較一對一描述時，要保留學派口徑。Narrative 的一對一包含親密關係、密友與活力；九型人格研究所的 sexual/attraction 更強調吸引與刺激強度。二者有交集，不完全等同，也都不是性或戀愛數量的測量。可對照[Narrative 本能介紹](https://www.narrativeenneagram.org/instinctual-subtypes/)與[九型人格研究所的模型說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。\n\n27 種副型組合屬於傳統描述；「反型」是 Chestnut–Paes 等學派使用的術語。它們不是已證實的神經類別或可重複科學診斷。[2021 年綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告，104 個樣本的信度與效度證據並不一致；它沒有驗證這些副型例子或費馬評分。某個問卷的研究，也不能建立所有人群中全部副型描述的效度。\n\n繼續比較時，閱讀[第四型核心關注](/zh-TW/personality/enneagram/type-4)、[自保第四型](/zh-TW/personality/enneagram/type-4/instincts/self-preservation)或[一對一第四型](/zh-TW/personality/enneagram/type-4/instincts/one-to-one)。",
+          "key": "terms_evidence_and_reading",
+          "title": "社群關注不等於外向"
+        }
+      ],
+      "seo": {
+        "description": "第四型社群副型是一種傳統且證據有限的假設：身分與意義關注可能透過比較、歸屬，以及感到重要群體擁有自己缺少的部分出現。群體不適不能證明副型；排斥、歧視、身分規則、遷移和不平等的參與機會都可能產生相同體驗。",
+        "title": "第四型社群副型：歸屬、認可與個人真實感"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-4/instincts/social",
+      "source_hash": "18f82da0257142cb96203aded516c9834de79434ea15bd2b6755bcec51e4468c",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "社群第四型的傳統視角，關注身分與個人意義怎樣進入歸屬、認可和貢獻。它可以幫助區分反覆出現的歸屬比較，以及群體確實需要修正的參與障礙。",
+      "title": "第四型社群副型：在群體中找到屬於自己的位置"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "35791991b00b1a375ee8a22ff5a96c3c7284687b814e55a77563e3a56a237898"
+}

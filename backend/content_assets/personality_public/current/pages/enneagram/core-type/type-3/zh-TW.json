@@ -1,0 +1,228 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-3",
+    "entity_key": "type-3",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-3"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-3"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-3",
+      "code": "type-3",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-3",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。興趣、訓練、責任、獎學金條件和生計壓力都能產生同樣表現。三號解釋關注的是成果獲得肯定，是否反覆成為確認整體自我價值的方式，需要與其他動機及現實條件一起比較。",
+          "question": "成績好、目標明確就能判斷為三號嗎？"
+        },
+        {
+          "answer": "不一定。不同環境認可的品質不同，低調、奉獻、學術貢獻或精湛作品也可能成為成功標準。重點不在成功看起來是什麼樣子，而是受認可的標準如何影響選擇和自我評價。",
+          "question": "三號一定外向、喜歡出名或追求高收入嗎？"
+        },
+        {
+          "answer": "不能自動排除。評價標準可能已經內化，誠實與靈活也可以和三號關注並存。更有意義的是長期比較：成果是否持續影響你對整體自我價值的判斷，以及原則、興趣、可信支持或關係連結是否解釋得更好。",
+          "question": "我私下也認真工作，失敗時會坦白，這能排除三號嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-3",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-3",
+        "x-default": "/en/personality/enneagram/type-3",
+        "zh-CN": "/zh/personality/enneagram/type-3"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格：九種動機模式",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/heart",
+          "label": "情感中心：價值感與被接納",
+          "relationship": "center_membership",
+          "target_identity_key": "center:heart"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/3w2",
+          "label": "3w2：成果中的關係與回應",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:3w2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/3w4",
+          "label": "3w4：成果中的個人表達與獨特性",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:3w4"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3/instincts/self-preservation",
+          "label": "三號自保副型：日常生活與資源",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3/instincts/social",
+          "label": "三號社交副型：群體中的成果與認可",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3/instincts/one-to-one",
+          "label": "三號一對一副型：重要關係中的價值關注",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "九型傳統中的三號解釋，關注的不只是完成任務，而是成果如何回答「我是不是有價值的人」。當做得好很快帶來認可，把自己投入到可見成果裡便可能成為一種熟悉策略；當一次結果不好，困難也可能擴大成對整個人的否定。\n\n[Enneagram Institute 的三號介紹](https://www.enneagraminstitute.com/type-3/)使用 The Achiever 這一稱呼。成功在這裡並不只指收入、職位或名氣。一個環境可能看重研究貢獻，另一個可能看重可靠照護、低調奉獻或藝術作品。需要觀察的是哪些品質被視為有價值，以及你是否持續據此調整自己，而不是從某種職業或外在地位判型。\n\n可以把模式的邏輯理解為：發現評價標準，朝那個方向投入，獲得回應，再用回應衡量自己。如果評價持續替代了「我實際想做什麼、現在有什麼感受」，效率就可能伴隨自我疏離。這是理解傳統模式的方式，不是對個人成長經歷已獲證實的解釋。",
+          "key": "achievement_and_value",
+          "title": "想把事情做好，怎麼會變成得不斷證明自己"
+        },
+        {
+          "body_md": "重視成果可以幫助一個人把模糊目標拆成步驟，找到關鍵資源，調整溝通方式，讓別人看見專案進展。這些做法的效果應由具體交付和使用結果判斷，不能由「三號」這個名稱保證。\n\n過度依賴這套做法時，可能出現以下情形：指標容易展示，便優先做指標；困難尚未解決，報告先呈現順利；為了繼續顯得勝任，遲遲不求助；休息被理解成落後，甚至關係中的相處也變成需要完成得漂亮的任務。這些只是需要核對的可能情境，不是三號必然不誠實或沒有感情。\n\n更有用的問題是：當前成果付出了哪些看不見的代價？哪些工作雖然不顯眼，卻關係到長期品質？最近一次失敗是否讓你把「這件事沒做好」擴大成「我沒有價值」？",
+          "key": "execution_and_its_cost",
+          "title": "推動事情有實際作用，也需要知道代價由誰承擔"
+        },
+        {
+          "body_md": "專案簡報前，你把重點改成客戶最關心的指標。這可能是清楚溝通，也可能是在迴避尚未解決的問題。比較時要同時看：原始資訊是否保留，客戶需要的事實有沒有被說明，任務是否確實要求不同表達，以及你在擔心什麼。如果害怕自己不再被視為有價值的人，因而一再影響取捨，就值得考慮三號的解釋；僅僅擅長簡報不能說明這一點。\n\n一次未達目標後，可以先說清事實、影響與下一步，再觀察內心還在急著補救什麼：方案本身、可靠的支持，還是別人對你的整體評價？承認失敗、及時求助和繼續認真工作，都可以與三號關注並存。\n\n親近的人想知道你最近過得怎樣，你卻自然開始報告完成了什麼。對方可能需要的是你的體驗，而非成績清單。可以試著補一句：「這件事做成了我很高興，但這週其實很累，也怕停下來會落後。」分享成果本身沒有問題；給感受一個位置，可以讓雙方更清楚正在交流什麼。",
+          "key": "work_and_relationship_scenarios",
+          "title": "適應受眾與管理形象，要放回實際情境"
+        },
+        {
+          "body_md": "先確認實際要求。獎學金、薪資、專案責任、考核規則和家庭資源限制，都可能讓任何人緊盯成績。只在這些條件下觀察，容易把現實壓力誤認為核心動機。\n\n- 三號與[一號](/zh-TW/personality/enneagram/type-1)：都可能勤奮、追求高品質。面對符合評審期待但不合自己原則的捷徑，比較主要負擔是違背正確做法，還是成果不被認可、自己顯得不夠有價值。三號不必接受捷徑，一號也不必拒絕調整方法；要看取捨的理由怎樣反覆出現。\n- 三號與[二號](/zh-TW/personality/enneagram/type-2)：都可能經營關係、提供幫助。比較「成果被高度認可，但沒有更親近」與「對方仍親近，但不再需要你的能力展示」。三號解釋更關注被肯定的成果怎樣支撐價值感，二號解釋更關注能幫上忙的角色如何維繫關係，不能用是否外向或是否喜歡人來區分。\n- 三號與[六號](/zh-TW/personality/enneagram/type-6)：都可能盡責、努力並重視回饋。比較完成目標主要讓你覺得自己有價值，還是讓承諾、支持與因應風險更可靠。害怕失敗也可能來自真實損失；只有先理解失敗會影響什麼，才知道應該比較哪種解釋。\n\n[The Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供這些相似模式的傳統辨別方向。本頁把它們用於比較具體選擇，不用一句回答決定類型。",
+          "key": "distinguishing_effort_and_adaptation",
+          "title": "努力、適應與三號不是同一回事"
+        },
+        {
+          "body_md": "認可可以成為內在評價標準。即使沒有觀眾，一個人仍可能想達到自己心中「有價值的人應該做到」的水準。因此，私下努力不自動否定三號；如實報錯、願意合作或能夠休息，也可能說明這個人不必再依賴單一策略。\n\n更有分量的反例，是在多個有選擇餘地的情境中，成果評價並不反覆影響對整體自我價值的判斷。你持續按興趣學習，能說明自己為什麼選擇不受認可的方向；指標只在明確職責內重要，離開職責後不再左右生活安排；或者關鍵決定更常取決於原則、可靠的支持或關係親近，而非認可的成果。\n\n這並不要求你對讚美無動於衷。大多數人都會享受肯定。要比較的是肯定怎樣影響選擇、感受和自我評價，而不是有沒有喜歡過掌聲。",
+          "key": "private_effort_and_counterexamples",
+          "title": "無人看見仍努力，不會自動排除三號"
+        },
+        {
+          "body_md": "選一個真實目標，寫下三件不同的事：它實際對誰有幫助、什麼證據能說明任務完成、你希望透過它證明自己是什麼樣的人。第三項可以寫「希望顯得可靠」或「怕別人發現我不夠厲害」，不必把它當作過錯。\n\n在下一次報告裡，清楚呈現一項進展、一項尚未解決的問題和一項需要的協助。根據對象和職責調整表達，同時保留完整事實。報告後記錄：現實後果是什麼？自己是否把一個不足擴大成整體價值受損？這是需要解決的任務問題，還是可以先承認的一種感受？\n\n再留一小段不以展示成果為目的的時間，做一件你實際願意做的事，或和親近的人交流當下體驗。結束後問「我有沒有感到興趣、疲憊、輕鬆或失落」，先不問「表現得怎麼樣」。這不是反對目標，而是練習讓目標、個人偏好與感受各自有位置。",
+          "key": "separate_results_from_self_worth",
+          "title": "一次小練習：給成果之外的體驗留出位置"
+        },
+        {
+          "body_md": "三號在九型傳統中屬於[情感中心](/zh-TW/personality/enneagram/centers/heart)，因為這個分組討論價值感與接納。看起來務實、少談感受，並不表示一個人沒有情感，也不能單憑這一點判為三號。\n\n如果成果與個人價值反覆連在一起，可以比較[3w2：成果中的關係與回應](/zh-TW/personality/enneagram/wings/3w2)和[3w4：成果中的個人表達與獨特性](/zh-TW/personality/enneagram/wings/3w4)。翼修飾三號核心，不等於因為會照顧人就變成二號，或因為重視作品就變成四號。\n\n如果主要困惑仍是「我為什麼這麼努力」，先回到[九型人格總覽](/zh-TW/personality/enneagram)，比較不同模式想維護的東西。副型頁面討論資源、群體角色與重要關係中的關注，不能把某一種成功方式直接當作副型身分。",
+          "key": "heart_center_wings_and_next_steps",
+          "title": "核心在意的價值與不同表達方式"
+        },
+        {
+          "body_md": "本頁使用傳統三號描述解釋一種可能的動機組織方式。工作與關係場景是用於討論的示例，實踐是增加觀察與選擇的嘗試，不是經過驗證的判型或干預工具。\n\n[Hook 等人的系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告九型研究證據並不一致，翼與類型間移動的研究支持有限。本頁不能證明一個人有永久核心，也不能證明費馬測評能夠預測表現。\n\n類型不衡量真實能力、誠信、收入或關係品質。判斷一項工作是否可靠，應看事實、承諾和交付；判斷一個人如何對待他人，應看具體行為及影響。不要因三號描述涉及形象與認可，就推定某個人虛偽或不值得信任。",
+          "key": "sources_and_scope",
+          "title": "把自我理解與能力、誠實和結果判斷分開"
+        }
+      ],
+      "seo": {
+        "description": "第三型是一種傳統九型觀察假設：注意力可能反覆回到可見成果、被認可的價值，以及如何配合當前情境的評價標準。完成目標本身不能證明動機；職位責任、生計壓力、訓練、競賽和資源限制都可能產生相同行為。",
+        "title": "九型人格3號：成果、認可與自我價值"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-3",
+      "source_hash": "35cf569d1d770c365462ee50b230983c9c60bb0e19666fde3dc8d57a6246fba4",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "三號模式關注什麼樣的成果會被看重，並可能把表現與個人價值緊密相連。這種模式有助於推進工作、適應情境，也可能讓真實偏好、感受與休息被不斷延後。理解三號，需要區分認可與價值感、原則與責任，以及現實條件要求的努力。",
+      "title": "九型人格3號：成果、認可與不只靠表現確認價值"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "7e8c53b15bab403bd7be5a9e1c60938c9fb164195c73afadc6ba869f29ab8ee8"
+}

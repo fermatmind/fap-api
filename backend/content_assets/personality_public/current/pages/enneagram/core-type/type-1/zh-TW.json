@@ -1,0 +1,228 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-1",
+    "entity_key": "type-1",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-1"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-1"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-1",
+      "code": "type-1",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-1",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不必。挑錯可能來自工作訓練或現實風險；一號的傳統重點是行動是否符合自己認可的標準、是否盡責。一個人可以保留這份關注，同時接受夠用結果、欣賞他人或允許不同方法。",
+          "question": "一號是不是必須追求完美、很會挑錯？"
+        },
+        {
+          "answer": "先比較確認想解決什麼問題：標準是否正確，還是依據與支持是否可靠。可以觀察在做法合乎原則但沒有人背書，以及有人可靠背書但做法不合原則時，哪種不適反覆決定你的選擇。不要從一次確認或是否顯得自信直接判斷。",
+          "question": "我守規則，也經常向別人確認，更像一號還是六號？"
+        },
+        {
+          "answer": "不會自動說明。接受共同標準可能是靈活地履行責任。只有當標準與盡責長期不構成主要關注，而另一種理由更穩定地組織選擇時，才有必要降低一號解釋的權重。",
+          "question": "接受夠用結果，會不會說明我其實不是一號？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-1",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-1",
+        "x-default": "/en/personality/enneagram/type-1",
+        "zh-CN": "/zh/personality/enneagram/type-1"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格：九種動機模式",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/gut",
+          "label": "身體（腹）中心：行動、不滿與邊界",
+          "relationship": "center_membership",
+          "target_identity_key": "center:gut"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/1w9",
+          "label": "1w9：較克制的改進方式",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:1w9"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/1w2",
+          "label": "1w2：更直接參與他人的改進方式",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:1w2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1/instincts/self-preservation",
+          "label": "一號自保副型：日常生活與資源",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1/instincts/social",
+          "label": "一號社交副型：群體角色與責任",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1/instincts/one-to-one",
+          "label": "一號一對一副型：重要關係中的關注",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "九型傳統用一號描述一種圍繞正確、責任與自我要求組織起來的模式。它的重點不只是看見錯誤，而是錯誤可能很快變成一個關於自己的問題：既然知道還能做好，放著不改是否意味著我沒有盡責？\n\n可以把這條思路理解為一個迴圈：注意到現實與理想的差距，感到自己應該處理，透過修正重新獲得安心。如果「我已經負責地完成了」總要等到「再也找不到缺點」才成立，改進就容易變成沒有終點的任務。這個解釋描述的是傳統模式的邏輯，不能據此推定某個人的童年經歷或人格成因。\n\n[Enneagram Institute 的一號介紹](https://www.enneagraminstitute.com/type-1/)使用 The Reformer 這一稱呼。這裡更值得觀察的是：當沒有人監督、也沒有額外獎勵時，你是否仍反覆關心同一條原則，以及違背它對你究竟意味著什麼。整潔、守時、會挑錯，都不足以單獨回答這些問題。",
+          "key": "standards_and_self_evaluation",
+          "title": "為什麼發現問題後，很難就這樣放過去"
+        },
+        {
+          "body_md": "這套策略的作用可以很具體：發現遺漏的責任、把含糊承諾變成可執行約定、提醒團隊按同一標準處理相似問題。有人願意指出大家已經習慣的缺陷，確實可能減少重做，也讓被忽視的人得到公平對待。\n\n過度使用的代價則常出現在「需要改進」與「只能按我的方式改進」混在一起的時候。一個有效但不同的做法可能過早被否定；回饋只剩修正，協作者聽不見已做好的部分；休息要等到所有問題消失，個人需要便不斷延期。\n\n留意不滿怎樣進入互動。你可能先告訴自己應該剋制，卻在反覆提醒、糾正語氣或接手他人任務時表達了憤怒。可以把「你怎麼又沒做好」拆成三件事：發生了什麼、造成什麼影響、接下來需要怎樣約定。表達不滿本身不說明類型，也不降低一個人的價值。",
+          "key": "useful_correction_and_overuse",
+          "title": "改進什麼時候有用，什麼時候開始擠壓生活"
+        },
+        {
+          "body_md": "團隊要交一份提案，你發現一處表述不夠準確。如果你的主要顧慮是「即使評審不會發現，我們也不該這樣陳述」，一號的標準解釋值得比較。如果你想的是「沒人複查，出事時我們得不到支援」，應更多考慮安全與可靠支持；如果你想的是「這一處會讓方案顯得不專業、影響評審的肯定」，則需要比較成果與評價的解釋。三個理由可以同時存在，要看哪個理由反覆決定你的取捨。\n\n在共同生活中，伴侶沒有按約定做家務，你堅持重新分工，可能是在維護公平，也可能是在擔心關係中的支持不可靠，或只是已經疲憊。先說「這週我額外承擔了兩次，我需要重新分配」，比用「一號都受不了不負責的人」解釋爭執更具體。\n\n如果你是收到回饋的人，可以請對方區分必須補救的後果與個人偏好，並一起確認結束條件。如果你是提出回饋的人，先了解對方的資源和責任範圍，再討論改法。理解模式是為了改善約定，不是讓任何一方自動擁有裁決權。",
+          "key": "correction_in_relationships_and_work",
+          "title": "同樣一句提醒，背後可能想維護不同的事"
+        },
+        {
+          "body_md": "這些比較用於澄清反覆出現的關注，不是按一種表現分組。\n\n- 一號與[六號](/zh-TW/personality/enneagram/type-6)：兩者都可能盡責、檢查和堅持規則。一號的解釋較著重規則是否正確、行動是否對得起自己的標準；六號的解釋較著重依據是否可信、誰能提供支援、出了問題如何應對。可以問：當可靠的人保證風險可控，但做法仍不合你的原則時，最難放下的是什麼？反過來，做法符合原則卻缺少可靠支持時，你還擔心什麼？一號也會猶豫，六號也能堅定，不能用自信程度直接區分。[一號與六號的傳統比較](https://www.enneagraminstitute.com/misidentifying-1-and-6/)提供了從標準與支持著手區分的方向。\n- 一號與[三號](/zh-TW/personality/enneagram/type-3)：兩者都可能認真工作、追求高品質。比較當受認可的成功標準與自己認為正確的做法不一致時，什麼最難割捨：違背原則的負擔，還是失去成果獲得肯定及自我價值感的壓力？三號可以有堅定原則，一號也可以在乎評價，關鍵是長期怎樣處理衝突。\n- 一號與[二號](/zh-TW/personality/enneagram/type-2)：兩者都可能主動改善他人的處境。幫助遭拒時，可以比較自己更在意「這件事仍沒有得到妥善處理」，還是「我在這段關係裡是否仍被需要」。對方的真實需要、你的職責和現實緊迫性也可能比類型更能解釋行動。",
+          "key": "distinguishing_one_six_three_two",
+          "title": "與六號、三號、二號怎樣比較"
+        },
+        {
+          "body_md": "能夠休息、接受夠用結果、承認自己判斷錯了，或在適合的任務裡先做試驗，都不自動否定一號模式。這些行為可能說明你可以在在意品質的同時靈活行動。一個人也可能很在乎標準，卻因疲勞、資源不足或更重要的責任，暫時不修正某個問題。\n\n更有分量的反例，是在多種有實際選擇餘地的情境裡，標準與盡責並不持續組織你的決定：檢查只在上級監督時出現，解除處罰後便不再重要；或者當結果與原則衝突時，你反覆說明自己主要關心排名、可靠支持或避免衝突，而不是做法是否對得起自己的要求。\n\n這些材料削弱的是「一號最能解釋這組選擇」的判斷。不要把所有不符合描述的行為都重新解釋成隱藏的一號，也不要只憑一次例外就改換標籤。",
+          "key": "what_weakens_the_explanation",
+          "title": "哪些觀察需要重新考慮一號解釋"
+        },
+        {
+          "body_md": "選一件後果較輕、可以補改的真實任務，例如內部說明或家庭安排。開始前，與相關的人一起寫下：必須滿足的條件、可以接受的不完美、截止時間，以及出現什麼實際後果才值得再改。涉及安全或法定要求的任務仍須滿足其正式標準。\n\n做到約定的條件後，準備停止時記錄三個問題：我還想改什麼？這次修改能改善誰的使用結果？如果不改，我最擔心的是具體後果，還是「我不夠認真」的自我評價？可以向協作者說：「這部分已經滿足約定，我仍有一點不放心，想先看看實際使用回饋。」\n\n使用後再比較預期與結果。如果確有遺漏，就修正標準；如果效果足夠好，卻仍覺得自己不該放鬆，可以練習把這種不適與實際責任分開。目標是增加選擇餘地，不是證明自己屬於一號，也不是強迫自己降低必要的品質。",
+          "key": "a_stopping_rule_experiment",
+          "title": "一次小實踐：讓停止也成為負責的決定"
+        },
+        {
+          "body_md": "九型傳統把一號放在[身體（腹）中心](/zh-TW/personality/enneagram/centers/gut)，也稱本能中心，用這個分組討論行動、不滿與自我約束。它包含1、8、9號，與自保、社交、一對一這三種本能關注不同。這不表示一號缺乏情感或只靠直覺做事。\n\n如果標準與負責改進確實是較穩定的主題，可以繼續比較[1w9：較克制的改進方式](/zh-TW/personality/enneagram/wings/1w9)與[1w2：更直接參與他人的改進方式](/zh-TW/personality/enneagram/wings/1w2)。翼用於描述相鄰模式如何修飾核心，不應把安靜或熱心當作獨立判型依據。\n\n如果你還在一號與其他核心之間猶豫，先回到[九型人格總覽](/zh-TW/personality/enneagram)，比較各模式想維護的東西。自保、社交與一對一頁面進一步討論關注落在哪些生活領域；它們不能代替對核心動機的比較。",
+          "key": "center_wings_and_next_steps",
+          "title": "先理解核心，再看不同的表達方式"
+        },
+        {
+          "body_md": "本頁把一號傳統描述轉成可討論的問題和自我觀察情境。類型動機來自九型理論與實踐者材料，情境和小實踐是用於比較解釋的示例，不是經過驗證的判型工具。\n\n[Hook 等人的系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告九型研究的信度與效度證據並不一致，翼與類型間移動的研究支持也有限。本頁不據此認定類型先天固定，不把成長箭頭當作必然規律，也不將第三方研究轉作費馬測評的效度證明。\n\n你可以自行用這些內容回顧自己的選擇，或在對方願意時討論具體約定；不要據此判斷道德水準、臨床狀況、職業能力或關係結局。",
+          "key": "sources_and_scope",
+          "title": "這頁能幫助你理解什麼"
+        }
+      ],
+      "seo": {
+        "description": "九型人格傳統中的1號關注標準、原則與盡責。本頁用工作回饋、家務分工和相近類型的比較，解釋改進何時有用、何時可以停止；認真、守規則或挑錯本身不能確定類型。",
+        "title": "九型人格1號：標準、責任與改進的分寸"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-1",
+      "source_hash": "849cfe385e1ce12d681967a4b9641f58181fc3f8ee072505726aac0a3450f5b4",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "一號模式關注怎樣把事情做對、讓行動符合自己認可的原則。這種關注能促使人負責地改進，也可能讓人難以接受已經夠用的結果。理解一號，需要比較修訂背後的理由，尤其區分對標準的堅持、對可靠支持的需要，以及對成果獲得肯定的追求。",
+      "title": "九型人格1號：標準、責任與改進的分寸"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "22434dea3ba0eefee9d28de6bbcc3076e6a1b3528061e130bdd07d10bc0e6d8b"
+}

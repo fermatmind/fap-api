@@ -1,0 +1,241 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-6",
+    "entity_key": "type-6",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-6"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-6"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-6",
+      "code": "type-6",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-6",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不一定。傳統第六型模式既可以透過合作尋求支持，也可以主動挑戰威脅或不可靠的權威。辨認時應看可靠性與支持的需要，不能用服從或反抗來判型。",
+          "question": "第六型一定膽小或服從權威嗎？"
+        },
+        {
+          "answer": "可能。類型解釋關注慣常處理未知與支持的方式，不要求某種情緒一直存在。焦慮本身也有許多原因，不能單獨說明類型。",
+          "question": "沒有明顯焦慮，還可能認同第六型嗎？"
+        },
+        {
+          "answer": "看核對是否補足實際缺少的資訊，答案能否改變行動，以及是否有根據後果與職責設定的停止條件。如果反覆得到同樣的資訊卻無法調整決定，可以檢查詢問是否主要在尋求暫時安心。",
+          "question": "怎麼分辨合理謹慎與反覆尋求保證？"
+        },
+        {
+          "answer": "並非如此。信任需要回應事實、履約與修復。類型標籤不能要求你接受失信、不公平或傷害，也不能把合理退出解釋成缺乏忠誠。",
+          "question": "忠誠是否表示必須繼續不可靠的關係？"
+        },
+        {
+          "answer": "不會自動說明。果斷可以是支持充分、責任明確或個人能力發展的結果。若可靠性與支持在多個領域長期都不是主要關注，才更值得重新考慮核心解釋。",
+          "question": "果斷行動，會不會說明我不是第六型？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-6",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-6",
+        "x-default": "/en/personality/enneagram/type-6",
+        "zh-CN": "/zh/personality/enneagram/type-6"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/head",
+          "label": "思維中心：面對未知的不同方式",
+          "relationship": "center_membership",
+          "target_identity_key": "center:head"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/6w5",
+          "label": "6w5：第六型與第五型翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:6w5"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/6w7",
+          "label": "6w7：第六型與第七型翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:6w7"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6/instincts/self-preservation",
+          "label": "第六型的自保本能副型",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6/instincts/social",
+          "label": "第六型的社交本能副型",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6/instincts/one-to-one",
+          "label": "第六型的一對一本能副型",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在傳統九型解釋中，第六型希望面對困難時有可信的支持與方向，擔心沒有可靠依據，或到了關鍵時刻只能獨自承擔。注意力可能先發現承諾中的空白、事情會怎樣出錯，以及誰能一起處理。\n\n這套策略的邏輯是：核對可靠性、先擬好備案、維護合作關係，便能帶著未知繼續前進。支持可以來自人，也可以來自清楚的程序、經過檢驗的知識或共同約定。\n\n因此，尋求支持與質疑支持並不矛盾。你可能認真遵守一項可信的協議，也可能強烈反對失信的權威。需要辨認的是背後的可靠性問題，而不是把順從或反抗當成固定特徵。",
+          "key": "motivation_attention",
+          "title": "真正要尋找的，是可以依靠的依據與支持"
+        },
+        {
+          "body_md": "同樣反覆核對一項計畫，有人正在履行安全職責，有人面對剛發生的故障，有人不清楚責任邊界，也有人即使在低風險決定中仍難以放心。先分清現實要求，再考慮慣常模式。\n\n忠誠也可能來自感情、倫理、互惠或生計，不表示一個人必須認同第六型。離開不公平關係，反而可能是認真回應眼前的事實。\n\n第六型模式還可能表現為主動面對威脅、強勢提問或保護同伴。看起來勇敢，並不證明沒有擔憂；看起來緊張，也不證明你屬於第六型。更有幫助的是問：「我在確認什麼，什麼條件會讓我願意行動？」",
+          "key": "behavior_motive",
+          "title": "謹慎、忠誠和勇敢，都不能單獨判型"
+        },
+        {
+          "body_md": "團隊準備採用一個新方案，你提出「失敗時誰負責、如何恢復」。這些問題若補足了實際缺少的資訊，就在幫助團隊行動。\n\n但如果每個回答又引出一個沒有盡頭的假設，大家可能一直不知道怎樣才算準備充分。可以區分必須滿足的條件、尚可接受的未知，以及何時重新檢查。條件應由實際後果與職責決定，而不只是由當下是否放心決定。\n\n收到建議時，也可分開評估建議內容和提出建議的人。可信的人可能判斷失誤，不熟悉的人可能提供好證據。依靠支持和使用自己的判斷，可以同時做到。",
+          "key": "decision_feedback_conflict",
+          "title": "核對是否有效，要看新證據能否改變決定"
+        },
+        {
+          "body_md": "這套關注可能幫助你提前發現薄弱環節，讓責任更清楚，認真履行承諾，並在別人需要時持續提供支持。它也可能推動團隊把「應該沒問題」變成可說明的依據。\n\n過度使用時，可能的威脅占去大部分注意力，而實際機率、可恢復性和手邊已有的支持容易被忽略。反覆詢問卻很少接納答案，會讓安慰迅速失效；把分歧理解成站隊問題，則可能讓合作變成忠誠檢驗。\n\n是否繼續核對，應看它帶來了什麼新資訊，能否改變行動。這個判斷不要求你忽略真實危險，也不把同伴的耐心當成無限資源。",
+          "key": "strengths_tradeoffs",
+          "title": "重視可靠性有何作用，以及無法結束的成本"
+        },
+        {
+          "body_md": "朋友不同意你的計畫，你可能擔心這是否表示對方不會支持你。可以把擔憂說具體：「你是不同意這個選擇，還是無法在我遇到困難時提供我希望的幫助？」接著明確需要的支持是什麼，也允許對方說明自己的能力與邊界。\n\n工作中也可以把「能不能信任你」改成可討論的承諾：誰完成哪一步，什麼時候回饋，變更如何通知。信任不必一次建立，它可以隨履約、解釋和修復逐步更新。\n\n如果確實存在持續失信、歧視或權力濫用，應處理現實問題，不能以「你只是第六型多疑」否定合理的質疑。",
+          "key": "work_relationship_examples",
+          "title": "談清楚需要，不用分歧檢驗對方站不站在你這邊"
+        },
+        {
+          "body_md": "傳統九型比較關注行動背後的目的，不能用嚴肅、強勢或理性等形容詞判型。\n\n- 與[第一型](/zh-TW/personality/enneagram/type-1)比較：兩者都可能重責任、守規則並提出改進。第六型解釋更關注規則或支持是否可靠、出了問題如何因應；第一型解釋更關注做法是否符合應有標準與自己的原則。回想一次規則已能保障安全、你仍不接受的情況：問題主要是標準不對，還是依據與責任仍不可信？兩型都可以有原則，也都可以擔心風險。\n- 與[第八型](/zh-TW/personality/enneagram/type-8)比較：兩者都可能對抗、保護別人並拒絕控制。第六型的挑戰可能為了查清可靠性、排除威脅或確認支持；第八型的挑戰可能為了保有自主、避免被支配。可比較弄清楚有哪些支持以後，最在意的是共同安排可信，還是仍要保有決定權。行動快慢或聲音大小不能決定答案。\n- 與[第五型](/zh-TW/personality/enneagram/type-5)比較：兩者都可能深入研究。第六型更關注依據與支持是否可靠；第五型更關注理解是否充分，以及自己是否有餘力參與。向別人詢問與獨立研究，都可能回應其中任何一種需要。\n\n6w5與6w7仍以第六型為核心，分別借相鄰第五型和第七型的關注解釋分析、私人準備，或選項與互動等修飾。核心未明確時，先繼續比較，不必急著選翼。可閱讀[6w5](/zh-TW/personality/enneagram/wings/6w5)與[6w7](/zh-TW/personality/enneagram/wings/6w7)。",
+          "key": "wings_mistypes",
+          "title": "與1、8、5號比較：要維護的究竟是什麼"
+        },
+        {
+          "body_md": "你可以信任別人、勇敢行動，並在證據足夠時停止核對，同時仍認同第六型的關注。一次果斷決定不自動排除這個模式，也不該把成長解釋成不再有該類型。\n\n更有力的反例是：在不同領域，查核都隨實際風險、職責及近期故障而變化，風險消除後自然停止；可靠的支持與承諾並非長期主要問題，反而是原則、自主、理解或其他關注更能解釋你的選擇。\n\n若謹慎來自實際不安全的情況，就優先保留現實解釋。不要為了維持類型判斷，把每個合乎情境的行為都改寫成隱藏的擔憂。",
+          "key": "counterexample",
+          "title": "能停止核對，顯示有彈性；長期不以可靠性為核心，才更能挑戰解釋"
+        },
+        {
+          "body_md": "[Enneagram Institute 的第六型說明](https://www.enneagraminstitute.com/type-6/)討論支持、指導，以及遵守或質疑權威的不同表現。其[1與6的比較](https://www.enneagraminstitute.com/misidentifying-1-and-6/)及[The Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供傳統辨別方法。本頁把這些方法用於具體動機比較，不採用名人歸類或用臨床層級評定一個人。\n\n[Hook 等人的2021年系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告九型研究的信度與效度證據並不一致，翼和類型間移動的研究支持有限。它不能證明費馬測評效度，也不能據此診斷焦慮、認證忠誠或判斷關係安全。\n\n可回到[九型人格總覽](/zh-TW/personality/enneagram)比較其他核心；若想理解5、6、7號面對未知的共同主題，可閱讀[思維中心](/zh-TW/personality/enneagram/centers/head)。",
+          "key": "use_boundary",
+          "title": "傳統信任模式，不是焦慮或忠誠的診斷"
+        },
+        {
+          "body_md": "選擇一件可調整、後果有限的日常決定，例如安排一次活動或選擇一種短期合作方式。真實安全、法律或職責要求仍需照常滿足。\n\n開始前寫清楚：已經知道的事實、實際缺少的資訊、可以接受的未知，以及出現什麼新證據時才需要重新考慮原本的決定。向一位相關的人提出一個具體問題，說明你需要的是事實、建議還是實際支持。\n\n得到回答後，依照原先的條件做決定。如果仍想再問，先記錄：「這次會帶來哪條新資訊？」若只是希望得到完全相同的保證，可以嘗試完成原定的小步驟，再按約定複查。\n\n最後比較預期與實際後果：哪些核對有用，哪些沒有改變選擇？保留一次合理改變決定的情況。目標是練習隨證據更新，並不要求自己永遠放心，也不是證明你屬於第六型。",
+          "key": "observation_exercise",
+          "title": "給一次低風險決定設定結束核對的條件"
+        }
+      ],
+      "seo": {
+        "description": "九型人格6號的傳統解釋關注面對未知時能否獲得可靠的支持與承諾。本頁幫助區分合理謹慎與反覆尋求保證，並說明怎樣根據事實、後果與職責結束核對。合作或質疑都可能服務這一關注；真實風險、失信與不公平處境仍需優先處理。",
+        "title": "第六型：不確定性、支持與信任更新的可修正假設"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-6",
+      "source_hash": "c5cedddf79a5059371c7da05db6c983be2f057794b7711e31b9d093f9985afa9",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "第六型的傳統模式，關注面對未知時可以相信什麼、依靠誰，以及承諾與責任是否可靠。它可能透過核對、備案、合作或主動質疑建立安全感，並不等於膽小、服從或總是焦慮。辨認時應觀察這些動作如何幫助行動，又何時變成難以結束的信任檢驗。",
+      "title": "九型人格6號：可靠的支持、可靠承諾與面對未知"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "c507dd4d593fcd6404ac8de4a0702caf2fce6dcff457f3252fb63b3576f79629"
+}

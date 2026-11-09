@@ -1,0 +1,208 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-1/instincts/one-to-one",
+    "entity_key": "type-1/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-1/instincts/one-to-one"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-1/instincts/one-to-one"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-1/instincts/one-to-one",
+      "code": "type-1/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-1/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不是。違約、壓力、分工不等和溝通習慣都可能造成相似表現。需要檢驗一號式標準關注如何與特定連結或投入感連在一起，並比較其他條件。嫉妒不是必要特徵，也不賦予干涉他人自由的權利。",
+          "question": "批評很強烈、容易嫉妒，就是一號一對一嗎？"
+        },
+        {
+          "answer": "可以。Narrative 的 one-to-one 也討論親近的朋友與活力，EI 的 sexual/attraction 也不只指性行為。不過兩者不是完全同義。先說明你實際觀察的是特定連結、吸引強度還是兩者，而不是以戀愛狀態或性慾高低作判斷。",
+          "question": "我沒有戀愛關係，還能理解這一副型嗎？"
+        },
+        {
+          "answer": "不能。先看要求是否共同約定、有沒有具體問題、時間與資源是否足夠，以及對方是否有另一種合理方法。副型不能證明相容性，更不能把拒絕視為不在乎。需要討論現實邊界、分工與合作條件。",
+          "question": "對方不願意改進，是否說明我們副型不合？"
+        },
+        {
+          "answer": "不能。翼與本能副型是不同解釋層：前者討論相鄰類型風格，後者討論關注領域。第二高分不能自動確定翼，也不能決定本能副型；職業、名人的類型描述或單一親密行為同樣不足。",
+          "question": "一對一副型能由翼或第二高分推出來嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-1/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-1/one-to-one",
+        "x-default": "/en/personality/enneagram/type-1/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-1/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1",
+          "label": "一號核心類型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1/instincts/self-preservation",
+          "label": "一號自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1/instincts/social",
+          "label": "一號社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "[Narrative 本能介紹](https://www.narrativeenneagram.org/instinctual-subtypes/)的 one-to-one 包括親密夥伴、親近的朋友與活力；[Enneagram Institute 本能模型](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)的 sexual/attraction 更強調吸引、刺激和彼此吸引的感覺。兩種說法有交集，卻不是完全同義。都不能簡化成只談性或戀愛，也不能以性慾高低決定歸屬。\n\n因此，本頁分別保留兩個觀察問題：你是否特別在意與某位重要的人形成有投入的連結？你是否特別容易圍繞令人振奮的人或活動集中精力？二者可以一起出現，也可能只有一個適用。喜歡深談的人未必符合吸引強度的描述；被一個專案吸引的人也不一定把主要注意放在親密關係。\n\n這些用語來自各學派對注意力的描述，不是已經確認的生物線路或神經機制。一個人仍會需要資源安全和群體連結；不必把三種本能想成彼此排斥的三類人。",
+          "key": "terms_before_portrait",
+          "title": "一對一不只是戀愛，也不完全等於 sexual"
+        },
+        {
+          "body_md": "一號的傳統核心是按認可的標準行動、維護正直並修正偏差，可見 [Enneagram Institute 一號介紹](https://www.enneagraminstitute.com/type-1/)。一對一副型的觀察方向，是這份要求是否經常集中到某段重要連結、共同承諾或令人投入的活動上。\n\n可能出現的過程是：先感到這段合作很重要、值得認真投入；隨後察覺對方的做法與理想有距離，便急切想讓兩人一起做到更好。當建議沒有被接納，失望可能同時涉及做得不對與連結沒有被回應。應詢問當事人實際在意什麼，不能預先假定其批評都是愛的表達。\n\n[Narrative 的一號一對一描述](https://www.narrativeenneagram.org/instinctual-subtypes/)討論熱切、嫉妒與自控。這不表示嫉妒是必要特徵，更不讓限制他人自由成為合理行為。核心動機和外在表達可能不一樣，具體解釋仍須允許被實際過程推翻。",
+          "key": "improvement_in_the_bond",
+          "title": "核心仍是「怎樣才算做對」，連結讓它變得更急切"
+        },
+        {
+          "body_md": "設想兩位朋友一起製作社群故事Podcast。周被搭檔的想法打動，願意多花時間核對事實、練習訪談，提出可以互相檢查的標準。兩個人都有參與感，品質也提高了。熱切在這裡支持了認真投入。\n\n後來，搭檔希望保留一種比較輕鬆的剪輯風格。周反覆要求重錄，理由從「這段資訊不清楚」變成「你如果和我一樣重視它，就應該願意再做一次」。這時，品質分歧被當成連結是否足夠重要的證明。對方很難只討論剪輯，也可能為了結束爭執而答應。\n\n這則原創情境不能證明周的副型。事實錯誤、雙方已同意的品質要求、長期分工不均或指導他人的職責，都可能需要具體糾正。辨別點是能否說清問題、接受另一種達標方法，以及對方是否能拒絕不在約定中的額外投入。若有威脅或反覆越界，先處理現實行為，不用人格標籤替它辯護。",
+          "key": "two_people_one_project",
+          "title": "合作變得有活力，何時又變成了只准一種做法"
+        },
+        {
+          "body_md": "讓節目、期限和雙方責任保持相同：\n\n- 自保一號可能先確保素材備份、設備可用，投入時間也能維持，讓工作可靠完成。\n- 社群一號可能先考慮對聽眾、受訪者和整個小組承擔的共同責任，確認標準如何適用於所有人。\n- 一對一一號可能先在意與這位搭檔能否共同投入、兌現兩人的承諾，並保留合作中鮮明的活力。\n\n三種關注都可能要求重錄。問清要求保護的是什麼，以及問題處理之後還剩下什麼不滿，比批評的音量更有辨別價值。只是與一個人工作，不能證明一對一；只是對方不配合，也不能證明你在追求吸引強度。\n\n[Narrative 類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供一號與二號、八號等類型的傳統辨別線索。可以進一步問：我最難放下的是不合標準、沒有得到需要的關係回應，還是自主權受到干涉？這些需要可能混合出現。語氣溫柔或強硬都不能單獨回答核心動機。",
+          "key": "same_edit_three_priorities",
+          "title": "同一份節目修改要求，重點可能完全不同"
+        },
+        {
+          "body_md": "選擇一次雙方願意討論、後果可控的合作分歧。先說具體問題和影響，例如「這段時間資訊不一致，會讓聽眾誤解」，再區分原本約定與個人偏好。詢問對方是否願意一起修改，並允許另一種達到目的的方法。\n\n另外說清楚你在關係中的需要：「我希望我們留一點時間共同打磨，能感到彼此投入。」不要把對方接受你的方案當作在乎關係的唯一證明。約定討論範圍、投入上限和何時暫停；聽到拒絕後，可以協商任務、分工或合作方式。真正必要的準確性與安全要求仍按實際情況處理。\n\n支持你的人可以肯定認真投入的價值，同時指出建議何時變成壓力。記錄一次討論中你何時最急、對方能否不同意、你是否願意承擔同樣標準，以及改變後是否更容易合作。練習的目的不是證明你更成熟或關係更匹配，而是把需要、標準與控制分開。",
+          "key": "make_an_invitation",
+          "title": "把共同變好改成可以拒絕的邀請"
+        },
+        {
+          "body_md": "如果急迫感只集中在一次尚未補救的違約，處理承諾後就明顯下降，關係歷史可能比副型解釋更直接。如果只在指導他人時要求特定人改變，職責可能更重要。如果在多次相近任務中，你總是先解決物資與時間，或先處理全體規則，而特定連結與投入感並不突出，就降低一對一優先的假設。\n\n如果標準只約束對方、異議被當成不忠，不能據此確定核心型，但應撤回「這是互惠的共同改進」這項具體解釋，並處理施壓行為。反過來，能接受拒絕、表現平靜，或暫時獨處都不自動否定一對一關注；要比較實際在意的領域，而非尋找某種必然出現的情緒表現。\n\n當預期過程反覆沒有出現，應允許結論是暫不適用或不知道。所謂隱藏副型、更強壓抑或反型，不能讓分類失去被撤回的可能。",
+          "key": "when_to_reconsider",
+          "title": "什麼情況應讓你放下這項解釋"
+        },
+        {
+          "body_md": "學派所說的二十七副型，是九個核心型各與三種主導本能之一組合（9 × 3）；countertype 或反型也屬於學派傳統。反型用語常用於討論外觀與典型描述不同的組合；它不是另一個核心型，也不是無論出現什麼行為都能維持原分類的理由。不同流派的畫像不能當成能重複驗證的科學診斷。\n\nEI 的本能堆疊討論另一個問題：把三種關注完整排為主導、次要和較少關注，共有六種順序。例如 sx/sp/so 與 sx/so/sp 都以 sexual/attraction 為先，自保與社群分列另外兩個位置；這裡的 sx 沿用 EI 口徑，不能因此把 Narrative 的 one-to-one 與它完全等同。本頁只探索主導關注，不憑批評、投入感、翼或核心型分數判定第二、第三順序、盲點或堆疊分數。\n\n[Hook 等人 2021 年系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告信度與效度證據不一致。傳統解釋、特定量表研究和費馬產品驗證不應互相替代；這些來源沒有驗證費馬的一號一對一評分，也不能預測關係是否合適、同意或未來結果。\n\n繼續閱讀 [一號核心類型](/zh-TW/personality/enneagram/type-1)，或比較 [一號自保副型](/zh-TW/personality/enneagram/type-1/instincts/self-preservation)與[一號社群副型](/zh-TW/personality/enneagram/type-1/instincts/social)。",
+          "key": "limits_and_reading",
+          "title": "關係選擇需要實際資訊，副型只能提供問題"
+        }
+      ],
+      "seo": {
+        "description": "一號一對一副型是九型傳統中的觀察假設，探索標準與改進要求如何集中於重要連結和共同投入。本文以Podcast合作比較三種本能關注，說明建議與施壓的分界；批評、嫉妒或投入強度不能單獨確定副型。",
+        "title": "一號一對一副型：共同投入、改進要求與關係界線"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-1/instincts/one-to-one",
+      "source_hash": "095a32bcb24a3289e4a4088cf70f58ada733f407e8bcbdfc86459cdaf279f222",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "一號一對一副型探索正確與改進的要求，如何集中在重要連結、共同投入和關係中的活力上。熱切可以支持合作，也可能把期待變成改造對方；強烈批評、嫉妒或性慾高低都不能單獨判定副型。",
+      "title": "一號一對一副型：共同變好的熱切與關係界線"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "199a0a2cd1ae1fd252c967b3c1d5609c5509da72ce5cb378cad9f8e4e522cacb"
+}

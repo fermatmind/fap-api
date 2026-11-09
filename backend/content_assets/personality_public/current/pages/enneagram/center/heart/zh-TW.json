@@ -1,0 +1,202 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/centers/heart",
+    "entity_key": "heart",
+    "entity_type": "center",
+    "framework": "enneagram",
+    "page_kind": "center",
+    "slug": "enneagram/centers/heart"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/centers/heart"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/centers/heart",
+      "code": "heart",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "heart",
+      "entity_type": "center",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "傳統分組比較的是反覆關注的價值與身分問題，不是日常最常使用的行為。三號方向的解釋可能把把事情做完與得到肯定連在一起，因此行動很多也可以涉及心中心主題。務實或能幹本身不證明三號。",
+          "question": "三號看起來很理性、重行動，為什麼屬於心中心？"
+        },
+        {
+          "answer": "回看自己最在意的結果：關係是否更親近、自己是否被需要，還是成果是否有效、貢獻是否被肯定。兩種關注可以並存，也可能只是責任或關心。要用多個具體事件和反例比較，不能憑一次幫助行為判型。",
+          "question": "幫助別人怎樣區分二號和三號？"
+        },
+        {
+          "answer": "不能。風格與情緒可能來自興趣、文化、生活經歷或當前處境。四號候選需要進一步比較個人意義、身分與被理解的問題怎樣影響選擇，而不是用審美或情緒強度代替動機。",
+          "question": "喜歡獨特風格或容易難過，就說明四號嗎？"
+        },
+        {
+          "answer": "不能這樣排除。人也可能在乎親近者的回應、準確的理解，或已經內化的價值標準。沒有觀眾的情境有助於比較，但關鍵仍是實際追求的東西和其他可能解釋。",
+          "question": "不在乎公開讚美，就不屬於心中心嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/centers/heart",
+        "reciprocal": true,
+        "translation_group": "enneagram:center:heart",
+        "x-default": "/en/personality/enneagram/centers/heart",
+        "zh-CN": "/zh/personality/enneagram/centers/heart"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2",
+          "label": "二號：連結與付出",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3",
+          "label": "三號：成效與價值",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-4",
+          "label": "四號：身分與個人意義",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-4"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "傳統九型把二號、三號和四號放在心中心，也稱情感中心。這三種模式的共同問題可以表述為：我怎樣知道自己值得被愛、被重視，或者被理解？\n\n在[Enneagram Institute 的中心解釋](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)中，心中心的情緒主題是羞恥。這裡討論的是可能出現的「我是不是不夠好」的整體自我評價，不是給某一類型貼上羞恥、虛榮或道德缺陷的標籤。\n\n有些人藉由親近他人回應這個問題，有的人忙於做好事情，有的人更關注自己的真實體驗。這能解釋為何同屬心中心的人，表現卻可能分別顯得熱情、務實或內省。心中心也會理性分析和採取行動；它不衡量同理心、社交能力或情緒強度。",
+          "key": "value_and_identity",
+          "title": "共同主題是價值與身分，不是「更感性」"
+        },
+        {
+          "body_md": "**二號的線索：我在關係中是否重要。** 傳統描述強調愛、連結、付出與被需要。體察和回應需要可以讓關係得到照顧；如果價值感過度繫於付出，自己的需要可能難以開口，拒絕幫助也可能讓人覺得自己遭到拒絕。幫助行為本身不證明這個動機，責任、互惠和單純關心同樣可以解釋它。[二號原始描述](https://www.enneagraminstitute.com/type-2/)\n\n**三號的線索：我的努力是否呈現了被重視的價值。** 傳統描述強調成效與認可。找到目標、調整方法、把事情做成，可以讓貢獻更明確；若自我價值過度依賴表現，就可能忙於滿足外在或已內化的成功標準，忽略疲勞、感受和真正想要的生活。三號候選不一定愛炫耀，成功的標準也不一定是金錢或地位。[三號原始描述](https://www.enneagraminstitute.com/type-3/)\n\n**四號的線索：被看見的是不是實際的我。** 傳統描述強調個人意義、身分與真實體驗。認真表達細微感受，可以讓經驗得到準確理解；若反覆用「我缺少別人擁有的東西」解釋自己，就可能看不見現有連結，把暫時的失落變成整體身分。喜歡藝術或打扮不同，不能單獨確認四號。[四號原始描述](https://www.enneagraminstitute.com/type-4/)\n\n這三種關注都可能伴隨真誠，也都可能過度使用。它們不是善良、能力或真實性的排名。",
+          "key": "three_value_strategies",
+          "title": "被需要、被肯定與被理解，有什麼不同"
+        },
+        {
+          "body_md": "假設你和朋友一起準備聚餐。結束時，大家只感謝了另一位組織者，沒有提到你做的事情。下面三種解釋是原創比較示例，不是從一次失落判斷類型。\n\n二號方向的關注可能是：「他們還需要我嗎？我以為這些照顧能讓我們更親近。」之後可能繼續主動幫忙，也可能因沒有回應而受傷。值得問的是失落更指向關係位置，還是這項貢獻本身。\n\n三號方向的關注可能是：「我投入了這麼多，大家卻不知道這場聚餐能順利完成也有我的功勞。」之後可能補充自己負責的內容，或下次選擇更容易呈現成效的任務。關注點可能是貢獻是否得到相應肯定。\n\n四號方向的關注可能是：「他們看到的是一個可以替換的幫手，沒有理解我為什麼特別在意這件事。」一般性的稱讚未必能緩解失落，因為希望被理解的是自己的投入與意義。\n\n三種解釋都可能表現為沉默、委屈、繼續幫忙或直接要求自己的貢獻也受到感謝。如果確實存在貢獻被忽略的問題，失落本身是合理反應，不必先歸因於類型。",
+          "key": "recognition_scene",
+          "title": "同一場聚餐：你的貢獻沒有被提到"
+        },
+        {
+          "body_md": "先把事件、感受與解釋分開：「大家沒有提到我」是事件；「我失落」是感受；「我對他們沒有價值」則是需要檢驗的解釋。不要把第三句直接當作第一句的事實。\n\n可以繼續問：\n\n- 如果朋友明確歡迎我參與，即使不再需要我幫忙，我是否仍能感到連結？\n- 如果成果得到清楚認可，但我不喜歡這種做事方式，我能否承認自己的不願意？\n- 如果別人準確理解了我的體驗，即使並不覺得它特別，我是否仍感到被看見？\n\n這些條件幫助區分關係位置、表現價值與個人意義，不是固定判型題。[Narrative Enneagram 的比較](https://www.narrativeenneagram.org/type-comparisons/)提供了二號、三號、四號組內差異的傳統參照。\n\n再回看一項不容易被別人看見的任務。無人表揚時行為仍然出現，並不自動推翻心中心候選：關係期待和成功形象也可能已經成為自己的要求。真正要比較的是當時仍在追求什麼，以及照顧責任、習慣、審美偏好、具體的不公平或當下壓力能否更充分解釋行為。",
+          "key": "refine_hypothesis",
+          "title": "比較什麼能緩解失落，也看看沒有人在旁時又如何"
+        },
+        {
+          "body_md": "不必先確定類型。選擇自己最熟悉的一種回應，在下一次低風險互動中做一次具體的嘗試。\n\n**如果常用付出維繫連結：** 先問對方是否需要幫助，允許對方說「不」，再把自己的需要直接說出來。例如：「今晚我也希望有人陪我聊一會兒。」觀察自己能否接受幫助被拒絕，而不立刻把它理解成關係被拒絕。\n\n**如果常用完成任務確認價值：** 做事前分別寫下「這件事需要什麼結果」和「我本人現在想要什麼」。當兩者不一致時，嘗試誠實說明自己目前的限制，別只想著把表現做到最好。觀察結果是否仍能推進，以及是否也把自己的感受納入考量。\n\n**如果常擔心真實體驗沒有被看見：** 用具體句子表達感受與希望：「剛才我失落，因為這件事對我有特別意義，我想講給你聽。」避免直接把它延伸成「從來沒人理解我」。然後選擇一個與當前生活有關的小行動，不以先獲得理想的理解或情緒為前提。\n\n這些嘗試針對不同的慣常策略，用來觀察和溝通，不承諾改變人格或帶來固定成長效果。",
+          "key": "specific_practice",
+          "title": "讓價值問題少一點隱含條件"
+        },
+        {
+          "body_md": "如果你主要在意關係中的需要與回應，可以先讀[二號：連結與付出](/zh-TW/personality/enneagram/type-2)；如果主要在意成效與肯定，可以讀[三號：成效與價值](/zh-TW/personality/enneagram/type-3)；如果主要在意實際體驗是否被理解，可以讀[四號：身分與個人意義](/zh-TW/personality/enneagram/type-4)。隨後讀同一中心內另一個可能解釋相同行為的類型，別只蒐集讓自己有共鳴的句子。需要擴大範圍時，回到[九型人格總覽](/zh-TW/personality/enneagram)。\n\n本頁使用傳統理論幫助整理觀察。Hook 等人的系統性回顧摘要報告研究證據並不一致，不能把這些描述當作費馬測評效度的證明。[系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)\n\n羞恥、認可需要或情緒表達都不能診斷任何心理問題，也不能確認核心型。解釋別人的行為時，應聽取當事人的描述，不替對方認定一個隱藏動機。",
+          "key": "reading_and_boundary",
+          "title": "從一個候選走向真正的比較"
+        }
+      ],
+      "seo": {
+        "description": "心中心在傳統九型框架中歸組二號、三號和四號。觀察心中心線索，可以比較人在互動中如何回應連結、認可和自我呈現的問題；它並不表示情緒會排除思考或行動，而且二號、三號、四號可能用不同方式組織同一場互動。",
+        "title": "心中心：比較連結、認可與自我呈現"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/centers/heart",
+      "source_hash": "f5bd57950a9e6ef07efbfc7fafc54535cfb98c46ce24ce4bb103098ba315ae58",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "二號可能透過回應他人需要獲得連結，三號可能透過被重視的成效確認價值，四號可能透過真實、獨特的體驗確認自我。心中心比較的是這些價值與身分問題，不是情緒表達的多少；一個看起來很務實的人，也可能把被認可放在重要位置。",
+      "title": "心中心：二號、三號與四號怎樣理解自己的價值"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "e69eccba68eb4a2490162664238326e82ea8b9947e6450a7d5ee95cfc2f06199"
+}

@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/6w7",
+    "entity_key": "6w7",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/6w7"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/6w7"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/6w7",
+      "code": "6w7",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "6w7",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "外在表達不能確定核心。需要看聯絡同伴和提出選擇主要在解決什麼：是讓支援更可靠、減少行動的不確定性，還是保持豐富可能、避免失去想要的體驗。前一種解釋可以與輕鬆活躍的表現同時存在。\n\n喜歡社交也無法直接證明社群本能。六號核心關注支援怎樣才可靠，七號翼可能增加選項和嘗試；Narrative 學派的社群本能則關注歸屬與群體中的位置，問的不是你聯絡了多少人。讀書活動中，打電話可能是在落實共同角色、保護家庭資源，或支援一段親密關係。需要看聯絡服務於什麼、這種領域關注是否反覆出現，不能用朋友或通話數量確定翼或本能。",
+          "question": "我看起來樂觀又愛交朋友，為什麼仍可能是六號核心？"
+        },
+        {
+          "answer": "比較備選的用途。6w7 的解釋更關注可靠推進及有人接住變化；7w6 的解釋更關注繼續擁有值得探索的可能，並用支援和備案讓探索可行。風險、資源與分工相近時，觀察什麼問題解決後你就願意收窄選擇。",
+          "question": "6w7 和 7w6 都準備備選，區別在哪裡？"
+        },
+        {
+          "answer": "仍需要比較。分數可以提示閱讀方向，卻沒有說明實際動機，也沒有排除協調職責、時間壓力或近期經歷。先比較核心，再觀察七號式選項與互動是否形成反覆出現的修飾；不清楚時不必確定翼。",
+          "question": "六號最高、七號第二高，是否就不用再比較了？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/6w7",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:6w7",
+        "x-default": "/en/personality/enneagram/wings/6w7",
+        "zh-CN": "/zh/personality/enneagram/wings/6w7"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6",
+          "label": "九型人格 6 號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7",
+          "label": "九型人格 7 號核心型",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/6w5",
+          "label": "6w5 翼型",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:6w5"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在傳統解釋中，六號關注可以依靠什麼；七號則關注可探索的可能性與滿足感。6w7 保留六號核心，同時可能用更主動的聯絡、備選和嘗試來處理不確定性。相關動機可參照[六號傳統描述](https://www.enneagraminstitute.com/type-6/)與[七號傳統描述](https://www.enneagraminstitute.com/type-7/)。這是一種解釋方式，不是經過驗證的因果規律。\n\n當計畫出現缺口，你可能不是退回獨自思考，而是找人討論：「有沒有別的辦法？誰能一起處理？」多一點選擇、有人可以商量，可能讓你更願意向前走。表面上的興奮和行動不一定表示沒有擔心；它們也可能是在為可靠行動創造條件。\n\nw7 修飾的是因應路徑，並不把六號變成七號，也不表示兩種動機各佔一半。一個愛開玩笑的人可能沒有這種模式，一個表達安靜的人也可能習慣透過選擇和同伴建立把握。",
+          "key": "support_and_possibility",
+          "title": "增加選擇，也可能是為了讓事情更有保障"
+        },
+        {
+          "body_md": "設想你和幾位朋友準備辦一次小型讀書活動。場地能用，但一位協作者尚未確認，內容也要做最後取捨。這是用來理解差異的假設場景。\n\n6w7 的解釋可能是：先聯絡一個能幫忙的人，準備簡化方案，再透過一次短討論確認大家如何分工。選項和互動服務於「活動能否可靠推進」。6w5 同樣可能想可靠推進，卻可能先核清場地條件、整理待確認事項，再把方案拿出來討論。區別在於獲得把握的方式，不是社交能力。\n\n[7w6](/zh-TW/personality/enneagram/wings/7w6) 也會找協作者和準備後備方案。要區分核心，可以問：我最難接受的是「計畫沒有可靠支援，出了變化沒人接得住」，還是「活動只剩一條平淡路線，其他想做的內容都被排除了」？前者更接近六號問題，後者提示比較七號核心。\n\n再改變條件：協作者和場地都可靠了，但活動必須縮成一個簡單主題。你是否已經覺得可以安心開展，還是繼續尋找更豐富的可能？反過來，一個有趣卻缺乏可靠分工的方案，又會讓你在意什麼？回答需要結合幾次實際選擇，不能靠一次想像確定類型。",
+          "key": "shared_event_comparison",
+          "title": "同一項共同活動：另一翼與反向組合怎麼分"
+        },
+        {
+          "body_md": "用得合適時，聯絡同伴能獲得遺漏的資訊，把模糊支援變成具體分工；尋找備選能讓一個小障礙不至於終止整個計畫。輕鬆的表達也可以降低討論門檻，讓人更容易說出顧慮。\n\n過用時，你可能不斷增加討論對象和替代路線，卻越來越難確定誰作決定。若每個人都說「應該沒問題」，但沒有人承擔下一步，安心感並沒有變成支援。為了保持氣氛輕鬆而過早說「都能解決」，還可能讓真正的擔憂無人知曉。\n\n每次再找一個人之前，說明這次需要的是新資訊、具體幫助，還是再次聽到肯定。三者都可以誠實提出，但用途不同。得到相同安慰時，未必需要繼續增加諮詢對象；發現新的關鍵問題時，則應更新計畫。",
+          "key": "coordination_use_and_cost",
+          "title": "聯絡同伴何時有用，何時只讓討論繼續"
+        },
+        {
+          "body_md": "如果反覆觀察發現，可靠支援並不是主要問題，而開放的可能性、避免被限制更能解釋你的取捨，那麼需要重新比較六號與七號核心。這不是「七號翼比較強」就能代替的判斷。\n\n如果六號核心仍貼近，但在相近條件下，你通常偏好獨立理解、縮小資訊蒐集範圍，而很少主動藉助討論和備選，那麼七號翼的依據可能不足。翼不清楚時，可以保留核心而不選翼。\n\n如果聯絡很多人源於活動組織職責、照護安排或必須會簽的制度，那是情境解釋。職責變化以後再比較，才知道是否存在額外偏好。\n\n能獨立評審、選擇一條路線、拒絕多餘協調，可能說明你正在有效管理任務。一次這樣的行動不會自動反駁 6w7；只有當選項與互動長期沒有提供額外解釋時，才值得降低對這個修飾的把握。",
+          "key": "what_changes_the_hypothesis",
+          "title": "獨自完成一件事，不會自動推翻 6w7"
+        },
+        {
+          "body_md": "選一個普通、可逆的共同安排。先寫出當前真正卡住的問題，例如「缺一個人負責布置」，不要只寫「我不放心」。再決定找誰，以及希望獲得什麼具體回答或幫助。\n\n一次討論結束後，區分討論結果：增加了事實、落實了幫助、只是得到安慰。把有效幫助寫成「誰在什麼時候完成什麼」；給後備方案寫出啟用條件，而不是一直並列保留所有方案。\n\n接著提出一個自己承擔的選擇：「如果布置人選今晚仍未確認，我們就縮小規模；我負責通知。」告訴同伴你仍擔心哪一點，讓輕鬆語氣與真實顧慮同時存在。\n\n回顧時看：討論有沒有改變行動？重複諮詢有沒有新增資訊？不再增加選項後，你能否兌現自己負責的部分？目標是把同伴聯絡變成可用支援，並練習在仍有不確定性時作出決定。",
+          "key": "consultation_into_action",
+          "title": "把下一次討論變成一項明確支援"
+        },
+        {
+          "body_md": "相鄰翼是傳統九型的描述方法，不能根據第二高分自動確定，也不能衡量外向、樂觀或忠誠。[2021 年系統綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)指出，支持翼概念的研究很少。本頁的場景是比較工具，不是診斷或預測；其他學派、量表的主張也不能替代費馬產品本身的驗證。\n\n若主要困惑是自己為何不斷確認支援，先讀[六號核心型](/zh-TW/personality/enneagram/type-6)。若六號核心已經較貼近，想比較偏向理解和準備的路徑，可以接著讀[6w5：六號與五號翼影響](/zh-TW/personality/enneagram/wings/6w5)。",
+          "key": "evidence_and_next",
+          "title": "用比較幫助理解，不必急著補齊標籤"
+        }
+      ],
+      "seo": {
+        "description": "6w7 是證據有限的翼型觀察：六號對不確定性、信任與備案的關注仍是核心，七號可能增加選項探索、社交協調和主動試驗。這些行為不能單獨確認 6w7；協調職責、事故應變、銷售、社群工作和時間壓力也會要求相似做法。",
+        "title": "九型人格6w7：六號核心、七號翼影響與常見誤判"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/6w7",
+      "source_hash": "9698864bb8a0a603ab21f01544219bc4609af0d80fa6e2131f9ab95ddabdcee1",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "6w7 描述六號核心受到相鄰七號的修飾：可靠感、信任與因應不確定性仍是主要關注，尋找選擇、聯絡同伴和嘗試辦法則可能成為行動路徑。它與 7w6 的差別不在誰更活躍，而在選項與支援最終要解決什麼問題。",
+      "title": "6w7：透過支援與選擇建立把握的六號"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "1fb6ffd5ccbdcb12245558200bf8fde9e47efd65abe69e9777a8795d572dd439"
+}

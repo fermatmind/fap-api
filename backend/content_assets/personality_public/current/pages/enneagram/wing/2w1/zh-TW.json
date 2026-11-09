@@ -1,0 +1,204 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/2w1",
+    "entity_key": "2w1",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/2w1"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/2w1"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/2w1",
+      "code": "2w1",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "2w1",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能據此確認。家庭習慣、角色要求、資源限制或不熟練的求助方式，都可能讓人不表達需要。應先比較核心動機，再觀察原則與自我要求是否反覆修飾給予。無論類型如何，承認實際容量與需要都可以是有用的調整。",
+          "question": "不願索取、凡事自己承擔，就是 2w1 嗎？"
+        },
+        {
+          "answer": "不能這樣排名。翼描述的是擬議的修飾方式，不衡量善良、動機純度或成熟程度。兩者都可能認真支援他人，也都可能有未說清的關係期待。需要看具體互動及其影響。",
+          "question": "2w1 比 2w3 更無私嗎？"
+        },
+        {
+          "answer": "不能。連結可以透過很多方式體現，繼續幫助也可能來自承諾、關心或職責。比較的是關係需要是否持續組織注意與選擇，不是是否要求口頭感謝。單次有無感謝都不能確定核心或翼。",
+          "question": "沒有感謝也繼續幫助，能排除 2 型核心嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/2w1",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:2w1",
+        "x-default": "/en/personality/enneagram/wings/2w1",
+        "zh-CN": "/zh/personality/enneagram/wings/2w1"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格：九種動機模式",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2",
+          "label": "2 型：關愛、連結與被需要",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1",
+          "label": "1 型：標準、責任與改進",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/2w3",
+          "label": "2w3：連結與貢獻的表達",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:2w3"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "2w1 中的 2 是核心，1 是相鄰翼。[傳統 2 型說明](https://www.enneagraminstitute.com/type-2/)把關愛、親近、被愛與被需要放在動機層面。考慮這個解釋，不是判斷你幫助了多少人，而是觀察關係需要怎樣反覆影響注意與選擇。\n\n例如，你容易注意到別人哪裡缺少支援，也可能在提供支援時感到自己與對方更有聯絡。若停止幫助，最難放下的可能不是任務本身，而是自己是否仍被關心、是否在關係中有位置。這是值得比較的內在問題，並不意味著每次給予都有交換條件。\n\n1 型修飾可能讓你對幫助提出要求：不能只讓對方當下舒服，還要可靠、公平、符合你認可的原則。你可能克制直接索取的衝動，希望用認真履行承諾表達關心。於是，想保持連結與想成為盡責的給予者可能同時牽動你。僅有認真負責，而沒有持續的關係關注，還不足以說明 2w1。",
+          "key": "core_first_modifier",
+          "title": "核心是連結，原則修飾給予的方式"
+        },
+        {
+          "body_md": "設想朋友最近忙不過來，你提出幫他安排一項日常事務，並說明可以承擔的時間與範圍。他隨後表示想用另一種方法，也不需要你繼續處理。這個原創情境用於觀察，不是對 2w1 的行為預測。\n\n原則可以讓支援更可靠：你不隨意承諾，先確認需要，尊重隱私，按約定完成。這時，認真不是替對方決定，而是讓對方知道哪些幫助可以依賴。\n\n過用時，要求可能轉向自己：既然答應關心，就不能停；如果承認疲憊或希望得到支援，好像就不夠無私。也可能轉向對方：我這樣做才負責，你應該接受。前一種會讓付出超出能承擔的範圍，後一種會讓幫助帶上難以拒絕的壓力。即使沒有公開要求感謝，委屈也可能積累在沒有說清的期待裡。\n\n檢驗原則的作用：它是在保護雙方的選擇與承諾，還是被用來證明你必須繼續、對方必須接受？後者首先是需要調整的具體互動，不是翼型的認證。",
+          "key": "observable_situations",
+          "title": "可靠的支援，何時變成必須付出的壓力"
+        },
+        {
+          "body_md": "繼續比較朋友需要支援這件事，先承認三種解釋都可能帶來有效幫助。\n\n**與 2w3 比較：**兩者都需要 2 型核心的依據。2w1 的修飾可能讓你更重視給予是否符合原則、是否盡責，寧可清楚限定承諾，也不願輕率答應；2w3 的修飾可能讓你更注意怎樣調整表達與組織方式，使幫助有效、讓對方容易接受，並能呈現貢獻。2w1 也可以組織活動，2w3 也可以謹慎、匿名幫助；公開與私下不是判別規則。\n\n與反向組合 [1w2](/zh-TW/personality/enneagram/wings/1w2) 比較：朋友讓另一個人接手，事務也處理妥當後，什麼仍讓你不安？如果你持續關注自己是否仍有關係位置，2 型核心值得比較；如果最牽動你的是處理方式是否符合標準、是否真正盡責，1 型核心值得比較。再觀察關係很親近，但事情沒有按你認為負責的方式完成時，哪種擔憂最持續地決定你的選擇。\n\n2w1 是連結關注受到原則修飾，1w2 是標準關注透過關係參與來表達。兩者都能尊重邊界，也都可能失落；不能靠一次被拒絕、一次沒有收到感謝或某個職業確定。",
+          "key": "sibling_core_comparison",
+          "title": "2w1、2w3 與 1w2：同樣支援別人，重心在哪裡"
+        },
+        {
+          "body_md": "制度可能要求你遵守服務範圍與公平規則；家庭可能已有照顧安排；你也可能只是知道未經同意就替人決定會帶來麻煩。負責任的幫助不獨屬於任何翼型。\n\n可以比較不受監督、沒有正式照護責任、可以自由拒絕的日常關係。在這些情境中，你是否仍容易透過給予維持連結，並用原則約束自己的承諾？如果認真只隨職責出現，角色解釋可能足夠；如果連結關注明確，但原則只來自一項制度，1 型修飾仍可能不清楚。\n\n允許自己表達需求、接受支援，或者因能承擔的範圍有限而說不，不會自動否定 2w1。改變幫助方法也不代表沒有原則。區分你想保護的價值與實現它的具體做法，能讓原則保留，同時給雙方更多選擇。",
+          "key": "alternative_explanations",
+          "title": "規範與照護職責，未必需要翼型解釋"
+        },
+        {
+          "body_md": "**核心需要重看：**在多種自主選擇的情境裡，你主要為了把事做正確或履行責任而幫助；任務完成後，關係位置與是否被需要並不反覆影響你。這時可以比較 1 型、角色責任或其他解釋，而不是憑體貼外表保留 2 型。\n\n**翼尚未清楚：**關係關注反覆出現，但幫助中的標準僅在制度規定時出現，離開制度就沒有類似取向。可以保留 2 型候選，暫不確定 1 翼。\n\n**不是反證的靈活性：**對方提出同樣可行的方法，你願意調整；對方拒絕幫助，你仍能保持聯絡；你需要休息，因此結束任務。這些事件可能顯示邊界與彈性，不應被誤寫成缺少 2 型或 1 翼。\n\n**需要核對的例外：**你對不同人的原則不一致，或特別在意公開認可。這值得檢查權力、互惠、實際風險與關係期待，但不能直接跳到 2w3 或其他類型。要看原則為何變化，以及變化是否在多個可比較情境中重複。",
+          "key": "counterexample",
+          "title": "哪種觀察會改變你的解釋"
+        },
+        {
+          "body_md": "下一次準備幫助之前，先問對方需要什麼，再寫下三個不同的問題：我實際能提供什麼；哪些範圍或原則需要說明；我自己希望從這段關係得到什麼。第三項可以是聯絡、陪伴或被理解，不必把它藏在服務承諾裡。\n\n把幫助說成明確的選擇：我今天可以陪你整理半小時，也可以只聽你說。你希望哪一種？如果對方有不同偏好，確認是否仍能滿足需要。若不能，就說明限制，而不是強調自己更知道怎樣才對。\n\n完成約定的部分後，按時結束。想要保持聯絡時，可以另約一次聊天；需要支援時，可以直接提出一個具體請求。不要把延長付出當作唯一的關係邀請，也不要故意撤回幫助來測試對方是否在意你。\n\n事後檢查：承諾是否清楚且做到了；對方是否可以拒絕或改方法；你是否說出了自己的需要。如果委屈仍在，找出哪項期待沒有說清，或哪些負擔已經超出能承擔的範圍。這個實踐用於調整互動，不是證明你屬於 2w1。",
+          "key": "observation_exercise",
+          "title": "把幫助、關係需要和責任分開說清"
+        },
+        {
+          "body_md": "[Hook 等人的系統綜述摘要](https://doi.org/10.1002/jclp.23097)報告翼相關研究很少。2w1 因而應保留為證據有限的自我觀察解釋。本文的情境與練習不構成經過驗證的判型程序，也不證明費馬測評的效度。\n\n翼不是兩個類型均分混合，也不由第二高分自動決定。2w1 不代表更善良、更成熟或更適合照護工作；它不能判斷健康狀況或預測關係結果。沒有明確翼時，可以先保留核心候選。\n\n支援朋友時，2 型核心解釋連結為何重要，1 翼嘗試解釋原則如何修飾給予；關心反覆集中在哪個生活領域，則是另一個本能問題。家庭資源與安穩、群體歸屬與共同角色，以及 Narrative Enneagram 所說的親密關係與密切友誼，分別提供自保、社會與一對一領域的比較方向。這些例子不能把一次照護直接歸類。認真支援或希望親近，都不足以確定 1 翼或某種本能；你可以繼續比較給予中的原則，同時保留未定的本能關注。\n\n如果仍不確定為什麼幫助，讀[2 型：關愛、連結與被需要](/zh-TW/personality/enneagram/type-2)。如果要比較另一種給予方式，讀[2w3：連結與貢獻的表達](/zh-TW/personality/enneagram/wings/2w3)。如果標準與盡責比關係位置更持續地牽動你，可回到現有[1 型：標準、責任與改進](/zh-TW/personality/enneagram/type-1)入口比較核心。",
+          "key": "wing_boundary",
+          "title": "認真給予不是健康等級，也不是效度證明"
+        }
+      ],
+      "seo": {
+        "description": "2w1 是證據有限的翼型觀察：二號對需要與連結的關注仍是核心，一號可能增加標準、克制和負責服務。守紀律的照護不能單獨確認 2w1；應比較關係關注是否反覆影響選擇、原則如何在職責之外修飾給予，並檢查制度或訓練能否解釋。",
+        "title": "九型人格2w1：二號核心、一號翼影響與常見誤判"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/2w1",
+      "source_hash": "35984c88041309b2851f433173601e2d8f73d448014dcafa4b3d51151e9dd4ba",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "2w1 以 2 型的關愛與連結關注為核心，1 型相鄰修飾可能讓原則、責任與自我要求影響給予方式。它能解釋幫助方式中的要求與克制，卻不能憑守紀律或無私外表確認；還需要看對方的選擇、自己的需要，以及幫助停止後關係意味著什麼。",
+      "title": "九型人格 2w1：認真給予，也允許自己有需要"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "1fb975553d5a29ecd0157f517168a0e947d9e638d5f71dc7dd45e1caaccc7135"
+}

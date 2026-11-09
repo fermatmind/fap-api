@@ -1,0 +1,203 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-8/instincts/social",
+    "entity_key": "type-8/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-8/instincts/social"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-8/instincts/social"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-8/instincts/social",
+      "code": "type-8/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-8/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "可能。這裡關注的是群體位置、成員聯絡和共同責任，不是參加活動的頻率。不愛聚會不能排除社群關注，愛聚會也不能證明社群第八型。",
+          "question": "不喜歡聚會，也可能有社群本能關注嗎？"
+        },
+        {
+          "answer": "不能。幫助可能出於職責、成員請求、關係價值或現實不公平。需要觀察力量與自主是否反覆透過共同立場得到維護，並核對其他解釋；更不能僅憑職業、名人形象或一次倡導來判型。",
+          "question": "總為別人出頭，就能說明是社群第八型嗎？"
+        },
+        {
+          "answer": "Chestnut–Paes（CP）在27 個副型描述中把社群第八型稱為「反型」，側重保護他人和較少顯露攻擊性的外觀。這是該學派的傳統術語，不是研究確立的診斷類別。溫和、體貼或願意讓步，既不能自動證明社群第八型，也不應被解釋成更深的壓抑來維持分類。",
+          "question": "別人說社群第八型是反型，這意味著什麼？"
+        },
+        {
+          "answer": "單次交接不會。它可以反駁必須持續獨佔群體力量的具體解釋。若長期觀察發現，共同位置和責任並非自己的優先關注，角色或其他本能領域更能解釋行為，則應減少或撤回社群副型假設。",
+          "question": "把領導職責交出去，會否定社群副型嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-8/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-8/social",
+        "x-default": "/en/personality/enneagram/type-8/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-8/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8",
+          "label": "第八型核心",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8/instincts/self-preservation",
+          "label": "第八型自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8/instincts/one-to-one",
+          "label": "第八型一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "關心同伴並不意味著核心主題從自主變成討好。在傳統解釋裡，社群第八型可能把「我不能任人擺布」延伸為「我們不能任人擺布」。成為有力量的共同體一員，既有歸屬意義，也能讓自己和同伴不再孤立無援。\n\n[Narrative Enneagram 的社群第八型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)強調朋友、共同事業，以及力量受到群體需要的引導。第八型維護自主的核心，可對照 [Enneagram Institute 的核心說明](https://www.enneagraminstitute.com/type-8/)。這是學派描述，不是「所有倡導者都是第八型」的判斷。\n\n這種關注可能落在：誰被排除在決定之外、誰值得支援、自己在共同體裡承擔什麼責任，以及群體有沒有能力回應不公平。外表可以很有禮貌，也可以不喜歡聚會；社交頻率並不能告訴我們，群體位置和共同立場是否是長期優先事項。",
+          "key": "strength_with_others",
+          "title": "為大家出頭，為什麼仍可能是第八型的主題"
+        },
+        {
+          "body_md": "設想幾位住戶要協商公共區域維修。周發現幾位時間不便的住戶沒有機會表達意見，於是收集他們願意提供的資訊，把具體需求帶到會議，並要求費用和進度公開。這裡，保護不是單純的氣勢，而是讓原本難以進入協商的人擁有實際影響。這個場景是說明性例子，不是研究證據。\n\n接著，一位受影響住戶希望先等待進一步報價，周卻說：「我已經為大家爭取到這一步，不能現在退。」共同責任可能開始變成必須服從自己的共同立場。周承擔的工作越多，越容易認為自己最有資格決定；成員的不同意見則可能被聽成不忠或軟弱。\n\n可觀察的過程是：看到成員受限、願意承擔責任、獲得代言位置、把異議理解成削弱團結、繼續集中發言。有效作用是組織分散的資訊和行動；過用代價是成員逐漸失去選擇，保護者也可能忽略自己的時間、疲憊和真實需要。\n\n同樣，也有人會主動問「你希望我怎麼支援」，接受成員選擇較慢的路線，或在任務結束後交回組織職責。這些行為削弱「必須長期掌握群體力量」的說法。它們不自動否定社群關注，卻要求我們把團結與獨佔代言分開。",
+          "key": "repair_meeting",
+          "title": "一次住戶維修協商：何時從提供支援變成替人決定"
+        },
+        {
+          "body_md": "三種關注都可能讓人認真準備、主動發言，甚至強硬反對一個方案。區別可以放在同一維修決定中觀察。\n\n- 自保第八型的解釋更關注費用、維修是否可靠、生活空間能否使用，以及實際條件會不會使自己受制於人。可用方案與保障落實後，主要擔心可能下降。\n- 社群第八型的解釋更關注住戶有沒有共同發言權、誰承擔不成比例的代價、自己應如何承擔保護責任，以及群體能否站穩立場。即使個人費用得到解決，這些問題也可能繼續重要。\n- 一對一第八型的解釋更關注重要同伴有沒有與自己並肩、彼此是否仍直接而投入，以及不同意見有沒有改變這段連結。群體決議完成，未必就解決了這部分在意。\n\n不要只看會議上的一句話。可以比較：若自己的利益已得到保障，但其他成員仍無發言機會，會不會繼續行動？若群體有公平程序，但重要搭檔退出，自己最難放下的是什麼？這些變化幫助區分關注，同時也允許一個人有多個真實需要。",
+          "key": "three_ways_into_the_meeting",
+          "title": "同一場會議，自保、社群和一對一關注哪裡"
+        },
+        {
+          "body_md": "為人出頭也可能來自第二型式的被需要與關係價值，第六型式的共同信任與可靠安排，或第一型式的正確標準與責任。社群第八型的假設，重點仍是力量和自主如何透過共同體得到維護。可以從 [Narrative Enneagram 的相關類型比較](https://www.narrativeenneagram.org/type-comparisons/)開始，但不要把這些動機簡化成「誰更善良」或「誰更勇敢」。\n\n例如，未得到感謝時，自己最在意的是不被需要，還是群體沒有能力回應不公平？成員改變立場時，自己是在尋找更多可信依據、擔心偏離正確標準，還是感覺大家正在把決定權交出去？可能同時有幾種答案，而且需要結合本人經歷，不能替別人讀取內心。\n\n正式職責、機構失靈、成員直接求助、歧視或緊急任務，都可能要求組織保護，與副型無關。如果介入只隨職務出現，職責交接後就自然結束，角色解釋可能已經足夠。如果長期在沒有代言職責的情境裡也不特別關注共同位置、責任和群體力量，應撤回社群副型假設，而不是把它稱為尚未顯露。",
+          "key": "care_duty_and_type",
+          "title": "幫助、盡責和堅持公正，各有不同原因"
+        },
+        {
+          "body_md": "下一次低風險的共同決定，先問當事成員三個具體問題：需要什麼支援；哪些事情由他們自己決定；出現分歧時如何暫停或換一種辦法。不要拿真實緊急危險做判型實驗，也不要要求對方為了觀察你而配合。\n\n可以提出一個有結束點的小任務，例如整理大家同意提交的問題。提交前讓相關成員確認內容，也允許他們不同意你的建議。完成以後交回決定權，不把付出的時間變成別人必須繼續追隨的理由。\n\n記錄自己面對糾正時的第一反應，以及隨後做了什麼。如果事實顯示方案可以保護成員，卻因為不是自己的路線而難以接受，可以研究是否把保護者的位置與自主綁得過緊。若明確授權和分工就解決了不適，應優先採用角色不清的解釋。\n\n接受交接，是對持續獨佔群體力量的一項反例；它不能單獨決定副型。更廣泛地看，若共同責任並非反覆優先事項，或其他本能領域始終更能解釋在意之處，就應降低社群副型解釋。這個嘗試可以幫助協作，但一次成功不證明自己屬於任何類型。",
+          "key": "support_without_owning_the_agenda",
+          "title": "讓受影響的人決定支援方式"
+        },
+        {
+          "body_md": "傳統中的三種本能是生活領域的關注，不是三類人各自只擁有一種本能。社群副型可以重視親密關係和物質保障；自保或一對一副型也可以參與公共事務。27 個副型把九種核心型分別與三種主導本能組合；三種本能的完整堆疊則要排出全部先後，有六種排序。關心成員的共同立場，不能據此判斷物質保障或重要連結誰排第二、誰排第三，或認定某種「盲點」；本頁不推斷這些次序。第八型與第九型、第一型同屬身體中心，是核心型主題的分組，並不是把群體、資源和連結分別劃入三個中心。翼型是另一個層次：第八型的第七型或第九型翼，不能等同於社群副型。\n\nChestnut–Paes（CP）把社群第八型稱為「反型」，側重保護他人和較少顯露攻擊性的外觀。這是傳統術語，不是把溫和行為自動解釋成隱藏的強硬，也不是越不符合就越能證明分類。27 個副型及反型沒有因此成為可重複科學診斷或已證實的神經機制。\n\n學派對一對一本能的定義也不完全一致。Narrative 包括重要夥伴、親近朋友與活力；[Enneagram Institute 的 sexual/attraction 模型](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更突出吸引強度。兩者有交集，不能完全互換，也不只指性或戀愛。\n\n[Hook 等人的 2021 年綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告，104 個獨立樣本的信度與效度證據並不一致。這不是對費馬題本、評分或社群副型判定的驗證。本頁給出的是反思問題，不能據此推斷公正、忠誠、領導資格或未來合作結果；行動是否幫助成員，仍要看實際過程和後果。\n\n繼續閱讀 [第八型核心](/zh-TW/personality/enneagram/type-8)，或對照 [第八型自保副型](/zh-TW/personality/enneagram/type-8/instincts/self-preservation)和 [第八型一對一副型](/zh-TW/personality/enneagram/type-8/instincts/one-to-one)。",
+          "key": "social_language_and_limits",
+          "title": "社群關注不等於外向，也不賦予保護者正確性"
+        }
+      ],
+      "seo": {
+        "description": "第八型社群副型是傳統且證據有限的假設，把第八型自主與團結、保護、群體力量，以及公正、忠誠與集體行動結合。倡導不能證明副型；倡導職責、歧視與制度失靈、工會角色、社群防衛、政治條件和當事人直接請求都可能形成相似行為。",
+        "title": "第八型社群副型：團結、保護與群體力量的觀察假設"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-8/instincts/social",
+      "source_hash": "97b15f38f8d147d2123125b6b986a4e548c60e47721d0339885388d8af0cbbbd",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "社群第八型的傳統解釋，把維護自主的力量放進同伴、群體位置和共同責任中。它可以表現為為人出頭，也可以是安靜地組織支援。需要辨別的不是是否愛社交，而是保護如何發生、成員是否保有聲音，以及共同立場為何如此重要。",
+      "title": "第八型社群副型：團結、責任與保護者的位置"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "737ece8a271e8f9707f986a0640fd218c7e43e9fd3bd3ce8ba7421e943cb92c4"
+}

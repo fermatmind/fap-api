@@ -1,0 +1,204 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/1w9",
+    "entity_key": "1w9",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/1w9"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/1w9"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/1w9",
+      "code": "1w9",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "1w9",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能自動這樣解釋。翼指核心型旁邊的修飾，不等於任意第二高分；即使較高分恰好來自相鄰型，也需要先比較核心動機，再觀察相鄰修飾是否在不同情境中反覆出現。分數接近或翼不清楚時，可以保留多個候選。",
+          "question": "我的 9 型分數第二高，就一定是 1w9 嗎？"
+        },
+        {
+          "answer": "可以繼續比較。克制不表示沒有憤怒，也不要求每次都間接表達。看看直接行動為何發生，以及平常怎樣處理分歧；一次情緒或語氣變化不能單獨確定或排除翼。",
+          "question": "我有時會生氣、直接糾正別人，還能考慮 1w9 嗎？"
+        },
+        {
+          "answer": "不一定。沒有修復可能來自無權決定、精力不足或協作失敗。需要區分你仍在意但無法處理，與你主要希望衝突結束、問題不再占據注意；即使後一種反覆出現，也只是需要比較其他核心解釋。",
+          "question": "沉默後沒有修復，是不是就更像 9w1？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/1w9",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:1w9",
+        "x-default": "/en/personality/enneagram/wings/1w9",
+        "zh-CN": "/zh/personality/enneagram/wings/1w9"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格：九種動機模式",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1",
+          "label": "1 型：標準、責任與改進",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9",
+          "label": "9 型：協調、平靜與自己的立場",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/1w2",
+          "label": "1w2：透過參與推動改進",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:1w2"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "1w9 中的 1 是核心，9 是相鄰翼。在[九型傳統的翼理論](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)裡，翼修飾核心的表達，並不是兩種人格各占一半。\n\n可以先問自己：發現約定與實際做法不一致時，為什麼這件事一直占據我的注意？如果反覆牽動你的是是否公平、是否盡責，以及明知可以改進卻沒有行動時的自我責備，那麼 1 型解釋值得繼續比較。這裡的標準可能來自你對事情的判斷，也可能是共同確認的要求；它不等於整潔、嚴肅或事事挑錯。\n\n9 型修飾可以幫助解釋你如何處理這種不滿：先聽完不同立場，給自己一點整理時間，找到不容易引起防衛反應的表達方式。你可能希望改變發生，同時希望分歧不至於破壞彼此的連結。標準與平靜之間的拉扯，比表面上說話輕不輕更值得觀察。",
+          "key": "core_first_modifier",
+          "title": "核心仍是：我有沒有把事情做對"
+        },
+        {
+          "body_md": "設想一次交接：大家準備結束討論，你發現清單漏掉了已經約定的核對步驟。以下是用來比較的情境，並不是識別翼型的行為清單。\n\n你可能沒有當場逐項糾正，而是先確認遺漏會影響什麼，再給負責人傳一則具體回饋：缺少哪一步、可能產生什麼後果、可以怎樣補上。這樣的節奏有實際作用：意見更清楚，對方也更容易一起補救。有效的克制仍讓雙方知道存在分歧，並留下處理問題的機會。\n\n過度依賴這套做法時，可能變成不斷等待合適時機。你心裡反覆檢查、越來越不滿，對方卻以為你已經同意；最後要麼問題沒有解決，要麼你默默把所有重做的工作接下來。另一種代價是只提出聽起來無爭議的小調整，卻沒有說出真正影響結果的差異。\n\n檢驗重點不是你有沒有立即開口，而是等待是否有理由和明確期限，以及之後雙方是否共同處理了問題。補救沒有成功還可能因為資源不足或你沒有決定權，不能直接當作人格結論。",
+          "key": "observable_situations",
+          "title": "平靜如何有助於改進，又何時讓問題遲遲未解"
+        },
+        {
+          "body_md": "用交接中的同一處遺漏，再比較你傾向怎樣解決，以及解決後什麼讓你真正放下這件事。\n\n**與 1w2 比較：**兩者都應先有 1 型核心的依據。1w9 的修飾可能表現為釐清差異、容納不同視角，再選擇較少摩擦的修訂方式；1w2 的修飾可能表現為較早進入協作，解釋、示範或一起補上缺漏。兩種方式都可能主動、溫暖，也都可能先寫後談。區別要從反覆採用的策略及其理由判斷，不能用獨處或外向二分。\n\n與反向組合 [9w1](/zh-TW/personality/enneagram/wings/9w1) 比較：兩者都可能溫和、有原則，也都可以認真完成任務。可以回看：對方已經不生氣、關係恢復平穩，但遺漏仍在時，你為什麼還放不下？1w9 的解釋更關注未處理的標準與責任；9w1 的解釋則以維持內外協調為核心，1 型修飾為這種協調增加原則或秩序。反過來，標準已經滿足，但雙方仍緊繃時，你又會把注意力放在哪裡？\n\n這些問題幫助比較動機，不要求在正確性與關係之間只能選一個。觀察自己的解釋，並核對實際選擇和後續行動，比替別人推測內心更可靠。",
+          "key": "sibling_core_comparison",
+          "title": "同一處遺漏：1w9、1w2 與 9w1 在意什麼"
+        },
+        {
+          "body_md": "有些克制不需要翼型解釋。面對有決定權的人，你可能判斷當場反對沒有作用；用不熟悉的語言討論複雜事項，書面回饋可能更準確；一段時間過度勞累，也可能讓你暫時缺少表達與跟進的精力。\n\n不必刻意製造衝突。找已經發生的相似事件，比較在更熟悉、更有自主權、精力更充足的情況下，你是否仍傾向讓先讓各種意見有表達的空間，同時保留對問題的明確判斷。如果方式隨條件變化，情境解釋可能已經足夠。\n\n你偶爾直接反對、立即行動，或接受另一種同樣有效的方法，並不會自動否定 1w9。有彈性可能表示你在選擇適合當前問題的做法。真正需要檢驗的是：9 型修飾是否為持續的 1 型關注提供額外的解釋，而不是能否把每個行為塞進同一種風格。",
+          "key": "alternative_explanations",
+          "title": "先分清謹慎、職責與正常的靈活性"
+        },
+        {
+          "body_md": "**核心依據不足：**在多個有自主權的情境中，你並不持續關注標準或盡責，而主要擔心分歧帶來的不安、距離或關係破裂。這會使 1 型核心需要重新比較，不能只靠溫和而負責任的外表保留 1w9。\n\n**翼的依據不足：**1 型關注反覆出現，但降低摩擦或容納不同意見只發生在某個職位，離開該角色就沒有相似模式。這時可以保留 1 型候選，暫不確定翼。沒有清楚的翼，也比勉強選一翼更準確。\n\n**一次行動受阻：**你已經明確提出問題，卻無法獲得預算、授權或配合。結果沒有改善，不能單憑這點證明你迴避責任。應檢查你能做的部分、表達過的意見和實際限制。\n\n**正常的調整：**新證據說明原標準不適用，你願意修改判斷；緊急情況需要直接溝通，你沒有等到氣氛平靜。這些改變不等於核心消失。留意你是否仍能說明為什麼這樣做更負責。",
+          "key": "counterexample",
+          "title": "哪些觀察削弱核心，哪些只說明翼還不清楚"
+        },
+        {
+          "body_md": "下一次遇到低風險、可以討論的分歧時，先寫兩句話：我認為具體需要改什麼；我擔心直接表達會影響什麼。把兩者分開，避免只記錄別人聽起來是否舒服。\n\n如果確實需要緩一緩，給出一個對方知道的安排，例如：我對核對步驟還有一個不同意見，今晚整理，明天下午一起確認。等候因此有了目的和結束點。\n\n溝通時只提出當前最重要的一處差異，並邀請對方說明其限制：我們約定過這一步，我擔心省略後會漏查。你現在最難處理的是什麼？隨後一起確定可採取的行動、負責人和回看時間。\n\n事後檢查三個結果：你的意見是否被聽見；對方是否仍有參與決定的空間；問題是否開始處理。如果沒有，先判斷是表達不清、沒有權限，還是雙方仍未達成共識。這個練習是溝通嘗試，不是翼型測試，也不要求所有分歧都由你負責修復。",
+          "key": "observation_exercise",
+          "title": "把等待變成有邊界的溝通"
+        },
+        {
+          "body_md": "翼是傳統框架中的解釋工具，研究支持有限。[Hook 等人的系統性回顧摘要](https://doi.org/10.1002/jclp.23097)報告，翼等次級理論方面的研究很少。這裡的情境與練習用於自我觀察，不是經過驗證的判型規則，也不證明費馬測評的效度。\n\n你可以暫時保留 1w9，也可以只保留 1 型候選。它不表示先天永久身分、健康等級或固定能力，不能據此預測職業與關係結果。\n\n回到交接情境，1 型核心解釋約定的標準為何重要，9 翼嘗試解釋你為何給分歧留空間；這兩層都不能直接回答你通常優先關注哪個生活領域。可用精力與日常資源涉及自保問題，群體角色與歸屬涉及社交關注，親密關係與密切友誼則在 Narrative Enneagram 的一對一口徑內。這些是需要繼續比較的領域，不是一次暫停就能確定的標籤。安靜、保護工作關係或需要休息，都不能單獨確定翼或本能；兩者均可暫時保持未定。\n\n如果核心仍不清楚，先讀[1 型：標準、責任與改進](/zh-TW/personality/enneagram/type-1)。如果主要困惑是同一個核心怎樣表現，繼續比較[1w2：透過參與推動改進](/zh-TW/personality/enneagram/wings/1w2)，帶著同一件真實事件閱讀。",
+          "key": "wing_boundary",
+          "title": "怎樣使用這個解釋，下一步讀什麼"
+        }
+      ],
+      "seo": {
+        "description": "了解九型人格 1w9：一號對標準、盡責與改進的關注是核心，九號翼可能讓表達更平緩、克制。比較 1w9、1w2 與 9w1 時，應回看反覆出現的關注和因應的理由，結合實際限制；不能僅憑安靜、隨和或改進是否成功確認。",
+        "title": "九型人格1w9：一號核心、九號翼影響與常見誤判"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/1w9",
+      "source_hash": "5585064c6c3c1c85e5db83cd7adfa277c7c7788a1f7349ff3f52b14496f015f9",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "1w9 表示以 1 型為核心、觀察 9 型相鄰修飾的解釋：仍在意做得是否正確、是否盡責，同時可能借助沉穩、容納不同意見和降低摩擦來推動改進。它能幫助你理解表達方式，卻不能僅憑安靜、溫和或一次退讓確認。",
+      "title": "九型人格 1w9：讓改進有分量，也給分歧留空間"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "556bce77bdb6c2e55ee6e3817998865169da4ff482247fc36f0bf18fd4d2b911"
+}

@@ -1,0 +1,223 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-7",
+    "entity_key": "type-7",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-7"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-7"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-7",
+      "code": "type-7",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-7",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不用靠這些表現來認定。社交、旅行和興趣多少受機會、文化、工作與資源影響。更有用的是觀察限制出現時，尋找新選擇發揮了什麼作用，以及選擇之後是否獲得實際滿足。",
+          "question": "7號一定外向、愛旅行或有很多興趣嗎？"
+        },
+        {
+          "answer": "可以先嘗試先擱置一些選項，而不是永久放棄興趣。選定一件小事、完成這一輪，再重新評估，可能讓時間和注意力真正由你使用。實際結果比「我應該更專注」的要求更能幫助你判斷。",
+          "question": "選擇少一點，會不會失去自由？"
+        },
+        {
+          "answer": "當正向解讀使已經發生的影響、對方的請求或未完成的責任被排除在討論之外時，就需要停下來。希望與承認失望可以同時存在；先聽清楚造成的影響，再商量下一步。",
+          "question": "樂觀何時會妨礙補救？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-7",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-7",
+        "x-default": "/en/personality/enneagram/type-7",
+        "zh-CN": "/zh/personality/enneagram/type-7"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/head",
+          "label": "思考中心：5、6、7號如何回應不確定性",
+          "relationship": "center_membership",
+          "target_identity_key": "center:head"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/7w6",
+          "label": "7w6：7號與6號相鄰翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:7w6"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/7w8",
+          "label": "7w8：7號與8號相鄰翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:7w8"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7/instincts/self-preservation",
+          "label": "7號自保本能：資源與日常生活",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7/instincts/social",
+          "label": "7號社交本能：群體與參與",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7/instincts/one-to-one",
+          "label": "7號一對一本能：吸引與投入",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在傳統九型框架中，第七型嘗試藉由保留選擇空間獲得自由和滿足，並減少陷入痛苦或匱乏的感覺。它屬於思考中心：即使外在很活躍，慣常策略也可能先發生在腦中——設想下一步、重寫事情的意義、尋找仍可走的路。這是理解動機的理論語言，不是關於大腦或童年成因的已證實結論。[Enneagram Institute 的第七型說明](https://www.enneagraminstitute.com/type-7/)提供了這項傳統描述。\n\n例如，你已選定一門課程，進度剛進入需要反覆練習的階段，另一個主題就顯得格外誘人。值得問的不是「我是否三分鐘熱度」，而是：新主題有明確的實際價值，還是想到可以換路線，就暫時不用面對卡關、無聊或錯過其他機會的感覺？兩種情況都可能存在。\n\n這套策略容易反覆使用，是因為找到替代路線能夠立刻恢復行動感。但一件事是否讓你滿足，需要真正經歷它；想像下一件事的快樂，不能替代當前體驗。觀察從「遇到限制」到「想出新選擇」的順序，比數旅行次數或興趣清單更有用。",
+          "key": "motivation_attention",
+          "title": "為什麼下一種可能總有吸引力"
+        },
+        {
+          "body_md": "設想幾條路線，在條件變化時有實際用途。預算減少後重新組合資源，或把不同領域的方法放在一起，可能讓團隊發現原本看不見的解法。問題通常出現到了需要縮小範圍時，還在增加選項。\n\n設想一個專案已有可交付方案，你又提出兩個新功能。先檢查：它們解決了哪個尚未滿足的需求？誰承擔增加的工作？原承諾是否仍可兌現？如果收益說不清，卻壓縮了現有任務的完成時間，「更多可能」就已經有了具體成本。\n\n個人生活也可以這樣看。安排很多活動未必有問題；如果你在每個活動裡都惦記下一個，回家後仍覺得沒真正享受，值得調整的是體驗方式。可以保留好奇心，同時給一個選擇足夠時間，分辨喜歡的是它本身，還是它尚未開始時的想像。",
+          "key": "strengths_tradeoffs",
+          "title": "讓選擇服務生活，而不是不斷擠滿生活"
+        },
+        {
+          "body_md": "同樣一句「我們還有別的辦法」，可能來自不同原因。負責探索方案的人在履行職責；擔心表現不夠亮眼的人想提升成果；難以忍受當前限制的人則可能借新路線恢復自由感。要聽當事人的解釋，也要看換路線後實際解決了什麼，不能憑一句話判型。\n\n在合作中，可分開安排提出構想和做出承諾的時間：「今天先列選項，明天下午選一條；選定後，新想法先記錄，除非出現影響交付的新事實。」這樣，提出想法的人仍有空間，收尾的人也不用不斷追趕不斷變動的目標。\n\n在關係中，朋友說某次失約讓他失望，你立刻提出下一次更精彩的安排。它可能是誠懇補救，也可能跳過了他此刻希望被理解的部分。先確認：「你更想讓我聽完這次的影響，還是一起安排補救？」新的開心經歷有價值，也需要具體道歉並履行約定。",
+          "key": "work_relationship_examples",
+          "title": "如何把熱情用在合作與關係上"
+        },
+        {
+          "body_md": "傳統比較把第七型的選擇與滿足、第[三型的成果與價值認可](/zh-TW/personality/enneagram/type-3)、第[六型的可靠的支持與不確定性](/zh-TW/personality/enneagram/type-6)放在不同動機下討論。[Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)可作為這一比較方法的參照，不是判型規則。\n\n**如果你同時推進很多事，先比較7與3。** 回到一次你想放棄乏味任務的經歷：最難接受的是少了一條有趣路線，還是結果不夠出色、可能失去認可？假如沒有人評價成果，任務對你的吸引力會怎樣變化？7號也能追求成就，3號也能享受新體驗，區別要靠反覆出現的優先考慮來判斷。\n\n**如果你不斷準備備用方案，再比較7與6。** 一個已經檢查過風險、但限制較多的方案，是否讓你更安心，還是讓你覺得生活被鎖住？新增方案主要提供了可靠退路，還是恢復了有趣的選擇空間？風險、收入和實際責任都要先核對；合理準備備案本身不屬於某個型。\n\n7w6與7w8是相鄰翼的傳統解釋：前者可用來探討協商和支持如何修飾選擇方式，後者可用來探討直接爭取和自主如何修飾它。先確認7號的核心問題是否貼近，再閱讀[7w6](/zh-TW/personality/enneagram/wings/7w6)或[7w8](/zh-TW/personality/enneagram/wings/7w8)，不必為了湊出完整標籤強選一翼。",
+          "key": "wings_mistypes",
+          "title": "忙碌的7號與3號，擔心的7號與6號"
+        },
+        {
+          "body_md": "一個人能完成重複任務、認真聽取失望，或者長期投入某件事，說明他在這些情境中可以靈活選擇。不能因此直接得出「不是7號」；第七型描述也不要求一個人永遠分散、永遠開心。\n\n更能削弱7號解釋的，是在不同生活領域、沒有職務或經濟壓力迫使當事人這麼做時，保留選擇和避開受限感一直都不太重要；當事人反覆說明，忙碌主要為了達到受認可的成果，且實際選擇也與此一致。這時應認真比較3號，或撤回原來的解釋。\n\n如果變化只發生在近期工作混亂、睡眠不足或生活條件不穩定的階段，先處理這些背景。類型不能替代對實際負荷的理解，也不應該讓你為了符合描述而製造「不願承諾」的證據。",
+          "key": "counterexample",
+          "title": "會專注、能難過，不代表核心解釋自動失效"
+        },
+        {
+          "body_md": "挑一件有真實意義、範圍小、可以完成的事，例如整理一段資料或準備一頓飯。開始前寫兩句：「我選它是因為……」「做到……就算這一輪足夠。」把突然冒出的新選項放進一張稍後再看的清單，先不追加到當前安排。\n\n中途想換路線時，停下來辨別這次衝動：出現了必須處理的新事實，還是無聊、遺憾或擔心錯過？如果確有新事實，允許調整；否則先花十分鐘做手上的事，再決定。無需強迫自己喜歡它。\n\n完成後回答：哪一部分實際讓我滿足？哪一部分只在期待時顯得吸引人？少做一件事後，誰的負擔減少了？這個實驗的目的不是證明你屬於7號，而是找出能讓選擇、實際體驗和履行承諾能彼此配合的做法。",
+          "key": "observation_exercise",
+          "title": "做一次「選擇已經足夠」的小實驗"
+        },
+        {
+          "body_md": "本頁的場景和練習用於自我觀察，不是經驗證的判型程序。涵蓋104個樣本的[九型研究系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)指出信度與效度的研究證據並不一致；翼和類型間移動的研究支持有限。這些結果無法證明費馬測試的效度。\n\n如果你主要困惑於7號為何被歸入思考中心，可繼續讀[思考中心](/zh-TW/personality/enneagram/centers/head)。如果幾種核心都貼近，回到[九型人格總覽](/zh-TW/personality/enneagram)比較主要關注，再用自己的真實經歷檢驗。相鄰翼和本能關注可以幫助看出差異，但不應遮住尚未確定的核心問題。",
+          "key": "use_boundary",
+          "title": "怎樣繼續使用這頁"
+        }
+      ],
+      "seo": {
+        "description": "第七型是一種傳統九型人格觀察假設，關注注意力是否反覆回到可能性、自由與保留選項，並可能借助重構不適與規劃未來維持行動感。點子多、樂觀、旅行或興趣廣不能證明動機；創意工作、注意力差異、遷居經驗、承諾帶來的負擔與現實限制都可能造成相似表現。",
+        "title": "九型人格7號（第七型）：可能性、自由與保留選項的可修正觀察假設"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-7",
+      "source_hash": "2b9240cb066e71054b02122e446f959f546c901456484443dc057485a986afdf",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "第七型關注自由、可能性與生活的滿足感。它幫助我們理解一種慣常策略：限制或失望出現時，先尋找更有吸引力的路線。關鍵不在興趣多少，而在新增選擇如何影響當下體驗、已經答應的事和真正想要的生活。",
+      "title": "九型人格7號：選擇空間、滿足與承諾"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "27ec11a8980f9da99ed0fbd26d85f77edc500226dfad92d24a5ed465c2b0f51d"
+}

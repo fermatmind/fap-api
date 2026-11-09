@@ -1,0 +1,203 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-3/instincts/one-to-one",
+    "entity_key": "type-3/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-3/instincts/one-to-one"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-3/instincts/one-to-one"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-3/instincts/one-to-one",
+      "code": "type-3/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-3/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "一些傳統中兩者有重疊，但範圍不同。Narrative 包含親近夥伴與活力，Enneagram Institute 更強調吸引與強度。使用時應說明正在討論哪個含義，兩者都不限於性行為或戀愛。",
+          "question": "一對一就是 sexual 的另一種說法嗎？"
+        },
+        {
+          "answer": "不能。支援可以來自感情、共同目標、實際責任或職業要求。只有當經營被欣賞的夥伴關係、成為理想搭檔反覆承載證明個人價值的壓力時，這項解釋才更值得探索。",
+          "question": "支援伴侶或搭檔成功，就能說明是這個副型嗎？"
+        },
+        {
+          "answer": "不能。外貌、吸引力、性別表達和性慾強弱，都不能確定本能或核心型。本頁關注尋求欣賞的意義與過程，同時核實自由選擇和關係條件。",
+          "question": "能從外貌或性慾判斷嗎？"
+        },
+        {
+          "answer": "這是關於當下情境的有用記錄，需要比較相似場合再概括。如果自願互動反覆顯示沒有維持理想角色的需要，也沒有相應價值感壓力，應減弱或撤回這項解釋，而不是把輕鬆重新說成隱藏副型。",
+          "question": "表達普通偏好很輕鬆，意味著什麼？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-3/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-3/one-to-one",
+        "x-default": "/en/personality/enneagram/type-3/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-3/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3",
+          "label": "第三型：成就與價值感",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3/instincts/self-preservation",
+          "label": "第三型自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3/instincts/social",
+          "label": "第三型社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-3/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "名稱需要先講清。Narrative 的 one-to-one 包括親密夥伴、親近友誼與活力；Enneagram Institute 的 sexual/attraction 更強調吸引與強度。兩者範圍有交集，並不完全同義。可對照[Narrative 的副型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)與[Enneagram Institute 的本能說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。\n\n兩套說明都不限於性行為或戀愛，喜歡私下交談也不能區分這種本能。性慾強弱、性取向、性別表達和關係狀態，都不能確定副型。\n\nNarrative 的第三型一對一原文帶有歷史性的二元性別角色語言。本頁不把它當作必須符合男性或女性理想形象的要求，也不據此推斷任何人的性取向。這裡要探索的是：呈現一個受到欣賞的自己，是否變成了確認價值的方式。",
+          "key": "language_and_scope",
+          "title": "這裡的一對一指什麼"
+        },
+        {
+          "body_md": "傳統的[第三型描述](https://www.enneagraminstitute.com/type-3/)把成就與個人價值連結起來。一對一的解釋討論這種關注如何落在令人欣賞的夥伴、有吸引力的合作者，或讓某個人特別願意接近的自己身上。\n\n可能出現的內心問題是：「我是這個人欣賞的對象嗎？」「我能成為對方會選擇的搭檔嗎？」外貌可能參與其中，能力、體貼、幽默或一段被欣賞的合作成果也可能參與。這些是需要檢查的可能，不是人人都必須符合的副型特徵。\n\n調整表達有時能促進聯結與合作。代價出現在角色越來越難退出時：你持續提供令人滿意的版本，卻不說自己的偏好、不確定或疲憊。關心夥伴與希望被欣賞可以並存，也都不能預先解釋每次助人行為。",
+          "key": "worth_through_appeal",
+          "title": "當「對方想選擇我」成為有價值的證明"
+        },
+        {
+          "body_md": "設想你與朋友準備一場小型公開展示。朋友肯定了你的技術工作，但談到兩人的合作時反應較平淡。你開始反覆改善呈現方式、接下額外任務，並留意對方是否更熱情。\n\n如果這個具體對象的欣賞反覆決定你是否覺得成功，一對一第三型的解釋值得探索。展示已經達到要求，你卻仍努力成為對方眼中的理想合作者。\n\n社群第三型解釋會更重視聽眾認可、團隊聲譽與自己在貢獻者中的位置。自保第三型解釋會更重視資源安排、持續運轉和已證明的實用能力。三者都可能打磨同一場展示，行動本身不能說明原因。\n\n也要區分「受到欣賞的搭檔關係」與「強烈的聯結」。一個人可能努力讓兩人的組合顯得成功，卻並不追求很高的情緒強度。這可以支持部分夥伴關係解釋，但較難支持 Enneagram Institute 強調的吸引口徑，不能悄悄把兩者當成同一項觀察。",
+          "key": "collaboration_scene",
+          "title": "事情做得不錯，合作卻仍讓自己不滿足"
+        },
+        {
+          "body_md": "敏銳地留意對方喜歡什麼，可以讓合作更愉快。過用時，你可能提供超出意願的投入、壓下分歧，或把每次平淡反應都理解成「我還需要更有吸引力」。\n\n可以記錄具體過程：對方回覆簡短，你推斷對方失望，隨後改掉偏好或增加任務，最後變得疲憊。先問自己是否核實了簡短回覆的含義。對方的表達習慣、分心或不同溝通方式，也可能足以解釋。\n\n現實與關係條件不能省略。客戶職位、表演訓練、外貌規範、經濟依賴或不平等評價權，都可能鼓勵迎合特定對象的期待。如果拒絕不安全，配合可能是保護自己的策略，不能當作本能偏好的證據。\n\n還要保留其他核心解釋。[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)區分成就認可、被需要與保持可能性等主題。回到事件裡，問問受威脅的是「我作為出色搭檔的價值」、「我作為被需要者的位置」，還是「繼續追隨新鮮可能的自由」。需要多個具體情境來探索這些區別，不能憑魅力定型。",
+          "key": "reciprocity_and_conditions",
+          "title": "照顧聯結，也容許雙方有不同反應"
+        },
+        {
+          "body_md": "在一段可信、雙方自願的關係裡，選一次低風險的普通互動，表達一個真實偏好或可承擔的界限：「我更想選簡單一點的安排」，或「這部分我能幫，額外任務接不了」。避開涉及危險、必要收入或拒絕會被懲罰的場景。\n\n表達前寫下怕失去什麼：樂趣、認可、關係，還是自己的價值感？之後記錄實際回應，以及自己是否能保留偏好，而不急著重建令人欣賞的角色。面對沉默，先澄清再解釋。\n\n這是觀察自己的嘗試，不是檢驗對方感情的考試。不要製造嫉妒、撤走照顧或故意引發拒絕。有效支援讓雙方可以普通地相處、說出界限和共同選擇，不必一直扮演理想角色。",
+          "key": "honest_preference",
+          "title": "嘗試表達一個不需要取悅人的小偏好"
+        },
+        {
+          "body_md": "如果在不同的自願、安全情境中，被某個重要對象欣賞反覆承載自我價值壓力，可以繼續探索這項解釋。如果呈現只出現在有獎勵的職位，不平等條件改變後就消失，或另一種關注更能解釋選擇，應降低它的分量。\n\n如果一個具體對象的反應反覆並不影響你的價值感或選擇，應撤回關於尋求特定對象欣賞的具體解釋。如果吸引與強度並不突出，應重新考慮吸引口徑。不能用隱藏慾望或更強壓抑維持結論。另一方面，分歧後仍保留合理任務標準，可能只是判斷穩健，也不能單獨當作反證。\n\n傳統模型包含三種本能。一個人可以同時關注資源、群體與個體聯結，並在情境中表現出不同重點。翼是另一層解釋：第三型可能帶有第二型或第四型修飾，這不是本能副型。第二高分、職業或名人猜型都不能確定本副型。傳統27 個副型是九個核心型與三種主導本能的組合，六種堆疊則排列三種本能的完整先後順序。在展示情境中，希望這位朋友欣賞自己，不能說明資源安全與群體位置誰更優先，更不能判斷本能盲點。第三型仍屬於心／感受中心；中心是在分組核心型，不是另一種本能。\n\n27 個副型及反型用語屬於學派傳統，不是科學診斷或已證實的神經機制。[Hook 綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告104 個樣本的信度與效度證據並不一致；它不能驗證本副型、費馬評分或對吸引和關係的預測。特定量表的發現也只能在該工具與研究範圍內理解。\n\n可先讀[第三型核心動機](/zh-TW/personality/enneagram/type-3)。如果資源或群體位置更能解釋壓力，再比較[第三型自保副型](/zh-TW/personality/enneagram/type-3/instincts/self-preservation)與[第三型社群副型](/zh-TW/personality/enneagram/type-3/instincts/social)。",
+          "key": "revising_the_explanation",
+          "title": "哪些發現應改變這項解釋"
+        }
+      ],
+      "seo": {
+        "description": "第三型一對一副型討論：成為某個人欣賞的理想搭檔，何時變成確認個人價值的條件？區分夥伴欣賞與吸引強度，核實關係和職位要求，並透過普通偏好觀察自己。魅力、外貌或支援伴侶都不能單獨判型。",
+        "title": "第三型一對一副型：被欣賞的搭檔角色與價值感"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-3/instincts/one-to-one",
+      "source_hash": "56e4ac49baea1430fdfc08369968531b0b2e7292298ab430083f8ac50384e4f9",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "這一傳統副型描述討論吸引力、被欣賞的夥伴關係與第三型價值追求之間的聯絡。值得觀察的是聯結何時變成持續表演，同時分清吸引、關係條件與不同學派的術語。",
+      "title": "第三型一對一副型：被欣賞時，也能走出理想角色"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "3f1293180ef2f87b208e17dbe96851cd4f81594ef60900776956be50e29d1b89"
+}

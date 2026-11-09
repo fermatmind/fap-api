@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-8/instincts/self-preservation",
+    "entity_key": "type-8/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-8/instincts/self-preservation"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-8/instincts/self-preservation"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-8/instincts/self-preservation",
+      "code": "type-8/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-8/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。消費習慣、收入能力和準備行為都可能來自家庭經驗、現實稀缺或工作職責。需要繼續核對：資源是否反覆被用來維護不受制於人的自主，以及條件穩定後這種關注是否仍然突出。",
+          "question": "很節儉、很會賺錢，或者總準備備用物資，就屬於自保第八型嗎？"
+        },
+        {
+          "answer": "未必。共同責任需要明確約定。只有在安排已經可靠、對方也尊重邊界時，仍因別人擁有影響力而反覆接管，依賴與自主的解釋才值得繼續研究。若澄清責任就能解決問題，應採用更直接的解釋。",
+          "question": "接受幫助以後仍想把事情安排清楚，是不是害怕依賴？"
+        },
+        {
+          "answer": "不等於。九號翼是相鄰類型的修飾假設，自保副型是資源與生活保障領域的關注假設。安靜、沉穩或不愛社交都不能把兩個概念合併，測評第二高分也不能自動確定它們。",
+          "question": "第八型九號翼是否等於自保副型？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-8/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-8/self-preservation",
+        "x-default": "/en/personality/enneagram/type-8/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-8/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8",
+          "label": "九型人格8號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8/instincts/social",
+          "label": "九型人格8號社群本能",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8/instincts/one-to-one",
+          "label": "九型人格8號一對一本能",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在傳統九型解釋中，第八型關心自己是否會被傷害或控制，並傾向於主動維護決定權。這是核心主題；自保副型進一步問：這種維護自主的努力，是否經常集中在實際生活所需的資源與使用權上？可參考 [Enneagram Institute 的第八型說明](https://www.enneagraminstitute.com/type-8/)。\n\n例如，有人重視備用資金，並不主要為了顯得成功，而是因為「有這筆錢，我就不必接受不合理的條件」；守住工作空間，也不只是喜歡獨處，而是因為「我需要有一塊不會隨時被別人改變規則的地方」。這是本頁提出的觀察方向，不是從儲蓄或空間偏好直接判型。\n\n[Narrative Enneagram 的副型介紹](https://www.narrativeenneagram.org/instinctual-subtypes/)把自保第八型的力量與物質保障聯絡起來。轉成日常問題，可以問：當供應、住房、收入或身體精力不可靠時，我是否很快進入「先掌握實際條件」的狀態？又是否容易把接受幫助理解為把自己交到別人手裡？",
+          "key": "resources_and_autonomy",
+          "title": "資源為什麼會與自主綁在一起"
+        },
+        {
+          "body_md": "設想一個小團隊共用工作室。供應商臨時取消交貨，負責採購的林立即聯絡替代管道、補齊材料，並明確哪些物品可以共同使用。團隊因此按時完成任務。這裡的直接行動有實際作用：把等待變成可執行的辦法，減少別人對不可靠供應的依賴。這個例子用於說明可能的過程，不是研究個案。\n\n問題出現在供應已經恢復後。林仍要求每筆小額採購都經自己批准，別人提出共用備用庫存時，他回答：「到頭來還是得我負責收拾。」原本有效的責任感，可能轉成只有自己能夠保障安全的假設。別人越沒有機會參與，他越容易看到他們缺乏經驗，繼而繼續包辦。\n\n要觀察的是這段迴圈，而不是給林貼上強硬標籤：發現缺口、迅速補位、把依賴視為風險、保留決定權、他人參與減少。過度使用的代價可能包括疲憊、重複採購和合作變得被動。實際自主也需要自己的時間與精力；持續透支不能僅憑「我撐得住」來判斷是否必要。\n\n同樣的提供行為，也可能是溫和而慷慨的。關鍵區別在於：提供之後，別人是否仍能表達不同需要、參與決定，並在不欠人情的條件下使用資源？",
+          "key": "provision_and_cost",
+          "title": "供給能解決問題，也可能變成全部由我決定"
+        },
+        {
+          "body_md": "下面比較同一個工作室交貨問題中的三條可能路線。它們都可以表現為聯絡供應商、協調夥伴或強硬談判，因此行為相似並不奇怪。\n\n- 自保關注可能先落在材料是否夠用、替代來源是否可靠、誰能取用庫存，以及團隊會不會因此受制於供應商。實際可用的資源恢復後，事情往往更容易放下。\n- 社群關注可能先落在誰替團隊承擔損失、成員有沒有共同發言權，以及怎樣維護大家的立場。庫存補齊後，群體責任和分工問題可能仍然重要。\n- 一對一關注可能先落在重要搭檔有沒有與自己並肩、合作是否仍有投入和活力，以及對方改變計畫是否意味著連結變了。供應問題解決，不一定就解決了關係中的在意。\n\n這些是用來比較注意力的提問，不是三個互斥的行為劇本。一個人可以同時關心物資、團隊和搭檔。更有資訊量的是：在不同事件中，哪個問題最先抓住自己，什麼變化最能讓自己放鬆，以及事後反覆回想的究竟是哪一部分。",
+          "key": "same_supply_problem",
+          "title": "同一次供應變化，三種第八型關注有什麼不同"
+        },
+        {
+          "body_md": "可以結合 [Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)繼續辨別。第五型與第八型都可能維護空間和資源，但前者的傳統解釋更強調減少消耗、避免侵入，後者更強調直接維護自己的行動與決定權。第六型也可能積極準備和對抗風險，不過需要核對：自己主要在尋找可信安排和確定性，還是在抵抗由別人掌握自己的條件？這些區別都要結合多次經歷，不能靠一次反應速度區分。\n\n現實條件常常更有解釋力。收入不穩、照護任務、住房限制、失竊經歷、無障礙需求，或正式承擔採購責任，都可能要求謹慎管理資源。即使不喜歡這種管理，一個人也可能因為職責而堅持。\n\n如果限制只出現在確有風險的事項中，風險解除後就能開放資源，現實需要可能足以解釋行為。如果長期觀察發現，自己並不特別關注資源自主，反而持續在意共同立場或特定關係中的投入，應降低乃至撤回自保副型假設。不要把不符合解釋成「隱藏得更深」。",
+          "key": "other_reasons_for_boundaries",
+          "title": "守住資源，不一定是自保第八型"
+        },
+        {
+          "body_md": "選擇一項金額有限、失敗後可以糾正、不會影響基本生活或重要工作的共同採購。不要拿房租、必要照護或危險職位做實驗。先說清預算、最低要求、誰負責執行，以及什麼客觀情況需要重新協商。\n\n讓另一位可靠夥伴在約定範圍內決定。記錄自己最初擔心的事情：實際缺貨、對方不了解需要、欠人情，還是別人有權改變安排本身？執行中如果想接管，先說明新出現的事實，而不是把自己的不舒服當作風險證據。夥伴可以拒絕額外要求，也可以提出修改。\n\n回顧兩件事：採購有沒有滿足需要；對方擁有決定權時，自己是否仍感到必須收回。如果客觀條件已滿足，卻反覆因為別人參與而感到受制，可以繼續檢視資源與自主是否被綁在一起，但仍不足以確定副型。\n\n如果明確職責和可靠供給就能消除緊張，應優先採用職責或供應解釋。願意共享決定權，反駁的是「必須持續獨佔控制」的具體說法，並不自動否定任何第八型理解；如果資源主題在其他相似、穩定情境中也不突出，則可以撤回本頁的副型假設。出現實際損失、責任不清或對方不願參與時，停止嘗試，恢復雙方同意的安排。",
+          "key": "small_shared_purchase",
+          "title": "用一筆小額共同採購，觀察控制是否必要"
+        },
+        {
+          "body_md": "三種本能在這些傳統裡指不同生活領域的關注，並不是三類人各自缺少其餘兩種需要。27 個副型由九種核心型與三種主導本能組合而來；三種本能堆疊另問全部三種關注的先後，共有六種完整排序。重視資源自主，不能據此確定群體歸屬或重要連結誰排第二、誰排第三，也不能認定某種「盲點」；本頁不判斷這份排序。第八型與第九型、第一型的身體中心分組，討論核心型的共同主題，不等於把自保、社群、一對一分成三個中心。翼型討論相鄰類型的修飾，第八型的翼是第七型或第九型；本能副型討論關注落在哪裡。這是兩個解釋層，不能用第二高分把它們互相替代。\n\n名稱也有學派差別。Narrative 的 one-to-one 包括重要夥伴、親近朋友與生命活力；[Enneagram Institute 的 sexual/attraction](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更突出吸引與強度。兩者有交集，不能完全互換，也都不只涉及性或戀愛。\n\n27 個副型屬於傳統解釋；Chestnut–Paes（CP）用「反型」描述與核心型常見外觀不同的副型。這些區分不是可重複的科學診斷，也不是已經證實的神經機制。[Hook 等人的 2021 年綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告：104 個獨立樣本中的信度與效度證據並不一致。這不構成對費馬題本、分數或本頁副型解釋的驗證。本頁情境和嘗試是幫助反思的建議，不是經過驗證的判型程序。\n\n繼續閱讀可先回到 [第八型核心]( /zh-TW/personality/enneagram/type-8 )，再對照 [第八型社群副型](/zh-TW/personality/enneagram/type-8/instincts/social)與 [第八型一對一副型](/zh-TW/personality/enneagram/type-8/instincts/one-to-one)。比較哪個解釋更符合完整經歷，也保留「目前無法判斷」的結論。",
+          "key": "scope_and_reading",
+          "title": "把副型當作可修正的理解，再繼續閱讀"
+        }
+      ],
+      "seo": {
+        "description": "第八型自保副型的傳統解釋，關注收入、供應和空間為何與自主有關。透過工作室供給和小額共同採購，區分實際職責與持續接管，觀察可靠安排能否緩解緊張。財富、節儉或準備物資都不能單獨判型。",
+        "title": "第八型自保副型：資源、自主與可靠的共同安排"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-8/instincts/self-preservation",
+      "source_hash": "9c0f9b213f6af9e0e3a5345bb7df577bea59289a0a05146e40ec0a83a49e8073",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "當第八型維護自主、抵抗受制於人的主題，主要落在收入、供應、空間和實際生活安排上，自保副型可以作為一種觀察假設。關鍵不是有多少錢、是否節儉，而是資源為何重要，以及條件穩定後，自己能否接受可靠的共同安排。",
+      "title": "第八型自保副型：用可靠資源守住自主"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "604bfe90906d948ceece8c123fc60574884635711308e8e5a6c638f66a212a0d"
+}

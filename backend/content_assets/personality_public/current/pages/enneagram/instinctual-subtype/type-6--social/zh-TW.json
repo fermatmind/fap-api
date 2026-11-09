@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-6/instincts/social",
+    "entity_key": "type-6/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-6/instincts/social"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-6/instincts/social"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-6/instincts/social",
+      "code": "type-6/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-6/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "可以。社群關注涉及成員位置、彼此期待與參與，不要求達到某種聊天數量。不喜歡聚會既不能確定，也不能排除這個副型；更關鍵的是歸屬和共同責任是否反覆組織你的注意力。",
+          "question": "社群六型可以不喜歡聚會嗎？"
+        },
+        {
+          "answer": "不能這樣判斷。質疑可能為了找到群體能夠信任的約定，也可能源於真實的不當行為、職業職責或其他個人顧慮。觀察自己在保護什麼，以及理由公開以後是否願意調整回應。",
+          "question": "質疑權威，說明我不可能是社群六型嗎？"
+        },
+        {
+          "answer": "它可以削弱更具體的解釋，例如職責已經清楚後仍需要反覆授權。單次靈活表現不能確定整個副型。如果成員位置與共同責任的關注沒有反覆出現，或者現實條件解釋得更好，就應降低信心或撤回解釋。",
+          "question": "靈活合作會否定社群副型嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-6/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-6/social",
+        "x-default": "/en/personality/enneagram/type-6/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-6/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6",
+          "label": "第六型：安全與可靠支援",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6/instincts/self-preservation",
+          "label": "第六型自保副型：日常資源與後援",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6/instincts/one-to-one",
+          "label": "第六型一對一副型：聯結與強度",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "要讓這個解釋成立，[第六型對支援的關注](https://www.enneagraminstitute.com/type-6/)仍應處在中心。社群視角進一步問：這種關注怎樣與自己在人群中的位置聯絡起來？成員可以期待什麼，我負責哪些事情，出了問題時這套安排是否靠得住？\n\n[Narrative Enneagram 的社群六型描述](https://www.narrativeenneagram.org/instinctual-subtypes/)強調職責與清楚的群體角色。可以把它用作觀察問題，不必強迫自己符合一個盡責、服從的形象。\n\n一個人可能不喜歡大型聚會，卻默默留意約定是否落實。另一個人可能質疑領導，恰恰因為領導正在破壞大家賴以合作的安排。參與次數與服從程度都不能確定副型。更值得看的是反應背後的顧慮，以及得到什麼資訊之後，當事人能夠繼續行動。",
+          "key": "place_in_the_group",
+          "title": "知道自己在群體中站在哪裡"
+        },
+        {
+          "body_md": "設想社群維修活動開始前兩天，原負責人退出。下面是用於說明差異的原創情境，不是對帶有某個標籤的人作預測。幾位志工都可能馬上列清單。\n\n社群六型的解釋可能沿著清單追問責任：誰能批准花錢，誰對外通知，接下一項任務是否意味著承擔所有問題？自保六型的解釋可能優先關注工具是否夠用、替代場地能否負擔，以及裝置壞了能聯絡誰。一對一六型的解釋可能更在意關鍵搭檔是否仍有個人投入，兩人之間是否還有一起把事情做下去的活力。\n\n外在行為相同，一份清單卻可能服務不同需要。工具與經費落實後，什麼仍然讓人不放心？是責任不清、某個人是否可靠，還是實際備用條件仍未解決？\n\n社群關注的有效作用，是在某位志工無意間承擔所有職責之前發現不公平的交接。過用的代價，則可能是每個小決定都要追加一次授權，或把普通的不確定理解成自己在群體中的位置受到威脅。",
+          "key": "event_responsibility",
+          "title": "共同專案突然失去負責人"
+        },
+        {
+          "body_md": "例如，新負責人說「所有人都必須加班」，但此前沒有人同意這個承諾。詢問理由、確認實際需要，再提出有邊界的貢獻，是一種保護合作的有效回應。\n\n按社群六型解釋，一種可以觀察的過程是：不清楚的要求引發對群體是否可靠的顧慮；當事人尋求正當約定；職責說清楚以後，參與變得更容易。這是本頁提出的觀察示例，不是已經證實的心理機制。\n\n過用可能表現為：普通任務已有可行負責人，仍不斷追問最終由誰做最後決定；或者依據很少的資訊，把同事分成可靠與不可靠兩邊。對每個領導都反對，也可能成為另一種要求確定性的方式。單看一次拒絕，不足以支持其中任何解釋。\n\n記錄公開理由與公平分工是否真的改變了你的回應。若能夠調整，同時不覺得自己失去成員位置，就會削弱「僵硬依賴權威」這一具體解釋。無需把靈活性重新解釋成藏得更深的僵硬。",
+          "key": "loyalty_with_questions",
+          "title": "忠誠也可能表現為拒絕"
+        },
+        {
+          "body_md": "核對流程可能是法律、培訓或錯誤後果所要求的。資歷較淺的同事要求書面指示，也可能因為組織把責任分配得不公平。一個經常被排斥的人警惕歸屬問題，可能反映真實處境。解釋人格之前，應先直接處理這些條件。\n\n[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供了一條傳統辨別線索：一型較關注正確性，六型較關注不確定性。放進實際情境，兩個人都可能要求安全清單。一位仍反對，是因為方法違反標準；另一位仍不放心，是因為沒人提供可靠指導或願意承擔責任。一個人也可以同時有這兩種顧慮，不能根據清單判型。\n\n如果表現可由正式職責與責任要求充分解釋，並在沒有這些後果的日常情境中消退，就應降低對社群六型解釋的信心。如果個人標準、資源可得性或某段特定關係，始終比成員位置與共同責任更能解釋顧慮，也應重新考慮。",
+          "key": "rules_and_real_stakes",
+          "title": "重視規則，也可能有其他原因"
+        },
+        {
+          "body_md": "選一項後果較輕、可以自願參與的活動。針對其中一項任務，說清負責人、責任限度、開始所需的資訊，以及什麼時候需要求助。保留已有法律和安全要求。\n\n交接前，寫下自己預期什麼會發生：任務失敗、被歸責，還是不再被視為可靠成員？交接後，記錄實際結果、追加尋求授權的次數，以及是否能接受別人採用合理但不同的方法。\n\n可以試著說：「我負責簽到工作到四點；之後由小林接手，新請求直接找小林。」如果群體不尊重這個邊界，應修復約定，而不是要求自己忍受不公平安排。\n\n有用的結果是：知道責任限度後能夠貢獻，並在新證據出現時調整。如果多次相近情境中，清晰交接都足以解決顧慮，就應降低「需要持續權威保證」的解釋。如果相關關注只出現在一個要求格外苛刻的群體，而沒有在其他場景反覆出現，可以撤回副型解釋，不必發明隱藏模式來保留它。",
+          "key": "bounded_handoff",
+          "title": "練習一次有邊界的責任交接"
+        },
+        {
+          "body_md": "在這些傳統中，三種本能都屬於一個人的生活。社群受到較多關注，不代表缺少實際生活或親密關係需要。六型核心討論可靠支援，五翼或七翼討論相鄰類型的影響。思考中心把六型與五型、七型歸在一組；三種本能則關注生活領域。翼與副型都不能從第二高的類型分數自動推導。\n\n二十七種副型把九種核心型與三種主導本能關注組合起來；六種本能堆疊則將三種本能完整排序。關心群體職責，並不能說明實際後援或某段重要連結誰排第二。本頁不推斷第二、第三種本能或本能盲點。\n\nNarrative 的一對一涵蓋親密連結與活力；[Enneagram Institute 的 sexual／attraction](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)較強調吸引與強度。兩者有交集，但不能互換，也不只涉及性或戀愛。\n\n副型框架屬於傳統解釋，反型是 CP Enneagram Academy 所用的學派術語，不是科學診斷、已經證實的神經系統或經驗證的費馬評分分類。[Hook 2021 年綜述摘要](https://doi.org/10.1002/jclp.23097)報告了不一致的信度與效度證據。針對特定量表的研究，不能自動證明整個框架或本產品的解釋有效。\n\n理解核心動機，可以閱讀[第六型核心](/zh-TW/personality/enneagram/type-6)。實際後援更突出時，比較[第六型自保副型](/zh-TW/personality/enneagram/type-6/instincts/self-preservation)；顧慮主要圍繞某段重要連結時，比較[第六型一對一副型](/zh-TW/personality/enneagram/type-6/instincts/one-to-one)。",
+          "key": "model_and_reading",
+          "title": "讓解釋保持適當分量"
+        }
+      ],
+      "seo": {
+        "description": "了解第六型如何在群體歸屬、共同責任與可靠約定中尋找支援。透過社群活動與責任交接的情境，理解忠誠為何可以包含質疑和拒絕，區分反覆顧慮與真實問責、不公平分工。",
+        "title": "第六型社群副型：歸屬、共同責任與可靠支援"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-6/instincts/social",
+      "source_hash": "13efa7d4eb197dd149727c880295d5d9913fa8f932cbc40182d17d241eaa3aa1",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "社群六型視角關注，對可靠支援的需要如何進入成員位置、共同職責與責任明確的約定。理解忠誠為什麼也可能包含質疑，並區分反覆關注歸屬的模式與現實角色本身帶來的要求。",
+      "title": "第六型社群副型：在歸屬、責任與共同約定中尋找支援"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "0f22e6969abb0ed595c227259310da5016f6758feb4e6873cd08f206db3043ee"
+}

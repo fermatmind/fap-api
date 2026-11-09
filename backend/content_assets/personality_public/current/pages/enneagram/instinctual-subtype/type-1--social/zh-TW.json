@@ -1,0 +1,203 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-1/instincts/social",
+    "entity_key": "type-1/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-1/instincts/social"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-1/instincts/social"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-1/instincts/social",
+      "code": "type-1/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-1/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "可以。這裡關注的是群體中的位置、責任和共同安排，不是社交活動量。要看具體參與時在意什麼，也要檢查角色和文化要求；不能用安靜或外向決定副型。",
+          "question": "內向、不愛聚會的人也可能有社群關注嗎？"
+        },
+        {
+          "answer": "不能。這些行為可以來自職責、價值觀或實際需要。需觀察一號式標準關注如何反覆進入群體生活，並保留條件解釋。副型不是公平認證，也不能用來比較人的道德價值。",
+          "question": "守規則、公平待人，是否說明我是社群一號？"
+        },
+        {
+          "answer": "一次靈活調整不會決定核心類型。先看調整是否達成你重視的目的。若多次觀察都缺少原先假定的群體標準過程，或角色解釋更充分，就修訂具體假設；無需用反型或壓抑來保證原標籤永遠正確。",
+          "question": "接受不同做法，會不會說明原先的類型判斷錯了？"
+        },
+        {
+          "answer": "不等於。翼討論相鄰類型風格，社群副型討論關注領域。第二高分不能自動確定翼，更不能確定本能副型；職業名稱、領導職位或名人相似度也沒有這種判定作用。",
+          "question": "社群副型等於二號翼，或測評第二高的類型嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-1/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-1/social",
+        "x-default": "/en/personality/enneagram/type-1/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-1/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1",
+          "label": "一號核心類型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1/instincts/self-preservation",
+          "label": "一號自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1/instincts/one-to-one",
+          "label": "一號一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-1/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "一號核心的傳統主題，是讓行動符合自己認可的正確標準並維持對自己行事正直的感受。[Enneagram Institute 一號介紹](https://www.enneagraminstitute.com/type-1/)提供了這個核心解釋。社群副型進一步問：這份要求是否經常透過群體中的位置和責任表達，例如要做可靠的組織者、守住一種共同做法，或示範怎麼參與才符合要求。\n\n這裡可以檢驗一條具體思路：群體裡出現不一致，我擔心大家失去一個負責的做法，於是主動解釋、示範或糾正；如果他人不接受，我便覺得必須更用力守住它。觀察時要問，維護的是大家需要的標準，還是自己熟悉的位置也受到了挑戰。\n\n[Narrative 副型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)描述了明確角色與規則帶來的熟悉感，以及堅持正確方法時可能出現的適應困難。這是傳統的類型描述，不能證明社群一號必然僵化，也不能認定誰天生有資格代表集體。",
+          "key": "place_and_standard",
+          "title": "在群體中負責，為什麼會變成「必須由我守住標準」"
+        },
+        {
+          "body_md": "設想一個社群讀書小組。陳負責安排輪值，提出每個人都承擔一次主持、臨時缺席要事先告知。大家能預期分工，新成員也知道怎麼加入。這種標準讓參與不再依賴少數人一直補位。\n\n後來，一位需要輪班的成員提出兩人搭檔主持。陳先回答：既然加入，就該按同樣的方法承擔責任。他花了很久說明舊規則，卻沒有先問搭檔方案能否達到同樣目的。這裡值得觀察的，是從「讓責任可見」滑向「只有既有形式才算負責」的過程；成員的現實限制可能被誤讀成態度問題。\n\n陳也可能只是受場地合約約束，或剛處理過一次許多人缺席。如果共同目的確實需要原安排，堅持規則未必做得過頭。先弄清規則解決什麼、誰有權修訂、有哪些可行替代，再談副型。提供支持時，不必要求陳放棄所有標準，而是邀請他把目的說出來，並聽取能夠達到目的的另一種方案。",
+          "key": "new_members_change_the_rule",
+          "title": "新成員改變做法時，先聽問題還是先糾正"
+        },
+        {
+          "body_md": "一個成員臨時不能主持，其他條件儘量不變：\n\n- 自保一號可能先處理材料、場地和備用安排，確保這次活動有可用資源。\n- 社群一號可能先關注責任如何重新分配、例外怎樣解釋，以及自己作為組織者該如何維護可理解的共同約定。\n- 一號的一對一副型可能先聯絡某位重要搭檔，關注兩人的承諾、投入感和下一次怎樣共同做好。\n\n三者都可能打電話找替補。若只記錄行為，會把不同理由混在一起。更有用的是問：替補找到後，我還放不下什麼？資源已經夠了、責任解釋清楚了、特定關係也已修復，哪一項最能緩解我的急迫感？混合答案應保留，不必強行選一類。\n\n社群關注不取決於朋友數量；安靜的人也可能十分在意群體位置。傳統模型也不認為一個人只擁有一種本能。討論另一種關注時，還須區分 Narrative 的 one-to-one 對親密連結與活力的用法，和 EI 的 sexual/attraction 對吸引強度的用法；二者相交而非完全同義，都不限於性或戀愛。可參閱 [本能模型介紹](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。",
+          "key": "same_absence_three_concerns",
+          "title": "同一次缺席，三個副型可能擔心不同的損失"
+        },
+        {
+          "body_md": "教師、管理者和志工組織負責人都可能需要解釋規則。先比較擔任職務與卸任之後、受到公眾關注與沒有人在旁時的相似決定。若規則關注主要隨法定責任或職位變化，就優先考慮職務能否解釋。\n\n[Narrative 類型比較](https://www.narrativeenneagram.org/type-comparisons/)也提醒，一號與三號都可能努力達成目標，一號與六號都可能認真檢查。可進一步觀察：我主要需要認可的成果、可靠的支持，還是即使沒有觀眾也難以放下某項正確標準？這是辨別問題，不是把成就、忠誠或原則分別判給某一種人。\n\n選擇性執行並不能單獨決定核心型。但如果一項規則只在維護自身地位時被堅持，面對同樣後果卻無法解釋差別，就足以撤回「這次行動是為了讓大家遵守一致的標準」這一具體說明。不要把有損群體的行為改稱更高層次的責任。反過來，一次合理例外也不否定一號；它可能更好地達成了原本的共同目的。",
+          "key": "roles_and_lookalikes",
+          "title": "公開講原則，也可能是在履行職責或維護形象"
+        },
+        {
+          "body_md": "選一項你有權共同修訂、後果可控的內部約定。先寫出它要保護的目的、現行方法，以及哪些要求實際不可協商。邀請受影響的人提出一種替代方法，例如仍讓每個人承擔主持責任，但允許搭檔或交換日期；涉及法律、安全或明確合約的要求繼續遵守。\n\n討論時把事實和評價分開：「本週沒有主持人」與「大家不夠負責」並不是同一件事。說明自己能承擔什麼，也讓他人提出可行安排。記錄誰可以發言、誰承擔新增成本、最終方案是否仍達成目的，以及你對失去原做法有什麼反應。\n\n如果換一種方法仍能達到共同目的，嘗試承認它同樣有效。若你的想糾正別人的衝動主要隨職位、獎懲或公眾評價變化，降低社群副型解釋的權重；若在多次相似情境中，資源維護或特定關係的連結始終更先得到關注，也重新考慮優先順序。少數幾次回顧不能證明類型，反例更不應被解釋成「社群關注隱藏得更深」。",
+          "key": "purpose_before_form",
+          "title": "試著保留目的，讓方法可以討論"
+        },
+        {
+          "body_md": "九型傳統用二十七副型整理九個核心型各與三種主導本能之一的組合（9 × 3）；countertype 或反型也是流派內部的描述。它們沒有因此成為科學診斷、實證神經機制或道德等級。\n\n社群優先並沒有確定完整的本能堆疊。在 EI 的用語中，堆疊把三種關注排為主導、次要和較少關注，共有六種順序。例如 so/sp/sx 與 so/sx/sp 都以社群為先，自保（sp）與 EI 的 sexual/attraction（sx）分列另外兩個位置；兩者仍可討論同一個社群一號組合。擔任組織者或維護共同規則，不能決定另外兩項的排序。本頁不憑職位、翼或核心型分數推定第二、第三本能、盲點或堆疊分數。\n\n[Hook 等人 2021 年系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)指出信度和效度證據並不一致。傳統類型描述、特定工具的量表研究和費馬產品驗證應分別判斷；上述來源沒有驗證費馬的一號社群評分，也不能證明某種副型更適合領導。\n\n若想先核對核心動機，讀 [一號核心類型](/zh-TW/personality/enneagram/type-1)。若困惑是自己的標準更常作用於資源還是關係，可比較 [一號自保副型](/zh-TW/personality/enneagram/type-1/instincts/self-preservation)與[一號一對一副型](/zh-TW/personality/enneagram/type-1/instincts/one-to-one)。",
+          "key": "sources_and_next_questions",
+          "title": "規則是否有效，比標籤是否貼切更值得繼續追問"
+        }
+      ],
+      "seo": {
+        "description": "一號社群副型是九型傳統中的觀察假設，探索標準如何進入群體責任、共同約定和歸屬。透過輪值情境區分共同需要、正式職責與維護熟悉位置；守規則、公平待人或外向程度都不能單獨確定副型。",
+        "title": "一號社群副型：共同標準、示範與制度情境"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-1/instincts/social",
+      "source_hash": "eced870326a81f55b6b4e33632a82301bae883fa97b2a711574ab23364f5259b",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "一號社群副型關注一號的正確與改進要求，如何進入群體規則、責任分配和自己在其中的位置。它不等於外向、愛參加活動或天生公正；需要區分個人堅持、正式職責和群體實際需要。",
+      "title": "一號社群副型：共同標準、群體位置與負責的方式"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "f308552082a9f1ec4da538cbd557bcbbca807717a61320ce607aa32c19e0a095"
+}

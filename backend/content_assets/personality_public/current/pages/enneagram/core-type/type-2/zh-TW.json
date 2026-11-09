@@ -1,0 +1,228 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-2",
+    "entity_key": "type-2",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-2"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-2"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-2",
+      "code": "type-2",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-2",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能只據此判斷。家庭分工、工作職責、待客文化、互惠約定與實際需要都可能解釋照顧行為。理解二號時，可以觀察：能幫上忙和感到被珍惜，是否經常相連，以及這層關聯如何影響你的選擇。",
+          "question": "我經常照顧別人，是不是就是二號？"
+        },
+        {
+          "answer": "不是。關心對方與希望連結可以同時存在，期待感謝也不自動使幫助失去真誠。需要澄清的是期待有沒有被說出來、對方有沒有同意，以及你能否接受不同回應，而不是用類型懷疑每一次善意。",
+          "question": "二號的幫助是不是都有隱藏目的？"
+        },
+        {
+          "answer": "可能。邊界和直接表達可以是更靈活的關心方式。只有當這些做法和其他選擇一起顯示關係連結和被需要長期不是主要關注時，才會明顯削弱二號解釋。",
+          "question": "如果我會拒絕，也能直接說自己的需要，還可能符合二號嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-2",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-2",
+        "x-default": "/en/personality/enneagram/type-2",
+        "zh-CN": "/zh/personality/enneagram/type-2"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格：九種動機模式",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/heart",
+          "label": "情感中心：價值感與被接納",
+          "relationship": "center_membership",
+          "target_identity_key": "center:heart"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/2w1",
+          "label": "2w1：關心中的原則與責任",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:2w1"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/2w3",
+          "label": "2w3：關心中的成效與回應",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:2w3"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2/instincts/self-preservation",
+          "label": "二號自保副型：日常生活與資源",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2/instincts/social",
+          "label": "二號社交副型：群體中的連結",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2/instincts/one-to-one",
+          "label": "二號一對一副型：重要關係中的連結",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "九型傳統中的二號解釋，把關心他人與確認自己在關係中的價值連在一起：發現一個需要，主動提供幫助，從回應中感到自己被需要、被珍惜。如果「不再需要我的幫助」逐漸被理解成「不再需要我」，原本有溫度的付出就可能變成維持連結的主要辦法。\n\n這不表示幫助都是交換，也不表示二號不會真誠關心人。一個人可以既希望對方過得好，也希望自己的投入得到回應。值得留意的是：你能否承認這兩種需要，還是只有把自己描述成完全不求回報的人，才覺得自己值得被喜歡。\n\n[Enneagram Institute 的二號介紹](https://www.enneagraminstitute.com/type-2/)使用 The Helper 這一稱呼。但照護工作、待客習慣、友誼、互惠約定或緊急事件，同樣會讓人提供大量幫助。應比較幫助怎樣與關係連結和自我評價相互影響，而不只是數付出了多少。",
+          "key": "connection_through_helping",
+          "title": "幫助為什麼可能不只是把事情辦好"
+        },
+        {
+          "body_md": "對他人有關注，可以讓你記住別人沒有說完的困難、及時連結所需資源，或讓新人感到有人願意陪他們適應。它的價值來自回應真實處境，而不是幫助越多越好。\n\n問題可能從一個很容易忽略的跳躍開始：你認為對方需要什麼，便把這當成對方已經同意接受幫助。隨後又期待對方多聯絡你、肯定你對他的意義，或按你的建議行動。這些期待若沒有討論，接受幫助的人就可能覺得自己突然欠下了一份關係義務。\n\n被拒絕時的失落值得理解，但失落不證明對方拒絕了你這個人。可以把「我都做了這麼多」拆成實際貢獻、沒有得到的回應，以及你現在想提出的請求。你有權表達需要，對方也有權拒絕某種幫助或回報。類型不能替任何一方訂下這個約定。",
+          "key": "help_without_an_unspoken_contract",
+          "title": "敏銳的關心，怎樣變成沒有說出的約定"
+        },
+        {
+          "body_md": "新人遇到困難，你主動接手對方的工作。這可能為了讓對方感到被支持，也可能為了履行服務職責、證明自己能力，或避免專案出問題。更具體的做法是先問：「你想讓我示範一次、一起做，還是只給你資料？」同樣是關心，陪伴、提供工具與直接接手，對對方的自主性影響不同。\n\n朋友說最近很累，你安排了一整天活動，對方卻想獨處。二號對關係連結的解釋可能幫你理解自己為何感覺被冷落，但不能證明朋友不珍惜你。可以說：「我原本想和你相處，所以有些失落。你想休息的話，我們另約時間。」這句話把自己的需要放回了對話，而不是讓安排本身替你索取回應。\n\n發生衝突時，先問眼前需要的是實際幫助、被聽見、明確分工，還是彼此陪伴。若主要問題是長期不平等的家務或照護責任，就應處理分工和資源，不能要求承擔更多的人僅靠調整人格模式解決。",
+          "key": "helping_in_real_interactions",
+          "title": "在協作和親近關係裡，先確認要解決什麼"
+        },
+        {
+          "body_md": "一次答應、送禮或主動幫助，無法區分這些核心。可以結合相似情境，比較自己最希望維護什麼。\n\n- 二號與[九號](/zh-TW/personality/enneagram/type-9)：同樣答應一個不想做的請求，二號解釋可能更關注仍被需要、維持親近；九號解釋可能更關注不要起衝突、讓相處恢復平穩。想像對方允許你拒絕，也保證關係不會疏遠：你仍擔心失去能幫上忙的位置，還是主要鬆了一口氣，因為不用再應付緊張？這只是辨別問題，不是測試題。\n- 二號與[六號](/zh-TW/personality/enneagram/type-6)：兩者都可以忠誠、顧及他人。比較付出主要是為了確認自己被珍惜，還是在建立可靠支持與共同承諾。現實上依賴某個人的工作、住房或安全時，順從可能是條件所迫，不能直接解釋成二號或六號。\n- 二號與[三號](/zh-TW/personality/enneagram/type-3)：兩者都可能調整表達、幫助團隊並希望得到認可。可以比較對方不再需要幫助但仍親近你，以及認可你的成果卻不願親近你這兩種情況：哪一種更觸動你，為什麼？重點是關係中的位置與成果的價值如何影響自我評價，而不是誰比較溫暖。\n- 二號與[一號](/zh-TW/personality/enneagram/type-1)：同樣提出改善建議，二號解釋更關注回應需要與保持連結，一號解釋更關注事情能以負責而正確的方式處理。兩個關注可以並存，要看哪個反覆決定你是否介入、何時停止。",
+          "key": "distinguishing_help_and_agreement",
+          "title": "熱心、討好與同意，可能來自不同關注"
+        },
+        {
+          "body_md": "可以拒絕、直接提出自己的需要、接受別人不想要某種幫助，都可能是維繫關係時更有彈性的做法。它們不自動推翻二號解釋。反過來，難以拒絕也可能來自權力差異、現實依賴、家庭規範或過去形成的應對習慣；僅憑「我會討好」不足以選定二號。\n\n更值得重新考慮的情況是：在幾種有選擇餘地的互動中，你對是否被需要、被珍惜並沒有持續關注；幫助主要隨明確職責開始和結束，離開職責後你關心的主題穩定轉向可靠的支持、衝突是否結束或成果是否得到認可。\n\n不要用「你只是沒有承認想被愛」消解所有反例。找不到支持二號解釋的觀察時，可以保留不確定，或比較更貼近實際選擇的其他解釋。",
+          "key": "flexibility_and_counterexamples",
+          "title": "有邊界不排除二號，缺乏邊界也不證明二號"
+        },
+        {
+          "body_md": "下次準備主動幫忙時，先停一下，分別說清三件事：對方實際提出了什麼、你猜測他們需要什麼、你自己希望得到什麼。若你期待藉機聊天、相處或得到感謝，可以先承認這一點，不必立即評價它好壞。\n\n向對方提供一個有邊界的選擇，例如：「我今天能陪你整理半小時，也可以傳資料給你。你想要哪一種，或者都不需要？」接受答案後，不繼續勸說。若對方不需要幫忙，而你仍想相處，可以另外提出：「那週末能不能一起喝杯茶？」\n\n事後記錄：原先以為拒絕會帶來什麼？對方實際怎樣回應？有沒有把拒絕一種幫助擴大成拒絕整段關係？自己的直接請求是否得到了明確回答？這項練習用來減少猜測和隱藏期待，不承諾關係一定改善，也不檢驗你是不是二號。",
+          "key": "ask_before_helping_and_request_directly",
+          "title": "一次小練習：確認請求，也給自己的需要一個位置"
+        },
+        {
+          "body_md": "二號在九型傳統中屬於[情感中心](/zh-TW/personality/enneagram/centers/heart)，這一分組討論價值感與被接納的關注。它不表示二號比其他人更有愛心，或所有情感都由關係決定。\n\n如果透過幫上忙來維繫關係確實反覆出現，可比較[2w1：關心中的原則與責任](/zh-TW/personality/enneagram/wings/2w1)和[2w3：關心中的成效與回應](/zh-TW/personality/enneagram/wings/2w3)。翼修飾的是同一個二號核心；盡責不自動使人變成一號，表達靈活也不自動使人變成三號。\n\n若你仍不清楚自己為什麼答應或幫助，先讀[九型人格總覽](/zh-TW/personality/enneagram)，再對照與你最接近的核心。副型頁面進一步討論日常資源、群體角色與重要關係中的關注，不應僅憑愛社交、會照顧生活或重視親密就選定副型。",
+          "key": "heart_center_wings_and_navigation",
+          "title": "二號核心、兩種翼與下一步"
+        },
+        {
+          "body_md": "二號的動機與模式來自傳統九型描述。不同核心的相似表現也可參照 [The Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)；這些是學派的解釋方向，不是憑單一行為判型的規則。本頁情境和實踐是用於討論請求、同意與連結的示例。\n\n[Hook 等人的系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)指出研究證據並不一致，翼與類型間移動的研究支持有限。這裡不把傳統描述當作費馬測評的效度證明，也不承諾幫助行為能揭示一個永久類型。\n\n本頁適合自願反思和具體溝通，不能用來評定善良程度、替討好行為作臨床解釋，或決定招聘、關係去留和個人能力。",
+          "key": "sources_and_scope",
+          "title": "把這些解釋留在可以討論的範圍內"
+        }
+      ],
+      "seo": {
+        "description": "九型人格傳統中的2號著重關懷他人、被需要與關係連結。透過協作和朋友相處的情境，區分實際請求、猜測的需要與幫助後的期待，練習表達自己的需要並允許拒絕；熱心或討好本身不能確定類型。",
+        "title": "九型人格2號：關心、連結與幫助的界線"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-2",
+      "source_hash": "f6bdde8b7ca581e3d7b75b31621c17ee2242cfb7ca48bd50f5de6ca6a84db8e3",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "二號模式關注他人的需要，也關注自己能否在關係裡成為有用、被珍惜的人。幫助可以建立溫暖的連結；當這份連結必須靠不斷付出來維持時，自己的需要與對方的決定權容易被忽略。理解二號，要比較幫助、同意和期待背後的不同理由。",
+      "title": "九型人格2號：關心、連結與表達自己的需要"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "7c2508bbcffce97285c10584ace3aca8c58752070b80ce6d966c09f27d9af6f7"
+}

@@ -1,0 +1,208 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/3w2",
+    "entity_key": "3w2",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/3w2"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/3w2"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/3w2",
+      "code": "3w2",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "3w2",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不是。成果關注可以與真誠關心並存。這裡討論的是關係回應怎樣參與價值判斷，以及這種方式什麼時候過用；不能從翼型標籤推斷一個人的善意或道德。",
+          "question": "3w2 是不是把所有關係都當作工具？"
+        },
+        {
+          "answer": "保持幫助行為不變，比較反覆覺得什麼最重要。3w2 要先解釋成果與貢獻怎樣證明價值；2w3 要先解釋自己是否被愛、被需要、在關係中有位置。單次選擇或一句自我評價都不足以確認。",
+          "question": "3w2 和 2w3 都幫助別人，怎麼比較？"
+        },
+        {
+          "answer": "可以。外向程度不是翼的定義。要看連結和支援是否反覆修飾三號式的成果關注，而不是統計社交活動。選擇獨立工作也可能是任務需要、精力管理或靈活性。\n\n願意支援團隊，也不能據此確定社群本能。在這一傳統框架裡，三號核心關注成果怎樣證明價值，二號翼關注支援與連結怎樣改變推進方式，社群本能關注群體歸屬和自己在其中的位置。同一次鼓勵同伴，可以承載多種關注，也可能只是履行職責。交付成功以後，比較仍讓你掛心的是什麼；友善或參與群體，單獨都不能確定翼或本能。",
+          "question": "內向、喜歡獨立完成工作的人也可以考慮 3w2 嗎？"
+        },
+        {
+          "answer": "可以作為比較材料，但不能因此確認翼。閱讀相關主題與計分判定是不同事情；翼不是第二高分的自動名稱，具體測評結果應按該題本自己的說明理解。",
+          "question": "二號不是第二高分，還能閱讀 3w2 嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/3w2",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:3w2",
+        "x-default": "/en/personality/enneagram/wings/3w2",
+        "zh-CN": "/zh/personality/enneagram/wings/3w2"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-3",
+          "label": "九型人格3號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-3"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2",
+          "label": "九型人格2號核心型",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/3w4",
+          "label": "3w4翼型",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:3w4"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在九型傳統中，[三號主題](https://www.enneagraminstitute.com/type-3/)與透過成就和認可確認價值有關。3w2 的解釋必須從這個核心出發；會關心人、善於溝通或擅長合作，單獨都不夠。\n\n這裡用二號修飾觀察一種可能的推進方式：你會考慮別人需要什麼支援，怎樣讓他們願意參與，怎樣讓成果被理解、接受和認可。例如，推進一項共同計畫時，你不僅列出目標，還會邀請每個人說出困難，提供資源，並用對方能接受的方式介紹方案。\n\n關係可以成為真正的合作基礎，並不必然是工具性的。需要留意的是：當成果、評價與關係回應捆在一起，你是否把「大家喜歡我的推進方式」也當成自己做得好的證明？若是如此，3w2 可以作為進一步觀察的描述，而不是直接確認的身分。\n\n3w2 的數字順序有意義：三號為核心，二號為相鄰修飾。[翼的傳統概念](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)不是兩型均分，也不由第二高分自動確定。",
+          "key": "core_first_modifier",
+          "title": "成果仍是核心，關係改變推進方式"
+        },
+        {
+          "body_md": "設想你協調一項團隊計畫。溝通很順利，大家願意找你，也感謝你的支援，但交付延遲了。與此同時，另一位同伴採用更直接的方式，完成了一項不太受歡迎卻確實必要的工作。\n\n先不要比較誰更友善。觀察你如何回顧：你會優先補上交付缺口，還是急著讓大家繼續相信你、喜歡你？你有沒有用「大家回饋很好」替代對結果的檢查？你又是否為了守住友好形象，沒有及時說出一項做不到的承諾？\n\n如果你能解釋「關係回應怎樣影響我對成果和自身價值的判斷」，這比「我會維繫人脈」提供更多資訊。也可能發現，延誤來自資源不足、任務變化或別人沒有履約，與你的關係方式無關。\n\n這是用於觀察取捨的原創場景，不是驗證過的判型規則。需要結合真實條件和多次記錄理解。",
+          "key": "observable_situations",
+          "title": "大家都支援你，計畫卻沒有按時完成"
+        },
+        {
+          "body_md": "**3w2 與 3w4：** 兩者都要保留三號的價值證明主題。面對一項已經達到基本要求的成果，3w2 可以從「怎樣讓人更願意參與、更容易理解和認可它」來觀察；3w4 可以從「怎樣讓它呈現我的特點、成為有辨識度的成果」來觀察。不是一個只關心人、一個只關心作品，而是什麼修飾反覆改變了你實現和呈現價值的方式。\n\n3w2 與 [2w3](/zh-TW/personality/enneagram/wings/2w3)： 用同一次支援同伴的行為比較。對方在你的幫助下完成了目標，後來卻不再經常找你。3w2 的觀察方向是：這項支援是否證明了我的能力和貢獻？若成果已經得到充分確認，關係變淡仍然重要，但是否仍是整件事最核心的困擾？2w3 的觀察方向則是：成功以後，我是否仍在對方生活中有位置、受到需要和重視？\n\n[Narrative Enneagram 的相關比較](https://www.narrativeenneagram.org/type-comparisons/)提供了核心主題的傳統參照，不能替代你的具體觀察。三號可以真誠地珍惜關係，二號也可以有強烈的成果要求；不要把「有感情」和「講效率」當成分界線。",
+          "key": "sibling_core_comparison",
+          "title": "比較 3w4，也比較反向組合 2w3"
+        },
+        {
+          "body_md": "如果一個團隊按客戶滿意度、同伴回饋或合作成果評價成員，你自然需要關注關係回應。一個負責跨團隊協調的人也可能習慣鼓勵別人、降低參與門檻；這可以是成熟的工作方法。\n\n比較有較多選擇空間的任務：評價制度不要求關係經營時，你是否仍反覆用支援、連結和被歡迎的方式確認自己的成果價值？關係活動是否使結果更好，還是逐漸成為結果之外的新負擔？\n\n還要考慮真實的權力差異。部屬不反對你，可能是因為不便反對；客戶稱讚你，可能只是禮貌。把這些回應直接當作個人價值證據，會同時誤讀關係和成果。\n\n無需用一次不符合描述的行為推翻自己。要檢查的是：排除明確職責以後，二號修飾是否仍幫助理解三號核心的表達。",
+          "key": "alternative_explanations",
+          "title": "合作要求與評價制度，也會塑造這種方式"
+        },
+        {
+          "body_md": "**核心不合：** 若在多種事情中，更反覆組織你選擇的是關係親近、對方是否需要你，而成果評價與能力證明並不居於中心，應重新比較二號等核心解釋。一個人很有成就，仍不能單憑成就確認三號。\n\n**修飾依據不足：** 若三號主題比較清楚，但關注他人需要、以支援和連結推進成果的方式只在特定職位裡出現，翼可以暫時不確定。若辨識度與個人表達更常改變成功標準，可以比較 3w4，但不必立即改標籤。\n\n**情境解釋：** 為完成一項必須協作的任務而建立聯絡，可能已由任務結構解釋，無需追加翼型解釋。\n\n**正常靈活性：** 沒有策略收益仍關心朋友，願意分配署名，或者選擇安靜完成工作，都不會自動推翻 3w2。真誠的溫暖不應被當作反證；成果核心也不等於每段關係都必須帶來回報。",
+          "key": "counterexample",
+          "title": "溫暖並不證明翼，安靜交付也不否定翼"
+        },
+        {
+          "body_md": "在下一項自然發生的共同任務開始前，寫下一個可核實的完成標準，例如「週五前完成雙方確認的清單」，再寫下合作條件，例如「每個人可以提出無法承擔的部分」。前者檢查交付，後者檢查合作，不要用其中一個替代另一個。\n\n安排一次簡短確認：「有什麼困難還沒有說出來？有沒有哪項承諾需要調整？」若你是決定任務或評價別人的人，明確說明不同意見不會自動被當作不支援你。\n\n回顧時，把「實際完成了什麼」和「別人怎樣回應我」分開寫。若得到稱讚但結果不足，就補結果；若結果合格但有人不喜歡你的風格，就先核對具體影響，不急著證明所有人都喜歡你。\n\n另留一次普通相處，不報告成果、不安排資源交換，也不測試對方會不會回報。注意自己是否很快想展示有用、能幹的一面。若出現這個衝動，可以嘗試說出當下真實感受，讓關係有機會承載成果以外的你。\n\n練習的觀察結果是承諾更準確、交付更清楚、關係更能容納真實資訊。它不是確認 3w2 的測驗。",
+          "key": "observation_exercise",
+          "title": "把成果證據與關係回應分開檢查"
+        },
+        {
+          "body_md": "[Hook 等人的綜述摘要](https://doi.org/10.1002/jclp.23097)指出，支持翼概念的研究有限。3w2 在這裡是傳統框架下的觀察描述，不是領導力、人緣或關係適配的判定，也不證明費馬測評效度。\n\n若不確定成果主題是否真正居於核心，先讀[三號核心型](/zh-TW/personality/enneagram/type-3)，再與[二號核心型](/zh-TW/personality/enneagram/type-2)比較。若三號主題較貼近，可繼續讀[3w4 翼型](/zh-TW/personality/enneagram/wings/3w4)，比較另一種價值呈現方式。\n\n你不必透過變得冷淡來證明自己是三號，也不必透過更多人喜歡你來證明自己值得。閱讀的用途是看清何時關係支援了成果，何時你把兩者都變成了必須維持的成績。",
+          "key": "wing_boundary",
+          "title": "讓解釋幫助合作，不讓標籤評價人"
+        }
+      ],
+      "seo": {
+        "description": "3w2 是證據有限、以第三型為核心的傳統翼型假設：對可見成果的關注，可能受到第二型相鄰主題中的連結、對他人有用和受眾回應所修飾。會經營關係並不能證明翼型，客戶職位、團隊獎勵和行業禮儀都可能產生相似表現。",
+        "title": "九型人格3w2：三號核心、二號翼與3w4的區別"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/3w2",
+      "source_hash": "4580d21ff7e99dfbe22841278bf71426b57f002cab0fdb6bc2791eea570b7332",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "3w2 指三號核心受到二號相鄰主題修飾的傳統翼型描述。證明自己的價值仍是核心關注，連結、鼓勵和對他人有用可能成為推進成果的方式。理解它，需要比較受歡迎、關係親近與真實交付分別在你心中意味著什麼。",
+      "title": "3w2：透過合作與回應實現成果"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "90cefc33b0a40603dd66436688ca1856f176dbf76170c661ab8d94718bd32efa"
+}

@@ -1,0 +1,194 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-6/instincts/self-preservation",
+    "entity_key": "type-6/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-6/instincts/self-preservation"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-6/instincts/self-preservation"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-6/instincts/self-preservation",
+      "code": "type-6/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-6/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。收入、能否取得資源、照護責任、習得的理財習慣與現實風險都可能解釋這些行為。只有六型對可靠支援的關注較符合自身經驗，而且你在不同情境中反覆優先關注生活能否穩定延續時，才值得繼續探索這個解釋。",
+          "question": "節儉、存錢或檢查物資，就說明我是自保六型嗎？"
+        },
+        {
+          "answer": "可以。社交程度不能確定本能關注。招待朋友可能出於享受、社群參與、吸引，也可能為了建立日常可用的支援。更有用的問題是這段交往承擔了什麼作用，而不是見了多少人。",
+          "question": "很外向的人也可以探索自保副型嗎？"
+        },
+        {
+          "answer": "這是有用的資訊，也是有幫助的結果。這削弱了「實際需要滿足後仍持續尋求保證」這一具體解釋。如果顧慮始終由真實短缺解釋，而且短缺結束後就消失，應降低對副型解釋的信心。",
+          "question": "有一個明確備用方案後就能放鬆，意味著什麼？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-6/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-6/self-preservation",
+        "x-default": "/en/personality/enneagram/type-6/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-6/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6",
+          "label": "第六型：安全與可靠支援",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6/instincts/social",
+          "label": "第六型社群副型：歸屬與責任",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6/instincts/one-to-one",
+          "label": "第六型一對一副型：聯結與強度",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "先看核心問題，再看購物或儲蓄習慣：事情變得不確定時，什麼能讓你覺得自己可以繼續行動？[Enneagram Institute 的第六型介紹](https://www.enneagraminstitute.com/type-6/)把安全與支援放在其傳統解釋的中心。\n\n自保視角把這個問題帶進日常生活：房租能否支付，出行是否可行，計畫改變時有沒有人幫忙？這些是任何人都可能有的合理顧慮。只有當實際生活能否持續穩定與隨時可用的個人支援反覆得到優先關注，而且眼前需要已經滿足時仍如此，副型解釋才值得進一步考察。\n\n[Narrative Enneagram](https://www.narrativeenneagram.org/instinctual-subtypes/)在自保六型的描述中強調溫暖。一個可供檢驗的理解是：友好關係也承擔著後援的作用。一個人可以慷慨、愛交往，同時在意需要幫助時是否有人回應。溫暖不能證明副型，也不能據此推斷一個人經歷過怎樣的童年。",
+          "key": "support_close_to_home",
+          "title": "什麼讓日常生活有了後援？"
+        },
+        {
+          "body_md": "設想一個說明性情境：朋友們約好週末出遊，住宿卻臨時取消。大家都開始提問。提問這個行為不能區分副型；問題想解決什麼，以及怎樣才算解決，更值得觀察。\n\n- 按自保六型理解，注意力可能首先落在今晚住哪裡、交通會增加多少費用，以及能聯絡誰提供可靠幫助。確認替代住宿，可能比熱情鼓勵更讓人踏實。\n- 按社群六型理解，重點可能是共同約定：誰有權更換訂單，費用怎樣分攤，有沒有人被留下承擔不公平的責任。\n- 按一對一六型理解，某位重要同伴的回應可能更突出：我們是不是一起面對這件事，彼此的連結是否仍有投入？當事人可能變得更直接，也可能努力恢復一起行動的活力。\n\n三者都可能去訂旅館，區別在於訂房解決了哪一種顧慮。同一個人也會關注三個領域。住宿危險或費用無法承擔時，無論副型是什麼，實際安全都應得到優先處理。\n\n對自保解釋而言，準備的有效作用是把不確定變成可執行的安排。過用的代價則是：每確認一項安排，又需要下一輪保證；或者朋友一次無法幫忙，就被理解為整段關係都不可靠。",
+          "key": "changed_weekend_plan",
+          "title": "同一項計畫變動，三種關注點"
+        },
+        {
+          "body_md": "例如，你經常給曾幫忙照看孩子的鄰居送晚飯。這可能是自願的互惠，也可能帶著一個沒有說出的願望：只要關係保持溫暖，下次就不會沒人幫我。值得記錄的是，對方拒收一次晚飯、暫時無法幫忙或提出另一種幫助時，你是否明顯失去對這段關係的信心。\n\n[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)用六型尋求安心、二型在意被需要，以及九型傾向順應的差異來幫助反思。這些是傳統辨別線索，不能根據慷慨行為替別人判型。\n\n可以問自己：如果對方無法幫忙，我最擔心失去的是感情、作為幫助者的價值、平和關係，還是實際可用的後援？多個答案可以同時成立。如果長期最突出的需要是得到感謝或避免分歧，就應重新考慮自保六型解釋是否真正有幫助。\n\n直接說明請求，往往比追加好意更清楚：「週二你能做我的備用接送人嗎？不方便也沒關係，我可以另找人。」支援因此可以協商，好意也不必變成一筆對方不知道的債。",
+          "key": "warmth_and_hidden_requests",
+          "title": "當好意帶著沒有說出的求助"
+        },
+        {
+          "body_md": "選擇兩次普通、低風險的決定，例如安排一頓飯或走一條熟悉路線。盡量讓可用預算、無障礙需要、承擔的責任和實際後果相近。不要為了觀察而製造資源不足，也不要撤走他人的支援。\n\n在尋求確認前，寫下一個可行方案、一個適當的備用辦法，以及哪些新資訊會讓你改變決定。確實需要幫助時，提出一次明確請求。得到回應後，記錄下一步：開始行動、重複提問、增加備用方案，還是發現了真正遺漏的條件？同時記下花費的時間，以及對方是否理解你的請求。\n\n目標是找到可用的停止點，不是要求自己從此不做準備。真實情況需要的安全檢查應繼續保留。如果住房不穩、無障礙受限、照護責任或幫助確實不可靠，才是反覆確認的主要原因，應直接處理這些條件。\n\n如果相關表現只出現在資源短缺期間，可靠供應恢復後就明顯緩解，或者群體責任、某段重要關係始終更能解釋顧慮，就應降低對自保副型解釋的信心。一次放鬆不能定論；但在多次相近情境中，若副型解釋始終沒有增加多少理解，可以撤回，不必改稱隱藏副型或更強的壓抑。",
+          "key": "enough_backup",
+          "title": "嘗試界定怎樣才算準備夠了"
+        },
+        {
+          "body_md": "在這些傳統中，每個人都有三種本能。自保受到較多關注，不代表缺少社群需要或親密關係。六型核心關注可靠支援；六型與五型、七型同屬思考中心，是核心型的分組，不是生活領域的選擇。五翼或七翼描述相鄰類型的修飾，自保則關注生活資源與日常生活能否延續。第二高的類型分數不能直接確定翼或副型。\n\n二十七種副型是九種核心型與三種主導本能關注的組合；六種本能堆疊則將三種本能完整排序。透過友好關係獲得實際後援，不能據此確定社群或一對一誰排第二。本頁不推斷第二、第三種本能或本能盲點。\n\n術語也有學派差異。Narrative 的一對一涵蓋親密連結與活力；[Enneagram Institute 的 sexual／attraction](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更強調吸引與強度。兩者有交集，但並不完全相同，也都不只涉及性或戀愛。\n\n副型模型屬於傳統解釋，反型是 CP Enneagram Academy 所用的學派術語，不能當作可重複的科學診斷或已經證實的神經機制。[Hook 等人 2021 年綜述的摘要](https://doi.org/10.1002/jclp.23097)報告，104 個樣本的信度與效度的證據並不一致。它不能驗證費馬分數或個人副型歸屬；特定量表研究也只能在其工具與研究人群範圍內解釋。\n\n如果核心動機仍不清楚，可以先讀[第六型核心]( /zh-TW/personality/enneagram/type-6)。比較支援主要從何處獲得時，繼續閱讀[第六型社群副型](/zh-TW/personality/enneagram/type-6/instincts/social)或[第六型一對一副型](/zh-TW/personality/enneagram/type-6/instincts/one-to-one)。",
+          "key": "using_the_lens",
+          "title": "把這個視角用於理解與選擇"
+        }
+      ],
+      "seo": {
+        "description": "了解第六型對可靠支援的關注如何進入日常資源與溫暖關係。透過住宿取消和鄰居互助的情境，區分有用準備、反覆確認與真實短缺，練習提出明確請求，並找到準備夠了的停止點。",
+        "title": "第六型自保副型：日常資源、可靠後援與溫暖關係"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-6/instincts/self-preservation",
+      "source_hash": "d33bd2658f42abe2a044ee84702092c9efa44f6e65c8d6b83f7b4937feb2d856",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "自保視角關注第六型對可靠支援的需要，如何落在生活資源、居所與友好關係提供的後援上。透過具體情境，區分有用的準備、反覆確認的代價，以及由現實困難造成的合理因應。",
+      "title": "第六型自保副型：從日常資源與可靠後援建立安全感"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "3c8a7cf1c838841fc7d5d65f8a35b23b0132ea914d563be3ea072e5e25473e81"
+}

@@ -1,0 +1,204 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/1w2",
+    "entity_key": "1w2",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/1w2"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/1w2"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/1w2",
+      "code": "1w2",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "1w2",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "這不是可靠的劃分。兩種解釋都可能包含情緒、思考、主動參與或獨立工作。需要比較共同的 1 型核心，以及人際參與或降低摩擦是否反覆修飾改進方式；不能憑聊天多少、職業或一次情緒表達判斷。",
+          "question": "1w2 比 1w9 更感性或更外向嗎？"
+        },
+        {
+          "answer": "一次難受不夠。你可能擔心錯誤繼續存在，也可能覺得投入不被尊重，或擔心關係疏遠。先把這些原因分開，再比較多次事件中什麼最持續地影響你的決定。1w2 與 2w1 都不能只靠拒絕後的情緒區分。",
+          "question": "別人拒絕我的幫助，我很難受，是不是說明我其實是 2w1？"
+        },
+        {
+          "answer": "應區分提出問題的責任與替別人處理的權限。你可以清楚說明錯誤和必要要求；是否共同修改、由誰處理，以及可以介入多少，要按實際職責和約定決定。翼型不能擴大你的任務所有權。",
+          "question": "我發現了真正的錯誤，還需要徵求同意嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/1w2",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:1w2",
+        "x-default": "/en/personality/enneagram/wings/1w2",
+        "zh-CN": "/zh/personality/enneagram/wings/1w2"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格：九種動機模式",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1",
+          "label": "1 型：標準、責任與改進",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2",
+          "label": "2 型：關愛、連結與被需要",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/1w9",
+          "label": "1w9：給分歧留空間",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:1w9"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "1w2 的 1 是核心，2 是相鄰翼。[傳統 1 型說明](https://www.enneagraminstitute.com/type-1/)把保持正直、符合自身原則和推動改進放在動機層面。考慮 1w2 時，應先檢驗這類關注是否一再影響你的選擇，再討論幫助如何成為表達方式。\n\n例如，看到別人做一件事很吃力，你願意走過去一起完成。可以問：最先讓我介入的是哪一個問題？是認為現有做法會留下錯誤、沒有盡到責任，還是擔心對方不再需要我、我和對方的關係變疏遠？兩種原因可以同時存在，重點是它們在不同事件裡怎樣影響決定。\n\n2 型修飾可能表現為希望讓改進過程有人支持：不只指出問題，還解釋、示範、陪著試一次，或關心對方能否理解並接受意見。它不表示所有 1w2 都外向，也不證明你更善良；人際參與是需要檢驗的修飾，而不是道德分數。",
+          "key": "core_first_modifier",
+          "title": "幫助是推進改進的方式，核心仍要先比較"
+        },
+        {
+          "body_md": "假設一位同事請你看看材料。你發現一段表述與雙方確認的事實不一致，於是願意說明原因，並和對方一起找到準確的寫法。以下是原創比較情境，不是對所有 1w2 的行為預測。\n\n這樣的參與可以降低改進的門檻：對方知道問題在哪裡，也得到完成修訂的協助。你把標準和實際的協助結合起來，而沒有把一句批評留給對方獨自處理。\n\n這樣做過了頭時，你可能把受邀檢查一段材料延伸成重寫整份檔案，或者堅持對方必須用你的方法。熱心與責任感疊加後，容易出現一種壓力：既然我看到了、又有能力幫忙，就應該由我把它改到滿意。結果可能是你承擔了沒有約定的工作，對方失去選擇，也開始覺得你提供回饋是在接管。\n\n需要檢查兩件事：修訂依據是否明確；參與範圍是否經過同意。有實際錯誤，不等於你自動擁有整項任務的決定權。",
+          "key": "observable_situations",
+          "title": "從共同修改，到不知不覺接管"
+        },
+        {
+          "body_md": "仍用修改材料這一件事比較，不把溫暖與冷靜當作分界。\n\n**與 1w9 比較：**兩者都保留 1 型核心。1w2 的修飾可能讓你傾向透過互動推動改進，例如解釋依據、共同修改或陪對方練習；1w9 的修飾可能讓你先釐清差異、容納對方的理由，再以較少摩擦的方式提出。任何一方都可以直接幫忙或選擇書面回饋，要比較長期策略，而不是單次選擇的溝通方式。\n\n與反向組合 [2w1](/zh-TW/personality/enneagram/wings/2w1) 比較：兩者都可能認真、體貼，也都可能對自己的付出要求很高。設想錯誤已經由別人修好，你的幫助沒有被採用：你更容易因為問題解決而放下，還是仍特別關注自己是否被信任、是否在關係中有位置？再設想對方很感謝你，但材料仍不準確：什麼會讓你繼續不安？\n\n1w2 的解釋以正確性與盡責為重心，關係參與修飾實現方式；2w1 的解釋以關愛和連結為重心，標準修飾提供幫助的方式。感謝不是二型的必需條件，無人感謝也不會自動排除二型。需要看多次選擇，避免把一次失落或一次堅持當作答案。",
+          "key": "sibling_core_comparison",
+          "title": "1w2、1w9 與 2w1：同樣幫忙，重心可以不同"
+        },
+        {
+          "body_md": "有時角色已經充分解釋了參與。你負責稽核，需要提出修改；你在帶新人，對方明確請求示範；家庭裡雙方約定由你處理某項事務。這些都不能單獨說明 2 型修飾。\n\n比較已經發生的事件：在沒有稽核責任、對方可以自己完成、也沒有緊急後果時，你是否仍傾向用共同參與而不是單純指出問題的方式推動改進？這種方式為何對你重要？如果只在職位要求下出現，先考慮職責能否解釋。\n\n參與方式也可以靈活。對方有能力自己處理時，你退後；任務緊急時，你按明確職責直接行動；事實更新時，你修改標準。這些選擇不自動削弱核心。真正值得觀察的是，你能否根據需要調整參與程度，而不是要求自己始終熱心介入。",
+          "key": "alternative_explanations",
+          "title": "主動介入也可能只是職責清楚"
+        },
+        {
+          "body_md": "**重新比較核心：**如果在多種可自由選擇的情境裡，你主要圍繞是否被需要、關係是否親近來決定介入，而標準與盡責並不持續出現，那麼 2 型等解釋可能更值得研究。不能只因為幫忙時要求嚴格，就保留 1 型核心。\n\n**暫不確定翼：**如果 1 型關注明確，但共同參與只在受邀或必須指導時出現，2 型修飾的額外依據可能不足。可以停在 1 型候選。\n\n**不要把尊重拒絕當反證：**對方說不用幫忙，你能停止、允許另一種有效方法，並不會讓 1w2 自動失效。它可能說明你區分了標準、方法與任務所有權。\n\n**也不要把施壓當證明：**在拒絕後繼續接管，可能涉及急迫感、對角色的誤解或不熟悉合作方式。應先處理具體邊界問題，不用翼型替行為辯護。一次沒有感謝就停止幫助，也可能是已無餘力或約定結束，需要了解情境。",
+          "key": "counterexample",
+          "title": "把核心不合、翼不明與協作能力分開"
+        },
+        {
+          "body_md": "下一次想替別人修改或最佳化時，先把意見分成三類：已經確認的要求、會影響結果的實際問題，以及你個人偏好的做法。只有最後一類不同，不一定需要介入。\n\n如果確有需要，先說明觀察並詢問範圍：我發現這一段與確認的資訊不一致。你希望我標出問題、一起改這一段，還是先由你處理？讓對方可以選擇，包括拒絕。\n\n按約定只處理一處，完成後把決定與後續任務交還原負責人。如果對方選擇別的方法，比較它是否滿足共同標準，不必要求過程與你相同。若有必須履行的稽核職責，就清楚說明職責範圍和必要要求，而不是把必須執行的決定說成個人的幫忙。\n\n事後寫下最難忍受的部分：是實際問題仍未解決，自己的方法未被採用，還是沒有獲得關係中的回應？再找一次最不符合你當前解釋的事件。觀察目的是改善協作並修訂理解，不是讓每次幫忙都支持 1w2 的解釋。",
+          "key": "observation_exercise",
+          "title": "先商定幫助範圍，再一起改一處"
+        },
+        {
+          "body_md": "[Hook 等人的系統性回顧摘要](https://doi.org/10.1002/jclp.23097)指出翼相關研究很少。因此，1w2 適合用作有限的自我觀察解釋；本文的比較與練習不是經過驗證的分類程序，也不提供費馬測評的效度證據。\n\n翼不是任意第二高分，也不表示兩個類型各占一半。它不能判斷利他程度、道德價值、健康狀況或關係前景。你可以保留 1 型而暫不決定翼。\n\n在上述共同修訂中，1 型核心解釋正確性與盡責為何重要，2 翼則嘗試解釋你為何透過人際參與推進改進。本能關注是另一個問題：注意力反覆優先落在哪個生活領域，例如自保中的資源與安穩、社交關注中的歸屬與共同角色，或 Narrative Enneagram 所稱一對一領域中的親密關係與密切友誼。與同事一起修改、關心彼此是否親近，都可能出現在不同領域；不能憑這一個行為決定 2 翼或某種本能。比較參與理由時，可以先讓本能關注保持未定。\n\n要繼續核對核心，可讀[1 型：標準、責任與改進](/zh-TW/personality/enneagram/type-1)。要比較另一種改進方式，可讀[1w9：給分歧留空間](/zh-TW/personality/enneagram/wings/1w9)。如果幫助背後的連結需要更突出，可藉助現有[2 型：關愛、連結與被需要](/zh-TW/personality/enneagram/type-2)入口重新比較核心。",
+          "key": "wing_boundary",
+          "title": "不把參與感變成確定的人格結論"
+        }
+      ],
+      "seo": {
+        "description": "1w2 是證據有限的翼型觀察：一號對標準與改進的關注仍是核心，二號可能增加直接幫助和關係修復。熱心參與不能單獨確認 1w2；應比較標準與盡責是否反覆影響選擇、人際參與為何修飾改進方式，並檢查職責能否充分解釋。",
+        "title": "九型人格1w2：一號核心、二號翼影響與常見誤判"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/1w2",
+      "source_hash": "bb5bc4a731abc5e0c11218b32209d622160a637d491334b501a630216d89f5e6",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "1w2 以 1 型的標準與盡責關注為核心，2 型相鄰修飾可能讓改進更常透過解釋、協作和直接幫助實現。熱心本身不能確認翼；更有用的問題是為什麼介入、誰擁有決定權，以及幫助被拒絕後什麼仍讓你放不下。",
+      "title": "九型人格 1w2：想把事情做好，也想親自幫上忙"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "8a6ab5a5d50f16cdaa9c1fa9e555959328347e2d595f68967004cdcde6c398be"
+}

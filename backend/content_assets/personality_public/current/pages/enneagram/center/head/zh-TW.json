@@ -1,0 +1,202 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/centers/head",
+    "entity_key": "head",
+    "entity_type": "center",
+    "framework": "enneagram",
+    "page_kind": "center",
+    "slug": "enneagram/centers/head"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/centers/head"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/centers/head",
+      "code": "head",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "head",
+      "entity_type": "center",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "傳統解釋關注的是事先想像和安排可能性怎樣幫助人面對未知、限制與不舒服的感受。行動可以由這種事先的設想和規劃帶動。樂觀和忙碌本身不能確認七號，也不能證明一個人沒有恐懼。",
+          "question": "七號看起來樂觀、喜歡行動，為什麼屬於腦中心？"
+        },
+        {
+          "answer": "比較查證要解決什麼：理解是否足以應對、投入是否可承擔，還是來源是否可靠、風險與支持是否清楚。兩者可以同時需要這些資訊。繼續看什麼答案能推動行動，以及沒有新證據時為何還要查。",
+          "question": "五號與六號都會查證，怎樣繼續區分？"
+        },
+        {
+          "answer": "不一定。傳統六號描述也包括懷疑、檢驗和反抗權威，以及主動面對風險。要比較行動是否圍繞可靠性、安全和支持組織，不能用服從、勇敢或猶豫單獨判型。",
+          "question": "六號一定依賴權威或不敢行動嗎？"
+        },
+        {
+          "answer": "不能。資料查詢與發散思考可能來自任務、訓練、興趣或現實需要。中心解釋需要結合反覆關注的動機、資訊怎樣改變行動，以及熟悉情境中的反例；它不評價智力。",
+          "question": "查很多資料或善於想點子，就代表腦中心嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/centers/head",
+        "reciprocal": true,
+        "translation_group": "enneagram:center:head",
+        "x-default": "/en/personality/enneagram/centers/head",
+        "zh-CN": "/zh/personality/enneagram/centers/head"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5",
+          "label": "五號：理解與準備",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6",
+          "label": "六號：可靠性與支持",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7",
+          "label": "七號：選擇與可能",
+          "relationship": "center_member",
+          "target_identity_key": "core_type:type-7"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "腦中心也稱頭中心或思考中心，傳統上包括五號、六號和七號。共同問題不是「我聰不聰明」，而是「面對未知，我憑什麼繼續往前？」\n\n在[Enneagram Institute 的中心解釋](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)中，這個中心的情緒主題是恐懼。傳統描述中的三條路徑很不同：準備和退開、查證和尋找支持、事先想像其他可能。七號的樂觀與忙碌也可能涉及不願被痛苦或限制困住，因此不能只憑表面輕鬆排除腦中心。\n\n這裡的恐懼是理論中的情緒主題，不是說三種類型一定膽小，也不是焦慮問題的診斷。腦中心的人同樣會感受、建立關係和直接行動；其他中心的人也可以長於分析。",
+          "key": "uncertainty_and_fear",
+          "title": "謹慎與樂觀為什麼會同屬腦中心"
+        },
+        {
+          "body_md": "**五號：我是否已經理解，也有足夠資源應對。** 傳統描述強調理解、能力與獨立準備。減少干擾、先弄清關鍵問題，可以讓投入更有分寸；若準備不斷擴展，卻沒有回到實際參與，就可能越學越難開始。關注點並非資料越多越好，也不能從學歷或獨處偏好推斷五號。[五號原始描述](https://www.enneagraminstitute.com/type-5/)\n\n**六號：依據、承諾與支持是否可靠。** 傳統描述強調安全、指導、信任與檢驗。追問風險和責任可以發現遺漏，明確需要誰一起承擔；若每個答案都引出新的懷疑，就可能不斷尋求確認卻仍難決定。六號方向也可能主動挑戰不可靠的權威，不能把服從或退縮當成必要特徵。[六號原始描述](https://www.enneagraminstitute.com/type-6/)\n\n**七號：還有哪些可能，不必被當前困境困住。** 傳統描述強調自由、滿足、提前設想與避免痛苦。提出新選項可以幫助找到出路；如果一遇到失望就轉向新的計畫，必要的取捨、感受與收尾可能被不斷延後。喜歡新鮮體驗不證明七號，備選方案也可能只是合理應變。[七號原始描述](https://www.enneagraminstitute.com/type-7/)",
+          "key": "three_routes",
+          "title": "準備、可靠支持與保留選項"
+        },
+        {
+          "body_md": "假設你和朋友準備週末出行，臨出發時列車取消，住宿已經預訂，替代路線的資訊還不完整。下面是為了比較而編寫的例子。\n\n五號方向可能先縮小資訊任務：「給我一點時間看清路線、花費和需要處理的事情，再決定我能承擔哪一種。」暫時退開可能是為了理解和掌握投入程度，不一定是漠不關心。\n\n六號方向可能先核對保障：「哪個訊息是官方確認的？末班車是否能趕上？如果走不通，誰和我一起處理？」也可能直接要求負責人說明，因為檢驗可靠性不一定表現為溫順。\n\n七號方向可能先拓展可能性：「可以換一條路線，或者就在附近安排另一種週末。」這種規劃可能恢復行動空間；也需要繼續看是否願意處理已經發生的損失，而不是立即用新計畫掩蓋失望。\n\n三個人都可能查資料、徵詢朋友或提出備用方案。區別不在用了哪種工具，而在希望這些行動解決什麼：理解與可承擔程度、可靠性與共同支持，還是因限制與失望而感到受困。遇到真實的交通或安全風險，充分核對本來就合理，不必解釋成類型。",
+          "key": "decision_scene",
+          "title": "同一決定：出發前列車突然取消"
+        },
+        {
+          "body_md": "回看一項決定，記錄最先提出的問題、資訊來自哪裡、什麼讓你願意行動，以及什麼又讓你停下來。隨後區分：\n\n- 我缺的是關鍵理解和可承擔資源，還是只是繼續準備比較安心？\n- 我缺的是可靠依據和明確支持，還是已經獲得答案卻仍在重複尋求確認？\n- 我需要的是可行替代方案，還是不願承受選定一個方案後失去其他可能的感覺？\n\n這些問題不把反覆思考、謹慎或樂觀直接歸給某一型。[Narrative Enneagram 的組內比較](https://www.narrativeenneagram.org/type-comparisons/)提供的是傳統差異參照，不是經過驗證的判定門檻。\n\n找一項後果相近但你很熟悉的任務作比較。如果查證主要來自陌生程度、職責、資訊權限或過去實際遇到的失敗，熟悉條件下可能顯著減少。反之，同樣的準備、確認或提出新選項仍反覆出現，也只是進一步探索的線索，不是結論。五號候選可以主動求助，六號候選可以獨立決定，七號候選也可以專注收尾；要理解這些變化，而不是把它們排除。",
+          "key": "what_is_enough",
+          "title": "觀察「什麼時候足夠」，比統計想了多久更有用"
+        },
+        {
+          "body_md": "選擇一項風險低、可以調整的決定。先滿足現實需要，再嘗試與你慣常策略相應的一種做法。\n\n**如果經常準備很久才參與：** 寫出這次開始行動必需知道的一個問題，以及足以開始的答案。獲得答案後做一個小的實際步驟，例如提出自己的方案，而不是繼續研究所有可能。觀察新增資訊是否真的改變決定，還是只是延後參與。\n\n**如果經常重複核對：** 寫出已有的可靠依據、尚未解決的風險和一個明確的共同支持安排。事先約定什麼新證據才值得重新檢查。觀察下一次確認是在補充實際缺口，還是在沒有新情況時重複尋求確定感。這裡不要求忽略真實風險。\n\n**如果經常靠新選項恢復輕鬆：** 選定一個夠用的方案，暫時停止繼續增加選項，同時給已經發生的失望一句具體表達。例如：「原計畫取消讓我失落，但我願意把這一個替代方案安排完。」觀察自己是否完成必要的聯絡與收尾，而不只是獲得下一種期待。\n\n這些做法幫助觀察準備、檢驗和擴展選項分別怎樣影響行動，不承諾降低焦慮，也不用於判斷心理健康狀態。",
+          "key": "action_experiments",
+          "title": "給不同的資訊策略設定一個可採取的下一步"
+        },
+        {
+          "body_md": "可以分別閱讀[五號：理解與準備](/zh-TW/personality/enneagram/type-5)、[六號：可靠性與支持](/zh-TW/personality/enneagram/type-6)和[七號：選擇與可能](/zh-TW/personality/enneagram/type-7)。先選兩個能解釋同一決定的候選，寫下各自解釋不了的部分；若它們都不貼近，再回到[九型人格總覽](/zh-TW/personality/enneagram)。\n\n本頁採用傳統動機解釋。Hook 等人的系統性回顧摘要報告九型研究的信度與效度證據並不一致，不能把學派描述或研究結果直接當作費馬測評有效的證明。[系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)\n\n腦中心不是腦區分類、智力等級或神經測量結果。查資料、擔憂、想像豐富或做事很快，都不足以確認類型；長期困擾也不能用中心標籤作診斷解釋。",
+          "key": "reading_and_limits",
+          "title": "下一步比較核心關注，而不是給思考能力排名"
+        }
+      ],
+      "seo": {
+        "description": "腦中心是傳統九型框架中對五號、六號和七號的歸組。觀察腦中心線索，可以追蹤不確定變重要時，人怎樣蒐集資訊、核對支持或提出新選項；這不表示思考會取代情緒與行動，五號、六號、七號也可能用相反路徑處理同一個未知問題。",
+        "title": "腦中心：記錄面對不確定時的資訊選擇"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/centers/head",
+      "source_hash": "5a2cfdd2fe98ad217d93db74662279928698c4b608486645952fea8d55fa27cc",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "五號可能先理解問題並保護有限資源，六號可能核對可靠性與支持，七號可能提出替代選項以保持餘地。腦中心把這些不同路徑放在一起，比較人在缺少確定感時怎樣尋找可繼續行動的依據。它不衡量智力，也不表示其他類型較少思考。",
+      "title": "腦中心：五號、六號與七號怎樣面對不確定"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "6c5bc39f86e847b7a8be0335261354026d4c48eb723aa57fe16cddcb7ac4606d"
+}

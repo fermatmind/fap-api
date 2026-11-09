@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-9/instincts/social",
+    "entity_key": "type-9/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-9/instincts/social"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-9/instincts/social"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-9/instincts/social",
+      "code": "type-9/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-9/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不等於。社群關注成員位置、角色、共同期待和貢獻，也可以出現在不喜歡大型聚會的人身上。人緣與幫忙次數不能確定副型，應看選擇過程，以及自己的優先事項後來有沒有位置。",
+          "question": "九號社群就等於外向、人緣好或總愛幫忙嗎？"
+        },
+        {
+          "answer": "可以探索傳統解釋，但這些行為不證明副型。要看當事人能否在保持連結時，保留自己的立場。若反覆能做到，應降低「群體參與讓個人優先事項被忽略」的具體解釋，不能把異議一律重新解釋成隱蔽服從。",
+          "question": "當領導、提出異議的人，也可能考慮九號社群嗎？"
+        },
+        {
+          "answer": "九號的翼描述相鄰八號或一號的影響，本能關注描述生活領域；都不能簡單由核心類型第二高分推定。三種本能關注可以共存。Narrative 的一對一涵蓋親密夥伴和活力，Enneagram Institute 的性或吸引口徑更強調吸引與強度；兩者有交集但不完全同義，也都不只指性或戀愛。",
+          "question": "翼和一對一關注，與社群關注有什麼不同？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-9/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-9/social",
+        "x-default": "/en/personality/enneagram/type-9/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-9/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9",
+          "label": "九號核心類型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9/instincts/self-preservation",
+          "label": "九號自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9/instincts/one-to-one",
+          "label": "九號一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "傳統九型中，九號關注平和與連結，並不要求外表安靜或缺乏行動。[Enneagram Institute 的核心說明](https://www.enneagraminstitute.com/type-9/)可以作為動機入口，但活動量本身無法確認或排除九號。\n\n社群關注這一層要問的是：在群體中保持安穩的位置，是否成了維持這種平和的主要方式？你可能很快注意到誰沒被顧及、哪裡缺人，以及怎樣讓大家繼續參與。[Narrative Enneagram 的社群九號說明](https://www.narrativeenneagram.org/instinctual-subtypes/)同時描述了貢獻、領導與個人優先事項被忽略的可能。\n\n參與能建立信任，讓合作持續，也能給原本被忽略的人留出位置。代價可能出現在「隨時有空幫忙」比「決定我自己想做什麼」更容易的時候。一個人可以把會議主持得很好，卻始終沒有把自己的提案放進議程。應比較貢獻是否包含清楚的個人選擇，還是反覆代替了那個選擇。",
+          "key": "organizer_question",
+          "title": "很忙、很能組織，為什麼仍會考慮九號？"
+        },
+        {
+          "body_md": "看一個虛構的志工小組情境。小周希望輪換已經讓自己疲憊的協調職位。會議上，兩位成員為下一場活動爭執，小周先讓雙方充分表達，找到折中安排，又接下剩餘任務，讓活動能繼續推進。\n\n這次協調有實際價值：方案形成了，兩位成員也願意留下。但小周希望輪替職務的請求始終沒有提出。恢復合作帶來的輕鬆，之後又變成一週不想承擔的勞動。如果在表達安全的場合，小周仍反覆透過放下個人議程來保住參與感，社群九號的解釋就得到一些證據支持。\n\n先核對職責與權力。受薪協調者可能本來就負責這些工作；新成員可能沒有足夠發言機會；有人可能依賴群體提供住房、照護或關鍵支援。在這些條件下保持沉默，有現實後果作為理由。不能用副型語言抹掉不公平分工，或責怪當事人應對權力差異的方式。",
+          "key": "unspoken_rotation",
+          "title": "所有人都說完了，組織者自己的請求沒出現"
+        },
+        {
+          "body_md": "假設社群活動邀請你週六幫忙，而那天原本留給個人專案。社群九號的假設會問：成員關係和共同責任是不是先佔據注意？「大家都在等我；如果不去，我在這裡還有位置嗎？」即使無人要求，你也可能先把自己的專案挪開。\n\n自保的比較會先看體力、物資、成本和熟悉節奏。熟悉的維護事務可能佔據時間，讓兩個安排都沒得到明確決定。\n\n一對一的比較會看某個重要的人是否讓活動變得有吸引力。對方的安排可能在你弄清楚自己的偏好之前，先成了你的安排。\n\n同樣一句「好，我來」，可以有這三種不同原因。安靜的人也可能高度關注成員關係，並不需要喜歡聚會。應比較什麼組織了選擇，而不是看起來多會社交。資源、歸屬和個體連結的需要，每個人都可以有。",
+          "key": "weekend_request",
+          "title": "同一份週末邀請，為什麼會讓出時間？"
+        },
+        {
+          "body_md": "[Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)說明，有幫助、有能力的外觀並不足以區分九號與其他核心模式。可以回到自己的例子：一件本可不接的事，為什麼那麼難拒絕？\n\n是擔心拒絕會打亂群體連結？是希望自己被需要、被感謝？還是這項任務本來屬於想完成並獲得認可的目標？這些是待核對的問題，不是直接判定九號、二號或三號的捷徑。職責、價值觀和多個動機也可能同時存在。\n\nChestnut–Paes 教學傳統把社群九號稱為「反型」，因為活躍的外表與常見的九號不行動印象不同。這仍是教學口徑，不能證明分類。如果你反覆能說出並推進自己的目標、保留分歧、不接可選勞動，而且之後不靠額外勞動補償，那麼「群體參與讓個人優先事項被忽略」的解釋就應下降。不能為了維持它，再假設你一定存在更隱蔽的自我忽略。",
+          "key": "why_help",
+          "title": "這次貢獻在保護什麼？"
+        },
+        {
+          "body_md": "在一個可以安全表達分歧的群體裡，選一項可接可不接的請求。回答前寫下已有承諾，以及自己願意貢獻多少時間。可以說：「我能週五準備材料，週六會留給自己的專案。」不需要拒絕一切，也不需要減少真正想投入的承諾。\n\n觀察群體是否接受這個範圍、個人時間是否留下，以及後來有沒有為了緩解不自在，又補上沒人看見的工作。補償行為值得記錄，但不是判型結論。可信賴的同伴可以幫助明確分工，也為你的提案留出發言位置。\n\n如果有範圍的參與反覆讓個人計畫與聲音保持完整，可以修正或撤回具體的自我忽略假設。如果澄清職責或降低排斥風險之後，負擔隨之變化，這些條件可能更有解釋力。拒絕可能影響收入、照護或安全時，應先尋找現實支援，不能把冒險獨立當成練習。",
+          "key": "limit_inside_participation",
+          "title": "試著把貢獻範圍一起說出來"
+        },
+        {
+          "body_md": "27 個副型把核心型與可能居於主導的本能關注組合起來，本頁討論九號維持連結的關注如何出現在群體參與中。六種本能堆疊則要把三種關注全部排出先後。參與群體不能告訴你自保還是一對一排第二，也不能確定第三本能或所謂「盲點」。九號的身體中心分組、八翼或一翼，屬於不同解釋層，不能用來代替本能排序。\n\n這些是傳統注意與動機描述，不是已確立的科學診斷，也不對應本頁已經驗證的神經系統。這裡沒有建立費馬副型評分的效度。\n\n[Hook 等人 2021 年綜述的摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告信度與效度的研究結果並不一致。特定問卷的研究必須保留工具與樣本邊界，不能證明所有副型，也不能自動轉移給另一個產品。\n\n若想重新確認共同動機，可讀[九號核心類型](/zh-TW/personality/enneagram/type-9)。再比較[九號自保副型](/zh-TW/personality/enneagram/type-9/instincts/self-preservation)與[九號一對一副型](/zh-TW/personality/enneagram/type-9/instincts/one-to-one)。即使最後認為描述不適合自己，形成更清楚的分工或表達範圍，也是一項實際收穫。",
+          "key": "evidence_navigation",
+          "title": "歸屬需要不等於科學分類"
+        }
+      ],
+      "seo": {
+        "description": "從九型傳統的自我觀察角度，理解九號社群副型：活躍的組織者為什麼仍可能考慮九號，貢獻何時包含自己的選擇，以及職位職責、發言機會與群體依賴為何也可能讓人接下工作。",
+        "title": "九號社群副型：參與群體，也保留自己的聲音"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-9/instincts/social",
+      "source_hash": "e695e519fe9fbf456b02c6098acc77712a462d5c525af30584f4ef11395c8c3e",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "關注群體的九號可能很活躍，善於貢獻和組織。需要比較的是：共同事務是否體現了自己的選擇，還是讓個人優先事項逐漸變得難以看見。",
+      "title": "九號社群副型：參與群體，也保留自己的聲音"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "9b18695324d30c2cc715c17b5e5846a6cd3af4a2be242126e2d41a11616ec0e0"
+}

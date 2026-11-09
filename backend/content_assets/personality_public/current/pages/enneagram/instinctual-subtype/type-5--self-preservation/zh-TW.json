@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-5/instincts/self-preservation",
+    "entity_key": "type-5/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-5/instincts/self-preservation"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-5/instincts/self-preservation"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-5/instincts/self-preservation",
+      "code": "type-5/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-5/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。預算、補充物資的管道、住房、感官需要和普通偏好都能解釋這些行為。要比較行為前的擔心、邊界怎樣形成，以及條件改善後怎樣調整；仍不能把觀察結果當作診斷。",
+          "question": "節儉、囤東西或喜歡獨處，就能判斷自保5號嗎？"
+        },
+        {
+          "answer": "傳統中確有不同外觀，但不能因此讓任何生活方式都符合。遷移工作、住房成本或旅行偏好應先解釋。只有在多個條件相近的情境中，持續出現透過掌握生活資源和降低要求來保護應付能力的過程，才值得保留這個候選；否則應撤回。",
+          "question": "不固定居所，也可能被描述為自保5號嗎？"
+        },
+        {
+          "answer": "不是。翼討論5號如何受相鄰4號或6號風格修飾；副型討論核心動機在哪個生活領域受到更多關注。不能用第二高的類型分數決定本能，也不能用職業或名人標籤替自己判型。",
+          "question": "自保副型與5w6是一回事嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-5/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-5/self-preservation",
+        "x-default": "/en/personality/enneagram/type-5/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-5/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5",
+          "label": "九型人格5號",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-5"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5/instincts/social",
+          "label": "5號社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5/instincts/one-to-one",
+          "label": "5號一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "把5號作為候選解釋時，先關注其核心問題：面對要求，是否傾向於先理解、準備並保持自主，以免自己還沒有能力應付就被捲入。自保關注讓這個問題落到日常基礎上：今天還有多少不被打斷的時間？工作結束後能否恢復？別人進入我的空間，會不會帶來無法結束的要求？\n\n這並不等於吝嗇、喜歡獨居或總是焦慮。有的人願意招待朋友、投入公共專案，也會事先確認結束時間和自己的休息安排。真正值得觀察的是，邊界在幫人參與，還是成為遲遲無法參與的先決條件。上述解釋以 [Enneagram Institute 的5號描述](https://www.enneagraminstitute.com/type-5/) 為傳統框架參照，不是對某個人的能力判斷。",
+          "key": "capacity_before_contact",
+          "title": "為什麼先問「夠不夠用」，再問「要不要加入」"
+        },
+        {
+          "body_md": "設想你與室友合住，大家商量讓兩位朋友週末留宿。以下是原創比較情境，不是副型判定題。\n\n自保關注較突出的5號，可能先問客人住哪裡、共用哪些用品、自己能否保留一段安靜時間。其擔心可能是：一旦答應，我還能掌握日常消耗和恢復嗎？\n\n社群關注較突出的5號，也可能提出規則，但更在意自己在這次安排中的位置：誰解釋計畫、誰提供有用資訊、自己的貢獻能否幫助大家合作？如果只是做個普通參與者，是否仍覺得有位置？\n\n一對一關注較突出的5號，可能首先留意來的人中有沒有能深入交流、讓自己願意開啟內在世界的對象，並同時考慮怎樣保留自主節奏。吸引或交流活力可能重要，朋友的數量本身不是關鍵。\n\n三人都可能接受留宿，也都可能拒絕。結果相同不說明原因相同；一個人也可能同時顧及這三方面。在本能框架裡，三種關注不是把人分成只具備一種需要的三類。",
+          "key": "shared_home_weekend",
+          "title": "同樣是朋友來住，三種關注會怎樣不同"
+        },
+        {
+          "body_md": "繼續看留宿安排。你提出：「客人可以用客廳，我週六下午需要兩小時獨處；晚餐一起做。」這個邊界讓別人知道如何與你合作，也為你留下恢復時間。它的價值是把不確定會耗費多少心力的事變成可以協商的安排。\n\n過用時，過程可能變成：先預想每一種打斷，再增加限制；即使室友已經接受安排，仍覺得不能放鬆；最後退出共同晚餐，卻花更長時間獨自準備備用用品。保護精力的辦法反而減少了實際支援和交流。\n\n觀察時可以問：我擔心的消耗是什麼？實際發生了多少？對方遵守約定後，我有沒有調整？若能在需要時重新協商並繼續參與，邊界正在發揮作用。若任何接觸都被預估為無法補回的損失，就值得檢查這種預估，而不是要求自己徹底取消邊界。",
+          "key": "useful_boundary_and_cost",
+          "title": "一個邊界怎樣從幫助合作變成限制生活"
+        },
+        {
+          "body_md": "住房擁擠、收入不穩定、照護責任、感官負擔、疾病恢復、遠端工作和保密義務，都可能讓獨立空間十分必要。這些條件需要現實安排，不能靠副型解釋替代。\n\n比較兩次工作量相近的共享活動：一次有清楚的使用規則、可靠的補充物資的管道和足夠恢復時間；另一次條件不穩定。若保護強度主要跟隨實際條件變化，自保副型並沒有提供多少額外解釋。不要故意製造稀缺或打斷來做比較。\n\n核心型也可以重新考慮。反覆確認「出了問題誰能支援我、約定可靠嗎」，可能更適合與6號的安全與支援主題比較；主要為了避免分歧而退讓，可能值得與9號的和諧主題比較。它們只是不同的動機問題，並不是靠某一句話定型的規則，可參照 [Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)。\n\n如果負擔合理時，你可以靈活共享、及時求助，應先降低「必須不斷減少需求才能參與」或「任何接觸都會造成無法補回的消耗」這些預期的權重。這並不單獨排除自保關注：時間、用品和恢復仍可能反覆成為最先考慮的問題。若實際條件已足夠解釋過程，而候選的核心與本能模式並不反覆出現，就撤回副型候選；若5號核心動機也不貼合，就撤回整個解釋。不能把不符合改寫成「其實更隱藏」。",
+          "key": "what_explains_the_withdrawal",
+          "title": "先把真實限制算進去"
+        },
+        {
+          "body_md": "選擇一次低風險的小合作，例如與熟悉的人共用工作區四十分鐘。先說清時間、可共用的物品和暫停方式，並保留真實需要的休息。不要從重要住房、必要開支或醫療資源開始嘗試。\n\n開始前寫下一個具體預期，例如「對方會不斷延長時間」；結束後只記錄發生了什麼、自己何時開始收緊邊界、明確說明是否有效，以及恢復用了多久。再觀察一次條件相近的自然事件，比較擔心與實際負擔是否一致。\n\n若溝通後負擔可控，可以嘗試少一個預防性限制；若邊界被侵犯、身體不適或工作受影響，就停止並調整安排。這個嘗試的目的，是找到更準確的參與條件。靈活共享、及時求助，以及限制解除後明顯放鬆，可以檢驗你事前對要求失控的具體預期，以及繼續增加限制是否必要。認真接受這些觀察，但不要把成功參與當成確認或排除自保關注的測試。",
+          "key": "small_reversible_trial",
+          "title": "試一次能結束、能恢復的參與"
+        },
+        {
+          "body_md": "[Narrative 的本能副型介紹](https://www.narrativeenneagram.org/instinctual-subtypes/) 提供本頁的傳統參照。27 個副型將九個核心型與三種主導本能關注組合，本頁只討論5號模式怎樣落到日常資源和恢復，不決定社群與一對一哪項排第二。把三種本能從第一到第三排完的六種堆疊是另一層，喜歡來往或保護休息都不能推出第二、第三種本能或「盲點」。自保也不等於5w4、5w6或5號所屬的思維中心：翼討論相鄰核心型的可能修飾，中心歸納核心主題，自保指關注領域。CP Enneagram 的「反型」屬於其學派解釋，不證明特殊機制。這些分類不是可重複的科學診斷、實證神經分類或驗證過的費馬評分。\n\n不同學派的詞義需要保留：Narrative 的 one-to-one 包括親密夥伴、好友和活力；[Enneagram Institute 的 sexual/attraction](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) 更強調吸引與強度。兩者有交集，但不能完全互換，也都不只指性或戀愛。\n\n[Hook 等人的2021 年系統綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/) 報告九型研究的信度與效度證據並不一致；它不能替本頁的具體副型解釋或費馬題本提供驗證。本頁情境和嘗試是用於反思的原創示例，沒有證明它們具有判型準確率。\n\n先回到 [5號核心類型]( /zh-TW/personality/enneagram/type-5 ) 確認動機是否貼合，再讀 [5號社群副型](/zh-TW/personality/enneagram/type-5/instincts/social)，比較保護可用精力與尋找群體位置的區別。",
+          "key": "tradition_and_next_reading",
+          "title": "用傳統描述提出問題，給證據留出邊界"
+        }
+      ],
+      "seo": {
+        "description": "5號自保副型關注時間、空間、用品和恢復是否足夠，讓自己有餘力應付要求。本頁用朋友留宿的情境說明邊界怎樣支援參與、過度保護如何減少支援，以及住房、健康或照護等真實限制何時更能解釋同樣選擇。",
+        "title": "第五型自保副型：空間、資源與降低需求與設下界限的假設"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-5/instincts/self-preservation",
+      "source_hash": "d051060229e7535e199c0917aa5d59189dd3bddd2448d2cda1680f12a7927efe",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "在5號核心動機下，自保關注可能把「我能應付嗎」具體化為時間、空間、用品和精力是否夠用。保護一個可自主安排的生活基地，可以支援專注與參與；過度保護也可能讓需求越來越少、求助越來越晚。本頁用共享空間的情境比較5號三個副型，並說明何時應優先採用資源、健康或安全條件的解釋。",
+      "title": "5號自保副型：留出空間，才有餘力參與"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "b27798e73f1b015abba802f67ebdaf576ace339e29ac97fa21c9ea3ea260c523"
+}

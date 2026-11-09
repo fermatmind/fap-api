@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-9/instincts/one-to-one",
+    "entity_key": "type-9/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-9/instincts/one-to-one"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-9/instincts/one-to-one"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-9/instincts/one-to-one",
+      "code": "type-9/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-9/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。強度可能來自吸引、創作合作、親近、新鮮感或現實情境。應分別檢驗九號動機與這項注意假設。如果在強烈連結中，獨立偏好仍清楚且能自由表達，就會挑戰「偏好丟失」的具體解釋。",
+          "question": "喜歡強烈連結，就說明我是九號一對一嗎？"
+        },
+        {
+          "answer": "未必。知道自己的偏好並主動取捨，與事後才發現偏好從未被考慮，是不同過程。應核對是否能夠拒絕、能否重新討論，以及雙方承諾有沒有實際位置。",
+          "question": "妥協就是失去自我嗎？"
+        },
+        {
+          "answer": "不會。傳統框架認為每個人都有三種本能關注。九號的翼指相鄰八號或一號的影響，是另一層解釋。不能用核心類型第二高分、職業，或對名人的猜測直接確定本能或翼。",
+          "question": "一對一會取代其他本能，或決定我的翼嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-9/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-9/one-to-one",
+        "x-default": "/en/personality/enneagram/type-9/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-9/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9",
+          "label": "第9型核心類型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9/instincts/self-preservation",
+          "label": "第9型自保副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9/instincts/social",
+          "label": "第9型社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-9/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "傳統九號描述關注平和與連結，有時難以表達獨立偏好。可先讀 [Enneagram Institute 的九號說明](https://www.enneagraminstitute.com/type-9/)。一對一這一層要問的是：某個特定連結，是否成了這種過程主要發生的地方？\n\n你可能在某個人身邊更有方向、更有活力。共同興趣可以讓活動更鮮明，留意彼此的需要也能讓合作更細緻。值得檢驗的困難，是連結是否反覆代替了對自己選擇的確認：對方提出安排，你接上去，後來才發現原本的承諾沒了位置。\n\n這與主動妥協不同。如果你知道原本想要什麼、明白取捨，並且自由選擇共同方案，偏好未必被丟掉。關心、默契和意見一致，都不能單獨確定副型。",
+          "key": "we_before_preference",
+          "title": "「我們怎麼安排」之前，有沒有問過自己想要什麼？"
+        },
+        {
+          "body_md": "[Narrative Enneagram 的一對一口徑](https://www.narrativeenneagram.org/instinctual-subtypes/)涵蓋親密關係和活力，其九號說明也談到超出戀愛關係的連結。[Enneagram Institute 的性或吸引口徑](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更強調吸引與強度。\n\n兩者有交集，但重視親密友誼，不足以確定 Institute 所說的性本能關注；追求刺激，也不自動說明本頁討論的偏好融合過程。使用這些名稱時，應說明正在檢驗哪一個意思，不能當成完全互換的標籤。\n\n兩種口徑都不只指性行為或戀愛。性慾強弱、是否單身、伴侶數量都不是副型指標。它們是傳統注意描述，不是某種激素、神經迴路或普遍配對機制的證據。",
+          "key": "one_to_one_and_attraction",
+          "title": "一對一和性／吸引本能，為什麼不能直接畫等號？"
+        },
+        {
+          "body_md": "看一個虛構的朋友合作情境。小安準備提交個人設計提案，好友小寧提議週末一起做展覽。討論很投入，小安還沒說出提交期限，就答應了共同安排。\n\n合作可能是好選擇：彼此的熱情能產生獨自做不出的作品。但幾個類似週末之後，小安發現個人提案始終沒推進。最初接上共同計畫很輕鬆，不必用不同安排打斷連結；後來卻開始疏遠或不滿，而小寧根本不知道存在另一個計畫。\n\n哪些觀察能支持這個解釋？小安事先有明確偏好，也有表達空間，卻在重要對象的方案變得鮮明時，反覆找不到自己的安排。什麼會挑戰它？小安能說明取捨、為個人提案留下另一個時段，或表達分歧後仍能連結，而不放棄原來的選擇。\n\n如果小寧掌握報酬、住房或必要照護，答應就有不同的現實後果。如果小安承擔翻譯或已經約定的協助，配合也可能是實際職責。應先澄清這些條件，再討論是不是融合。",
+          "key": "two_design_projects",
+          "title": "共同作品很有吸引力，個人作品卻一直沒完成"
+        },
+        {
+          "body_md": "假設社群活動邀請你在原本留給個人專案的週六幫忙。一對一的假設會問：是不是某個人的參加，改變了邀請的吸引力？你想共享這段經歷，被對方的熱情帶進去，原計畫卻變得難以定位。\n\n社群的比較會看群體位置和成員責任，即使那個特定的人不參加也依然重要。自保的比較會看體力、資源和可維持的日常節奏，熟悉維護事務可能佔據了決定的位置。\n\n三種關注可以同時存在於一個人身上。答應邀請、感到失落、偏好小聚，都不能確定哪一種關注居先。可比較那個人不能來、群體人手充足或實際負擔降低時，選擇如何變化。不要為了檢驗理論故意威脅關係，或撤掉必要支援。\n\n[Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)也提醒我們重新考慮核心型。回到實際事件，可以問：這段連結讓原本想做的事退居次位了嗎？是否希望透過被需要獲得重視？是否在保護鮮明的個人身分？這些是競爭解釋，不是自動分出九號、二號、四號的判型清單。",
+          "key": "one_saturday",
+          "title": "同一個週六請求，三種關注怎樣不同？"
+        },
+        {
+          "body_md": "選擇一件低風險的事，與一個尊重拒絕的人商量。聽對方方案前，先記下自己會怎麼選、為什麼。可以直接說：「我想把週六上午留給提案，下午很願意一起做展覽。」邀請真正的討論，不要求每次都按自己的方案決定。\n\n之後記錄改了什麼、改變是否出於自由選擇，以及獨立承諾是否實際完成。支持者可以在提建議前先問你的偏好，也避免把不同安排理解成關係拒絕。不能把另一個人的沉默當作同意。\n\n如果你反覆能保留獨立計畫、承受暫時不同步，之後重新聯絡時也能保留分歧，「偏好被連結取代」的解釋就應降低。如果困難只在經濟不對等、照護義務或擔心報復時出現，這些條件可能更有解釋力。持續出現反例時可以撤回副型解釋，不能改稱更隱蔽的融合或更強的壓抑。拒絕不安全時，先尋找現實支援，不做這項練習。",
+          "key": "say_preference_first",
+          "title": "討論共同方案之前，先說一個小偏好"
+        },
+        {
+          "body_md": "27 種組合討論的是核心型與可能居於主導的本能關注：本頁問九號對平和與連結的關注，怎樣出現在某個重要連結中。這與把三種本能全部排出先後、得到六種堆疊不同。重視親近不能告訴你社群還是自保排第二，也不能確定第三本能或所謂「盲點」。九號歸入身體中心，是核心型的分組，不是三種本能的排序；八翼或一翼又是另一層解釋。\n\n這些組合屬於九型傳統，不是已經確立的可重複科學診斷。Chestnut–Paes 教學傳統所稱「反型」，描述與常見核心型外表印象不同的呈現，不能證明不論出現什麼證據，核心模式都必然成立。\n\n[Hook 等人 2021 年綜述的摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告信度與效度的證據並不一致。它不驗證本頁關係解釋，也不驗證費馬副型評分。單一問卷的研究同樣不能證明所有副型在不同人群、語言或產品中成立。\n\n核心動機不清楚時，返回[九號核心類型](/zh-TW/personality/enneagram/type-9)。也可以比較[九號自保副型](/zh-TW/personality/enneagram/type-9/instincts/self-preservation)與[九號社群副型](/zh-TW/personality/enneagram/type-9/instincts/social)。目標是讓選擇更清楚，其中也包括放下不能解釋自己經歷的描述。",
+          "key": "revisable_description",
+          "title": "描述必須允許你判斷它不適合"
+        }
+      ],
+      "seo": {
+        "description": "從九型傳統的自我觀察角度，理解九號一對一副型：親近怎樣影響自己的安排，主動妥協與事後才發現偏好被忽略有何不同，以及一對一與性／吸引本能為何不能完全等同。",
+        "title": "九號一對一副型：親近關係中保留自己的偏好"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-9/instincts/one-to-one",
+      "source_hash": "1a532e98d51cc7eab67ef20fc3f0b76030eb919c1edb1c63ca8694f69962eafd",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "與某個重要的人連結，可能帶來活力，也可能讓自己的安排逐漸模糊。親近和妥協本身不是問題；應觀察雙方是否仍有真正可表達、可改變的選擇。",
+      "title": "九號一對一副型：靠近一個人時，也找得到自己的偏好"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "2e8848404c038bdb80782fbf6859efac6afc45f56c66bebff7b3f5fb215563ec"
+}

@@ -1,0 +1,212 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/9w1",
+    "entity_key": "9w1",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/9w1"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/9w1"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/9w1",
+      "code": "9w1",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "9w1",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能這樣排序。一號修飾描述的是標準、理想或克制可能參與表達的方式，不證明道德或盡責程度。過度自我要求和默默糾正也可能使合作更困難；應觀察具體作用，而不是把翼當成品質認證。",
+          "question": "9w1 是不是更有道德、更盡責的九號？"
+        },
+        {
+          "answer": "可以繼續比較。公開提出意見可能是更靈活的表達，不自動否定九號核心或一號翼。需要看你最在意的是什麼，以及你是否既表達了自己的標準，也允許共同討論，而不是用沉默維持表面和氣。",
+          "question": "我敢提出不受歡迎的意見，還可能用 9w1 理解自己嗎？"
+        },
+        {
+          "answer": "不說明。這些表現可以來自個人習慣、教育、文化規範、工作職責或對他人的尊重。要先探索九號核心，再觀察標準和自我要求是否在不同事件的取捨中持續發揮修飾作用。",
+          "question": "我很愛整潔、講禮貌，就說明有一號翼嗎？"
+        },
+        {
+          "answer": "不能。早晚受到職責、權限、風險和經驗影響。比較關係已平穩後仍牽動你的問題，以及糾正問題需要付出關係摩擦時的理由，比單獨比較開口時點更有幫助。",
+          "question": "9w1 和 1w9 能只憑誰先糾正問題來分嗎？"
+        },
+        {
+          "answer": "可以把它留作比較，但不能因此自行確認為結果。翼不是簡單讀取第二高分：先看九號核心是否貼近，再比較相鄰的一號與八號是否對長期表達有解釋作用。若依據不足，翼可以暫不確定。",
+          "question": "一號不是我的第二高分，還能考慮 9w1 嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/9w1",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:9w1",
+        "x-default": "/en/personality/enneagram/wings/9w1",
+        "zh-CN": "/zh/personality/enneagram/wings/9w1"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9",
+          "label": "九型人格 9 號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-1",
+          "label": "九型人格 1 號核心型",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-1"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/9w8",
+          "label": "9w8 翼型",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:9w8"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "設想幾個合住者討論家務。別人臨時修改分工，你覺得不太合理，但不想讓討論僵住，於是表示可以。之後你把漏掉的任務補上，期待其他人發現安排有問題；他們沒有發現，你也越來越不願參與。\n\n一種可能的 9w1 解釋是：你希望大家繼續好相處，又希望事情符合合理標準。兩種關注都沒有真正得到表達。別人聽見的是同意，你心裡的卻是有條件的接受。\n\n這套策略有用時，耐心使討論不必立刻變成對立，清楚的標準幫助大家形成穩定約定。你可以認真做事，也給不同習慣留下空間。過用時，你可能把自己的偏好先收起來，又用別人應該知道、應該自覺來維持期待。安靜補救暫時讓事情運轉，卻讓真實負擔和分歧更難被看見。\n\n另一種代價是覺得表達需要之前，必須先找到一個無可挑剔的理由。你並非沒有立場，只是一直等到自己的要求足夠合理才開口。結果，個人需要遲遲進不了共同討論。",
+          "key": "observable_situations",
+          "title": "你說了都可以，心裡卻有一份更好的安排"
+        },
+        {
+          "body_md": "9w1 的九號核心關注平靜與連結；一號相鄰翼可能增加理想、分辨、克制或自我要求。傳統翼型說法把核心放在前面，翼作為修飾，而非九號與一號的均分混合。參見[Enneagram Institute 的翼型說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。\n\n這些標準不一定來自正式規則。它們也可能是你對好好相處、認真完成事情或理想生活的個人理解。作為觀察方向，可以問：我希望安排更合理，是因為這樣大家更容易穩定合作，還是即使相處已經平靜，我仍主要被事情是否正確牽動？\n\n九號核心可以提出堅定異議，也可以堅持重要原則。一號翼不要求你一直安靜，更不能從整潔、禮貌或自律推出來。要看標準如何參與長期取捨：它們是在修飾九號的關注，還是正確與完整本身已經成為更主要的組織方向。\n\n家務有標準，也不等於已經辨出本能關注。核心回答反覆在意什麼，翼回答相鄰型怎樣修飾表達，本能關注則看注意力常落在哪類生活需要上。沿用上述 Enneagram Institute 的口徑，自保關注身體與資源，社群關注群體聯絡與歸屬，性／吸引本能（sexual）關注吸引與強烈體驗。你堅持輪換，可能是在保護休息，也可能是在意自己在合住群體中的位置；這兩種理由都不能單獨證明一號翼。想與某位合住者保持親近，也不足以確認性／吸引本能。同一標準可以被不同翼和本能關注使用；九號的連結需要不直接等於社群本能。再看分工已合理後仍牽動你的需要，而不是從整潔或是否合群把翼和本能一起定下來。",
+          "key": "core_first_modifier",
+          "title": "標準修飾了九號，不把你改成一號核心"
+        },
+        {
+          "body_md": "回到同一場家務討論。9w1 的可能關注是怎樣把安排變成雙方認可、以後還能照著執行的標準。你可能建議大家輪流承擔新增任務，並明確什麼情況下可以調整，以免同樣的摩擦再次發生。\n\n9w8 的可能關注是自己實際願意承擔多少，以及別人不能再預設替自己做什麼決定。你可能先說明這週只能完成原來答應的部分，其餘需要另外安排。\n\n這些解決辦法可以同時出現在一個人身上。對 9w1 而言，邊界同樣重要；對 9w8 而言，合理標準同樣可能有用。區分不靠有沒有規則或會不會拒絕，而看哪個修飾反覆幫助你組織回應。\n\n可以比較兩種不完全滿意的結果：一份公平的安排沒有留下你想要的個人時間；另一份安排保住了你的時間，卻不符合你心中的理想分工。哪部分讓你仍想繼續修改，為什麼？在其他有選擇餘地的日常事件中再問一次。這裡沒有標準答案，也不能把一次選擇變成翼型定論。",
+          "key": "sibling_wing_comparison",
+          "title": "9w1 與 9w8：共同想維持相處，修飾方向不同"
+        },
+        {
+          "body_md": "9w1 與 [1w9](/zh-TW/personality/enneagram/wings/1w9) 都可能認真、理想主義、克制，也都可能希望避免不必要的爭執。反向組合要比較核心動機，不能把溫和歸九號、批評歸一號。[Narrative Enneagram 的一號與九號比較](https://www.narrativeenneagram.org/type-comparisons/)提供了從內在關注區分相似行為的傳統參照。\n\n在分工爭議中，9w1 的可能問題是：怎樣讓大家繼續好好合作，同時保留我認為合理的安排？1w9 的可能問題是：怎樣把事情做對，並用較平穩的方式實現？九號翼可以緩和一號核心的表達，但不把正確與完整的關注換成九號核心。\n\n假如大家已經和氣地接受一個安排，你卻仍看到不合理之處：最難放下的是再談一次可能打破和氣，還是明知不妥卻讓它繼續？如果可以糾正問題，但必須容納一段分歧，你為什麼願意或不願意承擔這段不舒服？\n\n答案需要結合具體事件。一號核心也會遷就，九號核心也會及時糾正。職位、責任和現實代價都能改變開口的時點；早說或晚說只能提供線索，不能代替對關注與取捨的理解。",
+          "key": "sibling_core_comparison",
+          "title": "9w1 與 1w9：相同的溫和，不同的優先問題"
+        },
+        {
+          "body_md": "能較早提出異議，不應自動被寫成不像 9w1。需要分清被觀察到的改變落在哪一層。\n\n- 核心需要重看：在多個不同事件中，即使關係和氣，你仍主要被錯誤、不完整或違背內在標準牽動，並以糾正它們組織行動。此時一號核心值得比較，不能把所有標準關注都放進九號的一號翼。\n- 一號翼尚無充分依據：九號核心很貼近你，但標準與克制只在特定職責中出現，在其他選擇中沒有穩定作用。可以保留九號，暫不定翼。\n- 情境解釋更直接：你負責檢查品質、主持會議，或因權力差異選擇謹慎表達。職業要求和現實約束可能比翼型更能解釋這次表現。\n- 表達更靈活：你能在方案確定前說明需要，提出標準，也允許別人討論它。這削弱了必須靠安靜補救維持相處的策略解釋，未必削弱九號核心或一號修飾。\n\n同樣，接受不完美不等於沒有一號翼；一次嚴格糾錯也不等於一號翼已被確認。還要看你如何區分重要原則、可調整的慣例和個人偏好。",
+          "key": "counterexample",
+          "title": "公開表達標準，是反證還是更靈活的做法？"
+        },
+        {
+          "body_md": "下一次你想默默把不合理之處補好時，先寫下三句話：我認為怎樣更合適，我個人需要什麼，我具體希望對方做什麼。\n\n例如，標準是新增家務不應總落在同一個人身上；需要是本週保留一個晚上休息；請求是請另一位合住者承擔這次新增任務，並在下次討論輪換辦法。三句話有關聯，但不必把自己的休息證明成一個適用於所有人的道德規則，才有資格提出。\n\n在安排確定前說出請求，也問對方有哪些現實限制。如果對方提出另一種方法，檢查它是否已經滿足你真正的需要；不要僅因它不是你原來設想的方式就否定它。\n\n若你選擇暫時折衷，把折衷的範圍說清楚，例如這次可以代做，但之後需要按輪換安排。事後核對約定是否兌現，而不是繼續替對方完成任務，同時等待對方自行理解你的不滿。\n\n回顧時看兩個結果：自己的需要是否進入了討論，合理標準是否變成雙方理解的約定。練習的目標是讓合作包含你的真實立場，不是讓你變得更挑剔，也不是證明 9w1。",
+          "key": "observation_exercise",
+          "title": "把應該如此，拆成標準、需要與請求"
+        },
+        {
+          "body_md": "翼型是傳統解釋的一部分。Hook 等人 2021 年[系統綜述的摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)指出，支持翼型概念的研究很少。9w1 不證明道德、盡責或自我控制程度，也不能把其他量表的研究當作費馬測試的效度證據。\n\n若你仍在探索自己為何遷就或避免分歧，先讀[九號核心型](/zh-TW/personality/enneagram/type-9)。若九號較貼近，而你想比較邊界與標準兩種修飾，可讀[9w8：九號核心與八號翼](/zh-TW/personality/enneagram/wings/9w8)。若正確、完整與內在要求更像持續的核心關注，再讀[一號核心型](/zh-TW/personality/enneagram/type-1)。暫不確定翼，也不妨礙你在下一次合作中較早提出一個明確請求。",
+          "key": "wing_boundary",
+          "title": "下一步：先看核心，再決定修飾是否有幫助"
+        }
+      ],
+      "seo": {
+        "description": "9w1 是證據有限的翼型觀察：九號對穩定與連結的關注仍是核心，一號可能增加秩序、公平標準、克制和安靜糾正。禮貌、盡責或重視流程不能單獨確認 9w1；合規要求、專業訓練、文化表達和權力差異也會產生相似表現。",
+        "title": "9w1 九型人格：九號核心、一號翼與常見誤判"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/9w1",
+      "source_hash": "eecd2ec508319f60555b5a7583042eafc55a37169bc25c5d33f60074f41e1063",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "9w1 是九號核心、一號相鄰翼的傳統描述：重視內在平靜與連結，同時可能藉由理想、克制和清楚的標準來處理分歧。標準可以使合作更穩定，也可能讓你一邊遷就、一邊默默不滿。本頁用具體分工比較 9w1、9w8 與 1w9，並練習把未說出口的要求變成可討論的請求。",
+      "title": "9w1：在平靜相處中，為自己的標準留位置"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "2ce270f0ebac005b62314903ec0d19aff6b1e122867ed8dcdf237b64a0326c6f"
+}

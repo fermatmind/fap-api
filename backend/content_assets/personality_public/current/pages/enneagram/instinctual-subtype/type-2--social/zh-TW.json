@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-2/instincts/social",
+    "entity_key": "type-2/social",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-2/instincts/social"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-2/instincts/social"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-2/instincts/social",
+      "code": "type-2/social",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-2/social",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不一定。這些外觀既非必要條件，也不能單獨確認副型。需要觀察的是群體位置和貢獻是否反覆承載被需要、被接納的期待；幕後協作與正式領導也要結合職責解釋。",
+          "question": "社群2號一定外向、朋友多或擔任領導嗎？"
+        },
+        {
+          "answer": "不能這樣判斷。幫助可以有真實價值，同時伴隨未說明的認可需要。具體問題是雙方有沒有同意這份期待、你是否超出自己的資源，以及對方能否拒絕或採用別人提供的幫助。",
+          "question": "想得到認可，是否說明我的幫助不真誠？"
+        },
+        {
+          "answer": "不是。職責結束、缺少資源、疲憊和失去重要感都可能產生同一行為。比較明確職責之外的可選任務，並聽取本人對變化的解釋；只有制度條件已經足夠解釋過程、副型沒有增加解釋力時，才應撤回該假設。",
+          "question": "失去職位後不再貢獻，就是反證嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-2/instincts/social",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-2/social",
+        "x-default": "/en/personality/enneagram/type-2/instincts/social",
+        "zh-CN": "/zh/personality/enneagram/type-2/instincts/social"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2",
+          "label": "2號核心型：關懷與關係需要",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2/instincts/self-preservation",
+          "label": "2號自保副型：生活照料與支援",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2/instincts/one-to-one",
+          "label": "2號一對一副型：特別聯結與回應",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "[Enneagram Institute 對2號的介紹](https://www.enneagraminstitute.com/type-2/)把愛與被需要感放在核心。[Narrative 的社群2號描述](https://www.narrativeenneagram.org/instinctual-subtypes/)則著眼於借回應群體需要取得重要角色。\n\n本頁提出的可檢驗解釋是：一個人留意誰需要幫助、誰能提供資源、組織缺少什麼，並把「我能把大家連結起來」當成自己受到接納的依據。其有效作用可能是讓新人更容易參與，讓分散的資訊流動起來，讓共同任務有人接住。社群關注並不要求熱衷聚會；安靜地維護通訊錄、協調分工，也可能把注意力放在群體關係上。\n\n過用時，貢獻可能逐漸變成必須守住的位置。幫助者不只希望事情完成，還需要事情經過自己；交接似乎意味著不再重要。此時要觀察實際行為和本人確認的期待，不應從能幹、野心或幕後影響力猜出核心動機。承擔角色也可能只是職位要求。",
+          "key": "valued_through_contribution",
+          "title": "重要的未必是站在台前"
+        },
+        {
+          "body_md": "以下是原創合作情境。阿辰負責社群工作坊的志工安排，記得每個人的時間限制，也主動把新人介紹給熟悉流程的人。大家因此少走彎路。後來另一位成員接手排班，阿辰仍不斷私下改動安排，並說：「沒有我盯著，他們以後就不需要我了。」\n\n如果阿辰確認自己擔心的是失去被需要和被接納的感受，而不是排班品質，這個過程支持社群2號解釋：群體服務與個人重要感綁在一起。反覆繞過新負責人的決定、把幫助變成必須經過自己的入口，是可以討論的實際代價；它會削弱別人學習和承擔責任的空間。\n\n但如果新排班違反成員已經說明的限制，阿辰指出問題可能是在履行合理責任。若其工作契約仍要求對結果負責，也不能把繼續介入自動解釋成佔有角色。要先明確誰有決策權、哪裡真的出錯、交接是否完成。\n\n也不要反向簡化：卸任後停止服務，既可能是正常職責結束，也可能伴隨失去價值感，單憑停止行為無法決定。需要比較在沒有職責要求、仍有真實共同需要時，阿辰怎麼理解自己的位置，是否能支援別人完成任務。",
+          "key": "handover_in_a_workshop",
+          "title": "別人接手以後，你擔心失去什麼"
+        },
+        {
+          "body_md": "朋友在工作坊前說：「我最近太累，不知道能不能來。」社群2號解釋可能優先安排一個輕一些的角色、協調替補，並確認朋友不會因缺席而被排除。其關心的是人在共同活動中的位置與連結。\n\n在同樣的時間、資源和職責條件下，自保2號解釋可能先安排飯食、休息或交通，並留意可靠的生活照應；一對一2號解釋可能先爭取兩人一起做事，關注這個人是否仍願意特別回應自己。三者都可以體貼，也都可以處理其他領域。\n\n為了比較，可以問自己：「若朋友休息好了，但團隊不再需要我協調，我還會不安嗎？若大家安排順暢，卻不是由我完成，我覺得哪裡沒解決？」這些回答只是材料。某一次優先團隊任務，可能是你恰好擔任負責人；某一次優先私人陪伴，也可能來自朋友明確提出的請求。要在可比條件下尋找重複的關注，而不是把合理適應判成類型改變。",
+          "key": "shared_request_different_aims",
+          "title": "同一場工作坊，群體位置與私人照顧的區別"
+        },
+        {
+          "body_md": "[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)把2號的關係關注與3號的成績關注作了區分。在組織任務中，可用兩種情況幫助觀察：活動很成功，卻沒有人與自己保持親近；活動有不足，但成員仍明確重視自己的關懷。哪一種更觸動自己的重要感？不必強迫二選一，也不能憑一次答案判型。\n\n社群2號可以想要可見成績，3號也可以真心關懷。翼尤其容易讓外觀接近：2號的3翼和社群關注不是同一件事。前者討論相鄰風格，後者討論價值與關係注意力落在什麼領域。第二高核心型分數不能替你區分它們。\n\n制度同樣重要。薪酬、升職、選舉、資歷、組織文化和不清楚的交接都能獎勵控制資訊或維護位置。若行為隨著這些獎勵和責任變化，且沒有額外的被愛或被需要期待，正式角色解釋就可能足夠。不需要再新增副型。",
+          "key": "lookalikes_and_context",
+          "title": "把關懷、成績與責任分開"
+        },
+        {
+          "body_md": "選一個不涉及安全或關鍵照護的小任務，與接手者明確約定範圍、資料和回饋時間。把必要資訊交給對方，按約定處理確實出現的問題。不要故意失聯、隱瞞資料，或把別人會不會主動感謝當成測試。\n\n回顧三個可觀察問題：自己有沒有繞過約定再介入；最想恢復的是任務品質還是被需要感；能否直接說「我希望繼續和大家有聯絡」，而不是用加做任務換取位置。接手者的實際困難與自己的關係需要應分別處理。\n\n如果你在多次自願、低獎勵的協作中仍把被接納與不可替代的角色綁在一起，這讓這個互動模式值得繼續觀察。若所謂角色焦慮隨著職責澄清就消失，而且其他環境中主要關注資源保障或某一段關係，應撤回社群優先的解釋。\n\n能交接、能接受沒有得到預期的感謝，並不單獨否定社群2號；它只說明某項過用策略未出現或已經改變。也不要把反例說成更隱蔽的控制，令假設失去被推翻的可能。",
+          "key": "contribute_without_owning",
+          "title": "做一次小交接，保留貢獻，也讓別人能接手"
+        },
+        {
+          "body_md": "傳統把三種本能關注視為並存，社群副型不表示一個人沒有生活保障或親密聯結需要。它也不測量領導能力、受歡迎程度或道德價值。\n\n術語並非完全統一：[Narrative](https://www.narrativeenneagram.org/instinctual-subtypes/)的 one-to-one 包括親密夥伴與活力；[Enneagram Institute](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)的 sexual/attraction 強調吸引強度。兩者相交而非同義，均不限於性或戀愛。因此，與一個人談話、關心親密朋友，也可能服務群體歸屬，不能據此排除社群關注。該學派的完整堆疊把三種關注按主導、次要、較少關注排序，共有六種可能；社群優先本身沒有確定另外兩種關注的次序，也不能推出所謂盲點。\n\n27 個副型指九種核心型與三種主導本能關注的組合（9 × 3），不說明完整堆疊；這些組合及「反型」屬於學派傳統，不能當成可重複的科學診斷或已證實的神經機制。外觀不符合時，要讓事實修訂具體解釋，而不是訴諸隱藏本能保住分類。\n\n[Hook 等人的2021 年綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告了信度與效度的證據並不一致。本文的合作情境是觀察建議，不是27 個副型或費馬題本的驗證。特定量表的研究也不能自動轉為費馬評分或領導預測的證據。\n\n可先回到[2號核心型](https://www.fermatmind.com/zh-TW/personality/enneagram/type-2)，再讀[2號一對一副型](https://www.fermatmind.com/zh-TW/personality/enneagram/type-2/instincts/one-to-one)，比較「我在大家之間有用」與「我對這個人特別重要」。",
+          "key": "tradition_evidence_and_navigation",
+          "title": "社群關注不是社交性，也不是領導能力"
+        }
+      ],
+      "seo": {
+        "description": "社群2號是傳統的本能副型解釋，關注群體貢獻和角色怎樣承載被需要、被接納的期待。本頁以工作坊交接比較關懷、成績與職位責任，說明幕後協作也可能關注群體關係；領導職位和社交多少本身不能確定副型。",
+        "title": "2號社群副型：群體貢獻、被需要與歸屬"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-2/instincts/social",
+      "source_hash": "f6463eb8f499f00e706a7025285675f3dcc81be80a8c0a08f41cd5f9e1784b19",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "社群2號假設關注的是：一個人是否透過理解群體需要、連結資源和承擔角色，維繫被需要與被接納的感受。它可以表現為台前組織，也可以是幕後的關鍵協作者；領導職務和社交多少本身不能判定。",
+      "title": "2號社群副型：當貢獻成為歸屬與重要感"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "6fd1529f3f28cb785f5ae08f1ce19aad4340b5fa73b833a6181bf8a63e2786ee"
+}

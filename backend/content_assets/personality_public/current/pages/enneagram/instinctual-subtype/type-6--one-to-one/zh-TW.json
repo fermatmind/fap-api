@@ -1,0 +1,204 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-6/instincts/one-to-one",
+    "entity_key": "type-6/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-6/instincts/one-to-one"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-6/instincts/one-to-one"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-6/instincts/one-to-one",
+      "code": "type-6/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-6/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不是。反恐懼在傳統六型討論中描述接近而非迴避令人害怕的事物；一對一解釋關注注意力較常落入的領域。直接回應可能有不同原因，也可能出現在不同本能關注中。",
+          "question": "反恐懼六型與一對一六型是同一個意思嗎？"
+        },
+        {
+          "answer": "不能。慾望會隨關係、健康、處境與個人偏好變化。兩個學派都不只是以性慾強弱來定義其類別。本頁更關注可靠支援、重要連結與活力是否反覆相連，而不是把慾望當作判型捷徑。",
+          "question": "強烈吸引或性慾能夠確定這個副型嗎？"
+        },
+        {
+          "answer": "描述不產生能力或表現要求。力量與美感是 Narrative 傳統描述處理恐懼的方式；直接表達和審美活動還有許多其他意義。若沒有反覆關聯到支援是否可靠的顧慮，它們就很難成為保留副型解釋的理由。",
+          "question": "必須強勢或有藝術才能，才符合傳統描述嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-6/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-6/one-to-one",
+        "x-default": "/en/personality/enneagram/type-6/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-6/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6",
+          "label": "第六型：安全與可靠支援",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-6"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6/instincts/self-preservation",
+          "label": "第六型自保副型：日常資源與後援",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-6/instincts/social",
+          "label": "第六型社群副型：歸屬與責任",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-6/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "這個名稱需要先說清楚。[Narrative Enneagram 的一對一](https://www.narrativeenneagram.org/instinctual-subtypes/)涵蓋親密關係、密切友誼與活力；[Enneagram Institute 的 sexual／attraction](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更強調吸引與強度。兩者有共同部分，但並不完全相同。\n\n友誼、創作搭檔或讓人投入的活動，都可以進入這個討論；它不只涉及性或戀愛。有伴侶、喜歡單獨聊天或性慾較強，都不能確定本能副型。\n\n要保留六型解釋，[Enneagram Institute 六型描述](https://www.enneagraminstitute.com/type-6/)中的可靠支援仍應是核心問題。本頁提出一個值得觀察的問題：不確定出現時，注意力是否反覆圍繞某段重要連結組織起來——我們是否靠得住，這次互動是否仍有投入和活力？這是可以檢驗的可能性，不是對每段親密關係的預設。",
+          "key": "two_school_vocabularies",
+          "title": "這裡的一對一指什麼？"
+        },
+        {
+          "body_md": "[Narrative 的副型描述](https://www.narrativeenneagram.org/instinctual-subtypes/)談到以力量或創造美感來因應恐懼的兩種呈現。這些是傳統描述，不是經過驗證的行為測試。\n\n用一個原創情境說明第一種可能：與重要搭檔出現分歧時，當事人把立場說得更強，想知道這段合作能不能承受分歧。有效部分是把顧慮明確說出來；過用的代價則是為了獲得確定而升級衝突，對方因此防禦，又被當成不可靠的新證據。\n\n第二種可能，可以放在一場難談的對話裡：選擇熟悉的房間、有共同意義的音樂，或先一起做一項創作。這樣的安排可能幫助兩人更穩當地接近不確定。若經營氣氛替代了說明問題，或者一個不完美的晚上被理解成關係正在失敗，就會產生代價。\n\n這兩個示例都不能讓強勢、裝飾、審美或創作能力成為副型證據。要保留解釋，應觀察到策略與「支援是否可靠」的顧慮反覆相連。如果缺少這層關聯，就應撤回解釋。",
+          "key": "strength_beauty",
+          "title": "為什麼傳統同時談力量與美感？"
+        },
+        {
+          "body_md": "設想一個說明性情境：信任的搭檔建議刪掉共同簡報中的一部分，你立即強烈回應。在稱它為一對一模式之前，先辨認什麼受到威脅。\n\n- 按自保六型理解，可能主要在意此前準備是否白費、重做成本，以及實際後援還夠不夠。\n- 按社群六型理解，可能主要在意團隊原本的約定、誰能批准變更，以及誰向聽眾承擔責任。\n- 按一對一六型理解，可能主要在意這位搭檔的個人投入：改變是否意味著對方正在退出我們共同做的事情？回應的語氣與活力，可能比建議內容更突出。\n\n這些顧慮都可能帶來直接追問，也可以同時存在。預算、角色與建議本身說清楚以後，哪一種顧慮仍然沒有緩解？\n\n對一對一解釋而言，一個可能有用的訊號是：討論反覆從事情本身轉向尋找關係是否可靠的證據。能夠直接詢問投入程度，再回到任務，有助於讓支援變清楚。如果反應主要跟隨不良規劃或對方反覆違約變化，這些事實本身就可能足以解釋。",
+          "key": "feedback_conversation",
+          "title": "搭檔提出改變共同計畫"
+        },
+        {
+          "body_md": "[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)把具有對抗呈現的六型與八型作為可能混淆的組合。可以利用相似處提出更好的問題，不必按強硬程度給人分類。在簡報情境裡，反對主要為了獲得可靠支援、保有自主，還是另有原因？\n\n有用的記錄包括過程順序：最先注意到什麼，隨後作了什麼解釋，提出了什麼要求，以及什麼讓互動安定下來。不能只因為一個自信的人提出反對，就推斷其背後藏著恐懼。如果支援與信任沒有成為反覆出現的顧慮，應重新檢查六型核心解釋本身。\n\n同樣，創造美感不能確定六型與四型，也不能證明一對一關注。這件事可能表達創作、享受、文化中的待客方式，或對話本身的實際需要。意義應來自當事人的說明與多次觀察。\n\n輕聲回應也完全可能，不必重新解釋成隱藏的對抗。如果相近且安全的互動中，持續觀察到普通協商而非檢驗關係，就應降低對「直接挑戰」這一具體解釋的信心。",
+          "key": "directness_without_typing",
+          "title": "直接程度不能決定核心型"
+        },
+        {
+          "body_md": "選擇兩次與可信任的人進行的普通對話，雙方都能自由拒絕或暫停。不要透過製造嫉妒、假裝離開或製造危險來觀察任何人的反應。\n\n不確定出現時，把三件事分開：對方實際說了或做了什麼，你據此怎樣解釋關係，以及現在需要什麼。把間接考驗換成一個清楚請求：「你還願意和我一起完成這件事嗎？如果願意，我們能否說清下一步？」對方仍有權作出與你期待不同的回答。\n\n記錄得到回答後是否能回到任務，是否還想要求另一種投入證明，以及能否容納普通的語氣或活力差異。另一次對話中，也可以在對方同意的前提下，嘗試平靜的環境，而不是提高互動強度。比較哪一種安排更有助於說清楚；這不是診斷測試。\n\n過去反覆違約、脅迫、騷擾、權力差異或真實不安全的遭遇，都可能解釋警惕和直接抵抗。應處理這些條件，並保留離開與求助的選擇。任何成長練習都不要求留在不安全的互動裡。",
+          "key": "direct_request_trial",
+          "title": "直接提出想與對方保持連結的請求，不用考驗來確認"
+        },
+        {
+          "body_md": "只有在相近情境中，反覆觀察到對支援的顧慮與聯結的重要性或強度相連，一對一解釋才更值得作為個人反思保留。不能僅因某個例子讓人共鳴，就把它當成歸屬證據。\n\n以下情況應降低信心：相關表現只圍繞一個不可靠搭檔出現，並在可靠溝通後消退；真實危險或權力不平等更能解釋反應；或者實際資源與群體問責始終更突出。如果吸引、創作投入或親近感沒有與六型關注反覆相連，這個解釋增加的理解很少，可以撤回。\n\n一次平靜互動不能決定類型，但反覆的反例有意義。不能把它們改稱壓抑、更強的反型或隱藏本能，使解釋永遠無法被質疑。\n\n傳統模型仍認為一個人具有三種本能。六型核心討論對可靠支援的關注，五翼或七翼討論相鄰類型的影響。六型與五型、七型同屬思考中心，是另一層分組：三個中心用於組織核心型，三種本能關注生活領域。第二高的類型分數、名人示例或職業，都不能確定這個副型。",
+          "key": "revising_interpretation",
+          "title": "什麼時候應調整或撤回解釋？"
+        },
+        {
+          "body_md": "CP Enneagram Academy 把 sexual 六型稱為反型，用強勢呈現與六型通常和恐懼相連的描述作對照。這是該學派的傳統解釋。主動接近令人害怕的事情，仍可能為了處理不確定；這不意味著每次勇敢回應都屬於一對一六型，反型名稱也不能提供副型已經科學驗證的依據。\n\n二十七種副型把九種核心型與三種主導本能關注組合起來。將三種本能完整排序，則有六種本能堆疊，是另一層描述。關注某段重要連結，並不能說明實際後援與群體歸屬誰排在後面；本頁不推斷第二、第三種本能或本能盲點。\n\n這個傳統框架不能證明神經性的戰鬥反應、生物吸引機制或經驗證的費馬的類型判定規則。[Hook 等人 2021 年綜述摘要](https://doi.org/10.1002/jclp.23097)報告了不一致的信度與效度證據。特定量表的發現仍屬於那項研究及其工具，不能驗證全部副型描述或本產品分數。\n\n了解核心關注，可以閱讀[第六型核心](/zh-TW/personality/enneagram/type-6)。實際後援的差異見[第六型自保副型](/zh-TW/personality/enneagram/type-6/instincts/self-preservation)，成員位置與共同責任的差異見[第六型社群副型](/zh-TW/personality/enneagram/type-6/instincts/social)。",
+          "key": "evidence_and_next_steps",
+          "title": "這個解釋能說明什麼？"
+        }
+      ],
+      "seo": {
+        "description": "了解第六型尋求可靠支援的需要如何進入重要連結與活力，辨別力量和美感的傳統描述。透過搭檔改變計畫的情境，比較自保、社群與一對一關注，區分檢驗信任與對真實違約的合理回應。",
+        "title": "第六型一對一副型：可靠支援、重要連結與力量和美感"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-6/instincts/one-to-one",
+      "source_hash": "c9fdbf5a2e132611fb05374c6d4d7881700fd92c221bbae53847a7e0feb77c6e",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "一對一視角探索，第六型尋求可靠支援的需要如何集中到某段重要連結及其中的活力。區分直接表達與檢驗信任，理解力量與美感的傳統描述，並避免用吸引、對抗或單一行為判型。",
+      "title": "第六型一對一副型：在重要連結與活力中面對不確定"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "50e4fd4312a8ff201646a33d8e170275fdb108eb701dd60005d030329cdb9bd8"
+}

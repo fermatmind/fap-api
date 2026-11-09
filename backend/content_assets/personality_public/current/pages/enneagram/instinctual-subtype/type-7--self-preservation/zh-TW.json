@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-7/instincts/self-preservation",
+    "entity_key": "type-7/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-7/instincts/self-preservation"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-7/instincts/self-preservation"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-7/instincts/self-preservation",
+      "code": "type-7/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-7/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "都不一定。花錢可能在購買方便、體驗或備用選擇；節儉也可能在保留以後可以選擇的餘地。收入、家庭習慣和實際責任同樣能解釋這些行為。要看安排完成之後是否還持續擴張，以及這種擴張在緩解什麼，不用消費金額或節儉程度定副型。",
+          "question": "自保第七型一定愛消費，或者特別節儉嗎？"
+        },
+        {
+          "answer": "社交人數不是本能的判據。一個熱絡的親友圈可以承載一起吃飯、共享資源和舒適生活；也可以承載群體身分或某段特別有吸引力的交流。先詢問本人為什麼維持這些聯絡，再看實際互動，不能替別人猜動機。",
+          "question": "朋友很多，為什麼仍可能是自保關注？"
+        },
+        {
+          "answer": "一次安靜選擇不足以推翻或確認。更有資訊量的是反覆出現的過程：資源可靠、責任相近時，是否能以簡單安排獲得滿足；遇到遺憾時，是否也不需要另開多個選項。若這種過程持續存在，應降低本頁解釋的權重，而不是用隱藏本能或壓抑來保住分類。",
+          "question": "有時只想安靜過日子，是否就推翻了這個解釋？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-7/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-7/self-preservation",
+        "x-default": "/en/personality/enneagram/type-7/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-7/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7",
+          "label": "第七型核心介紹",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7/instincts/social",
+          "label": "第七型社群副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7/instincts/one-to-one",
+          "label": "第七型一對一副型",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-7/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "第七型的核心問題，可以先理解為：怎樣讓生活保持值得期待，而不被匱乏、失望或一種無法退出的處境困住？在自保副型的解釋裡，答案比較容易落在可用的資源與生活安排上：住得舒服，有幾條辦事管道，身邊有人可以一起享受生活，也能在計畫受阻時找到替代辦法。第七型尋找滿足與選擇餘地的動機仍在；自保只是把注意力帶到日常生活能不能承載這些可能性上。[Enneagram Institute 的第七型介紹](https://www.enneagraminstitute.com/type-7/)提供的是這一核心動機的傳統描述。\n\n例如，一個人在聚餐前確認交通、備好食材，還想到飯後可以做什麼。這些安排可能讓大家真正輕鬆下來。需要留意的是後續過程：當交通和食物已經可靠，他能否坐下來享受這頓飯，還是又增加一道菜、一個活動和一個備用場地，因為「只有這些好像還不夠」？前者說明準備已經完成任務；後者才值得進一步詢問，增加選項是否在幫助他暫時繞開失望或受限的感覺。\n\n這不是從一次忙碌推斷內心。本人可能只是喜歡做飯，或者需要照顧過敏、無障礙和接送條件。先把實際需要說明白，再討論剩下的擴張衝動。",
+          "key": "enough_and_options",
+          "title": "為什麼「有準備」還可能不夠"
+        },
+        {
+          "body_md": "[Narrative Enneagram 的副型介紹](https://www.narrativeenneagram.org/instinctual-subtypes/)把自保第七型寫在親友間的豐盛生活、交流和共同計畫中。因此，這個副型不能只被縮成囤東西、找交易或經營有用的人。有人透過一頓飯把朋友聚起來，有人分享工具和出行經驗，也有人安靜地維護幾個可靠管道。\n\n這類策略有效時，資源與關係相互支援：大家知道誰能提供什麼，也知道誰此刻沒有餘力；一次意外不必讓整個計畫崩掉。過用時，安排可能越鋪越大，原本為了安心而建立的生活反而需要不停採購、協調和兌現。別人也可能不清楚，收到的好意是一次贈予，還是帶著尚未說出口的交換期待。\n\n可以觀察三個具體環節：新增安排解決了什麼實際缺口；它增加了誰的工作；別人說「不」之後，關係和基本支援是否仍然穩定。不要因為一個人熱情招待，就認定他在利用關係；也不要因為他喜歡獨處，就排除這種資源關注。",
+          "key": "circle_of_abundance",
+          "title": "親友圈既是支援，也可以成為享受生活的空間"
+        },
+        {
+          "body_md": "設想朋友一起籌辦週末修理工作坊：場地臨時取消，預算減半，一位合作者說明自己只能參加兩小時。下面是幫助比較注意力的原創情境，不是三種人的標準答案。\n\n- 自保第七型的解釋會關注：哪裡還能借到場地和工具，怎樣讓這一天仍然方便、舒服、有得做？有效的版本迅速找到一個夠用方案；過用的版本不斷聯絡新管道，新增活動和人情交換，遲遲不肯接受簡化後的規模。\n- 社群第七型的解釋會關注：這個活動對大家還有什麼意義，怎樣維持共同目標與參與位置？有效的版本重新分工、縮小承諾；過用的版本用「為了大家」接下超出承受範圍的責任。\n- 一對一第七型的解釋會關注：與某位合作者之間那種令人興奮的交流，能否帶出一個更有吸引力的新方向？有效的版本把靈感變成雙方確認的小嘗試；過用的版本把兩小時參與想成長期合作，忽略對方已經說明的限制。\n\n三者都可能打電話、熱情提議或幫忙借工具。更有區分力的是：哪個問題最先佔住注意力，哪個限制最難接受，以及問題解決後還在追什麼。一個人也可能同時關心這三個領域。",
+          "key": "cancelled_venue",
+          "title": "同一個活動受阻，三個第七型可能先搶救什麼"
+        },
+        {
+          "body_md": "自保第七型與第六型都可能認真準備、維護可信聯絡。可以比較的是：可靠安排一旦確認，注意力主要轉向「終於知道怎樣穩妥地做」，還是又轉向「還有哪些值得試、不能錯過」？這只是區別動機的提問，不是用樂觀或焦慮判型。第七型也會謹慎，第六型也會喜歡新體驗。\n\n與第二型相似的地方是熱情照顧和建立關係。可以詢問：如果朋友不再需要這份幫助，最難放下的是被需要的位置，還是一起享受、交流和開啟新選項的機會？兩種關注也能並存。[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供傳統辨別思路，不能替代本人在具體事件中的解釋。\n\n更直接的原因常在環境裡。收入不穩、住房風險、照護責任、遷移手續或當地互助習慣，都可能要求多個管道。若資源恢復後，額外尋找和交換明顯減少，就應優先採用環境解釋。若一個人反覆偏好簡單安排，能接受有限選擇，也沒有用新機會繞開失望的過程，本頁解釋的適用性就下降；不用把不符合重新解釋成「藏得更深的自保第七型」。",
+          "key": "other_reasons",
+          "title": "會找後路，不一定是在尋找更多可能性"
+        },
+        {
+          "body_md": "選一次安全、花費較低的日常安排，例如已經具備基本條件的朋友聚餐。先寫清不可省的需要，再選一個主要方案和一個真正必要的備用方案。對其他好點子暫時只做記錄，不立刻增加採購或向別人許諾。\n\n在活動前、進行中和結束後，各記一句：我現在還想增加什麼；它解決的是實際缺口，還是讓我暫時不用感受某個遺憾；不增加時，眼前的體驗是否真的變差？同時記錄花費、協調時間、他人新增的工作，以及自己有沒有更充分地參與。\n\n這不是減少必要儲備的挑戰。食物、藥物、交通、無障礙和照護條件尚未可靠時，先處理這些事實，也不要刻意製造匱乏來觀察自己。合作者可以支援你把方案定下來，明確說出「這些已經足夠」，並在不貶低新想法的情況下保護結束點。\n\n如果增加選項始終對應具體需求，需求滿足後就自然停止，那麼「透過擴張避開受限感」的解釋應被撤回或明顯降低採用這項解釋的信心。若暫緩新增後反覆出現受困感，而自己也能確認新增安排主要在緩解它，這只增加了該解釋的參考價值，仍不能據此確定副型。",
+          "key": "finish_one_plan",
+          "title": "試著讓一個足夠好的安排完成任務"
+        },
+        {
+          "body_md": "三種本能在這裡是傳統的生活關注模型，不是三類各自缺少其餘本能的人。第七型歸頭／思考中心；翼討論相鄰第六、第八型的修飾，自保副型討論第七型動機怎樣落在日常資源與生活安排上。第二高分不能直接確定翼或本能。\n\n自保第七型屬於九種核心型×三種主導本能的二十七個組合；將三個本能全部排出先後，則有六種完整排序，是另一個層次的問題。為工作坊備好場地與工具，不能據此認定群體參與和親密連結誰排第二、誰排第三，也不能推出盲點。無障礙或照護需要可能已經足以解釋這些準備，主導本能也可以暫時未定。\n\nNarrative 的 one-to-one 包括親密夥伴、密友與活力；[Enneagram Institute 的 sexual／attraction 描述](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更強調吸引與刺激強度。兩種口徑有交集，但並非完全同義，也都不能簡單化為性生活或戀愛。CP Enneagram Academy 傳統使用的「反型」等稱呼是教學語言，不能當作已驗證的神經機制或科學診斷。\n\n[Hook 等人 2021 年綜述的摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告九型研究的信度與效度的證據並不一致。本頁的傳統解釋與生活嘗試不證明費馬題本、副型評分或個人分類已經獲得驗證，也不評價理財能力、慷慨程度或未來安全。\n\n如果還不確定核心動機，先讀[第七型核心介紹](/zh-TW/personality/enneagram/type-7)。如果難點在共同責任而非資源安排，可對照[第七型社群副型](/zh-TW/personality/enneagram/type-7/instincts/social)。",
+          "key": "scope_and_reading",
+          "title": "讓解釋維持在適用範圍內"
+        }
+      ],
+      "seo": {
+        "description": "第七型自保副型是傳統且證據有限的假設，把第七型可能性與實際選項、資源、取得舒適生活條件的可能和互惠聯盟結合。會找管道或準備物資不能證明副型；資源稀缺與照護責任、住房安全與無障礙需要、遷移和日常互助都可能造成相同行為。",
+        "title": "第七型自保副型：實際選項、資源與互惠聯盟的觀察假設"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-7/instincts/self-preservation",
+      "source_hash": "c047cb711bd996b9ee2a657e9e0442c594793f414c9f29c28a91c6c929cfd5c1",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "自保第七型的傳統解釋，把第七型尋找滿足、保留選擇和避開受困感的動機，放進資源、舒適與親友生活中。重點不是花錢或節儉，而是一個安排已經夠用之後，是否仍需要增加管道、體驗和後路，才能安心投入眼前的生活。",
+      "title": "第七型自保副型：讓生活有餘地，也有足夠好的落點"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "727e9fc3b8f4b3659631e2fe925ed1e56c77f7e5e0f3d20ee6ceb7cb455c9374"
+}

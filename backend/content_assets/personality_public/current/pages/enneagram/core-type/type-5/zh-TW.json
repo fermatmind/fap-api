@@ -1,0 +1,237 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-5",
+    "entity_key": "type-5",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-5"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-5"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-5",
+      "code": "type-5",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-5",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不等於。內向是表現或偏好，智力需要相應測量。第五型的傳統解釋關注透過理解、準備與資源邊界獲得勝任感，不能據此評定能力。",
+          "question": "第五型等於內向或智力高嗎？"
+        },
+        {
+          "answer": "不是。重視私人空間可以與親近、求助和合作並存。有時，減少需求是為了保留自己能負擔的空間，不代表真實需要已經消失，也不代表關係不重要。",
+          "question": "第五型是不是不需要別人？"
+        },
+        {
+          "answer": "回想查完資料後，主要問題還剩什麼：是自己是否理解並有餘力參與，還是支持、依據與責任是否可信？兩種關注可以並存，需要比較多個具體經歷，不能用一次擔憂決定。",
+          "question": "我既查資料又擔心可靠性，怎麼比較5與6？"
+        },
+        {
+          "answer": "看實際負荷、暫停是否有說明，以及能否依約回來處理問題。清楚的時限和參與範圍能兼顧休息與責任；單次沉默無法說明動機。",
+          "question": "怎麼分辨保護精力與迴避溝通？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-5",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-5",
+        "x-default": "/en/personality/enneagram/type-5",
+        "zh-CN": "/zh/personality/enneagram/type-5"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/head",
+          "label": "思維中心：面對未知的不同方式",
+          "relationship": "center_membership",
+          "target_identity_key": "center:head"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/5w4",
+          "label": "5w4：第五型與第四型翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:5w4"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/5w6",
+          "label": "5w6：第五型與第六型翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:5w6"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5/instincts/self-preservation",
+          "label": "第五型的自保本能副型",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5/instincts/social",
+          "label": "第五型的社交本能副型",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-5/instincts/one-to-one",
+          "label": "第五型的一對一本能副型",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-5/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "在傳統九型解釋中，第五型希望有能力應付生活中的要求，擔心自己無法因應要求，或參與之後承擔不了持續的消耗。知識、技能、私人空間和可支配時間，因此可能成為重要的保障。\n\n這套策略的邏輯是：先觀察、弄清結構、準備好，再進入情境；如果要求太多，就減少需求或保持距離，讓自己仍有餘地。理解本身也可以帶來樂趣，但辨認第五型時，還要觀察它是否經常承擔「這樣我才有能力面對」的作用。\n\n這並不說明你實際能力不足，也不證明你的精力比別人少。它描述的是對勝任與參與成本的關注，不是智力、知識水準或健康狀態的測量。",
+          "key": "motivation_attention",
+          "title": "先理解，再參與：這套策略想解決什麼"
+        },
+        {
+          "body_md": "會前認真閱讀，可能為了完成專業職責、理解陌生語言或彌補資訊不足；獨處可能為了專注、休息、保密或滿足感官需要。只有這些行為，不能判斷第五型。\n\n更有辨別力的問題是：「我還在蒐集什麼，它會改變下一步嗎？」若資料確實影響決定，繼續準備有實際用途；若問題已經能處理，卻總覺得必須再了解一層才能參加，一再準備可能讓你延後面對未知。\n\n同樣要核對資源。工作量已經超負荷時，減少承諾是現實需要，不能把真實疲勞解釋成一種性格上的不願投入。",
+          "key": "behavior_motive",
+          "title": "查資料、獨處與少說話，都有其他理由"
+        },
+        {
+          "body_md": "團隊需要選擇一個工具，你仍想讀完更多資料。可以把問題拆成：決定必須知道什麼，哪些未知可以在試用中了解，什麼結果會要求改變選擇。\n\n若第五型模式正在起作用，你可能希望先形成完整理解，再把觀點交給別人。這能維持準確性，也可能讓團隊遲遲得不到一個可討論的初稿。分享「目前知道的、尚不確定的、建議先試的」，可以讓理解與參與同步進行。\n\n收到回饋或發生衝突後，需要時間整理並沒有問題。說明暫停多久、何時回來、回來討論什麼，能讓私人思考成為協作的一部分，而不是讓別人猜測你是否還願意參與。",
+          "key": "decision_feedback_conflict",
+          "title": "判斷準備是否足夠，要看它如何幫助你採取下一步"
+        },
+        {
+          "body_md": "這樣的關注可能有助於深入研究、獨立檢查假設、精確區分概念，以及在複雜問題面前保持耐心。減少不必要的干擾，也可能讓有限的時間用於真正重要的事情。\n\n過度依賴它時，知識會替代行動：已經具備的能力一直沒有經過實際嘗試，參與成本卻在想像中越來越高。保護空間也可能變成不分享必要資訊，讓合作夥伴無法安排自己的工作。\n\n另一個可觀察的代價是，為了減少消耗而不提出需要。短期看似省事，長期卻失去本來可以獲得的幫助。觀察這些情況，並不需要把獨處或明確邊界本身視為問題。",
+          "key": "strengths_tradeoffs",
+          "title": "深入理解的價值，和距離過大的代價"
+        },
+        {
+          "body_md": "朋友想談一件複雜的事，你擔心一旦開始就會占去整個晚上。一個具體的回應可以是：「我今天可以認真聽二十分鐘，之後需要休息。如果還沒談完，我們約明天繼續。」它同時保留了關係連結與資源界線。\n\n若你只是消失，對方可能理解為拒絕；若你勉強答應全部，又可能更不願意下次參與。可以比較自己預估的消耗、實際消耗，以及一次有限參與是否比想像中更可行。\n\n在工作中，同事暫不分享內容也可能是因為保密、權限或事實尚未核實。討論邊界應尊重這些真實要求，而不能以類型標籤要求別人開放私人資訊。",
+          "key": "work_relationship_examples",
+          "title": "把邊界說具體，給關係留下入口"
+        },
+        {
+          "body_md": "第五型與[第六型](/zh-TW/personality/enneagram/type-6)都可能分析、提問、準備和懷疑。傳統比較中的重點，是這些動作最後想建立什麼：第五型更關注自己是否理解並能夠承擔；第六型更關注依據、支持與責任安排是否可信，能否依靠它們面對未知。\n\n例如，兩個人都研究一項合作方案。一個希望弄清機制，並確認參與不會讓自己得一再增加投入；另一個希望確認合作方是否可靠、出了問題誰能提供支持、承諾是否會兌現。不能用「獨立思考」和「相信權威」硬分兩型：兩者都可以獨立判斷，也都可以求助。\n\n還可以比較兩種相似的退出：與[第四型](/zh-TW/personality/enneagram/type-4)比較，留出空間主要為了整理個人意義，還是為了理解與管理參與？與[第九型](/zh-TW/personality/enneagram/type-9)比較，少回應主要為了保留自己能負擔的空間，還是為了避免打破平靜與引發衝突？這些原因可以同時存在，應回到反覆出現的優先關注。\n\n5w4和5w6仍以第五型為核心。前者借相鄰第四型關注個人意義與表達，後者借相鄰第六型關注驗證與可靠性。若能否獲得可靠支持才是主要問題，需要繼續比較第五型與第六型，而不是僅用5w6解釋。可閱讀[5w4](/zh-TW/personality/enneagram/wings/5w4)與[5w6](/zh-TW/personality/enneagram/wings/5w6)。",
+          "key": "wings_mistypes",
+          "title": "5與6：需要更多理解，還是更可靠的支持"
+        },
+        {
+          "body_md": "一次積極合作、公開表達或帶著未知行動，可以說明你有彈性，並不自動否定第五型。重要的是，你如何判斷參與可行，而不是參與的次數有多少。\n\n更能削弱解釋的情況是：資料蒐集始終由任務本身決定，資訊足夠便自然結束；私人空間主要隨實際負荷變化；在不同領域中，為勝任而做的準備與保留自己能負擔的空間並沒有反覆成為核心問題。此時，專業訓練、工作條件或一般偏好可能解釋得更好。\n\n不要把所有反例都重新解釋成「隱藏的第五型」。如果另一種解釋更貼近本人理由和實際過程，就應給它更高權重。",
+          "key": "counterexample",
+          "title": "願意分享和求助，不會自動排除第五型"
+        },
+        {
+          "body_md": "[Enneagram Institute 的第五型說明](https://www.enneagraminstitute.com/type-5/)討論理解與勝任感；其[5與6的比較](https://www.enneagraminstitute.com/misidentifying-5-and-6/)和[The Narrative Enneagram 的比較](https://www.narrativeenneagram.org/type-comparisons/)提供傳統區別。本頁採用動機與情境進行比較，不採用職業、學術背景或名人歸類來判型。\n\n[Hook 等人的2021年系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告九型研究的信度與效度證據並不一致，翼和類型間移動的研究支持有限。這些資料不能證明費馬測評的分數效度，也不能用來推斷智力或專業水準，或作為診斷依據。\n\n若想比較整體模型，可回到[九型人格總覽](/zh-TW/personality/enneagram)；若想理解5、6、7號處理未知的共同主題，可閱讀[思維中心](/zh-TW/personality/enneagram/centers/head)。",
+          "key": "use_boundary",
+          "title": "理解型模式，不能替代能力評價"
+        },
+        {
+          "body_md": "選一件低風險、可以調整的小任務，例如分享一個初稿、詢問一個具體問題，或與朋友約定一段談話。先寫清楚完成它所需的最低資訊，以及你願意投入的時間。\n\n保留必要的保密和職責要求，然後完成一項範圍明確的行動。可以只分享目前的結論與不確定處，或提出一項明確的求助，不必承諾無限後續投入。\n\n結束後比較：你原先預估會消耗多少，實際發生了什麼？新增知識是否真的改變了行動？哪部分理解只能透過參與獲得？也記錄一次邊界確實需要保留的情況，不強迫自己把所有距離都撤掉。\n\n下一步可以是調整參與範圍，或更早分享一個可討論的版本。這不是驗證你屬於第五型的測試。",
+          "key": "observation_exercise",
+          "title": "試一次有限參與，讓現實檢驗準備"
+        }
+      ],
+      "seo": {
+        "description": "九型人格5號的傳統解釋關注透過理解與準備獲得勝任感，以及怎樣保護私人空間和可用資源。本頁比較5號與6號的不同關注，幫助分辨準備何時有助於參與、何時持續延後；查資料或獨處也可能出於真實負荷與保密要求，不能單獨判型。",
+        "title": "第五型：知識、為勝任做準備、保留精力的可修正假設"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-5",
+      "source_hash": "41d6c2e3eb6f09ddddc5d1fdbf71bbab89f128ba64af490ffee492c946b02379",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "第五型的傳統模式，是透過理解問題、逐步做好準備和保護可用資源，讓自己能夠因應生活。它不等於智力高、內向或不需要關係。辨認時應看：求知與距離是否反覆承擔了提升勝任感的作用，以及準備何時有助於參與、何時讓人一再延後參與。",
+      "title": "九型人格5號：理解、勝任感與資源邊界"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "06b330cd83ac8e0d3439cf4846da7bd924551d72dd0de8df4b2d4def00029641"
+}

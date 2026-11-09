@@ -1,0 +1,223 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-8",
+    "entity_key": "type-8",
+    "entity_type": "core_type",
+    "framework": "enneagram",
+    "page_kind": "core_type",
+    "slug": "enneagram/type-8"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-8"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-8",
+      "code": "type-8",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-8",
+      "entity_type": "core_type",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "這些表現不能作為必備條件。一個人可以重視自主，同時謹慎溝通、避免無效衝突，也可以沒有任何管理職務。需要了解他在做決定和仰賴他人時最重視什麼。",
+          "question": "8號一定愛衝突或擔任領導者嗎？"
+        },
+        {
+          "answer": "檢查你有沒有了解當事人的意願、允許他拒絕，並在自己的授權範圍內行動。保護是否有效，要看當事人的選擇空間和處境有沒有改善；僅有「我是為你好」的意圖不夠。",
+          "question": "怎樣知道自己是在保護還是在控制？"
+        },
+        {
+          "answer": "可以把幫助範圍、決定權和退出方式說清楚。選擇接受一項明確的幫助，本身也可以是自主行動。觀察具體合作是否尊重約定，比把依賴一概等同於受控制更有用。",
+          "question": "接受幫助會不會讓自己失去自主？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-8",
+        "reciprocal": true,
+        "translation_group": "enneagram:core_type:type-8",
+        "x-default": "/en/personality/enneagram/type-8",
+        "zh-CN": "/zh/personality/enneagram/type-8"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/centers/gut",
+          "label": "本能中心：8、9、1號的邊界與行動",
+          "relationship": "center_membership",
+          "target_identity_key": "center:gut"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/8w7",
+          "label": "8w7：8號與7號相鄰翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:8w7"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/8w9",
+          "label": "8w9：8號與9號相鄰翼",
+          "relationship": "wing_variant",
+          "target_identity_key": "wing:8w9"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8/instincts/self-preservation",
+          "label": "8號自保本能：資源與自主",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8/instincts/social",
+          "label": "8號社交本能：群體與保護",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8/instincts/one-to-one",
+          "label": "8號一對一本能：吸引與投入",
+          "relationship": "instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-8/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model",
+          "claim.application.exploratory_not_predictive",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "傳統九型理論將第八型的主要關注放在自主、自我保護，以及避免被別人傷害或控制。自己掌握資源、清楚表達立場、直接採取行動，能夠讓自己能影響局面；依賴別人或暴露需要，則可能讓人覺得失去保護。[Enneagram Institute 的第八型說明](https://www.enneagraminstitute.com/type-8/)提供這項傳統描述，而不是它已經獲得科學驗證的證明。\n\n這裡解釋的是策略的功能：如果接管局面經常讓你恢復安全和行動感，它就容易成為第一反應。這個理解不要求你總是強勢，也不說明你的家庭經歷必然如何。\n\n例如，合作方遲遲不給明確答覆，你直接聯絡負責人推動決定。先問自己最難接受的是什麼：專案確實要停擺，還是「我的下一步要由別人決定」的感覺？兩者可以同時存在，但需要用不同方式處理。現實障礙需要協調；自主受威脅的感受，則還要檢查是否把合作中的正常依賴當成了被控制。",
+          "key": "motivation_attention",
+          "title": "自主為什麼會成為優先問題"
+        },
+        {
+          "body_md": "在沒人願意承擔責任時，明確站出來、指出問題並作出有權限的決定，可以讓局面繼續運轉。有人受到不合理對待時，願意支持他表達界線，也可能減少孤立感。判斷行動是否有效，要看它有沒有解決具體問題。\n\n保護容易做過頭的一種情況，是「我知道什麼對你最好」。朋友遇到工作糾紛，你替他聯絡主管，看起來是在幫忙，卻可能打亂他正在準備的溝通。先問他希望得到資料、陪同還是直接介入；如果他希望自己處理，能否尊重這一選擇？\n\n另一種情況是讓他人只能接受決定。你可以很清楚地說明自己的邊界，也讓對方擁有說不、提出不同意見和選擇退出的空間。別人暫時沒有反對，不足以說明他有真實決定權；還要看反對後是否會受到懲罰、羞辱或關係壓力。",
+          "key": "strengths_tradeoffs",
+          "title": "讓力量保護選擇，而不是替代選擇"
+        },
+        {
+          "body_md": "工作會議裡，幾個人都說「現在就要解決」。一位在履行事故負責人職責，一位擔心同事不可靠，一位可能格外難以接受由別人掌握進度。速度和語氣很像，原因卻未必相同。先確認緊急程度與權限，再了解每個人想避免的具體損失。\n\n如果有人回饋「你剛才替我做了決定」，先重述可以核對的事實：「我沒有徵求你的意見就確認了時間。」接著詢問對方需要恢復哪項選擇，決定由誰重新溝通。解釋保護意圖可以稍後進行；它不能替代恢復對方受到影響的決定權。\n\n在親密關係中，也可以直接說需要：「我擔心這件事會失控，想先知道我們各自負責什麼。」這比透過下命令讓對方猜到擔心更清楚。對方有不同意見時，討論具體分工，不必把分歧擴大成誰比較強、誰必須服從。",
+          "key": "decision_feedback_conflict",
+          "title": "在意見相左時，分清事實、權限和感受"
+        },
+        {
+          "body_md": "傳統框架把第八型的自主、第[一型的標準與正確性](/zh-TW/personality/enneagram/type-1)、第[六型的可靠的支持](/zh-TW/personality/enneagram/type-6)區分開。[Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供了相似行為背後可能有不同關注的參照。\n\n**如果你堅持「必須這樣做」，比較8與1。** 當決定權受到充分尊重，但方案仍不符合你認為應守的原則時，你最難放下的是什麼？8號解釋重點在誰能主導局面，以及如何保護界線，1號解釋重點在標準是否被遵守。但8號可以有原則，1號也可以爭取自主；要比較多次選擇中什麼更優先。\n\n**如果你經常質疑權威，比較8與6。** 問「我需要自己能掌握局面」，還是「我需要確認這套安排和這些人可靠」？可靠的支持與核實過的資訊已經到位後，你的困擾是否明顯緩解？6號也可能勇敢對抗，8號也可能求助，不能用是否猶豫、是否敢吵架來區分。\n\n8w7與8w9屬於相鄰翼的理論描述，可進一步探討行動怎樣更傾向拓展空間或維持穩定。閱讀[8w7](/zh-TW/personality/enneagram/wings/8w7)與[8w9](/zh-TW/personality/enneagram/wings/8w9)時保留核心自主問題，不用把直接程度排成誰「更像8號」。",
+          "key": "wings_mistypes",
+          "title": "堅持的原因：8號、1號和6號"
+        },
+        {
+          "body_md": "主動求助、承認害怕、接受別人的方案，說明一個人能使用這些方式。它們不會自動否定8號解釋。表達方式可以改變，重視自主也不等於必須事事獨自完成。\n\n真正需要重估的是：在多種權力對等且沒有危機的情境中，當事人並不特別在意掌控或避免依賴；他堅持介入的原因持續指向原則正確或支持是否可靠，且後續選擇與此一致。這時1號或6號可能更能解釋，也可能不需要類型解釋。\n\n如果有實際威脅、正式指揮職責或對方曾經越界，清楚保護自己首先有現實理由。不能把正當維護邊界解釋成性格缺陷，也不能讓類型語言為越界、恐嚇或傷害開脫。",
+          "key": "counterexample",
+          "title": "能求助，也可能仍然重視自主"
+        },
+        {
+          "body_md": "找一項風險低、責任範圍清楚的合作，先約定結果要求、各自權限和何時需要溝通。讓對方在他的範圍內選擇方法，而不是口頭授權後不斷推翻對方的決定。\n\n你想接管時，寫下兩欄：已經出現的事實，以及自己預想的擔心。確實影響約定結果的問題，可以提出具體回饋；只是做法與你不同，就先問清對方的理由。還可以直接表達一項需要，例如「我希望週五前知道是否需要增加資源」。\n\n結束後檢查：對方是否能不同意？你有沒有在沒有約定的事項上保留最終否決權？開始共同做決定後，哪些工作完成得更好，哪些仍需重新分配？只做有真實授權的低風險嘗試，不用拿緊急安全事務測試自己能否放手。",
+          "key": "observation_exercise",
+          "title": "選一次可以真正共同掌握決定權的合作"
+        },
+        {
+          "body_md": "本頁提出的是理解和協作問題，不是領導能力或關係好壞的評定。涵蓋104個樣本的[九型研究系統性回顧摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)指出信度與效度的研究證據並不一致，翼和類型間移動的研究支持有限；這些結果無法證明費馬測試的效度。\n\n想了解8號與1、9號為何同屬一組，可閱讀[本能中心](/zh-TW/personality/enneagram/centers/gut)。這裡的本能中心也稱身體中心，指8、9、1號的傳統分組；它與自保、社交、一對一這三種本能關注屬於不同的分類。尚不確定核心時，回到[九型人格總覽](/zh-TW/personality/enneagram)比較主要關注。你可以先改善分工、請求幫助或清楚表達邊界，不必等到類型完全確定才開始。",
+          "key": "use_boundary",
+          "title": "從核心問題繼續探索"
+        }
+      ],
+      "seo": {
+        "description": "第八型是一種傳統九型人格觀察假設，關注注意力是否反覆回到自主、直接影響與保護，以及對控制、脆弱與清楚邊界的處理。強勢或領導表現不能證明動機；權威、危機職責與真實危險、倡議任務、歧視、文化、訓練和權力不對等都可能造成相似行為。",
+        "title": "第八型：自主、直接影響與保護邊界的可修正觀察假設"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-8",
+      "source_hash": "bc82b6cd2a6d657f1f4eefcee3a0f436751605f5adf5be323428004b6d2954e3",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "第八型關注自己能否掌握生活，以及重要的人和邊界能否得到保護。直接行動可以解決無人承擔的問題，也可能在過度使用時壓縮他人的選擇空間。本頁幫助你分辨：什麼時候需要力量，什麼時候需要共同決定。",
+      "title": "九型人格8號：自主、保護與共同掌握決定權"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "770e5146c77d268ce9f6a8f34321340db940efa5c0165dcf6c14f8479e23dda0"
+}

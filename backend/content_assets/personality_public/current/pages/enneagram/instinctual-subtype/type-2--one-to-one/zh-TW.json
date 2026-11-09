@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-2/instincts/one-to-one",
+    "entity_key": "type-2/one-to-one",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-2/instincts/one-to-one"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-2/instincts/one-to-one"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-2/instincts/one-to-one",
+      "code": "type-2/one-to-one",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-2/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不是。Narrative 與 Enneagram Institute 的口徑有差別，前者包含親密夥伴與活力，後者強調吸引強度。兩者都不限於性或戀愛；性慾強弱、戀愛狀態和喜歡深談都不能單獨確定副型。",
+          "question": "一對一副型就是性慾強，或只關心戀愛嗎？"
+        },
+        {
+          "answer": "不能。新親密、照護、危機、明確合作承諾和權力差異都可能集中注意力。需要同時檢驗2號式關係動機、特別回應的重複優先性，以及條件變化後仍然存在或消失的過程。",
+          "question": "非常關注一個人，就是一對一2號嗎？"
+        },
+        {
+          "answer": "這個事件本身無法支持這項結論。對方可能不需要這種幫助、想採用別的方式，或沒有時間。可以直接詢問並尊重答案。幫助不能自動取得特別位置，也不能使對方負有親近、戀愛或性方面的義務。",
+          "question": "對方拒絕我的幫助，是在拒絕我嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-2/instincts/one-to-one",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-2/one-to-one",
+        "x-default": "/en/personality/enneagram/type-2/instincts/one-to-one",
+        "zh-CN": "/zh/personality/enneagram/type-2/instincts/one-to-one"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2",
+          "label": "2號核心型：關懷與關係需要",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2/instincts/self-preservation",
+          "label": "2號自保副型：生活照料與支援",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/self-preservation"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2/instincts/social",
+          "label": "2號社群副型：貢獻與群體位置",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/social"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "[Narrative](https://www.narrativeenneagram.org/instinctual-subtypes/)的 one-to-one 包括親密夥伴與活力；[Enneagram Institute](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)的 sexual/attraction 強調吸引強度。兩者有交集而非完全同義，均不限於性或戀愛。\n\n因此，本頁不會把所有深談、親密友情或強烈興趣自動合併成同一種本能。先確定自己想解釋的是長期親近、兩人之間的特別回應，還是某種吸引與充滿活力的投入，再檢驗具體過程。性慾強弱、是否戀愛、是否喜歡獨處，都不能代替這個區分。\n\n傳統認為三種本能關注並存。一個人可以珍惜某段關係，同時重視生活保障和群體歸屬。本頁只提供一對一2號的觀察假設，不決定其他關注的強弱，也不決定關係應不應該繼續。",
+          "key": "which_one_to_one",
+          "title": "先分清「一對一」在說什麼"
+        },
+        {
+          "body_md": "[Enneagram Institute 的2號介紹](https://www.enneagraminstitute.com/type-2/)以愛與被需要感描述核心型。[Narrative 的一對一2號描述](https://www.narrativeenneagram.org/instinctual-subtypes/)關注借細緻回應爭取選定之人的注意。\n\n可以研究的具體迴圈是：注意到某個人的情緒或興趣，投入有針對性的支援，從對方的反應感到被重視，隨後越來越需要確認自己的特別位置。細緻回應本身可以很有價值：記住對方正在做的事、給出合適的鼓勵、共同投入一個有活力的專案，都能幫助人感到被理解。\n\n過用時，特別關照可能附帶未說明的獨佔期待。對方與別人合作、需要安靜或沒有立即回覆，被解釋為自己不再重要。這樣的反應需要本人確認和事件證據；不能從熱情、吸引力或嫉妒單獨推出副型，更不能把施壓說成關係必需品。",
+          "key": "particular_response",
+          "title": "關懷怎樣變成「我對你特別重要」"
+        },
+        {
+          "body_md": "以下是原創情境。若言與朋友準備一場工作坊，常記得朋友最在意的細節，及時給予鼓勵，兩人一起做事很有活力。朋友後來約另一位成員討論，並說今晚不方便聊天。若言仍發去多條關心的訊息，最後說：「我這樣支援你，你怎麼還需要別人？」\n\n若若言明確承認，自己希望這些支援保證兩人之間獨特的位置，那麼一對一2號解釋得到具體證據支持：關懷與特別回應綁在一起。可觀察代價是，在對方已經說明可聯絡的時間後繼續追問，或把接受其他幫助當成關係威脅。\n\n如果朋友違背了原有排他合作協議，爭議也可能來自明確承諾；應先核對協議是否存在、是否合理、雙方是否仍同意。若朋友臨時出現急迫風險，集中關心也可能是必要照護。在這些條件下，不應把所有急迫投入都歸為副型。\n\n對方不方便聊天，只能說明當時是否有空；它本身不能證明拒絕這段關係。若言也可以表達失落並協商後續時間，同時接受對方有其他朋友和合作選擇。",
+          "key": "a_collaborator_needs_space",
+          "title": "一位合作者需要空間時"
+        },
+        {
+          "body_md": "朋友在工作坊前說：「我最近太累，不知道能不能來。」一對一2號解釋可能先提出兩人一起完成一個環節，並特別留意朋友是否還願意回應這份聯結。自保2號解釋可能優先飯食、休息、接送與可靠照料；社群2號解釋可能優先調整角色、協調替補，並維持朋友在團隊中的位置。\n\n這些幫助都可以發生在私下。區分時，可問：「如果對方休息充分、團隊也接納他，但不再特別找我，我還覺得哪裡沒有解決？」若答案主要指向生活保障，就不宜堅持一對一優先；若擔心的是退出集體後的歸屬，社群解釋可能更貼近。答案可以混合，也可以因情境而變化。\n\n還要避免把強烈投入誤認成同一核心型。[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)區分2號的他人需要關注與4號的自我感受關注。對應這個例子，可以觀察自己主要在調整什麼：努力成為對方需要的人，還是希望自己的獨特感受被理解。兩種願望可以同時存在，必須靠跨事件的材料進一步區分。",
+          "key": "three_ways_to_help",
+          "title": "同樣關心一個人，優先解決的可能不同"
+        },
+        {
+          "body_md": "在一段安全、雙方願意溝通的關係裡，選一個小請求，例如：「我想週末和你一起做這件事，你願意嗎？不方便也可以告訴我。」明確請求之後，按約定等待，接受對方提出其他時間或拒絕。不要故意冷落、製造競爭或反覆試探忠誠。\n\n回顧時記錄請求、對方明確說出的安排、自己隨後做了什麼，以及哪些結論其實沒有被對方表達。觀察想靠近的願望能否直接提出，是否需要先提供大量幫助，才能覺得自己有資格要回應。這個練習用於改善溝通，不要求雙方等量回報每一項付出。\n\n新關係、依戀經歷、危機、照護責任、分工不等與權力差異都可能集中注意力。比較較平靜的時期和其他關係，優先處理真實失約、負擔或安全問題。若互動有威脅或報復，就不適合用減少聯絡來做觀察實驗。\n\n若在多段可比、穩定的關係中，特別回應並非反覆優先事項，投入主要跟隨明確照護協議或即時任務，就應撤回一對一優先的假設。接受拒絕只會削弱「用關懷索取獨佔回應」的具體解釋，不會單獨否定整個副型；沒有施壓也不能被解釋成施壓更隱蔽。",
+          "key": "ask_without_claiming",
+          "title": "表達想靠近的願望，給回應留下選擇"
+        },
+        {
+          "body_md": "一對一副型與翼是不同解釋層。2號的1翼或3翼討論相鄰風格，一對一討論關係注意力的領域；不能用第二高核心型分數決定副型，也不能憑職業或名人類比判斷。\n\n27 個副型指九種核心型與三種主導本能關注的組合（9 × 3），並未確定另外兩種關注的次序。Enneagram Institute 另用本能堆疊表示三種關注的完整排序：主導、次要、較少關注，共有六種可能順序。本頁對特別回應的觀察不能推出第二、第三位或所謂盲點，也不能把 Narrative 的一對一直接代換為該學派的 sexual/attraction。兩套解釋及「反型」名稱都屬於學派傳統，不是可重複的科學診斷、已證實的神經機制或關係適配結果。外觀不符合時，應修改具體假設，不應認定對方隱藏了更強的本能。任何標籤都不能證明雙方同意、保證吸引或替代對關係品質的實際判斷。\n\n[Hook 等人的2021 年綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告了信度與效度的證據並不一致。本頁的原創情境與練習不構成27 個副型或費馬題本驗證；特定量表研究不能自動作為費馬評分的證據、個體分類或伴侶匹配。\n\n可先讀[2號核心型](https://www.fermatmind.com/zh-TW/personality/enneagram/type-2)，再比較[2號自保副型](https://www.fermatmind.com/zh-TW/personality/enneagram/type-2/instincts/self-preservation)，看自己反覆希望獲得的是特別回應，還是穩定的相互照料。暫時無法區分時，可以把假設留在未定狀態。",
+          "key": "scope_and_next_reading",
+          "title": "特別聯結不能替代關係事實"
+        }
+      ],
+      "seo": {
+        "description": "一對一2號是傳統的本能副型解釋，關注關懷是否反覆承載「我對你特別重要」的期待。本頁比較特別回應、生活照應與群體歸屬，並用合作情境說明：強烈關心一個人，不能單獨確定副型，也不能證明吸引、同意或關係適配。",
+        "title": "2號一對一副型：關懷、特別聯結與回應"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-2/instincts/one-to-one",
+      "source_hash": "51008cd4c777ffa03baafd38585efb2f4116258f199519e1e598e67f1463fe24",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "一對一2號假設關注的是：2號式關懷是否反覆集中在選定的人與特別回應上。它可能帶來細緻理解、鼓勵和關係活力；當付出被用來保證獨特位置時，也可能把對方的自主誤讀為拒絕。",
+      "title": "2號一對一副型：特別聯結、吸引與回應"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "81c9c41d8b7eee3dbfb2b9f9d56139147ac439bc233a92923d7e3ad040ba12e2"
+}

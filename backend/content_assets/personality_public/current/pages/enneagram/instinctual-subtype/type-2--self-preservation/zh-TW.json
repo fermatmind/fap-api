@@ -1,0 +1,194 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/type-2/instincts/self-preservation",
+    "entity_key": "type-2/self-preservation",
+    "entity_type": "instinctual_subtype",
+    "framework": "enneagram",
+    "page_kind": "instinctual_subtype",
+    "slug": "enneagram/type-2/instincts/self-preservation"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/type-2/instincts/self-preservation"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/type-2/instincts/self-preservation",
+      "code": "type-2/self-preservation",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "type-2/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能。這些行為可以由預算、興趣、文化和分工解釋。要觀察生活照料是否反覆承載被愛、被需要或相互照顧的關係期待，並尋找不符合這個過程的事件。",
+          "question": "節儉、喜歡做飯或經常招待朋友，就是自保2號嗎？"
+        },
+        {
+          "answer": "不會。任何人都可能需要照顧。值得研究的是如何提出需要，以及是否把付出當成未協商的關係保證。能直接求助、接受別人不同的關心方式，是具體過程的變化，不必被解釋成換了類型。",
+          "question": "希望別人照顧自己，會不會與2號核心矛盾？"
+        },
+        {
+          "answer": "不能。本能副型、相鄰翼和核心型是不同解釋層，核心型第二高分不能自動決定另外兩層。描述共鳴、職業和名人類比也不能完成判定；證據不足時可以保留未定。",
+          "question": "能用第二高分確定副型或翼嗎？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/type-2/instincts/self-preservation",
+        "reciprocal": true,
+        "translation_group": "enneagram:instinctual_subtype:type-2/self-preservation",
+        "x-default": "/en/personality/enneagram/type-2/instincts/self-preservation",
+        "zh-CN": "/zh/personality/enneagram/type-2/instincts/self-preservation"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2",
+          "label": "2號核心型：關懷與關係需要",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-2"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2/instincts/social",
+          "label": "2號社群副型：貢獻與群體位置",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/social"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-2/instincts/one-to-one",
+          "label": "2號一對一副型：特別聯結與回應",
+          "relationship": "sibling_instinctual_subtype",
+          "target_identity_key": "instinctual_subtype:type-2/one-to-one"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "[Enneagram Institute 的2號介紹](https://www.enneagraminstitute.com/type-2/)以愛與被需要感描述這個核心型。自保副型的工作假設，是這種關係關注經常借生活保障表達：讓對方吃好、休息好、有人照應，也希望自己能在這份互相照應的關係中得到安穩的位置。\n\n[Narrative 的副型描述](https://www.narrativeenneagram.org/instinctual-subtypes/)提醒，自保2號的照料可能伴隨自己應獲照顧的期待。這裡可以檢驗的不是「這個人是否自私」，而是一條具體過程：發現需要，主動承擔，未說明自己想得到什麼，隨後把對方沒有回饋理解為自己不重要。這個過程也可能根本沒有發生。\n\n實際照料可以非常有效。替疲憊的人準備一頓飯，比籠統安慰更貼近當下；穩定、雙方同意的互助也能減少生活負擔。困難出現在照料被當成未說出口的交換條件時：對方接受的是一頓飯，幫助者卻以為雙方已經約定了更多陪伴或優先照顧。付出是真實的，期待也值得說清，兩者都不需要靠猜測處理。",
+          "key": "care_and_receiving",
+          "title": "照顧別人，與希望自己也被照顧"
+        },
+        {
+          "body_md": "以下是用於觀察的原創情境。小嵐邀請一位朋友週末留宿，提前整理房間、準備早餐，又取消了自己的午休。朋友很感謝，下午仍按原計畫獨自外出。小嵐覺得失落，脫口而出：「我安排這麼多，你還是不想陪我。」\n\n如果小嵐確認，自己原本希望用這些安排換來一個親近、相互照顧的週末，那麼這讓一項關係期待值得先檢驗：生活照料被用來保證親近，陪伴期待卻沒有直接協商。它還不能確定小嵐反覆優先的是可靠生活照應，還是這個人的特別回應。可觀察材料是安排、原計畫、取消的休息和後來明確說出的期待，不是旁觀者猜出的內心。\n\n另一種可能是朋友答應共同活動後臨時失約；小嵐的不滿指向真實的協議違背。也可能小嵐當時身體不適，確實需要幫忙，卻沒有合適的人可求助。這些事實要先查清。如果失落主要隨失約或照護缺口出現，就應撤回「透過照料換取愛」的解釋。\n\n一次不高興不會決定副型。比較休息、資源和約定相近的其他來往：生活照應可靠，但朋友選擇獨處時，自己還覺得哪裡沒有解決？朋友願意陪伴，但日常支援不可靠時，又覺得缺少什麼？留意哪項需要反覆優先，以及能否接受朋友用別的方式關心自己。這些是回顧問題，不是經過驗證的分類程序；答案可以混合，副型也可以暫時未定。",
+          "key": "a_weekend_guest",
+          "title": "一次留宿，怎樣從好意變成失落"
+        },
+        {
+          "body_md": "設想朋友在社群工作坊前說：「我最近太累，不知道能不能來。」三種副型假設都可能帶來幫助，也都可能約對方單獨談話。區別在於幫助者反覆優先修復什麼。\n\n自保2號解釋會先問：對方有沒有吃飯、能否休息、交通和費用是否可承受？可能安排熱飯或接送，並留意雙方能否形成可靠的生活照應。社群2號解釋會先問：對方在團隊中有沒有合適的位置、誰能接手任務、怎樣讓其仍被接納？一對一2號解釋則可能優先維持與這個人的特別聯結，提出一起完成某個環節，留意兩人之間的回應與活力。\n\n同一輛車可以服務三種目的：減輕身體負擔，讓對方繼續參與團隊，或爭取一段兩人相處的時間。事後詢問本人「哪件事解決了，你才真正鬆下來」，比按接送行為分類更有幫助。也允許答案是幾個方面一起重要，或當時根本沒有關係期待。\n\n比較時盡量保持時間、資源、職責和關係親近程度相似。若一個人只在預算緊張時關心費用，而資源充足時更穩定地關注群體位置，就不能把短缺情境中的表現直接當成自保優先。",
+          "key": "same_workshop_three_priorities",
+          "title": "同一個朋友疲憊，三種關注怎樣不同"
+        },
+        {
+          "body_md": "下一次低風險的日常互助，可以只做一個小嘗試。先說清能提供的範圍，再直接提出自己的需要，例如：「我今晚可以做飯；我也想和你聊半小時，你願意嗎？」對方可以接受飯而拒絕聊天，兩件事分別協商。不要為了測試副型而突然撤走必要照護，也不要故意讓別人欠人情。\n\n記錄實際提供了什麼、有沒有超出體力或預算、自己的需要是否說出、對方如何回應，以及沒有按預期回饋時自己如何理解。若明確溝通後失落減少，支持的解釋是「未說明的交換期待需要調整」，並不能憑這次改善證明副型。\n\n家庭待客習慣、照護分工、無障礙安排、長期資源不足都能產生同樣的外觀。還可以比較其他核心解釋：[Narrative 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)區分了2號的關係關注與6號的安全關注。對應到這個情境，可問自己更難受的是「事情可能沒有人接手」，還是「沒有我的照顧，我就不再重要」。這只是辨別問題，焦慮程度不能代替答案。\n\n若在資源穩定、職責相近的多次事件中，照料不承載被愛或被需要的期待，生活安排也主要由明確任務解釋，就應撤回這項自保2號假設。直接表達需要只會削弱「間接求照顧」的具體解釋，不會單獨否定整個副型；接受拒絕也不是隱藏期待的證據。",
+          "key": "test_the_exchange",
+          "title": "把照料、協議和需要分別說清"
+        },
+        {
+          "body_md": "傳統認為三種本能關注並存，本頁副型討論的是主導關注領域，不是有人沒有社群或一對一需要。翼與副型也回答不同問題：2號的1翼或3翼討論相鄰風格，自保討論注意力經常落在哪個生活領域，不能互相替代。\n\n本頁的照料迴圈主要參考 Narrative 對照料他人與自身照顧期待的描述。CP Enneagram Academy 對自保2號的介紹同樣使用「Privilege」名稱，但更強調希望因自己是誰而被愛、被優先照顧，而不是因為付出了什麼。兩種描述都涉及照顧需要，但對如何爭取照顧的側重不同；本文的迴圈不是各學派共同的定義。\n\n學派用詞也需要分開：[Narrative](https://www.narrativeenneagram.org/instinctual-subtypes/)的 one-to-one 包括親密夥伴與活力；[Enneagram Institute](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)的 sexual/attraction 強調吸引強度。兩者有交集而非同義，也都不限於性或戀愛。後者的本能堆疊另給三種關注安排主導、次要、較少關注的完整次序，共有六種排序。例如 sp/so/sx 與 sp/sx/so 都以自保（sp）為首，卻交換了社群（so）和 sexual/attraction（sx）的後兩位。本頁不確定這兩位，也不能據此推出所謂盲點。\n\n27 個副型指九種核心型與三種主導本能關注的組合（9 × 3），不等於完整堆疊；這些組合以及有些傳統使用的「反型」名稱，屬於學派解釋。某人不像常見畫像時，應檢查具體假設，而不是說其本能被更深地壓抑，讓分類永遠成立。它們不是可重複的科學診斷，也不提供已經證實的神經機制。\n\n[Hook 等人的2021 年綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告了信度與效度的證據並不一致。本頁的生活例子是觀察建議，不能證明27 個副型或費馬題本的效度。特定量表的研究只能支持其實際使用的工具與樣本所能得出的結論，費馬評分、翻譯和個體解釋需要各自的產品證據。\n\n先讀[2號核心型](https://www.fermatmind.com/zh-TW/personality/enneagram/type-2)確認關係動機是否有解釋力，再與[2號社群副型](https://www.fermatmind.com/zh-TW/personality/enneagram/type-2/instincts/social)比較生活照應與群體位置的區別。",
+          "key": "model_and_reading",
+          "title": "怎樣使用這份副型解釋"
+        }
+      ],
+      "seo": {
+        "description": "自保2號是傳統的本能副型解釋，關注吃住、休息與相互照料怎樣承載愛和連結的期待。本頁透過留宿情境比較可靠生活支援與特別陪伴，區分未說出的期待、真實失約和照護需要；待客或希望被照顧，不能單獨確定副型。",
+        "title": "二號自保副型：實際照顧與接受關懷的觀察"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/type-2/instincts/self-preservation",
+      "source_hash": "47313db32bda48a7a34a04002840b870ded9b9e3b33697d77b7198b1d68c9d30",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "當2號透過關懷維繫愛與連結時，自保關注可能把這份投入帶到吃住、休息、資源和相互照料。需要檢驗的是這些安排怎樣承載關係期待，而不是憑節儉、待客或想被照顧就確定副型。",
+      "title": "2號自保副型：照顧生活，也讓自己的需要被看見"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "170ddfe3c201aae63c626cdcb179df81edfbcde378ef93aedd89b492b6c41379"
+}

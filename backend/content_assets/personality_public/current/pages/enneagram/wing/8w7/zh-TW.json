@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/8w7",
+    "entity_key": "8w7",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/8w7"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/8w7"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/8w7",
+      "code": "8w7",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "8w7",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "不能據此判定。社交量、職責、資源和後果都會影響表現。八號核心問行動是否主要保護自主，七號修飾問是否反覆透過開啟路線來實現它，可與穩定維持既有安排作比較。本能關注另問哪些生活需要反覆被優先留意：在場地例子中，物資是否夠用、大家怎樣參與，是不同的問題。多聯絡場地或保護參與者，都不能單獨確定七號翼或社群本能副型，也可能只是活動負責人的職責。8w7 這個名稱不指定本能；行動目的、慣用方式與關注領域需要分別比較。",
+          "question": "8w7 一定比 8w9 更外向、更愛冒險嗎？"
+        },
+        {
+          "answer": "可以。八號核心的觀察重點是自主與受控感，不是永遠必須自己指揮。你可能在知情、自願和邊界清晰的情況下接受別人的方案；這種合作可以體現靈活性。",
+          "question": "我會採用別人的方案，還能是八號核心嗎？"
+        },
+        {
+          "answer": "在同一事情裡，分別設想「決定權恢復但體驗有限」和「體驗豐富但受別人安排」。觀察哪項缺失更持續地引發不安，以及問題解決後你還在追求什麼。幾次相近事件的動機比較，比單次行為或分數排序更有幫助。",
+          "question": "怎樣知道我是 8w7，還是 7w8？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/8w7",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:8w7",
+        "x-default": "/en/personality/enneagram/wings/8w7",
+        "zh-CN": "/zh/personality/enneagram/wings/8w7"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8",
+          "label": "九型人格8號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-7",
+          "label": "九型人格7號核心型",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-7"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/8w9",
+          "label": "8w9翼型",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:8w9"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "8w7 的主解釋是八號，不是七號與八號平分。傳統八號描述關注保有自己生活的決定權、保護邊界，以及避免被別人傷害或控制。七號翼可能讓更傾向擴大行動範圍：一個通道受阻，就開另一個；一種方式不行，就增加嘗試、資源或行動速度。八號決定行動要守護什麼，七號修飾可能改變可用路線和行動的滋味。\n\n例如，小組活動的場地臨時附加了一項不合理條件。你不想讓大家被迫接受，便同時聯絡替代場地、提出縮小活動規模，還考慮改為線上。八號核心的觀察重點是：你是否首先在意決定權和被強加的條件？七號修飾的重點是：你是否習慣透過多種可行路線，把自主變成一種仍然有活力、有選擇的行動？這與只是「精力很多」不同。\n\n動機口徑來自 [Enneagram Institute 的八號介紹](https://www.enneagraminstitute.com/type-8/)。[其翼說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)屬於傳統理論，翼的強弱和一個翼、兩個翼的解釋也存在分歧。8w7 不表示你已經被證明具有一個終生固定的身分；第二高分也不能自動確定七號翼。",
+          "key": "core_first_modifier",
+          "title": "先問守護什麼，再問為什麼不斷開新路線"
+        },
+        {
+          "body_md": "設定同一場活動、同一預算和期限，大家都能表達不同意見。\n\n8w7 與 8w9 都可能拒絕被強加的條件。8w7 的修飾假設更關注開啟路線：尋找其他場地、調整形式，透過行動恢復決定空間。8w9 的修飾假設更關注穩住已有立場：保留原計畫的關鍵部分，明確不能接受的條件，以持續而較少擴張的方式交涉。兩者都可能快速行動或耐心等待，關鍵是反覆使用的策略如何服務於八號核心。\n\n8w7 與 [7w8](/zh-TW/personality/enneagram/wings/7w8) 都可能一下提出幾個替代方案。想像原場地撤回附加條件，但活動只能保持平淡、有限的規模。你最主要的不安是否明顯緩解，因為大家重新有權決定？這更值得從八號核心繼續觀察。若不安主要仍來自活動不夠精彩、體驗減少或期待落空，七號核心需要同樣認真地比較。\n\n再想像一個很有吸引力的新場地，但對方仍要求替你們決定關鍵事項。你願意為了精彩體驗接受多少安排？不要把任何一次選擇當作測驗答案；看相近事件中自主與滿足的先後順序。[Narrative Enneagram 的類型比較](https://www.narrativeenneagram.org/type-comparisons/)提供了七與八、八與九的傳統關注差異，本頁情境用於幫助比較這些解釋。",
+          "key": "sibling_core_comparison",
+          "title": "同一個附加條件，比較 8w9 與反向的 7w8"
+        },
+        {
+          "body_md": "當一個不合理條件堵住唯一通道，新增路線有實際價值：它減少對單一安排的依賴，讓選擇權重新可用。直接承擔交涉也能避免所有人只等別人解決。\n\n過用時，你可能把「別人提出了限制」直接聽成「別人要壓住我」，於是增加場地、活動形式和參與人數，想用更大的行動證明自己沒有受制。原本只需澄清一項條件的問題，變成了資源與意志的較量。七號式增加選項可能讓行動更有吸引力，八號式抗拒受控又讓停止看起來像認輸，兩者便互相加碼。\n\n代價並不一定是行動失敗。活動可能照常舉行，但別人承擔了額外準備，你自己錯過了休息，而一個可以談清楚的分歧被留成關係對抗。可以問：新增路線恢復了必要的自主，還是主要讓我感覺更強、更不受限制？若對方撤回了不合理條件，我能否把行動也收回來？\n\n八號的保護邏輯還需要容納別人的決定權。替別人出頭之前，先確認對方需要什麼；代替對方決定，不會因為出發點是保護就自動合理。",
+          "key": "observable_situations",
+          "title": "突破僵局的力量，也可能變成不斷加碼"
+        },
+        {
+          "body_md": "分別檢查四類觀察。\n\n核心不合：多件事裡，你願意接受別人主持，只要機會足夠豐富；真正難以承受的主要是無聊、錯過或失望，而不是被控制。此時應比較七號核心，不必把全部差異塞進七號翼。\n\n修飾依據不足：八號的自主關注很貼合，但只有在活動職責要求時才開新路線。職責、獎勵或緊急時限可能已經解釋擴張，七號翼可以暫時不確定。\n\n情境要求：負責替代場地的人理應多聯絡幾處；危機處置也可能要求並行行動。比較你沒有這項職責、又有條件選擇時的習慣，才更能判斷修飾是否有額外解釋價值。\n\n靈活性：你選擇一個樸素方案、願意合作或先完成維護，不代表八號核心或七號翼被推翻。若這種收窄讓你更好地守住真正重要的自主，它可能正是有效的調整。只有相近條件下反覆出現另一種更貼合的模式，才需要降低翼判斷的確信。",
+          "key": "counterexample",
+          "title": "縮小行動範圍並不自動否定七號翼"
+        },
+        {
+          "body_md": "下一次遇到阻力，在開第二條路線前做一張簡短清單。\n\n1. 寫下必須守住的邊界，例如「參與者不能被迫提供未同意的資訊」。把它與偏好分開，例如「我希望活動更大、更熱鬧」。\n2. 選擇一條足夠滿足邊界的方案，寫明時間、費用、需要誰同意，以及它會擠掉哪項已經答應的事。\n3. 再寫一個停止條件：「如果這項附加要求撤回，就回到原定規模，不繼續增加活動。」如果確實需要替代路線，讓它回應具體問題，而不是只回應受挫的感覺。\n4. 請一位參與者提出縮小或停止的理由。先複述對方意見，再決定；不要讓對方必須更強硬才能被聽見。\n5. 事後比較：必要邊界是否守住？新增行動是否按時收尾？我能否在沒有更大規模、更多刺激的情況下，承認問題已經解決？\n\n這裡練習的不是放棄自主，而是讓行動與實際需要重新匹配。如果開新路線有效，就保留；如果只是讓成本持續增加，就調整它。",
+          "key": "observation_exercise",
+          "title": "為新增路線設一個能真正執行的停止條件"
+        },
+        {
+          "body_md": "若你仍分不清是在爭取自主還是追求更多體驗，讀 [八號核心：自主、邊界與受控感](/zh-TW/personality/enneagram/type-8)。如果八號核心較貼合，再比較 [8w9：八號核心與九號翼](/zh-TW/personality/enneagram/wings/8w9)，觀察自己在可選擇的情況下更習慣擴展路線還是穩定守住立場。\n\n這些是傳統解釋與生活觀察建議，不能證明行動力、風險承受能力或商業成功。2021 年 [Hook 等人的系統綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告九型信度與效度的證據並不一致，翼等次級理論研究較少。本頁的情境和練習沒有因此獲得獨立驗證，也不能把別家量表的研究轉成費馬產品效度。\n\n不確定翼是可接受的結果。比確認 8w7 更有實際價值的是：你能表達邊界，也能在問題解決後停止加碼，並給別人同樣的選擇空間。",
+          "key": "wing_boundary",
+          "title": "下一步先確認八號，再比較行動的修飾"
+        }
+      ],
+      "seo": {
+        "description": "8w7 以八號對自主、邊界和避免受控的關注為核心，七號翼可能增加可行路線與體驗。本頁用場地附加條件比較 8w9 與 7w8，說明如何在問題解決後停止加碼；精力旺盛或擴張行動不足以確定翼。",
+        "title": "8w7 九型人格：八號核心、七號翼與常見誤判"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/8w7",
+      "source_hash": "1b0cb25f9f1a69cbc7bd5af1bf417fa905673c8f67d1cf945650447f202ebdba",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "8w7 以八號對自主、邊界和不受控制的關注為核心，七號翼可能增加嘗試新路線、擴大行動空間和追求強烈體驗的傾向。它能幫助人擺脫僵局，也可能把一個有限問題變成不斷加碼的行動；需要分清是在保護必要的自主，還是難以容忍任何限制。",
+      "title": "8w7：八號核心為什麼會用更多路線爭取自主"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "8f53f7747f47dc2d3d2cd6fca6b67386c7528ffaefafc32105f2f127c41d2634"
+}

@@ -1,0 +1,199 @@
+{
+  "content_state": "enhanced",
+  "contract_version": "personality.page.content.v1",
+  "identity": {
+    "canonical_path": "/zh-TW/personality/enneagram/wings/8w9",
+    "entity_key": "8w9",
+    "entity_type": "wing",
+    "framework": "enneagram",
+    "page_kind": "wing",
+    "slug": "enneagram/wings/8w9"
+  },
+  "locale": "zh-TW",
+  "payload": {
+    "personality_public_content_asset_v1": {
+      "canonical": {
+        "authority_source": "pr07_frozen_route_ledger",
+        "mode": "self_canonical_backend_candidate",
+        "path": "/zh-TW/personality/enneagram/wings/8w9"
+      },
+      "canonical_path": "/zh-TW/personality/enneagram/wings/8w9",
+      "code": "8w9",
+      "contract_version": "personality_public_asset.v1",
+      "entity_key": "8w9",
+      "entity_type": "wing",
+      "evidence_notes": {
+        "claim_mapping": [],
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      },
+      "faq": [
+        {
+          "answer": "可能，但安靜本身沒有足夠區分力。先看你是否保持清楚立場、主要保護自主，還是為了避免疏離和衝突而壓低自己的願望；後者值得比較九號核心。九號翼問的是平穩與接納是否反覆修飾八號關注。本能關注則另問注意力經常落在哪裡：日常資源與生活安排、群體中的參與和歸屬，或某段特定連結。平靜守住公共空間可能服務於不同需要；事情發生在家中，或你顧及合住者，都不足以確定本能副型。8w9 這個名稱不指定本能，音量和爭吵意願不能解決這些判斷。",
+          "question": "我很安靜，不喜歡爭吵，也可能是 8w9 嗎？"
+        },
+        {
+          "answer": "不是。等待可能是核對事實、遵守程序、疲勞或溝通習慣。它也可能在減少不適。先了解功能，再觀察它是否反覆修飾八號模式；九號翼不要求一定拖延。",
+          "question": "延後回應是不是九號翼的標誌？"
+        },
+        {
+          "answer": "不會自動說明。你可能在邊界明確、知情自願的條件下共享決定權，這可以體現靈活性。是否需要修正翼解釋，要看多個相近情境中的整體模式，而不是一次合作。",
+          "question": "主動溝通、願意共享決定權，會不會說明我不是 8w9？"
+        }
+      ],
+      "framework": "enneagram",
+      "hreflang": {
+        "authority_source": "pr07_frozen_bilingual_route_pair",
+        "en": "/en/personality/enneagram/wings/8w9",
+        "reciprocal": true,
+        "translation_group": "enneagram:wing:8w9",
+        "x-default": "/en/personality/enneagram/wings/8w9",
+        "zh-CN": "/zh/personality/enneagram/wings/8w9"
+      },
+      "index_eligible": true,
+      "internal_links": [
+        {
+          "href": "/zh-TW/personality/enneagram",
+          "label": "九型人格總覽",
+          "relationship": "framework_parent",
+          "target_identity_key": "hub:enneagram"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-8",
+          "label": "九型人格 8 號核心型",
+          "relationship": "primary_core_type",
+          "target_identity_key": "core_type:type-8"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/type-9",
+          "label": "九型人格 9 號核心型",
+          "relationship": "adjacent_influence_type",
+          "target_identity_key": "core_type:type-9"
+        },
+        {
+          "href": "/zh-TW/personality/enneagram/wings/8w7",
+          "label": "8w7 翼型",
+          "relationship": "sibling_wing_variant",
+          "target_identity_key": "wing:8w7"
+        }
+      ],
+      "is_public": true,
+      "launch_state": "published",
+      "llms_eligible": true,
+      "locale": "zh-TW",
+      "method_boundary": {
+        "blocked_claim_ids": [
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis",
+          "claim.boundary.non_diagnostic",
+          "claim.blocked.fermatmind_psychometrics",
+          "claim.blocked.predictive_outcomes",
+          "claim.blocked.human_review_and_release"
+        ],
+        "evidence_status": "evidence_limited_requires_human_review",
+        "factual_claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "robots": "index,follow",
+      "schema": [],
+      "schema_runtime_eligible": true,
+      "sections": [
+        {
+          "body_md": "8w9 中，八號仍是主要動機解釋，九號是相鄰修飾。傳統八號描述關注自主、保護邊界和避免受控；九號描述則關注內外平和、連結和減少令人不安的衝突。九號翼可能讓八號式邊界表達較為平穩，更願意保留既有節奏、聽取意見或避免無謂升級。它不把核心自動改成「只求大家和氣」。相關傳統口徑見 [Enneagram Institute 的八號介紹](https://www.enneagraminstitute.com/type-8/)與[九號介紹](https://www.enneagraminstitute.com/type-9/)。\n\n例如，合住的人臨時提出改變公共空間的使用安排。你平靜聽完，也願意調整細節，但對一項重要安排有清楚的「不」：誰都不能單方面決定，必須共同確認。能支持八號核心解釋的，是自主和邊界是否仍然清晰；可能的九號修飾，是你如何透過穩定、容納和較少升級來表達它。\n\n8w9 不是八號和九號各佔一半，也不是「八號不夠強，所以變成九號」。翼只能取相鄰類型；八號的另一翼是七號。第二高分不能自動確定翼。不同傳統對一個翼、兩個翼的解釋有分歧，可參見 [Enneagram Institute 的翼說明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。這裡的核心順序是描述的邏輯，不是對先天、終生類型的實證結論。",
+          "key": "core_first_modifier",
+          "title": "看起來溫和，核心為什麼仍可能是八號"
+        },
+        {
+          "body_md": "讓各方擁有相同的發言權，也都承擔空間調整的成本。\n\n8w9 與 8w7 都可能堅持共同決定。8w9 的修飾假設更關注保留可持續的安排：把邊界說清，調整必要部分，避免為了爭議重做一切。8w7 的修飾假設更關注增加行動空間：重新劃分空間、嘗試另一種時間表，甚至尋找新的使用方式。快慢和音量只是表面；兩者都可能採取另一種辦法。\n\n8w9 與 [9w8](/zh-TW/personality/enneagram/wings/9w8) 都可能看起來安靜、隨和，也都可能在某個點突然堅決。要分辨核心，可設想：別人願意維持親近、沒有爭吵，卻要求由他們單方面決定空間使用。最難接受的是自己的決定權被拿走，還是提出異議會打破平和與連結？前者更值得從八號核心檢驗，後者更值得從九號核心檢驗。\n\n再設想你的決定權已經得到承認，但討論仍然有分歧。你能否接受一點緊張，只要邊界清楚？還是更想盡快消除不和，甚至一時忘記自己原本想要什麼？這能幫助比較平靜的功能，不能單憑一次退讓或爭執確定類型。\n\n[Narrative Enneagram 的八與九比較](https://www.narrativeenneagram.org/type-comparisons/)強調傳統描述中的自主表達與維持和諧差異。本頁把這種差異用於自我觀察，不把「八號愛衝突、九號不會反對」當作普遍規則。",
+          "key": "sibling_core_comparison",
+          "title": "同一次空間調整，分辨 8w7 與 9w8"
+        },
+        {
+          "body_md": "穩定的作用是讓重要的邊界不必每次都透過激烈爭執重新建立。你可以不急於改變全部安排，也能認真聽取別人的具體需要。清楚的共同規則會減少反覆猜測，使合作更可持續。\n\n但平靜並不保證溝通充分。如果你覺得「我的立場已經很明顯」，卻沒有把它說出來，別人可能把沉默當作同意。你則可能認為對方正在不斷侵入，直到累積到某個點才強硬拒絕。反過來，你也可能一直維持舊安排，卻不給別人討論它的機會。看似沒有爭吵，實際上分歧只是被固定住了。\n\n因此，不只記錄回應等了多久，還要問等待在做什麼：核對事實、保留平穩節奏、遵守程序，還是不願讓不舒服的討論進入生活？平靜且明確的回應與沉默不動，是兩種不同的事。\n\n有效的穩定能說清楚什麼需要保護、什麼可以調整、何時再討論。僵持則讓邊界和偏好混在一起，把所有變化都當成威脅。",
+          "key": "observable_situations",
+          "title": "穩定可以保護生活，也可能讓分歧無處表達"
+        },
+        {
+          "body_md": "如果你在多個關係中反覆先順從、模糊自己的願望，主要擔心異議會造成疏離，即使自主已經得到保障也急於消除一切分歧，九號核心可能比八號核心更值得比較。不要只因為後來堅決拒絕，就確定為 8w9。\n\n如果八號的邊界關注較清楚，但安靜與等待只出現在疲勞、程序限制或不熟悉的環境裡，九號修飾的依據可能不足。熟悉事務、擁有正式責任或溝通文化也可以解釋穩重表現。可以比較一次流程允許立即對話的事情與一次必須等待的事情，看看平穩方式是否仍有額外解釋價值。\n\n如果你及時說出異議、共同調整規則，或主動分享決定權，這些選擇不自動否定 8w9。它們可能說明你既保護自主，又能靈活合作。需要修正的是「九號翼必然拖延、守住領地不動」這種過窄解釋。\n\n若在相近條件下，開新路線比穩定維持反覆更貼合，可再比較七號翼；如果兩種方式都有、沒有清楚差別，就保留不確定。",
+          "key": "counterexample",
+          "title": "分別檢驗八號核心、九號修飾和環境要求"
+        },
+        {
+          "body_md": "選擇一件已經有輕微不滿、但沒有安全風險的共同生活或協作小事。不要等到「實在受不了」才開始。\n\n1. 分開寫三句話：發生了什麼事實；我想保留什麼重要需要；我習慣的安排是什麼。最後一項未必是不可改變的邊界。\n2. 用一句明確、平靜的話開啟討論：「臨時改變使用時間讓我無法安排自己的事情。我希望改動前先共同確認。」再請對方說出他們的需要。\n3. 選一個可以試行的小調整，例如提前一天告知，而不是一次決定所有未來情況。約定一個回顧時間，讓穩定來自清楚的安排，而不是誰一直不鬆口。\n4. 若當下確實需要等待，明確說明原因和回覆時間：「我今晚核對日程，明天答覆。」這樣別人不必猜沉默代表同意、拒絕還是猶豫。\n5. 回顧時問：邊界是否變清楚？對方能否提出不同意見？試行安排是否真的減少了摩擦？如果需要已得到保障，我是否仍在堅持舊方式，只因為改變令人不舒服？\n\n實踐目標是讓平靜與清晰同時存在。你不必靠升級證明堅定，也不必靠隱藏分歧維持穩定。",
+          "key": "observation_exercise",
+          "title": "把尚未說出的邊界變成一次可討論的安排"
+        },
+        {
+          "body_md": "先用 [八號核心：自主與邊界](/zh-TW/personality/enneagram/type-8)檢查動機。如果八號核心較貼合，再讀 [8w7：透過更多路線爭取自主](/zh-TW/personality/enneagram/wings/8w7)。如果真正難分的是「怕被控制」與「怕失去連結」，可從本頁原導航進入 [九號核心：平和、連結與自己的願望](/zh-TW/personality/enneagram/type-9)。\n\n這頁是傳統解釋與原創觀察情境，不是經過驗證的翼型分類程序。2021 年 [Hook 等人的系統綜述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)報告信度與效度的證據並不一致，支持翼等次級理論的研究很少。它不能證明費馬某個題本或 8w9 解釋有效，也不能把平靜推成情緒穩定、可靠領導或良好關係的保證。\n\n可以暫時識別八號模式而不確定翼。看見自己的邊界怎樣表達、哪些習慣可以調整，已經是有用的結果。",
+          "key": "wing_boundary",
+          "title": "下一步與研究邊界"
+        }
+      ],
+      "seo": {
+        "description": "8w9 以八號對自主和邊界的關注為核心，九號翼可能使表達更平穩、更能接納意見，並減少無謂升級。本頁用公共空間的共同決定比較 8w7 與 9w8；安靜或等待不足以確定這個證據有限的翼解釋。",
+        "title": "8w9 九型人格：八號核心、九號翼與常見誤判"
+      },
+      "sitemap_eligible": true,
+      "slug": "enneagram/wings/8w9",
+      "source_hash": "41bc9d246ca225970c9906e6a94f2953465181924c2efa1c2cabfb9883b9c542",
+      "source_package": "enneagram-public-authority-v2-release-gate-22",
+      "summary": "8w9 以八號對自主和邊界的關注為核心，九號翼可能增加平穩、接納和維持既有安排的方式。安靜不等於沒有立場，堅定也不必伴隨高聲或擴張。分辨重點是平靜在保護自主，還是在避免失去連結，以及穩定什麼時候變成了不願溝通的僵持。",
+      "title": "8w9：八號核心怎樣以穩定、較不容易讓衝突升高的方式守住邊界"
+    },
+    "personality_public_content_asset_v2": {
+      "compatible_v1_contract_version": "personality_public_asset.v1",
+      "contract_version": "personality_public_asset.v2",
+      "editorial_authority": {
+        "author": null
+      },
+      "schema_eligible": true,
+      "visible_evidence": {
+        "claim_mapping": [],
+        "eligible": true,
+        "limitations": [],
+        "sources": [
+          {
+            "accessed_at": "2026-10-08",
+            "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+            "claim_ids": [],
+            "doi": "10.1002/jclp.23097",
+            "id": "hook_2021_systematic_review",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
+            "source_type": "peer_reviewed_research",
+            "title": "The Enneagram: A systematic review of the literature and directions for future research",
+            "year": 2021
+          }
+        ]
+      }
+    }
+  },
+  "payload_contract": "personality_public_asset.v2",
+  "source_content_sha256": "8643a0468739b24fba0aa828ae0ac95b307a9d3fac0ca1618616f60b64cfde3c"
+}
