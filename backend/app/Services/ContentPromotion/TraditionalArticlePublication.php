@@ -86,6 +86,7 @@ final class TraditionalArticlePublication
             'before' => [], 'staging_before' => [],
             'source_identity' => $identity,
             'source_expectations' => $proofs[$environment],
+            'allow_staging_prepared_root' => $environment === 'staging',
             'article_metadata' => $article,
             'taxonomy_display' => $mapping['taxonomy_display'],
             'snapshot' => [
@@ -100,7 +101,7 @@ final class TraditionalArticlePublication
     public function read(array $row, bool $lock): array
     {
         $guard = app(TraditionalArticleSourcePreflight::class);
-        $source = $guard->assertSource($row['source_expectations'], $lock);
+        $source = $guard->assertSource($row['source_expectations'], $lock, ($row['allow_staging_prepared_root'] ?? false) === true);
         $target = Article::query()->withoutGlobalScopes()->withTrashed()
             ->where($row['identity'])->when($lock, fn ($query) => $query->lockForUpdate())->first();
         if ($target === null) {

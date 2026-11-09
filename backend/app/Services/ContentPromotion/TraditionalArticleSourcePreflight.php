@@ -13,14 +13,18 @@ use Illuminate\Support\Facades\DB;
 
 final class TraditionalArticleSourcePreflight
 {
-    public function assertSource(array $proof, bool $lock = false): Article
+    public function assertSource(array $proof, bool $lock = false, bool $allowStagingPreparedRoot = false): Article
     {
         if ($lock && DB::transactionLevel() < 1) {
             throw new DomainException('traditional_article_source_transaction_required');
         }
 
         $source = $this->readArticle($proof['source'], null, $lock);
-        if (! $source->isSourceArticle()
+        // Staging can hold a published root copied from the prepared workflow.
+        // readArticle has already checked null parents, source locale and the exact public revision.
+        $preparedRoot = $allowStagingPreparedRoot
+            && $source->translation_status === Article::TRANSLATION_STATUS_APPROVED;
+        if ((! $source->isSourceArticle() && ! $preparedRoot)
             || (int) $source->working_revision_id !== (int) $source->published_revision_id
             || ! hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash())) {
             throw new DomainException('traditional_article_source_working_state_changed');

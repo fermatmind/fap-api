@@ -1376,6 +1376,15 @@ final class ArticlePublicApiTest extends TestCase
             $this->assertSame('traditional_article_source_payload_changed', $exception->getMessage());
         }
 
+        $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_APPROVED])->saveQuietly();
+        try {
+            $guard->assertSource($proof);
+            $this->fail('The production guard accepted a prepared source.');
+        } catch (DomainException $exception) {
+            $this->assertSame('traditional_article_source_working_state_changed', $exception->getMessage());
+        }
+        $this->assertSame($source->id, $guard->assertSource($proof, allowStagingPreparedRoot: true)->id);
+
         $candidate = app(TraditionalArticlePublication::class);
         $sha = str_repeat('a', 64);
         $context = new PromotionContext('test', $sha, 'W3', 'PUBLIC-CONTENT-53', str_repeat('b', 40),
@@ -1384,6 +1393,7 @@ final class ArticlePublicApiTest extends TestCase
             'identity' => ['org_id' => 0, 'locale' => 'zh-TW', 'slug' => $source->slug],
             'source_identity' => ['source_article_id' => $source->id],
             'source_expectations' => $proof,
+            'allow_staging_prepared_root' => true,
             'package_sha256' => $sha,
             'page_id' => 'TRADITIONAL-ARTICLE-test',
             'snapshot' => ['title' => '繁體標題', 'excerpt' => '繁體摘要', 'content_md' => '## 繁體正文',
