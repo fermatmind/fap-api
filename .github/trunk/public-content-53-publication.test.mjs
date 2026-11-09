@@ -1124,10 +1124,10 @@ test('Traditional Blog featured order binds published targets and checks the vis
   assert.doesNotThrow(()=>assertDom(row,html(articles),{},'production'));
   assert.throws(()=>assertDom(row,html(articles.toReversed()),{},'production'),/TRADITIONAL_BLOG_DOM/);
   assert.throws(()=>assertDom(row,html([]),{},'production'),/TRADITIONAL_BLOG_DOM/);
-  const fetcher=items=>async url=>{
+  const fetcher=(items,candidate=row)=>async url=>{
    const path=new URL(url).pathname;
    const body=path.endsWith('/articles_index')
-    ? {ok:true,surface:{surface_key:'articles_index',locale:'zh-TW',status:'published',is_public:true,is_indexable:false,...row.snapshot}}
+    ? {ok:true,surface:{surface_key:'articles_index',locale:'zh-TW',status:'published',is_public:true,is_indexable:false,...candidate.snapshot}}
     : {ok:true,blog_v1:{configuration_state:'published',is_indexable:false,featured_items:items}};
    return Response.json(body);
   };
@@ -1137,6 +1137,12 @@ test('Traditional Blog featured order binds published targets and checks the vis
   assert.equal(accepted.api_readback_count,1);
   assert.equal(accepted.dom_readback_count,1);
   await assert.rejects(verifyOnlineCandidates('production',fixture,fetcher(articles.toReversed()),renderer,prestate,sha),/TRADITIONAL_BLOG_FEATURED_API/);
+  const stagingArticles=packageRow.environments.staging;
+  const stagingRenderer=async()=>html(stagingArticles);
+  const stagingAccepted=await verifyOnlineCandidates('staging',fixture,fetcher(stagingArticles,stage),stagingRenderer,prestate,sha);
+  assert.equal(stagingAccepted.api_readback_count,1);
+  assert.equal(stagingAccepted.dom_readback_count,1);
+  await assert.rejects(verifyOnlineCandidates('staging',fixture,fetcher(articles,stage),stagingRenderer,prestate,sha),/TRADITIONAL_BLOG_FEATURED_API/);
   packageRow.environments.production=[...articles].reverse();
   save();
   assert.throws(()=>readCandidateRows(fixture,packageDigest(fixture,selection)));
