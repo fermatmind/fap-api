@@ -1609,3 +1609,27 @@ test('Traditional admissions and reading guides preserve reviewed sources and na
    [[18,'mbti'],[environment==='staging'?178:189,'777c03dffbf5']]);
  }
 });
+
+test('Traditional relationship and guide articles preserve reviewed FAQs and exact source versions',()=>{
+ const selection='traditional-article-relationship-and-guides';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,5);
+ const revisions={
+  production:[[1179,1180],[1043,1044],[886,887],[1079,1080],[437,652]],
+  staging:[[845,847],[838,null],[833,null],[435,722],[437,660]],
+ };
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates;
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english?.published_revision_id??null]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection?.faq.length??0),[0,0,0,4,5]);
+  assert.ok(rows.every(row=>!row.snapshot.editorial_projection?.ctas));
+  assert.match(rows[3].snapshot.content_md,/每組五題.*平均分數/u);
+  const preference=rows[4].snapshot.editorial_projection.faq[1].answer;
+  assert.match(preference,/單憑內向或外向/u);
+  assert.ok(rows[4].snapshot.content_md.includes(preference));
+  assert.equal(rows[0].taxonomy_display.tags.find(tag=>tag.slug==='e983e8f35861')?.id,
+   environment==='staging'?179:193);
+  assert.equal(Object.hasOwn(rows[4].source_expectations.source,'legacy_cover_image_alt'),environment==='production');
+ }
+});

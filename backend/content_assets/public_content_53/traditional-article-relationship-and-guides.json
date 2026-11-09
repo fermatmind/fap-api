@@ -1,0 +1,1575 @@
+{
+  "schema": "fermatmind.traditional_article_batch.v1",
+  "articles": [
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "seven-deadly-sins-and-seven-virtues",
+          "source_locale": "zh-CN",
+          "source_article_id": 298,
+          "translation_group_id": "seven-deadly-sins-and-seven-virtues"
+        },
+        "review_sha256": "b5f23be3c3ce0a04bcda399a09fa4f30da63662e37967c7eb5cff12ccc22d16a",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 293,
+              "slug": "seven-deadly-sins-and-seven-virtues",
+              "locale": "zh-CN",
+              "published_revision_id": 845,
+              "translation_group_id": "seven-deadly-sins-and-seven-virtues",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "2a4380d5057e57c84567e6c5ea721ac95da1bb7581d32c7fad7894f117045ada",
+              "public_body_sha256": "f3ec2646083569d7b6b427d187b86ed562213285110e59b96f434f695b675732",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": {
+              "id": 295,
+              "slug": "seven-deadly-sins-and-seven-virtues",
+              "locale": "en",
+              "published_revision_id": 847,
+              "translation_group_id": "seven-deadly-sins-and-seven-virtues",
+              "source_locale": "zh-CN",
+              "source_article_id": 293,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "29b931bac85ae7781c7bb73dcda1a0608d1169bedb86b99272dc24e727342f44",
+              "public_body_sha256": "7498ce487ad04c83c52cae56cde0e9c033131762a78fa186cb0c1cd3e211a6c9",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          },
+          "production": {
+            "source": {
+              "id": 298,
+              "slug": "seven-deadly-sins-and-seven-virtues",
+              "locale": "zh-CN",
+              "published_revision_id": 1179,
+              "translation_group_id": "seven-deadly-sins-and-seven-virtues",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "0dd44851cc51364cac6d2c00088ba975814f232708f8508566eb67006acff3ae",
+              "public_body_sha256": "f3ec2646083569d7b6b427d187b86ed562213285110e59b96f434f695b675732",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": {
+              "id": 299,
+              "slug": "seven-deadly-sins-and-seven-virtues",
+              "locale": "en",
+              "published_revision_id": 1180,
+              "translation_group_id": "seven-deadly-sins-and-seven-virtues",
+              "source_locale": "zh-CN",
+              "source_article_id": 298,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "369b343a4861142a859b67c5b82951862bd8e9c776c0a6a0f9ebc21512d56f88",
+              "public_body_sha256": "7498ce487ad04c83c52cae56cde0e9c033131762a78fa186cb0c1cd3e211a6c9",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-157-articleseven-deadly-sins-and-seven-virtuescoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1672,
+          "cover_image_height": 941,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-157-articleseven-deadly-sins-and-seven-virtuescoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-157-articleseven-deadly-sins-and-seven-virtuescoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-157-articleseven-deadly-sins-and-seven-virtuescoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-157-articleseven-deadly-sins-and-seven-virtuescoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-157-articleseven-deadly-sins-and-seven-virtuescoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            }
+          },
+          "related_test_slug": "seven-sins-virtues-test",
+          "author_name": "費馬測試編輯部",
+          "cover_image_alt": "暖陶色與鈷藍色的成對陶片圍繞兩條弧線排列，示意同一個情境裡的兩種選擇。"
+        },
+        "seo_metadata": {
+          "og_title": "七宗罪是哪七個？七美德對照與 7 個生活例子",
+          "og_description": "七宗罪是哪七個？用一張對照表和 7 個生活例子，弄清七宗罪與對應美德、四樞德和三超德的區別，以及為什麼費馬測試的同組分數可以同時高。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-157-articleseven-deadly-sins-and-seven-virtuescoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "七宗罪是哪七個？七美德對照與 7 個生活例子",
+          "excerpt": "從傲慢與謙卑到懶惰與勤勉，用 7 個生活場景讀懂七宗罪與七美德，再看同組測試分數為什麼可以同時高。",
+          "content_md": "**依常見的中文名稱，七宗罪是傲慢、貪婪、嫉妒、暴怒、色慾、暴食和懶惰。** 這份名單見於《天主教教理》第 1866 段。教廷繁體中文版使用「慳吝」「忿怒」「迷色」「貪饕」，分別對應這裡的貪婪、暴怒、色慾和暴食。英文版把最後一項寫作 *sloth or acedia*。《教理》稱這七項為「罪宗」，因為它們在這一傳統中被視為會滋生其他罪過和惡習的根源。《教理》把這套分類追溯到聖若望·加祥和聖大額我略的傳統。舉個例子，想獨佔功勞的念頭可能進一步演變為謊報分工。[《天主教教理》第 1866 段（繁體中文）](https://www.vatican.va/chinese/ccc/ccc_zh-t-1776.pdf#page=13) · [英文原文](https://www.vatican.va/content/catechism/en/part_three/section_one/chapter_one/article_8/v_the_proliferation_of_sin.html)\n\n## 七宗罪與七美德怎麼對應？\n\n逐項對照的用法，是為每種惡習找一種能夠培養的品格。例如，用謙卑回應傲慢，用慷慨回應貪婪。歷史上的《巴爾的摩教理》把與暴怒相對的品格寫作「溫和」，另有堂區教理講義並列使用「溫和」和「耐心」。下表採用費馬測試的七組名稱，用日常反應來說明每一組的區別。[《巴爾的摩教理》第三冊第 317 問](https://catholicfamilydevotions.com/catechism/baltimore/lesson-6) · [聖雷蒙堂區教理講義](https://straymonds.org/wp-content/uploads/Session-18-Seven-Capital-Sins-Opposite-Corresponding-Virtues-and-Extremes-1.pdf)\n\n| 七宗罪 | 費馬採用的對應美德 | 日常反應舉例 |\n| --- | --- | --- |\n| 傲慢 | 謙卑 | 覺得自己高人一等，聽不進指正。謙卑體現在承認他人的貢獻和自己的疏漏。 |\n| 貪婪 | 慷慨 | 只顧自己多拿、多留。慷慨體現在有餘力時願意和別人分享。 |\n| 嫉妒 | 仁愛 | 因別人得到自己想要的東西而心裡發酸。仁愛體現在失落之餘仍能欣賞對方。 |\n| 暴怒 | 耐心 | 被惹惱時衝動回擊。耐心可以表現在先停一下，再決定怎麼回應。 |\n| 色慾 | 貞潔 | 急著推進親密接觸。這裡用貞潔提醒人先確認彼此意願、尊重彼此的界線。 |\n| 暴食 | 節制 | 持續追求眼前的享受，擠掉原有安排。節制體現在還能照自己的決定停下來。 |\n| 懶惰 | 勤勉 | 有條件處理一項責任，卻一再回避。勤勉體現在找得到第一步，也能著手去做。 |\n\n### 四樞德加三超德是另一組「七美德」\n\n《天主教教理》列出四樞德，即智德、義德、勇德和節德，可理解為明智、公義、堅毅和節制。另有三項超性德行，也稱神學美德，即信德、望德和愛德。這兩組是在教理中分類德行的方式。雖然「節制」也出現在上面的對照表裡，四樞德加三超德並沒有逐項對應七宗罪。比如，與色慾相對的貞潔就不在這份七項名單裡。[《天主教教理》第 1805 段](https://www.vatican.va/content/catechism/en/part_three/section_one/chapter_one/article_7/i_the_human_virtues.html) · [第 1813 段](https://www.vatican.va/content/catechism/en/part_three/section_one/chapter_one/article_7/ii_the_theological_virtues.html)\n\n## 七宗罪與七美德的 7 個生活例子\n\n下面是七個虛構場景。例子借用這些名稱來觀察日常選擇，適用範圍和宗教原義有差異。例如，阿奎那在《神學大全》裡討論的暴食關乎對飲食的過度欲求。費馬借用「暴食與節制」來討論更廣的日常享受，例如追劇時能不能照原定計畫停下。[《神學大全》II–II，第 148 問第 1 條](https://www.newadvent.org/summa/3148.htm)\n\n### 1. 傲慢與謙卑｜誰做了這份成果？\n\n社團準備展示活動成果。小林負責上台簡報，原本覺得大家照他的方案做就好。隊友指出圖表裡兩個數字放反了，他重新核對並改正，也在台上說清楚誰蒐集資料、誰負責校對。這裡的謙卑體現在願意聽進指正，也把功勞說完整。如果名單上漏掉了小林，請人補上他的署名，也是如實說明分工。\n\n### 2. 貪婪與慷慨｜公共物資該留多少？\n\n社區活動發放材料，每戶只用一包。阿嵐領夠以後，還想把剩下幾包拿回家備用，後來發現還有鄰居沒領，就把材料留給了他們。她還把自己多帶的一盒彩色筆分給忘帶筆的小朋友。同樣是把物資留下來，志工為晚到的已登記家庭預留一包，是在履行承諾。要判斷有沒有多拿，可以先問那一份原本該留給誰。\n\n### 3. 嫉妒與仁愛｜朋友的小店先開張了\n\n小周和朋友都在做手工。看到朋友的小店接到第一筆訂單，小周心裡一酸，差點回一句「你只是剛好被平台推薦」。他想起朋友為了讓包裝能反覆使用改過好幾版，還是認真說了聲恭喜，也答應幫忙試試怎麼包裝才更牢固。他也可以問朋友如何拍商品照片，從對方的經驗裡學習。單憑他注意到兩人訂單數不同，無法判斷他是在嫉妒。\n\n### 4. 暴怒與耐心｜收到一條刺耳的訊息\n\n合租室友的群組裡，有人把一筆不明費用歸到小許頭上。小許很想回一句重話，寫完卻先放下手機，等查到付款紀錄再發訊息說明。可以把生氣、想回擊和最後怎樣回應分開看。如果對方繼續辱罵，小許可以結束對話或尋求協助。想進一步區分這些反應，可以讀[暴怒與耐心的結果解讀](https://fermatmind.com/zh-TW/tests/explore/seven-sins-virtues-test/results/anger-reading)。\n\n### 5. 色慾與貞潔｜喜歡一個人，怎麼確認對方也願意？\n\n第二次約會結束時，小顧很想牽對方的手，就先問「可以牽手嗎？」聽到對方說想慢一點，他一度想再勸一句，最後點頭說「好，我們慢慢來」。在這個生活化的例子裡，觀察的是人會不會急著推進，以及怎麼回應對方的選擇。兩人都願意時，主動表達喜歡也可以尊重彼此的節奏。《天主教教理》對貞潔和色慾的討論屬於更廣的性倫理語境。[《天主教教理》第 2337、2351 段](https://www.vatican.va/content/catechism/en/part_three/section_two/chapter_two/article_6/ii_the_vocation_to_chastity.html)\n\n### 6. 暴食與節制｜本來說好只看一集\n\n小陳原本打算看一集就睡，卻因為自動連播接著看了好幾集，隔天差點錯過早班車。下次她先關掉自動連播，讓自己在片尾重新決定要不要繼續。這裡可觀察的是享受有沒有擠掉她原本想做的事。如果週末本來就留了兩小時看電影，看完整部也不能據此說她缺乏節制。\n\n### 7. 懶惰與勤勉｜知道第一步，還是沒開始\n\n小嚴週五前要預約到府維修，號碼也找到了，卻一連幾晚把打電話這件事拖到隔天。後來他先定下一個方便通話的時段，當天打去問可預約的時間。勤勉在這裡就是把能做的第一步做完。如果他剛下夜班，需要睡一覺再處理，晚一點打也有充分理由。[懶惰與勤勉的結果解讀](https://fermatmind.com/zh-TW/tests/explore/seven-sins-virtues-test/results/starting-rest-reading)進一步說明怎樣區分任務沒說清、需要休息和知道怎麼開始卻遲遲沒動。\n\n## 七宗罪和七美德的分數能同時高嗎？\n\n可以。費馬目前的網頁版共有 28 題原創題目，分別計算 14 項得分，每項用各自的兩題計分。同組的兩個分數可以都高，也可以都低。比如，小周可能經常拿自己和朋友比較，同時也常真誠地祝賀朋友。假設他在嫉妒和仁愛各自的兩道題上都選了 4，兩項就會各得 75 分。[費馬七宗罪與七美德測試及計分說明](https://fermatmind.com/zh-TW/tests/explore/seven-sins-virtues-test)\n\n0 到 100 分是本次作答的換算值。75 分表示這兩題的陳述與你這次自我描述的符合程度，無法用來判斷超過了多少人，或某種行為發生的機率。這個題本尚未建立群體常模或心理計量效度，僅供娛樂和自我探索。想回看一個結果，可以選最近一次類似的事，分別想想自己當時有什麼反應、後來做了什麼。",
+          "seo_title": "七宗罪是哪七個？七美德對照與 7 個生活例子",
+          "seo_description": "七宗罪是哪七個？用一張對照表和 7 個生活例子，弄清七宗罪與對應美德、四樞德和三超德的區別，以及為什麼費馬測試的同組分數可以同時高。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 1,
+            "slug": "55e888afb9f3",
+            "label": "人格心理學"
+          },
+          "tags": [
+            {
+              "id": 193,
+              "slug": "e983e8f35861",
+              "label": "七宗罪"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 1,
+        "tag_ids": [
+          179
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 293,
+            "slug": "seven-deadly-sins-and-seven-virtues",
+            "locale": "zh-CN",
+            "published_revision_id": 845,
+            "translation_group_id": "seven-deadly-sins-and-seven-virtues",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "9fb5a5b90305781d55b2af74381fb525974615250c1c11aa105304cf2c96516d",
+              "excerpt": "a097a7ba9958a69e5ce24df8940ffe21859990ee9384925c8368318b4334628c",
+              "content_md": "f3ec2646083569d7b6b427d187b86ed562213285110e59b96f434f695b675732",
+              "author_name": "a35721cf784957062571e98a7b1aa5ac78a35a4140f744735f02769513ef058d",
+              "cover_image_alt": "976f9c7b69bf7fecd3dd1fea8e3dacb57d50ab2f4ff6c2fae9cc0a341ddccb79",
+              "seo_title": "9fb5a5b90305781d55b2af74381fb525974615250c1c11aa105304cf2c96516d",
+              "seo_description": "1f824679bd5cb57a4ff458b3dc841814574e39cfa84d733de22936642c533329",
+              "og_title": "9fb5a5b90305781d55b2af74381fb525974615250c1c11aa105304cf2c96516d",
+              "og_description": "1f824679bd5cb57a4ff458b3dc841814574e39cfa84d733de22936642c533329"
+            }
+          },
+          "existing_english": {
+            "id": 295,
+            "slug": "seven-deadly-sins-and-seven-virtues",
+            "locale": "en",
+            "published_revision_id": 847,
+            "translation_group_id": "seven-deadly-sins-and-seven-virtues",
+            "source_locale": "zh-CN",
+            "source_article_id": 293,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "c5b54ddcc3ea0d383a3f248eba57405a3f9df774f6c0a58b39683336e24735c7",
+              "excerpt": "c44410d80717379a883328630b818cd8de3cba9fbe9562dd21950f0edf2e3792",
+              "content_md": "7498ce487ad04c83c52cae56cde0e9c033131762a78fa186cb0c1cd3e211a6c9",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "a64bbdd7b1d6231152e5a223ece54aec5d069308ca2890e3d228d48db385984a",
+              "seo_title": "c8ba83fda2ed7b0d36bc283b9119d79c767e46df783df4b29e41cb0d0edc4bf7",
+              "seo_description": "dee5dc3ed86dc19ed3308befa9147e2db456a87f898eae7097d644030376859b",
+              "og_title": "c8ba83fda2ed7b0d36bc283b9119d79c767e46df783df4b29e41cb0d0edc4bf7",
+              "og_description": "dee5dc3ed86dc19ed3308befa9147e2db456a87f898eae7097d644030376859b"
+            }
+          },
+          "editorial_projection_sha256": "c4068cb5ff36f724284b7cca3e7cabb52f232ede801e7a82efa78c9ff78f0bba",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 298,
+            "slug": "seven-deadly-sins-and-seven-virtues",
+            "locale": "zh-CN",
+            "published_revision_id": 1179,
+            "translation_group_id": "seven-deadly-sins-and-seven-virtues",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "9fb5a5b90305781d55b2af74381fb525974615250c1c11aa105304cf2c96516d",
+              "excerpt": "a097a7ba9958a69e5ce24df8940ffe21859990ee9384925c8368318b4334628c",
+              "content_md": "f3ec2646083569d7b6b427d187b86ed562213285110e59b96f434f695b675732",
+              "author_name": "a35721cf784957062571e98a7b1aa5ac78a35a4140f744735f02769513ef058d",
+              "cover_image_alt": "976f9c7b69bf7fecd3dd1fea8e3dacb57d50ab2f4ff6c2fae9cc0a341ddccb79",
+              "seo_title": "9fb5a5b90305781d55b2af74381fb525974615250c1c11aa105304cf2c96516d",
+              "seo_description": "1f824679bd5cb57a4ff458b3dc841814574e39cfa84d733de22936642c533329",
+              "og_title": "9fb5a5b90305781d55b2af74381fb525974615250c1c11aa105304cf2c96516d",
+              "og_description": "1f824679bd5cb57a4ff458b3dc841814574e39cfa84d733de22936642c533329"
+            }
+          },
+          "existing_english": {
+            "id": 299,
+            "slug": "seven-deadly-sins-and-seven-virtues",
+            "locale": "en",
+            "published_revision_id": 1180,
+            "translation_group_id": "seven-deadly-sins-and-seven-virtues",
+            "source_locale": "zh-CN",
+            "source_article_id": 298,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "c5b54ddcc3ea0d383a3f248eba57405a3f9df774f6c0a58b39683336e24735c7",
+              "excerpt": "c44410d80717379a883328630b818cd8de3cba9fbe9562dd21950f0edf2e3792",
+              "content_md": "7498ce487ad04c83c52cae56cde0e9c033131762a78fa186cb0c1cd3e211a6c9",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "a64bbdd7b1d6231152e5a223ece54aec5d069308ca2890e3d228d48db385984a",
+              "seo_title": "c8ba83fda2ed7b0d36bc283b9119d79c767e46df783df4b29e41cb0d0edc4bf7",
+              "seo_description": "dee5dc3ed86dc19ed3308befa9147e2db456a87f898eae7097d644030376859b",
+              "og_title": "c8ba83fda2ed7b0d36bc283b9119d79c767e46df783df4b29e41cb0d0edc4bf7",
+              "og_description": "dee5dc3ed86dc19ed3308befa9147e2db456a87f898eae7097d644030376859b"
+            }
+          },
+          "editorial_projection_sha256": "c4068cb5ff36f724284b7cca3e7cabb52f232ede801e7a82efa78c9ff78f0bba",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            }
+          ]
+        }
+      },
+      "staging_target_tag_ids": {
+        "e983e8f35861": 179
+      }
+    },
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "can-chatgpt-estimate-your-iq",
+          "source_locale": "zh-CN",
+          "source_article_id": 285,
+          "translation_group_id": "iq-chat-estimate-20261029"
+        },
+        "review_sha256": "d0556feb8cc4103683485fc182abf9243068f9cdaa64501014d4767a39172c46",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 286,
+              "slug": "can-chatgpt-estimate-your-iq",
+              "locale": "zh-CN",
+              "published_revision_id": 838,
+              "translation_group_id": "iq-chat-estimate-20261029",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "5019f4c424e1da8d5debae418801cbbbb7bcd5da3338e81da6c9f0200569e2fa",
+              "public_body_sha256": "daf3a3f6fab462dd07df056285e6f70b34bf5c4a939a69f9db3fb7d1969909af",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": null
+          },
+          "production": {
+            "source": {
+              "id": 285,
+              "slug": "can-chatgpt-estimate-your-iq",
+              "locale": "zh-CN",
+              "published_revision_id": 1043,
+              "translation_group_id": "iq-chat-estimate-20261029",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "257609133678cee67b7ba4bd7b8f356b1b4871907a29514c54c8f55472c2f836",
+              "public_body_sha256": "daf3a3f6fab462dd07df056285e6f70b34bf5c4a939a69f9db3fb7d1969909af",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": {
+              "id": 286,
+              "slug": "can-chatgpt-estimate-your-iq",
+              "locale": "en",
+              "published_revision_id": 1044,
+              "translation_group_id": "iq-chat-estimate-20261029",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "e9b6efdd4a8cde5cb45032cb0d19a143754995fd8970f36e9491c7aac6caca53",
+              "public_body_sha256": "2d65bb1308c736b5f49ca451aa9b133ba3ede49e031cbe21cd47467fcf3ca166",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-144-articleiqchat-estimatecoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1600,
+          "cover_image_height": 900,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-144-articleiqchat-estimatecoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-144-articleiqchat-estimatecoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-144-articleiqchat-estimatecoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-144-articleiqchat-estimatecoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-144-articleiqchat-estimatecoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            }
+          },
+          "related_test_slug": "iq-test-intelligence-quotient-assessment",
+          "author_name": "費馬測試編輯部",
+          "cover_image_alt": "一位讀者對照聊天氣泡與紙上的推理圖，用鉛筆查證思路。"
+        },
+        "seo_metadata": {
+          "og_title": "ChatGPT 能從聊天測出智商嗎？判斷 AI 給你的 IQ估計",
+          "og_description": "AI 根據聊天給出的 IQ或百分位有多可信？區分聊天猜測、臨時出題、文本預測研究與標準化測驗，用完整虛構案例檢查依據、糾正誤讀，並得到可用的推理回饋。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-144-articleiqchat-estimatecoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "ChatGPT 能從聊天測出智商嗎？如何判斷 AI 給你的 IQ估計",
+          "excerpt": "AI 根據聊天給出的 IQ或百分位有多可信？區分聊天猜測、臨時出題、文本預測研究與標準化測驗，用完整虛構案例檢查依據、糾正誤讀，並得到可用的推理回饋。",
+          "content_md": "如果 ChatGPT 根據聊天告訴你「你的 IQ 大約是 130」，你目前得到的是一個需要檢查依據的判斷。一個數字、一段細緻的讚美，甚至一個看起來審慎的分數範圍，都不能單獨證明已經完成了可信的 IQ 測量。\n\n你可以請 AI 指出一段文字裡可見的表達和推理特點。不過，從「這段話有這些特點」走到「這個人在某個人群中處於某個 IQ 位置」，中間還需要解釋如何測、如何計分、與誰比較，以及這種解釋有什麼驗證依據。\n\n這不等於文本研究沒有價值。真正需要分清的是：它在評價什麼，用什麼方法，能夠支持多大範圍的結論。\n\n下面用一個完整例子說明怎樣檢查、修正錯誤和繼續探索。**小林、對話、IQ 數字、練習及其結果全部由費馬測試編輯部虛構，用於示範方法；不是實際模型試用、真實使用者經歷或效果驗證。**\n\n## 一個很吸引人的估計，可能連眼前的推理都讀錯了\n\n小林寫了一段配送決策，請 AI 根據這段文字評價自己的思考能力。\n\n任務是：週一上午要使用一件物品，預算不超過 80，不能接受遲到。金額均為示意。\n\n| 方案 | 價格 | 到貨條件 |\n|---|---:|---|\n| A | 80 | 保證週日到 |\n| B | 60 | 可能週五到，也可能週二到 |\n| C | 100 | 保證週六到 |\n\n小林的原回答是：\n\n> 我選 B。它更便宜，而且如果週五到了，還能提前檢查。若週二才到，我再改選 A，避免耽誤週一使用。\n\n虛構的 AI 回答聽起來很懂他：\n\n> 你能同時處理成本、時間和風險，並靈活調整策略。這體現了很強的推理能力，我估計你的 IQ 大約是 130。\n\n小林很高興，但先檢查了其中一句：「靈活調整策略」真的成立嗎？\n\n任務要求週一上午使用。若等到週二才知道 B 遲到，再改選 A，已經無法補救週一的安排。AI 把一個沒有解決截止條件的計畫，說成了風險處理得當。\n\n這裡出現了兩個不同的問題。\n\n第一個問題很具體：AI 有沒有讀對這段推理？第二個問題更大：即使讀對了，它有什麼依據把一段決策說明換算成個人 IQ？糾正第一個問題，並不會自動補上第二個問題。\n\n2026 年 10 月，Futurism 報導了全新聊天中也出現較高智力百分位猜測的示範。這提示讀者檢查數字依據，但報導不能提供總體錯誤率或驗證這些分數。[Futurism 原文](https://futurism.com/artificial-intelligence/unused-chatgpt-accounts-top-percentiles-intelligence)\n\n## 能看見語言特點，為什麼還不能直接換算 IQ？\n\n先把幾步推理拆開。\n\n**第一步是描述文本。** 例如，「你列出了三個方案」「你提到價格和最晚到貨日」「這句話與截止條件衝突」。這些說法能夠回到原句檢查。\n\n**第二步是解釋這次表現。** 例如，「在這段任務裡，你優先考慮了較低價格，卻沒有排除可能遲到的方案」。這個判斷仍然有範圍：它只針對這一段任務和回答。\n\n**第三步是推斷更穩定的能力。** 這需要知道，這段文字是不是本人獨立寫的，是否經過修改，是否藉助工具，是否來自熟悉的話題，以及其他任務中的表現怎樣。僅憑當前片段，通常無法逐項確認這些條件。\n\n**第四步才是給出可解釋的分數或人群位置。** 「IQ 130」「第 98 百分位」都需要一個明確的測量和比較框架。知道某種常見 IQ 量尺的表示方式，不會自動產生從聊天內容到該量尺的可靠換算方法。\n\n百分位尤其容易製造確定感。它表達的是相對於某個參照群體的位置，因此必須說清參照群體是誰、成績怎樣取得、比較怎樣建立。「我見過很多聰明人的文字」沒有交代這些資訊。\n\n正確率也不能替代百分位。答對 24 道、總共 30 道，正確率是 80%；這個算式沒有告訴你超過了多少人，更沒有自動給出 IQ。\n\n如果這些問題還不清楚，可以先看[IQ、測量與常模的基本區別](/zh/articles/what-is-iq-and-how-it-is-measured)。本頁接下來處理的是：面對已經出現的聊天估計，具體怎樣查證。\n\n## 四種看起來都像「AI 測智商」的事情，證據要求不同\n\n| 實際發生的事 | 目前可以討論什麼 | 還需要什麼，才能支持更大的結論 |\n|---|---|---|\n| 通用聊天機器人根據對話猜數 | 當前文本中可核的特點、錯誤和表達方式 | 從這些輸入到個人分數的明確方法、適用範圍和驗證證據 |\n| AI 臨時編幾道題讓你作答 | 在這些題目和規則下答得怎樣；題目和評分是否合理 | 題目品質、施測與計分一致性、參照依據及用途驗證 |\n| 專門訓練並檢驗的文本預測模型 | 在研究定義的人群、輸入和目標上取得什麼預測結果 | 對新語言、新人群、新輸入或個人用途的適用證據 |\n| 用於適當目的的標準化測驗 | 按明確程序取得並解釋的測驗成績 | 對所用版本、施測條件、參照人群和具體用途的相應證據 |\n\nAI 臨時出題，比隨口看聊天多了一次作答機會。但「做過幾道題」和「得到了標準 IQ」之間仍有距離。題目可能有歧義，評分也需要檢查；即使題題答對，沒有相應依據，也不能任意換算成某個常模百分位。\n\n同樣，線上進行本身不構成無效的理由。需要檢查的是具體工具、施測與計分程序、常模適用範圍和解釋用途。把紙筆換成螢幕，不能替代這些查證；僅僅使用螢幕，也不能決定結果無效。\n\nAPA 的《心理評估與評量指南》相關段落討論了分數解釋、測驗選擇、標準化施測與計分，以及常模的適用範圍。查證重點應落在具體人群與用途所需的證據。[APA 指南，PDF 第18–21頁](https://www.apa.org/about/policy/guidelines-psychological-assessment-evaluation.pdf)\n\n## 文本確實可能包含認知資訊，但研究方法不能省略\n\n2025 年 Wolfram 的研究使用英國出生世代研究在 11 歲寫的短文，以語言特徵和模型嵌入，經過專門的監督式訓練與交叉驗證預測認知等結果。它說明文本可以包含可預測資訊；它沒有驗證通用聊天機器人對任意成人聊天報出的 IQ。研究中的解釋的變異比例也不是某個人估計「猜對的機率」。[Wolfram，2025](https://pmc.ncbi.nlm.nih.gov/articles/PMC12229686/)\n\n因此，可以認真對待文本預測研究，同時要求聊天估分說明自己的依據。\n\n一個研究模型有明確的訓練目標、輸入形式和檢驗方法。把該研究的存在接到一次一般聊天的情境裡，並不能證明兩者使用了同樣的方法。對話中引用了論文，也不能代替這次估計本身的驗證。\n\n對小林來說，問題不是「有沒有任何研究從文本預測過認知」，而是「眼前這個 130 是怎樣得出的，依據是否適用於我提供的材料」。\n\n## 先撤回沒有依據的數值，再保留有用的回饋\n\n小林可以這樣追問：\n\n> 請分別核對兩件事。  \n> 一、你對我這段回答的判斷，有哪些原句支持？有沒有讀錯條件？  \n> 二、你給出 IQ 數字用了什麼測驗、計分方法、參照人群和驗證依據？如果無法說明，請撤回這個數字，不要換成另一個範圍。\n\n在這個虛構案例中，一個合格的修正可以是：\n\n> 我撤回 IQ 130 的估計。我沒有提供把這段文字換算成 IQ 的方法或驗證依據。  \n> 我也誤讀了你的計畫：若週二才換方案，已經錯過週一的使用時間。可以保留的觀察是，你注意到了價格和提前檢查的好處；不能保留「已經妥善處理遲到風險」的判斷。\n\n這段修正不會產生一個「更真實的低分」。發現一次推理遺漏，不能據此給小林判定低 IQ。它只讓結論回到現有證據能夠支持的位置。\n\n可實際保留的回饋產物如下：\n\n| 原文證據 | 可以保留的回饋 | 不能據此推出 |\n|---|---|---|\n| 「它更便宜」 | 你注意到了價格差異，B 也沒有超過預算。 | 你在所有決策中都善於管理成本。 |\n| 「若週二才到，我再改選 A」 | 補救發生在截止時間之後；當前計畫沒有滿足不能遲到的條件。 | 你有某種認知缺陷，或整體推理能力低。 |\n| 沒有測驗、計分與參照依據 | IQ 數字應撤回，保留未知。 | 改報一個更寬的範圍就可靠了。 |\n\n小林可以把回答改成：\n\n> 我選 A。它保證週日到，價格為 80，滿足預算和週一使用兩個必要條件。B 雖然便宜，但可能週二到；C 到得更早，但超預算。若可以接受遲到，或預算可以增加，選擇才需要重新比較。\n\n這份修改有明確用途：它補上了原回答中遺漏的條件。它仍然不是 IQ 分數。\n\n模型可能繼續讚美、編造依據，或沒有真正撤回數字。應把回答與原文逐項對照；不符合材料的句子直接刪去。如果它不能穩定完成這項核對，就停止讓它承擔這項任務。多問幾次、換幾個模型得到相同數字，也不會補上缺失的測量證據。\n\nOpenAI 曾在 2025 年 4 月說明，一次 GPT-4o 更新出現過度迎合並被回滾。這是特定歷史事件，不能據此判定所有當前模型都迎合或總給高分。[OpenAI 官方說明](https://openai.com/index/sycophancy-in-gpt-4o/)\n\n## 怎樣請求一份更容易核對的回饋？\n\n不必提供完整聊天紀錄。選擇一段自己有權分享、已移除身分資訊及敏感內容的短材料，就可以先做局部核對。不要為這項討論上傳完整個人報告、商業資料、正式測驗題目或標準答案。\n\n下面的提示詞針對可觀察表現，不請求個人 IQ：\n\n> 我會提供一段我有權分享、已移除敏感資訊的短文，以及這段任務的要求。  \n> 請只分析我提供的內容：  \n> 1. 引用具體原句，指出其中一個成立的推理和一個需要查證的地方；沒有足夠證據時直接說沒有。  \n> 2. 對需要查證的地方，區分文本中的實際問題與可能的其他解釋，不替我判斷未提供的經歷或能力。  \n> 3. 給出一處具體修改，並說明它解決了哪個問題。  \n> 4. 列出仍然不知道的事項。  \n> 不估算 IQ、常模百分位或診斷標籤，不把文風直接換算為整體認知能力。不要假設你能存取未提供的歷史。若先前給過過度結論，請明確撤回。\n\n提示詞不能保證模型遵守。最終產物仍應接受同一項檢查：每條觀察能否指回材料，每個建議解決了什麼問題，哪些結論仍需擱置。\n\n關於如何限定對話範圍、質疑迎合和保留自己的決定，可以接著閱讀[與 AI 教練對話的方法](/zh/articles/how-16-personality-types-talk-to-an-ai-coach)。這裡不需要先給自己貼人格或智力標籤。\n\n## 再獨立試一次，才能檢查自己是否用上了回饋\n\n修改同一道題，很容易沿用剛看過的解釋。小林因此換了一段由編輯部自擬的情境，先獨立寫答案，再看回饋：\n\n預算增加到 100；物品仍在週一使用，但現在必須在週五晚上前收到，以便週六試裝。\n\n| 方案 | 價格 | 到貨條件 |\n|---|---:|---|\n| A | 80 | 保證週日到 |\n| B | 95 | 保證週五 18:00 前到 |\n| C | 60 | 可能週五到，也可能週二到 |\n\n小林這次先寫出三個條件：預算不超過 100、週五晚上前到貨、不能接受遲到。隨後選擇 B，並說明 A 來不及試裝，C 仍不能保證趕上時間。\n\n這次可以記錄的結果是：在這個新的小任務裡，他先找出必要條件，並讓選擇與這些條件一致。\n\n仍然不知道的事情包括：他在其他類型任務中是否也能這樣做，隔一段時間後能否保留這項方法，以及任何在參照群體中的 IQ 位置。兩段編輯部練習不能回答這些問題，也不能證明某種長期訓練效果。\n\n如果你已經有本人獨立完成的練習結果，也可以從實際記錄出發：當次完成了什麼、怎樣作答、有沒有外部協助、哪些條件需要下次核對。不要讓 AI 用一個整體標籤蓋過這些具體差異。[本人結果的回顧方法](/zh/articles/iq-test-narrative-portrait)可以幫助組織這類記錄。\n\n## 接下來做什麼，取決於你真正需要知道什麼\n\n如果你只是想知道一段說明哪裡清楚、哪裡存在推理漏洞，完成上面的局部回饋就可以停下。得到可檢查的修改，比繼續追問一個沒有依據的分數更有用。\n\n如果你想獨立嘗試一組明確的視覺推理任務，可以從[費馬原創矩陣練習指南](/zh/articles/iq-test-tool-guide)了解題型和參與方式。當前題本為 30 道原創視覺矩陣，結果包括答對題數、正確率、總用時和所測題組表現；符合條件時還可能出現 Beta 設計參考分。該參考來自設計錨點，不是人口常模、常模百分位或正式全量 IQ，不能拿來認證聊天中的估計。\n\n閱讀結果時，先看[分數、參考指標與限制的解釋](/zh/articles/iq-test-score-and-limits-explained)。未被這組任務測到的能力，也不能被解釋成零分。\n\n若想借助外部 AI 討論本人表現，可以自己選擇需要的結果片段，先預覽，再複製或下載 TXT／Markdown。由你決定是否分享；這個操作不會自動把結果傳給 AI，也不構成原生 AI 測評。討論應圍繞真實成績和作答條件，不讓模型另算人口常模下的 IQ 或百分位。\n\n如果某個決定需要被學校、機構或其他接收方認可的評估結果，先確認對方接受什麼測驗、報告和實施條件，再安排相應評估。聊天中的一個分數，無法替你完成這一步。\n\n## 「AI 自己考出高 IQ」，能說明它會測我的 IQ嗎？\n\n這是兩個評估對象。\n\n給 AI 做題是在研究模型的表現；讓 AI 判斷一個人，則是在提出個人測量主張。Mitchell 的方法討論提醒，人類測驗的效度不能自動遷移到 AI，還需檢查訓練資料洩漏與替代解題路徑。[Mitchell，2026](https://onlinelibrary.wiley.com/doi/10.1002/aaai.70061)\n\n因此，一條模型高分新聞不能補上你個人估計中缺失的測試、參照和驗證依據。\n\n你現在就能做的，是把聊天裡的數字暫時擱置，挑出一條能指回原文的觀察，檢查它是否成立，再決定是否需要下一步測量。對自己保留未知，也是一種準確的判斷。",
+          "seo_title": "ChatGPT 能從聊天測出智商嗎？判斷 AI 給你的 IQ估計",
+          "seo_description": "AI 根據聊天給出的 IQ或百分位有多可信？區分聊天猜測、臨時出題、文本預測研究與標準化測驗，用完整虛構案例檢查依據、糾正誤讀，並得到可用的推理回饋。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 15,
+            "slug": "ability-cognition",
+            "label": "能力與認知"
+          },
+          "tags": [
+            {
+              "id": 80,
+              "slug": "iq-test",
+              "label": "IQ 測驗"
+            },
+            {
+              "id": 84,
+              "slug": "cognitive-self-assessment",
+              "label": "認知能力自評"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 15,
+        "tag_ids": [
+          80,
+          84
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 286,
+            "slug": "can-chatgpt-estimate-your-iq",
+            "locale": "zh-CN",
+            "published_revision_id": 838,
+            "translation_group_id": "iq-chat-estimate-20261029",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "dc8b80bff74ab85718ed471fe2c3c87bad309abc75606311a2be31a28683ce95",
+              "excerpt": "63083a43d12acda26f9ecca773fb7540945589c84db8db0ddd841adf44b7a66a",
+              "content_md": "daf3a3f6fab462dd07df056285e6f70b34bf5c4a939a69f9db3fb7d1969909af",
+              "author_name": "a35721cf784957062571e98a7b1aa5ac78a35a4140f744735f02769513ef058d",
+              "cover_image_alt": "099fb67488f65b7f0577b11d5e1fd98df6cabf8476242d046e42b619b353942d",
+              "seo_title": "7dc35dfb5fcdc797923c36686d4ecaecff7ef4f0a53f41873d6a821d580719d7",
+              "seo_description": "63083a43d12acda26f9ecca773fb7540945589c84db8db0ddd841adf44b7a66a",
+              "og_title": "7dc35dfb5fcdc797923c36686d4ecaecff7ef4f0a53f41873d6a821d580719d7",
+              "og_description": "63083a43d12acda26f9ecca773fb7540945589c84db8db0ddd841adf44b7a66a"
+            }
+          },
+          "existing_english": null,
+          "unpublished_english_slug": "can-chatgpt-estimate-your-iq",
+          "editorial_projection_sha256": "e6c0b31a773e83ba623ed446e11a632cb1800e03a0d91cd2d64af1852895bf13",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            },
+            {
+              "key": "start_test",
+              "kind": "start_test",
+              "href": "/zh/tests/iq-test-intelligence-quotient-assessment"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 285,
+            "slug": "can-chatgpt-estimate-your-iq",
+            "locale": "zh-CN",
+            "published_revision_id": 1043,
+            "translation_group_id": "iq-chat-estimate-20261029",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "dc8b80bff74ab85718ed471fe2c3c87bad309abc75606311a2be31a28683ce95",
+              "excerpt": "63083a43d12acda26f9ecca773fb7540945589c84db8db0ddd841adf44b7a66a",
+              "content_md": "daf3a3f6fab462dd07df056285e6f70b34bf5c4a939a69f9db3fb7d1969909af",
+              "author_name": "a35721cf784957062571e98a7b1aa5ac78a35a4140f744735f02769513ef058d",
+              "cover_image_alt": "099fb67488f65b7f0577b11d5e1fd98df6cabf8476242d046e42b619b353942d",
+              "seo_title": "7dc35dfb5fcdc797923c36686d4ecaecff7ef4f0a53f41873d6a821d580719d7",
+              "seo_description": "63083a43d12acda26f9ecca773fb7540945589c84db8db0ddd841adf44b7a66a",
+              "og_title": "7dc35dfb5fcdc797923c36686d4ecaecff7ef4f0a53f41873d6a821d580719d7",
+              "og_description": "63083a43d12acda26f9ecca773fb7540945589c84db8db0ddd841adf44b7a66a"
+            }
+          },
+          "existing_english": {
+            "id": 286,
+            "slug": "can-chatgpt-estimate-your-iq",
+            "locale": "en",
+            "published_revision_id": 1044,
+            "translation_group_id": "iq-chat-estimate-20261029",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "329bf595f5e09524f853723911ae24f4b8ef15d9d410e0cfd8a696f2da5ab88a",
+              "excerpt": "15d42ec29b60e5497fff18796260fc59ec4cc8b8e56116893299a21065fa1404",
+              "content_md": "2d65bb1308c736b5f49ca451aa9b133ba3ede49e031cbe21cd47467fcf3ca166",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "69d14f0fbf3bdc43fdf1b968aeffda7fa59f615437644b239507efe0182cb970",
+              "seo_title": "329bf595f5e09524f853723911ae24f4b8ef15d9d410e0cfd8a696f2da5ab88a",
+              "seo_description": "15d42ec29b60e5497fff18796260fc59ec4cc8b8e56116893299a21065fa1404",
+              "og_title": "329bf595f5e09524f853723911ae24f4b8ef15d9d410e0cfd8a696f2da5ab88a",
+              "og_description": "15d42ec29b60e5497fff18796260fc59ec4cc8b8e56116893299a21065fa1404"
+            }
+          },
+          "english_relationship": "independent_published_english",
+          "editorial_projection_sha256": "e6c0b31a773e83ba623ed446e11a632cb1800e03a0d91cd2d64af1852895bf13",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            },
+            {
+              "key": "start_test",
+              "kind": "start_test",
+              "href": "/zh/tests/iq-test-intelligence-quotient-assessment"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "career-interests-vs-work-values",
+          "source_locale": "zh-CN",
+          "source_article_id": 272,
+          "translation_group_id": "c30a570e-9443-4cb6-863c-63f3be5ee64b"
+        },
+        "review_sha256": "0c59b77d379bf113a5cde77900c84240c164e65c5b5d45eaf453fc669e16564d",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 281,
+              "slug": "career-interests-vs-work-values",
+              "locale": "zh-CN",
+              "published_revision_id": 833,
+              "translation_group_id": "c30a570e-9443-4cb6-863c-63f3be5ee64b",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "bccb4f771fbe02ba4d1e273354ec3caab2f6e6476481c74465a452df665ee19f",
+              "public_body_sha256": "2f772851a5dfb38a091afb4e8dacc08dfb93b836a8e3877411f696e076171590",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": null
+          },
+          "production": {
+            "source": {
+              "id": 272,
+              "slug": "career-interests-vs-work-values",
+              "locale": "zh-CN",
+              "published_revision_id": 886,
+              "translation_group_id": "c30a570e-9443-4cb6-863c-63f3be5ee64b",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "6474385c129dab8aa921e6e27692aa5993de38a3675f770c41a3cf2fea324f9f",
+              "public_body_sha256": "2f772851a5dfb38a091afb4e8dacc08dfb93b836a8e3877411f696e076171590",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": {
+              "id": 273,
+              "slug": "why-you-like-the-work-but-dont-want-the-job",
+              "locale": "en",
+              "published_revision_id": 887,
+              "translation_group_id": "c30a570e-9443-4cb6-863c-63f3be5ee64b",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "64b2e07bd76a023118a28f87877cf96be8e4fd8ad53522139203a351338661b9",
+              "public_body_sha256": "493bc68e5c399a5f0496b6116701e9426be29c2bde7af4adb8402c2fc48f757f",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1600,
+          "cover_image_height": 900,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            }
+          },
+          "related_test_slug": "holland-career-interest-test-riasec",
+          "author_name": "費馬測試編輯團隊",
+          "cover_image_alt": "一位讀者對照戶外與辦公室工作圖片，思考活動興趣與工作條件。"
+        },
+        "seo_metadata": {
+          "og_title": "職業興趣與職業價值觀：如何判斷要不要接受一份工作",
+          "og_description": "喜歡工作中的某些活動，卻不願接受具體職位？分清興趣、價值觀、任務組合和現實限制，比較兩份職缺的實際問答，寫出下一步該核實什麼、何時繼續或暫緩。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "職業興趣與職業價值觀有何不同：喜歡的工作，為什麼不想選",
+          "excerpt": "興趣指向你願意做的活動，價值觀指向你重視的目標和條件。把職位任務、實際安排與個人底線放在一起，才能判斷是換工作條件、補技能，還是換一個選擇。",
+          "content_md": "喜歡查資料、分析問題、把複雜的事寫清楚，可看到一份包含這些任務的職位，你還是會猶豫：如果總要臨時待命，如果沒有獨立判斷的空間，這還是自己想做的工作嗎？\n\n這種猶豫可能涉及職業價值觀，也可能涉及技能、健康、家庭安排、進入門檻與成本，或者你還不了解的職位條件。它不能直接證明你「不夠喜歡」。\n\n**職業興趣關注你願意投入哪些工作活動；職業價值觀關注你希望從工作中獲得或實現什麼，以及哪些條件和標準對你重要。**喜歡一種活動，和願不願意接受一份具體工作，是有關聯、卻不能互相替代的判斷。\n\n## 興趣問「願意做什麼」，價值觀問「什麼對我重要」\n\n「我喜歡查證資訊」「我願意教別人使用工具」，描述的是活動興趣。\n\n「我希望判斷受到認真對待」「我在意能否幫助別人」「我需要公平的管理和可靠的收入」，描述的是工作中重視的目標、條件或標準。\n\n歷史版 O*NET Work Importance Locator 使用者指南將價值觀所關注的目標與標準，同興趣所關注的活動加以區分。[WIL 使用者指南，印刷第4、22頁](https://www.onetcenter.org/dl_files/WIL_zips/WIL-UG-deskp.pdf) 這個區分便於整理問題；在具體經歷中，你可以既喜歡一項活動，也重視它所實現的目標。\n\n例如，你喜歡教學，可能既因為享受解釋問題的過程，也因為重視幫助他人。但即使教學讓你投入，你仍可能不願接受缺少備課時間、支援不足的某個職位。反過來，一份工作未必每天都讓你興奮，卻可能因為收入可靠、同事可信、安排可預測而值得留下。\n\n分開看，是為了找對下一步：興趣可以結合既往經歷、實際嘗試和回饋來了解；職位條件則需要查資料、具體詢問、觀察並交叉核實。\n\n興趣也不等於每一分鐘都愉快。喜歡的活動仍有重複、卡殼和返工。更有用的問題是：經歷這些之後，你還願意繼續接觸哪一部分？在什麼條件下願意繼續？\n\n## 先看任務組合：你喜歡的部分，在這份職位裡占多大比重？\n\n一份職位說明提到「研究」和「寫作」，不表示日常大部分時間都在做這些事。你可能喜歡研究，卻不願長期承擔大量催稿、格式整理或客戶協調。這時，問題不一定只是價值觀，也可能是整個任務組合沒有想像中吸引你。\n\n可以問：「新人一個普通星期主要完成哪些任務？哪些最花時間？我感興趣的那項活動通常在什麼情況下出現？」最好請對方舉最近的工作實例，而不只看職位說明中的幾個動詞。\n\n不必要求工作中的每件事都令人興奮。要核實的是：**吸引你的活動是否確實存在；其餘固定任務和安排，你是否願意且能夠承擔。**職位名稱相同，也要分別查具體團隊。\n\n## 兩份都叫「內容編輯」的工作，為什麼會得到不同答案\n\n**以下人物、職位、問答和結果均為虛構，用於演示判斷過程。**\n\n阿寧喜歡查證資訊，再把它整理成別人看得懂的說明。做課程專案時，她願意反覆追查出處、比較說法、修改表達。\n\n她看到兩份「內容編輯」職位，都寫著「資料研究」和「內容撰寫」。甲強調即時回應，乙強調事先排定時程。她最初覺得乙更好：「我喜歡穩定。」\n\n但「穩定」還不夠具體。繼續拆解後，她發現：\n\n- 資料不足時，她希望能說明不確定性，並得到認真覆核。這涉及她重視的工作標準與支援。\n- 她目前承擔固定的晚間照護，無法接下常態夜間值班。這是目前限制，也與她重視的家庭責任有關。\n- 乙是否真的很少臨時任務，她並不知道。「事先排定時程」沒有回答上線時怎樣安排。\n\n這幾項並不互斥。同一件事可以同時涉及價值觀和現實限制；還有一些只是資訊沒問清。\n\n### 她問了什麼，答案改變了什麼\n\n阿寧向甲詢問：「夜間回應是不是固定職責？最近一次臨時任務怎樣分工？目前能否調整班次？」\n\n甲明確回答：團隊需要輪流夜間回應，目前無法調整。\n\n她因此暫不推進甲。這個答案只說明「甲目前的安排接不了」，沒有證明她不喜歡內容工作，更沒有理由據此排除整個行業。\n\n她向乙詢問：「過去三個月，臨時修改大約多久發生一次？上線階段怎樣排班？關鍵資料無法查證，誰決定延期？覆核通常多久會有回覆？」\n\n乙回答：通常事先排定時程，上線時仍有臨時修改；有覆核流程，但團隊較忙，回饋未必及時。\n\n這個答案修正了她對乙的想像。乙還不能被認定為「穩定、支援充分」，只是值得繼續了解。她需要進一步確認的是：臨時修改是否涉及晚間，以及覆核延遲時如何安排任務。\n\n她還沒有把「包含資料研究」當成「主要做資料研究」，準備繼續問乙：新人一週的研究、寫作、協調與修改通常怎樣分配。近期實例能補充資訊，但不能保證以後的每週都相同。\n\n阿寧也做了一次短篇說明練習，請一位編輯朋友回饋。對方發現，她的一處引文沒有追到最初來源，兩個數字版本也缺少選擇依據。\n\n這說明本次材料存在查核缺口，可以據此補方法、找回饋，再觀察相似任務。它不能證明阿寧「沒有天賦」，也不能證明她已具備職位所需的完整能力。\n\n最終，她暫緩甲，繼續核實乙，並補自己的查核方法。她仍不知道乙是否會錄用她，也不知道入職後是否滿意；但她知道每個判斷依據什麼、還缺什麼。\n\n## 職業價值觀包括哪些？用六類歷史分類幫助提問\n\n價值觀不只涉及理想、公益或道德，也包括待遇、自主、管理方式和工作保障。\n\nO*NET 歷史工具 WIL 使用過六類工作價值觀。下面按其報告作簡要說明：\n\n| 類別 | 主要關注 |\n|---|---|\n| 成就 | 發揮所長，看見成果與成就感 |\n| 獨立 | 主動安排工作、獨立作決定 |\n| 認可 | 晉升機會、聲望與領導空間 |\n| 關係 | 同事友好、服務他人、符合道德判斷 |\n| 支援 | 組織支援，以及稱職、體諒且公平的管理 |\n| 工作條件 | 報酬、工作保障、環境及工作方式 |\n\n這是一種具體分類，不能當成「所有人的價值觀只有六種」。例如，報酬在這一分類中歸入工作條件，並非一項普遍獨立的「第七類」。[WIL Score Report，印刷第2頁](https://www.onetcenter.org/dl_files/WIL_zips/WIL-SR-deskp.pdf)\n\n該工具已於2024年6月3日退役，官方將材料保留供研究使用。這裡借它幫助理解概念，不推薦用舊職業名單作目前求職結論；工具退役也不等於「工作價值觀」這個概念失效。[O*NET 官方歸檔說明](https://www.onetcenter.org/reports/WIL_Archive.html)\n\n不必急著給六類排出終身順序。先選一個正在考慮的職位，把抽象詞變成具體問題：「獨立」是能選擇方法，還是能決定時間？「成長」是任務變難，還是有人給你及時、具體的回饋？\n\n## 把「我不喜歡」拆成價值、限制、未知和代價\n\n下面是整理資訊的方法，不是標準化測評。同一句話可能同時涉及幾層，不必強行只選一類。\n\n| 資訊層次 | 例子 | 下一步 |\n|---|---|---|\n| 價值偏好 | 我重視可預測的生活安排 | 寫清最低可接受條件和原因 |\n| 目前限制 | 這段時間必須承擔晚間照護 | 核實能否調整，或暫緩 |\n| 未知資訊 | 職位是否需要晚間值班 | 查安排、問近期實例 |\n| 代價與權衡 | 換到合適班次會增加通勤 | 核算能否負擔、能負擔多久 |\n\n收入同樣可以這樣拆。「希望收入反映貢獻」涉及價值判斷；「必須覆蓋目前基本開支」涉及現實底線；「獎金怎樣發」可能是未知；「轉到這個領域要經歷多久收入下降」涉及進入門檻與成本。\n\n訓練、健康、家庭期待和地區機會也可能交疊。例如，你可能既重視專業成長，又暫時承擔不起訓練期間的收入損失。先承認兩件事都成立，比把問題歸結成「到底夠不夠熱愛」更容易推進。\n\n一個有用的反問是：「如果這個條件改變，我還願意做這些活動嗎？」回答可以幫助辨認問題，但假設本身不能證明現實中一定存在這樣的職位。\n\n## 兩個都重要的價值衝突時，檢查具體組合\n\n你可能同時重視自主和可靠收入，也同時重視幫助他人與保留個人時間。它們不必必然衝突；是否存在取捨，要看具體職位怎樣組織工作。\n\n某個職位可能用更高報酬交換更多值班，也可能沒有這種安排。不要先認定「收入高就必須工時長」或「穩定就沒有自主」，再替自己放棄尚未核實的選擇。\n\n回到阿寧的情況，她可以這樣表達：\n\n> 日常寫作方法可以按團隊規範調整；關鍵事實沒有依據時，我需要能提出覆核，並知道由誰決定繼續還是延期。\n\n這比只說「自主最重要」更容易核實。她也可以同時重視回饋及時和任務安排明確，再問乙能提供怎樣的組合。\n\n打分有時能幫助比較，但總分不能覆蓋目前接不了的硬條件。其他條件再滿意，也不能自動補償無法承擔的固定夜班。\n\n如果不想打分，可以先整理三欄：\n\n- **必須滿足**：目前不可讓步的條件，寫清原因。\n- **可以協商**：願意調整什麼，需要什麼補償或支援。\n- **仍待核實**：留下能改變判斷的具體問題。\n\n這張表的作用是讓比較清楚，不會替你算出「正確職業」。\n\n## 喜歡、能完成、具備資格，需要不同證據\n\n「願意做」不能證明「已經能做好」。能力涉及影響任務表現的較廣泛特徵；技能是通過學習與經驗形成的具體做事方法；資格則涉及學歷、證書、執照等進入要求。O*NET 內容模型將這些資訊分別組織，而不是用興趣分數代替。[O*NET Content Model](https://www.onetcenter.org/content.html)\n\n遇到困難時，先定位任務要求、知識與方法、工具和支援條件，再決定補訓練、找回饋還是調整目標。一次完成得慢、一次練習出錯，都不足以判斷固定能力或先天天賦。\n\n資格要求也要按具體職位和地區核實，分清權威規定與僱主偏好。感興趣、做過模擬專案，都不能替代實際需要的入行資格。\n\n工作適應理論（TWA）還區分兩個方向：你對工作環境是否滿意，以及工作環境對你的任務表現是否滿意。一個人可以做得很好，卻不願長期接受某種安排；也可以喜歡條件，卻暫時達不到任務要求。這兩個方向不能互相證明。[明尼蘇達大學 TWA 說明](https://vpr.psych.umn.edu/theory-work-adjustment)\n\n如果你卡在「喜歡這個方向，但拿不出做事證據」，可繼續讀[專業不對口怎麼找工作](https://fermatmind.com/zh/articles/major-career-mismatch-job-search-skills-plan)。那裡討論怎樣整理職位看得懂的證據；這裡討論你願意在什麼條件下做。\n\n## 下一步：找出最可能改變判斷的一個未知\n\n霍蘭德 RIASEC 六類興趣整理的是興趣線索，不能直接當成能力結論或工作價值觀排序。具體邊界可看[霍蘭德測試能告訴你什麼、不能告訴你什麼](https://fermatmind.com/zh/articles/holland-career-interest-test-can-and-cannot-tell-you)。\n\n已經有 RIASEC 結果時，可以先檢查平台、語言、版本、作答情況和解釋邊界，再結合完整六維與真實經歷提取活動線索。**為了了解工作價值觀而再做一次興趣測試，並不能補上另一類資訊。**六維如何理解，可看[霍蘭德 RIASEC 六維怎麼讀](https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained)。\n\n如果還不清楚哪些活動吸引自己，可先讀[費馬霍蘭德職業興趣測試說明](https://fermatmind.com/zh/tests/holland-career-interest-test-riasec)。其結果用於興趣探索，不能直接推斷能力，也不能替代對價值觀和工作條件的核實。\n\n核實職位時，可以組合使用職位說明、招募溝通和在職人員的經驗。職位說明能提供職責與要求，但未必寫明例外；招募方可以解釋目前安排，但說法仍需核對；從業人員能補充日常細節，卻未必代表其他團隊。\n\n一次只追問最可能改變決定的事項。時間安排不清，就問最近的輪班和例外；自主空間不清，就問哪些決定可自己作、遇到分歧由誰處理；成長支援不清，就問新人最近一次怎樣得到回饋。相關資格則查對應地區的明確要求，不只聽招募口頭概括。\n\n如果答案含糊或相互矛盾，先保留為未知。還不知道，不等於不匹配；近期的一個例子，也不等於對未來安排的保證。\n\n也不必把每項興趣都變成職業。喜歡攝影，卻不願承擔招攬客戶、客戶修改和經營安排，可以選擇保留為業餘興趣。這樣的判斷並沒有否定喜歡本身。\n\n## 資訊還不完整時，怎樣做出下一步決定？\n\n不必等所有疑問都消失，但要區分一般的不確定性與會讓你無法接受職位的未知。這裡建議保留一份簡短決定記錄，而不是計算職業適配總分：\n\n> **這個職位吸引我的活動：**____；目前有什麼依據說明它會出現在日常工作中？  \n> **必須滿足的條件：**____；為什麼是目前底線，而不只是更喜歡的安排？  \n> **最關鍵的已知與未知：**____；分別來自哪裡，誰還能核實？  \n> **本次決定與覆核點：**繼續了解／提出具體協商條件／暫緩；在____前核實____，如果答案不同，我會怎樣調整？\n\n已經明確無法滿足必要條件，可以暫緩這個職位，不把結論推廣到整個職業。關鍵條件尚未問清，可以先請求澄清，並給自己一個與實際回覆期限相符的覆核點；不要把「尚未證實有問題」當成「已經符合」。\n\n如果現實中沒有理想選項，就比較目前真正可得、能夠承擔的組合：哪些偏好可以階段性調整，需要什麼支援，預計承擔多久。因目前收入或家庭責任選擇一份不完美的工作，並不能直接說明你背叛了自己的價值觀；仍要如實記錄代價，不把已知不可承擔的條件改名為「成長機會」。\n\n這份記錄是思考工具，不會預測錄用或滿意度。**興趣幫你找出願意接觸的活動；價值觀、現實條件和職位證據，幫助你判斷願不願意接受這一份工作。**",
+          "seo_title": "職業興趣與職業價值觀：如何判斷要不要接受一份工作",
+          "seo_description": "喜歡工作中的某些活動，卻不願接受具體職位？分清興趣、價值觀、任務組合和現實限制，比較兩份職缺的實際問答，寫出下一步該核實什麼、何時繼續或暫緩。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 11,
+            "slug": "career-exploration",
+            "label": "職業探索"
+          },
+          "tags": [
+            {
+              "id": 14,
+              "slug": "d69d9bea15c7",
+              "label": "職業興趣"
+            },
+            {
+              "id": 185,
+              "slug": "dfe789843a46",
+              "label": "職業價值觀"
+            },
+            {
+              "id": 186,
+              "slug": "38d3e40c61f3",
+              "label": "工作價值觀"
+            },
+            {
+              "id": 187,
+              "slug": "1faf4156a22d",
+              "label": "職業選擇"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 11,
+        "tag_ids": [
+          14,
+          175,
+          176,
+          177
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 281,
+            "slug": "career-interests-vs-work-values",
+            "locale": "zh-CN",
+            "published_revision_id": 833,
+            "translation_group_id": "c30a570e-9443-4cb6-863c-63f3be5ee64b",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "2410c21fbf1250b500fa485fea6c38e79af3b58622766a3359f42a989290d15c",
+              "excerpt": "bc098941bae43f00b3f8c3c48eb85b7d83845527fd20f10916c347a39db81516",
+              "content_md": "2f772851a5dfb38a091afb4e8dacc08dfb93b836a8e3877411f696e076171590",
+              "author_name": "0cd9e3963ca88fd31dc6271d4e10ccf04aa64ed8a354066b1286821d47e1c291",
+              "cover_image_alt": "68c15a8b7ac4df1ac92b0cd8e33cda3880248d25a52fcfb8e34923dd0c279d9a",
+              "seo_title": "435e9444f6dadbd65e5d9f63970d3b476dfde2d6b313cffcf795445e6ca96846",
+              "seo_description": "6a96f335df094e34d316bdbe587b0a05cd33a6ee1e0cb6cf9c92b15b3f09a9da",
+              "og_title": "435e9444f6dadbd65e5d9f63970d3b476dfde2d6b313cffcf795445e6ca96846",
+              "og_description": "6a96f335df094e34d316bdbe587b0a05cd33a6ee1e0cb6cf9c92b15b3f09a9da"
+            }
+          },
+          "existing_english": null,
+          "unpublished_english_slug": "why-you-like-the-work-but-dont-want-the-job",
+          "editorial_projection_sha256": "28d33d75ce0fad2dd736e6e881c31a39beea4df3676ed6f06123c1bfa74fa858",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            },
+            {
+              "key": "start_test",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 272,
+            "slug": "career-interests-vs-work-values",
+            "locale": "zh-CN",
+            "published_revision_id": 886,
+            "translation_group_id": "c30a570e-9443-4cb6-863c-63f3be5ee64b",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "2410c21fbf1250b500fa485fea6c38e79af3b58622766a3359f42a989290d15c",
+              "excerpt": "bc098941bae43f00b3f8c3c48eb85b7d83845527fd20f10916c347a39db81516",
+              "content_md": "2f772851a5dfb38a091afb4e8dacc08dfb93b836a8e3877411f696e076171590",
+              "author_name": "0cd9e3963ca88fd31dc6271d4e10ccf04aa64ed8a354066b1286821d47e1c291",
+              "cover_image_alt": "68c15a8b7ac4df1ac92b0cd8e33cda3880248d25a52fcfb8e34923dd0c279d9a",
+              "seo_title": "435e9444f6dadbd65e5d9f63970d3b476dfde2d6b313cffcf795445e6ca96846",
+              "seo_description": "6a96f335df094e34d316bdbe587b0a05cd33a6ee1e0cb6cf9c92b15b3f09a9da",
+              "og_title": "435e9444f6dadbd65e5d9f63970d3b476dfde2d6b313cffcf795445e6ca96846",
+              "og_description": "6a96f335df094e34d316bdbe587b0a05cd33a6ee1e0cb6cf9c92b15b3f09a9da"
+            }
+          },
+          "existing_english": {
+            "id": 273,
+            "slug": "why-you-like-the-work-but-dont-want-the-job",
+            "locale": "en",
+            "published_revision_id": 887,
+            "translation_group_id": "c30a570e-9443-4cb6-863c-63f3be5ee64b",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "c1cb79b9916604e277371cedf64f97ff3fd5a74bf88c4d89805641e368c5b446",
+              "excerpt": "8dcccb78047ef55ae70c7407a6403e04a6502d2a0af250fac25fa738ddd061d4",
+              "content_md": "493bc68e5c399a5f0496b6116701e9426be29c2bde7af4adb8402c2fc48f757f",
+              "author_name": "bfe9b72b4d42c0e0acf0841a6ea64e2cde7ebeab55f70c018d4023387da0497f",
+              "cover_image_alt": "d468eeb3bd7d935bcb90ca291fe518160fff817f15ddb71aecf8fc19d90b508f",
+              "seo_title": "18e69c8fc449da3d8b9a9630e2cde23556ab90868a47236c13e08439b5b3aef0",
+              "seo_description": "86f9cdeea49b0c31f040cc653cd35df83823d8d7e5fccb23b38318d069c24ac0",
+              "og_title": "18e69c8fc449da3d8b9a9630e2cde23556ab90868a47236c13e08439b5b3aef0",
+              "og_description": "86f9cdeea49b0c31f040cc653cd35df83823d8d7e5fccb23b38318d069c24ac0"
+            }
+          },
+          "english_relationship": "independent_published_english",
+          "editorial_projection_sha256": "28d33d75ce0fad2dd736e6e881c31a39beea4df3676ed6f06123c1bfa74fa858",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            },
+            {
+              "key": "start_test",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            }
+          ]
+        }
+      },
+      "staging_target_tag_ids": {
+        "dfe789843a46": 175,
+        "38d3e40c61f3": 176,
+        "1faf4156a22d": 177
+      }
+    },
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "which-love-script-fits-you-best",
+          "source_locale": "zh-CN",
+          "source_article_id": 16,
+          "translation_group_id": "article-16"
+        },
+        "review_sha256": "9a77d20d8b97c4b34b09b70a17e4cca53cf1b95c190680adfe521003e1e7fa5d",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 16,
+              "slug": "which-love-script-fits-you-best",
+              "locale": "zh-CN",
+              "published_revision_id": 435,
+              "translation_group_id": "article-16",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "bc3890654d60d40a16afb4ecb1641561e862e4fc58ed47bd044dfc9160c64c3c",
+              "public_body_sha256": "8e69c469c40a1de115776d82e00394dcde1771da2be6ffa7b26d0ce03d04202e",
+              "hreflang_gate": null
+            },
+            "existing_english": {
+              "id": 25,
+              "slug": "which-love-script-fits-you-best",
+              "locale": "en",
+              "published_revision_id": 722,
+              "translation_group_id": "article-16",
+              "source_locale": "zh-CN",
+              "source_article_id": 16,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "221fce47cc8301111abfba48bf6124a70bd12301e4ebb6abf4222c20866ea64e",
+              "public_body_sha256": "16cc6ebf3a6c626aff0df70c4f99cd20f25488c73e54e67efb47b8cba762adcb",
+              "hreflang_gate": null
+            }
+          },
+          "production": {
+            "source": {
+              "id": 16,
+              "slug": "which-love-script-fits-you-best",
+              "locale": "zh-CN",
+              "published_revision_id": 1079,
+              "translation_group_id": "article-16",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "c1fb26a9a1efe9e420534a54d24b110b8c113912d73745cdeb03a11e1bb0d42e",
+              "public_body_sha256": "9459d0c692ef5bb8aa35c9a942a927d869eb0c254048ed8cae351c20d156d979",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": {
+              "id": 25,
+              "slug": "which-love-script-fits-you-best",
+              "locale": "en",
+              "published_revision_id": 1080,
+              "translation_group_id": "article-16",
+              "source_locale": "zh-CN",
+              "source_article_id": 16,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "2eed8db03cdb024140be0e642b96fd3a0cb0e66d79890e731bc8dfdb3faeacd5",
+              "public_body_sha256": "f6e4bd6b3f52796db7197561cad7aa700f9496db642105a45aa5a741785efb4d",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-126-articlewhich-love-script-fits-you-bestcoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1672,
+          "cover_image_height": 941,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-126-articlewhich-love-script-fits-you-bestcoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-126-articlewhich-love-script-fits-you-bestcoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-126-articlewhich-love-script-fits-you-bestcoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-126-articlewhich-love-script-fits-you-bestcoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-126-articlewhich-love-script-fits-you-bestcoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            }
+          },
+          "related_test_slug": null,
+          "author_name": "FermatMind Editorial",
+          "cover_image_alt": "一對伴侶透過親密、激情與承諾三條路徑理解不同愛情腳本"
+        },
+        "seo_metadata": {
+          "og_title": "愛情三角理論：親密、激情與承諾如何組成不同關係狀態",
+          "og_description": "系統解釋 Sternberg 愛情三角理論及親密、激情、承諾的不同組合，附現實三角練習與關係邊界，不做伴侶匹配預測。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-126-articlewhich-love-script-fits-you-bestcoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "愛情三角理論：親密、激情與承諾如何組成不同關係狀態",
+          "excerpt": "愛情三角理論幫助描述一段關係中的親密、激情與承諾，但不能測出命定伴侶或預測關係結局。",
+          "content_md": "## 快速答案\n\nSternberg 的愛情三角理論把愛情理解為親密、激情與承諾三個成分的不同組合。它能幫助你描述一段關係現在偏向陪伴、吸引、責任還是三者兼具，卻不能算出誰是「命定伴侶」。比尋找固定愛情類型更有用的問題是：你們目前擁有什麼、缺少什麼、雙方希望如何改變，以及現實行動是否與承諾一致。\n\n先分別寫下最近四週親密、激情與承諾的行為證據，再比較現實三角與理想三角；不要把組合名稱當成伴侶匹配結果。\n\n## 愛情三角理論在解釋什麼\n\n談到「適合的愛情」，人們常把吸引力、被理解、長期穩定和現實協作混在一起。三角理論的價值，是把這些體驗拆成三個可以分別討論的成分：\n\n- **親密**：理解、信任、支持、願意分享脆弱感受與生活日常；\n- **激情**：吸引、渴望、興奮與身體親近；\n- **決定／承諾**：短期是決定自己愛某個人，長期是承諾維持這份愛；這兩個方面不一定同時出現，不能只憑承諾推定親密或激情。\n\n三個成分不是一次測量後的固定分數。它們會隨著關係階段、壓力、距離、健康與共同經歷變化。熱戀期的激情很強，不代表承諾已經形成；長期伴侶的激情下降，也不等於關係沒有價值。\n\n## 三種成分如何形成常見關係狀態\n\n理論通常用不同組合描述關係狀態。中文譯名在不同資料中可能略有差異，理解組合比背名稱更重要。\n\n| 親密 | 激情 | 承諾 | 常見描述 | 需要繼續觀察 |\n|---|---|---|---|---|\n| 無 | 無 | 無 | 無愛或關係尚未形成 | 是否有繼續建立連結的意願 |\n| 有 | 無 | 無 | 喜歡、友誼式親近 | 雙方是否希望發展激情或承諾 |\n| 無 | 有 | 無 | 迷戀 | 是否了解真實生活中的對方 |\n| 無 | 無 | 有 | 空洞之愛 | 承諾是否仍有情感與實際支持 |\n| 有 | 有 | 無 | 浪漫之愛 | 如何面對長期責任和差異 |\n| 有 | 無 | 有 | 伴侶之愛 | 如何維護新鮮感與身體親近 |\n| 無 | 有 | 有 | 草率之愛 | 決定是否快於相互了解 |\n| 有 | 有 | 有 | 完整之愛 | 三者如何在現實中持續維護 |\n\n這張表不是關係成績單。「完整」也不等於永遠穩定；三個成分都需要實際行動支持，而且雙方對親密、激情和承諾的理解可能不同。\n\n這些組合是理論上的極端情形，現實關係不必純屬某一類。\n\n## 不要把關係狀態誤當成個人類型\n\n「我就是激情型」「他天生不適合承諾」聽起來簡潔，卻可能掩蓋真正的問題。關係成分描述的是兩個人在特定階段的互動，不是一個人的一輩子的身分。\n\n例如，一個人在上一段關係裡遲遲不承諾，可能是價值觀衝突、現實條件不足或信任尚未建立，而不是他擁有固定的「逃避腳本」。同一個人在另一段關係、不同人生階段，行為可能完全不同。\n\n如果本文使用「關係腳本」這個方便理解的表達，它指的是反覆出現的期待和互動順序，不是 FermatMind 自創或驗證的新量表，也不用於診斷依附類型。\n\n## 先畫「現實三角」，再畫「理想三角」\n\n你可以和伴侶分別完成下面的練習。不要急著討論誰對誰錯，先記錄具體證據。如果一時想不出例子，可以先做[費馬愛情三角反思測驗](/zh/tests/explore/sternberg-love)。親密、激情和決定／承諾各有一份解讀，每組五題都有數值回答才顯示該組平均分數。讀完其中一項，先記下一件真實發生的事。例如，最近哪次談話讓你感到被理解？再把你希望多發生的一件事寫進理想三角。你的作答只描述自己的體驗，伴侶可以用自己的話說說他們的感受。\n\n### 第一步：描述現實\n\n分別為三個問題寫下最近四週的例子：\n\n1. 親密：我們在哪些時刻真正理解或支持彼此？\n2. 激情：哪些互動讓我們感到吸引、活力或期待？\n3. 承諾：我們為關係做過哪些可見、持續的選擇？\n\n### 第二步：描述理想\n\n各自回答：未來三個月最想增加哪一個成分？想增加的不是抽象感覺，而是什麼行為，例如每週一次不被手機打擾的對話、共同安排一次新體驗、完成一項長期計畫。\n\n### 第三步：比較差距\n\n如果一方想增加激情，另一方最在意承諾，衝突不一定是「不夠愛」，而是優先順序不同。先把需要翻譯成可執行請求，再決定雙方是否願意投入。\n\n## 同一段關係會經歷不同組合\n\n關係早期可能有較強激情，卻尚未充分了解彼此；共同生活後，承諾與親密增加，激情可能受到工作、照護和健康影響。經歷異地、育兒、失業或遷居時，三個成分還會重新排列。把一次感受當成固定類型，會讓雙方忽略關係本來就在變化。\n\n可以每三個月分別回答三個問題：最近什麼行為讓我感到被理解？我們如何主動創造吸引和活力？哪些承諾已經落實為時間、責任和選擇？如果答案為空，先尋找具體缺口，不要急著給關係貼「空洞」或「失敗」的標籤。\n\n理論也不能替代安全判斷。控制、羞辱、威脅、隔離和強迫不是某種愛情組合需要接受的代價。存在這些情形時，應優先考慮安全和適當支持，而不是靠增加親密或激情來修復。\n\n如果雙方對關係目標根本不同，理論最多幫助把分歧說清楚，不能保證達成一致。清楚的不一致有時比一個看似完整的類型答案更重要。\n\n## 七種狀態不是「七個最佳配對答案」\n\n搜尋「哪種愛情適合我」時，使用者很容易期待一個配對結論。更可靠的判斷至少要同時看：\n\n- 雙方對關係的目標是否一致；\n- 衝突後能否修復，而不是只看衝突次數；\n- 承諾是否表現為持續行動；\n- 權力、邊界與安全是否基本平等；\n- 現實條件能否支援雙方想要的生活；\n- 差異能否被討論，而不是用人格標籤封口。\n\n人格偏好可以幫助你理解溝通節奏，卻不能證明兩個人相配。不要因為同一 MBTI 類型就認定合適，也不要因為類型不同就否定關係。\n\n## 常見誤區\n\n### 激情強就代表愛得更深\n\n激情是愛情的重要成分之一，但高強度也可能來自不確定、追逐或衝突後的暫時靠近。判斷關係品質還要看親密、承諾、安全和長期行為。\n\n### 沒有激情的關係一定應該結束\n\n不能僅憑這一項決定。激情可能受壓力、照護責任、健康和相處模式影響。雙方需要先確認問題、意願和可調整空間；涉及身體或心理健康時應尋求適當專業支持。\n\n### 完整之愛是一次達到的終點\n\n不是。即使三個成分都存在，也可能隨時間波動。關係更像需要持續維護的系統，而不是拿到一個永久認證。\n\n## 把理論用於一次具體對話\n\n可以用下面的順序開始：\n\n1. 「過去一個月，我最感到親近的一次是……」\n2. 「我希望我們增加的不是抽象浪漫，而是……」\n3. 「我願意為這項改變承擔的行動是……」\n4. 「四週後，我們用什麼現象判斷它有沒有幫助？」\n\n如果你正在計劃一個具體節日情境，可以繼續看[按關係階段、刺激偏好和預算安排情人節約會](/zh/articles/best-valentines-date-by-personality-and-relationship-science)。本頁負責解釋關係成分，那篇文章負責把目標變成活動。\n\n## 常見問題\n\n### 愛情三角理論可以測出最適合我的伴侶嗎？\n\n不可以。它幫助描述關係成分，不預測特定對象，也不能代替對價值觀、安全、邊界和現實條件的判斷。\n\n### 七種愛情類型是固定的嗎？\n\n不是。更準確的說法是不同組合形成的關係狀態。親密、激情和承諾會隨階段與情境變化。\n\n### 三個成分哪一個最重要？\n\n沒有適用於所有關係的單一答案。不同階段的重點可能不同，但任何長期關係都需要雙方對期待和投入有足夠清楚的共識。\n\n### 可以用 MBTI 判斷雙方的愛情類型嗎？\n\n不建議。MBTI-style 偏好最多幫助討論溝通和決策差異，不能推出關係品質或「最佳配對」。\n\n## 參考來源\n\n- Sternberg, R. J. (1986). A triangular theory of love. Psychological Review, 93(2), 119–135. https://doi.org/10.1037/0033-295X.93.2.119\n- Robert J. Sternberg 對愛情理論的公開介紹：https://www.robertjsternberg.com/love/\n- Acker, M., & Davis, M. H. (1992). Intimacy, passion and commitment in adult romantic relationships. https://doi.org/10.1177/0265407592091002\n\n這些資料支持對愛情成分和關係狀態的解釋，無法用這些分類預測伴侶是否合適或關係結局。",
+          "seo_title": "愛情三角理論：親密、激情與承諾如何組成不同關係狀態",
+          "seo_description": "系統解釋 Sternberg 愛情三角理論及親密、激情、承諾的不同組合，附現實三角練習與關係邊界，不做伴侶匹配預測。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 2,
+            "slug": "ef918706df93",
+            "label": "關係與愛情"
+          },
+          "tags": [
+            {
+              "id": 6,
+              "slug": "8fc09614864d",
+              "label": "親密關係"
+            },
+            {
+              "id": 8,
+              "slug": "d63abbbd8cb5",
+              "label": "關係科學"
+            },
+            {
+              "id": 18,
+              "slug": "mbti",
+              "label": "MBTI"
+            },
+            {
+              "id": 23,
+              "slug": "4459340b9f64",
+              "label": "依附與親密"
+            },
+            {
+              "id": 24,
+              "slug": "01a428276613",
+              "label": "愛情風格"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 2,
+        "tag_ids": [
+          6,
+          8,
+          18,
+          23,
+          24
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 16,
+            "slug": "which-love-script-fits-you-best",
+            "locale": "zh-CN",
+            "published_revision_id": 435,
+            "translation_group_id": "article-16",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": null,
+            "snapshot_sha256": {
+              "title": "3c499991cf02e8e6849c90b0bd4999accdf11cf1d5e56d2e7e158aeeea9e22d8",
+              "excerpt": "a8ccdb0bd6b3d999bd97e5bfa6b745806e09001c8389eb1360348864c52e4389",
+              "content_md": "8e69c469c40a1de115776d82e00394dcde1771da2be6ffa7b26d0ce03d04202e",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "ced92a6cdc7670d405c7f7783925cc7d8b79a6f45e49407fc18b0d51025ea010",
+              "seo_title": "3c499991cf02e8e6849c90b0bd4999accdf11cf1d5e56d2e7e158aeeea9e22d8",
+              "seo_description": "60379c186340fa383745ad5120bc0e74bb4f59f360c22f7a7a16d0b3b8ec4413",
+              "og_title": "3c499991cf02e8e6849c90b0bd4999accdf11cf1d5e56d2e7e158aeeea9e22d8",
+              "og_description": "60379c186340fa383745ad5120bc0e74bb4f59f360c22f7a7a16d0b3b8ec4413"
+            }
+          },
+          "existing_english": {
+            "id": 25,
+            "slug": "which-love-script-fits-you-best",
+            "locale": "en",
+            "published_revision_id": 722,
+            "translation_group_id": "article-16",
+            "source_locale": "zh-CN",
+            "source_article_id": 16,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": null,
+            "snapshot_sha256": {
+              "title": "745a26208c9074519906000399f8450e644ab997a8a0f76b441da7cc1e512ef1",
+              "excerpt": "351d81856c4fd7f66716dda7f23f9fe3b8a858fa38c01ae8fcb0f1861adc68da",
+              "content_md": "16cc6ebf3a6c626aff0df70c4f99cd20f25488c73e54e67efb47b8cba762adcb",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "d0953492fd00a6671665a7209e1e0f07b27c1ea4d09dd923e37167099106040c",
+              "seo_title": "a73dc1223b3fd30d0845aae970264175111dd9b9253bff07a0fac03d72f0e925",
+              "seo_description": "1837b910e053d1ccc25c5aca0394730f696fe857c53c2b0414098025a184dcbd",
+              "og_title": "a73dc1223b3fd30d0845aae970264175111dd9b9253bff07a0fac03d72f0e925",
+              "og_description": "1837b910e053d1ccc25c5aca0394730f696fe857c53c2b0414098025a184dcbd"
+            }
+          },
+          "editorial_projection_sha256": "6488100828914b0e8fd364393dc62e3fc5410b473b5736c8888aca2a18f721bd",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 16,
+            "slug": "which-love-script-fits-you-best",
+            "locale": "zh-CN",
+            "published_revision_id": 1079,
+            "translation_group_id": "article-16",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "3c499991cf02e8e6849c90b0bd4999accdf11cf1d5e56d2e7e158aeeea9e22d8",
+              "excerpt": "a8ccdb0bd6b3d999bd97e5bfa6b745806e09001c8389eb1360348864c52e4389",
+              "content_md": "9459d0c692ef5bb8aa35c9a942a927d869eb0c254048ed8cae351c20d156d979",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "5f2efabea70e11d29a328c75109d26aaba89ee8476113c2b98be8a3ff290954e",
+              "seo_title": "3c499991cf02e8e6849c90b0bd4999accdf11cf1d5e56d2e7e158aeeea9e22d8",
+              "seo_description": "60379c186340fa383745ad5120bc0e74bb4f59f360c22f7a7a16d0b3b8ec4413",
+              "og_title": "3c499991cf02e8e6849c90b0bd4999accdf11cf1d5e56d2e7e158aeeea9e22d8",
+              "og_description": "60379c186340fa383745ad5120bc0e74bb4f59f360c22f7a7a16d0b3b8ec4413"
+            }
+          },
+          "existing_english": {
+            "id": 25,
+            "slug": "which-love-script-fits-you-best",
+            "locale": "en",
+            "published_revision_id": 1080,
+            "translation_group_id": "article-16",
+            "source_locale": "zh-CN",
+            "source_article_id": 16,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "b8f924e9d00ac1e2904eabd148775faa7cc936904414536d7094640e04b4b196",
+              "excerpt": "51c39ef4c43f01340caaf89b762133577431e82c0197885c50fd518de3769ac3",
+              "content_md": "f6e4bd6b3f52796db7197561cad7aa700f9496db642105a45aa5a741785efb4d",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "8e9a8b850981e02f8ae5e7819c965bd51095486a53433e4cdccdd1959194f11b",
+              "seo_title": "a73dc1223b3fd30d0845aae970264175111dd9b9253bff07a0fac03d72f0e925",
+              "seo_description": "1837b910e053d1ccc25c5aca0394730f696fe857c53c2b0414098025a184dcbd",
+              "og_title": "a73dc1223b3fd30d0845aae970264175111dd9b9253bff07a0fac03d72f0e925",
+              "og_description": "1837b910e053d1ccc25c5aca0394730f696fe857c53c2b0414098025a184dcbd"
+            }
+          },
+          "editorial_projection_sha256": "6488100828914b0e8fd364393dc62e3fc5410b473b5736c8888aca2a18f721bd",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            }
+          ]
+        }
+      },
+      "editorial_package_v1": {
+        "answer_surface_policy": "editor_supplied",
+        "answer_surface_visibility": "below_intro",
+        "answer_surface_v1": {
+          "faq_items": [
+            {
+              "key": "article_faq_0",
+              "question": "愛情三角理論可以測出最適合我的伴侶嗎？",
+              "answer": "不可以。它幫助描述關係成分，不預測特定對象，也不能代替對價值觀、安全、邊界和現實條件的判斷。"
+            },
+            {
+              "key": "article_faq_1",
+              "question": "七種愛情類型是固定的嗎？",
+              "answer": "不是。更準確的說法是不同組合形成的關係狀態。親密、激情和承諾會隨階段與情境變化。"
+            },
+            {
+              "key": "article_faq_2",
+              "question": "三個成分哪一個最重要？",
+              "answer": "沒有適用於所有關係的單一答案。不同階段的重點可能不同，但任何長期關係都需要雙方對期待和投入有足夠清楚的共識。"
+            },
+            {
+              "key": "article_faq_3",
+              "question": "可以用 MBTI 判斷雙方的愛情類型嗎？",
+              "answer": "不建議。MBTI-style 偏好最多幫助討論溝通和決策差異，不能推出關係品質或「最佳配對」。"
+            }
+          ]
+        },
+        "cta_slots": []
+      }
+    },
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "best-valentines-date-by-personality-and-relationship-science",
+          "source_locale": "zh-CN",
+          "source_article_id": 12,
+          "translation_group_id": "article-12"
+        },
+        "review_sha256": "196d5fd6658acef1c04ab343b45fe345150ac9331257474987138cf4ddca4eeb",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 12,
+              "slug": "best-valentines-date-by-personality-and-relationship-science",
+              "locale": "zh-CN",
+              "published_revision_id": 437,
+              "translation_group_id": "article-12",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "99dfe5a925aa9a37f1c292cf9ca96530b2e3242ec0c3c4a9954f8ae2ee9352dc",
+              "public_body_sha256": "f313570023bf035b7d5df06831d9dbc1674a4030ab467a7f1e5374ea14211ba0",
+              "hreflang_gate": null
+            },
+            "existing_english": {
+              "id": 27,
+              "slug": "best-valentines-date-by-personality-and-relationship-science",
+              "locale": "en",
+              "published_revision_id": 660,
+              "translation_group_id": "article-12",
+              "source_locale": "zh-CN",
+              "source_article_id": 12,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "a9f484eb4481643fe5eec92bf209972b960b4c2aff486bf3922f8f9496c96442",
+              "public_body_sha256": "b41aa99960d0adeb69ca559c55b761819f06f2171b16fd1a30ca5cea54bdb269",
+              "hreflang_gate": null
+            }
+          },
+          "production": {
+            "source": {
+              "id": 12,
+              "slug": "best-valentines-date-by-personality-and-relationship-science",
+              "locale": "zh-CN",
+              "published_revision_id": 437,
+              "translation_group_id": "article-12",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "17d4461d8a340d9323a4124e653b1b0dc3dfd7f47fc0125489a3bee2890f002e",
+              "public_body_sha256": "f313570023bf035b7d5df06831d9dbc1674a4030ab467a7f1e5374ea14211ba0",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": {
+              "id": 27,
+              "slug": "best-valentines-date-by-personality-and-relationship-science",
+              "locale": "en",
+              "published_revision_id": 652,
+              "translation_group_id": "article-12",
+              "source_locale": "zh-CN",
+              "source_article_id": 12,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "8e4aef8f5b93e66fb11f63d5fa0942727f9bafb682f6ea96602eb65d31e7a2f1",
+              "public_body_sha256": "ec2b86203f7e752247ad8e05e5d176ef35e383c35cfe5e6a1854861981f88c99",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-122-articlebest-valentines-date-by-personality-and-relationship-sciencecoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1672,
+          "cover_image_height": 941,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-122-articlebest-valentines-date-by-personality-and-relationship-sciencecoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-122-articlebest-valentines-date-by-personality-and-relationship-sciencecoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-122-articlebest-valentines-date-by-personality-and-relationship-sciencecoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-122-articlebest-valentines-date-by-personality-and-relationship-sciencecoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-122-articlebest-valentines-date-by-personality-and-relationship-sciencecoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            }
+          },
+          "related_test_slug": null,
+          "author_name": "FermatMind Editorial",
+          "cover_image_alt": "一對伴侶根據精力、環境與共同興趣規劃低壓力約會"
+        },
+        "seo_metadata": {
+          "og_title": "情人節約會怎麼安排？按關係階段、刺激程度的偏好和預算選方案",
+          "og_description": "按關係階段、約會目標、刺激程度的偏好、預算與時間選擇情人節方案，包含 12 種活動、備用計畫、遠距與低壓力版本。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-122-articlebest-valentines-date-by-personality-and-relationship-sciencecoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "情人節約會怎麼安排？按關係階段、刺激程度的偏好和預算選方案",
+          "excerpt": "先確認關係階段、約會目標、活動刺激強度和現實限制，再選擇活動，比照搬人格類型約會清單更可靠。",
+          "content_md": "## 快速答案\n\n一場合適的情人節約會，不取決於哪種人格「最浪漫」，而取決於關係階段、這次約會的目標、雙方能接受的活動刺激強度，以及預算、時間和體力。先決定你們是想增加了解、創造新鮮感、重新連結還是單純休息，再選活動並準備較輕鬆的備案，通常比照搬 MBTI 約會清單更可靠。\n\n## 用 30 秒確定約會方向\n\n先各自選一項，再比較答案：\n\n1. **關係階段**：第一次約會、正在確認關係、穩定交往、長期伴侶；\n2. **本次目標**：更了解彼此、製造新鮮感、表達感謝、修復疏離、放鬆休息；\n3. **活動刺激強度**：安靜熟悉、中等變化、互動多且新鮮；\n4. **現實限制**：預算、可用時間、交通、天氣、飲食和無障礙需求。\n\n如果雙方答案不同，不必爭論誰「更會過節」。可以把晚上拆成兩段，例如先吃熟悉的晚餐，再安排一個小型新體驗；或一人負責主活動，另一人負責結束後的安靜時間。\n\n## 關係階段比人格類型更重要\n\n初次約會需要安全、可退出和便於對話；穩定關係可能更需要打破慣性；長期伴侶則可能更珍惜被看見、被分擔和不必表演的空間。\n\n人格偏好可以提供細節，例如有人需要提前知道安排，有人喜歡保留驚喜；有人從熱鬧中獲得能量，有人需要較低刺激。但這些只能通過當事人溝通確認，不能從四個字母直接推出。\n\n## 十二種約會方案\n\n| 方案 | 更適合的目標 | 時間/預算 | 對話壓力 | 備案 |\n|---|---|---|---|---|\n| 雙人散步加熱飲 | 初次認識、輕鬆交流 | 低 | 低到中 | 改到安靜購物中心或室內步道 |\n| 一起做一頓飯 | 協作、穩定關係 | 低到中 | 低 | 購買半成品，減少準備壓力 |\n| 小型展覽或書店任務 | 了解興趣 | 中 | 低 | 各選一件作品，說說喜歡的原因 |\n| 桌遊或雙人解謎 | 新鮮感、合作 | 中 | 中 | 選擇無競爭性或短回合遊戲 |\n| 城市攝影散步 | 探索、共同創作 | 低 | 低 | 室內互拍主題照片 |\n| 雙人手作課 | 新體驗、紀念物 | 中到高 | 低 | 在家做簡單手工 |\n| 熟悉餐廳加問題卡 | 在熟悉的安排中加深對話 | 中 | 中到高 | 只選三道輕問題 |\n| 一日微旅行 | 新鮮感、長期伴侶 | 高 | 中 | 改為城市內陌生街區 |\n| 在家主題電影夜 | 休息、低刺激 | 低 | 低 | 各選一部短片 |\n| 共同完成願望清單 | 長期規劃 | 低 | 中 | 只談未來三個月 |\n| 志工活動或共同助人 | 共同價值、行動 | 低到中 | 低 | 改為共同整理捐贈物品 |\n| 「各自半天、晚上見」 | 需要獨處的伴侶 | 靈活 | 低 | 提前約定見面時間和方式 |\n\n沒有哪個方案天然更高階。昂貴餐廳也可能帶來噪音、時間壓力和表演感；在家做飯也可能因為任務分配不清而爭吵。方案的價值來自是否匹配目標。\n\n## 按刺激程度的偏好調整同一個方案\n\n不要把內向等同於不想約會，也不要把外向等同於必須熱鬧。可以用「活動強度」做調整：\n\n- 安靜版本：預約、避開尖峰時段、小空間、明確結束時間；\n- 中等版本：一個新活動加一個熟悉環節；\n- 高刺激版本：現場演出、多人活動或挑戰專案，但保留提前離開的選擇。\n\n對喜歡事先知道安排的人，驚喜可以保留內容，但提前說明時間、穿著、交通和體力要求。喜歡彈性的人，也需要知道不能改變的邊界，例如預約時間和預算上限。\n\n## 按關係目標設計細節\n\n### 想增加了解\n\n選擇允許並肩活動和自然停頓的情境。與其連續盤問，不如圍繞共同看到的事物交流。初次約會應優先公共空間、獨立交通和清楚邊界。\n\n### 想創造新鮮感\n\n共同的新體驗可能提升活力，但不需要追求危險或昂貴。關鍵是雙方都願意，難度適中，而且失敗也能變成有趣經歷。\n\n### 想重新連結\n\n不要用盛大安排繞過尚未處理的衝突。可以先安排低壓力活動，再進行一次有時間邊界的對話：分別說出最近被支持的一刻、最需要調整的一件小事和願意承擔的行動。\n\n### 想表達感謝\n\n把感謝寫成具體行為：「謝謝你上個月怎樣支持我，以及它對我意味著什麼。」具體記憶通常比通用讚美更有力量。\n\n## 避免四種容易增加壓力的安排\n\n1. **把驚喜變成控制**：不告訴對方必要資訊，也不給拒絕空間；\n2. **用花費證明感情**：讓預算壓力替代真實溝通；\n3. **安排過滿**：交通、排隊和時間切換耗盡雙方精力；\n4. **把社群媒體當評委**：為了照片和比較，忽略真實體驗。\n\n如果關係中存在威脅、控制或不安全，約會技巧不能解決這些問題，應優先考慮安全和適當支持。\n\n## 異地、獨處和不在當天慶祝\n\n遠距伴侶可以把「同時上線」改成共同完成一個小任務：各自準備一道食物、交換一張當天照片、同時聽一段音樂，再用二十分鐘回答同一組問題。不要把長時間視訊通話當成投入程度證明；時差、工作和居住隱私都需要被尊重。\n\n單身或選擇獨處的人不需要把情人節理解成缺失。可以用它回顧自己重視的關係、安排朋友活動或做一次照顧自己。文章提供的是伴侶約會設計，不暗示所有人都應該進入親密關係。\n\n如果當天價格、擁擠或排班不合適，把慶祝移到前後幾天不會降低意義。共同決定何時慶祝，本身就是一次現實協商。節日只是觸發點，不是檢驗感情的統一考試。\n\n發布或分享照片前，也應確認雙方同意，尤其不要公開位置、私人對話或讓對方不舒服的影像。浪漫安排不自動授權公開。\n\n## 一份可複製的約會小表單\n\n你們可以各自填寫：\n\n- 我希望這次約會最重要的感受是：\n- 我能接受的預算和時間是：\n- 我最不想發生的是：\n- 我需要提前知道的資訊是：\n- 如果天氣或狀態不好，我接受的備案是：\n- 結束後我希望保留多少獨處或休息時間：\n\n把差異說清楚，比猜測「你的類型應該喜歡什麼」更尊重彼此。\n\n如果你想先理解親密、激情和承諾的差異，可以閱讀[愛情三角理論與不同關係狀態](/zh/articles/which-love-script-fits-you-best)；本頁只負責把關係目標轉成一次可執行約會。\n\n## 常見問題\n\n### 第一次約會適合安排驚喜嗎？\n\n可以保留小驚喜，但應提前說明安全、時間、交通、費用和穿著等必要資訊，並讓對方能自在拒絕或自行離開。\n\n### 內向的人更適合在家約會嗎？\n\n不一定。單憑內向或外向，無法知道一個人想不想出門。可以直接詢問對方偏好的場所、活動強度和時間。\n\n### 情人節一定要安排昂貴活動嗎？\n\n不需要。關係目標、注意力和雙方參與感通常比價格更重要。預算應在雙方可承受範圍內。\n\n### 長期伴侶怎樣避免每年重複？\n\n每年只改變一個變數：地點、一起做的事、對話主題或慶祝時間。新鮮感不必來自更高花費。\n\n### 一方不重視情人節怎麼辦？\n\n先討論節日代表什麼，以及雙方願意投入的最低行動。不要把不同期待自動解釋成愛或不愛的證明。\n\n## 參考來源\n\n- Aron, A. 等關於伴侶共同參與新奇活動與關係質量的研究：https://doi.org/10.1037/0022-3514.78.2.273\n- The Gottman Institute 關於情人節和關係連結的公開建議：https://www.gottman.com/blog/valentines-day-the-gottman-way/\n- 關於伴侶共同活動與關係質量的研究：https://doi.org/10.1177/02654075211000436\n\n這些資料支持共同活動、回應和關係連結的討論，不證明某項約會對某人格或伴侶必然有效。",
+          "seo_title": "情人節約會怎麼安排？按關係階段、刺激程度的偏好和預算選方案",
+          "seo_description": "按關係階段、約會目標、刺激程度的偏好、預算與時間選擇情人節方案，包含 12 種活動、備用計畫、遠距與低壓力版本。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 2,
+            "slug": "ef918706df93",
+            "label": "關係與愛情"
+          },
+          "tags": [
+            {
+              "id": 6,
+              "slug": "8fc09614864d",
+              "label": "親密關係"
+            },
+            {
+              "id": 7,
+              "slug": "55e888afb9f3",
+              "label": "人格心理學"
+            },
+            {
+              "id": 8,
+              "slug": "d63abbbd8cb5",
+              "label": "關係科學"
+            },
+            {
+              "id": 9,
+              "slug": "c4328f75476f",
+              "label": "情人節"
+            },
+            {
+              "id": 10,
+              "slug": "93a25dcffc2f",
+              "label": "約會設計"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 2,
+        "tag_ids": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 12,
+            "slug": "best-valentines-date-by-personality-and-relationship-science",
+            "locale": "zh-CN",
+            "published_revision_id": 437,
+            "translation_group_id": "article-12",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": null,
+            "snapshot_sha256": {
+              "title": "e379f8c33b3952831bcace6ef0f49eddb21537a43bd7ef8d6ed58090004fa6b8",
+              "excerpt": "81c5c5358639d6dcf73e22519c6b02c8dc711f1ec001927717ecc5c69ace0dd0",
+              "content_md": "f313570023bf035b7d5df06831d9dbc1674a4030ab467a7f1e5374ea14211ba0",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "3e211ebefb27614d2cc525f45dcfd59fbcfce788e3a4d8abfd48aaf90c549fd2",
+              "seo_title": "e379f8c33b3952831bcace6ef0f49eddb21537a43bd7ef8d6ed58090004fa6b8",
+              "seo_description": "c490e3f783dd07e29f4bff01a32dbd2ddb869a0f8c54c8abcab172b24046ca32",
+              "og_title": "e379f8c33b3952831bcace6ef0f49eddb21537a43bd7ef8d6ed58090004fa6b8",
+              "og_description": "c490e3f783dd07e29f4bff01a32dbd2ddb869a0f8c54c8abcab172b24046ca32"
+            }
+          },
+          "existing_english": {
+            "id": 27,
+            "slug": "best-valentines-date-by-personality-and-relationship-science",
+            "locale": "en",
+            "published_revision_id": 660,
+            "translation_group_id": "article-12",
+            "source_locale": "zh-CN",
+            "source_article_id": 12,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": null,
+            "snapshot_sha256": {
+              "title": "cba1326b09f56a244ec971765b41d8e3a565910e58c92405cdeb4241abd60ec3",
+              "excerpt": "890a402bb0ae01bcb757ae25219045505ff55737124154845e360be8d9dc9fdd",
+              "content_md": "b41aa99960d0adeb69ca559c55b761819f06f2171b16fd1a30ca5cea54bdb269",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "4a42ba33eb7627c005619c420564663e33d178439943b6516e7b4a328f94ac7f",
+              "seo_title": "ae40202900ffd97e923b3e7101c6bb2c0c8bf97ff6e99bc92c216e6aabef3d57",
+              "seo_description": "6cb078072b37e44a01a9c51a88d467c6483d045d532c5f9983f13194fbb7ab09",
+              "og_title": "ae40202900ffd97e923b3e7101c6bb2c0c8bf97ff6e99bc92c216e6aabef3d57",
+              "og_description": "6cb078072b37e44a01a9c51a88d467c6483d045d532c5f9983f13194fbb7ab09"
+            }
+          },
+          "editorial_projection_sha256": "09ad599d84a1193d9dfc1d60eb1293b356f989ee438768ae6e950ef7cd1c4d3e",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 12,
+            "slug": "best-valentines-date-by-personality-and-relationship-science",
+            "locale": "zh-CN",
+            "published_revision_id": 437,
+            "translation_group_id": "article-12",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "e379f8c33b3952831bcace6ef0f49eddb21537a43bd7ef8d6ed58090004fa6b8",
+              "excerpt": "81c5c5358639d6dcf73e22519c6b02c8dc711f1ec001927717ecc5c69ace0dd0",
+              "content_md": "f313570023bf035b7d5df06831d9dbc1674a4030ab467a7f1e5374ea14211ba0",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "b201cafc49c97a143ab10424023c0e5f20657fa19cc67afa2da49c9733af547b",
+              "seo_title": "e379f8c33b3952831bcace6ef0f49eddb21537a43bd7ef8d6ed58090004fa6b8",
+              "seo_description": "c490e3f783dd07e29f4bff01a32dbd2ddb869a0f8c54c8abcab172b24046ca32",
+              "og_title": "e379f8c33b3952831bcace6ef0f49eddb21537a43bd7ef8d6ed58090004fa6b8",
+              "og_description": "c490e3f783dd07e29f4bff01a32dbd2ddb869a0f8c54c8abcab172b24046ca32"
+            },
+            "legacy_cover_image_alt": "抽象路径地图连接两个关系节点，表现低摩擦约会设计"
+          },
+          "existing_english": {
+            "id": 27,
+            "slug": "best-valentines-date-by-personality-and-relationship-science",
+            "locale": "en",
+            "published_revision_id": 652,
+            "translation_group_id": "article-12",
+            "source_locale": "zh-CN",
+            "source_article_id": 12,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "cba1326b09f56a244ec971765b41d8e3a565910e58c92405cdeb4241abd60ec3",
+              "excerpt": "890a402bb0ae01bcb757ae25219045505ff55737124154845e360be8d9dc9fdd",
+              "content_md": "ec2b86203f7e752247ad8e05e5d176ef35e383c35cfe5e6a1854861981f88c99",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "f79583cd741d42d4e7344becf927aeb77213438c303c95c8c812ee6533d9f117",
+              "seo_title": "ae40202900ffd97e923b3e7101c6bb2c0c8bf97ff6e99bc92c216e6aabef3d57",
+              "seo_description": "6cb078072b37e44a01a9c51a88d467c6483d045d532c5f9983f13194fbb7ab09",
+              "og_title": "ae40202900ffd97e923b3e7101c6bb2c0c8bf97ff6e99bc92c216e6aabef3d57",
+              "og_description": "6cb078072b37e44a01a9c51a88d467c6483d045d532c5f9983f13194fbb7ab09"
+            }
+          },
+          "editorial_projection_sha256": "09ad599d84a1193d9dfc1d60eb1293b356f989ee438768ae6e950ef7cd1c4d3e",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            }
+          ]
+        }
+      },
+      "editorial_package_v1": {
+        "answer_surface_policy": "editor_supplied",
+        "answer_surface_visibility": "below_intro",
+        "answer_surface_v1": {
+          "faq_items": [
+            {
+              "key": "article_faq_0",
+              "question": "第一次約會適合安排驚喜嗎？",
+              "answer": "可以保留小驚喜，但應提前說明安全、時間、交通、費用和穿著等必要資訊，並讓對方能自在拒絕或自行離開。"
+            },
+            {
+              "key": "article_faq_1",
+              "question": "內向的人更適合在家約會嗎？",
+              "answer": "不一定。單憑內向或外向，無法知道一個人想不想出門。可以直接詢問對方偏好的場所、活動強度和時間。"
+            },
+            {
+              "key": "article_faq_2",
+              "question": "情人節一定要安排昂貴活動嗎？",
+              "answer": "不需要。關係目標、注意力和雙方參與感通常比價格更重要。預算應在雙方可承受範圍內。"
+            },
+            {
+              "key": "article_faq_3",
+              "question": "長期伴侶怎樣避免每年重複？",
+              "answer": "每年只改變一個變數：地點、一起做的事、對話主題或慶祝時間。新鮮感不必來自更高花費。"
+            },
+            {
+              "key": "article_faq_4",
+              "question": "一方不重視情人節怎麼辦？",
+              "answer": "先討論節日代表什麼，以及雙方願意投入的最低行動。不要把不同期待自動解釋成愛或不愛的證明。"
+            }
+          ]
+        },
+        "cta_slots": []
+      }
+    }
+  ]
+}
