@@ -72,11 +72,12 @@ final class TraditionalArticlePublication
         $proofs = $package['source_expectations'] ?? [];
         $identity = $mapping['target_identity'] ?? [];
         $slug = $identity['slug'] ?? '';
+        $sourceLocale = $identity['source_locale'] ?? null;
         if (($package['schema'] ?? null) !== self::SCHEMA
             || ($mapping['review_sha256'] ?? null) !== hash('sha256', $reviewBytes)
             || ($review['targetLocale'] ?? null) !== 'zh-TW'
             || ($identity['locale'] ?? null) !== 'zh-TW' || ($identity['org_id'] ?? null) !== 0
-            || ($identity['source_locale'] ?? null) !== 'zh-CN'
+            || ! in_array($sourceLocale, ['zh-CN', 'en'], true)
             || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
             || array_keys($proofs) !== ['staging', 'production'] || ! isset($proofs[$environment])) {
             throw new DomainException('traditional_article_package_invalid');
@@ -106,7 +107,7 @@ final class TraditionalArticlePublication
             $reviewed['/article/tags/'.$index.'/name'] = $tag['label'];
         }
         if ($editorial !== null) {
-            $reviewed += self::editorialReviewFields($editorial);
+            $reviewed += self::editorialReviewFields($editorial, $sourceLocale);
             if (self::ctaTargets($editorial['cta_slots']) !== ($proofs['production']['editorial_cta_targets'] ?? null)) {
                 throw new DomainException('traditional_article_editorial_cta_drift');
             }
@@ -127,22 +128,31 @@ final class TraditionalArticlePublication
         }
         foreach ($proofs as $name => $proof) {
             $origins = $mapping['environment_source_preflight'][$name] ?? [];
+            $englishSource = $sourceLocale === 'en';
+            if ($englishSource && (! array_key_exists('existing_chinese', $proof) || $proof['existing_chinese'] !== null
+                || ! array_key_exists('existing_chinese', $origins) || $origins['existing_chinese'] !== null
+                || array_key_exists('existing_english', $proof) || array_key_exists('existing_english', $origins)
+                || ($proof['source']['locale'] ?? null) !== 'en' || ($proof['source']['source_locale'] ?? null) !== 'en'
+                || ($proof['source']['source_article_id'] ?? null) !== null)) {
+                throw new DomainException('traditional_article_english_source_proof_invalid');
+            }
             $englishAbsent = array_key_exists('existing_english', $proof) && $proof['existing_english'] === null;
             if ($englishAbsent && ($name !== 'staging' || ! array_key_exists('existing_english', $origins)
                 || $origins['existing_english'] !== null || ! is_string($proof['unpublished_english_slug'] ?? null)
                 || $proof['unpublished_english_slug'] !== ($proofs['production']['existing_english']['slug'] ?? null))) {
                 throw new DomainException('traditional_article_staging_english_absence_invalid');
             }
-            foreach ($englishAbsent ? ['source'] : ['source', 'existing_english'] as $role) {
+            foreach ($englishAbsent || $englishSource ? ['source'] : ['source', 'existing_english'] as $role) {
                 $origin = $origins[$role] ?? [];
                 $record = $proof[$role] ?? [];
                 $recordSlug = $record['slug'] ?? '';
                 $recordGroup = $record['translation_group_id'] ?? '';
                 if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $recordSlug) !== 1
-                    || ($role === 'source' && ($recordSlug !== $slug || $recordGroup !== $identity['translation_group_id']))
+                    || ($role === 'source' && ($recordSlug !== $slug || $recordGroup !== $identity['translation_group_id']
+                        || ($record['locale'] ?? $sourceLocale) !== $sourceLocale))
                     || $recordSlug !== ($origin['slug'] ?? null)
                     || $recordGroup === '' || $recordGroup !== ($origin['translation_group_id'] ?? null)
-                    || ($record['locale'] ?? ($role === 'source' ? 'zh-CN' : 'en')) !== ($origin['locale'] ?? null)
+                    || ($record['locale'] ?? ($role === 'source' ? $sourceLocale : 'en')) !== ($origin['locale'] ?? null)
                     || ($record['source_locale'] ?? null) !== ($origin['source_locale'] ?? null)
                     || ($record['source_article_id'] ?? null) !== ($origin['source_article_id'] ?? null)
                     || (($record['seo_present'] ?? true) === false && ($name !== 'staging' || $role !== 'existing_english'))
@@ -152,7 +162,7 @@ final class TraditionalArticlePublication
                     throw new DomainException('traditional_article_source_proof_invalid');
                 }
             }
-            if (! $englishAbsent) {
+            if (! $englishAbsent && ! $englishSource) {
                 self::englishSourceId($proof);
             }
         }
@@ -166,11 +176,13 @@ final class TraditionalArticlePublication
                     || ! is_int($stagingTaxonomy['category_id']) || ! array_is_list($stagingTaxonomy['tag_ids']))) {
                 throw new DomainException('traditional_article_batch_staging_source_invalid');
             }
+        }
+        if ($batch || $sourceLocale === 'en') {
             foreach ($proofs as $name => $proof) {
                 if ($editorial !== null && ! preg_match('/\A[a-f0-9]{64}\z/', $proof['editorial_projection_sha256'] ?? '')) {
                     throw new DomainException('traditional_article_editorial_source_invalid');
                 }
-                if ($editorial !== null && $name === 'staging') {
+                if (($editorial !== null || $sourceLocale === 'en') && $name === 'staging') {
                     continue;
                 }
                 $sourceHashes = $proof['source']['snapshot_sha256'];
@@ -226,7 +238,7 @@ final class TraditionalArticlePublication
         return array_map(static fn (array $slot): array => ['key' => $slot['key'], 'kind' => $slot['kind'], 'href' => $slot['href']], $slots);
     }
 
-    private static function editorialReviewFields(array $editorial): array
+    private static function editorialReviewFields(array $editorial, string $sourceLocale): array
     {
         $faq = $editorial['answer_surface_v1']['faq_items'] ?? [];
         $ctas = $editorial['cta_slots'] ?? [];
@@ -246,9 +258,10 @@ final class TraditionalArticlePublication
             $fields['/answer_surface_v1/faq_blocks/'.$index.'/question'] = $item['question'];
             $fields['/answer_surface_v1/faq_blocks/'.$index.'/answer'] = $item['answer'];
         }
+        $segment = $sourceLocale === 'en' ? 'en' : 'zh';
         foreach ($ctas as $index => $slot) {
             if (array_keys($slot) !== ['key', 'kind', 'href', 'label'] || ! preg_match('/\A[a-z0-9_-]+\z/', $slot['key'])
-                || $slot['kind'] !== 'start_test' || ! preg_match('~\A/zh/tests/[a-z0-9]+(?:-[a-z0-9]+)*\z~', $slot['href'])) {
+                || $slot['kind'] !== 'start_test' || ! preg_match('~\A/'.$segment.'/tests/[a-z0-9]+(?:-[a-z0-9]+)*\z~', $slot['href'])) {
                 throw new DomainException('traditional_article_editorial_cta_invalid');
             }
             $fields['/landing_surface_v1/cta_bundle/'.$index.'/label'] = $slot['label'];

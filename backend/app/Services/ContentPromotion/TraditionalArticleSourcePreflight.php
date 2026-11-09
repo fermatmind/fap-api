@@ -21,7 +21,11 @@ final class TraditionalArticleSourcePreflight
             throw new DomainException('traditional_article_source_transaction_required');
         }
 
-        $source = $this->readArticle($proof['source'], 'zh-CN', null, $lock);
+        $sourceLocale = $proof['source']['locale'] ?? 'zh-CN';
+        if (! in_array($sourceLocale, ['zh-CN', 'en'], true)) {
+            throw new DomainException('traditional_article_source_locale_invalid');
+        }
+        $source = $this->readArticle($proof['source'], $sourceLocale, null, $lock);
         // Staging can hold a published root copied from the prepared workflow.
         // readArticle has already checked null parents, source locale and the exact public revision.
         $preparedRoot = $allowStagingPreparedRoot
@@ -39,6 +43,15 @@ final class TraditionalArticleSourcePreflight
                 || TraditionalArticlePublication::ctaTargets($editorial['ctas']) !== ($proof['editorial_cta_targets'] ?? null)) {
                 throw new DomainException('traditional_article_source_editorial_drift');
             }
+        }
+
+        if ($sourceLocale === 'en') {
+            if (! array_key_exists('existing_chinese', $proof) || $proof['existing_chinese'] !== null
+                || $this->hasPublishedCounterpart($source, 'zh-CN', [$source->slug], $lock)) {
+                throw new DomainException('traditional_article_english_source_chinese_counterpart');
+            }
+
+            return $source;
         }
 
         $english = $proof['existing_english'];
@@ -69,14 +82,18 @@ final class TraditionalArticleSourcePreflight
             throw new DomainException('traditional_article_staging_english_absence_invalid');
         }
 
-        $existing = Article::query()->withoutGlobalScopes()->where('org_id', 0)->where('locale', 'en')
-            ->whereNull('deleted_at')->published()
-            ->where(static fn ($query) => $query->whereIn('slug', [$source->slug, $slug])
-                ->orWhere('source_article_id', $source->id)->orWhere('translation_group_id', $source->translation_group_id))
-            ->when($lock, fn ($query) => $query->lockForUpdate())->first(['id']);
-        if ($existing !== null) {
+        if ($this->hasPublishedCounterpart($source, 'en', [$source->slug, $slug], $lock)) {
             throw new DomainException('traditional_article_staging_english_now_published');
         }
+    }
+
+    private function hasPublishedCounterpart(Article $source, string $locale, array $slugs, bool $lock): bool
+    {
+        return Article::query()->withoutGlobalScopes()->where('org_id', 0)->where('locale', $locale)
+            ->whereNull('deleted_at')->published()
+            ->where(static fn ($query) => $query->whereIn('slug', $slugs)
+                ->orWhere('source_article_id', $source->id)->orWhere('translation_group_id', $source->translation_group_id))
+            ->when($lock, fn ($query) => $query->lockForUpdate())->first(['id']) !== null;
     }
 
     private function readArticle(array $expected, string $locale, ?Article $source, bool $lock): Article

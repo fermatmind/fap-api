@@ -9,6 +9,7 @@ use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\CanonicalFrontendUrl;
 use App\Support\CanonicalTranslationPayloadHash as Hash;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -91,8 +92,21 @@ final class ArticleReviewedCounterpartService
             return [];
         }
 
-        $sourceId = $article->locale === 'zh-CN' ? (int) $article->id : (int) $article->source_article_id;
         $reviewed = $article->locale === 'en' ? $this->resolve($article) : null;
+        $englishRoot = $article->locale === 'en' && ! $article->source_article_id && $reviewed === null;
+        $legacyChinese = $englishRoot ? $this->legacyGroupRoots($article, 'zh-CN') : collect();
+        if ($legacyChinese->count() > 1) {
+            return [];
+        }
+        $sourceLocale = match (true) {
+            $article->locale === 'zh-TW' && $article->source_locale === 'en',
+            $englishRoot && $legacyChinese->isEmpty() => 'en',
+            default => 'zh-CN',
+        };
+        $sourceId = $article->locale === $sourceLocale ? (int) $article->id : (int) $article->source_article_id;
+        if ($legacyChinese->isNotEmpty()) {
+            $sourceId = (int) $legacyChinese->sole()->id;
+        }
         if ($reviewed !== null) {
             $sourceId = (int) collect($reviewed)->firstWhere('locale', 'zh-CN')?->id;
         }
@@ -107,7 +121,9 @@ final class ArticleReviewedCounterpartService
             ->whereIn('locale', ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES)
             ->with(['publishedRevision', 'seoMeta'])->get();
         $source = $members->firstWhere('id', $sourceId);
-        if ($source?->locale !== 'zh-CN' || ! $this->readableForNavigation($source)) {
+        if ($source?->locale !== $sourceLocale || ! $this->readableForNavigation($source)
+            || ($sourceLocale === 'en' && ($this->binding($source) !== null
+                || ($article->locale === 'zh-TW' && $this->legacyGroupRoots($source, 'zh-CN')->isNotEmpty())))) {
             return [];
         }
 
@@ -115,7 +131,7 @@ final class ArticleReviewedCounterpartService
         if ($group === '') {
             return [];
         }
-        $siblings = $members->filter(fn (Article $member): bool => $member->source_locale === 'zh-CN'
+        $siblings = $members->filter(fn (Article $member): bool => $member->source_locale === $sourceLocale
             && (int) $member->source_article_id === $sourceId && $member->translation_group_id === $group
             && (int) $member->publishedRevision?->source_article_id === $sourceId && $this->readableForNavigation($member));
         $traditional = $siblings->where('locale', 'zh-TW');
@@ -123,19 +139,46 @@ final class ArticleReviewedCounterpartService
             return [];
         }
 
-        $reviewed ??= $this->resolve($source);
-        $english = $reviewed === null
-            ? $siblings->where('locale', 'en')
-            : collect($reviewed)->where('locale', 'en')->filter(fn (Article $member): bool => $this->readableForNavigation($member));
         $destinations = collect([$source, $traditional->sole()]);
-        if ($english->count() === 1) {
-            $destinations->push($english->sole());
+        if ($sourceLocale === 'zh-CN') {
+            $reviewed ??= $this->resolve($source);
+            $english = $reviewed === null
+                ? $siblings->where('locale', 'en')
+                : collect($reviewed)->where('locale', 'en')->filter(fn (Article $member): bool => $this->readableForNavigation($member));
+            if ($reviewed === null && $english->isEmpty()) {
+                $legacy = $this->legacyGroupRoots($source, 'en');
+                if ($legacy->count() === 1 && $this->binding($legacy->sole()) === null) {
+                    $roots = $this->legacyGroupRoots($source, 'zh-CN');
+                    if ($roots->count() === 1 && $roots->sole()->id === $source->id) {
+                        $english = $legacy;
+                    }
+                }
+            }
+            if ($english->count() === 1) {
+                $destinations->push($english->sole());
+            }
         }
         if (! $destinations->contains(fn (Article $member): bool => (int) $member->id === (int) $article->id)) {
             return [];
         }
 
         return $destinations->mapWithKeys(static fn (Article $member): array => [$member->locale => $member->slug])->all();
+    }
+
+    /** @return Collection<int, Article> */
+    private function legacyGroupRoots(Article $article, string $locale): Collection
+    {
+        $group = trim((string) $article->translation_group_id);
+        if ($group === '') {
+            return collect();
+        }
+
+        // Some original variants are independent roots in an explicit translation group.
+        return Article::withoutGlobalScopes()->where('org_id', 0)->where('locale', $locale)
+            ->where('source_locale', $locale)->where('translation_group_id', $group)
+            ->whereNull('source_article_id')->whereNull('translated_from_article_id')
+            ->whereNull('deleted_at')->publiclyReadable()->with(['publishedRevision', 'seoMeta'])
+            ->get()->filter(fn (Article $member): bool => $this->readableForNavigation($member));
     }
 
     private function readableForNavigation(Article $article): bool

@@ -671,6 +671,36 @@ final class ArticlePublicApiTest extends TestCase
         $this->getJson('/api/v0.5/articles/'.$traditional->slug.'?locale=zh-TW')->assertNotFound();
     }
 
+    public function test_reader_links_existing_independent_roots_in_the_same_group(): void
+    {
+        $group = 'legacy-reader-group';
+        $source = $this->createArticle(['slug' => 'traditional-source', 'locale' => 'zh-CN', 'translation_group_id' => $group]);
+        $english = $this->createArticle(['slug' => 'legacy-english-root', 'locale' => 'en', 'translation_group_id' => $group]);
+        $traditional = $this->createArticle([
+            'slug' => $source->slug, 'locale' => 'zh-TW', 'translation_group_id' => $group,
+            'source_article_id' => $source->id, 'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED, 'is_indexable' => false,
+        ]);
+        $links = ['zh-CN' => $source->slug, 'zh-TW' => $traditional->slug, 'en' => $english->slug];
+        foreach ([$source, $english, $traditional] as $article) {
+            $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale='.$article->locale)->assertOk()
+                ->assertJsonPath('reader_language_slugs', $links);
+        }
+
+        $otherEnglish = $this->createArticle(['slug' => 'other-english-root', 'locale' => 'en', 'translation_group_id' => $group]);
+        $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()
+            ->assertJsonMissingPath('reader_language_slugs.en');
+        $this->getJson('/api/v0.5/articles/'.$english->slug.'?locale=en')->assertOk()
+            ->assertJsonMissingPath('reader_language_slugs');
+        $otherEnglish->delete();
+
+        $this->createArticle(['slug' => 'other-chinese-root', 'locale' => 'zh-CN', 'translation_group_id' => $group]);
+        $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()
+            ->assertJsonMissingPath('reader_language_slugs.en');
+        $this->getJson('/api/v0.5/articles/'.$english->slug.'?locale=en')->assertOk()
+            ->assertJsonMissingPath('reader_language_slugs');
+    }
+
     public function test_same_slug_in_other_group_cannot_replace_a_verified_locale_sibling(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
@@ -1453,6 +1483,93 @@ final class ArticlePublicApiTest extends TestCase
         $proof['unpublished_english_slug'] = 'different-english-slug';
         $this->expectExceptionMessage('traditional_article_staging_english_absence_invalid');
         TraditionalArticlePublication::package($encode($package), $review, 'staging');
+    }
+
+    public function test_traditional_article_package_requires_exact_english_source_and_explicit_chinese_absence(): void
+    {
+        $root = base_path('content_assets/public_content_53/');
+        $package = json_decode(file_get_contents($root.'traditional-article.json'), true, flags: JSON_THROW_ON_ERROR);
+        $review = file_get_contents($root.'traditional-article-review.json');
+        $reviewedFields = json_decode($review, true, flags: JSON_THROW_ON_ERROR)['fields'];
+        $package['mapping']['target_identity']['source_locale'] = 'en';
+        foreach ($package['source_expectations'] as $environment => &$proof) {
+            $origins = &$package['mapping']['environment_source_preflight'][$environment];
+            unset($proof['existing_english'], $origins['existing_english']);
+            $proof['existing_chinese'] = $origins['existing_chinese'] = null;
+            foreach (['locale' => 'en', 'source_locale' => 'en', 'source_article_id' => null] as $key => $value) {
+                $proof['source'][$key] = $origins['source'][$key] = $value;
+            }
+            if ($environment === 'production') {
+                foreach ($proof['source']['snapshot_sha256'] as $key => &$hash) {
+                    $path = '/article/'.(str_starts_with($key, 'seo_') || str_starts_with($key, 'og_') ? 'seo_meta/' : '').$key;
+                    $hash = $reviewedFields[$path]['sourceSha256'];
+                }
+                unset($hash);
+                $origins['source']['public_body_sha256'] = $proof['source']['snapshot_sha256']['content_md'];
+            }
+        }
+        unset($proof, $origins);
+        $rows = TraditionalArticlePublication::package(json_encode($package, JSON_THROW_ON_ERROR), $review, 'production')['candidates'];
+        $this->assertSame('en', $rows[0]['source_identity']['source_locale']);
+        $this->assertNull($rows[0]['source_expectations']['existing_chinese']);
+        $package['source_expectations']['staging']['existing_chinese'] = ['id' => 1];
+
+        $this->expectExceptionMessage('traditional_article_english_source_proof_invalid');
+        TraditionalArticlePublication::package(json_encode($package, JSON_THROW_ON_ERROR), $review, 'production');
+    }
+
+    public function test_english_root_publishes_traditional_reader_links_and_rollback_leaves_source_intact(): void
+    {
+        $this->ensurePublicRiasecRegistry();
+        $relatedTest = 'holland-career-interest-test-riasec';
+        $source = $this->createArticle(['locale' => 'en', 'slug' => 'independent-english-root', 'related_test_slug' => $relatedTest]);
+        $source->forceFill(['working_revision_id' => $source->published_revision_id])->saveQuietly();
+        $seo = $this->createSeoMeta($source);
+        $proof = ['source' => [
+            'slug' => $source->slug, 'locale' => 'en', 'id' => $source->id,
+            'published_revision_id' => $source->published_revision_id, 'translation_group_id' => $source->translation_group_id,
+            'is_indexable' => (bool) $source->is_indexable, 'sitemap_eligible' => (bool) $source->sitemap_eligible,
+            'hreflang_gate' => null,
+            'snapshot_sha256' => array_map(
+                static fn (?string $value): ?string => $value === null ? null : hash('sha256', $value),
+                $source->only(['title', 'excerpt', 'content_md', 'author_name', 'cover_image_alt'])
+                    + $seo->only(['seo_title', 'seo_description', 'og_title', 'og_description']),
+            ),
+        ], 'existing_chinese' => null];
+        $sha = str_repeat('a', 64);
+        $row = [
+            'identity' => ['org_id' => 0, 'locale' => 'zh-TW', 'slug' => $source->slug],
+            'source_identity' => ['source_article_id' => $source->id],
+            'source_expectations' => $proof,
+            'package_sha256' => $sha, 'page_id' => 'TRADITIONAL-ARTICLE-english-root',
+            'snapshot' => ['title' => '繁體標題', 'excerpt' => '繁體摘要', 'content_md' => '## 繁體正文',
+                'author_name' => '費馬測試編輯部', 'cover_image_alt' => '封面',
+                'seo_text' => ['seo_title' => '繁體標題', 'seo_description' => '繁體摘要']],
+            'article_metadata' => ['related_test_slug' => $relatedTest],
+            'taxonomy_display' => ['category' => ['id' => null], 'tags' => []],
+        ];
+        $sourceBefore = $source->fresh()->getAttributes();
+        $context = new PromotionContext('test', $sha, 'W3', 'PUBLIC-CONTENT-53', str_repeat('b', 40),
+            $sha, $sha, '1', 1, $sha, 1, $sha);
+        $writer = app(TraditionalArticlePublication::class);
+        DB::transaction(fn () => $this->assertTrue($writer->publish($row, $writer->read($row, true), $context)));
+
+        $path = '/api/v0.5/articles/'.$source->slug;
+        $links = ['en' => $source->slug, 'zh-TW' => $source->slug];
+        $this->getJson($path.'?locale=zh-TW')->assertOk()->assertJsonPath('article.source_locale', 'en')
+            ->assertJsonPath('article.is_indexable', false)->assertJsonPath('reader_language_slugs', $links)
+            ->assertJsonPath('landing_surface_v1.start_test_target', '/en/tests/'.$relatedTest)
+            ->assertJsonPath('landing_surface_v1.cta_bundle.2.label', '開始測驗');
+        $this->getJson($path.'?locale=en')->assertOk()->assertJsonPath('reader_language_slugs', $links);
+        $this->getJson($path.'/seo?locale=en')->assertOk()->assertJsonMissingPath('meta.alternates.zh-TW');
+        DB::transaction(fn () => $writer->restore($row, $writer->read($row, true)));
+        $this->getJson($path.'?locale=en')->assertOk()->assertJsonMissingPath('reader_language_slugs');
+        $this->getJson($path.'?locale=zh-TW')->assertNotFound();
+        $this->assertSame($sourceBefore, $source->fresh()->getAttributes());
+
+        $this->createArticle(['locale' => 'zh-CN', 'slug' => $source->slug]);
+        $this->expectExceptionMessage('traditional_article_english_source_chinese_counterpart');
+        app(TraditionalArticleSourcePreflight::class)->assertSource($proof);
     }
 
     #[DataProvider('traditionalArticleTaxonomyCases')]

@@ -514,15 +514,9 @@ class ArticleController extends Controller
     {
         $metadata = $this->editorialPackageMetadata($article);
         $slots = is_array($metadata['cta_slots'] ?? null) ? $metadata['cta_slots'] : [];
-        $targetLocale = $locale;
-        if ($locale === 'zh-TW') {
-            // Editorial slots retain the published source's assessment route until
-            // the relevant assessment flow has its own Traditional release.
-            if (! $article->source_article_id || $article->source_article_id !== $article->translated_from_article_id
-                || ! in_array($article->source_locale, ['zh-CN', 'en'], true)) {
-                return [];
-            }
-            $targetLocale = $article->source_locale;
+        $targetLocale = $this->articleAssessmentLocale($article, $locale);
+        if ($targetLocale === null) {
+            return [];
         }
         $ctas = [];
 
@@ -654,7 +648,11 @@ class ArticleController extends Controller
             ],
             $this->articleTestTarget($article, $locale) !== null ? [
                 'key' => 'start_test',
-                'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                'label' => match ($locale) {
+                    'zh-CN' => '开始测试',
+                    'zh-TW' => '開始測驗',
+                    default => 'Take the test',
+                },
                 'href' => $this->articleTestTarget($article, $locale),
                 'kind' => 'start_test',
             ] : null,
@@ -663,6 +661,10 @@ class ArticleController extends Controller
 
     private function articleTestTarget(Article $article, string $locale): ?string
     {
+        $locale = $this->articleAssessmentLocale($article, $locale);
+        if ($locale === null) {
+            return null;
+        }
         $segment = $this->frontendLocaleSegment($locale);
         foreach ($this->publicRelatedTestSlugs($article) as $slug) {
             $href = $this->normalizePublicTestHref('/'.$segment.'/tests/'.$slug, $locale);
@@ -672,6 +674,17 @@ class ArticleController extends Controller
         }
 
         return null;
+    }
+
+    private function articleAssessmentLocale(Article $article, string $locale): ?string
+    {
+        if ($locale !== 'zh-TW') {
+            return $locale;
+        }
+
+        // Traditional articles retain the verified source's assessment route.
+        return $article->source_article_id && $article->source_article_id === $article->translated_from_article_id
+            && in_array($article->source_locale, ['zh-CN', 'en'], true) ? $article->source_locale : null;
     }
 
     /**
