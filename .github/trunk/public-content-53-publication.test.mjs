@@ -1210,3 +1210,35 @@ test('Traditional Article career and EQ batch binds each environment and preserv
   assert.throws(()=>assertDom(fixture,html.replace(href,href.replace('/zh/','/en/')),{missing:true},'production'),/TRADITIONAL_ARTICLE_ASSESSMENT_LINK/);
  }
 });
+
+test('Traditional Big Five articles retain the production English relationships while staging lacks those editions',()=>{
+ const selection='traditional-article-big-five';
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ const paths=['backend/content_assets/public_content_53/'+selection+'.json'];
+ assert.equal(classifyPaths(paths).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,12);
+ const production=readCandidateRows(root,binding.package_sha256).candidates;
+ const staging=readCandidateRows(root,binding.package_sha256,'staging').candidates;
+ assert.deepEqual(production.map(row=>row.source_expectations.source.published_revision_id),[1121,721,1064,1111,1124,704,1105,1113,1126,1127,1128,1130]);
+ assert.deepEqual(staging.map(row=>row.source_expectations.source.published_revision_id),[399,400,404,395,424,403,420,390,414,421,415,386]);
+ for (const [index, stage] of staging.entries()) {
+  const prod=production[index];
+  assert.equal(stage.identity.slug,prod.identity.slug);
+  assert.equal(stage.source_expectations.existing_english,null);
+  assert.equal(stage.source_expectations.unpublished_english_slug,prod.source_expectations.existing_english.slug);
+  assert.equal(prod.source_expectations.existing_english.source_article_id,prod.source_identity.source_article_id);
+  assert.equal(prod.article_metadata.related_test_slug,'big-five-personality-test-ocean-model');
+ }
+ for (const rows of [staging,production]) {
+  const faqRows=rows.filter(row=>row.snapshot.editorial_projection);
+  assert.deepEqual(faqRows.map(row=>row.snapshot.editorial_projection.faq.length),[3,4]);
+  for (const row of faqRows) {
+   const {faq}=row.snapshot.editorial_projection;
+   assert.deepEqual(row.editorial_package_v1.cta_slots,[]);
+   const cta={key:'start_test',label:'開始測驗',href:'/zh/tests/'+row.article_metadata.related_test_slug,kind:'start_test'};
+   assert.deepEqual(projection(row,{ok:true,article:{org_id:0,locale:'zh-TW',slug:row.identity.slug,status:'published',is_public:true},
+    answer_surface_v1:{faq_blocks:faq},landing_surface_v1:{cta_bundle:[cta]}}).editorial_projection,{faq});
+  }
+ }
+});

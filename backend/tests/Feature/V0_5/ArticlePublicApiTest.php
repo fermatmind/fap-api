@@ -12,6 +12,7 @@ use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\ContentPromotion\PromotionContext;
+use App\Services\ContentPromotion\PublicContent53FrontendRevalidator;
 use App\Services\ContentPromotion\TraditionalArticlePublication;
 use App\Services\ContentPromotion\TraditionalArticleSourcePreflight;
 use App\Services\SEO\SitemapGenerator;
@@ -20,6 +21,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -1439,7 +1441,11 @@ final class ArticlePublicApiTest extends TestCase
 
     public static function traditionalArticleTaxonomyCases(): array
     {
-        return ['same as source' => [false], 'staging with an unclassified source' => [true]];
+        return [
+            'same as source' => [false],
+            'staging with an unclassified source' => [true],
+            'FAQ with default CTA' => [true, true],
+        ];
     }
 
     public function test_traditional_article_package_binds_an_independent_english_root_with_its_own_slug(): void
@@ -1483,6 +1489,42 @@ final class ArticlePublicApiTest extends TestCase
         $proof['unpublished_english_slug'] = 'different-english-slug';
         $this->expectExceptionMessage('traditional_article_staging_english_absence_invalid');
         TraditionalArticlePublication::package($encode($package), $review, 'staging');
+    }
+
+    public function test_traditional_publication_revalidates_each_cached_original_reader_once(): void
+    {
+        config([
+            'ops.content_release_observability.hmac_revalidation_url' => 'https://site.test/api/content-release/revalidate',
+            'ops.content_release_observability.hmac_revalidation_secret' => 'test-signing-secret',
+        ]);
+        $chinese = $this->createArticle(['slug' => 'cached-chinese', 'locale' => 'zh-CN']);
+        $english = $this->createArticle(['slug' => 'cached-english', 'locale' => 'en']);
+        Http::preventStrayRequests();
+        Http::fake(['https://site.test/api/content-release/revalidate' => static function ($request) {
+            $content = $request->data()['content'];
+
+            return Http::response([
+                'ok' => true, 'revalidated_paths' => $request->data()['cache_signal']['paths'], 'rejected_paths' => [],
+                'invalidated_tags' => ['article-detail:'.$content['locale'].':'.$content['slug'], 'article-seo:'.$content['locale'].':'.$content['slug']],
+            ]);
+        }]);
+        $identity = static fn (Article $article): array => ['id' => $article->id, 'slug' => $article->slug];
+        $row = [
+            'kind' => 'article', 'new_traditional_article' => true,
+            'identity' => ['org_id' => 0, 'slug' => $chinese->slug, 'locale' => 'zh-TW'],
+            'source_identity' => ['source_locale' => 'zh-CN'],
+            'source_expectations' => ['source' => $identity($chinese), 'existing_english' => $identity($english)],
+        ];
+        app(PublicContent53FrontendRevalidator::class)->revalidate([$row, $row]);
+        Http::assertSentCount(2);
+        foreach ([[$chinese, 'zh'], [$english, 'en']] as [$article, $segment]) {
+            Http::assertSent(static fn ($request): bool => $request->data() === [
+                'content' => ['type' => 'article', 'slug' => $article->slug, 'locale' => $article->locale,
+                    'path_scope' => 'article_detail_only', 'published_revision_id' => $article->published_revision_id,
+                    'content_sha256' => hash('sha256', (string) $article->publishedRevision->content_md)],
+                'cache_signal' => ['paths' => ["/$segment/articles/$article->slug"]],
+            ] && $request->hasHeader('X-FM-Content-Release-Signature'));
+        }
     }
 
     public function test_traditional_article_package_requires_exact_english_source_and_explicit_chinese_absence(): void
@@ -1620,7 +1662,7 @@ final class ArticlePublicApiTest extends TestCase
     }
 
     #[DataProvider('traditionalArticleTaxonomyCases')]
-    public function test_traditional_article_preflight_locks_native_source_and_rejects_source_drift_or_target_collision(bool $useStagingTaxonomy): void
+    public function test_traditional_article_preflight_locks_native_source_and_rejects_source_drift_or_target_collision(bool $useStagingTaxonomy, bool $faqOnly = false): void
     {
         $source = $this->createArticle(['locale' => 'zh-CN']);
         $source->forceFill(['working_revision_id' => $source->published_revision_id])->saveQuietly();
@@ -1758,12 +1800,15 @@ final class ArticlePublicApiTest extends TestCase
             $faq = [['key' => 'reviewed_faq', 'question' => '如何理解興趣？', 'answer' => '先觀察自己偏好的活動。']];
             $ctas = [['key' => 'reviewed_cta', 'kind' => 'start_test', 'href' => '/zh/tests/holland-career-interest-test-riasec', 'label' => '開始職涯興趣測驗']];
             $row['snapshot']['author_name'] = null;
-            $row['snapshot']['editorial_projection'] = ['faq' => $faq, 'ctas' => $ctas];
+            $row['snapshot']['editorial_projection'] = $faqOnly ? ['faq' => $faq] : ['faq' => $faq, 'ctas' => $ctas];
+            if ($faqOnly) {
+                $row['article_metadata']['related_test_slug'] = 'holland-career-interest-test-riasec';
+            }
             $row['editorial_package_v1'] = [
                 'answer_surface_policy' => 'editor_supplied',
                 'answer_surface_visibility' => 'below_intro',
                 'answer_surface_v1' => ['faq_items' => $faq],
-                'cta_slots' => $ctas,
+                'cta_slots' => $faqOnly ? [] : $ctas,
             ];
             $tag->update(['is_active' => false]);
             try {
@@ -1788,10 +1833,17 @@ final class ArticlePublicApiTest extends TestCase
             $published->assertJsonPath('article.category.slug', 'career-exploration')
                 ->assertJsonPath('article.tags.0.slug', 'riasec')
                 ->assertJsonPath('article.author_name', null)
-                ->assertJsonPath('answer_surface_v1.faq_blocks', $row['snapshot']['editorial_projection']['faq'])
-                ->assertJsonCount(1, 'landing_surface_v1.cta_bundle');
-            foreach ($row['snapshot']['editorial_projection']['ctas'][0] as $key => $value) {
-                $published->assertJsonPath('landing_surface_v1.cta_bundle.0.'.$key, $value);
+                ->assertJsonPath('answer_surface_v1.faq_blocks', $row['snapshot']['editorial_projection']['faq']);
+            if ($faqOnly) {
+                $published->assertJsonCount(3, 'landing_surface_v1.cta_bundle')
+                    ->assertJsonPath('landing_surface_v1.cta_bundle.0.href', '/zh-TW/articles')
+                    ->assertJsonPath('landing_surface_v1.cta_bundle.2.href', '/zh/tests/holland-career-interest-test-riasec')
+                    ->assertJsonPath('landing_surface_v1.cta_bundle.2.label', '開始測驗');
+            } else {
+                $published->assertJsonCount(1, 'landing_surface_v1.cta_bundle');
+                foreach ($row['snapshot']['editorial_projection']['ctas'][0] as $key => $value) {
+                    $published->assertJsonPath('landing_surface_v1.cta_bundle.0.'.$key, $value);
+                }
             }
         }
         DB::transaction(function () use ($candidate, $row): void {

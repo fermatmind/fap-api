@@ -121,7 +121,7 @@ export function projection(row,data) {
   if (row.kind === 'article' && row.snapshot.editorial_projection) {
     result.editorial_projection = {
       faq: data.answer_surface_v1?.faq_blocks ?? [],
-      ctas: data.landing_surface_v1?.cta_bundle ?? [],
+      ...(Object.hasOwn(row.snapshot.editorial_projection, 'ctas') ? {ctas: data.landing_surface_v1?.cta_bundle ?? []} : {}),
     };
   }
   if (row.kind === 'profile') Object.assign(result,{sections:data.sections,entry_groups:data.entry_groups,seo_text:{title:data.seo_meta?.seo_title,description:data.seo_meta?.seo_description}});
@@ -416,7 +416,7 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_ASSESSMENT_LINK_${row.page_id}`);
     const editorial = row.snapshot.editorial_projection;
     if (editorial && (editorial.faq.some(({question})=>!body.includes(compact(question)) && !body.includes(compact(plain(question))))
-      || editorial.ctas.some(({href,label})=>!(dom.link_labels[href] ?? []).some(value=>compact(value) === compact(label)))))
+      || editorial.ctas?.some(({href,label})=>!(dom.link_labels[href] ?? []).some(value=>compact(value) === compact(label)))))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_EDITORIAL_DOM_${row.page_id}`);
   }
   if (newArticle) {

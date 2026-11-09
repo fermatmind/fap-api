@@ -98,6 +98,7 @@ final class TraditionalArticlePublication
         }
 
         $editorial = $package['editorial_package_v1'] ?? null;
+        $faqOnly = false;
         $reviewed = [
             '/article/title' => $revision['title'], '/article/excerpt' => $revision['excerpt'],
             '/article/content_md' => $revision['content_md'], '/article/author_name' => $article['author_name'],
@@ -111,7 +112,18 @@ final class TraditionalArticlePublication
         }
         if ($editorial !== null) {
             $reviewed += self::editorialReviewFields($editorial, $sourceLocale);
-            if (self::ctaTargets($editorial['cta_slots']) !== ($proofs['production']['editorial_cta_targets'] ?? null)) {
+            // These articles use the runtime's default navigation and assessment CTA.
+            // Store only reviewed FAQ copy so publishing it leaves those links in place.
+            $sourceCtaTargets = $proofs['production']['editorial_cta_targets'] ?? null;
+            $faqOnly = $projectedBatch && $sourceLocale === 'zh-CN'
+                && $editorial['cta_slots'] === [] && $editorial['answer_surface_v1']['faq_items'] !== []
+                && is_string($article['related_test_slug'] ?? null)
+                && $sourceCtaTargets === [
+                    ['key' => 'back_to_articles', 'kind' => 'content_continue', 'href' => '/zh/articles'],
+                    ['key' => 'topic_hub', 'kind' => 'discover', 'href' => '/zh/topics'],
+                    ['key' => 'start_test', 'kind' => 'start_test', 'href' => '/zh/tests/'.$article['related_test_slug']],
+                ];
+            if (! $faqOnly && self::ctaTargets($editorial['cta_slots']) !== $sourceCtaTargets) {
                 throw new DomainException('traditional_article_editorial_cta_drift');
             }
             foreach (['author_name', 'cover_image_alt'] as $field) {
@@ -264,7 +276,8 @@ final class TraditionalArticlePublication
                 'title' => $revision['title'], 'excerpt' => $revision['excerpt'], 'content_md' => $revision['content_md'],
                 'author_name' => $article['author_name'], 'cover_image_alt' => $article['cover_image_alt'],
                 ...($editorial === null ? [] : ['editorial_projection' => [
-                    'faq' => $editorial['answer_surface_v1']['faq_items'], 'ctas' => $editorial['cta_slots'],
+                    'faq' => $editorial['answer_surface_v1']['faq_items'],
+                    ...($faqOnly ? [] : ['ctas' => $editorial['cta_slots']]),
                 ]]),
                 'seo_text' => ['seo_title' => $revision['seo_title'], 'seo_description' => $revision['seo_description'],
                     'og_title' => $seo['og_title'], 'og_description' => $seo['og_description'], 'og_image_url' => $seo['og_image_url']],

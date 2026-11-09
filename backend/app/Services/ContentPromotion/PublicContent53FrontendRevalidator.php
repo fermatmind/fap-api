@@ -17,12 +17,28 @@ final class PublicContent53FrontendRevalidator
         [$endpoint, $secret] = $this->configuration();
         $rateLimitWaited = false;
         $requests = $rows;
+        $originals = [];
+        foreach ($rows as $row) {
+            if (! ($row['new_traditional_article'] ?? false)) {
+                continue;
+            }
+            $proof = $row['source_expectations'];
+            foreach (['source' => $row['source_identity']['source_locale'], 'existing_english' => 'en'] as $role => $locale) {
+                $original = $proof[$role] ?? null;
+                if ($original !== null) {
+                    $originals[$original['id']] = ['kind' => 'article', 'identity' => [
+                        'org_id' => 0, 'id' => $original['id'], 'slug' => $original['slug'], 'locale' => $locale,
+                    ]];
+                }
+            }
+        }
+        array_push($requests, ...array_values($originals));
         if (array_filter($rows, static fn ($row): bool => ($row['new_article'] ?? false) === true)) {
             $requests[] = ['kind' => 'discovery', 'identity' => ['locale' => 'en', 'slug' => 'articles']];
         }
         foreach ($requests as $row) {
             if ($row['new_traditional_article'] ?? false) {
-                // The zh-TW article reader and its SEO projection both use no-store.
+                // The zh-TW page uses no-store. Its original readers are handled above.
                 continue;
             }
 
