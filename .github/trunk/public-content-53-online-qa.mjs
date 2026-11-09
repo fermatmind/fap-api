@@ -95,7 +95,7 @@ $homeJsonLd=[]; foreach($xp->query('//script[@type="application/ld+json"]') as $
 echo json_encode(['language'=>$doc->documentElement->getAttribute('lang'),'link_labels'=>$labels,'body'=>$values($mainQuery),'h1'=>$values($mainQuery.'//h1'),'links'=>$values($mainQuery.'//a','href'),
  'home_jsonld'=>$homeJsonLd,'home_iq_cards'=>$values('//main//article[.//a[contains(@href,"iq-test-intelligence-quotient-assessment")]]'),
  'tests_quickstart_jsonld'=>$quickstart,'article_body'=>$values('//main//article[@data-testid="article-detail-content"]'),
- 'title'=>$documentTitles,'description'=>$values('//meta[@name="description"]','content'),
+ 'h1_names'=>$values($mainQuery.'//h1','aria-label'),'title'=>$documentTitles,'description'=>$values('//meta[@name="description"]','content'),
  'og_title'=>$values('//meta[@property="og:title"]','content'),'og_description'=>$values('//meta[@property="og:description"]','content'),
  'canonical'=>$canonicalLinks,'robots'=>$values('//meta[@name="robots"]','content'),
  'alternates'=>$alternateLinks,'alternate_entries'=>$alternateEntries],JSON_THROW_ON_ERROR);`;
@@ -143,7 +143,7 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
       result[row.page_id] = await readMbtiResultCopySample(environment,row,fetcher,renderer);
       continue;
     }
-    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || row.new_traditional_page === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
+    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || row.new_traditional_page === true || row.new_traditional_landing === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
     if (bytes === null) { result[row.page_id]={missing:true};continue; }
     const data=parseApi(bytes);const value=projection(row,data);
     if (!equal(value,environment === 'staging' ? row.staging_before : row.before) && !equal(value,row.snapshot)) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DRIFT_${row.page_id}`);
@@ -223,6 +223,32 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   const reviewedBefore=environment === 'staging' ? (row.staging_before ?? row.before) : row.before;
   const dom=domOf(html,{articleSsr}); const body=compact(dom.body.join(' '));
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
+  if (row.new_traditional_landing) {
+    const copy = row.snapshot.payload_json;
+    const slug = row.identity.slug;
+    const path = pathFor(row);
+    const h1 = {home:'看清自己，走好每一步', tests_category_personality:'免費人格測驗', tests_category_career:'免費職業測驗'}[slug] ?? copy.hero.title;
+    const readerCopy = slug === 'home' ? ['費馬測試把自我認知','免費測驗','120 萬','5000 萬','真實伺服器資料統計']
+      : slug === 'tests' ? ['互動故事','主要測評']
+      : [copy.hero.body,copy.featured.title,copy.allTests.title,copy.differences.title,copy.trust.title,copy.resources.title];
+    const originalPath = path.slice('/zh-TW'.length);
+    const originalLinks = [originalPath ? '/zh'+originalPath : '/', '/en'+originalPath];
+    const entryLinks = slug === 'tests'
+      ? ['/zh-TW/tests/category/personality','/zh-TW/tests/category/career','/zh-TW/tests/explore/chiikawa']
+      : slug === 'home' ? ['/zh-TW/foundation','/zh-TW/method-boundaries','/zh-TW/about'] : ['/zh-TW/tests'];
+    const title = slug === 'home' ? copy.seo.title : copy.seo.title+' | 費馬測試';
+    if (dom.language !== 'zh-TW' || compact(dom.h1_names[0] || dom.h1[0]) !== compact(h1)
+      || !equal(dom.title.map(compact),[compact(title)])
+      || !equal(dom.description.map(compact),[compact(copy.seo.description)])
+      || !equal(dom.canonical,['https://fermatmind.com'+path])
+      || !dom.robots.some(value=>/\bnoindex\b/i.test(value))
+      || dom.alternate_entries.some(item=>item.hreflang)
+      || readerCopy.some(text=>!body.includes(compact(text)))
+      || [...originalLinks,...entryLinks].some(href=>!dom.links.includes(href))) {
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_LANDING_DOM_${row.page_id}`);
+    }
+    return;
+  }
   if (row.kind !== 'surface' && row.snapshot.title && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
   if (['article','guide'].includes(row.kind) && row.snapshot.seo_text) {
     const seo=row.snapshot.seo_text;
@@ -437,7 +463,9 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     const data=parseApi(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
     const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
     const createdArticle = row.new_article === true && before?.missing === true;
-    const createdTraditional = row.new_traditional_page === true && before?.missing === true;
+    const createdTraditional = (row.new_traditional_page === true || row.new_traditional_landing === true) && before?.missing === true;
+    if (row.new_traditional_landing && native.is_indexable !== false)
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_LANDING_QUALIFICATION_${row.page_id}`);
     if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_QUALIFICATION_${row.page_id}`);
     if (row.new_article === true && (!['is_indexable','sitemap_eligible','llms_eligible'].every(key=>native[key] === true)

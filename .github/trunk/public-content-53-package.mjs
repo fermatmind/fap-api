@@ -9,6 +9,7 @@ export const packagePath = 'content_assets/public_content_53';
 const packages = {
   'support-contact': ['fermatmind.public_support_contact.v1', ['support-contact.json','support-contact-review.json']],
   'pricing-refund': ['fermatmind.public_content_pricing_refund.v1', ['pricing-refund.json','pricing-refund-review.json']],
+  'traditional-entrance': ['fermatmind.traditional_landing_surfaces.v1', ['traditional-entrance.json','traditional-entrance-review.json']],
   'traditional-pages': ['fermatmind.traditional_content_page.v1', ['traditional-pages.json','traditional-pages-review.json']],
   'zh-reading-links': ['fermatmind.public_content_zh_reading_links.v1', ['zh-reading-links.json','zh-reading-links-review.json']],
   'directory-card-copy': ['fermatmind.tests_directory_card_copy.v1', ['directory-card-copy.json','directory-card-copy-review.json']],
@@ -56,6 +57,7 @@ export const executorPaths = [
   "app/Models/CmsTranslationRevision.php",
   "app/Models/ContentPage.php",
   "app/Models/LandingSurface.php",
+  "app/Models/PageBlock.php",
   "app/Models/TopicProfile.php",
   "app/Models/TopicProfileEntry.php",
   "app/Models/TopicProfileRevision.php",
@@ -81,6 +83,7 @@ export const executorPaths = [
   "app/Services/ContentPromotion/PublicContent53State.php",
   "app/Services/ContentPromotion/PublicContent53Writer.php",
   "app/Services/ContentPromotion/TraditionalContentPagePublication.php",
+  "app/Services/ContentPromotion/TraditionalLandingSurfacePublication.php",
   "app/Services/Cms/SiblingTranslationWorkflowService.php",
   "app/Support/CanonicalTranslationPayloadHash.php",
   "app/Services/Cms/RowBackedRevisionWorkspace.php",
@@ -99,7 +102,7 @@ export const executorPaths = [
 ].sort();
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 export function readCandidateRows(backendRoot, digest = packageDigest(backendRoot)) {
-  const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/RiasecCodeSampleArticles.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53MbtiResultCopy.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalContentPagePublication.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2]), JSON_THROW_ON_ERROR);';
+  const code = 'require $argv[1]."/app/Services/ContentPromotion/PromotionContextFactory.php"; require $argv[1]."/app/Services/ContentPromotion/RiasecCodeSampleArticles.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53MbtiResultCopy.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalContentPagePublication.php"; require $argv[1]."/app/Services/ContentPromotion/TraditionalLandingSurfacePublication.php"; require $argv[1]."/app/Services/ContentPromotion/PublicContent53Package.php"; echo json_encode((new App\\Services\\ContentPromotion\\PublicContent53Package)->read($argv[1],$argv[2]), JSON_THROW_ON_ERROR);';
   return JSON.parse(execFileSync('php', ['-r', code, realpathSync(backendRoot), digest], { encoding: 'utf8', timeout: 30000, maxBuffer: 4000000, stdio: ['pipe', 'pipe', 'pipe'] }));
 }
 export function inspectPackage(backendRoot, selection = process.env.PUBLIC_CONTENT_53_PACKAGE_NAME) {

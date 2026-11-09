@@ -1001,3 +1001,16 @@ test('contact native diagnostics retain only fixed source conditions and declare
   });
  }
 });
+
+
+test('Taiwan entrance uses the existing fixed package classifier and strict noindex reader acceptance',()=>{
+ const packageFiles=['backend/content_assets/public_content_53/traditional-entrance.json','backend/content_assets/public_content_53/traditional-entrance-review.json'];
+ assert.equal(selectPublicContentPackage(packageFiles),'traditional-entrance');
+ assert.equal(classifyPaths(packageFiles).operations.public_content_53_package,'traditional-entrance');
+ const row={page_id:'TRADITIONAL-LANDING-home',kind:'surface',identity:{slug:'home',locale:'zh-TW'},new_traditional_landing:true,before:{},
+   snapshot:{payload_json:{seo:{title:'費馬測試',description:'認識自己'}}}};
+ const html='<html lang="zh-TW"><head><meta charset="utf-8"><title>費馬測試</title><meta name="description" content="認識自己"><link rel="canonical" href="https://fermatmind.com/zh-TW"><meta name="robots" content="noindex,follow"></head><body><main><h1 aria-label="看清自己，走好每一步"><span aria-hidden="true">看清自己，走好每一步</span></h1><p>費馬測試把自我認知</p><p>免費測驗</p><p>120 萬，5000 萬（真實伺服器資料統計）</p><a href="/">简体中文</a><a href="/en">English</a><a href="/zh-TW/foundation">公益計畫</a><a href="/zh-TW/method-boundaries">方法界線</a><a href="/zh-TW/about">關於費馬測試</a></main></body></html>';
+ assert.doesNotThrow(()=>assertDom(row,html,{missing:true},'production'));
+ for(const changed of [html.replace('noindex,follow','index,follow'),html.replace('lang="zh-TW"','lang="zh-CN"'),html.replace('免費測驗','免费测试'),html.replace('/zh-TW/about','/zh/about')])
+  assert.throws(()=>assertDom(row,changed,{missing:true},'production'),/TRADITIONAL_LANDING_DOM/);
+});

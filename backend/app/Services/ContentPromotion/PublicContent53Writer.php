@@ -84,6 +84,14 @@ final class PublicContent53Writer
         $created = 0;
         foreach ($rows as $row) {
             $saved = $before[$row['page_id']];
+            if ($row['new_traditional_landing'] ?? false) {
+                if (app(TraditionalLandingSurfacePublication::class)->publish($row, $saved)) {
+                    $written[$row['page_id']] = true;
+                    $created += $saved['missing'] ? 1 : 0;
+                }
+
+                continue;
+            }
             if ($row['new_traditional_page'] ?? false) {
                 if (app(TraditionalContentPagePublication::class)->publish($row, $saved, $context)) {
                     $written[$row['page_id']] = true;
@@ -196,7 +204,13 @@ final class PublicContent53Writer
         if ($this->states->hash($current) !== $this->states->hash($after)) {
             throw new DomainException('public_content_53_rollback_concurrent_state');
         }
+        $rows = collect($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'])->keyBy('page_id');
         foreach ($before as $id => $saved) {
+            if ($saved['traditional_landing'] ?? false) {
+                app(TraditionalLandingSurfacePublication::class)->restore($rows[$id], $saved, $after[$id]);
+
+                continue;
+            }
             if ($saved['traditional_page'] ?? false) {
                 app(TraditionalContentPagePublication::class)->restore($saved, $after[$id]);
 

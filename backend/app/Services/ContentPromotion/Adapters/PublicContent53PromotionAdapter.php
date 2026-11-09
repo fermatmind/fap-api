@@ -248,7 +248,8 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
                 \Illuminate\Support\Facades\Cache::forget('content_page:v1:0:'.$row['identity']['slug'].':'.$row['identity']['locale']);
             }
         }
-        if (array_filter($rows, static fn (array $row): bool => ! in_array($row['kind'], ['page', 'guide', 'mbti-result'], true))) {
+        if (array_filter($rows, static fn (array $row): bool => ! ($row['new_traditional_landing'] ?? false)
+            && ! in_array($row['kind'], ['page', 'guide', 'mbti-result'], true))) {
             $this->cache->flushArticleDiscoverabilityCaches(false);
         }
         app(\App\Services\ContentPromotion\PublicContent53FrontendRevalidator::class)->revalidate($rows);
@@ -260,7 +261,7 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
             'indexability_mutation_count' => 0, 'sitemap_mutation_count' => 0, 'llms_mutation_count' => 0, 'search_mutation_count' => 0, 'deploy_mutation_count' => 0,
         ]) + ['target_state_sha256' => $this->states->hash($state)];
         if ($published > 0 && $written > 0
-            && array_filter($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'], static fn ($row): bool => ($row['new_traditional_page'] ?? false) === true)) {
+            && array_filter($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'], static fn ($row): bool => ($row['new_traditional_page'] ?? false) === true || ($row['new_traditional_landing'] ?? false) === true)) {
             $result['created_count'] = $created;
             $result['updated_count'] = $written - $created;
         }
