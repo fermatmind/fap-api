@@ -14,9 +14,6 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -1401,7 +1398,7 @@
         "status": "mapped"
       },
       "item:biostatisticians.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:biostatisticians.path.interview-probation.1": {
         "status": "mapped"
@@ -23621,10 +23618,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：生物统计学家不是「跑个回归就行」，而是把临床、公共卫生或生命科学问题转成可复核的研究设计、分析计划、统计推断与限制说明。美国侧对应 O*NET-SOC 15-2041.01，被标注 Bright Outlook，列为 Job Zone Five（需要大量准备）。核心边界是：你可以决定统计方法、分析口径与结果解释到什么程度，但不能替临床团队作医学判断，也不能把统计输出直接写成诊疗、放行或监管结论。"
+              "若只想运行模型找显著结果，或尚未核清数据权限和谁负责复核，先用虚构数据练习。真实项目不能凭软件熟练度独立签发结论。"
             ]
           },
           "id": "biostatisticians.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "bio-paper",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -23632,10 +23633,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你愿意先把问题写成可检验的终点与假设、先算样本量再动手建模；能接受自己的分析计划、代码与结果被别人逐条复核；遇到缺失数据、方案偏离或结果无法解释时，愿意先停下来记录并说明限制，而不是先凑出一个好看的结论；对「这个结论最多能支持到什么程度」的兴趣，大于「模型跑没跑通」。"
+              "做入行区 BS-07 短题：把每组 60 条里的 10 条缺失写清，计算三种 B−A，并给复核者写两句交接。"
             ]
           },
           "id": "biostatisticians.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "bio-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23643,10 +23647,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停高额投入的条件：你还没有在监督下完成过一次从研究问题到分析计划、数据处理、结果解释与限制说明的完整闭环，或者只想用现成模型的输出换一个「显著」结论，不愿承担分析计划、数据质量与可追溯记录的责任；也不要把会用某一款统计软件、或修过几门统计课程，当作可以独立签署研究结论的证明。"
+              "愿意先写分析计划、核对样本和缺失记录，并接受他人复算与质疑。"
             ]
           },
           "id": "biostatisticians.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "onet-details",
+            "bio-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23654,10 +23662,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历、资格与岗位授权必须分别核对：O*NET 把该职业列为 Job Zone Five（SVP 8.0 及以上），受访者中 58% 认为需硕士学历、29% 认为需博士学历、13% 认为需学士学历；BLS 将统计师序列的典型入门学历列为硕士。这些是调查与公开资料口径，不是统一法定门槛；真实要求以雇主、资助方、伦理委员会与所在地法规为准，签字与数据访问权限又另需机构授权。"
+              "到入行区做 BS-07。纸面短题写两句交接；完整题另交一页复核说明。"
             ]
           },
           "id": "biostatisticians.quick-decision.fermat-decision-card.6",
+          "source_refs": [
+            "bio-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23665,10 +23676,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以研究设计、统计分析、数据质量与结论边界为核心的专业岗位，产出是可复核的分析计划、结果与限制说明，而不是代替医生或监管方作决定。美国工资与就业数据口径为 Statisticians（SOC 15-2041）而非 15-2041.01 单列；中国大陆没有与该职业对应的全国职业级工资统计，本页据实标注而不代填数值。"
+              "先看自己是否愿意把同一个问题写成可以复算的计划，找出分母、数据和版本问题，并向团队解释结果还能说明什么。"
             ]
           },
           "id": "biostatisticians.quick-decision.fermat-decision-card.7",
+          "source_refs": [
+            "onet-details",
+            "bio-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -24530,10 +24545,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "面向更广泛的统计推断与方法问题，产出以统计模型、方法说明与数据分析报告为主。"
+              "统计师在多个行业设计收集办法、分析数据并报告结果；两类工作都可能使用同样的统计方法。"
             ]
           },
           "id": "biostatisticians.direction-comparison.adjacent-career-comparison-table.12",
+          "source_refs": [
+            "adj-stats-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -24541,10 +24560,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "两者方法基础相近，但生物统计学家默认面向生命科学、临床与公共卫生问题，需处理试验设计、受试者数据、伦理与监管语境；统计学家不以此为默认场景。"
+              "生物统计师的应用对象多为临床、公共卫生或生命科学，常交付分析计划、估计与限制说明；具体职责仍看项目。"
             ]
           },
           "id": "biostatisticians.direction-comparison.adjacent-career-comparison-table.13",
+          "source_refs": [
+            "onet-details",
+            "adj-stats-current"
+          ],
           "type": "prose"
         },
         {
@@ -25013,10 +25036,10 @@
                 "url": "https://www.onetonline.org/link/hot_tech/15-2041.01"
               },
               {
-                "entity": "BLS《Mathematicians and Statisticians》职业展望手册",
+                "entity": "BLS 就业预测表 1.2：统计师母类 15-2041",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 15-2041.01 职业摘要",
@@ -25147,14 +25170,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑按任务推演：工具可辅助检索、代码、数据字典与图表草稿；当前未核本职业整体替代、采用或节时因果数据，不能断言永不会替代。研究设计、缺失处理和签署责任按适用法规与机构授权核。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "用虚构材料练习生成变量字典或分析脚本初稿，再逐项核对变量、样本数、缺失处理及版本。可用的资料没有证明本职业的 AI 采用率、节省工时或替代程度。不要把真实参与者资料放进未经项目批准的工具。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor-current",
-            "onet-details",
-            "ilo-genai"
+            "source-fermatmind-ai-rubric",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -25327,13 +25349,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务建议（具体机构规则另核）：下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
+              "以下是三类工作中可用虚构材料试做的草稿。先确定复核责任和检查办法，结果不能用于推断自动化程度。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "editor-current",
-            "onet-details"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -25779,13 +25800,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "实际链接招聘软件信号，任务易受AI影响的排序是编辑推演，没有本职业实测替代排序。"
+              "此来源仅给美国招聘软件词。它不衡量 AI 替代、采用或节约工时。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet-hot-tech",
-            "editor-current"
+            "onet-hot-tech"
           ],
           "type": "prose"
         },
@@ -25794,10 +25814,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 对数学家与统计师合计口径的 2025—2035 年预测为增长 10%、净增 3,400 个岗位；这是统计分类口径，不是对 15-2041.01 的预测，也不构成个人就业保证。"
+              "美国 BLS 只给统计师 SOC 15-2041 母类预测：2025 年约 31,300 人、2035 年约 34,700 人，增长 11.0%，十年净增约 3,400，年均约 1,900 个空缺，含增长和替补。2025 基期含 1.3% 自雇。该表不单列生物统计师，也不是实时招聘数。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.70",
+          "source_refs": [
+            "bls-ep"
+          ],
           "type": "prose"
         },
         {
@@ -25805,10 +25828,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS《Mathematicians and Statisticians》职业展望手册"
+              "表 1.2 的统计师母类行给出就业、空缺和自雇比例，不能据此预测本细分职业或 AI 的影响。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.71",
+          "source_refs": [
+            "bls-ep"
+          ],
           "type": "prose"
         },
         {
@@ -27031,23 +27057,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆薪资参考：官方统计口径与缺口"
+              "生物统计师薪资｜大陆行业与招聘样本"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.44",
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "中国精确职业工资仍缺；本模块提供匹配行业/人员大类参照及边界。"
-            ]
-          },
-          "id": "biostatisticians.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs-current"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -27056,10 +27071,28 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认机构性质、数据访问权限、复核责任与计酬方式（年薪、项目制或服务合同），不要把行业平均数当作个人工资预期。"
+              "没有核实到大陆全国生物统计师职业工资；下列两家雇主也都未给金额。"
+            ]
+          },
+          "id": "biostatisticians.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "pku-biostat-2026",
+            "fudan-biostat-2026"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局 2025 年城镇单位就业人员税前年平均工资：科学研究和技术服务业，非私营 182,064 元、私营 83,560 元；卫生和社会工作，非私营 146,266 元、私营 75,631 元。行业平均不能替代生物统计师个人或全国职业工资。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.46",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -27078,10 +27111,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆生物统计学家的月薪区间或城市排名；同名岗位可能按年薪、项目费或服务合同计酬，比较时须把数据权限、复核责任、项目周期与社保安排纳入书面约定。"
+              "两则公告只说明当时各单位如何招人，不能判断当前职位状态、行业统一学历门槛或职业工资。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.48",
+          "source_refs": [
+            "pku-biostat-2026",
+            "fudan-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -27089,10 +27126,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（全国口径）"
+              "北京｜北京大学临床医学高等研究院"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.49",
+          "source_refs": [
+            "pku-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -27100,10 +27140,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与生物统计学家精确对应的全国职业月薪分布。"
+              "北京大学临床医学高等研究院 2026 年 2 月 9 日招聘 1 名劳务派遣制生物统计部统计师，要求相关专业博士；职责包括样本量、统计分析计划、指导程序开发、复核统计表图及分析报告。公告未列薪资金额。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.50",
+          "source_refs": [
+            "pku-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -27111,10 +27154,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "一线城市（北京、上海、广州、深圳）"
+              "上海｜复旦大学"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.51",
+          "source_refs": [
+            "fudan-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -27122,10 +27168,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可核验的城市级职业月薪数据，本页不出示城市排名。"
+              "复旦大学 2026 年 5 月 12 日公告列 2 名派遣制生物统计师，要求相关专业本科及以上、至少 3 年数据管理和分析经验，其中至少 1 年与临床研究相关；工作包括准备分析数据集、编写和验证分析程序、出报告。公告未列薪资金额。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.52",
+          "source_refs": [
+            "fudan-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -27133,10 +27182,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他城市"
+              "大陆全国口径"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.53",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -27144,10 +27196,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未有官方或可核验来源支持其他城市的生物统计学家月薪区间。"
+              "国家统计局 2025 年城镇单位就业人员税前年平均工资：科学研究和技术服务业，非私营 182,064 元、私营 83,560 元；卫生和社会工作，非私营 146,266 元、私营 75,631 元。行业平均不能替代生物统计师个人或全国职业工资。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.54",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -28981,13 +29036,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "编辑自查分析计划、数据核查、代码重跑与复核反馈；本轮未核比兴趣或编程兴趣更有解释力的职业专属比较。"
+              "做完 BS-07，观察自己是否愿意先写假设、核对分母和接受他人复核。测评只提供探索线索，不决定能否上岗。"
             ]
           },
           "id": "biostatisticians.fit.riasec-fit-block.9",
           "source_refs": [
-            "editor-current",
-            "details-current"
+            "bio-paper",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -29190,10 +29245,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：主要风险包括研究设计或样本量不当导致结论不可靠、分析计划事后修改、数据质量与缺失处理不当、受试者信息泄露、申报材料责任边界不清，以及多方协作中的复核缺失；控制依赖预先设定的分析计划、清晰的权限与可追溯的记录。"
+              "医疗健康和生物识别信息属于敏感个人信息。真实项目先核对处理目的、必要性、适用同意或其他规则、数据访问和输出权限；涉及人类遗传资源时另核适用制度。 大陆 2026 年修订药物临床试验质量管理规范自 9 月 1 日施行，适用于经国务院药监部门批准或备案、为研制药品进行的临床试验。医学判断和医疗决策由具备临床医生资质的主要研究者或其授权的临床医生负责；统计工作按适用规范和书面职责执行。"
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.9",
+          "source_refs": [
+            "pipl-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -29845,10 +29904,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：美国路径通常以研究生层级统计或生物统计教育为基础，BLS 把统计师序列的典型入门学历列为硕士，O*NET 把该职业列为 Job Zone Five。实际进入方式取决于岗位类型——药物临床试验、医院研究、公共卫生或生命科学研发对训练与数据权限的要求不同，应以具体雇主的岗位说明与机构授权为准。"
+              "O*NET 将生物统计师 15-2041.01 列为 Job Zone Five；BLS 的典型入门硕士属于统计师母类 15-2041。大陆公告分岗位看：复旦这个岗位接受相关本科并要求经验，北大这个岗位要求相关博士。学历、用人条件、研究职责和数据授权分别核对。"
             ]
           },
           "id": "biostatisticians.path.career-path-block.20",
+          "source_refs": [
+            "onet-details",
+            "bls-ep",
+            "pku-biostat-2026",
+            "fudan-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -30725,7 +30790,8 @@
                 "values": [
                   "虚构研究包（非临床证据）",
                   "自造120行：A、B各60例，组内j=1…60；id为组名+j，年龄=20+(j mod 40)。主要终点为8周连续量Y（分，越低越好）；j≤50时，A=100+((j−1) mod 10−4.5)，B=96+同余项；j>50时Y留缺失且missing=1，其余missing=0。组别仅为演示标签，不声称真实随机化；次要终点未给，不能另造检验。",
-                  "60分钟先写计划，45分钟按固定规则生成并分析；用任意统计软件，不用真实受试者数据。120例是题设，不是已验证样本量；角色仅为提交草稿的学习者。"
+                  "60分钟先写计划，45分钟按固定规则生成并分析；用任意统计软件，不用真实受试者数据。120例是题设，不是已验证样本量；角色仅为提交草稿的学习者。",
+                  "纸面短题（可独立完成）：每组 50 条有观察、10 条缺失，观察均值 A=100、B=96。先算完整记录的 B−A；S1 的缺失记录都填 A=110、B=86，S2 都填 A=90、B=106；两情景按每组 60 条重新求均值。写出三种 B−A 和两句交接，说明分母、情景变化以及为什么不能解读成疗效。软件生成 120 行和区间只属于完整题。"
                 ]
               },
               {
@@ -30733,7 +30799,8 @@
                 "values": [
                   "任务与交付",
                   "先指定B−A均值差、完整案例分析、样本方差分母n−1和近似95%区间公式d±1.96×sqrt(sA²/nA+sB²/nB)。报告原120例、每组10例缺失与观察样本50/组；不能从数据反推缺失机制。",
-                  "敏感性：仅比较全120例均值差。情境S1给A缺失值110、B缺失值86；S2给A缺失值90、B缺失值106。写两种差值及三条限制：虚构非随机演示、缺失机制未知、正态近似区间非正式试验结论。"
+                  "敏感性：仅比较全120例均值差。情境S1给A缺失值110、B缺失值86；S2给A缺失值90、B缺失值106。写两种差值及三条限制：虚构非随机演示、缺失机制未知、正态近似区间非正式试验结论。",
+                  "交三样：已锁定的分析口径、可重算的汇总表、给复核者的一页说明，列明分母、两种情景和限制。"
                 ]
               },
               {
@@ -30741,7 +30808,8 @@
                 "values": [
                   "参考计算与解释",
                   "完整案例两组均值100与96，各n=50、样本方差8.418367；B−A=−4.000，SE=0.580288，题设正态近似95%区间[−5.137365,−2.862635]。它只描述自造观察样本，不能证明治疗有效或真实因果效应。",
-                  "S1全120例均值差−7.333333；S2为−0.666667。方向在给定情境中未变，幅度明显变化；不证明真实缺失机制或稳健临床获益，不把填补值当新增独立观察计算更窄区间。保存代码、数据规则、计划与偏离记录。"
+                  "S1全120例均值差−7.333333；S2为−0.666667。方向在给定情境中未变，幅度明显变化；不证明真实缺失机制或稳健临床获益，不把填补值当新增独立观察计算更窄区间。保存代码、数据规则、计划与偏离记录。",
+                  "交接示例：“每组原有 60 条、完整记录各 50 条，B−A 由 −4.00 变为 S1 的 −7.33 和 S2 的 −0.67。请复核分母和缺失处理，这组虚构结果不提供疗效证据。”"
                 ]
               },
               {
@@ -30754,7 +30822,11 @@
             ]
           },
           "id": "biostatisticians.path.entry-work-sample-data.1",
-          "title": "纸面案例与任务",
+          "source_refs": [
+            "bio-paper",
+            "bio-ich-e9r1"
+          ],
+          "title": "BS-07｜分母、缺失与复核",
           "type": "cards"
         },
         {
@@ -30886,8 +30958,8 @@
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第六天：复核反馈",
-                  "请有经验者核代码与解释；无法获得外部反馈则标明，只完成自检并列待问问题。"
+                  "第六天：独立复算",
+                  "只用题内记录重跑一次，核对组别、分母、版本及限制。若有同伴，可请对方用同一份记录复算；无需接触真实资料。"
                 ]
               },
               {
@@ -30900,6 +30972,9 @@
             ]
           },
           "id": "biostatisticians.path.seven-day-trial.1",
+          "source_refs": [
+            "bio-paper"
+          ],
           "title": "七天渐进体验",
           "type": "timeline"
         },
@@ -31050,15 +31125,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "真实单校招聘样本：复旦大学国际临床试验与转化医学中心于2026-05-12招聘2名生物统计师（研究助理序列、上海张江、劳务派遣），公告截止2027-12-31，实际空缺须向雇主核对。要求本科及以上相关背景、年龄不超35岁、至少3年数据管理与分析经验，其中临床研究至少1年，掌握R/SAS/Stata等并具英文能力；不属于无经验应届生入口。职责包括样本量与随机化、准备数据集、编程验证、分析计划及报告。公告未给薪资，不能推全国工资或统一硕士门槛。上方方向与面试/90天表为编辑情境。原公告见下方来源链接。"
+              "北京大学临床医学高等研究院 2026 年 2 月 9 日招聘 1 名劳务派遣制生物统计部统计师，要求相关专业博士；职责包括样本量、统计分析计划、指导程序开发、复核统计表图及分析报告。公告未列薪资金额。",
+              "复旦大学 2026 年 5 月 12 日公告列 2 名派遣制生物统计师，要求相关专业本科及以上、至少 3 年数据管理和分析经验，其中至少 1 年与临床研究相关；工作包括准备分析数据集、编写和验证分析程序、出报告。公告未列薪资金额。",
+              "两则公告只说明当时各单位如何招人，不能判断当前职位状态、行业统一学历门槛或职业工资。"
             ]
           },
           "id": "biostatisticians.path.recruitment-sample.1",
           "source_refs": [
-            "fudan-biostat-2026",
-            "editorial"
+            "pku-biostat-2026",
+            "fudan-biostat-2026"
           ],
-          "title": "招聘样本使用说明",
+          "title": "大陆两则生物统计招聘样本",
           "type": "notice"
         }
       ]
@@ -31186,7 +31263,7 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS Table1.2统计师父级就业预测",
+                "entity": "BLS 就业预测表 1.2｜统计师 15-2041",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31267,13 +31344,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 2025—2035 年 Statisticians（SOC 15-2041，统计师父级代理口径）预测：2025 年约31,300人、2035 年约34,700人、增长11.0%、净增约3,400人，年均约1,900个职位空缺；不是生物统计学家15-2041.01单列统计。中国大陆职业级工资与就业数据本轮仍缺。"
+              "美国 BLS 只给统计师 SOC 15-2041 母类预测：2025 年约 31,300 人、2035 年约 34,700 人，增长 11.0%，十年净增约 3,400，年均约 1,900 个空缺，含增长和替补。2025 基期含 1.3% 自雇。该表不单列生物统计师，也不是实时招聘数。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.8",
           "source_refs": [
-            "bls-ep",
-            "editorial"
+            "bls-ep"
           ],
           "type": "prose"
         },
@@ -31934,10 +32010,13 @@
           "data": {
             "entries": [
               {
-                "answer": "生物统计学家把生命科学、临床与公共卫生问题转成统计工作：与医生或生命科学家共同设计研究、计算样本量、撰写分析计划、清洗与核对数据、用 SAS 或 R 等编写分析代码、报告效应量与不确定度，并把结果与限制解释给研究团队、数据监查委员会或监管机构。",
+                "answer": "生物统计学家（岗位也常称生物统计师，O*NET 15-2041.01）与医生、生命科学或公共卫生团队协作，把问题写成可复核的研究设计和分析计划，核对输入、报告结果与限制。医学判断由具备资格并获授权的人员负责。",
                 "id": "biostatisticians.faq.1",
                 "question": "生物统计学家每天做什么？",
-                "question_key": "career.faq.biostatisticians.1"
+                "question_key": "career.faq.biostatisticians.1",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "需要提前注意的风险包括设计与样本量不当、分析计划事后修改、数据质量与缺失处理不当、受试者信息泄露、申报材料责任边界不清，以及多方协作中的复核缺失；控制依赖预先设定的分析计划、清晰的权限与可追溯记录。",
@@ -31952,22 +32031,35 @@
                 "question_key": "career.faq.biostatisticians.3"
               },
               {
-                "answer": "AI 与统计软件可辅助文献检索、代码草稿、数据字典整理、文档结构与图表初稿等可回滚环节；研究设计、样本量确定、缺失数据处理决策、效应解释与结果签署责任仍由人负责。",
+                "answer": "用虚构材料练习生成变量字典或分析脚本初稿，再逐项核对变量、样本数、缺失处理及版本。可用的资料没有证明本职业的 AI 采用率、节省工时或替代程度。不要把真实参与者资料放进未经项目批准的工具。",
                 "id": "biostatisticians.faq.4",
-                "question": "AI 会改变哪些任务？",
-                "question_key": "career.faq.biostatisticians.4"
+                "question": "哪些任务能用虚构材料试做？",
+                "question_key": "career.faq.biostatisticians.4",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric",
+                  "pipl-current"
+                ]
               },
               {
-                "answer": "终点与分析人群的定义、缺失数据处理方式、模型假设的合理性、结论与限制的表述，以及对外提交材料的签署，都必须由受训并获授权的人复核与承担。",
+                "answer": "大陆 2026 年修订药物临床试验质量管理规范自 9 月 1 日施行，适用于经国务院药监部门批准或备案、为研制药品进行的临床试验。医学判断和医疗决策由具备临床医生资质的主要研究者或其授权的临床医生负责；统计工作按适用规范和书面职责执行。",
                 "id": "biostatisticians.faq.5",
                 "question": "哪些环节必须保留人工复核？",
-                "question_key": "career.faq.biostatisticians.5"
+                "question_key": "career.faq.biostatisticians.5",
+                "source_refs": [
+                  "cn-gcp-2026"
+                ]
               },
               {
-                "answer": "需要分别核对学历与课程训练、统计编程能力证明、机构授权、数据访问与保密协议、伦理批准范围以及统计报告的签署规则；O*NET 列为 Job Zone Five，BLS 把典型入门学历列为硕士。",
+                "answer": "O*NET 将生物统计师 15-2041.01 列为 Job Zone Five；BLS 的典型入门硕士属于统计师母类 15-2041。大陆公告分岗位看：复旦这个岗位接受相关本科并要求经验，北大这个岗位要求相关博士。学历、用人条件、研究职责和数据授权分别核对。",
                 "id": "biostatisticians.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
-                "question_key": "career.faq.biostatisticians.6"
+                "question_key": "career.faq.biostatisticians.6",
+                "source_refs": [
+                  "onet-details",
+                  "bls-ep",
+                  "pku-biostat-2026",
+                  "fudan-biostat-2026"
+                ]
               },
               {
                 "answer": "O*NET美国受访者54%持续或几乎持续久坐、71%每天在室内受控环境；噪音33%从不、33%每月一次以上但非每周、21%每年一次以上但非每月。不能将有害条件等其他项目概括为噪音也几乎从不出现。",
@@ -31982,16 +32074,24 @@
                 "question_key": "career.faq.biostatisticians.8"
               },
               {
-                "answer": "BLS 2025—2035 年 Statisticians（SOC 15-2041，统计师父级代理口径）预测：2025 年约31,300人、2035 年约34,700人、增长11.0%、净增约3,400人，年均约1,900个职位空缺；不是生物统计学家15-2041.01单列统计。转向须补目标岗位方法、数据权限及责任证据。",
+                "answer": "美国 BLS 只给统计师 SOC 15-2041 母类预测：2025 年约 31,300 人、2035 年约 34,700 人，增长 11.0%，十年净增约 3,400，年均约 1,900 个空缺，含增长和替补。2025 基期含 1.3% 自雇。该表不单列生物统计师，也不是实时招聘数。",
                 "id": "biostatisticians.faq.9",
                 "question": "职业前景与转向如何判断？",
-                "question_key": "career.faq.biostatisticians.9"
+                "question_key": "career.faq.biostatisticians.9",
+                "source_refs": [
+                  "bls-ep"
+                ]
               },
               {
-                "answer": "美国数值为O*NET展示的2025 OEWS统计师父级15-2041。本轮核到的国家统计局2025城镇单位资料按行业与岗位大类汇总，未单列生物统计学家，不能代填职业工资；两者覆盖不同，年份相同也不能直接比较。",
+                "answer": "国家统计局 2025 年城镇单位就业人员税前年平均工资：科学研究和技术服务业，非私营 182,064 元、私营 83,560 元；卫生和社会工作，非私营 146,266 元、私营 75,631 元。行业平均不能替代生物统计师个人或全国职业工资。 两则公告只说明当时各单位如何招人，不能判断当前职位状态、行业统一学历门槛或职业工资。",
                 "id": "biostatisticians.faq.10",
                 "question": "美国工资与中国大陆口径为什么不能互相换算？",
-                "question_key": "career.faq.biostatisticians.10"
+                "question_key": "career.faq.biostatisticians.10",
+                "source_refs": [
+                  "nbs-wages",
+                  "pku-biostat-2026",
+                  "fudan-biostat-2026"
+                ]
               },
               {
                 "answer": "O*NET 任务包含用统计软件编写分析代码；雇主招聘技术信号以 SAS 66%、R 61% 为主，Python 17%、SQL 9%。能复现分析并接受复核，比会多少种语言更重要。",
@@ -32000,10 +32100,14 @@
                 "question_key": "career.faq.biostatisticians.11"
               },
               {
-                "answer": "涉及中国人类遗传资源时，依2024修订条例按活动核对伦理、知情同意及相应审批/备案条件；国际合作临床试验存在限定备案例外，安全审查有适用触发条件，并非所有活动均同时审批、备案和安全审查。医疗健康等敏感个人信息还须核合法处理基础、最小必要和严格保护；基于同意时核单独同意，不忽略法律规定的其他处理基础。",
+                "answer": "医疗健康和生物识别信息属于敏感个人信息。真实项目先核对处理目的、必要性、适用同意或其他规则、数据访问和输出权限；涉及人类遗传资源时另核适用制度。",
                 "id": "biostatisticians.faq.12",
                 "question": "处理临床与遗传数据需要注意什么？",
-                "question_key": "career.faq.biostatisticians.12"
+                "question_key": "career.faq.biostatisticians.12",
+                "source_refs": [
+                  "pipl-current",
+                  "hgr-current"
+                ]
               },
               {
                 "answer": "以室内、受控环境为主（71% 每天在室内受控环境工作），54% 持续或几乎持续久坐；92% 每天使用电子邮件、42% 每天有面对面讨论，团队合作被 54% 评为极其重要。",
@@ -32109,10 +32213,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明：本页区分精确职业口径与 Statisticians 代理口径；中国大陆的行业平均工资只作对照；缺口以「证据不足」标记，不用推测数值填补。"
+              "O*NET 支持职责；BLS 工资和就业只到统计师母类。大陆行业均值与两所大学岗位分开看。BS-07 只用虚构数据。"
             ]
           },
           "id": "biostatisticians.sources.source-card.4",
+          "source_refs": [
+            "onet-details",
+            "bls-pay",
+            "bls-ep",
+            "nbs-wages",
+            "pku-biostat-2026",
+            "fudan-biostat-2026",
+            "bio-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -32231,9 +32344,9 @@
                 "url": "https://www.onetonline.org/link/industry/15-2041.01"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "支持雇主招聘启事中的软件技能占比：SAS 66%、R 61%、Python 17%、SQL 9% 等共 29 项。",
+                  "O*NET 招聘技能页所列美国 2025 年职位广告中 SAS 66%、R 61%、Python 17%、SQL 9%。目录条数、页面展示条数和提及率是不同口径。",
                   "雇主招聘技术信号；访问 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
@@ -32311,14 +32424,14 @@
                 "url": "https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "支持中国大陆按行业门类与岗位大类公布平均工资、但不单列该职业的事实。",
-                  "2025 年；2026-05-15 发布"
+                  "国家统计局 2025 年城镇单位就业人员税前年平均工资：科学研究和技术服务业，非私营 182,064 元、私营 83,560 元；卫生和社会工作，非私营 146,266 元、私营 75,631 元。行业平均不能替代生物统计师个人或全国职业工资。",
+                  "表 2 和表 5 分列非私营、私营单位。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "nbs-wages",
-                "limitation": "按行业门类与岗位大类汇总，未单列该职业，本页不据此推导职业工资。",
+                "limitation": "行业税前年平均，非本职业工资。",
                 "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
                 "period": "2025 年；2026-05-15 发布",
@@ -32386,9 +32499,9 @@
                 "market": "美国",
                 "name": "FermatMind 编辑设计与虚构练习",
                 "period": "2026-09 整理",
-                "publisher": "费马测试职业内容编辑组",
+                "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
-                "url": "https://www.onetonline.org/link/summary/15-2041.01"
+                "url": "#career-content-path"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32439,25 +32552,25 @@
                 "url": "https://www.onetonline.org/link/summary/15-2041.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "支持 Statisticians 口径就业规模与 2024—2034 年预测字段的来源与统计期说明。",
-                  "就业为 2024 年、预测为 2024—2034 年；访问 2026-09-16"
+                  "OEWS 受雇者工资范围，剔除自雇。",
+                  "不用于统计个人净收入。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-oews-methods",
-                "limitation": "就业与预测口径为 Statisticians（SOC 15-2041），不是 15-2041.01 精确统计。",
+                "limitation": "工资调查方法与受雇者覆盖，排除自雇；不是就业预测或到手工资。",
                 "market": "美国",
-                "name": "O*NET-SOC 15-2041.01 职业摘要（就业与预测字段）",
-                "period": "就业为 2024 年、预测为 2024—2034 年；访问 2026-09-16",
-                "publisher": "O*NET OnLine",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/15-2041.01"
+                "name": "BLS OEWS：2025 年 5 月调查方法",
+                "period": "2025 年 5 月工资调查",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/methods_25.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "31.3千至34.7千人、增长11.0%、净增3.4千人、年均空缺1.9千个；硕士典型入门、无相关经验及在岗训练分类，不代表无需机构带教。"
+                  "美国 BLS 只给统计师 SOC 15-2041 母类预测：2025 年约 31,300 人、2035 年约 34,700 人，增长 11.0%，十年净增约 3,400，年均约 1,900 个空缺，含增长和替补。2025 基期含 1.3% 自雇。该表不单列生物统计师，也不是实时招聘数。"
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-ep",
@@ -32470,33 +32583,33 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2026年第50号施行并废止2020年第57号；第8条教育训练经验与明确责任，医学判断由合格临床医生作出；第9条记录及信息保护。"
+                  "大陆 2026 年修订药物临床试验质量管理规范自 9 月 1 日施行，适用于经国务院药监部门批准或备案、为研制药品进行的临床试验。医学判断和医疗决策由具备临床医生资质的主要研究者或其授权的临床医生负责；统计工作按适用规范和书面职责执行。"
                 ],
-                "evidence_type": "primary_document",
+                "evidence_type": "公开原始资料",
                 "id": "cn-gcp-2026",
-                "limitation": "适用获批准或备案的药物研制临床试验，不是所有生物统计活动的职业执照。",
+                "limitation": "仅述药物临床试验；不替代单位职责和授权文件。",
                 "market": "中国大陆",
-                "name": "药物临床试验质量管理规范（2026修订）及施行公告",
-                "period": "2026-05-21发布；2026-09-01施行",
-                "publisher": "国家药监局等四部门；新疆司法厅官方转载",
+                "name": "药物临床试验质量管理规范（2026 修订）",
+                "period": "2026-09-01",
+                "publisher": "辽宁省药监局转载国家规范",
                 "scope": "contextual",
-                "url": "https://sft.xinjiang.gov.cn/xjsft/flfggz/202608/751ed8e1ce404794a7d1c03c1629b777.shtml"
+                "url": "https://ypjg.ln.gov.cn/ypjg/ztzl/ypyfcxxxfw/zcfgzq/flfg/2026071921180223928/index.shtml"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "本科及以上相关背景、年龄≤35、3年以上数据管理分析及1年以上临床研究经验；R/SAS/Stata与英文要求。",
-                  "统计支持、样本量与随机化、准备数据、程序验证、分析计划与报告；招聘2名，上海张江。"
+                  "复旦大学 2026 年 5 月 12 日公告列 2 名派遣制生物统计师，要求相关专业本科及以上、至少 3 年数据管理和分析经验，其中至少 1 年与临床研究相关；工作包括准备分析数据集、编写和验证分析程序、出报告。公告未列薪资金额。",
+                  "两则公告只说明当时各单位如何招人，不能判断当前职位状态、行业统一学历门槛或职业工资。"
                 ],
-                "evidence_type": "primary_document",
+                "evidence_type": "公开原始资料",
                 "id": "fudan-biostat-2026",
-                "limitation": "单校劳务派遣及有经验岗位，未公布薪资；公告期限不证明今日仍有空缺，不外推普遍门槛。",
+                "limitation": "两则公告只说明当时各单位如何招人，不能判断当前职位状态、行业统一学历门槛或职业工资。",
                 "market": "中国大陆",
-                "name": "复旦国际临床试验与转化医学中心生物统计师招聘",
-                "period": "2026-05-12公告；列明截止2027-12-31",
-                "publisher": "复旦大学人事处",
+                "name": "复旦大学：两名生物统计师",
+                "period": "2026-05-12",
+                "publisher": "Fudan University",
                 "scope": "recruitment_proxy",
                 "url": "https://hr.fudan.edu.cn/d0/46/c15370a708678/page.htm"
               },
@@ -32817,21 +32930,64 @@
                 "url": "https://www.onetonline.org/link/summary/15-2021.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "设计与计划｜与临床或生命科学团队确定终点、比较与人群，计算样本量并预定义分析方法、缺失数据处理与敏感性分析｜与研究方案一致、可复现的统计分析计划。 — 50/100; weight=1/3; biostatisticians.profile.responsibilities-block.1[1]",
-                  "数据与计算｜核对数据编码与缺失，编写可复现的分析代码，保留数据版本、代码与分析日志｜他人可以重跑并得到同一结果的分析资产。 — 75/100; weight=1/3; biostatisticians.profile.responsibilities-block.1[2]",
-                  "推断与解释｜报告效应量与不确定度，做模型诊断与敏感性分析，说明结论能支持到什么程度及限制｜含区间、假设与局限说明的结果报告。 — 75/100; weight=1/3; biostatisticians.profile.responsibilities-block.1[3]"
+                  "用虚构材料练习生成变量字典或分析脚本初稿，再逐项核对变量、样本数、缺失处理及版本。可用的资料没有证明本职业的 AI 采用率、节省工时或替代程度。不要把真实参与者资料放进未经项目批准的工具。",
+                  "定性编辑说明，无评分。",
+                  "定性编辑说明，无评分。",
+                  "定性编辑说明，无评分。",
+                  "定性编辑说明，无评分。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "公开原始资料",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "定性编辑说明，无评分。",
+                "name": "费马测试：AI 任务证据口径",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "#career-visual-group-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "北京大学临床医学高等研究院 2026 年 2 月 9 日招聘 1 名劳务派遣制生物统计部统计师，要求相关专业博士；职责包括样本量、统计分析计划、指导程序开发、复核统计表图及分析报告。公告未列薪资金额。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "pku-biostat-2026",
+                "limitation": "两则公告只说明当时各单位如何招人，不能判断当前职位状态、行业统一学历门槛或职业工资。",
+                "name": "北京大学临床医学高等研究院：生物统计部统计师",
+                "period": "2026-02-09",
+                "publisher": "Peking University Health Science Center",
+                "scope": "recruitment_proxy",
+                "url": "https://rsc.bjmu.edu.cn/rczp/jfxz/fe1cfdefffc840038c0676a59376692e.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "估计目标把临床问题与分析对齐，敏感性分析检验结果对关键假设的依赖。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "bio-ich-e9r1",
+                "limitation": "指南用于临床试验方法背景。BS-07 仅用虚构数据示范分母与缺失情景。",
+                "name": "ICH E9(R1)：估计目标与敏感性分析",
+                "period": "2019-11-20",
+                "publisher": "ICH",
+                "scope": "contextual",
+                "url": "https://database.ich.org/sites/default/files/E9-R1_Step4_Guideline_2019_1203.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "到入行区试做 BS-07：用虚构记录核对分母、解释两组缺失情景，并交一页复核说明。"
+                ],
+                "evidence_type": "虚构练习",
+                "id": "bio-paper",
+                "limitation": "不涉及真实参与者或临床结论。",
+                "name": "费马测试 BS-07：虚构统计复核",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -32955,6 +33111,26 @@
               "entry": "link-5",
               "field": "entity"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-2041.00",
+            "label": "统计师实际定义"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-2051.00",
+            "label": "O*NET 15-2051.00 数据科学家职业摘要"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/11-9121.01",
+            "label": "O*NET 11-9121.01 临床研究协调员职业摘要"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/19-1029.01",
+            "label": "O*NET 19-1029.01 生物信息学家职业摘要"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-2021.00",
+            "label": "O*NET 15-2021.00 数学家职业摘要"
           }
         ],
         "evidence_note": {
@@ -32973,25 +33149,25 @@
         "rows": [
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.11",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.12",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.13",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.14",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.12",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.11",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -32999,25 +33175,25 @@
           },
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.15",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.16",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.17",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.18",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.16",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.15",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -33025,25 +33201,25 @@
           },
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.19",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.20",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.21",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.22",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.20",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.19",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -33051,25 +33227,25 @@
           },
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.23",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.24",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.25",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.26",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.24",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.23",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -33077,25 +33253,25 @@
           },
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.27",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.28",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.29",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.30",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.28",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.27",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -33103,25 +33279,25 @@
           },
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.31",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.32",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.33",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.34",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.32",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.31",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -33582,7 +33758,7 @@
             }
           }
         ],
-        "heading": "AI 会取代生物统计学家吗？",
+        "heading": "怎样用虚构材料检验 AI 草稿？",
         "method_cards": [
           {
             "含义": {
@@ -34283,6 +34459,30 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://rsc.bjmu.edu.cn/rczp/jfxz/fe1cfdefffc840038c0676a59376692e.htm",
+            "id": "pku-biostat-2026",
+            "label": "北京大学临床医学高等研究院：生物统计部统计师",
+            "scope": "两则公告只说明当时各单位如何招人，不能判断当前职位状态、行业统一学历门槛或职业工资。"
+          },
+          {
+            "href": "https://hr.fudan.edu.cn/d0/46/c15370a708678/page.htm",
+            "id": "fudan-biostat-2026",
+            "label": "复旦大学：两名生物统计师",
+            "scope": "两则公告只说明当时各单位如何招人，不能判断当前职位状态、行业统一学历门槛或职业工资。"
+          },
+          {
+            "href": "https://ypjg.ln.gov.cn/ypjg/ztzl/ypyfcxxxfw/zcfgzq/flfg/2026071921180223928/index.shtml",
+            "id": "cn-gcp-2026",
+            "label": "药物临床试验质量管理规范（2026 修订）",
+            "scope": "仅述药物临床试验；不替代单位职责和授权文件。"
+          },
+          {
+            "href": "https://database.ich.org/sites/default/files/E9-R1_Step4_Guideline_2019_1203.pdf",
+            "id": "bio-ich-e9r1",
+            "label": "ICH E9(R1)：估计目标与敏感性分析",
+            "scope": "指南用于临床试验方法背景。BS-07 仅用虚构数据示范分母与缺失情景。"
           }
         ],
         "tracks": [
@@ -35351,6 +35551,18 @@
             "id": "cn-gcp-2026",
             "label": "2026GCP：药物研制临床试验适用",
             "scope": "第2/7/8/9条与方案/数据记录及角色责任，非全体统计活动统一制度。"
+          },
+          {
+            "href": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
+            "id": "pipl-current",
+            "label": "个人信息保护法",
+            "scope": "按个人信息识别性、处理目的和合法基础核；匿名化与去标识化不同。"
+          },
+          {
+            "href": "https://database.ich.org/sites/default/files/E9-R1_Step4_Guideline_2019_1203.pdf",
+            "id": "bio-ich-e9r1",
+            "label": "ICH E9(R1)：估计目标与敏感性分析",
+            "scope": "指南用于临床试验方法背景。BS-07 仅用虚构数据示范分母与缺失情景。"
           }
         ]
       },
@@ -36183,7 +36395,7 @@
       },
       "hero": {
         "h1": "生物统计学家",
-        "quick_answer": "生物统计学家把临床、公共卫生与生命科学问题转成可复核的研究设计、统计推断与限制说明，与医生和生命科学团队协作；其工作不等于数据录入，也不代替医生作诊疗判断。",
+        "quick_answer": "生物统计学家（岗位也常称生物统计师，O*NET 15-2041.01）与医生、生命科学或公共卫生团队协作，把问题写成可复核的研究设计和分析计划，核对输入、报告结果与限制。医学判断由具备资格并获授权的人员负责。",
         "title": "生物统计学家"
       },
       "market_signal_card": {
@@ -37749,7 +37961,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与工作任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38017,32 +38229,20 @@
         "source_refs": [
           "bls-pay"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "生物统计学家",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与工作任务"
     },
     "badges": [
       "O*NET 15-2041.01 · Bright Outlook · 研究与推断责任",
       "分析计划与记录 / 数据与隐私授权 / 跨专业协作",
-      "中国大陆无单列职业统计 · 缺口可见标记"
+      "O*NET 兴趣信号：IC"
     ],
     "metrics": [
       {
@@ -38081,17 +38281,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "生物统计学家做什么、需要哪些学历与训练、美国与中国的薪资和前景如何，以及 AI 会改变哪些任务；保留 Statisticians 代理口径与中国大陆数据缺口。"
+      "text": "了解生物统计师如何写分析计划、核对缺失数据和报告结果，对照美国统计师工资与大陆招聘样本，再做一项虚构复核。"
     },
     "title": {
       "availability": "available",
-      "text": "生物统计学家"
+      "text": "生物统计学家（生物统计师）：工作、入行与薪资"
     }
   },
-  "source_content_sha256": "8e0de4711703b29b229645c1b765035b4b9a62f99e4f5c2b2a11f31344a9415c",
+  "source_content_sha256": "0096b1e67435a0c088f904735ea23a8a4778bc84567ea53bb50f99ba680a86b7",
   "subject": {
     "canonical_slug": "biostatisticians",
     "name": "生物统计学家",
-    "summary": "生物统计学家把临床、公共卫生与生命科学问题转成可复核的研究设计、统计推断与限制说明，与医生和生命科学团队协作；其工作不等于数据录入，也不代替医生作诊疗判断。"
+    "summary": "生物统计学家（岗位也常称生物统计师，O*NET 15-2041.01）与医生、生命科学或公共卫生团队协作，把问题写成可复核的研究设计和分析计划，核对输入、报告结果与限制。医学判断由具备资格并获授权的人员负责。"
   }
 }

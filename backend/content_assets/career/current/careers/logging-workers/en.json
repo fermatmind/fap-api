@@ -14,9 +14,6 @@
       "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
@@ -156,6 +153,12 @@
         "status": "pending_mapping"
       },
       "item:logging-workers.path.career-path-block.8": {
+        "status": "pending_mapping"
+      },
+      "item:logging-workers.path.entry-work-sample-data.1": {
+        "status": "pending_mapping"
+      },
+      "item:logging-workers.path.recruitment-sample.1": {
         "status": "pending_mapping"
       },
       "item:logging-workers.profile.career-quick-answers-block.8": {
@@ -7234,12 +7237,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The core work in the Logging Workers, All Other category is turning forest trees into timber ready for transfer and delivery: felling and delimbing trees under work plans, using hand tools or machinery for skidding and transfer, bucking to specifications and grading by characteristics, and completing equipment inspections, protective measures, and work records. O*NET provides no task-level data for this title. The content above is an editorial synthesis of publicly available general knowledge of logging work for career exploration."
+              "Identify the actual role first. Check equipment, harvesting, and skidding requirements separately. A handoff should make permissions, stop conditions and records clear."
             ]
           },
           "id": "logging-workers.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "bls-ooh-logging"
           ],
           "type": "prose"
         },
@@ -7248,12 +7252,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Entirely fictional work sample: provide a fictional forest work scenario containing 1 harvesting-area boundary, 1 skidding route, 1 log requiring bucking to specifications, and 1 work anomaly requiring reporting. Within 45 minutes, write the work sequence, safety points, bucking judgments, and anomaly reporting records. Do not use real forest-site, land-parcel, or company data."
+              "Try LG-04 in the entry section: compare three fictional records, without any field visit, tools or real site data."
             ]
           },
           "id": "logging-workers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "internal-rubric"
+            "logging-paper"
           ],
           "type": "prose"
         },
@@ -7262,12 +7266,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Sample output and reflection: check whether work boundaries and safety conditions were confirmed first, bucking followed specifications and records were retained, and work anomalies were reported. Then ask yourself whether you can remain focused during outdoor forest and physical work, strictly follow safety procedures, and accept responsibility for work records and safety."
+              "Check whether you can state two clear reasons to pause before exploring a specific forest crew role."
             ]
           },
           "id": "logging-workers.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "internal-rubric"
+            "logging-paper"
           ],
           "type": "prose"
         }
@@ -7284,13 +7288,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "Logging Workers, All Other on this page refers to O*NET 45-4029.00. O*NET defines this All Other title as all logging workers not listed separately and explicitly provides no occupational-level tasks, interests, or work context data. This page therefore uses BLS wage, employment, and industry statistics to describe its US market scope and provides an editorial synthesis of typical content from publicly available general knowledge of logging work. Verify it separately from individually listed occupations such as fallers, logging equipment operators, and log graders and scalers."
+              "U.S. O*NET 45-4029.00 groups logging workers not separately listed. O*NET does not publish task, work-context, or interest data for this category. Logging Equipment Operators are separately listed under 45-4022."
             ]
           },
           "id": "logging-workers.profile.definition-block.1",
           "source_refs": [
-            "onet-summary",
-            "onet-details"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7299,12 +7302,14 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Insufficient evidence: O*NET provides no task-level data for 45-4029.00 Logging Workers, All Other (2026 official public scope). The following is an editorial synthesis: inputs include trees and harvesting areas, felling and delimbing tools, skidding and transfer tools or machinery, log specifications and grading standards, personal protective equipment, and work records."
+              "Typical logging crew inputs include trees, work areas, equipment, log specifications, and safety conditions. O*NET has no separate task profile for the residual 45-4029.00 category."
             ]
           },
           "id": "logging-workers.profile.responsibilities-block.2",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "bls-ooh-logging",
+            "logging-paper"
           ],
           "type": "list"
         },
@@ -7313,12 +7318,14 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Checkable outputs (editorial synthesis): planned felling and delimbing quantities, skidding and transfers along routes, logs meeting specifications, and work safety and inspection records."
+              "Examples of crew outputs, depending on assignment: moved logs, size or grade records, and equipment check records. Each person handles the work assigned and authorized."
             ]
           },
           "id": "logging-workers.profile.responsibilities-block.3",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "bls-ooh-logging",
+            "logging-paper"
           ],
           "type": "list"
         },
@@ -7327,12 +7334,14 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "Full workflow (editorial synthesis): pre-shift briefing and safety preparation → confirm the harvesting area and working conditions → fell and delimb → skid and transfer → buck to specifications and perform preliminary grading → record and hand over the shift."
+              "Example logging crew workflow: check conditions before work, then carry out assigned harvesting, skidding, or measurement. Handoff notes are a FermatMind editorial example. Each person handles only their authorized part."
             ]
           },
           "id": "logging-workers.profile.responsibilities-block.4",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "bls-ooh-logging",
+            "logging-paper"
           ],
           "type": "list"
         },
@@ -7399,12 +7408,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Work cycle: start with pre-shift briefing and safety preparation, proceed through confirming conditions, felling and delimbing, skidding and transfer, and bucking and grading, then record and hand over the shift. Do not proceed until safety conditions and specifications are confirmed."
+              "The table combines BLS handbook examples of harvesting, moving and grading with FermatMind editorial examples of pre-shift preparation and handoff. Individual duties depend on crew assignments and authorization."
             ]
           },
           "id": "logging-workers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "internal-rubric"
+            "bls-ooh-logging",
+            "logging-paper"
           ],
           "type": "prose"
         },
@@ -7480,12 +7490,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Agricultural equipment operators use farm machinery for cultivation and harvesting. Logging positions in this aggregate category carry out tree harvesting and skidding in forests, with different work objects and safety procedures."
+              "Use logging machinery to harvest, move or load logs. Verify authorization for the equipment assigned."
             ]
           },
           "id": "logging-workers.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-summary"
+            "role-45-4022.00"
           ],
           "type": "prose"
         },
@@ -7494,12 +7504,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Fallers are a separately listed occupation with O*NET task and skill scopes. This page covers an aggregate title for workers not separately listed; verify it separately from fallers. They cannot replace one another."
+              "Fell trees with handheld tools such as axes or chain saws."
             ]
           },
           "id": "logging-workers.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-summary"
+            "role-45-4021.00"
           ],
           "type": "prose"
         },
@@ -7508,12 +7518,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Log graders and scalers determine grades and volumes for settlement. Positions in this aggregate category mainly involve tree harvesting and skidding; grading is only a possible incidental task."
+              "Measure or grade logs by species, dimensions and quality characteristics."
             ]
           },
           "id": "logging-workers.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-summary"
+            "role-45-4023.00"
           ],
           "type": "prose"
         },
@@ -7522,7 +7532,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Operating engineers and construction equipment operators use machinery in earthmoving and construction settings. Logging positions in this aggregate category work on forest terrain with different equipment and procedures."
+              "Construction and earthmoving equipment have their own sites, machinery and safety requirements. Check the individual posting rather than applying those duties to 45-4029."
             ]
           },
           "id": "logging-workers.direction-comparison.adjacent-career-comparison-table.5",
@@ -7559,12 +7569,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial hypothesis: practice information organization using fictional forest shifts and records. This aggregate category has no occupational-level task data. No claim is made that remote control performs hazardous tasks or which role will be replaced first. Tool capabilities, safety controls, and adoption outcomes require independent empirical evidence. AI Impact Score 25% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Try organizing fictional crew records. Available sources do not establish AI use, replacement rates, or field safety effects for this occupation. Qualified personnel remain responsible for incident handling and restart authorization under the applicable procedure."
             ]
           },
           "id": "logging-workers.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "internal-rubric"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -7615,12 +7625,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "First conduct offline verification exercises using entirely fictional forest work scenarios, recording judgments and escalation paths. Do not let unverified automated prompts replace on-site inspections."
+              "Use fictional LG-04 records to practice organizing information. Real site checks and restart decisions require applicable authorization."
             ]
           },
           "id": "logging-workers.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "internal-rubric"
+            "logging-paper"
           ],
           "type": "prose"
         },
@@ -7665,7 +7675,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round did not establish a separate Chinese wage mapping for the 45-4029.00 aggregate category. NBS2025 agriculture and forestry figures of 74424 / 46552 yuan are only industry proxies for forestry businesses, not this occupation's median or China's main industry composition."
+              "A comparable national occupational wage in mainland China was not obtained. NBS 2025 annual means for agriculture, forestry, animal husbandry and fishery were CNY 74,424 in urban non-private units and CNY 46,552 in urban private units. Broad industry means do not establish logging wages."
             ]
           },
           "id": "logging-workers.china-salary.career-snapshot-primary-locale.1",
@@ -7743,12 +7753,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The table below shows US nationwide 2025 OEWS wage percentiles. Median wages and hourly values are used separately as reported by the occupational source. Separate employment projections are 2,400 workers in 2025 and 2,200 in 2035, -8% growth over 2025—2035, and 300 average annual openings from growth and replacement."
+              "U.S. BLS 45-4029: about 2,400 jobs in 2025 and 2,200 projected in 2035, down 7.6%, with about 300 annual openings. The projections count openings from growth and replacement, not current vacancies."
             ]
           },
           "id": "logging-workers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages"
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -7785,7 +7795,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET45-4029.00 aggregate-category industry employment in 2025: agriculture, forestry, animal husbandry, and fishing 58%. There are no occupational-level task data; industry shares do not define an individual's work."
+              "O*NET identifies Agriculture, Forestry, Fishing and Hunting as a top industry for the U.S. category. A wage table by industry was not obtained."
             ]
           },
           "id": "logging-workers.us-salary.career-snapshot-secondary-locale.5",
@@ -7799,7 +7809,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Employment in 2025: 2,400; growth over 2025—2035: -8%. Average annual openings of 300 include replacements and are neither currently advertised positions nor annual net additions. They do not establish individual opportunity or AI causation."
+              "U.S. BLS 45-4029: about 2,400 jobs in 2025 and 2,200 projected in 2035, down 7.6%, with about 300 annual openings. The projections count openings from growth and replacement, not current vacancies."
             ]
           },
           "id": "logging-workers.us-salary.career-snapshot-secondary-locale.6",
@@ -7877,12 +7887,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Trial action: use an entirely fictional forest work scenario to write the work sequence, safety points, bucking judgments, and anomaly reporting records. Ask another person to review the records."
+              "Try the complete LG-04 paper records in the entry section. Write a stop decision and handoff; no site visit or partner is needed."
             ]
           },
           "id": "logging-workers.fit.riasec-fit-block.5",
           "source_refs": [
-            "internal-rubric"
+            "logging-paper"
           ],
           "type": "prose"
         },
@@ -8034,12 +8044,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET explicitly provides no occupational-level task, education, or interest data for the 45-4029.00 aggregate category. This round did not establish a fixed training duration for it; do not borrow equipment operators' Job Zone. Verify training, education, and authorization for the specific target position separately."
+              "BLS lists high school or equivalent and moderate-term on-the-job training as typical for U.S. 45-4029. O*NET does not provide occupation-level education or task data for this residual category."
             ]
           },
           "id": "logging-workers.path.career-path-block.2",
           "source_refs": [
-            "internal-rubric"
+            "onet-trends",
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -8048,12 +8059,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "For applicable US logging operations, verify training and safety scope under OSHA1910.266. In China, verify training and authorization against actual work, equipment, sites, and applicable requirements. This round did not establish complete Chinese entry requirements for the aggregate category and does not infer the absence of a unified qualification. Training proof is not independent operating authorization."
+              "In mainland China, tree harvesting workers (5-02-04-01) fell, delimb and buck trees; log skidding workers (5-02-04-02) gather and move timber. Forest-land projects follow applicable permits and procedures; verify individual authorization separately. OSHA 1910.266 applies only to covered U.S. operations."
             ]
           },
           "id": "logging-workers.path.career-path-block.3",
           "source_refs": [
-            "internal-rubric",
+            "cn-logging-roles",
+            "cn-forest-law",
+            "cn-logging-standard",
             "osha-logging"
           ],
           "type": "prose"
@@ -8091,12 +8104,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Evidence to demonstrate: use a reviewable work record, safety checklist, and bucking explanation to show procedural execution and safety coordination."
+              "Keep reviewable training or handoff records: date, supervised task, confirming lead, exceptions and receipt. Use them to show the work you were authorized to do."
             ]
           },
           "id": "logging-workers.path.career-path-block.6",
           "source_refs": [
-            "internal-rubric"
+            "logging-paper"
           ],
           "type": "prose"
         },
@@ -8105,12 +8118,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Next step: verify the target company or forest site's work categories, authorization, and safety training requirements, then validate harvesting, skidding, and bucking skills during supervised real work."
+              "Verify crew duties, applicable permits, and training for the actual role. Then use the LG-04 paper exercise to test handoff skills."
             ]
           },
           "id": "logging-workers.path.career-path-block.7",
           "source_refs": [
-            "internal-rubric"
+            "logging-paper",
+            "cn-forest-law"
           ],
           "type": "prose"
         },
@@ -8127,6 +8141,60 @@
             "internal-rubric"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "exercise-materials",
+                "values": [
+                  "Materials | Fictional",
+                  "Fictional records: P1 authorizes work only in Area A, with a visible north boundary marker and clear east passage. P2: at 08:10 the marker cannot be read and temporary materials block the passage. P3: pause if either condition fails and notify the lead. Work resumes only after the lead confirms. No receipt from the lead is recorded."
+                ]
+              },
+              {
+                "id": "exercise-task",
+                "values": [
+                  "Submit three items first",
+                  "Submit two reasons to pause, a two-sentence handoff to the lead, and the evidence needed before restart. Use no tools and enter no real site."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Reference answer",
+                  "The unreadable marker and blocked passage each trigger a pause. Example: “At 08:10 the north marker was unreadable and the east passage blocked, so work was paused and the lead notified. Please verify both conditions and explicitly confirm any restart; receipt is pending.” Do not restart without confirmation."
+                ]
+              }
+            ]
+          },
+          "id": "logging-workers.path.entry-work-sample-data.1",
+          "source_refs": [
+            "logging-paper"
+          ],
+          "title": "LG-04 | Write a pause and handoff record",
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "A February 2026 Fujin, Heilongjiang, posting lists seven forestry production technicians at state forest farms. These were temporary support positions involving acceptance records, verification and safety checks. The announcement gives a 2026 example: CNY 4,165.01 total and CNY 3,000 take-home per person per month after the listed insurance deductions.",
+              "A June 2026 posting from Wutaishan State Forest Farm in Nan’an, Fujian, listed one dispatched driver for official travel, vehicle maintenance and logs, requiring a C1 or higher driving license and at least 10 years of continuous driving experience. It listed CNY 3,300 monthly base pay, CNY 300 attendance and CNY 400 performance bonuses, totaling CNY 4,000, plus the stated insurance and housing fund. It did not describe logging equipment operation.",
+              "An August 2026 notice from Baisha State Forest Farm in Shanghang requires this project’s winning contractor to complete a signed site handover confirming the boundary before harvesting. Work includes skidding, warehouse delivery and cleanup. Contract payments are not personal wages. Verify statutory permits and individual authority separately."
+            ]
+          },
+          "id": "logging-workers.path.recruitment-sample.1",
+          "source_refs": [
+            "fujin-post",
+            "nanan-post",
+            "shanghang-project"
+          ],
+          "title": "Mainland forest-farm job and project examples",
+          "type": "notice"
         }
       ]
     },
@@ -8155,7 +8223,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "US O*NET / BLS: employment of 2,400 in 2025, projected 2,200 in 2035, -8% growth over 2025—2035, and 300 average annual openings from growth and replacement. Occupational projections are neither current hiring samples nor individual hiring probabilities."
+              "U.S. BLS 45-4029: about 2,400 jobs in 2025 and 2,200 projected in 2035, down 7.6%, with about 300 annual openings. The projections count openings from growth and replacement, not current vacancies."
             ]
           },
           "id": "logging-workers.market-signals.market-signal-card.2",
@@ -8169,12 +8237,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET45-4029.00 aggregate-category industry employment in 2025: agriculture, forestry, animal husbandry, and fishing 58%. There are no occupational-level task data; industry shares do not define an individual's work."
+              "BLS Table 1.2 puts self-employment at 30.3% of this U.S. category in 2025. OEWS wages cover employees and do not estimate self-employment income."
             ]
           },
           "id": "logging-workers.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-industry"
+            "onet-trends",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -8220,13 +8289,13 @@
           "data": {
             "entries": [
               {
-                "answer": "This page covers O*NET 45-4029.00 Logging Workers, All Other. O*NET defines this title as all logging workers not listed separately and explicitly provides no occupational-level tasks, interests, or work context data. This page uses BLS wage, employment, and industry statistics to describe US market scope and provides an editorial synthesis of typical content from publicly available general knowledge of industry work. It is distinct from separately listed fallers, logging equipment operators, or log graders and scalers.",
+                "answer": "U.S. O*NET 45-4029.00 groups logging workers not separately listed. O*NET does not publish task, work-context, or interest data for this category. Logging Equipment Operators are separately listed under 45-4022. The U.S. BLS handbook describes typical logging crew work such as equipment checks, harvesting, moving logs, and keeping records. An individual’s duties depend on their assignment and authorization.",
                 "id": "logging-workers.faq.1",
                 "question": "What are daily work and working hours like?",
                 "question_key": "career.faq.logging-workers.daily-work",
                 "source_refs": [
                   "onet-summary",
-                  "onet-details"
+                  "bls-ooh-logging"
                 ]
               },
               {
@@ -8249,12 +8318,12 @@
                 ]
               },
               {
-                "answer": "Equipment monitoring, work planning, and remote-controlled machinery may assist with status recording, route planning, and hazardous tasks. However, on-site harvesting judgments, skidding operations, safety stops, and personnel safety responsibility remain with workers and crews. This page's AI discussion is an editorial synthesis, not evidence of widespread industry adoption.",
+                "answer": "Try organizing fictional crew records. Available sources do not establish AI use, replacement rates, or field safety effects for this occupation. Qualified personnel remain responsible for incident handling and restart authorization under the applicable procedure.",
                 "id": "logging-workers.faq.4",
                 "question": "How will AI affect this occupation?",
                 "question_key": "career.faq.logging-workers.ai-impact",
                 "source_refs": [
-                  "internal-rubric"
+                  "source-fermatmind-ai-rubric"
                 ]
               },
               {
@@ -8267,17 +8336,18 @@
                 ]
               },
               {
-                "answer": "The National Bureau of Statistics publishes average annual wages for employed persons in urban units by industry category without listing this occupation separately, so a safely mapped nationwide occupational median cannot be established. This page shows only an industry proxy labeled as industry-level data: in 2025, agriculture, forestry, animal husbandry, and fishing paid 74,424 yuan per year in urban non-private units and 46,552 yuan per year in urban private units; the nationwide total for urban non-private units was 129,441 yuan per year. None equals this occupation's median or starting pay. Ministry of Human Resources and Social Security enterprise compensation survey information is provided as a lookup entry point.",
+                "answer": "A comparable national occupational wage in mainland China was not obtained. NBS reports 2025 industry means of CNY 74,424 per year in urban non-private units and CNY 46,552 in urban private units. The Fujin and Nan’an notices cover adjacent jobs.",
                 "id": "logging-workers.faq.6",
                 "question": "What is the pay evidence for mainland China?",
                 "question_key": "career.faq.logging-workers.china-pay",
                 "source_refs": [
                   "nbs-wages",
-                  "mohrss-wage"
+                  "fujin-post",
+                  "nanan-post"
                 ]
               },
               {
-                "answer": "BLS 2025 OEWS data, displayed through O*NET, show a median annual wage of 50,840 US dollars for this title, approximately 24.44 US dollars per hour, and a range from the 10th to the 90th percentile of 36,380—69,350 US dollars. These are nationwide statistics, not personal take-home income or starting pay. This title has very few workers, mostly in outdoor forests with hourly pay; actual income depends on location, company, and seasonal work.",
+                "answer": "For U.S. 45-4029, 2025 BLS OEWS employee wages had a median of $50,840 a year and $24.44 an hour; the annual 10th to 90th percentiles were $36,380–$69,350. Use the U.S. row of the O*NET table, not its Oregon row. The figures exclude self-employment income.",
                 "id": "logging-workers.faq.7",
                 "question": "What is the US pay evidence?",
                 "question_key": "career.faq.logging-workers.us-pay",
@@ -8286,13 +8356,16 @@
                 ]
               },
               {
-                "answer": "In the United States, this title is an aggregate category for which O*NET provides no occupational-level education data. Based on BLS and publicly available general knowledge of industry work (editorial synthesis), such positions mostly receive on-the-job training from several days to one year. Training does not equal equipment operation authorization. Mainland China: there is no unified occupational qualification exactly corresponding to this O*NET occupation; requirements are generally determined by companies and forestry authorities.",
+                "answer": "BLS lists high school or equivalent and moderate-term on-the-job training as typical for U.S. 45-4029. O*NET does not provide occupation-level education or task data for this residual category. China distinguishes tree harvesting workers (5-02-04-01) from log skidding workers (5-02-04-02). Check applicable permits and procedures for forest-land work. Verify individual training, equipment and authority with the employer separately. OSHA 1910.266 applies only to covered U.S. operations.",
                 "id": "logging-workers.faq.8",
                 "question": "What are the entry and training paths?",
                 "question_key": "career.faq.logging-workers.education-path",
                 "source_refs": [
-                  "onet-summary",
-                  "internal-rubric"
+                  "onet-trends",
+                  "cn-logging-roles",
+                  "cn-forest-law",
+                  "cn-logging-standard",
+                  "osha-logging"
                 ]
               },
               {
@@ -8305,7 +8378,7 @@
                 ]
               },
               {
-                "answer": "O*NET cites BLS data showing about 3,100 employed under this title in 2024, a projected decline of about 5% over 2024—2034, about 3,000 employed in 2034, and about 400 average annual job openings. These projections are occupational statistics, not individual hiring probabilities or a sample of job advertisements.",
+                "answer": "U.S. BLS 45-4029: about 2,400 jobs in 2025 and 2,200 projected in 2035, down 7.6%, with about 300 annual openings. The projections count openings from growth and replacement, not current vacancies.",
                 "id": "logging-workers.faq.10",
                 "question": "How should market signals be interpreted?",
                 "question_key": "career.faq.logging-workers.outlook-transition",
@@ -8314,19 +8387,24 @@
                 ]
               },
               {
-                "answer": "If you can remain focused in outdoor forests, are willing to follow procedures, and record truthfully, it is worth using an entirely fictional work scenario for a low-cost safety and work exercise. You may also move toward separately listed logging equipment operation, scaling, or yard management roles, after adding corresponding equipment knowledge, authorization, and evidence of responsibility.",
+                "answer": "Try the complete LG-04 paper records in the entry section. Write a stop decision and handoff; no site visit or partner is needed.",
                 "id": "logging-workers.faq.11",
                 "question": "Is this occupation worth exploring further?",
                 "question_key": "career.faq.logging-workers.career-worth",
                 "source_refs": [
-                  "onet-summary"
+                  "logging-paper"
                 ]
               },
               {
-                "answer": "Evidence for China, the United States, and specific institutions is stated separately: pay, employment, qualifications, safety, and AI conclusions must not be combined across scopes. The Logging Workers, All Other page offers occupational judgment and safety exercise information and does not replace local laws, forestry and operating safety procedures, or other professional advice. Any statement of insufficient evidence means only that a bounded search did not establish safely corresponding data; proxies or memory are not used to fabricate figures.",
+                "answer": "Check wages, occupations, and qualifications separately by jurisdiction. The fictional exercise covers documentation and handoff, not field training.",
                 "id": "logging-workers.faq.boundary",
                 "question": "What are the boundaries for using this page?",
-                "question_key": "career.faq.logging-workers.boundary"
+                "question_key": "career.faq.logging-workers.boundary",
+                "source_refs": [
+                  "logging-paper",
+                  "cn-forest-law",
+                  "osha-logging"
+                ]
               }
             ]
           },
@@ -8360,67 +8438,67 @@
           "data": {
             "entries": [
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.1",
                 "relation": "career.section",
                 "url": "/en/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.2",
                 "relation": "career.section",
                 "url": "#career-content-profile"
               },
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.3",
                 "relation": "career.section",
                 "url": "#career-content-direction-comparison"
               },
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.4",
                 "relation": "career.section",
                 "url": "#career-content-ai-impact"
               },
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.5",
                 "relation": "career.section",
                 "url": "#career-content-china-salary"
               },
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.6",
                 "relation": "career.section",
                 "url": "#career-content-us-salary"
               },
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.7",
                 "relation": "career.section",
                 "url": "#career-content-fit"
               },
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.8",
                 "relation": "career.section",
                 "url": "#career-content-risk"
               },
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.9",
                 "relation": "career.section",
                 "url": "#career-content-path"
               },
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.10",
                 "relation": "career.section",
                 "url": "#career-content-market-signals"
               },
               {
-                "entity": "Logging Equipment Operator",
+                "entity": "Logging Workers, All Other",
                 "id": "logging-workers.navigation.11",
                 "relation": "career.section",
                 "url": "#career-content-sources"
@@ -8476,49 +8554,46 @@
                 "url": "https://www.onetonline.org/link/details/45-4029.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "2025 BLS OEWS wage percentiles and median wages, nationwide United States.",
-                  "Percentiles are not starting pay; retain the stated period, population, and units."
+                  "For U.S. 45-4029, 2025 BLS OEWS employee wages had a median of $50,840 a year and $24.44 an hour; the annual 10th to 90th percentiles were $36,380–$69,350. Use the U.S. row of the O*NET table, not its Oregon row. The figures exclude self-employment income."
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "onet-wages",
-                "limitation": "Displays BLS OEWS wage data; percentiles are not starting pay. Retain the stated period, population, geography, and units.",
+                "limitation": "Read the United States row; figures cover employees.",
                 "market": "United States",
-                "name": "O*NET 45-4029.00 National Wages (BLS OEWS Display)",
-                "period": "2025 BLS OEWS wage data; accessed 2026-09-25",
+                "name": "O*NET wage table: use the United States row",
+                "period": "2025",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/45-4029.00"
+                "url": "https://www.onetonline.org/link/localwages/45-4029.00?st=OR"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Employment size, 2024—2034 projections, and average annual job openings for 45-4029.00.",
-                  "Projections do not guarantee hiring."
+                  "U.S. BLS 45-4029: about 2,400 jobs in 2025 and 2,200 projected in 2035, down 7.6%, with about 300 annual openings. The projections count openings from growth and replacement, not current vacancies."
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
                 "limitation": "Projections do not guarantee hiring and do not include individual hiring probabilities.",
                 "market": "United States",
-                "name": "O*NET 45-4029.00 National Employment Trends",
-                "period": "2024—2034 projections; accessed 2026-09-25",
-                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "name": "U.S. BLS Employment Projections Table 1.2: 45-4029",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localtrends/45-4029.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "The main industry for this title in 2024 was agriculture, forestry, animal husbandry, and fishing (Agriculture, Forestry, Fishing, and Hunting).",
-                  "Industry distribution signals employer settings, not growth or demand projections."
+                  "O*NET identifies Agriculture, Forestry, Fishing and Hunting as a top industry in 2025. Industry groupings do not establish duties or wages."
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-industry",
                 "limitation": "Industry distribution signals employer settings, not growth or demand projections.",
                 "market": "United States",
                 "name": "Industries: 45-4029.00",
-                "period": "O*NET industry data current 2026; accessed 2026-09-25",
+                "period": "2025",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/45-4029.00"
@@ -8558,14 +8633,13 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "Organizes typical tasks and human control points from publicly available general knowledge of logging work, labeled as editorial synthesis.",
-                  "The editorial scale is not evidence of adoption rates, layoffs, regulations, or licenses, nor a substitute for O*NET occupational-level data."
+                  "Try organizing fictional crew records. Available sources do not establish AI use, replacement rates, or field safety effects for this occupation. Qualified personnel remain responsible for incident handling and restart authorization under the applicable procedure."
                 ],
                 "evidence_type": "internal task rubric",
                 "id": "internal-rubric",
-                "limitation": "The editorial scale is not evidence of adoption rates, layoffs, regulations, or licenses. This title has no O*NET occupational-level task data.",
+                "limitation": "Editorial examples, not an official task list.",
                 "market": "Global task level",
-                "name": "FermatMind Logging Workers, All Other Task Impact Scale",
+                "name": "FermatMind: task and paper-exercise editorial notes",
                 "period": "FermatMind task rubric v2026.09; reviewed 2026-09-25",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
@@ -8588,20 +8662,170 @@
               },
               {
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Fell and delimb (editorial synthesis) — 0/100; weight=1/3; display.ai_impact_table.task_rows.0[0]",
-                  "Skidding and transfer (editorial synthesis) — 0/100; weight=1/3; display.ai_impact_table.task_rows.1[0]",
-                  "Complete work and safety records — 75/100; weight=1/3; display.ai_impact_table.task_rows.3[0]"
+                  "Try organizing fictional crew records. Available sources do not establish AI use, replacement rates, or field safety effects for this occupation. Qualified personnel remain responsible for incident handling and restart authorization under the applicable procedure."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "Qualitative editorial note; no score.",
+                "name": "FermatMind: Evidence for AI task claims",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "scope": "editorial_synthesis",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "The U.S. BLS handbook describes typical logging crew work such as equipment checks, harvesting, moving logs, and keeping records. An individual’s duties depend on their assignment and authorization."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "bls-ooh-logging",
+                "limitation": "Handbook duties, work settings and industry wages cover the broader group. Its table lists 45-4029 separately.",
+                "name": "BLS Logging Workers handbook",
+                "period": "2026-11-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/farming-fishing-and-forestry/logging-workers.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "PDF page 304: 5-02-04-01 tree harvesting worker and 5-02-04-02 log skidding worker."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "cn-logging-roles",
+                "limitation": "Task counterparts only; no one-to-one U.S. crosswalk.",
+                "name": "China occupational classification: harvesting and skidding",
+                "period": "2026-11-09",
+                "publisher": "Xilingol League human resources bureau (classification)",
+                "scope": "contextual",
+                "url": "https://rsj.xlgl.gov.cn/rsj/zwgk/gsgg/2025042911363847198/2025042911360419576.pdf#page=304"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Harvesting trees on forest land generally requires compliance with a permit; the law specifies exceptions."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "cn-forest-law",
+                "limitation": "The permit covers harvesting activity and forest land; it does not qualify individual operators.",
+                "name": "China Forest Law Article 56: harvesting permits",
+                "period": "2020-07-01",
+                "publisher": "Ministry of Ecology and Environment (statutory text)",
+                "scope": "contextual",
+                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/202106/t20210608_836755.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Check the current standard and applicable local procedures."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "cn-logging-standard",
+                "limitation": "A technical standard, not a hiring requirement.",
+                "name": "GB/T 45088-2024 technical code for tree harvesting",
+                "period": "2025-06-01",
+                "publisher": "National standards portal",
+                "scope": "contextual",
+                "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=465F85BAC4FAA33ADAD67A42FEBAEC3B"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A February 2026 Fujin, Heilongjiang, posting lists seven forestry production technicians at state forest farms. These were temporary support positions involving acceptance records, verification and safety checks. The announcement gives a 2026 example: CNY 4,165.01 total and CNY 3,000 take-home per person per month after the listed insurance deductions."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "fujin-post",
+                "limitation": "Adjacent forest-farm support work, not logging worker pay or a current vacancy.",
+                "name": "Fujin forestry production technician posting",
+                "period": "2026-02-02",
+                "publisher": "Fujin Forestry and Grassland Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://www.fujin.gov.cn/fjs/c101552/202602/c04_285288.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A June 2026 posting from Wutaishan State Forest Farm in Nan’an, Fujian, listed one dispatched driver for official travel, vehicle maintenance and logs, requiring a C1 or higher driving license and at least 10 years of continuous driving experience. It listed CNY 3,300 monthly base pay, CNY 300 attendance and CNY 400 performance bonuses, totaling CNY 4,000, plus the stated insurance and housing fund. It did not describe logging equipment operation."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "nanan-post",
+                "limitation": "Adjacent forest-farm staffing, not logging worker pay or a current vacancy.",
+                "name": "Nan’an Wutaishan State Forest Farm staffing notice",
+                "period": "2026-06-22",
+                "publisher": "Quanzhou Forestry Bureau",
+                "scope": "recruitment_proxy",
+                "url": "https://lyj.quanzhou.gov.cn/zwgk/tzgg/202606/t20260622_3302421.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Practice checking permissions, pausing and handoff."
+                ],
+                "evidence_type": "Fictional paper exercise",
+                "id": "logging-paper",
+                "limitation": "Paper only: no harvesting, equipment, or field practice.",
+                "name": "FermatMind: fictional LG-04 crew records",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "An August 2026 notice from Baisha State Forest Farm in Shanghang requires this project’s winning contractor to complete a signed site handover confirming the boundary before harvesting. Work includes skidding, warehouse delivery and cleanup. Contract payments are not personal wages. Verify statutory permits and individual authority separately."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "shanghang-project",
+                "limitation": "Project contract example, not recruitment or personal pay.",
+                "name": "Shanghang Baisha State Forest Farm project notice",
+                "period": "2026-08-13",
+                "publisher": "Longyan Public Resources Trading Center",
+                "scope": "contextual",
+                "url": "https://ggzy.longyan.gov.cn/lyztb/tdky/011010/011010002/20260813/cc292987-c4dd-41af-b50f-9c5451521ba8.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Use logging machinery to harvest, move or load logs. Verify authorization for the equipment assigned."
+                ],
+                "evidence_type": "Occupation profile",
+                "id": "role-45-4022.00",
+                "limitation": "Detailed U.S. occupation, separate from the residual category.",
+                "name": "O*NET 45-4022.00: Logging Equipment Operators",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/45-4022.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Fell trees with handheld tools such as axes or chain saws."
+                ],
+                "evidence_type": "Occupation profile",
+                "id": "role-45-4021.00",
+                "limitation": "Detailed U.S. occupation, separate from the residual category.",
+                "name": "O*NET 45-4021.00: Fallers",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/45-4021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Measure or grade logs by species, dimensions and quality characteristics."
+                ],
+                "evidence_type": "Occupation profile",
+                "id": "role-45-4023.00",
+                "limitation": "Detailed U.S. occupation, separate from the residual category.",
+                "name": "O*NET 45-4023.00: Log Graders and Scalers",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/45-4023.00"
               }
             ]
           },
@@ -8641,7 +8865,7 @@
     ],
     "components": {
       "adjacent_career_comparison_table": {
-        "conclusion": "First use reviewable work records, safety checklists, and bucking explanations to verify work objects, methods, and boundaries, then assess the direction. Do not assign a single ranking based on income or personality.",
+        "conclusion": "The residual category has no single task list. Compare the detailed occupations above and then verify duties in the posting or with the employer.",
         "evidence_links": [
           {
             "href": {
@@ -8652,6 +8876,18 @@
               "item": "logging-workers.source-register.published.1"
             },
             "label": "Sources for this occupation"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/45-4022.00",
+            "label": "Logging Equipment Operators 45-4022.00"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/45-4021.00",
+            "label": "Fallers 45-4021.00"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/45-4023.00",
+            "label": "Log Graders and Scalers 45-4023.00"
           }
         ],
         "evidence_note": "Adjacent relationships are for comparing directions only. They do not mean automatic transfer, mutual recognition of qualifications, or operating authorization.",
@@ -8659,37 +8895,37 @@
         "intro": "The following compares this aggregate title and adjacent roles by actual work objects, core deliverables, and responsibility boundaries. Titles do not make qualifications interchangeable.",
         "rows": [
           {
-            "关键区别": "Operate farm machinery for cultivation and harvesting.",
-            "更适合什么选择": "Compare if you prefer agricultural machinery.",
+            "关键区别": "Focuses on machinery.",
+            "更适合什么选择": "Verify actual duties, training, and authorization.",
             "核心工作与产出": {
               "$item": "logging-workers.direction-comparison.adjacent-career-comparison-table.2",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": "Agricultural Equipment Operators"
+            "职业方向": "Logging Equipment Operators 45-4022"
           },
           {
-            "关键区别": "A separately listed occupation with official task and skill scopes.",
-            "更适合什么选择": "Compare if you prefer a clearly defined official scope.",
+            "关键区别": "Focuses on manual felling.",
+            "更适合什么选择": "Verify actual duties, training, and authorization.",
             "核心工作与产出": {
               "$item": "logging-workers.direction-comparison.adjacent-career-comparison-table.3",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": "Fallers (separately listed)"
+            "职业方向": "Fallers 45-4021"
           },
           {
-            "关键区别": "Determine grades and volumes for settlement.",
-            "更适合什么选择": "Compare if you prefer scaling judgments.",
+            "关键区别": "Focuses on grading and measurement.",
+            "更适合什么选择": "Verify actual duties, training, and authorization.",
             "核心工作与产出": {
               "$item": "logging-workers.direction-comparison.adjacent-career-comparison-table.4",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": "Log Graders and Scalers"
+            "职业方向": "Log Graders and Scalers 45-4023"
           },
           {
             "关键区别": "Operate machinery in earthmoving and construction settings.",
@@ -8703,7 +8939,7 @@
             "职业方向": "Operating Engineers and Construction Equipment Operators"
           }
         ],
-        "transition": "Next, turn comparison results into small-scale exercises and on-site observations that can be stopped."
+        "transition": "Try a handoff with the fictional LG-04 records in the entry section."
       },
       "ai_impact_table": {
         "action_rows": [
@@ -8888,56 +9124,20 @@
         "questions": [
           {
             "回答": "Task exposure, adoption, and job outcomes are different things to measure; they cannot establish dates for job cuts.",
-            "来源": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "logging-workers.source-register.published.1"
-            },
-            "链接": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "logging-workers.source-register.published.1"
-            },
+            "来源": "FermatMind editorial note",
+            "链接": "See LG-04 in the entry section",
             "问题": "Will AI replace Logging Workers, All Other?"
           },
           {
-            "回答": "Editorial hypothesis: practice information organization using fictional forest shifts and records. This aggregate category has no occupational-level task data. No claim is made that remote control performs hazardous tasks or which role will be replaced first. Tool capabilities, safety controls, and adoption outcomes require independent empirical evidence.",
-            "来源": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "logging-workers.source-register.published.1"
-            },
-            "链接": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "logging-workers.source-register.published.1"
-            },
+            "回答": "Try organizing fictional crew records. Available sources do not establish AI use, replacement rates, or field safety effects for this occupation. Qualified personnel remain responsible for incident handling and restart authorization under the applicable procedure.",
+            "来源": "FermatMind editorial note",
+            "链接": "See LG-04 in the entry section",
             "问题": "Which steps could be tested in controlled trials with digital tools?"
           },
           {
             "回答": "Insufficient evidence: this round obtained no AI adoption rate, time-saving data, or causal employment study for this occupation.",
-            "来源": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "logging-workers.source-register.published.1"
-            },
-            "链接": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "logging-workers.source-register.published.1"
-            },
+            "来源": "FermatMind editorial note",
+            "链接": "See LG-04 in the entry section",
             "问题": "Does this page have adoption-rate data?"
           }
         ],
@@ -9153,7 +9353,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "Editorial hypothesis: practice information organization using fictional forest shifts and records. This aggregate category has no occupational-level task data. No claim is made that remote control performs hazardous tasks or which role will be replaced first. Tool capabilities, safety controls, and adoption outcomes require independent empirical evidence."
+          "Try organizing fictional crew records. Available sources do not establish AI use, replacement rates, or field safety effects for this occupation. Qualified personnel remain responsible for incident handling and restart authorization under the applicable procedure."
         ],
         "heading": "Logging Workers, All Other: Work Objects and AI Boundaries"
       },
@@ -9277,6 +9477,42 @@
               "item": "logging-workers.source-register.published.1"
             },
             "scope": "Industry distribution; not a demand projection."
+          },
+          {
+            "href": "https://rsj.xlgl.gov.cn/rsj/zwgk/gsgg/2025042911363847198/2025042911360419576.pdf#page=304",
+            "id": "cn-logging-roles",
+            "label": "China occupational classification: harvesting and skidding",
+            "scope": "Task counterparts only; no one-to-one U.S. crosswalk."
+          },
+          {
+            "href": "https://www.mee.gov.cn/ywgz/fgbz/fl/202106/t20210608_836755.shtml",
+            "id": "cn-forest-law",
+            "label": "China Forest Law Article 56: harvesting permits",
+            "scope": "The permit covers harvesting activity and forest land; it does not qualify individual operators."
+          },
+          {
+            "href": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=465F85BAC4FAA33ADAD67A42FEBAEC3B",
+            "id": "cn-logging-standard",
+            "label": "GB/T 45088-2024 technical code for tree harvesting",
+            "scope": "A technical standard, not a hiring requirement."
+          },
+          {
+            "href": "https://www.fujin.gov.cn/fjs/c101552/202602/c04_285288.shtml",
+            "id": "fujin-post",
+            "label": "Fujin forestry production technician posting",
+            "scope": "Adjacent forest-farm support work, not logging worker pay or a current vacancy."
+          },
+          {
+            "href": "https://lyj.quanzhou.gov.cn/zwgk/tzgg/202606/t20260622_3302421.htm",
+            "id": "nanan-post",
+            "label": "Nan’an Wutaishan State Forest Farm staffing notice",
+            "scope": "Adjacent forest-farm staffing, not logging worker pay or a current vacancy."
+          },
+          {
+            "href": "https://ggzy.longyan.gov.cn/lyztb/tdky/011010/011010002/20260813/cc292987-c4dd-41af-b50f-9c5451521ba8.html",
+            "id": "shanghang-project",
+            "label": "Shanghang Baisha State Forest Farm project notice",
+            "scope": "Project contract example, not recruitment or personal pay."
           }
         ],
         "tracks": [
@@ -9448,48 +9684,48 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "How can the full work cycle be assessed?",
+            "question": "What might a logging crew do?",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "Work cycle",
+                  "label": "Editorial example 1",
                   "secondary_value": null,
                   "value": "From pre-shift preparation to shift handover"
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step one",
+                  "label": "Editorial example 2",
                   "secondary_value": null,
                   "value": "Pre-shift briefing and safety preparation"
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step two",
+                  "label": "Editorial example 3",
                   "secondary_value": null,
                   "value": "Confirm harvesting areas and working conditions"
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step three",
+                  "label": "Industry example 4",
                   "secondary_value": null,
                   "value": "Felling and delimbing"
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step four",
+                  "label": "Industry example 5",
                   "secondary_value": null,
                   "value": "Skidding and transfer"
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step five",
+                  "label": "Industry example 6",
                   "secondary_value": null,
                   "value": "Buck to specifications and grade"
                 },
                 {
                   "alternate_value": null,
-                  "label": "Step six",
+                  "label": "Editorial example 7",
                   "secondary_value": null,
                   "value": "Records and shift handover"
                 }
@@ -9497,7 +9733,7 @@
             }
           },
           {
-            "answer": "This title is an O*NET aggregate category with no occupational-level qualification data. Based on publicly available general industry knowledge (editorial synthesis), these positions mostly receive on-the-job training. Training does not equal equipment operation authorization. This page does not assess individual eligibility.",
+            "answer": "BLS lists high school or equivalent and moderate-term on-the-job training as typical for U.S. 45-4029. O*NET does not provide occupation-level education or task data for this residual category.",
             "key": "qa1",
             "question": "What are the qualification boundaries?",
             "table": {
@@ -9552,7 +9788,7 @@
             "label": "View risk module"
           }
         ],
-        "direct_answer": "Risks must be handled in terms of triggers, consequences, controls, and escalation boundaries. Risks on this page are an editorial synthesis.",
+        "direct_answer": "Check the role and jurisdiction. In the U.S. read the coverage of OSHA 1910.266; in mainland China check Article 56 and applicable procedures. Escalate boundary, passage, equipment or communication problems under the site procedure.",
         "evidence_scope": "The 45-4029 aggregate category has no occupational tasks or work context. The six risks are editorial forestry scenario examples, not accident rates for this category. Verify safety training against US applicability under OSHA1910.266, and check China separately. These do not replace specific procedures.",
         "heading": "Logging Workers, All Other: Work Risks and Boundaries",
         "risks": [
@@ -9624,10 +9860,10 @@
             "affected_roles": "Recordkeeping positions",
             "consequence": "May affect traceability and safety.",
             "evidence_refs": [
-              "logging-workers.display.source.osha-logging"
+              "logging-paper"
             ],
             "id": "risk-5",
-            "mitigation": "Complete records truthfully and retain them.",
+            "mitigation": "Editorial suggestion: retain handoff, exception and receipt records as authorized.",
             "scenario": "When work or safety records differ from reality.",
             "title": {
               "$item": "logging-workers.risk.career-risk-cards.5",
@@ -9638,12 +9874,12 @@
           },
           {
             "affected_roles": "Operating positions",
-            "consequence": "May lead to incorrect operations when on-site conditions change.",
+            "consequence": "Editorial risk example: misunderstanding site conditions. We did not establish automation safety outcomes for this category.",
             "evidence_refs": [
-              "logging-workers.display.source.osha-logging"
+              "internal-rubric"
             ],
             "id": "risk-6",
-            "mitigation": "Base decisions on on-site safety conditions and work records, retaining human confirmation.",
+            "mitigation": "Editorial suggestion: treat system prompts as leads. Verify actual conditions and restart authority under the site procedure.",
             "scenario": "When equipment or system prompts are used as the basis for work without on-site verification.",
             "title": "Direct acceptance of automated prompts"
           }
@@ -9727,6 +9963,30 @@
             "id": "logging-workers.display.source.osha-logging",
             "label": "OSHA1910.266",
             "scope": "Applicable US logging safety scope; risk scenarios are editorial examples"
+          },
+          {
+            "href": "https://www.mee.gov.cn/ywgz/fgbz/fl/202106/t20210608_836755.shtml",
+            "id": "cn-forest-law",
+            "label": "China Forest Law Article 56: harvesting permits",
+            "scope": "The permit covers harvesting activity and forest land; it does not qualify individual operators."
+          },
+          {
+            "href": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=465F85BAC4FAA33ADAD67A42FEBAEC3B",
+            "id": "cn-logging-standard",
+            "label": "GB/T 45088-2024 technical code for tree harvesting",
+            "scope": "A technical standard, not a hiring requirement."
+          },
+          {
+            "href": "#career-visual-group-path",
+            "id": "logging-paper",
+            "label": "FermatMind LG-04 paper handoff",
+            "scope": "Fictional example, not a safety standard."
+          },
+          {
+            "href": "#career-visual-group-ai-impact",
+            "id": "internal-rubric",
+            "label": "FermatMind editorial risk example",
+            "scope": "Does not establish safety outcomes."
           }
         ]
       },
@@ -10067,7 +10327,7 @@
           },
           {
             "指标": "Employment · growth",
-            "数值": "-8%（2025—2035）",
+            "数值": "Down 7.6% (2025–35)",
             "说明": {
               "$join": [
                 {
@@ -10123,7 +10383,7 @@
         },
         "factor_rows": [
           {
-            "answer": "The aggregate category has no occupational education data. Verify training duration and operating authorization for the specific trade.",
+            "answer": "O*NET does not give an education distribution for 45-4029. BLS typical education and training are described in the entry section; confirm actual training and operating permission with the employer.",
             "factor": "Qualifications"
           },
           {
@@ -10141,7 +10401,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "-8%（2025—2035）",
+        "growth": "Down 7.6% (2025–35)",
         "heading": {
           "$item": "logging-workers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10194,7 +10454,7 @@
             "question": "Employment"
           },
           {
-            "answer": "-8% growth over 2025—2035; establishes neither individual hiring probabilities nor AI causation.",
+            "answer": "−7.6% growth over 2025—2035; establishes neither individual hiring probabilities nor AI causation.",
             "question": "Outlook"
           },
           {
@@ -10208,7 +10468,7 @@
         "wage_column_labels": [
           "Percentile",
           "Annual reference",
-          "Hourly equivalent",
+          "Hourly wage percentile",
           "Explanation"
         ],
         "wage_heading": {
@@ -10509,8 +10769,8 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career interest trial",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
+            "cta_label": "Explore the RIASEC interest assessment",
             "evidence_level": "Editorial synthesis",
             "id": "riasec",
             "label": "RIASEC",
@@ -10528,8 +10788,8 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career interest trial",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
+            "cta_label": "Explore the Big Five assessment",
             "evidence_level": "Editorial synthesis",
             "id": "big-five",
             "label": "Big Five personality",
@@ -10547,8 +10807,8 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career interest trial",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "Explore the MBTI assessment",
             "evidence_level": "Editorial synthesis",
             "id": "mbti",
             "label": "MBTI",
@@ -10561,8 +10821,8 @@
           },
           {
             "answer": "Further verification requires real tasks, responsibility boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career interest trial",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
+            "cta_label": "Explore the Enneagram assessment",
             "evidence_level": "Editorial synthesis",
             "id": "enneagram",
             "label": "Enneagram",
@@ -10575,8 +10835,8 @@
           },
           {
             "answer": "Further verification requires real tasks, responsibility boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career interest trial",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
+            "cta_label": "Explore the cognitive reasoning assessment",
             "evidence_level": "Editorial synthesis",
             "id": "iq",
             "label": "Cognitive ability",
@@ -10589,8 +10849,8 @@
           },
           {
             "answer": "Further verification requires real tasks, responsibility boundaries, and reviewable deliverables.",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "Start a career interest trial",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "cta_label": "Explore the emotional skills assessment",
             "evidence_level": "Editorial synthesis",
             "id": "eq",
             "label": "Emotional ability",
@@ -10848,7 +11108,7 @@
           "entry": "logging-workers.navigation.1",
           "field": "url"
         },
-        "label": "Test whether my career interests fit logging equipment operation",
+        "label": "Explore your career interests",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -10916,7 +11176,7 @@
             "item": "logging-workers.source-register.published.1"
           }
         },
-        "note": "45-4029.00 aggregates logging workers not separately listed; it is not 45-4022 equipment operators. 2025 wages 36380 / 41900 / 50840 / 61450 / 69350, hourly 24.44; 2025—2035 employment 2400 → 2200, -8%, openings 300; 2025 agriculture and forestry share 58%. There are no occupational task, education, or interest data; paths and risks are editorial examples. OSHA1910.266 covers only applicable US logging safety scope; NBS2025 agriculture and forestry figures are proxies. The frozen identity / CTA still incorrectly says equipment operator, and protected FAQ shared sources retain older figures and qualification statements, pending independent review. Exact Chinese wages and entry requirements, AI and personality evidence, and detailed-industry wages remain gaps."
+        "note": "Use O*NET to verify the U.S. category. Read BLS projections and wages separately. China’s broad industry means and two forest-farm postings do not establish national logging wages. LG-04 is fictional."
       },
       "work_context_block": {
         "$item": "logging-workers.profile.work-context-block.5",
@@ -10928,6 +11188,20 @@
     "contract_version": "career.detail.display.v1",
     "locale": "zh-CN",
     "native_items": [
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "logging-workers.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "logging-workers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
       {
         "block": "source-register",
         "copy_key": "career.item.published-sources",
@@ -11017,36 +11291,36 @@
       },
       {
         "derivation": null,
-        "display_value": "3,100 workers",
+        "display_value": "About 2,400 jobs",
         "fact_id": "us-employment-2024",
         "market": "United States",
-        "measure": "Employment in 2024",
+        "measure": "Employment in 2025",
         "occupation_scope": "O*NET 45-4029.00 (Nationwide United States)",
-        "period": "2024; accessed 2026-09-25",
+        "period": "2025",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
-        "derivation": "O*NET shows 3,100 workers in 2024 and about 3,000 in 2034, with a projected decline of about 5%.",
-        "display_value": "Approximately -5% (decline, 2024—2034)",
+        "derivation": null,
+        "display_value": "Projected decline of 7.6%",
         "fact_id": "us-growth",
         "market": "United States",
         "measure": "Projected employment growth (decline)",
         "occupation_scope": "O*NET 45-4029.00 (Nationwide United States)",
-        "period": "2024—2034; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
       },
       {
-        "derivation": "O*NET shows about 400 average annual job openings over 2024—2034. This is an annual average, not a ten-year total.",
-        "display_value": "Approximately 400 openings per year (2024—2034 annual average)",
+        "derivation": null,
+        "display_value": "About 300 per year",
         "fact_id": "us-openings",
         "market": "United States",
         "measure": "Projected average annual job openings",
         "occupation_scope": "O*NET 45-4029.00 (Nationwide United States)",
-        "period": "2024—2034; accessed 2026-09-25",
+        "period": "2025–2035",
         "source_refs": [
           "onet-trends"
         ]
@@ -11098,32 +11372,20 @@
         "source_refs": [
           "nbs-wages"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((0+0+75)/3+0.5)=25; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "25%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Logging Equipment Operator",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and work tasks"
     },
     "badges": [
-      "Felling and delimbing",
-      "Skidding and transfer",
-      "Log bucking and safety records"
+      "Check crew duties",
+      "Separate roles and authorization",
+      "Paper handoff exercise"
     ],
     "metrics": [
       {
@@ -11162,17 +11424,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "This page covers O*NET 45-4029.00 Logging Workers, All Other, an aggregate category for logging occupations not listed separately. O*NET provides no occupational-level task or interest data. The page uses BLS wage, employment, and industry statistics to describe US market scope and provides an editorial synthesis of typical work from publicly available general industry knowledge. When assessing this career path, verify the full work cycle, responsibility boundaries, evidence scope, risk controls, and observable entry-level work samples together."
+      "text": "Compare the U.S. residual logging category with separately listed roles. See pay, training, and mainland China examples, then try a fictional safety handoff."
     },
     "title": {
       "availability": "available",
-      "text": "Logging Workers, All Other Career Assessment: Work, Entry Paths, and Risk Boundaries"
+      "text": "Logging Workers, All Other: Work, Training, and Pay"
     }
   },
-  "source_content_sha256": "aff3e132780fa831c0a91dae99f6115a876eb9f9b90b0ca33002377d6d228fbf",
+  "source_content_sha256": "daeda0783db01dfe95852ed8900496bbef7e84a03ade2d642314573c1f4a5e6d",
   "subject": {
     "canonical_slug": "logging-workers",
-    "name": "Logging Equipment Operator",
-    "summary": "This page covers O*NET 45-4029.00 Logging Workers, All Other. O*NET defines the All Other title as an aggregate of logging occupations not listed separately, officially described as all logging workers not listed separately, and explicitly provides no occupational-level task, interest code, or work context details. This page therefore uses BLS wage, employment, and industry statistics to describe its US market scope and provides an editorial synthesis of typical work from publicly available general knowledge of logging: tree felling and delimbing, skidding and transfer, log bucking and grading, equipment inspections, and safety records. These are not presented as this title's official task list. Verify separately against individually listed fallers, logging equipment operators, and log graders and scalers."
+    "name": "Logging Workers, All Other",
+    "summary": "U.S. O*NET 45-4029.00 groups logging workers not separately listed. O*NET does not publish task, work-context, or interest data for this category. Logging Equipment Operators are separately listed under 45-4022. The U.S. BLS handbook describes typical logging crew work such as equipment checks, harvesting, moving logs, and keeping records. An individual’s duties depend on their assignment and authorization."
   }
 }

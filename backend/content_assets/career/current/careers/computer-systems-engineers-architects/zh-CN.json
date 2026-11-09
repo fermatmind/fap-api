@@ -29,9 +29,6 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -23088,10 +23085,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "上手前先确认：你能把系统要求拆成功能、性能、安全与可维护性几类，并说明取舍依据。"
+              "如果缺验证、授权或回退确认，先暂停。测评与证书都不会授予生产操作权限。"
             ]
           },
           "id": "computer-systems-engineers-architects.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "sys-paper",
+            "sys-ruankao"
+          ],
           "type": "prose"
         },
         {
@@ -23099,10 +23100,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "试用方式：为虚构场景（如把内部审批系统改成多租户架构）写一页方案说明，包含现状与目标、组件与接口、失败与回退、以及三项风险与验证方式。"
+              "在入行区做 SA-09：只看题内两套方案，列通过项、失败项和要复核的证据。"
             ]
           },
           "id": "computer-systems-engineers-architects.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23110,10 +23114,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "边界：本页练习与判断只用于自我核对，不构成录用标准、资质认定或真实系统的部署与变更授权；涉及生产系统时须按所在组织制度执行。"
+              "愿意画清依赖、检查接口记录，并解释为什么一个方案可继续评审时，可以进一步了解。"
             ]
           },
           "id": "computer-systems-engineers-architects.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23121,10 +23129,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "注意：若你更愿意做业务需求梳理或代码实现，本职业是相邻方向但不是同一角色；系统分析师侧重需求到方案，程序员侧重代码交付，本职业则对架构与集成设计负责。"
+              "做入行区 SA-09：根据虚构接口验证记录和停机上限写上线决定与回退待办，不操作任何系统。"
             ]
           },
           "id": "computer-systems-engineers-architects.quick-decision.fermat-decision-card.6",
+          "source_refs": [
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23132,10 +23143,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话总结：这是一份以“把系统要求翻译成可实施、可验证、可维护的架构与集成方案”为核心的工作，适合愿意做技术取舍、协调多方并对运行结果负责的人。"
+              "适合进一步了解的信号：愿画清系统依赖、查接口验证证据，并在缺批准或回退条件时暂停变更。"
             ]
           },
           "id": "computer-systems-engineers-architects.quick-decision.fermat-decision-card.7",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -23711,7 +23726,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025信息传输/软件/IT服务城镇非私营248,752、私营128,166元/年为税前行业均值，分别读，不是本职业区间/中位/起薪或个人报价。GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
+              "2025信息传输/软件/IT服务城镇非私营248,752、私营128,166元/年为税前行业均值，分别读，不是本职业区间/中位/起薪或个人报价。GB/T 4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
             ]
           },
           "id": "computer-systems-engineers-architects.profile.onet-structured-fields-block.3",
@@ -23931,10 +23946,16 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把本职业与五个相邻职业放在同一组维度上：每个方向先写核心工作与产出，再写与本职业的关键区别，最后提示什么情况下更适合选择该方向。"
+              "系统工程师与架构师关注跨组件的设计与集成；网络架构师重网络设计和容量，软件开发人员重功能和代码，系统管理员重维护、监控及访问。名称有重叠，比较具体产出与责任。"
             ]
           },
           "id": "computer-systems-engineers-architects.direction-comparison.adjacent-career-comparison-table.10",
+          "source_refs": [
+            "onet-details",
+            "sys-adj-15-1244.00",
+            "sys-adj-15-1241.00",
+            "sys-adj-15-1252.00"
+          ],
           "type": "prose"
         },
         {
@@ -24557,10 +24578,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需求、配置、文档、用例及日志为编辑待测辅助候选，实际可靠性、采用与净效率未取得。BLS表1.2 SOC15-1299其他计算机类（2025—2035）总体就业471,200→495,300，公布净变化+24,200/+5.1%、年均空缺27,000含替补；舍入端点相减不替代公布净变化。均为父类背景非15-1299.08独立就业、个人机会或AI因果。 AI影响度 67% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "AI 可作为虚构文档整理的练习对象。现有资料不能推断本职业 AI 使用率、工时节约、岗位替代或生产安全效果。真实变更仍由获授权人员审核和批准。"
             ]
           },
           "id": "computer-systems-engineers-architects.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "source-fermatmind-ai-rubric"
+          ],
           "type": "prose"
         },
         {
@@ -25865,7 +25889,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
+              "GB/T 4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.12",
@@ -25975,7 +25999,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "精确职业分位未取得，背景不代填。GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
+              "精确职业分位未取得，背景不代填。GB/T 4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.22",
@@ -25997,7 +26021,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
+              "GB/T 4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.24",
@@ -26030,10 +26054,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "大专实施/集成为编辑准备方向，真实中国招聘样本未取得。"
+              "可用入行区两则公告比较网络研究和软件集成的教育与经历要求；不能当作行业通用门槛。"
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.27",
+          "source_refs": [
+            "sys-cnic-post",
+            "sys-xmist-post"
+          ],
           "type": "prose"
         },
         {
@@ -26217,10 +26245,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
+              "中国大陆薪资参考"
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.44",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -26338,7 +26369,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
+              "GB/T 4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.55",
@@ -26361,7 +26392,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025行业工资与GT4754，背景非精确职业数值。"
+              "国家统计局2025行业工资与GB/T 4754，背景非精确职业数值。"
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.57",
@@ -26708,10 +26739,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025父类年分位55,940/79,370/116,580/157,500/188,470美元，小时26.89/38.16/56.05/75.72/90.61；BLS表1.2 SOC15-1299其他计算机类（2025—2035）总体就业471,200→495,300，公布净变化+24,200/+5.1%、年均空缺27,000含替补；舍入端点相减不替代公布净变化。均为父类背景非15-1299.08独立就业、个人机会或AI因果。"
+              "2025 年 5 月 BLS OEWS 美国 15-1299 合并组受雇者年薪中位 116,580 美元，时薪中位 56.05 美元。该组合就业预测的 2025 基期含 4.9% 自雇，工资数据不含自雇。 BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。"
             ]
           },
           "id": "computer-systems-engineers-architects.us-salary.career-snapshot-secondary-locale.26",
+          "source_refs": [
+            "bls-pay",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -27995,10 +28030,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "任务体验可核组件/架构/部署兴趣；C79/I74/R52/E34/S18/A15为O*NET兴趣轮廓，前三排序CIR非人数比例/个人阈值。"
+              "用 SA-09 核对自己喜欢的环节。兴趣结果只作探索。"
             ]
           },
           "id": "computer-systems-engineers-architects.fit.riasec-fit-block.9",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -28006,10 +28045,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "C79/I74/R52/E34/S18/A15为O*NET兴趣轮廓，前三排序CIR非人数比例/个人阈值。"
+              "观察自己是否愿按步骤核对接口、查原因并把限制说清楚。"
             ]
           },
           "id": "computer-systems-engineers-architects.fit.riasec-fit-block.10",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -28017,10 +28060,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "CIR（前三兴趣排序）"
+              "O*NET 对该美国职业列出 C 79、I 74、R 52、E 34、S 18、A 15。前三项为常规型、研究型、现实型。它们是职业活动兴趣强度，不是个人分数、合格线或录用概率。"
             ]
           },
           "id": "computer-systems-engineers-architects.fit.riasec-fit-block.11",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -28028,10 +28075,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "C79/I74/R52；其余E34/S18/A15，非人数/阈值。"
+              "常规型、研究型、现实型（O*NET 职业口径）"
             ]
           },
           "id": "computer-systems-engineers-architects.fit.riasec-fit-block.12",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -28194,10 +28245,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑建议核需求/组件/测试/变更与记录，不能称两风险最主要或能力必然迅速过时。"
+              "设计评审、验证测试、变更审批和生产操作分别留证。复核失败或缺授权时停止；系统工程方法可参考 NIST，具体权限按项目确认。"
             ]
           },
           "id": "computer-systems-engineers-architects.risk.career-risk-cards.9",
+          "source_refs": [
+            "sys-nist",
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -28811,10 +28866,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "实施/集成/平台准备为编辑路径，非常见比例/统一晋升。O*NET15-1299.08新聘教育回答41%高中后证书/27%两年学位/23%本科为部分回答，非在职学历构成。Zone3/SVP6至低于7是准备层级非个人固定年限；BLS父类15-1299典型本科/无相关经验/无OJT不是细类或中国统一要求。58认证候选、1学徒注册名称非实际机会。"
+              "O*NET 对 15-1299.08 新聘人员所需教育的调查：41% 回答需中学后证书，27% 两年制学位，23% 学士。这是受访回答，不能当作每家雇主要求。大陆岗位另看职责、学历、项目经历和授权。 中国大陆的计算机技术与软件专业技术资格考试可作能力与职称参照。证书、岗位录用、系统访问及变更审批是不同事项，生产权限按机构和项目确认。"
             ]
           },
           "id": "computer-systems-engineers-architects.path.career-path-block.20",
+          "source_refs": [
+            "onet-details",
+            "sys-ruankao"
+          ],
           "type": "prose"
         },
         {
@@ -28844,10 +28903,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "准备路径：先掌握操作系统与网络、组件与接口、测试与变更流程、设计与集成文档写法，再按方向补充架构、平台或安全技能；资格与认证要求须按目标雇主当年公告核对，本页不构成资格认定。"
+              "O*NET 对 15-1299.08 列 Job Zone Three，描述通常所需的准备程度；BLS 对 15-1299 合并组列学士为典型入行学历。两者适用对象不同，岗位实际门槛以雇主为准。"
             ]
           },
           "id": "computer-systems-engineers-architects.path.career-path-block.23",
+          "source_refs": [
+            "onet-details",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -29623,7 +29686,7 @@
                 "id": "education",
                 "values": [
                   "学历与专业背景要求",
-                  "学历/专业/经验为编辑准备建议，真实中国招聘样本未取得。",
+                  "两则大陆历史公告分别示例网络架构研究、软件开发和系统集成；各自要求见样本区。",
                   "O*NET15-1299.08新聘教育回答41%高中后证书/27%两年学位/23%本科为部分回答，非在职学历构成。Zone3/SVP6至低于7是准备层级非个人固定年限；BLS父类15-1299典型本科/无相关经验/无OJT不是细类或中国统一要求。"
                 ]
               },
@@ -29665,39 +29728,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构系统材料（练习输入）",
-                  "虚构情境：某公司内部审批系统要在半年内支持三个业务部门独立配置流程，并满足审计留痕要求。",
-                  "已给材料：现状架构（单体应用＋单一数据库，配置需开发改代码）；当前指标（峰值 300 并发、审批平均 6 小时、变更平均每月 4 次）；约束（预算有限、不能中断现有业务、需保留至少 1 年审计记录）。",
-                  "未给材料：是否需要多云部署、是否有专有合规要求、历史数据迁移量级。练习中如需要这些条件，请明确写出假设。"
+                  "题面｜虚构",
+                  "上线门槛：停机不超过 5 分钟；3 条接口检查全部通过；值班负责人书面确认回退。",
+                  "方案 A：停机 8 分钟，3/3 接口通过，值班负责人已书面确认回退。",
+                  "方案 B：停机 3 分钟，2/3 接口通过，未见值班负责人书面回退确认。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务要求",
-                  "请写出一页架构与集成方案：包含要求与约束、目标架构与关键组件、接口与数据流向、失败与回退处理，以及两项风险与验证方式。",
-                  "方案要写明哪些结论需要评审确认，哪些需要与运维或安全共同评估。"
-                ]
-              },
-              {
-                "id": "exercise-approach",
-                "values": [
-                  "参考交付（可从题面推导）",
-                  "方案应包含：要求（多部门自助配置、审计留痕、可用性目标）、约束（预算、不中断、留痕期限）、目标架构（配置与执行分离、审计日志独立存储）、接口与数据流向（配置下发与日志回传的失败重试）、失败与回退（配置版本化、灰度与回滚）、风险（迁移数据量与一致性、权限边界）与验证方式（灰度对比、审计抽样）。",
-                  "参考交付只列应包含的要素，不要求与示例措辞一致；能说明判断依据即可。"
+                  "先交三样",
+                  "第一项：写方案 A 的通过项与未通过项。",
+                  "第二项：写方案 B 的通过项、未通过项和缺失证据。第三项：用两句写给值班负责人，交代决定和待复核事项。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界与不可推断的结论",
-                  "本题只检验架构与集成方案的编写能力，不评价真实项目结果，也不构成录用或资质判断。"
+                  "纸面权限",
+                  "不连接系统、不修改配置、不提交实际审批。"
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "参考答案",
+                  "A：接口和书面回退通过，但停机 8 分钟超过 5 分钟。B：停机 3 分钟通过，但 2/3 接口不达标，且缺书面回退。两案均不能上线。",
+                  "示例：“请暂停两案。B 可继续纸面准备；确认第三条接口检查通过，并取得负责人的书面回退确认后再评审。”"
                 ]
               }
             ]
           },
           "id": "computer-systems-engineers-architects.path.entry-work-sample-data.1",
-          "title": "纸面案例与任务",
+          "source_refs": [
+            "sys-paper"
+          ],
+          "title": "SA-09｜核对变更是否具备条件",
           "type": "cards"
         },
         {
@@ -29796,55 +29862,58 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天：读一份架构说明",
-                  "找一份公开的架构说明或系统设计文档，标出要求、组件、接口与失败处理，并写下三处你想确认的地方。"
+                  "第 1 天",
+                  "读 SA-09 上线门槛。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天：写要求与约束清单",
-                  "针对虚构场景「多部门自助配置审批流程」，写出功能要求与非功能要求（可用性、安全、审计）。"
+                  "第 2 天",
+                  "列出 A 的原始记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天：做组件比较",
-                  "选三类候选组件（数据库、消息或配置中心），比较许可、支持周期与锁定风险，写出一页结论。"
+                  "第 3 天",
+                  "列出 B 的原始记录。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天：画接口与数据流向",
-                  "为其中一个接口写清数据流向、失败处理与重试策略，并标出责任边界。"
+                  "第 4 天",
+                  "逐项标记通过、失败与待确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天：写回退方案",
-                  "为一次配置变更写出回退条件、备份方式与验证步骤。"
+                  "第 5 天",
+                  "写两句交接与下一步。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天：写测试与验收项",
-                  "把安全与容量目标转成 6 条可测量的验收项与对应测试用例。"
+                  "第 6 天",
+                  "与参考答案对照。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天：判断是否继续",
-                  "回到本页的判断清单，写下你愿意继续的三条理由与需要慎重的两条条件。"
+                  "第 7 天",
+                  "用一条记录说明你喜欢哪类工作。"
                 ]
               }
             ]
           },
           "id": "computer-systems-engineers-architects.path.seven-day-trial.1",
+          "source_refs": [
+            "sys-paper"
+          ],
           "title": "七天渐进体验",
           "type": "timeline"
         },
@@ -29969,12 +30038,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；中国大陆的招聘条件须按目标雇主当年公告核对。",
-              "示例中的架构案例、文档评审与考核方式为编辑设计，用于说明常见验证方式，不代表任何雇主的统一流程。"
+              "中国科学院计算机网络信息中心 2026 年 1 月 6 日公告：网络体系结构与协议研究岗项目聘用 2 人，做架构及核心协议、原型、仿真与现网试验；要求通信或计算机相关博士。未披露数字薪酬。",
+              "厦门软件职业技术学院 2026 年 10 月 21 日公告：信息管理中心软件开发工程师 2 人，做接口、系统集成、部署和故障排查；要求计算机及相关专业背景；全日制本科加三年以上相关经验，或硕士及以上不限经历。原公告列研究生转正后年总支付约 12–20 万元，依职称，非月薪、到手工资或全国架构师工资。",
+              "历史招聘用于比较职责，不证明当前仍在招聘。"
             ]
           },
           "id": "computer-systems-engineers-architects.path.recruitment-sample.1",
-          "title": "招聘样本使用说明",
+          "source_refs": [
+            "sys-cnic-post",
+            "sys-xmist-post"
+          ],
+          "title": "大陆两则岗位样本",
           "type": "notice"
         }
       ]
@@ -30102,10 +30176,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 15-1299.08 摘要页（大类代理口径）",
+                "entity": "BLS 就业预测表1.2：15-1299 合并组",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/15-1299.08"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "ILO 生成式 AI 与工作暴露研究",
@@ -30183,10 +30257,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS表1.2 SOC15-1299其他计算机类（2025—2035）总体就业471,200→495,300，公布净变化+24,200/+5.1%、年均空缺27,000含替补；舍入端点相减不替代公布净变化。均为父类背景非15-1299.08独立就业、个人机会或AI因果。2025信息传输/软件/IT服务城镇非私营248,752、私营128,166元/年为税前行业均值，分别读，不是本职业区间/中位/起薪或个人报价。"
+              "BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。"
             ]
           },
           "id": "computer-systems-engineers-architects.market-signals.market-signal-card.8",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -30381,7 +30458,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025信息传输/软件/IT服务城镇非私营248,752、私营128,166元/年为税前行业均值，分别读，不是本职业区间/中位/起薪或个人报价。GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
+              "2025信息传输/软件/IT服务城镇非私营248,752、私营128,166元/年为税前行业均值，分别读，不是本职业区间/中位/起薪或个人报价。GB/T 4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
             ]
           },
           "id": "computer-systems-engineers-architects.market-signals.market-signal-card.26",
@@ -30403,7 +30480,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
+              "GB/T 4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。"
             ]
           },
           "id": "computer-systems-engineers-architects.market-signals.market-signal-card.28",
@@ -30425,10 +30502,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS父类当前预测非细类就业保证"
+              "美国 15-1299 合并组 2025—2035 预测，不给本职业单列。"
             ]
           },
           "id": "computer-systems-engineers-architects.market-signals.market-signal-card.30",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -30742,10 +30822,13 @@
           "data": {
             "entries": [
               {
-                "answer": "沟通系统要求、评估组件与接口、设计架构与集成方案、配置与验证环境、处理部署与运行问题，并维护设计与配置文档。",
+                "answer": "计算机系统工程师与架构师（O*NET 15-1299.08）设计复杂应用、系统管理或网络问题的解决方案，负责系统管理与集成；常核接口兼容、稳定性、安全与可扩展性。岗位职责因雇主而异。",
                 "id": "computer-systems-engineers-architects.faq.1",
                 "question": "计算机系统工程师与架构师每天在做什么？",
-                "question_key": "career.faq.computer-systems-engineers-architects.daily-work"
+                "question_key": "career.faq.computer-systems-engineers-architects.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "本职业对架构设计、组件选型与集成验证负责；系统分析师侧重需求到规格的转化，程序员侧重代码交付。三者协作紧密，但责任与产出不同。",
@@ -30754,40 +30837,60 @@
                 "question_key": "career.faq.computer-systems-engineers-architects.comparison"
               },
               {
-                "answer": "部分分析与文档任务会被辅助（需求整理、文档与用例草稿、日志归类），但架构取舍、安全与扩展性验证、生产变更与回退决策仍需人负责；本页美国数值为大类代理口径，不能用来推断本职业被替代的程度。",
+                "answer": "AI 可作为虚构文档整理的练习对象。现有资料不能推断本职业 AI 使用率、工时节约、岗位替代或生产安全效果。真实变更仍由获授权人员审核和批准。",
                 "id": "computer-systems-engineers-architects.faq.3",
                 "question": "AI 会取代计算机系统工程师与架构师吗？",
-                "question_key": "career.faq.computer-systems-engineers-architects.ai-replacement"
+                "question_key": "career.faq.computer-systems-engineers-architects.ai-replacement",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "需求与配置差异整理、架构与集成文档草稿、测试用例初稿、监控与日志归类；需要架构取舍、跨团队协调与生产变更决策的任务不容易被完全自动化。",
+                "answer": "可用虚构需求和配置记录，试写差异摘要、集成文档或测试用例初稿，再逐条对照原记录。它们是待验证的练习，不代表本职业已采用 AI 或取得了成效。",
                 "id": "computer-systems-engineers-architects.faq.4",
-                "question": "哪些任务最容易被辅助？",
-                "question_key": "career.faq.computer-systems-engineers-architects.automatable-tasks"
+                "question": "哪些文档任务可以用虚构材料试做？",
+                "question_key": "career.faq.computer-systems-engineers-architects.automatable-tasks",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "在约束下做架构取舍并说明依据、把安全与容量目标转成可验证条件、跨团队推动集成、以及为生产变更与回退承担责任。",
+                "answer": "依机构流程由获授权人员确认验证、变更与回退。现有证据不支持推断哪些任务能被完全自动化。",
                 "id": "computer-systems-engineers-architects.faq.5",
-                "question": "哪些能力不容易被替代？",
-                "question_key": "career.faq.computer-systems-engineers-architects.human-skills"
+                "question": "实际架构或上线由谁确认？",
+                "question_key": "career.faq.computer-systems-engineers-architects.human-skills",
+                "source_refs": [
+                  "sys-nist",
+                  "sys-paper"
+                ]
               },
               {
-                "answer": "不是。O*NET 页面明确标注工资与就业数值为 SOC 15-1299「其他计算机类职业」大类代理口径：中位年工资 116,580 美元（2025 年 5 月）、就业约 472,000 人（2024 年）、增速 8%、年均空缺约 31,300 个；本职业独立数值未公布，本页已登记缺口。",
+                "answer": "2025 年 5 月 BLS OEWS 美国 15-1299 合并组受雇者年薪中位 116,580 美元，时薪中位 56.05 美元。该组合就业预测的 2025 基期含 4.9% 自雇，工资数据不含自雇。 BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。",
                 "id": "computer-systems-engineers-architects.faq.6",
                 "question": "美国工资和就业数据是本职业的吗？",
-                "question_key": "career.faq.computer-systems-engineers-architects.salary"
+                "question_key": "career.faq.computer-systems-engineers-architects.salary",
+                "source_refs": [
+                  "bls-pay",
+                  "bls-outlook"
+                ]
               },
               {
-                "answer": "美国口径：准备层级为 Job Zone Three（多要求职业学校培训、在职经验或副学士学位），My Next Move 教育需求评级 2/4；该页面未公布教育层级百分比。中国大陆要求以目标雇主当年招聘公告为准。",
+                "answer": "O*NET 对 15-1299.08 新聘人员所需教育的调查：41% 回答需中学后证书，27% 两年制学位，23% 学士。这是受访回答，不能当作每家雇主要求。大陆岗位另看职责、学历、项目经历和授权。",
                 "id": "computer-systems-engineers-architects.faq.7",
                 "question": "入行需要什么学历？",
-                "question_key": "career.faq.computer-systems-engineers-architects.education"
+                "question_key": "career.faq.computer-systems-engineers-architects.education",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
-                "answer": "本页不提供强制资质清单；厂商与平台认证、架构与安全认证、项目管理认证可作为能力证明（O*NET 认证检索列出候选认证示例），架构评审与生产变更授权由雇主与客户方规定。",
+                "answer": "中国大陆的计算机技术与软件专业技术资格考试可作能力与职称参照。证书、岗位录用、系统访问及变更审批是不同事项，生产权限按机构和项目确认。",
                 "id": "computer-systems-engineers-architects.faq.8",
                 "question": "需要哪些证书或资质？",
-                "question_key": "career.faq.computer-systems-engineers-architects.credentials"
+                "question_key": "career.faq.computer-systems-engineers-architects.credentials",
+                "source_refs": [
+                  "sys-ruankao"
+                ]
               },
               {
                 "answer": "现实。常见入口是系统实施、集成支持与基础设施运维岗位；有开发或运维背景的人可结合经验切入，但需要补齐架构设计、组件评估与文档能力。",
@@ -30796,28 +30899,42 @@
                 "question_key": "career.faq.computer-systems-engineers-architects.career-change"
               },
               {
-                "answer": "O*NET 页面标注该职业为 Bright Outlook（就业前景良好），其依据来自相关大类代理口径的增速与空缺数据；该标注不构成个人就业保证。",
+                "answer": "O*NET 将 15-1299.08 标为 Bright Outlook。该标签与 BLS 15-1299 合并组预测是不同口径。 BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。",
                 "id": "computer-systems-engineers-architects.faq.10",
                 "question": "这个职业是 Bright Outlook 吗？",
-                "question_key": "career.faq.computer-systems-engineers-architects.career-worth"
+                "question_key": "career.faq.computer-systems-engineers-architects.career-worth",
+                "source_refs": [
+                  "onet-details",
+                  "bls-outlook"
+                ]
               },
               {
-                "answer": "本条证据路由把中国大陆职业级工资登记为「未取得」（公开工资统计按行业或人员大类聚合发布，未建立与 O*NET-SOC 15-1299.08 一一对应的职业细类），因此本页只保留可见缺口，不用行业均值、父职业或美国数据代填。",
+                "answer": "国家统计局 2025 年信息传输、软件和信息技术服务业城镇单位就业人员年平均：非私营 248,752 元、私营 128,166 元。是行业范围，不是系统架构岗位工资。 厦门软件职业技术学院 2026 年 10 月 21 日公告：信息管理中心软件开发工程师 2 人，做接口、系统集成、部署和故障排查；要求计算机及相关专业背景；全日制本科加三年以上相关经验，或硕士及以上不限经历。原公告列研究生转正后年总支付约 12–20 万元，依职称，非月薪、到手工资或全国架构师工资。",
                 "id": "computer-systems-engineers-architects.faq.12",
                 "question": "为什么中国大陆没有具体工资数字？",
-                "question_key": "career.faq.computer-systems-engineers-architects.china-data-scope"
+                "question_key": "career.faq.computer-systems-engineers-architects.china-data-scope",
+                "source_refs": [
+                  "nbs-wages",
+                  "sys-xmist-post"
+                ]
               },
               {
-                "answer": "因为 O*NET 该职业页面未公布 15-1299.08 的独立工资与就业数值，只公布了 SOC 15-1299「其他计算机类职业」大类口径（页面明确标注 Wage/Employment data for Computer Occupations, All Other）。本页逐处标注代理口径，并在行业行与边界段登记本职业精确数值缺口。",
+                "answer": "BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。",
                 "id": "computer-systems-engineers-architects.faq.13",
                 "question": "美国数据的口径为什么是代理的？",
-                "question_key": "career.faq.computer-systems-engineers-architects.us-data-scope"
+                "question_key": "career.faq.computer-systems-engineers-architects.us-data-scope",
+                "source_refs": [
+                  "bls-outlook"
+                ]
               },
               {
-                "answer": "不能。练习材料与情境均为虚构，用于检验架构与集成方案的编写能力，不构成录用、资质或真实系统的部署与变更授权；涉及生产系统时须按所在组织制度执行。",
+                "answer": "做入行区 SA-09：根据虚构接口验证记录和停机上限写上线决定与回退待办，不操作任何系统。",
                 "id": "computer-systems-engineers-architects.faq.14",
                 "question": "页面里的练习能当作真实项目依据吗？",
-                "question_key": "career.faq.computer-systems-engineers-architects.exercise-boundary"
+                "question_key": "career.faq.computer-systems-engineers-architects.exercise-boundary",
+                "source_refs": [
+                  "sys-paper"
+                ]
               }
             ]
           },
@@ -30838,9 +30955,9 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "本页把职业身份与任务（O*NET-SOC 15-1299.08）、美国工资与就业（SOC 15-1299 大类代理口径，2025 年 5 月工资数据与 2024—2034 年预测）、行业结构与技术关键词、以及中国大陆的统计口径边界分别标注来源与限制，不混用不同口径，也不把大类代理数值当作本职业独立数值。",
+              "BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。",
               "编辑归纳（能力阶段、风险情境、适配信号、练习材料与七日安排）与来源事实分开表述：三个工作面与六条职责来自官方定义与任务清单，能力阶段、风险情境、适配信号与练习均为编辑整理，其中练习材料全部为虚构，不得用于真实系统部署、变更审批或作为资质依据。",
-              "统计位置与不可换算说明：中位数不是入门工资、分位不是职级等级；行业、雇主规模、技术栈与地区的差异不能外推为个人报价，也不换算个人月收入或到手工资；本职业兴趣代码、教育层级百分比、精确职业工资与就业数值均未公布，缺口按规则保留并在可见位置标记。"
+              "O*NET 有本职业兴趣和新聘教育调查。BLS 工资和就业是 15-1299 合并组；中位数、分位和预测不能用来推断个体薪酬或录用。"
             ]
           },
           "id": "computer-systems-engineers-architects.sources.boundary.1",
@@ -30865,10 +30982,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "细类O*NET任务/教育/兴趣/情境；美国2025工资及2025—2035就业为15-1299父类背景，行业页当前展示范围另列，中国2025IT背景与精确缺口分开。风险、适配、准备与转型为编辑建议。"
+              "费马测试编辑部"
             ]
           },
           "id": "computer-systems-engineers-architects.sources.source-card.1",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30876,10 +30996,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为 O*NET OnLine 公开页面（职业详细资料、摘要、行业分布、技术清单、准备层级、认证检索、全国工资页面）、My Next Move 职业概览、International Labour Organization 关于生成式 AI 与工作暴露的研究、NIST AI 风险管理框架，以及国家统计局城镇单位就业人员年平均工资发布信息与中华人民共和国职业分类大典（2022 年版）公布信息。"
+              "O*NET 职责、BLS 工资与预测、国家统计局与历史岗位原件"
             ]
           },
           "id": "computer-systems-engineers-architects.sources.source-card.2",
+          "source_refs": [
+            "onet-details",
+            "bls-outlook",
+            "nbs-wages",
+            "sys-cnic-post",
+            "sys-xmist-post"
+          ],
           "type": "prose"
         },
         {
@@ -30887,10 +31014,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本次九模块查读/修订2026-10-09，未复开历史源保留日期，不宣称整页更新。"
+              "2026-11-09"
             ]
           },
           "id": "computer-systems-engineers-architects.sources.source-card.3",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30898,10 +31028,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用提示：本页是职业信息服务，不构成录用条件、资质认定、架构评审结论、生产变更授权或法律与合规建议；涉及数据安全、系统变更与上线决策的具体判断，须以适用法域规定与所在组织制度及有权限岗位的意见为准。"
+              "O*NET 确认职责，BLS 仅支持合并组工资与预测。大陆行业工资和两个用人样本分别读；SA-09 纯纸面。"
             ]
           },
           "id": "computer-systems-engineers-architects.sources.source-card.4",
+          "source_refs": [
+            "onet-details",
+            "bls-outlook",
+            "nbs-wages",
+            "sys-cnic-post",
+            "sys-xmist-post",
+            "sys-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -30991,14 +31129,14 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "历史2024—2034父类摘要供保留Hero/FAQ等历史消费者，本次九模块使用新增BLS当前事实"
+                  "BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。"
                 ],
                 "evidence_type": "official source",
                 "id": "onet-summary",
-                "limitation": "该页标注「Employment data for Computer Occupations, All Other」：就业 472,000 人（2024）、增速 8%、年均空缺 31,300 个均为 SOC 15-1299 大类代理口径，不是本职业独立数值。",
+                "limitation": "BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。",
                 "market": "美国",
                 "name": "15-1299.08 - Computer Systems Engineers/Architects: Summary（职业摘要）",
-                "period": "2024 年就业与 2024—2034 年预测（大类口径）；检索 2026-09-17",
+                "period": "BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/summary/15-1299.08"
@@ -31081,33 +31219,33 @@
                 "url": "https://www.onetonline.org/link/localwages/15-1299.08"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "本页工资口径与代理不可外推说明引用 OEWS 方法说明。",
-                  "来源身份、章节与用途按本职业主张逐项核对；未取得项按缺口登记。"
+                  "BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。",
+                  "BLS 只给美国 15-1299“其他计算机职业”合并组的预测：2025 年 471.2 千人，2035 年 495.3 千人，增长 5.1%，十年净增 24.2 千，年均 27.0 千个空缺，含增长和替补。各列独立舍入，空缺不是当前招聘，也不代表本职业单列。"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-outlook",
-                "limitation": "说明 OEWS 的覆盖人群、工资构成与统计口径；不提供本职业具体数值，也不提供大类代理口径的拆分方法。",
+                "limitation": "合并组，不是 O*NET 15-1299.08 单列。",
                 "market": "美国",
-                "name": "Handbook of Methods: Occupational Employment and Wage Statistics（方法说明）",
-                "period": "方法说明页；检索 2026-09-17",
+                "name": "BLS 就业预测表1.2：15-1299 合并组",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
-                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "本页中国薪资板块引用此来源说明实际查阅范围与职业级缺口，不据此换算数值。",
-                  "来源身份、章节与用途按本职业主张逐项核对；未取得项按缺口登记。"
+                  "国家统计局 2025 年信息传输、软件和信息技术服务业城镇单位就业人员年平均：非私营 248,752 元、私营 128,166 元。是行业范围，不是系统架构岗位工资。",
+                  "国家统计局 2025 年信息传输、软件和信息技术服务业城镇单位就业人员年平均：非私营 248,752 元、私营 128,166 元。是行业范围，不是系统架构岗位工资。"
                 ],
                 "evidence_type": "official source",
                 "id": "nbs-wages",
-                "limitation": "2025信息传输/软件/IT服务城镇非私营248,752、私营128,166元/年为税前行业均值，分别读，不是本职业区间/中位/起薪或个人报价。GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。",
+                "limitation": "行业年平均，非职业工资。",
                 "market": "中国内地",
                 "name": "2025 年城镇单位就业人员年平均工资情况",
-                "period": "2025 年数据；发布于 2026-05-15；检索 2026-10-09",
+                "period": "2025",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
@@ -31258,13 +31396,13 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "GT4754-2017单位主要软件/IT业务分类"
+                  "GB/T 4754-2017单位主要软件/IT业务分类"
                 ],
                 "evidence_type": "official source",
                 "id": "cn-industry-classification",
-                "limitation": "GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。",
+                "limitation": "GB/T 4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。",
                 "market": "中国大陆",
-                "name": "GT4754-2017单位主要软件/IT业务分类",
+                "name": "GB/T 4754-2017单位主要软件/IT业务分类",
                 "period": "2017分类",
                 "publisher": "国家统计局",
                 "scope": "contextual",
@@ -31286,21 +31424,134 @@
                 "url": "https://www.onetonline.org/link/localcert/15-1299.08"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "需求｜沟通并确认系统需求｜与员工或客户沟通，确认系统要满足的功能、数据与接口要求，并把需求写成可核对的清单。 — 50/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[0]",
-                  "设计｜设计系统与集成架构｜设计系统工程、系统集成或分布式系统架构，定义功能标准与接口，并确保组件兼容。 — 75/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[2]",
-                  "验证｜验证稳定性与安全扩展性｜通过测试与模型验证稳定性、互操作性、可移植性、安全性与可扩展性，记录结果与适用范围。 — 75/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[3]"
+                  "AI 可作为虚构文档整理的练习对象。现有资料不能推断本职业 AI 使用率、工时节约、岗位替代或生产安全效果。真实变更仍由获授权人员审核和批准。",
+                  "AI 可作为虚构文档整理的练习对象。现有资料不能推断本职业 AI 使用率、工时节约、岗位替代或生产安全效果。真实变更仍由获授权人员审核和批准。",
+                  "AI 可作为虚构文档整理的练习对象。现有资料不能推断本职业 AI 使用率、工时节约、岗位替代或生产安全效果。真实变更仍由获授权人员审核和批准。",
+                  "AI 可作为虚构文档整理的练习对象。现有资料不能推断本职业 AI 使用率、工时节约、岗位替代或生产安全效果。真实变更仍由获授权人员审核和批准。",
+                  "AI 可作为虚构文档整理的练习对象。现有资料不能推断本职业 AI 使用率、工时节约、岗位替代或生产安全效果。真实变更仍由获授权人员审核和批准。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "limitation": "定性编辑说明，无评分。",
+                "name": "费马测试：AI 任务证据口径",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国科学院计算机网络信息中心 2026 年 1 月 6 日公告：网络体系结构与协议研究岗项目聘用 2 人，做架构及核心协议、原型、仿真与现网试验；要求通信或计算机相关博士。未披露数字薪酬。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "sys-cnic-post",
+                "limitation": "历史项目岗位，不是所有架构岗要求。",
+                "name": "中科院计算机网络信息中心网络架构研究岗",
+                "period": "2026-01-06",
+                "publisher": "Computer Network Information Center, CAS",
+                "scope": "recruitment_proxy",
+                "url": "https://www.cnic.cas.cn/rcdw/rczp/szyxz/202502/t20250218_7528810.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "厦门软件职业技术学院 2026 年 10 月 21 日公告：信息管理中心软件开发工程师 2 人，做接口、系统集成、部署和故障排查；要求计算机及相关专业背景；全日制本科加三年以上相关经验，或硕士及以上不限经历。原公告列研究生转正后年总支付约 12–20 万元，依职称，非月薪、到手工资或全国架构师工资。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "sys-xmist-post",
+                "limitation": "历史相邻岗位，金额有学历、转正及职称条件。",
+                "name": "厦门软件职业技术学院软件开发与集成岗",
+                "period": "2026-10-21",
+                "publisher": "Xiamen Institute of Software Technology",
+                "scope": "recruitment_proxy",
+                "url": "https://rsc.xmist.edu.cn/info/1115/2574.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国大陆的计算机技术与软件专业技术资格考试可作能力与职称参照。证书、岗位录用、系统访问及变更审批是不同事项，生产权限按机构和项目确认。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "sys-ruankao",
+                "limitation": "中国大陆考试制度，不授予系统访问权限。",
+                "name": "计算机技术与软件专业技术资格考试规定",
+                "period": "2004-01-01",
+                "publisher": "工业和信息化部",
+                "scope": "contextual",
+                "url": "https://www.miit.gov.cn/jgsj/rjj/rcgz/art/2020/art_9697b8faa3894e4ba1b27b641970bc62.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "系统生命周期的安全工程方法。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "sys-nist",
+                "limitation": "方法参考，不是统一岗位许可。",
+                "name": "NIST SP 800-160：可信系统工程",
+                "period": "2022-11",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "做入行区 SA-09：根据虚构接口验证记录和停机上限写上线决定与回退待办，不操作任何系统。"
+                ],
+                "evidence_type": "虚构纸面练习",
+                "id": "sys-paper",
+                "limitation": "不使用真实接口、账号、系统或配置。",
+                "name": "费马测试：SA-09 虚构变更记录",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "系统工程师与架构师关注跨组件的设计与集成；网络架构师重网络设计和容量，软件开发人员重功能和代码，系统管理员重维护、监控及访问。名称有重叠，比较具体产出与责任。"
+                ],
+                "evidence_type": "职业原页",
+                "id": "sys-adj-15-1244.00",
+                "limitation": "美国相邻职业，职责按实际岗位核。",
+                "name": "O*NET 15-1244.00 系统管理员",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1244.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "系统工程师与架构师关注跨组件的设计与集成；网络架构师重网络设计和容量，软件开发人员重功能和代码，系统管理员重维护、监控及访问。名称有重叠，比较具体产出与责任。"
+                ],
+                "evidence_type": "职业原页",
+                "id": "sys-adj-15-1241.00",
+                "limitation": "美国相邻职业，职责按实际岗位核。",
+                "name": "O*NET 15-1241.00 网络架构师",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1241.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "系统工程师与架构师关注跨组件的设计与集成；网络架构师重网络设计和容量，软件开发人员重功能和代码，系统管理员重维护、监控及访问。名称有重叠，比较具体产出与责任。"
+                ],
+                "evidence_type": "职业原页",
+                "id": "sys-adj-15-1252.00",
+                "limitation": "美国相邻职业，职责按实际岗位核。",
+                "name": "O*NET 15-1252.00 软件开发人员",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1252.00"
               }
             ]
           },
@@ -31424,6 +31675,18 @@
               "entry": "link-5",
               "field": "entity"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-1244.00",
+            "label": "O*NET 15-1244.00 系统管理员"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-1241.00",
+            "label": "O*NET 15-1241.00 网络架构师"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-1252.00",
+            "label": "O*NET 15-1252.00 软件开发人员"
           }
         ],
         "evidence_note": {
@@ -32752,6 +33015,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.cnic.cas.cn/rcdw/rczp/szyxz/202502/t20250218_7528810.html",
+            "id": "sys-cnic-post",
+            "label": "中科院计算机网络信息中心网络架构研究岗",
+            "scope": "历史项目岗位，不是所有架构岗要求。"
+          },
+          {
+            "href": "https://rsc.xmist.edu.cn/info/1115/2574.htm",
+            "id": "sys-xmist-post",
+            "label": "厦门软件职业技术学院软件开发与集成岗",
+            "scope": "历史相邻岗位，金额有学历、转正及职称条件。"
+          },
+          {
+            "href": "https://www.miit.gov.cn/jgsj/rjj/rcgz/art/2020/art_9697b8faa3894e4ba1b27b641970bc62.html",
+            "id": "sys-ruankao",
+            "label": "计算机技术与软件专业技术资格考试规定",
+            "scope": "中国大陆考试制度，不授予系统访问权限。"
           }
         ],
         "tracks": [
@@ -33807,6 +34088,12 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+            "id": "sys-nist",
+            "label": "NIST SP 800-160：可信系统工程",
+            "scope": "方法参考，不是统一岗位许可。"
           }
         ]
       },
@@ -36115,7 +36402,8 @@
     "contract_version": "career.detail.display.v1",
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪条系统工程与架构方向？",
-      "interface.fit.interest_code_heading": "怎样理解本职业的兴趣分区（本次未取得代码）",
+      "interface.fit.interest_code_heading": "如何理解 O*NET 的职业兴趣线索？",
+      "interface.quick_decision.experiment_heading": "怎样用一次纸面练习了解这个职业？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考（大类代理口径）",
@@ -36208,7 +36496,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与工作任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -36263,62 +36551,62 @@
       },
       {
         "derivation": null,
-        "display_value": "约 472,000 人（2024 年；大类代理口径）",
+        "display_value": "约 471.2 千人",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "大类代理口径的就业规模",
+        "measure": "美国 15-1299 合并组",
         "occupation_scope": "SOC 15-1299 大类代理口径",
-        "period": "2024 年；检索 2026-09-17",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 510,500 人（2034 年预测；大类代理口径）",
+        "display_value": "预计 495.3 千人",
         "fact_id": "us-employment-2035",
         "market": "美国",
-        "measure": "大类代理口径的预测目标年就业人数",
+        "measure": "美国 15-1299 合并组",
         "occupation_scope": "SOC 15-1299 大类代理口径",
-        "period": "2024—2034 年预测期；检索 2026-09-17",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "远快于平均（8%；2024—2034 年；大类代理口径）",
+        "display_value": "增长 5.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业变化率（增速）",
+        "measure": "美国 15-1299 合并组",
         "occupation_scope": "SOC 15-1299 大类代理口径",
-        "period": "2024—2034 年预测期；检索 2026-09-17",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：O*NET 摘要页按大类公布 2024 年与 2034 年就业规模及 8% 增速，未单列净变化人数，也未公布本职业精确职业数值",
+        "display_value": "净增 24.2 千人",
         "fact_id": "us-change-2025-2035",
         "market": "美国",
-        "measure": "未取得的统计位置（净变化人数与本职业精确数值）",
+        "measure": "美国 15-1299 合并组",
         "occupation_scope": "SOC 15-1299 大类代理口径；本职业精确数值未公布",
-        "period": "2024—2034 年预测期；检索 2026-09-17",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 31,300 个/年（2024—2034 年年均职位空缺；大类代理口径）",
+        "display_value": "年均约 27.0 千个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺（含替换需求）",
+        "measure": "美国 15-1299 合并组",
         "occupation_scope": "SOC 15-1299 大类代理口径",
-        "period": "2024—2034 年预测期；检索 2026-09-17",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-outlook"
         ]
       },
       {
@@ -36336,7 +36624,7 @@
       },
       {
         "derivation": null,
-        "display_value": "GT4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。",
+        "display_value": "GB/T 4754-2017的651软件开发（PDF70/印刷64页）、6531系统集成/6540运行维护/6560IT咨询（PDF71/印刷65页）按单位主要业务匹配背景，不涵盖所有行业内部架构岗，不判中美职业等价。",
         "fact_id": "cn-industry-manufacturing-2024",
         "market": "中国内地",
         "measure": "单位行业匹配背景",
@@ -36539,30 +36827,18 @@
         "source_refs": [
           "bls-projections"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "工程师计算机",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与工作任务"
     },
     "badges": [
-      "RIASEC · 未公布",
+      "O*NET 兴趣线索：CIR",
       "需求与组件评估 / 架构设计与集成 / 部署运维与验证",
       "架构与接口决策 · 安全与扩展性验证 · 变更与文档责任"
     ],
@@ -36571,25 +36847,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国工资中位数（2025 年 5 月数据；SOC 15-1299 大类代理口径）"
+        "label": "美国合并组年薪中位"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034 年，远快于平均，8%；大类代理口径）"
+        "label": "美国合并组就业增长"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024 年，约 472,000 人；大类代理口径）"
+        "label": "美国合并组就业"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034 年，约 31,300 个；大类代理口径）"
+        "label": "美国合并组年均空缺"
       },
       {
         "availability": "missing",
@@ -36603,17 +36879,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "计算机系统工程师与架构师对应 O*NET-SOC 15-1299.08（Bright Outlook）：设计并开发复杂应用、系统管理与网络问题的解决方案，承担系统管理与集成；28 项官方任务、工作情境百分比、美国工资与就业（SOC 15-1299 大类代理口径，2025 年 5 月中位数 116,580 美元、2024—2034 年 8%）、中国大陆职业级工资缺口与练习边界一次看清。"
+      "text": "了解系统集成与架构的职责，查看美国合并组工资和大陆用人样本，再试做纸面变更评审。"
     },
     "title": {
       "availability": "available",
-      "text": "计算机系统工程师与架构师"
+      "text": "计算机系统工程师与架构师：工作、入行与工资"
     }
   },
-  "source_content_sha256": "962d75c50b2715636d8882bdf99d2470442aa9e39e2596783dcbc5d466aaf574",
+  "source_content_sha256": "6032c643d21563e97f7770c1ece4bb792d2987d06b9ec5a2a6285f1148870a69",
   "subject": {
     "canonical_slug": "computer-systems-engineers-architects",
     "name": "计算机系统工程师与架构师",
-    "summary": "计算机系统工程师与架构师设计并开发复杂应用、系统管理与网络问题的解决方案，执行系统管理与集成职能，并对架构取舍、集成结果与文档负责。"
+    "summary": "计算机系统工程师与架构师（O*NET 15-1299.08）设计复杂应用、系统管理或网络问题的解决方案，负责系统管理与集成；常核接口兼容、稳定性、安全与可扩展性。岗位职责因雇主而异。"
   }
 }

@@ -29,9 +29,6 @@
       "fact:current-us-target-2025-2035": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -23088,10 +23085,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Before starting, confirm that you can divide system requirements into functional, performance, security and maintainability categories and explain the reasoning behind tradeoffs."
+              "Pause when checks, authorization, or rollback confirmation are missing. Interest results and certificates do not grant production access."
             ]
           },
           "id": "computer-systems-engineers-architects.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "sys-paper",
+            "sys-ruankao"
+          ],
           "type": "prose"
         },
         {
@@ -23099,10 +23100,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Try it: write a one-page proposal for a fictional scenario (such as converting an internal approval system to a multi-tenant architecture), including the current and target states, components and interfaces, failures and rollback, and three risks and verification methods."
+              "Try SA-09 in the entry section. Use only the two supplied options to list what passes, what fails, and what needs review."
             ]
           },
           "id": "computer-systems-engineers-architects.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23110,10 +23114,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Boundary: this page's exercises and judgments are for self-assessment only; they do not constitute hiring criteria, qualification recognition or authorization to deploy or change real systems. Follow your organization's procedures when production systems are involved."
+              "Explore further if you like mapping dependencies, checking interface records, and explaining whether an option is ready for review."
             ]
           },
           "id": "computer-systems-engineers-architects.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23121,10 +23129,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Note: if you prefer clarifying business requirements or implementing code, this occupation is an adjacent direction but a different role; systems analysts focus on turning requirements into solutions, programmers on delivering code, while this occupation is accountable for architecture and integration design."
+              "Try SA-09 in the entry section: use fictional interface checks and an outage limit to write a rollout decision and rollback follow-up. Do not operate any system."
             ]
           },
           "id": "computer-systems-engineers-architects.quick-decision.fermat-decision-card.6",
+          "source_refs": [
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23132,10 +23143,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "One-sentence summary: this work centers on translating system requirements into implementable, verifiable and maintainable architecture and integration solutions; it suits people willing to make technical tradeoffs, coordinate multiple parties and take responsibility for operating results."
+              "Explore this role if you enjoy mapping dependencies, checking interface evidence, and pausing changes when approval or rollback conditions are missing."
             ]
           },
           "id": "computer-systems-engineers-architects.quick-decision.fermat-decision-card.7",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -23711,7 +23726,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025 information transmission/software/IT services urban non-private 248,752 and private 128,166 yuan per year are pre-tax industry averages; read them separately. They are not this occupation's range/median/starting wage or individual quote. GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish equivalence between Chinese and U.S. occupations."
+              "2025 information transmission/software/IT services urban non-private 248,752 and private 128,166 yuan per year are pre-tax industry averages; read them separately. They are not this occupation's range/median/starting wage or individual quote. GB/T 4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish equivalence between Chinese and U.S. occupations."
             ]
           },
           "id": "computer-systems-engineers-architects.profile.onet-structured-fields-block.3",
@@ -23931,10 +23946,16 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The table below places this occupation and five adjacent occupations in the same dimensions: each direction begins with core work and outputs, then the key difference from this occupation, and finally when choosing that direction may be more suitable."
+              "Systems engineers and architects focus on cross-component design and integration. Network architects focus on network design and capacity, software developers on functionality and code, and systems administrators on maintenance, monitoring and access. Titles overlap; compare deliverables and responsibility."
             ]
           },
           "id": "computer-systems-engineers-architects.direction-comparison.adjacent-career-comparison-table.10",
+          "source_refs": [
+            "onet-details",
+            "sys-adj-15-1244.00",
+            "sys-adj-15-1241.00",
+            "sys-adj-15-1252.00"
+          ],
           "type": "prose"
         },
         {
@@ -24557,10 +24578,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Requirements, configuration, documentation, test cases and logs are editorial candidates for assistance awaiting testing; actual reliability, adoption and net efficiency have not been obtained. BLS Table 1.2 SOC15-1299, Other Computer Occupations (2025–2035), gives overall employment 471,200→495,300, published net change +24,200/+5.1%, and 27,000 average annual openings including replacement; subtracting rounded endpoints does not replace published net change. All are parent-category context, not independent employment for 15-1299.08, individual opportunities or AI causation. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Try using fictional notes for document practice. Available sources do not establish AI adoption, hours saved, job replacement, or operational safety effects for this occupation. Authorized personnel still review and approve real changes."
             ]
           },
           "id": "computer-systems-engineers-architects.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "source-fermatmind-ai-rubric"
+          ],
           "type": "prose"
         },
         {
@@ -25865,7 +25889,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
+              "GB/T 4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.12",
@@ -25975,7 +25999,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Precise occupational percentiles have not been obtained; contextual figures do not fill the gap. GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
+              "Precise occupational percentiles have not been obtained; contextual figures do not fill the gap. GB/T 4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.22",
@@ -25997,7 +26021,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
+              "GB/T 4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.24",
@@ -26030,10 +26054,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Diploma-level implementation/integration is an editorial preparation direction; actual Chinese recruitment samples have not been obtained."
+              "Compare education and experience for network research and software integration in the two postings in the entry section. They do not establish industry-wide requirements."
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.27",
+          "source_refs": [
+            "sys-cnic-post",
+            "sys-xmist-post"
+          ],
           "type": "prose"
         },
         {
@@ -26217,10 +26245,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
+              "Mainland China wage reference"
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.44",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -26338,7 +26369,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
+              "GB/T 4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.55",
@@ -26361,7 +26392,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics 2025 Industry Wages and GT4754; Context, Not Precise Occupational Figures"
+              "National Bureau of Statistics 2025 Industry Wages and GB/T 4754; Context, Not Precise Occupational Figures"
             ]
           },
           "id": "computer-systems-engineers-architects.china-salary.career-snapshot-primary-locale.57",
@@ -26708,10 +26739,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 parent-category annual wage percentiles 55,940/79,370/116,580/157,500/188,470 dollars, hourly 26.89/38.16/56.05/75.72/90.61; BLS Table 1.2 SOC15-1299, Other Computer Occupations (2025–2035), gives overall employment 471,200→495,300, published net change +24,200/+5.1%, and 27,000 average annual openings including replacement; subtracting rounded endpoints does not replace published net change. All are parent-category context, not independent employment for 15-1299.08, individual opportunities or AI causation."
+              "May 2025 BLS OEWS median wages for U.S. employees in parent group 15-1299 were $116,580 per year and $56.05 per hour. The projection baseline includes 4.9% self-employment; the wage figures exclude self-employment. BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects."
             ]
           },
           "id": "computer-systems-engineers-architects.us-salary.career-snapshot-secondary-locale.26",
+          "source_refs": [
+            "bls-pay",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -27995,10 +28030,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Task experience can help check interests in components/architecture/deployment; C79/I74/R52/E34/S18/A15 are the O*NET interest profile; the top three rank CIR, not population proportions or personal thresholds."
+              "Use SA-09 to see which part you enjoy. Interest results are for exploration."
             ]
           },
           "id": "computer-systems-engineers-architects.fit.riasec-fit-block.9",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -28006,10 +28045,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "C79/I74/R52/E34/S18/A15 are the O*NET interest profile; the top three rank CIR, not population proportions or personal thresholds."
+              "Notice whether you like checking interfaces systematically, finding causes, and explaining limits."
             ]
           },
           "id": "computer-systems-engineers-architects.fit.riasec-fit-block.10",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -28017,10 +28060,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "CIR (Top Three Interest Ranking)"
+              "O*NET lists C 79, I 74, R 52, E 34, S 18 and A 15 for this U.S. occupation. The leading three are Conventional, Investigative, and Realistic. These describe occupational activities, not personal scores, hiring thresholds or chances."
             ]
           },
           "id": "computer-systems-engineers-architects.fit.riasec-fit-block.11",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -28028,10 +28075,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "C79/I74/R52; remaining E34/S18/A15, not population figures/thresholds."
+              "Conventional, Investigative, Realistic (O*NET occupational scope)"
             ]
           },
           "id": "computer-systems-engineers-architects.fit.riasec-fit-block.12",
+          "source_refs": [
+            "onet-details",
+            "sys-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -28194,10 +28245,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Editorial advice is to check requirements/components/tests/changes and records; do not claim two risks are the most important or abilities necessarily become obsolete rapidly."
+              "Record design review, validation, change approval and production access separately. Stop if checks fail or authority is missing. Use NIST for engineering methods and verify approval for the actual project."
             ]
           },
           "id": "computer-systems-engineers-architects.risk.career-risk-cards.9",
+          "source_refs": [
+            "sys-nist",
+            "sys-paper"
+          ],
           "type": "prose"
         },
         {
@@ -28811,10 +28866,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Implementation/integration/platform preparation is an editorial route, not a common prevalence rate or uniform promotion path. O*NET15-1299.08 new-hire education responses of 41% postsecondary certificate/27% two-year degree/23% bachelor's degree are partial responses, not the educational composition of current workers. Zone3/SVP6 to below 7 is a preparation level, not a fixed individual duration; the BLS parent category 15-1299 typically requiring a bachelor's degree/no related experience/no OJT is not a detailed-category or uniform Chinese requirement. 58 certification candidates and 1 registered apprenticeship name are not actual opportunities."
+              "For new hires in O*NET 15-1299.08, 41% of respondents report a post-secondary certificate, 27% a two-year degree, and 23% a bachelor’s degree. These are survey responses, not universal employer requirements. Check duties, degree, experience and authorization for each mainland China position. In mainland China, the computer and software professional qualification examination can provide evidence of competence or professional standing. Certification, hiring, system access and change approval are separate decisions. Production authority depends on the facility and project."
             ]
           },
           "id": "computer-systems-engineers-architects.path.career-path-block.20",
+          "source_refs": [
+            "onet-details",
+            "sys-ruankao"
+          ],
           "type": "prose"
         },
         {
@@ -28844,10 +28903,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Preparation route: first learn operating systems and networks, components and interfaces, testing and change processes, and design and integration documentation, then develop architecture, platform or security skills for the chosen direction. Verify qualification and certification requirements against the target employer's announcements for the relevant year; this page does not constitute qualification recognition."
+              "O*NET lists 15-1299.08 in Job Zone Three, a description of typical preparation. BLS lists a bachelor’s degree for the broader 15-1299 group. These apply to different populations; verify the actual employer’s entry requirements."
             ]
           },
           "id": "computer-systems-engineers-architects.path.career-path-block.23",
+          "source_refs": [
+            "onet-details",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -29623,7 +29686,7 @@
                 "id": "education",
                 "values": [
                   "Education and Academic Background Requirements",
-                  "Education/major/experience are editorial preparation suggestions; actual Chinese recruitment samples have not been obtained.",
+                  "The two dated mainland China notices illustrate network architecture research and software development with integration. Check their separate requirements in the examples.",
                   "O*NET15-1299.08 new-hire education responses of 41% postsecondary certificate/27% two-year degree/23% bachelor's degree are partial responses, not the educational composition of current workers. Zone3/SVP6 to below 7 is a preparation level, not a fixed individual duration; the BLS parent category 15-1299 typically requiring a bachelor's degree/no related experience/no OJT is not a detailed-category or uniform Chinese requirement."
                 ]
               },
@@ -29665,39 +29728,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Fictional System Materials (Exercise Input)",
-                  "Fictional scenario: a company's internal approval system must support independent workflow configuration by three business departments within half a year and meet audit-trail requirements.",
-                  "Provided materials: current architecture (monolithic application + single database; configuration requires developers to change code); current metrics (peak concurrency 300, average approval time 6 hours, average 4 changes per month); constraints (limited budget, no interruption to existing business, retention of at least 1 year of audit records).",
-                  "Missing materials: whether multi-cloud deployment is needed, whether specific compliance requirements apply, and the volume of historical data migration. State assumptions explicitly if your exercise needs these conditions."
+                  "Materials | Fictional",
+                  "Release criteria: at most five minutes of downtime, all three interface checks pass, and the lead confirms rollback in writing.",
+                  "Option A: eight minutes of downtime, 3/3 checks pass, and the lead confirmed rollback in writing.",
+                  "Option B: three minutes of downtime, 2/3 checks pass, and there is no written rollback confirmation from the lead."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task Requirements",
-                  "Write a one-page architecture and integration proposal covering requirements and constraints, target architecture and key components, interfaces and data flows, failure and rollback handling, and two risks and verification methods.",
-                  "Specify which conclusions require review confirmation and which need joint evaluation with operations or security."
-                ]
-              },
-              {
-                "id": "exercise-approach",
-                "values": [
-                  "Reference Deliverable (Derivable From the Prompt)",
-                  "Include requirements (departmental self-service configuration, audit trails, availability targets), constraints (budget, uninterrupted operation, retention period), target architecture (separation of configuration and execution, independent audit-log storage), interfaces and data flows (failure retries for configuration distribution and log return), failures and rollback (versioned configuration, gradual rollout and rollback), risks (migration data volume and consistency, permission boundaries), and verification methods (gradual-rollout comparisons, audit sampling).",
-                  "The reference deliverable lists required elements only; wording need not match the example, provided you can explain the reasoning."
+                  "Submit three items first",
+                  "First: list the criteria option A passes and fails.",
+                  "Second: list what option B passes, what it fails, and what evidence is missing. Third: write two sentences to the lead with the decision and checks still needed."
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries and Conclusions That Cannot Be Inferred",
-                  "This exercise tests only the ability to write architecture and integration proposals; it does not evaluate real project results or constitute hiring or qualification judgments."
+                  "Paper scope",
+                  "Do not connect to systems, modify configurations, or submit a real approval."
+                ]
+              },
+              {
+                "id": "exercise-approach",
+                "values": [
+                  "Reference answer",
+                  "A passes interface and written rollback checks, but eight minutes exceeds five. B passes the downtime limit at three minutes, but only 2/3 interfaces pass and written rollback confirmation is missing. Neither option can go ahead.",
+                  "Example: “Hold both options. Continue paper preparation on B, but verify that the third interface check passes and obtain written rollback confirmation from the lead before another review.”"
                 ]
               }
             ]
           },
           "id": "computer-systems-engineers-architects.path.entry-work-sample-data.1",
-          "title": "Paper Case and Tasks",
+          "source_refs": [
+            "sys-paper"
+          ],
+          "title": "SA-09 | Check whether a change can go ahead",
           "type": "cards"
         },
         {
@@ -29796,55 +29862,58 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Day 1: Read an Architecture Explanation",
-                  "Find a public architecture explanation or system design document, mark requirements, components, interfaces and failure handling, and note three points you want to confirm."
+                  "Day 1",
+                  "Read the SA-09 criteria."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Day 2: Write a Requirements and Constraints Checklist",
-                  "For the fictional scenario of departmental self-service approval workflow configuration, write functional and non-functional requirements (availability, security and auditing)."
+                  "Day 2",
+                  "List the original values for A."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Day 3: Compare Components",
-                  "Choose three candidate component categories (databases, messaging or configuration centers), compare licensing, support periods and lock-in risks, and write a one-page conclusion."
+                  "Day 3",
+                  "List the original values for B."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Day 4: Draw Interfaces and Data Flows",
-                  "Document one interface's data flow, failure handling and retry strategy, marking responsibility boundaries."
+                  "Day 4",
+                  "Mark each condition pass, fail, or pending."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Day 5: Write a Rollback Plan",
-                  "For a configuration change, document rollback conditions, backup methods and verification steps."
+                  "Day 5",
+                  "Write a two-sentence handoff."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day 6: Write Tests and Acceptance Items",
-                  "Turn security and capacity targets into 6 measurable acceptance items and corresponding test cases."
+                  "Day 6",
+                  "Compare with the reference answer."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Day 7: Decide Whether to Continue",
-                  "Return to this page's judgment checklist and record three reasons to continue and two conditions requiring caution."
+                  "Day 7",
+                  "Record which part of the work you would like to explore."
                 ]
               }
             ]
           },
           "id": "computer-systems-engineers-architects.path.seven-day-trial.1",
+          "source_refs": [
+            "sys-paper"
+          ],
           "title": "Seven-Day Progressive Experience",
           "type": "timeline"
         },
@@ -29969,12 +30038,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "This page cites no specific active recruitment announcement and does not count historical recruitment cases as open roles; mainland Chinese hiring conditions must be verified against the target employer's announcements for the relevant year.",
-              "Architecture cases, documentation reviews and assessment methods in the examples are editorial designs illustrating common verification methods, not any employer's uniform process."
+              "A January 6, 2026, announcement from the Computer Network Information Center, CAS, lists two project research hires for network architecture and protocols, prototypes, simulation and field trials. It asks for a doctorate in communications or computing. No numeric salary is stated.",
+              "An October 21, 2026, posting from Xiamen Institute of Software Technology lists two software development engineers for interfaces, integration, deployment and troubleshooting. Applicants need a computing or related background, plus a full-time bachelor’s degree with at least three years of relevant experience, or a master’s degree or higher with no experience requirement. It quotes approximately CNY 120,000–200,000 in total annual compensation for postgraduate hires after probation, depending on professional title. This is not monthly, take-home or national architect pay.",
+              "Use these dated postings to compare roles, not to infer current vacancies."
             ]
           },
           "id": "computer-systems-engineers-architects.path.recruitment-sample.1",
-          "title": "Recruitment Sample Usage Notes",
+          "source_refs": [
+            "sys-cnic-post",
+            "sys-xmist-post"
+          ],
+          "title": "Two mainland China postings",
           "type": "notice"
         }
       ]
@@ -30102,10 +30176,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 15-1299.08 Summary Page (Broad-Category Proxy Scope)",
+                "entity": "BLS Employment Projections Table 1.2: parent group 15-1299",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/15-1299.08"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "ILO Research on Generative AI and Occupational Exposure",
@@ -30183,10 +30257,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS Table 1.2 SOC15-1299, Other Computer Occupations (2025–2035), gives overall employment 471,200→495,300, published net change +24,200/+5.1%, and 27,000 average annual openings including replacement; subtracting rounded endpoints does not replace published net change. All are parent-category context, not independent employment for 15-1299.08, individual opportunities or AI causation. 2025 information transmission/software/IT services urban non-private 248,752 and private 128,166 yuan per year are pre-tax industry averages; read them separately. They are not this occupation's range/median/starting wage or an individual quote."
+              "BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects."
             ]
           },
           "id": "computer-systems-engineers-architects.market-signals.market-signal-card.8",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -30381,7 +30458,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 information transmission/software/IT services urban non-private 248,752 and private 128,166 yuan per year are pre-tax industry averages; read them separately. They are not this occupation's range/median/starting wage or individual quote. GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish equivalence between Chinese and U.S. occupations."
+              "2025 information transmission/software/IT services urban non-private 248,752 and private 128,166 yuan per year are pre-tax industry averages; read them separately. They are not this occupation's range/median/starting wage or individual quote. GB/T 4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish equivalence between Chinese and U.S. occupations."
             ]
           },
           "id": "computer-systems-engineers-architects.market-signals.market-signal-card.26",
@@ -30403,7 +30480,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
+              "GB/T 4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence."
             ]
           },
           "id": "computer-systems-engineers-architects.market-signals.market-signal-card.28",
@@ -30425,10 +30502,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Current BLS Parent-Category Projections Do Not Guarantee Detailed-Category Employment"
+              "U.S. 15-1299 parent-group projections for 2025–35; no separate estimate for this occupation."
             ]
           },
           "id": "computer-systems-engineers-architects.market-signals.market-signal-card.30",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -30742,10 +30822,13 @@
           "data": {
             "entries": [
               {
-                "answer": "Communicate system requirements, evaluate components and interfaces, design architecture and integration solutions, configure and verify environments, handle deployment and operational problems, and maintain design and configuration documents.",
+                "answer": "Computer systems engineers and architects (O*NET 15-1299.08) design solutions to complex application, administration, or network problems and perform systems management and integration. Work can include checking compatibility, stability, security and scalability. Duties vary by employer.",
                 "id": "computer-systems-engineers-architects.faq.1",
                 "question": "What Do Computer Systems Engineers and Architects Do Each Day?",
-                "question_key": "career.faq.computer-systems-engineers-architects.daily-work"
+                "question_key": "career.faq.computer-systems-engineers-architects.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "This occupation is accountable for architectural design, component selection and integration verification; systems analysts focus on turning requirements into specifications, and programmers on code delivery. All collaborate closely, but their accountability and outputs differ.",
@@ -30754,40 +30837,60 @@
                 "question_key": "career.faq.computer-systems-engineers-architects.comparison"
               },
               {
-                "answer": "Some analysis and documentation tasks will receive assistance (requirements organization, document and test-case drafts, log classification), but architectural tradeoffs, security and scalability verification, production changes and rollback decisions still require human accountability. This page's U.S. figures are broad-category proxies and cannot establish the extent of substitution of this occupation.",
+                "answer": "Try using fictional notes for document practice. Available sources do not establish AI adoption, hours saved, job replacement, or operational safety effects for this occupation. Authorized personnel still review and approve real changes.",
                 "id": "computer-systems-engineers-architects.faq.3",
                 "question": "Will AI Replace Computer Systems Engineers and Architects?",
-                "question_key": "career.faq.computer-systems-engineers-architects.ai-replacement"
+                "question_key": "career.faq.computer-systems-engineers-architects.ai-replacement",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "Organizing requirements and configuration differences, drafting architecture and integration documents and initial test cases, and classifying monitoring data and logs; tasks requiring architectural tradeoffs, cross-team coordination and production change decisions are not easily fully automated.",
+                "answer": "With fictional requirements and configuration notes, try drafting a change summary, integration note, or test case, then check each line against the original notes. These are exercises to evaluate; they do not establish occupational AI adoption or benefits.",
                 "id": "computer-systems-engineers-architects.faq.4",
-                "question": "Which Tasks Are Easiest to Assist?",
-                "question_key": "career.faq.computer-systems-engineers-architects.automatable-tasks"
+                "question": "Which documentation tasks can I try with fictional material?",
+                "question_key": "career.faq.computer-systems-engineers-architects.automatable-tasks",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "Making architectural tradeoffs under constraints and explaining their basis, converting security and capacity targets into verifiable conditions, driving cross-team integration, and taking responsibility for production changes and rollback.",
+                "answer": "Follow the facility procedure: authorized personnel confirm validation, change and rollback. Available evidence does not establish which tasks can be fully automated.",
                 "id": "computer-systems-engineers-architects.faq.5",
-                "question": "Which Capabilities Are Hard to Replace?",
-                "question_key": "career.faq.computer-systems-engineers-architects.human-skills"
+                "question": "Who approves real architecture or rollout decisions?",
+                "question_key": "career.faq.computer-systems-engineers-architects.human-skills",
+                "source_refs": [
+                  "sys-nist",
+                  "sys-paper"
+                ]
               },
               {
-                "answer": "No. The O*NET page explicitly labels wages and employment as broad SOC 15-1299, Other Computer Occupations, category proxies: median annual wage 116,580 dollars (year 2025, month 5), employment approximately 472,000 people (2024), growth 8%, and approximately 31,300 average annual openings. Independent figures for this occupation have not been published; this page records the gap.",
+                "answer": "May 2025 BLS OEWS median wages for U.S. employees in parent group 15-1299 were $116,580 per year and $56.05 per hour. The projection baseline includes 4.9% self-employment; the wage figures exclude self-employment. BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects.",
                 "id": "computer-systems-engineers-architects.faq.6",
                 "question": "Are the U.S. Wage and Employment Data for This Occupation?",
-                "question_key": "career.faq.computer-systems-engineers-architects.salary"
+                "question_key": "career.faq.computer-systems-engineers-architects.salary",
+                "source_refs": [
+                  "bls-pay",
+                  "bls-outlook"
+                ]
               },
               {
-                "answer": "U.S. scope: preparation level is Job Zone Three (often requiring vocational training, work experience or an associate degree), with My Next Move education requirement rating 2/4; that page does not publish education-level percentages. Mainland Chinese requirements follow the target employer's announcements for the relevant year.",
+                "answer": "For new hires in O*NET 15-1299.08, 41% of respondents report a post-secondary certificate, 27% a two-year degree, and 23% a bachelor’s degree. These are survey responses, not universal employer requirements. Check duties, degree, experience and authorization for each mainland China position.",
                 "id": "computer-systems-engineers-architects.faq.7",
                 "question": "What Education Is Needed to Enter?",
-                "question_key": "career.faq.computer-systems-engineers-architects.education"
+                "question_key": "career.faq.computer-systems-engineers-architects.education",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
-                "answer": "This page provides no mandatory qualification list; vendor and platform, architecture and security, and project management certifications can demonstrate capabilities (O*NET certification search lists candidate examples), while employers and clients define authorization for architectural review and production changes.",
+                "answer": "In mainland China, the computer and software professional qualification examination can provide evidence of competence or professional standing. Certification, hiring, system access and change approval are separate decisions. Production authority depends on the facility and project.",
                 "id": "computer-systems-engineers-architects.faq.8",
                 "question": "Which Certificates or Qualifications Are Needed?",
-                "question_key": "career.faq.computer-systems-engineers-architects.credentials"
+                "question_key": "career.faq.computer-systems-engineers-architects.credentials",
+                "source_refs": [
+                  "sys-ruankao"
+                ]
               },
               {
                 "answer": "Yes. Common entry points include system implementation, integration support and infrastructure operations; people with development or operations backgrounds can build on experience but need architectural design, component evaluation and documentation capabilities.",
@@ -30796,28 +30899,42 @@
                 "question_key": "career.faq.computer-systems-engineers-architects.career-change"
               },
               {
-                "answer": "The O*NET page labels this occupation Bright Outlook (good employment prospects), based on growth and opening figures for the related broad-category proxy scope; this label does not guarantee individual employment.",
+                "answer": "O*NET marks 15-1299.08 Bright Outlook. That designation is separate from the BLS parent-group projections. BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects.",
                 "id": "computer-systems-engineers-architects.faq.10",
                 "question": "Is This Occupation Bright Outlook?",
-                "question_key": "career.faq.computer-systems-engineers-architects.career-worth"
+                "question_key": "career.faq.computer-systems-engineers-architects.career-worth",
+                "source_refs": [
+                  "onet-details",
+                  "bls-outlook"
+                ]
               },
               {
-                "answer": "This entry's evidence routing records mainland Chinese occupational wages as not obtained (public wage statistics are aggregated by industry or broad personnel category without an occupational subcategory in one-to-one correspondence with O*NET-SOC 15-1299.08). This page therefore retains visible gaps without filling them with industry averages, a parent occupation or U.S. data.",
+                "answer": "NBS 2025 annual means for urban employees in information transmission, software and information technology services were CNY 248,752 for non-private units and CNY 128,166 for private units. These are industry figures, not architect pay. An October 21, 2026, posting from Xiamen Institute of Software Technology lists two software development engineers for interfaces, integration, deployment and troubleshooting. Applicants need a computing or related background, plus a full-time bachelor’s degree with at least three years of relevant experience, or a master’s degree or higher with no experience requirement. It quotes approximately CNY 120,000–200,000 in total annual compensation for postgraduate hires after probation, depending on professional title. This is not monthly, take-home or national architect pay.",
                 "id": "computer-systems-engineers-architects.faq.12",
                 "question": "Why Are There No Specific Mainland China Wage Figures?",
-                "question_key": "career.faq.computer-systems-engineers-architects.china-data-scope"
+                "question_key": "career.faq.computer-systems-engineers-architects.china-data-scope",
+                "source_refs": [
+                  "nbs-wages",
+                  "sys-xmist-post"
+                ]
               },
               {
-                "answer": "Because this O*NET occupational page does not publish independent wage or employment figures for 15-1299.08, only the broad SOC 15-1299, Other Computer Occupations, scope (explicitly labeled Wage/Employment data for Computer Occupations, All Other). This page labels proxies throughout and records precise occupational gaps in industry rows and boundary paragraphs.",
+                "answer": "BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects.",
                 "id": "computer-systems-engineers-architects.faq.13",
                 "question": "Why Is the U.S. Data Scope a Proxy?",
-                "question_key": "career.faq.computer-systems-engineers-architects.us-data-scope"
+                "question_key": "career.faq.computer-systems-engineers-architects.us-data-scope",
+                "source_refs": [
+                  "bls-outlook"
+                ]
               },
               {
-                "answer": "No. Exercise materials and scenarios are fictional and test the ability to write architecture and integration proposals; they do not constitute hiring, qualification recognition or authorization to deploy or change real systems. Follow organizational procedures when production systems are involved.",
+                "answer": "Try SA-09 in the entry section: use fictional interface checks and an outage limit to write a rollout decision and rollback follow-up. Do not operate any system.",
                 "id": "computer-systems-engineers-architects.faq.14",
                 "question": "Can This Page's Exercises Serve as Evidence for Real Projects?",
-                "question_key": "career.faq.computer-systems-engineers-architects.exercise-boundary"
+                "question_key": "career.faq.computer-systems-engineers-architects.exercise-boundary",
+                "source_refs": [
+                  "sys-paper"
+                ]
               }
             ]
           },
@@ -30838,9 +30955,9 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "This page separately labels sources and limitations for occupational identity and tasks (O*NET-SOC 15-1299.08), U.S. wages and employment (broad SOC 15-1299 category proxies, year 2025, month 5 wage data and 2024–2034 projections), industry structure and technology keywords, and mainland Chinese statistical scope boundaries. It does not mix scopes or treat broad-category proxies as independent figures for this occupation.",
+              "BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects.",
               "Editorial syntheses (capability stages, risk scenarios, suitability signals, exercise materials and seven-day schedules) are stated separately from source facts: three work areas and six responsibilities derive from the official definition and task lists; capability stages, risk scenarios, suitability signals and exercises are editorial compilations. All exercise materials are fictional and must not be used for real system deployment, change approval or qualification evidence.",
-              "Statistical positions and non-conversion notes: the median is not an entry wage and percentiles are not job grades; differences across industries, employer sizes, technology stacks and regions cannot be extrapolated into individual quotes or converted into individual monthly or take-home income. This occupation's interest code, education-level percentages, precise occupational wages and employment figures are all unpublished; gaps are retained under the rules and marked visibly."
+              "O*NET provides occupational interest and new-hire education data. BLS wages and employment cover parent group 15-1299; medians, percentiles and projections do not estimate individual pay or hiring."
             ]
           },
           "id": "computer-systems-engineers-architects.sources.boundary.1",
@@ -30865,10 +30982,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Detailed-category O*NET tasks/education/interests/work context; U.S. 2025 wages and 2025–2035 employment provide 15-1299 parent-category context. Current industry page displayed scope is listed separately, and Chinese 2025 IT context is kept separate from precise gaps. Risks, suitability, preparation and transitions are editorial advice."
+              "FermatMind Editorial"
             ]
           },
           "id": "computer-systems-engineers-architects.sources.source-card.1",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30876,10 +30996,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Main sources are public O*NET OnLine pages (detailed occupational data, summaries, industry distributions, technology lists, preparation levels, certification search and national wages), My Next Move occupational overviews, International Labour Organization research on generative AI and occupational exposure, the NIST AI Risk Management Framework, National Bureau of Statistics annual average wage releases for employees in urban units, and announcements of the Occupational Classification Dictionary of the People's Republic of China (2022 edition)."
+              "O*NET duties, BLS wages and projections, NBS and dated job postings"
             ]
           },
           "id": "computer-systems-engineers-architects.sources.source-card.2",
+          "source_refs": [
+            "onet-details",
+            "bls-outlook",
+            "nbs-wages",
+            "sys-cnic-post",
+            "sys-xmist-post"
+          ],
           "type": "prose"
         },
         {
@@ -30887,10 +31014,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "This round's nine modules were read/revised 2026-10-09; historical sources not reopened retain their dates. No whole-page update is claimed."
+              "2026-11-09"
             ]
           },
           "id": "computer-systems-engineers-architects.sources.source-card.3",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30898,10 +31028,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Usage note: this page is an occupational information service, not hiring conditions, qualification recognition, architectural review conclusions, production change authorization or legal/compliance advice. Specific judgments about data security, system changes and deployment decisions must follow applicable jurisdictional rules, organizational procedures and authorized roles' opinions."
+              "Use O*NET for duties and BLS for parent-group wages and projections. Keep mainland China industry figures separate from the two postings. SA-09 is paper only."
             ]
           },
           "id": "computer-systems-engineers-architects.sources.source-card.4",
+          "source_refs": [
+            "onet-details",
+            "bls-outlook",
+            "nbs-wages",
+            "sys-cnic-post",
+            "sys-xmist-post",
+            "sys-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -30991,14 +31129,14 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "Historical 2024–2034 parent-category summaries serve retained historical Hero/FAQ and other consumers; this round's nine modules use newly added current BLS facts."
+                  "BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects."
                 ],
                 "evidence_type": "official source",
                 "id": "onet-summary",
-                "limitation": "The page labels Employment data for Computer Occupations, All Other: employment 472,000 people (2024), growth 8%, and 31,300 average annual openings all use broad SOC 15-1299 category proxies, not independent figures for this occupation.",
+                "limitation": "BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects.",
                 "market": "United States",
                 "name": "15-1299.08 - Computer Systems Engineers/Architects: Summary (Occupational Summary)",
-                "period": "2024 Employment and 2024–2034 Projections (Broad-Category Scope); Retrieved 2026-09-17",
+                "period": "BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects.",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/summary/15-1299.08"
@@ -31081,33 +31219,33 @@
                 "url": "https://www.onetonline.org/link/localwages/15-1299.08"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "This page's wage scope and non-extrapolation of proxies cite OEWS methods notes.",
-                  "Source identities, sections and uses are checked against this occupation's claims individually; unobtained items are recorded as gaps."
+                  "BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects.",
+                  "BLS reports projections for U.S. parent group 15-1299, Computer Occupations, All Other: 471.2 thousand jobs in 2025 and 495.3 thousand in 2035, up 5.1%, with a table-listed net gain of 24.2 thousand and 27.0 thousand annual openings including growth and replacement. Columns round independently. These are not current vacancies or separate estimates for systems engineers and architects."
                 ],
                 "evidence_type": "official source",
                 "id": "bls-outlook",
-                "limitation": "Explains OEWS coverage, wage components and statistical scope; provides neither specific figures for this occupation nor methods to disaggregate broad-category proxies.",
+                "limitation": "Parent group, not a separate O*NET 15-1299.08 series.",
                 "market": "United States",
-                "name": "Handbook of Methods: Occupational Employment and Wage Statistics (Methods Notes)",
-                "period": "Methods Page; Retrieved 2026-09-17",
+                "name": "BLS Employment Projections Table 1.2: parent group 15-1299",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
-                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "This page's Chinese wage section cites this source to explain actual reading scope and occupational gaps, without converting figures from it.",
-                  "Source identities, sections and uses are checked against this occupation's claims individually; unobtained items are recorded as gaps."
+                  "NBS 2025 annual means for urban employees in information transmission, software and information technology services were CNY 248,752 for non-private units and CNY 128,166 for private units. These are industry figures, not architect pay.",
+                  "NBS 2025 annual means for urban employees in information transmission, software and information technology services were CNY 248,752 for non-private units and CNY 128,166 for private units. These are industry figures, not architect pay."
                 ],
                 "evidence_type": "official source",
                 "id": "nbs-wages",
-                "limitation": "2025 information transmission/software/IT services urban non-private 248,752 and private 128,166 yuan per year are pre-tax industry averages; read them separately. They are not this occupation's range/median/starting wage or individual quote. GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish equivalence between Chinese and U.S. occupations.",
+                "limitation": "Industry annual mean, not occupational pay.",
                 "market": "Mainland China",
                 "name": "Annual Average Wages of Employees in Urban Units in 2025",
-                "period": "2025 Data; Published 2026-05-15; Retrieved 2026-10-09",
+                "period": "2025",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
@@ -31258,13 +31396,13 @@
               {
                 "accessed_at": "2026-10-09",
                 "details": [
-                  "GT4754-2017 Classification of Organizations' Principal Software/IT Business"
+                  "GB/T 4754-2017 Classification of Organizations' Principal Software/IT Business"
                 ],
                 "evidence_type": "official source",
                 "id": "cn-industry-classification",
-                "limitation": "GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence.",
+                "limitation": "GB/T 4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence.",
                 "market": "Mainland China",
-                "name": "GT4754-2017 Classification of Organizations' Principal Software/IT Business",
+                "name": "GB/T 4754-2017 Classification of Organizations' Principal Software/IT Business",
                 "period": "2017 Classification",
                 "publisher": "National Bureau of Statistics",
                 "scope": "contextual",
@@ -31286,21 +31424,134 @@
                 "url": "https://www.onetonline.org/link/localcert/15-1299.08"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Requirements | Communicate and Confirm System Requirements | Communicate with employees or clients to confirm the system's functional, data and interface requirements, and document them as a checklist that can be verified. — 50/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[0]",
-                  "Design | Design System and Integration Architecture | Design systems engineering, systems integration or distributed system architectures, define functional standards and interfaces, and ensure component compatibility. — 75/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[2]",
-                  "Verification | Verify Stability, Security and Scalability | Use tests and models to verify stability, interoperability, portability, security and scalability, recording results and applicability. — 75/100; weight=1/3; computer-systems-engineers-architects.profile.responsibilities-block.1[3]"
+                  "Try using fictional notes for document practice. Available sources do not establish AI adoption, hours saved, job replacement, or operational safety effects for this occupation. Authorized personnel still review and approve real changes.",
+                  "Try using fictional notes for document practice. Available sources do not establish AI adoption, hours saved, job replacement, or operational safety effects for this occupation. Authorized personnel still review and approve real changes.",
+                  "Try using fictional notes for document practice. Available sources do not establish AI adoption, hours saved, job replacement, or operational safety effects for this occupation. Authorized personnel still review and approve real changes.",
+                  "Try using fictional notes for document practice. Available sources do not establish AI adoption, hours saved, job replacement, or operational safety effects for this occupation. Authorized personnel still review and approve real changes.",
+                  "Try using fictional notes for document practice. Available sources do not establish AI adoption, hours saved, job replacement, or operational safety effects for this occupation. Authorized personnel still review and approve real changes."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "Qualitative editorial note; no score.",
+                "name": "FermatMind: Evidence for AI task claims",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A January 6, 2026, announcement from the Computer Network Information Center, CAS, lists two project research hires for network architecture and protocols, prototypes, simulation and field trials. It asks for a doctorate in communications or computing. No numeric salary is stated."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "sys-cnic-post",
+                "limitation": "Historical project role, not a universal requirement.",
+                "name": "CNIC, CAS: network architecture research posting",
+                "period": "2026-01-06",
+                "publisher": "Computer Network Information Center, CAS",
+                "scope": "recruitment_proxy",
+                "url": "https://www.cnic.cas.cn/rcdw/rczp/szyxz/202502/t20250218_7528810.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "An October 21, 2026, posting from Xiamen Institute of Software Technology lists two software development engineers for interfaces, integration, deployment and troubleshooting. Applicants need a computing or related background, plus a full-time bachelor’s degree with at least three years of relevant experience, or a master’s degree or higher with no experience requirement. It quotes approximately CNY 120,000–200,000 in total annual compensation for postgraduate hires after probation, depending on professional title. This is not monthly, take-home or national architect pay."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "sys-xmist-post",
+                "limitation": "Historical adjacent role; pay has degree, probation and professional title conditions.",
+                "name": "Xiamen Institute of Software Technology: software and integration posting",
+                "period": "2026-10-21",
+                "publisher": "Xiamen Institute of Software Technology",
+                "scope": "recruitment_proxy",
+                "url": "https://rsc.xmist.edu.cn/info/1115/2574.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "In mainland China, the computer and software professional qualification examination can provide evidence of competence or professional standing. Certification, hiring, system access and change approval are separate decisions. Production authority depends on the facility and project."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "sys-ruankao",
+                "limitation": "Mainland China examination provisions; not a system access grant.",
+                "name": "Computer and software professional qualification examination provisions",
+                "period": "2004-01-01",
+                "publisher": "Ministry of Industry and Information Technology",
+                "scope": "contextual",
+                "url": "https://www.miit.gov.cn/jgsj/rjj/rcgz/art/2020/art_9697b8faa3894e4ba1b27b641970bc62.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Security engineering methods across the system life cycle."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "sys-nist",
+                "limitation": "Method reference, not a universal occupational requirement.",
+                "name": "NIST SP 800-160: Engineering Trustworthy Secure Systems",
+                "period": "2022-11",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Try SA-09 in the entry section: use fictional interface checks and an outage limit to write a rollout decision and rollback follow-up. Do not operate any system."
+                ],
+                "evidence_type": "Fictional paper exercise",
+                "id": "sys-paper",
+                "limitation": "No real interfaces, accounts, systems, or configuration.",
+                "name": "FermatMind: fictional SA-09 change record",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Systems engineers and architects focus on cross-component design and integration. Network architects focus on network design and capacity, software developers on functionality and code, and systems administrators on maintenance, monitoring and access. Titles overlap; compare deliverables and responsibility."
+                ],
+                "evidence_type": "Occupation profile",
+                "id": "sys-adj-15-1244.00",
+                "limitation": "Related U.S. occupations; verify each posting.",
+                "name": "O*NET 15-1244.00 Systems administrators",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1244.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Systems engineers and architects focus on cross-component design and integration. Network architects focus on network design and capacity, software developers on functionality and code, and systems administrators on maintenance, monitoring and access. Titles overlap; compare deliverables and responsibility."
+                ],
+                "evidence_type": "Occupation profile",
+                "id": "sys-adj-15-1241.00",
+                "limitation": "Related U.S. occupations; verify each posting.",
+                "name": "O*NET 15-1241.00 Network architects",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1241.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Systems engineers and architects focus on cross-component design and integration. Network architects focus on network design and capacity, software developers on functionality and code, and systems administrators on maintenance, monitoring and access. Titles overlap; compare deliverables and responsibility."
+                ],
+                "evidence_type": "Occupation profile",
+                "id": "sys-adj-15-1252.00",
+                "limitation": "Related U.S. occupations; verify each posting.",
+                "name": "O*NET 15-1252.00 Software developers",
+                "period": "2026-11-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1252.00"
               }
             ]
           },
@@ -31424,6 +31675,18 @@
               "entry": "link-5",
               "field": "entity"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-1244.00",
+            "label": "O*NET 15-1244.00 Systems administrators"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-1241.00",
+            "label": "O*NET 15-1241.00 Network architects"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-1252.00",
+            "label": "O*NET 15-1252.00 Software developers"
           }
         ],
         "evidence_note": {
@@ -32752,6 +33015,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.cnic.cas.cn/rcdw/rczp/szyxz/202502/t20250218_7528810.html",
+            "id": "sys-cnic-post",
+            "label": "CNIC, CAS: network architecture research posting",
+            "scope": "Historical project role, not a universal requirement."
+          },
+          {
+            "href": "https://rsc.xmist.edu.cn/info/1115/2574.htm",
+            "id": "sys-xmist-post",
+            "label": "Xiamen Institute of Software Technology: software and integration posting",
+            "scope": "Historical adjacent role; pay has degree, probation and professional title conditions."
+          },
+          {
+            "href": "https://www.miit.gov.cn/jgsj/rjj/rcgz/art/2020/art_9697b8faa3894e4ba1b27b641970bc62.html",
+            "id": "sys-ruankao",
+            "label": "Computer and software professional qualification examination provisions",
+            "scope": "Mainland China examination provisions; not a system access grant."
           }
         ],
         "tracks": [
@@ -33807,6 +34088,12 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+            "id": "sys-nist",
+            "label": "NIST SP 800-160: Engineering Trustworthy Secure Systems",
+            "scope": "Method reference, not a universal occupational requirement."
           }
         ]
       },
@@ -36115,7 +36402,8 @@
     "contract_version": "career.detail.display.v1",
     "interface": {
       "interface.fit.directions_heading": "Which Systems Engineering and Architecture Direction Are You More Likely Suited To?",
-      "interface.fit.interest_code_heading": "How to Understand This Occupation's Interest Section (Code Not Obtained This Round)",
+      "interface.fit.interest_code_heading": "How to read O*NET occupational interest signals",
+      "interface.quick_decision.experiment_heading": "How can a paper exercise help you explore this role?",
       "interface.us_salary.industry.industry_header": "Industry",
       "interface.us_salary.industry.interpretation_header": "How to Understand This Value",
       "interface.us_salary.section_label": "U.S. Wage Reference (Broad-Category Proxy Scope)",
@@ -36208,7 +36496,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and work tasks",
       "china-salary": "Mainland China Wage Reference",
       "direction-comparison": "Comparison of Occupational Directions",
       "fit": "Occupational Suitability Guide",
@@ -36263,62 +36551,62 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 472,000 People (2024; Broad-Category Proxy Scope)",
+        "display_value": "About 471.2 thousand jobs",
         "fact_id": "us-employment-2025",
         "market": "United States",
-        "measure": "Employment Size Under Broad-Category Proxy Scope",
+        "measure": "U.S. 15-1299 parent group",
         "occupation_scope": "Broad SOC 15-1299 Category Proxy Scope",
-        "period": "2024; Retrieved 2026-09-17",
+        "period": "2025",
         "source_refs": [
-          "onet-summary"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 510,500 People (2034 Projection; Broad-Category Proxy Scope)",
+        "display_value": "Projected 495.3 thousand jobs",
         "fact_id": "us-employment-2035",
         "market": "United States",
-        "measure": "Employment in Projection Target Year Under Broad-Category Proxy Scope",
+        "measure": "U.S. 15-1299 parent group",
         "occupation_scope": "Broad SOC 15-1299 Category Proxy Scope",
-        "period": "2024–2034 Projection Period; Retrieved 2026-09-17",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Much Faster Than Average (8%; 2024–2034; Broad-Category Proxy Scope)",
+        "display_value": "Up 5.1%",
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
-        "measure": "Employment Change Rate (Growth)",
+        "measure": "U.S. 15-1299 parent group",
         "occupation_scope": "Broad SOC 15-1299 Category Proxy Scope",
-        "period": "2024–2034 Projection Period; Retrieved 2026-09-17",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Insufficient evidence: the O*NET summary page publishes broad-category employment size for 2024 and 2034 and growth of 8%, without separately listing net change in people or precise occupational figures for this occupation",
+        "display_value": "Net gain of 24.2 thousand",
         "fact_id": "us-change-2025-2035",
         "market": "United States",
-        "measure": "Unobtained Statistical Position (Net Change in People and Precise Figures for This Occupation)",
+        "measure": "U.S. 15-1299 parent group",
         "occupation_scope": "Broad SOC 15-1299 Category Proxy Scope; Precise Figures for This Occupation Unpublished",
-        "period": "2024–2034 Projection Period; Retrieved 2026-09-17",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-outlook"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Approximately 31,300 per Year (2024–2034 Average Annual Job Openings; Broad-Category Proxy Scope)",
+        "display_value": "About 27.0 thousand per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
-        "measure": "Average Annual Job Openings (Including Replacement Demand)",
+        "measure": "U.S. 15-1299 parent group",
         "occupation_scope": "Broad SOC 15-1299 Category Proxy Scope",
-        "period": "2024–2034 Projection Period; Retrieved 2026-09-17",
+        "period": "2025–2035",
         "source_refs": [
-          "onet-summary"
+          "bls-outlook"
         ]
       },
       {
@@ -36336,7 +36624,7 @@
       },
       {
         "derivation": null,
-        "display_value": "GT4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence.",
+        "display_value": "GB/T 4754-2017 categories 651 software development (PDF70/printed page 64), 6531 systems integration/6540 operation and maintenance/6560 IT consulting (PDF71/printed page 65) match context by an organization's principal business; they do not cover all in-house architecture roles across industries or establish Chinese/U.S. occupational equivalence.",
         "fact_id": "cn-industry-manufacturing-2024",
         "market": "Mainland China",
         "measure": "Organizational Industry Matching Context",
@@ -36539,30 +36827,18 @@
         "source_refs": [
           "bls-projections"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Computer Systems Engineers and Architects",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and work tasks"
     },
     "badges": [
-      "RIASEC · Unpublished",
+      "O*NET interest signals: CIR",
       "Requirements and Component Evaluation / Architectural Design and Integration / Deployment, Operations and Verification",
       "Architecture and Interface Decisions · Security and Scalability Verification · Change and Documentation Accountability"
     ],
@@ -36571,25 +36847,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. Median Wage (Year 2025, Month 5 Data; Broad SOC 15-1299 Category Proxy Scope)"
+        "label": "U.S. parent-group annual median pay"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. Employment Growth (2024–2034, Much Faster Than Average, 8%; Broad-Category Proxy Scope)"
+        "label": "U.S. parent-group projected growth"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. Workers (2024, Approximately 472,000 People; Broad-Category Proxy Scope)"
+        "label": "U.S. parent-group employment"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. Average Annual Job Openings (2024–2034, Approximately 31,300; Broad-Category Proxy Scope)"
+        "label": "U.S. parent-group annual openings"
       },
       {
         "availability": "missing",
@@ -36603,17 +36879,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Computer systems engineers and architects correspond to O*NET-SOC 15-1299.08 (Bright Outlook): they design and develop solutions to complex application, systems administration and network problems and perform systems management and integration. See 28 official tasks, work-context percentages, U.S. wages and employment (broad SOC 15-1299 category proxy scope; year 2025, month 5 median 116,580 dollars, 2024–2034 8%), mainland Chinese occupational wage gaps and exercise boundaries together."
+      "text": "Explore systems architecture and integration, U.S. parent-group pay and mainland China postings. Try a paper change review."
     },
     "title": {
       "availability": "available",
-      "text": "Computer Systems Engineers and Architects"
+      "text": "Computer Systems Engineers and Architects: Work, Training, and Pay"
     }
   },
-  "source_content_sha256": "59515f1b3b1f97506e5e6956446733703c169148dbde3e3f9bfa60141627baec",
+  "source_content_sha256": "87cda5bb4195a6c2b7025f610804dacb5806f406f98804ca4bdb24d2709c1a58",
   "subject": {
     "canonical_slug": "computer-systems-engineers-architects",
     "name": "Computer Systems Engineers and Architects",
-    "summary": "Computer systems engineers and architects design and develop solutions to complex application, systems administration and network problems, perform systems management and integration, and take responsibility for architectural tradeoffs, integration results and documentation."
+    "summary": "Computer systems engineers and architects (O*NET 15-1299.08) design solutions to complex application, administration, or network problems and perform systems management and integration. Work can include checking compatibility, stability, security and scalability. Duties vary by employer."
   }
 }

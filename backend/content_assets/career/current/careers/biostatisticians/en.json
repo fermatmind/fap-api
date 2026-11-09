@@ -14,9 +14,6 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -1401,7 +1398,7 @@
         "status": "mapped"
       },
       "item:biostatisticians.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:biostatisticians.path.interview-probation.1": {
         "status": "mapped"
@@ -16060,20 +16057,44 @@
         "status": "unfilled"
       },
       "interface.direction_comparison.table.choice_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.choice_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.direction_comparison.table.direction_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.direction_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.direction_comparison.table.distinction_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.distinction_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.direction_comparison.table.work_output_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.work_output_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.fit.assessment_misuse_label": {
         "ref": null,
@@ -23261,10 +23282,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "In one sentence: biostatisticians are not just running a regression; they turn clinical, public health, or life science questions into a reviewable study design, analysis plan, statistical inference, and statement of limitations. The U.S. counterpart is O*NET-SOC 15-2041.01, marked Bright Outlook and listed as Job Zone Five (extensive preparation needed). The core boundary is that you can decide the statistical method, the analysis definition, and how far the results can be interpreted, but you cannot make medical judgments for the clinical team, and you cannot write statistical output directly as diagnosis, release, or regulatory conclusions."
+              "If you mainly want to run a model for a significant result, or have not checked data permissions and review ownership, start with fictional data. Software skills alone do not authorize sign-off on real findings."
             ]
           },
           "id": "biostatisticians.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "bio-paper",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -23272,10 +23297,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Signals to keep exploring: you are willing to first write the question as testable endpoints and hypotheses and to compute the sample size before modeling; you can accept having your analysis plan, code, and results reviewed point by point by others; when data are missing, the protocol deviates, or results cannot be explained, you are willing to stop, record, and state the limitations rather than force out a good-looking conclusion; and your interest in how far a conclusion can be supported exceeds your interest in whether the model ran."
+              "Try the short BS-07 exercise in the entry section. Account for the 10 missing records out of 60 per group, calculate three B−A values, and write a two-sentence handoff."
             ]
           },
           "id": "biostatisticians.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "bio-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23283,10 +23311,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Conditions for pausing major investment: you have not yet completed, under supervision, one full closed loop from research question to analysis plan, data processing, result interpretation, and statement of limitations; or you only want to use the output of an off-the-shelf model to obtain a significant conclusion and are unwilling to bear responsibility for the analysis plan, data quality, and traceable records; also, do not treat being able to use one statistics software package or having taken a few statistics courses as proof that you can independently sign off on research conclusions."
+              "You enjoy writing the analysis plan first, checking counts and missing records, and having someone else rerun and question your work."
             ]
           },
           "id": "biostatisticians.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "onet-details",
+            "bio-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23294,10 +23326,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Education, qualifications, and job authorization must be verified separately: O*NET lists this occupation as Job Zone Five (SVP 8.0 and above), and among respondents 58% consider a master's degree necessary, 29% a doctorate, and 13% a bachelor's degree; BLS lists a master's degree as the typical entry-level education for the statistician series. These are survey and public material definitions, not a uniform statutory threshold; real requirements are set by the employer, funder, ethics committee, and local regulations, and signing and data access permissions additionally require institutional authorization."
+              "Try BS-07 in the entry section. Write a two-sentence handoff for the short paper exercise or a one-page review note for the full exercise."
             ]
           },
           "id": "biostatisticians.quick-decision.fermat-decision-card.6",
+          "source_refs": [
+            "bio-paper"
+          ],
           "type": "prose"
         },
         {
@@ -23305,10 +23340,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: this is a professional role centered on study design, statistical analysis, data quality, and conclusion boundaries, and its output is reviewable analysis plans, results, and statements of limitations, not decisions made in place of physicians or regulators. The U.S. wage and employment data follow the Statisticians definition (SOC 15-2041) rather than a separate 15-2041.01 listing; mainland China has no national occupation-level wage statistics corresponding to this occupation, and this page marks this honestly rather than filling in figures."
+              "Explore this role if you like turning questions into plans someone else can rerun, catching denominator, data and version errors, and explaining what the results can support."
             ]
           },
           "id": "biostatisticians.quick-decision.fermat-decision-card.7",
+          "source_refs": [
+            "onet-details",
+            "bio-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -24170,10 +24209,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Directed at broader statistical inference and method problems, with outputs mainly being statistical models, method descriptions, and data analysis reports."
+              "Statisticians design data collection, analyze data, and report results across industries. Both roles can use the same statistical methods."
             ]
           },
           "id": "biostatisticians.direction-comparison.adjacent-career-comparison-table.12",
+          "source_refs": [
+            "adj-stats-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -24181,10 +24224,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The two share similar methodological foundations, but biostatisticians by default face life science, clinical, and public health questions and must handle trial design, participant data, and the ethics and regulatory context; statisticians do not take this as the default scenario."
+              "Biostatisticians apply these methods to clinical, public health, or life science questions, often producing an analysis plan, estimates and limitations. Duties still depend on the project."
             ]
           },
           "id": "biostatisticians.direction-comparison.adjacent-career-comparison-table.13",
+          "source_refs": [
+            "onet-details",
+            "adj-stats-current"
+          ],
           "type": "prose"
         },
         {
@@ -24379,7 +24426,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Moving in from biomedical experimental or clinical positions"
+              "Transitioning from biomedical research or clinical roles"
             ]
           },
           "id": "biostatisticians.direction-comparison.adjacent-career-comparison-table.31",
@@ -24412,7 +24459,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "If you are willing to build up statistical inference and programming training and accept review, you can consider moving in; if you only want to change the job title without building the methodological foundation, the gap will be large."
+              "Consider a transition to biostatistics if you want to strengthen statistical inference and programming skills and have your analysis reviewed. Build those skills before taking on independent analysis responsibilities."
             ]
           },
           "id": "biostatisticians.direction-comparison.adjacent-career-comparison-table.34",
@@ -24653,10 +24700,10 @@
                 "url": "https://www.onetonline.org/link/hot_tech/15-2041.01"
               },
               {
-                "entity": "BLS Mathematicians and Statisticians Occupational Outlook Handbook",
+                "entity": "BLS Employment Projections Table 1.2: parent category Statisticians 15-2041",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 15-2041.01 occupation summary",
@@ -24787,14 +24834,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial reasoning from the tasks: tools can assist search, code, data dictionaries, and chart drafts; no causal data on overall replacement, adoption, or time savings for this occupation was verified this round, so it cannot be asserted that replacement will never happen. Study design, missing data handling, and signing responsibility should be verified by the applicable regulations and institutional authorization. AI Impact Score 67% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Use fictional material to try drafting a data dictionary or analysis script. Check variables, counts, missing data rules and versions one by one. Available evidence does not establish occupational AI adoption, hours saved or job replacement. Keep real participant data out of tools the project has not approved."
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor-current",
-            "onet-details",
-            "ilo-genai"
+            "source-fermatmind-ai-rubric",
+            "pipl-current"
           ],
           "type": "prose"
         },
@@ -24967,13 +25013,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial task suggestion (verify specific institutional rules separately): the table below compares three groups of work directions in terms of automation impact: which steps can be assisted and which judgments and responsibilities still rest with people."
+              "The table offers fictional draft exercises from three kinds of work. Set the review owner and checks first. Do not infer the degree of automation from the exercises."
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "editor-current",
-            "onet-details"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -25419,13 +25464,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The actual link is job posting software signals; the ranking of tasks most affected by AI is editorial reasoning, and there is no measured replacement ranking for this occupation."
+              "This source only tracks software mentions in U.S. postings. It does not measure AI replacement, adoption, or time saved."
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet-hot-tech",
-            "editor-current"
+            "onet-hot-tech"
           ],
           "type": "prose"
         },
@@ -25434,10 +25478,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The BLS 2025—2035 projection for the combined mathematicians and statisticians definition is 10% growth and a net gain of 3,400 positions; this is a statistical classification definition, not a projection for 15-2041.01, and does not constitute a personal employment guarantee."
+              "BLS projects U.S. employment for the parent category Statisticians (SOC 15-2041): about 31,300 in 2025 and 34,700 in 2035, up 11.0%, a net gain of about 3,400, and about 1,900 annual openings from growth and replacement. The 2025 baseline includes 1.3% self-employment. These figures do not isolate biostatisticians or count live vacancies."
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.70",
+          "source_refs": [
+            "bls-ep"
+          ],
           "type": "prose"
         },
         {
@@ -25445,10 +25492,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Mathematicians and Statisticians Occupational Outlook Handbook"
+              "The Statisticians row in Table 1.2 reports employment, openings, and self-employment. It does not isolate biostatisticians or measure AI effects."
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.71",
+          "source_refs": [
+            "bls-ep"
+          ],
           "type": "prose"
         },
         {
@@ -26671,23 +26721,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China salary reference: official statistical definitions and gaps"
+              "Biostatistician pay in mainland China: industries and postings"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.44",
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "Precise Chinese occupation wages are still missing; this module provides matched industry and broad personnel category references and their boundaries."
-            ]
-          },
-          "id": "biostatisticians.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs-current"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -26696,10 +26735,28 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "When comparing opportunities, confirm the nature of the institution, data access permissions, review responsibility, and the pay method (annual salary, project-based, or service contract), and do not treat an industry average as an individual wage expectation."
+              "No national occupation wage for mainland biostatisticians was verified. Neither employer below gives a figure."
+            ]
+          },
+          "id": "biostatisticians.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "pku-biostat-2026",
+            "fudan-biostat-2026"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "NBS 2025 mean annual gross wages for urban employees: scientific research and technical services, CNY 182,064 in non-private units and CNY 83,560 in private units; health and social work, CNY 146,266 and CNY 75,631, respectively. These industry means do not estimate individual or national occupational pay."
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.46",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -26718,10 +26775,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This page does not provide monthly wage ranges or city rankings for biostatisticians in mainland China; same-named positions may be paid by annual salary, project fees, or service contract, and comparisons must include data permissions, review responsibility, project cycles, and social insurance arrangements in the written agreement."
+              "These dated postings describe the employers’ requirements at publication. They do not establish current vacancies, a universal degree threshold, or occupational pay."
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.48",
+          "source_refs": [
+            "pku-biostat-2026",
+            "fudan-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -26729,10 +26790,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China (national definition)"
+              "Beijing | Institute of Advanced Clinical Medicine, Peking University"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.49",
+          "source_refs": [
+            "pku-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -26740,10 +26804,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national occupation monthly wage distribution precisely corresponding to biostatisticians was obtained."
+              "On February 9, 2026, the Institute of Advanced Clinical Medicine, Peking University advertised one statistician in its biostatistics department under a labor dispatch arrangement, requiring a doctorate in a related field. The work covers sample size, the statistical analysis plan, guidance on programming, and review of statistical tables, figures and reports. The posting gives no numeric pay."
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.50",
+          "source_refs": [
+            "pku-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -26751,10 +26818,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "First-tier cities (Beijing, Shanghai, Guangzhou, Shenzhen)"
+              "Shanghai | Fudan University"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.51",
+          "source_refs": [
+            "fudan-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -26762,10 +26832,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable city-level occupation monthly wage data were obtained, and this page presents no city rankings."
+              "On May 12, 2026, Fudan University advertised two biostatisticians under a labor dispatch arrangement, asking for a related bachelor’s degree or higher and at least three years of data management and analysis experience, including at least one in clinical research. Duties include preparing analysis data, writing and validating programs, and reporting. The posting gives no numeric pay."
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.52",
+          "source_refs": [
+            "fudan-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -26773,10 +26846,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Other cities"
+              "Mainland China national scope"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.53",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -26784,10 +26860,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no official or verifiable source supports biostatistician monthly wage ranges for other cities."
+              "NBS 2025 mean annual gross wages for urban employees: scientific research and technical services, CNY 182,064 in non-private units and CNY 83,560 in private units; health and social work, CNY 146,266 and CNY 75,631, respectively. These industry means do not estimate individual or national occupational pay."
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.54",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -28621,13 +28700,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "Editorial self-check of analysis plans, data checks, code reruns, and review feedback; this round did not verify occupation-specific comparisons with more explanatory power than interest or programming interest."
+              "After BS-07, ask whether you would willingly write assumptions first, check denominators and welcome review. Assessments are prompts for exploration, not employment screens."
             ]
           },
           "id": "biostatisticians.fit.riasec-fit-block.9",
           "source_refs": [
-            "editor-current",
-            "details-current"
+            "bio-paper",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -28830,10 +28909,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Direct answer: main risks include unreliable conclusions due to inappropriate study design or sample size, post hoc changes to the analysis plan, poor data quality and missing data handling, leakage of participant information, unclear responsibility boundaries in submission materials, and missing review in multi-party collaboration; control depends on a predefined analysis plan, clear permissions, and traceable records."
+              "Medical and health information and biometrics are sensitive personal information. On real projects verify the purpose, necessity, applicable consent or other requirements, and access and output permissions. Check separate rules when human genetic resources are involved. Mainland China’s 2026 Good Clinical Practice revision took effect September 1 for drug development trials approved by or filed with the national drug regulator. Medical judgments and treatment decisions belong to a principal investigator who is a qualified clinician or an authorized clinician. Statistical work follows applicable rules and documented responsibilities."
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.9",
+          "source_refs": [
+            "pipl-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -29485,10 +29568,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Direct answer: U.S. pathways are usually based on graduate-level statistics or biostatistics education, BLS lists a master's degree as the typical entry-level education for the statistician series, and O*NET lists this occupation as Job Zone Five. The actual entry route depends on the position type — pharmaceutical clinical trials, hospital research, public health, and life science research and development differ in training and data permission requirements — and should follow the specific employer's job description and institutional authorization."
+              "O*NET places biostatisticians (15-2041.01) in Job Zone Five. The BLS typical entry-level master’s degree applies to the parent category Statisticians (15-2041). The Fudan posting accepts a related bachelor’s degree with experience, while the Peking University posting asks for a relevant doctorate. Verify training, hiring requirements, assigned duties and data access separately."
             ]
           },
           "id": "biostatisticians.path.career-path-block.20",
+          "source_refs": [
+            "onet-details",
+            "bls-ep",
+            "pku-biostat-2026",
+            "fudan-biostat-2026"
+          ],
           "type": "prose"
         },
         {
@@ -30365,7 +30454,8 @@
                 "values": [
                   "Fictional study package (not clinical evidence)",
                   "Generate 120 rows: 60 cases each for A and B, with j=1…60 within each group; id is the group name plus j, and age=20+(j mod 40). The primary endpoint is the 8-week continuous quantity Y (points, lower is better); when j≤50, A=100+((j−1) mod 10−4.5) and B=96+the same congruence term; when j>50, Y is left missing and missing=1, otherwise missing=0. The group labels are demonstration labels only and do not claim real randomization; no secondary endpoints are given, so no additional tests may be invented.",
-                  "Write the plan in the first 60 minutes and generate and analyze the data by fixed rules in the next 45 minutes; use any statistical software and no real participant data. The 120 cases are the given scenario, not a validated sample size; the role is only that of a learner submitting a draft."
+                  "Write the plan in the first 60 minutes and generate and analyze the data by fixed rules in the next 45 minutes; use any statistical software and no real participant data. The 120 cases are the given scenario, not a validated sample size; the role is only that of a learner submitting a draft.",
+                  "Short paper exercise (standalone): each group has 50 observed and 10 missing records, with observed means A=100 and B=96. Calculate complete-case B−A. For S1 fill the missing records with A=110 and B=86; for S2 use A=90 and B=106. Recompute the means using 60 records per group in each scenario. Give all three B−A values and a two-sentence handoff about denominators, scenario changes, and why this is not evidence of efficacy. Generate 120 rows and an interval only for the full exercise."
                 ]
               },
               {
@@ -30373,7 +30463,8 @@
                 "values": [
                   "Tasks and deliverables",
                   "First specify the B−A mean difference, the complete-case analysis, the sample variance denominator n−1, and the approximate 95% interval formula d±1.96×sqrt(sA² ÷ nA + sB² ÷ nB). Report the original 120 cases, the 10 missing cases per group, and the observed sample of 50 per group; the missingness mechanism cannot be inferred backward from the data.",
-                  "Sensitivity: compare only the mean difference over all 120 cases. Scenario S1 gives A missing values of 110 and B of 86; S2 gives A missing values of 90 and B of 106. Write the two differences and three limitations: this is a fictional non-randomized demonstration, the missingness mechanism is unknown, and the normal approximation interval is not a formal trial conclusion."
+                  "Sensitivity: compare only the mean difference over all 120 cases. Scenario S1 gives A missing values of 110 and B of 86; S2 gives A missing values of 90 and B of 106. Write the two differences and three limitations: this is a fictional non-randomized demonstration, the missingness mechanism is unknown, and the normal approximation interval is not a formal trial conclusion.",
+                  "Submit three items: the fixed analysis rules, a reproducible summary table, and a one-page note stating the denominators, two scenarios, and limits."
                 ]
               },
               {
@@ -30381,7 +30472,8 @@
                 "values": [
                   "Reference calculation and interpretation",
                   "In the complete case the two group means are 100 and 96, each with n=50 and sample variance 8.418367; B−A=−4.000, SE=0.580288, and the given normal approximation 95% interval is [−5.137365, −2.862635]. It describes only the self-generated observed sample and cannot prove treatment efficacy or a real causal effect.",
-                  "S1 mean difference over all 120 cases −7.333333; S2 −0.666667. The direction does not change under the given scenarios but the magnitude changes markedly; this does not prove the real missingness mechanism or a robust clinical benefit, and imputed values are not treated as additional independent observations to compute narrower intervals. Save the code, data rules, plan, and deviation records."
+                  "S1 mean difference over all 120 cases −7.333333; S2 −0.666667. The direction does not change under the given scenarios but the magnitude changes markedly; this does not prove the real missingness mechanism or a robust clinical benefit, and imputed values are not treated as additional independent observations to compute narrower intervals. Save the code, data rules, plan, and deviation records.",
+                  "Sample handoff: “Both groups start with 60 records and have 50 complete records; B−A moves from −4.00 to −7.33 in S1 and −0.67 in S2. Please check the denominators and missing data rules, since these fictional results do not establish efficacy.”"
                 ]
               },
               {
@@ -30394,7 +30486,11 @@
             ]
           },
           "id": "biostatisticians.path.entry-work-sample-data.1",
-          "title": "Paper case and tasks",
+          "source_refs": [
+            "bio-paper",
+            "bio-ich-e9r1"
+          ],
+          "title": "BS-07 | Denominators, missing data, and review",
           "type": "cards"
         },
         {
@@ -30526,8 +30622,8 @@
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Day six: review feedback",
-                  "Ask an experienced person to check the code and interpretation; if external feedback is unavailable, state that, complete only self-checks, and list the open questions."
+                  "Day six: independent rerun",
+                  "Rerun using only the supplied rules and check group labels, denominators, version and limits. A peer can rerun the same inputs if available; no real records are needed."
                 ]
               },
               {
@@ -30540,6 +30636,9 @@
             ]
           },
           "id": "biostatisticians.path.seven-day-trial.1",
+          "source_refs": [
+            "bio-paper"
+          ],
           "title": "Seven-day progressive experience",
           "type": "timeline"
         },
@@ -30690,15 +30789,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Real single-institution recruitment sample: the International Clinical Trials and Translational Medicine Center of Fudan University advertised 2 biostatistician positions on 2026-05-12 (research assistant series, Zhangjiang, Shanghai, labor dispatch), with the announcement closing on 2027-12-31, and the actual vacancy must be verified with the employer. Requirements include a bachelor's degree or above in a related background, age not over 35, at least 3 years of data management and analysis experience including at least 1 year in clinical research, and command of R, SAS, and Stata plus English ability; this is not an entry route for new graduates without experience. Duties include sample size and randomization, preparing datasets, program validation, analysis plans, and reports. The announcement gives no salary and cannot be used to infer national wages or a uniform master's threshold. The directions above and the interview and 90-day tables are editorial scenarios. The original announcement is at the source link below."
+              "On February 9, 2026, the Institute of Advanced Clinical Medicine, Peking University advertised one statistician in its biostatistics department under a labor dispatch arrangement, requiring a doctorate in a related field. The work covers sample size, the statistical analysis plan, guidance on programming, and review of statistical tables, figures and reports. The posting gives no numeric pay.",
+              "On May 12, 2026, Fudan University advertised two biostatisticians under a labor dispatch arrangement, asking for a related bachelor’s degree or higher and at least three years of data management and analysis experience, including at least one in clinical research. Duties include preparing analysis data, writing and validating programs, and reporting. The posting gives no numeric pay.",
+              "These dated postings describe the employers’ requirements at publication. They do not establish current vacancies, a universal degree threshold, or occupational pay."
             ]
           },
           "id": "biostatisticians.path.recruitment-sample.1",
           "source_refs": [
-            "fudan-biostat-2026",
-            "editorial"
+            "pku-biostat-2026",
+            "fudan-biostat-2026"
           ],
-          "title": "Notes on using the recruitment sample",
+          "title": "Two mainland China biostatistics postings",
           "type": "notice"
         }
       ]
@@ -30826,7 +30927,7 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS Table1.2 statistician parent category employment projections",
+                "entity": "BLS Employment Projections Table 1.2 | Statisticians 15-2041",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -30907,13 +31008,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 2025—2035 projections for Statisticians (SOC 15-2041, statistician parent category proxy definition): about 31,300 in 2025 and about 34,700 in 2035, growth of 11.0%, net growth of about 3,400, and about 1,900 job openings per year; this is not a separate biostatistician 15-2041.01 statistic. Occupation-level wage and employment data for mainland China are still missing this round."
+              "BLS projects U.S. employment for the parent category Statisticians (SOC 15-2041): about 31,300 in 2025 and 34,700 in 2035, up 11.0%, a net gain of about 3,400, and about 1,900 annual openings from growth and replacement. The 2025 baseline includes 1.3% self-employment. These figures do not isolate biostatisticians or count live vacancies."
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.8",
           "source_refs": [
-            "bls-ep",
-            "editorial"
+            "bls-ep"
           ],
           "type": "prose"
         },
@@ -31574,10 +31674,13 @@
           "data": {
             "entries": [
               {
-                "answer": "Biostatisticians turn life science, clinical, and public health questions into statistical work: designing studies together with physicians or life scientists, computing sample sizes, writing analysis plans, cleaning and checking data, writing analysis code in SAS or R and similar tools, reporting effect sizes and uncertainty, and explaining results and limitations to research teams, data monitoring committees, or regulatory agencies.",
+                "answer": "Biostatisticians (O*NET 15-2041.01) work with clinicians and life science or public health teams to turn questions into reviewable study designs and analysis plans, check inputs, and report results and limits. Qualified, authorized clinicians make medical judgments.",
                 "id": "biostatisticians.faq.1",
                 "question": "What do biostatisticians do every day?",
-                "question_key": "career.faq.biostatisticians.1"
+                "question_key": "career.faq.biostatisticians.1",
+                "source_refs": [
+                  "onet-details"
+                ]
               },
               {
                 "answer": "Risks to note in advance include inappropriate design or sample size, post hoc changes to the analysis plan, poor data quality and missing data handling, leakage of participant information, unclear responsibility boundaries in submission materials, and missing review in multi-party collaboration; control depends on a predefined analysis plan, clear permissions, and traceable records.",
@@ -31592,22 +31695,35 @@
                 "question_key": "career.faq.biostatisticians.3"
               },
               {
-                "answer": "AI and statistical software can assist rollback-capable steps such as literature search, code drafts, data dictionary organization, document structure, and chart drafts; study design, sample size determination, missing data handling decisions, effect interpretation, and responsibility for signing results remain with people.",
+                "answer": "Use fictional material to try drafting a data dictionary or analysis script. Check variables, counts, missing data rules and versions one by one. Available evidence does not establish occupational AI adoption, hours saved or job replacement. Keep real participant data out of tools the project has not approved.",
                 "id": "biostatisticians.faq.4",
-                "question": "Which tasks will AI change?",
-                "question_key": "career.faq.biostatisticians.4"
+                "question": "Which tasks can I try with fictional material?",
+                "question_key": "career.faq.biostatisticians.4",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric",
+                  "pipl-current"
+                ]
               },
               {
-                "answer": "The definition of endpoints and the analysis population, the missing data handling method, the reasonableness of model assumptions, the statement of conclusions and limitations, and the signing of external submission materials must all be reviewed and owned by trained and authorized people.",
+                "answer": "Mainland China’s 2026 Good Clinical Practice revision took effect September 1 for drug development trials approved by or filed with the national drug regulator. Medical judgments and treatment decisions belong to a principal investigator who is a qualified clinician or an authorized clinician. Statistical work follows applicable rules and documented responsibilities.",
                 "id": "biostatisticians.faq.5",
                 "question": "Which steps must retain human review?",
-                "question_key": "career.faq.biostatisticians.5"
+                "question_key": "career.faq.biostatisticians.5",
+                "source_refs": [
+                  "cn-gcp-2026"
+                ]
               },
               {
-                "answer": "Education and course training, proof of statistical programming ability, institutional authorization, data access and confidentiality agreements, the scope of ethics approval, and the rules for signing statistical reports must each be verified; O*NET lists it as Job Zone Five, and BLS lists a master's degree as the typical entry-level education.",
+                "answer": "O*NET places biostatisticians (15-2041.01) in Job Zone Five. The BLS typical entry-level master’s degree applies to the parent category Statisticians (15-2041). The Fudan posting accepts a related bachelor’s degree with experience, while the Peking University posting asks for a relevant doctorate. Verify training, hiring requirements, assigned duties and data access separately.",
                 "id": "biostatisticians.faq.6",
                 "question": "Which qualifications must be verified to enter this occupation?",
-                "question_key": "career.faq.biostatisticians.6"
+                "question_key": "career.faq.biostatisticians.6",
+                "source_refs": [
+                  "onet-details",
+                  "bls-ep",
+                  "pku-biostat-2026",
+                  "fudan-biostat-2026"
+                ]
               },
               {
                 "answer": "Among U.S. respondents in O*NET, 54% sit continually or almost continually and 71% work indoors in a controlled environment every day; for noise, 33% never, 33% once a month or more but not weekly, and 21% once a year or more but not monthly. Other items such as hazardous conditions cannot be summarized as noise also being almost never present.",
@@ -31622,16 +31738,24 @@
                 "question_key": "career.faq.biostatisticians.8"
               },
               {
-                "answer": "BLS 2025—2035 projections for Statisticians (SOC 15-2041, statistician parent category proxy definition): about 31,300 in 2025 and about 34,700 in 2035, growth of 11.0%, net growth of about 3,400, and about 1,900 job openings per year; this is not a separate biostatistician 15-2041.01 statistic. A transition requires building up the target position's methods, data permissions, and responsibility evidence.",
+                "answer": "BLS projects U.S. employment for the parent category Statisticians (SOC 15-2041): about 31,300 in 2025 and 34,700 in 2035, up 11.0%, a net gain of about 3,400, and about 1,900 annual openings from growth and replacement. The 2025 baseline includes 1.3% self-employment. These figures do not isolate biostatisticians or count live vacancies.",
                 "id": "biostatisticians.faq.9",
                 "question": "How should I judge career prospects and transitions?",
-                "question_key": "career.faq.biostatisticians.9"
+                "question_key": "career.faq.biostatisticians.9",
+                "source_refs": [
+                  "bls-ep"
+                ]
               },
               {
-                "answer": "The U.S. figures are the 2025 OEWS statistician parent category 15-2041 shown by O*NET. The National Bureau of Statistics 2025 urban unit materials verified this round aggregate by industry and broad job category and do not list biostatisticians separately, so occupation wages cannot be filled in; the two cover different populations, and being for the same year does not make them directly comparable.",
+                "answer": "NBS 2025 mean annual gross wages for urban employees: scientific research and technical services, CNY 182,064 in non-private units and CNY 83,560 in private units; health and social work, CNY 146,266 and CNY 75,631, respectively. These industry means do not estimate individual or national occupational pay. These dated postings describe the employers’ requirements at publication. They do not establish current vacancies, a universal degree threshold, or occupational pay.",
                 "id": "biostatisticians.faq.10",
                 "question": "Why can't U.S. wages and mainland China figures be converted into each other?",
-                "question_key": "career.faq.biostatisticians.10"
+                "question_key": "career.faq.biostatisticians.10",
+                "source_refs": [
+                  "nbs-wages",
+                  "pku-biostat-2026",
+                  "fudan-biostat-2026"
+                ]
               },
               {
                 "answer": "O*NET tasks include writing analysis code with statistical software; the employer job posting technology signals are mainly SAS 66% and R 61%, with Python 17% and SQL 9%. Being able to reproduce an analysis and accept review matters more than how many languages you know.",
@@ -31640,10 +31764,14 @@
                 "question_key": "career.faq.biostatisticians.11"
               },
               {
-                "answer": "When China's human genetic resources are involved, verify ethics, informed consent, and the corresponding approval or filing conditions by activity under the 2024 revised regulations; international cooperative clinical trials have limited filing exceptions, and security review has applicable trigger conditions, so not all activities simultaneously require approval, filing, and security review. Sensitive personal information such as medical and health data also requires verifying the lawful basis for processing, least necessity, and strict protection; consent-based processing requires verifying separate consent, without ignoring other processing bases provided by law.",
+                "answer": "Medical and health information and biometrics are sensitive personal information. On real projects verify the purpose, necessity, applicable consent or other requirements, and access and output permissions. Check separate rules when human genetic resources are involved.",
                 "id": "biostatisticians.faq.12",
                 "question": "What should I note when handling clinical and genetic data?",
-                "question_key": "career.faq.biostatisticians.12"
+                "question_key": "career.faq.biostatisticians.12",
+                "source_refs": [
+                  "pipl-current",
+                  "hgr-current"
+                ]
               },
               {
                 "answer": "Mainly indoors in a controlled environment (71% work indoors in a controlled environment every day), with 54% sitting continually or almost continually; 92% use email every day and 42% have face-to-face discussions every day, and teamwork is rated extremely important by 54%.",
@@ -31749,10 +31877,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Usage notes: this page distinguishes the precise occupation definition from the Statisticians proxy definition; mainland China industry average wages serve only as a comparison; gaps are marked insufficient evidence and are not filled with speculative values."
+              "O*NET supports the duties. BLS wages and employment cover the parent category Statisticians. Keep mainland China industry means separate from the two university postings. BS-07 uses fictional data."
             ]
           },
           "id": "biostatisticians.sources.source-card.4",
+          "source_refs": [
+            "onet-details",
+            "bls-pay",
+            "bls-ep",
+            "nbs-wages",
+            "pku-biostat-2026",
+            "fudan-biostat-2026",
+            "bio-paper"
+          ],
           "type": "prose"
         }
       ]
@@ -31871,9 +32008,9 @@
                 "url": "https://www.onetonline.org/link/industry/15-2041.01"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Supports the software skill shares in employer job postings: SAS 66%, R 61%, Python 17%, SQL 9%, and others, 29 in total.",
+                  "O*NET’s U.S. 2025 posting data show SAS 66%, R 61%, Python 17%, and SQL 9%. Directory entries, rows displayed, and mention rates are different measures.",
                   "Employer job posting technology signals; accessed 2026-09-16"
                 ],
                 "evidence_type": "primary_document",
@@ -31951,14 +32088,14 @@
                 "url": "https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Supports the fact that mainland China publishes average wages by industry category and broad job category but does not list this occupation separately.",
-                  "2025; released 2026-05-15"
+                  "NBS 2025 mean annual gross wages for urban employees: scientific research and technical services, CNY 182,064 in non-private units and CNY 83,560 in private units; health and social work, CNY 146,266 and CNY 75,631, respectively. These industry means do not estimate individual or national occupational pay.",
+                  "Tables 2 and 5 cover non-private and private units separately."
                 ],
                 "evidence_type": "primary_document",
                 "id": "nbs-wages",
-                "limitation": "Aggregated by industry category and broad job category without listing this occupation separately; this page does not derive occupation wages from it.",
+                "limitation": "Annual gross industry means, not occupational wages.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics, 2025 average annual wages of urban unit employees",
                 "period": "2025; released 2026-05-15",
@@ -32026,9 +32163,9 @@
                 "market": "United States",
                 "name": "FermatMind editorial design and fictional exercises",
                 "period": "Compiled 2026-09",
-                "publisher": "FermatMind career content editorial team",
+                "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
-                "url": "https://www.onetonline.org/link/summary/15-2041.01"
+                "url": "#career-content-path"
               },
               {
                 "accessed_at": "2026-09-16",
@@ -32079,25 +32216,25 @@
                 "url": "https://www.onetonline.org/link/summary/15-2041.00"
               },
               {
-                "accessed_at": "2026-09-16",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Supports the source and statistical period notes for the Statisticians definition employment size and 2024—2034 projections fields.",
-                  "Employment is for 2024 and projections are for 2024—2034; accessed 2026-09-16"
+                  "OEWS employee wage coverage excludes self-employment.",
+                  "Do not read these as individual take-home pay."
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-oews-methods",
-                "limitation": "The employment and projections definition is Statisticians (SOC 15-2041), not a precise 15-2041.01 statistic.",
+                "limitation": "Wage survey methods and employee coverage exclude self-employment. This is not an employment projection or take-home pay.",
                 "market": "United States",
-                "name": "O*NET-SOC 15-2041.01 occupation summary (employment and projections fields)",
-                "period": "Employment is for 2024 and projections are for 2024—2034; accessed 2026-09-16",
-                "publisher": "O*NET OnLine",
-                "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/15-2041.01"
+                "name": "BLS OEWS: May 2025 Survey Methods",
+                "period": "May 2025 wage survey",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/methods_25.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "31.3 thousand to 34.7 thousand people, growth of 11.0%, net growth of 3.4 thousand, and 1.9 thousand annual openings; a master's is the typical entry education with an entry-level work experience and on-the-job training classification, which does not mean institutional mentoring is unnecessary."
+                  "BLS projects U.S. employment for the parent category Statisticians (SOC 15-2041): about 31,300 in 2025 and 34,700 in 2035, up 11.0%, a net gain of about 3,400, and about 1,900 annual openings from growth and replacement. The 2025 baseline includes 1.3% self-employment. These figures do not isolate biostatisticians or count live vacancies."
                 ],
                 "evidence_type": "primary_document",
                 "id": "bls-ep",
@@ -32110,33 +32247,33 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Implemented as 2026 No. 50, repealing 2020 No. 57; Article 8 covers education, training, experience, and clear responsibilities, with medical judgments made by qualified clinicians; Article 9 covers records and information protection."
+                  "Mainland China’s 2026 Good Clinical Practice revision took effect September 1 for drug development trials approved by or filed with the national drug regulator. Medical judgments and treatment decisions belong to a principal investigator who is a qualified clinician or an authorized clinician. Statistical work follows applicable rules and documented responsibilities."
                 ],
-                "evidence_type": "primary_document",
+                "evidence_type": "Primary public source",
                 "id": "cn-gcp-2026",
-                "limitation": "Applies to approved or filed pharmaceutical research clinical trials, not an occupational license for all biostatistical activities.",
+                "limitation": "Applies to drug trials; check institutional responsibility and access documents.",
                 "market": "Mainland China",
-                "name": "Good Clinical Practice for pharmaceutical clinical trials (2026 revision) and the effective-date announcement",
-                "period": "Released 2026-05-21; effective 2026-09-01",
-                "publisher": "Four departments including the National Medical Products Administration; official republication by the Xinjiang Department of Justice",
+                "name": "China Good Clinical Practice for Drug Trials (2026 revision)",
+                "period": "2026-09-01",
+                "publisher": "Liaoning MPA publication of national rules",
                 "scope": "contextual",
-                "url": "https://sft.xinjiang.gov.cn/xjsft/flfggz/202608/751ed8e1ce404794a7d1c03c1629b777.shtml"
+                "url": "https://ypjg.ln.gov.cn/ypjg/ztzl/ypyfcxxxfw/zcfgzq/flfg/2026071921180223928/index.shtml"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Bachelor's degree or above in a related background, age not over 35, more than 3 years of data management and analysis and more than 1 year of clinical research experience; R, SAS, and Stata plus English requirements.",
-                  "Statistical support, sample size and randomization, data preparation, program validation, analysis plans, and reports; 2 positions, Zhangjiang, Shanghai."
+                  "On May 12, 2026, Fudan University advertised two biostatisticians under a labor dispatch arrangement, asking for a related bachelor’s degree or higher and at least three years of data management and analysis experience, including at least one in clinical research. Duties include preparing analysis data, writing and validating programs, and reporting. The posting gives no numeric pay.",
+                  "These dated postings describe the employers’ requirements at publication. They do not establish current vacancies, a universal degree threshold, or occupational pay."
                 ],
-                "evidence_type": "primary_document",
+                "evidence_type": "Primary public source",
                 "id": "fudan-biostat-2026",
-                "limitation": "A single-institution labor dispatch and experienced position with no salary published; the announcement period does not prove the vacancy still exists today and cannot be extrapolated to a universal threshold.",
+                "limitation": "These dated postings describe the employers’ requirements at publication. They do not establish current vacancies, a universal degree threshold, or occupational pay.",
                 "market": "Mainland China",
-                "name": "Biostatistician recruitment at the Fudan International Clinical Trials and Translational Medicine Center",
-                "period": "Announcement of 2026-05-12; states a closing date of 2027-12-31",
-                "publisher": "Human Resources Office, Fudan University",
+                "name": "Fudan University: two biostatisticians",
+                "period": "2026-05-12",
+                "publisher": "Fudan University",
                 "scope": "recruitment_proxy",
                 "url": "https://hr.fudan.edu.cn/d0/46/c15370a708678/page.htm"
               },
@@ -32457,21 +32594,64 @@
                 "url": "https://www.onetonline.org/link/summary/15-2021.00"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Design and planning | Determine endpoints, comparisons, and populations with the clinical or life science team, compute the sample size, and predefine the analysis methods, missing data handling, and sensitivity analysis | A reproducible statistical analysis plan consistent with the study protocol. — 50/100; weight=1/3; biostatisticians.profile.responsibilities-block.1[1]",
-                  "Data and computing | Verify data coding and missing values, write reproducible analysis code, and retain data versions, code, and analysis logs | Analysis assets that others can rerun to obtain the same results. — 75/100; weight=1/3; biostatisticians.profile.responsibilities-block.1[2]",
-                  "Inference and interpretation | Report effect sizes and uncertainty, perform model diagnostics and sensitivity analysis, and explain how far the conclusions can be supported and their limitations | A results report including intervals, assumptions, and limitation statements. — 75/100; weight=1/3; biostatisticians.profile.responsibilities-block.1[3]"
+                  "Use fictional material to try drafting a data dictionary or analysis script. Check variables, counts, missing data rules and versions one by one. Available evidence does not establish occupational AI adoption, hours saved or job replacement. Keep real participant data out of tools the project has not approved.",
+                  "Qualitative editorial note, with no score.",
+                  "Qualitative editorial note, with no score.",
+                  "Qualitative editorial note, with no score.",
+                  "Qualitative editorial note, with no score."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "Primary public source",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "Qualitative editorial note, with no score.",
+                "name": "FermatMind: evidence for AI task claims",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "#career-visual-group-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "On February 9, 2026, the Institute of Advanced Clinical Medicine, Peking University advertised one statistician in its biostatistics department under a labor dispatch arrangement, requiring a doctorate in a related field. The work covers sample size, the statistical analysis plan, guidance on programming, and review of statistical tables, figures and reports. The posting gives no numeric pay."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "pku-biostat-2026",
+                "limitation": "These dated postings describe the employers’ requirements at publication. They do not establish current vacancies, a universal degree threshold, or occupational pay.",
+                "name": "Institute of Advanced Clinical Medicine, Peking University: statistician",
+                "period": "2026-02-09",
+                "publisher": "Peking University Health Science Center",
+                "scope": "recruitment_proxy",
+                "url": "https://rsc.bjmu.edu.cn/rczp/jfxz/fe1cfdefffc840038c0676a59376692e.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "An estimand aligns the clinical question and analysis; sensitivity analysis examines how results depend on assumptions."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "bio-ich-e9r1",
+                "limitation": "Clinical trial methods context. BS-07 only illustrates denominators and missing data scenarios with fictional inputs.",
+                "name": "ICH E9(R1): estimands and sensitivity analysis",
+                "period": "2019-11-20",
+                "publisher": "ICH",
+                "scope": "contextual",
+                "url": "https://database.ich.org/sites/default/files/E9-R1_Step4_Guideline_2019_1203.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Try BS-07 in the entry section: check denominators in fictional records, compare two missing-data scenarios, and submit a one-page review note."
+                ],
+                "evidence_type": "Fictional exercise",
+                "id": "bio-paper",
+                "limitation": "No real participants or clinical conclusions.",
+                "name": "FermatMind BS-07: fictional statistical review",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -32595,6 +32775,26 @@
               "entry": "link-5",
               "field": "entity"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-2041.00",
+            "label": "Actual definition of statisticians"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-2051.00",
+            "label": "O*NET 15-2051.00 Data Scientists occupation summary"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/11-9121.01",
+            "label": "O*NET 11-9121.01 Clinical Research Coordinators occupation summary"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/19-1029.01",
+            "label": "O*NET 19-1029.01 Bioinformatics Scientists occupation summary"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-2021.00",
+            "label": "O*NET 15-2021.00 Mathematicians occupation summary"
           }
         ],
         "evidence_note": {
@@ -32613,25 +32813,25 @@
         "rows": [
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.11",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.12",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.13",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.14",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.12",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.11",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -32639,25 +32839,25 @@
           },
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.15",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.16",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.17",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.18",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.16",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.15",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -32665,25 +32865,25 @@
           },
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.19",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.20",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.21",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.22",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.20",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.19",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -32691,25 +32891,25 @@
           },
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.23",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.24",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.25",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.26",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.24",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.23",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -32717,25 +32917,25 @@
           },
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.27",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.28",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.29",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.30",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.28",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.27",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -32743,25 +32943,25 @@
           },
           {
             "与会计师／审计师的关键区别": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.31",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "更适合什么选择": {
-              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.32",
-              "block": "direction-comparison",
-              "copy_key": "career.item.adjacent-career-comparison-table",
-              "type": "prose"
-            },
-            "核心工作与产出": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.33",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": {
+            "更适合什么选择": {
               "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.34",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.32",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "biostatisticians.direction-comparison.adjacent-career-comparison-table.31",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
@@ -33222,7 +33422,7 @@
             }
           }
         ],
-        "heading": "Will AI replace biostatisticians?",
+        "heading": "How can I check AI drafts with fictional material?",
         "method_cards": [
           {
             "含义": {
@@ -33923,6 +34123,30 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://rsc.bjmu.edu.cn/rczp/jfxz/fe1cfdefffc840038c0676a59376692e.htm",
+            "id": "pku-biostat-2026",
+            "label": "Institute of Advanced Clinical Medicine, Peking University: statistician",
+            "scope": "These dated postings describe the employers’ requirements at publication. They do not establish current vacancies, a universal degree threshold, or occupational pay."
+          },
+          {
+            "href": "https://hr.fudan.edu.cn/d0/46/c15370a708678/page.htm",
+            "id": "fudan-biostat-2026",
+            "label": "Fudan University: two biostatisticians",
+            "scope": "These dated postings describe the employers’ requirements at publication. They do not establish current vacancies, a universal degree threshold, or occupational pay."
+          },
+          {
+            "href": "https://ypjg.ln.gov.cn/ypjg/ztzl/ypyfcxxxfw/zcfgzq/flfg/2026071921180223928/index.shtml",
+            "id": "cn-gcp-2026",
+            "label": "China Good Clinical Practice for Drug Trials (2026 revision)",
+            "scope": "Applies to drug trials; check institutional responsibility and access documents."
+          },
+          {
+            "href": "https://database.ich.org/sites/default/files/E9-R1_Step4_Guideline_2019_1203.pdf",
+            "id": "bio-ich-e9r1",
+            "label": "ICH E9(R1): estimands and sensitivity analysis",
+            "scope": "Clinical trial methods context. BS-07 only illustrates denominators and missing data scenarios with fictional inputs."
           }
         ],
         "tracks": [
@@ -34991,6 +35215,18 @@
             "id": "cn-gcp-2026",
             "label": "2026 GCP: applies to pharmaceutical research clinical trials",
             "scope": "Articles 2, 7, 8, and 9, together with the protocol, data records, and role responsibilities; this is not a uniform system for all statistical activities."
+          },
+          {
+            "href": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
+            "id": "pipl-current",
+            "label": "Personal Information Protection Law",
+            "scope": "Verify by personal information identifiability, processing purpose, and lawful basis; anonymization and de-identification are different."
+          },
+          {
+            "href": "https://database.ich.org/sites/default/files/E9-R1_Step4_Guideline_2019_1203.pdf",
+            "id": "bio-ich-e9r1",
+            "label": "ICH E9(R1): estimands and sensitivity analysis",
+            "scope": "Clinical trial methods context. BS-07 only illustrates denominators and missing data scenarios with fictional inputs."
           }
         ]
       },
@@ -35823,7 +36059,7 @@
       },
       "hero": {
         "h1": "Biostatisticians",
-        "quick_answer": "Biostatisticians turn clinical, public health, and life science questions into reviewable study designs, statistical inference, and limitation statements and collaborate with physicians and life science teams; their work is not data entry and does not replace physicians' diagnostic judgments.",
+        "quick_answer": "Biostatisticians (O*NET 15-2041.01) work with clinicians and life science or public health teams to turn questions into reviewable study designs and analysis plans, check inputs, and report results and limits. Qualified, authorized clinicians make medical judgments.",
         "title": "Biostatisticians"
       },
       "market_signal_card": {
@@ -37295,6 +37531,10 @@
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
+      "interface.direction_comparison.table.choice_header": "Best-fit choice",
+      "interface.direction_comparison.table.direction_header": "Career direction",
+      "interface.direction_comparison.table.distinction_header": "Key differences",
+      "interface.direction_comparison.table.work_output_header": "Core work and output",
       "interface.fit.directions_heading": "Which adjacent direction are you more likely to suit?",
       "interface.fit.interest_code_heading": "How to understand the IC interest code",
       "interface.us_salary.industry.industry_header": "Industry",
@@ -37389,7 +37629,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and work tasks",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -37657,32 +37897,20 @@
         "source_refs": [
           "bls-pay"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+75)/3+0.5)=67; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "67%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Biostatisticians",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and work tasks"
     },
     "badges": [
       "O*NET 15-2041.01 · Bright Outlook · research and inference responsibility",
       "Analysis plans and records, data and privacy authorization, and cross-disciplinary collaboration",
-      "No separate occupation statistic for mainland China · visible gap markers"
+      "O*NET interest signals: IC"
     ],
     "metrics": [
       {
@@ -37721,17 +37949,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "What biostatisticians do, what education and training is needed, what salaries and prospects look like in the United States and China, and which tasks AI will change; the Statisticians proxy definition and the mainland China data gap are retained."
+      "text": "See how biostatisticians plan studies, review missing data and report results. Compare U.S. parent-category pay, mainland China postings and a fictional review exercise."
     },
     "title": {
       "availability": "available",
-      "text": "Biostatisticians"
+      "text": "Biostatisticians: Work, Training, and Pay"
     }
   },
-  "source_content_sha256": "e6bbeafee281fb8c275041a643001aba8ab1d56dc7e36735f3cee0544651aed6",
+  "source_content_sha256": "886c62c3aa1c3816b22f7ccf2133a686434424fc48b7837ef24e4179574988fd",
   "subject": {
     "canonical_slug": "biostatisticians",
     "name": "Biostatisticians",
-    "summary": "Biostatisticians turn clinical, public health, and life science questions into reviewable study designs, statistical inference, and limitation statements and collaborate with physicians and life science teams; their work is not data entry and does not replace physicians' diagnostic judgments."
+    "summary": "Biostatisticians (O*NET 15-2041.01) work with clinicians and life science or public health teams to turn questions into reviewable study designs and analysis plans, check inputs, and report results and limits. Qualified, authorized clinicians make medical judgments."
   }
 }
