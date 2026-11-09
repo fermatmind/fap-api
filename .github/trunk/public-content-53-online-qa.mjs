@@ -96,6 +96,7 @@ $homeJsonLd=[]; foreach($xp->query('//script[@type="application/ld+json"]') as $
 echo json_encode(['language'=>$doc->documentElement->getAttribute('lang'),'link_labels'=>$labels,'body'=>$values($mainQuery),'h1'=>$values($mainQuery.'//h1'),'links'=>$values($mainQuery.'//a','href'),
  'home_jsonld'=>$homeJsonLd,'home_iq_cards'=>$values('//main//article[.//a[contains(@href,"iq-test-intelligence-quotient-assessment")]]'),
  'tests_quickstart_jsonld'=>$quickstart,'article_body'=>$values('//main//article[@data-testid="article-detail-content"]'),
+ 'article_images'=>$values('//main//article[@data-testid="article-detail-content"]//img[normalize-space(@alt)!=""]','src'),
  'blog_featured_links'=>$values($mainQuery.'//*[@data-testid="articles-featured-grid"]//article[@data-article-layout="featured"]/a','href'),
  'h1_names'=>$values($mainQuery.'//h1','aria-label'),'title'=>$documentTitles,'description'=>$values('//meta[@name="description"]','content'),
  'og_title'=>$values('//meta[@property="og:title"]','content'),'og_description'=>$values('//meta[@property="og:description"]','content'),
@@ -445,6 +446,8 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
     if (dom.language !== 'zh-TW' || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)])
       || !robots.includes('noindex') || robots.includes('index') || dom.alternate_entries.some(entry=>entry.hreflang))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_SEO_${row.page_id}`);
+    if (row.snapshot.body_visual && !dom.article_images.includes(row.snapshot.body_visual.image_url))
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_BODY_VISUAL_${row.page_id}`);
     if (row.source_identity?.source_locale === 'en') {
       const sourcePath='/en/articles/'+row.source_expectations.source.slug;
       const testSlug=row.article_metadata?.related_test_slug;

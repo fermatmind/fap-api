@@ -98,6 +98,7 @@ final class TraditionalArticlePublication
         }
 
         $editorial = $package['editorial_package_v1'] ?? null;
+        $bodyVisual = $article['cover_image_variants']['editorial_package_v1']['body_visual_image_url'] ?? null;
         $faqOnly = false;
         $reviewed = [
             '/article/title' => $revision['title'], '/article/excerpt' => $revision['excerpt'],
@@ -289,6 +290,10 @@ final class TraditionalArticlePublication
             'snapshot' => [
                 'title' => $revision['title'], 'excerpt' => $revision['excerpt'], 'content_md' => $revision['content_md'],
                 'author_name' => $article['author_name'], 'cover_image_alt' => $article['cover_image_alt'],
+                ...($bodyVisual === null ? [] : ['body_visual' => [
+                    'image_url' => $bodyVisual,
+                    'fallback_authorized' => (bool) ($article['cover_image_variants']['editorial_package_v1']['body_visual_fallback_authorized'] ?? false),
+                ]]),
                 ...($editorial === null ? [] : ['editorial_projection' => [
                     'faq' => $editorial['answer_surface_v1']['faq_items'],
                     ...($faqOnly ? [] : ['ctas' => $editorial['cta_slots']]),
@@ -429,7 +434,7 @@ final class TraditionalArticlePublication
         $source = Article::query()->withoutGlobalScopes()->findOrFail($row['source_identity']['source_article_id']);
         $copy = $row['snapshot'];
         $seo = $copy['seo_text'];
-        unset($copy['seo_text'], $copy['editorial_projection']);
+        unset($copy['seo_text'], $copy['editorial_projection'], $copy['body_visual']);
         $tags = DB::table('article_tag_map')->where('article_id', $source->id)->where('org_id', 0)
             ->orderBy('tag_id')->lockForUpdate()->pluck('tag_id')->map(fn ($id): int => (int) $id)->all();
         $expectedTags = array_column($row['taxonomy_display']['tags'], 'id');

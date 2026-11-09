@@ -1662,6 +1662,7 @@ final class ArticlePublicApiTest extends TestCase
             $targetSlug .= '-english-source';
         }
         $sha = str_repeat('a', 64);
+        $bodyVisualUrl = 'https://assets.fermatmind.com/storage/media-library/variants/fixture/hero_1600x900.jpg';
         $row = [
             'identity' => ['org_id' => 0, 'locale' => 'zh-TW', 'slug' => $targetSlug],
             'source_identity' => ['source_article_id' => $source->id],
@@ -1673,6 +1674,13 @@ final class ArticlePublicApiTest extends TestCase
             'article_metadata' => ['related_test_slug' => $relatedTest],
             'taxonomy_display' => ['category' => ['id' => null], 'tags' => []],
         ];
+        if (! $independentChinese) {
+            $row['snapshot']['body_visual'] = ['image_url' => $bodyVisualUrl, 'fallback_authorized' => false];
+            $row['article_metadata']['cover_image_variants'] = ['editorial_package_v1' => [
+                'body_visual_image_url' => $bodyVisualUrl,
+                'body_visual_fallback_authorized' => false,
+            ]];
+        }
         $sourceBefore = $source->fresh()->getAttributes();
         $context = new PromotionContext('test', $sha, 'W3', 'PUBLIC-CONTENT-53', str_repeat('b', 40),
             $sha, $sha, '1', 1, $sha, 1, $sha);
@@ -1685,7 +1693,8 @@ final class ArticlePublicApiTest extends TestCase
         $this->getJson($targetPath.'?locale=zh-TW')->assertOk()->assertJsonPath('article.source_locale', 'en')
             ->assertJsonPath('article.is_indexable', false)->assertJsonPath('reader_language_slugs', $links)
             ->assertJsonPath('landing_surface_v1.start_test_target', '/en/tests/'.$relatedTest)
-            ->assertJsonPath('landing_surface_v1.cta_bundle.2.label', '開始測驗');
+            ->assertJsonPath('landing_surface_v1.cta_bundle.2.label', '開始測驗')
+            ->assertJsonPath('article.body_visual', $row['snapshot']['body_visual'] ?? null);
         $this->getJson($path.'?locale=en')->assertOk()->assertJsonPath('reader_language_slugs', $links);
         $this->getJson($path.'/seo?locale=en')->assertOk()->assertJsonMissingPath('meta.alternates.zh-TW');
         DB::transaction(fn () => $writer->restore($row, $writer->read($row, true)));

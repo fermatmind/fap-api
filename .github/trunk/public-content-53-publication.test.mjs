@@ -1418,3 +1418,63 @@ test('Traditional Big Five research reading preserves versions, formulas and def
   }
  }
 });
+
+test('Traditional Big Five teamwork preserves original versions and structured FAQ',()=>{
+ const selection='traditional-article-big-five-application';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,10);
+ const revisions={production:[[1129,1163],[1112,1166],[1122,1140],[688,606]],staging:[[397,null],[396,null],[394,null],[402,null]]};
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(0,4);
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english?.published_revision_id??null]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection?.faq.length??0),[4,3,4,0]);
+  assert.deepEqual(rows.map(row=>row.snapshot.author_name),Array(4).fill('費馬測試編輯部'));
+  assert.match(rows[0].snapshot.content_md,/15 分鐘/u);
+  assert.match(rows[1].snapshot.content_md,/35 分鐘/u);
+  assert.match(rows[2].snapshot.content_md,/articlebig5zh017bodyv1/u);
+  assert.match(rows[3].snapshot.content_md,/social-battery-test/u);
+ }
+});
+
+test('Traditional Big Five planning preserves example time, revision and assessment destinations',()=>{
+ const selection='traditional-article-big-five-application';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,10);
+ const revisions={production:[[709,727],[1041,1042]],staging:[[406,null],[657,null]]};
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(4,6);
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english?.published_revision_id??null]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.author_name),['費馬測試編輯部','費馬測試編輯部']);
+  assert.match(rows[0].snapshot.content_md,/17:30/u);
+  assert.match(rows[1].snapshot.content_md,/v0\.2.*v0\.3/u);
+  assert.match(rows[1].snapshot.content_md,/\/zh\/tests\/explore\/perfectionism/u);
+  assert.match(rows[1].snapshot.content_md,/\/zh\/tests\/explore\/procrastinator-type-test/u);
+ }
+});
+
+test('Traditional Big Five score-use keeps the source body visual information and original assessment actions',()=>{
+ const selection='traditional-article-big-five-application';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,10);
+ const revisions={production:[[1110,1108],[983,999],[1116,1117],[1099,1103]],staging:[[332,712],[392,null],[425,null],[384,null]]};
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(6,10);
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english?.published_revision_id??null]),expected);
+  assert.match(rows[0].snapshot.content_md,/原流程圖的繁體文字版/u);
+  assert.match(rows[0].snapshot.body_visual.image_url,/^https:\/\/assets\.fermatmind\.com\/storage\/media-library\/variants\/org-0\/media-asset-\d+-[^/]+zh-twbody-visualv1\/hero_1600x900\.jpg$/u);
+  assert.equal(rows[0].snapshot.body_visual.fallback_authorized,false);
+  assert.match(rows[0].snapshot.content_md,/每天可記下的問題/u);
+  assert.deepEqual(rows[0].editorial_package_v1.cta_slots.map(slot=>[slot.key,slot.href]),[
+   ['mid_article','/zh/tests/big-five-personality-test-ocean-model'],
+   ['end_article','/zh/tests/big-five-personality-test-ocean-model'],
+  ]);
+  assert.equal(rows[0].source_expectations.english_relationship,environment==='production'?'reviewed_published_english':'independent_published_english');
+  assert.equal(rows[1].snapshot.editorial_projection.faq.length,4);
+  assert.match(rows[2].snapshot.content_md,/Everything DiSC/u);
+  assert.equal([...rows[3].snapshot.content_md.matchAll(/^[-] \*\*[NEOAC][1-6] [A-Za-z -]+（/gmu)].length,30);
+  assert.match(rows[3].snapshot.content_md,/articlebig5zh007bodyv1/u);
+ }
+});
