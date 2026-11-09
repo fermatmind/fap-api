@@ -281,17 +281,17 @@ class EditArticle extends EditRecord
                 }),
             // @review-surface article_translation_revision
             Action::make('confirmManualSourceReview')
-                ->label('确认人工译文源版本')
+                ->label('核对现有译文的公开源版本')
                 ->icon('heroicon-o-language')
                 ->visible(fn (): bool => ContentAccess::canWrite() && ! $this->getRecord()->isSourceArticle()
                     && $this->getRecord()->workingRevision?->revision_status === \App\Models\ArticleTranslationRevision::STATUS_HUMAN_REVIEW)
-                ->modalDescription('核对两份完整预览后，将当前未批准人工译文绑定到当前已发布源文。正文、发布指针和导入记录保持不变，随后仍须编辑审核和原生发布校验。')
+                ->modalDescription('逐份核对完整认证预览后，将当前待审修订绑定到同组已公开的源版本。此处记录的是源版本复核，后续仍须编辑审核和原生发布校验。')
                 ->fillForm(fn (): array => app(ArticleManualSourceReviewWorkspace::class)->prepare($this->getRecord()))
                 ->form([
                     Textarea::make('source_hash')->label('源文状态')->readOnly()->required()->rows(2),
                     Textarea::make('target_hash')->label('译文状态')->readOnly()->required()->rows(2),
                     Textarea::make('review_context')->label('待核对版本与预览')->readOnly()->dehydrated(false)->rows(8),
-                    Checkbox::make('source_reviewed')->label('已核对这两份完整预览，人工译文与当前源文相符')->accepted(),
+                    Checkbox::make('source_reviewed')->label('我已逐份核对认证预览，确认这份工作修订的事实、引用和解释边界与当前公开源版本相符')->accepted(),
                 ])
                 ->action(function (array $data): void {
                     try {
@@ -301,7 +301,7 @@ class EditArticle extends EditRecord
                             $this->getMountedActionForm()->getStatePath().'.source_reviewed' => $exception->errors()['source_reviewed'] ?? [$exception->getMessage()],
                         ]);
                     }
-                    Notification::make()->title('人工译文源版本已确认；仍需编辑审核')->success()->send();
+                    Notification::make()->title('工作修订的公开源版本已确认；仍需编辑审核')->success()->send();
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $this->getRecord()]));
                 }),
             // @review-surface article
