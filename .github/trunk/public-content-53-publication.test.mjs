@@ -1030,3 +1030,18 @@ test('Traditional Article selects the existing publisher and binds the OCEAN sou
  assert.equal(row.source_expectations.existing_english.published_revision_id,903);
  assert.equal(row.new_traditional_article,true);
 });
+
+test('Traditional Article batch selects three independently verified native source pairs per environment',()=>{
+ const files=['backend/content_assets/public_content_53/traditional-article-batch.json','backend/content_assets/public_content_53/traditional-article-batch-review.json'];
+ assert.equal(classifyPaths(files).operations.public_content_53_package,'traditional-article-batch');
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ const binding=inspectPackage(root,'traditional-article-batch');
+ assert.equal(binding.expected_row_count,3);
+ const production=readCandidateRows(root,binding.package_sha256).candidates;
+ const staging=readCandidateRows(root,binding.package_sha256,'staging').candidates;
+ assert.deepEqual(production.map(row=>row.source_identity.source_article_id),[275,276,277]);
+ assert.deepEqual(staging.map(row=>row.source_identity.source_article_id),[234,235,236]);
+ assert.deepEqual(staging.map(row=>row.source_expectations.source.published_revision_id),[777,785,779]);
+ assert.deepEqual(staging.map(row=>row.snapshot),production.map(row=>row.snapshot));
+ assert.ok(staging.every(row=>row.staging_source_taxonomy.category_id===null && row.taxonomy_display.category.id===11));
+});

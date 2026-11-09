@@ -20,6 +20,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class ArticlePublicApiTest extends TestCase
@@ -1356,7 +1357,13 @@ final class ArticlePublicApiTest extends TestCase
         ], ['scale_code' => 'RIASEC', 'is_primary' => true]);
     }
 
-    public function test_traditional_article_preflight_locks_native_source_and_rejects_source_drift_or_target_collision(): void
+    public static function traditionalArticleTaxonomyCases(): array
+    {
+        return ['same as source' => [false], 'staging with an unclassified source' => [true]];
+    }
+
+    #[DataProvider('traditionalArticleTaxonomyCases')]
+    public function test_traditional_article_preflight_locks_native_source_and_rejects_source_drift_or_target_collision(bool $useStagingTaxonomy): void
     {
         $source = $this->createArticle(['locale' => 'zh-CN']);
         $source->forceFill(['working_revision_id' => $source->published_revision_id])->saveQuietly();
@@ -1428,6 +1435,20 @@ final class ArticlePublicApiTest extends TestCase
             'article_metadata' => [],
             'taxonomy_display' => ['category' => ['id' => null], 'tags' => []],
         ];
+        if ($useStagingTaxonomy) {
+            $category = ArticleCategory::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => 'career-exploration', 'name' => '職業探索', 'is_active' => true]);
+            $tag = ArticleTag::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => 'riasec', 'name' => 'RIASEC', 'is_active' => true]);
+            $row['staging_source_taxonomy'] = ['category_id' => null, 'tag_ids' => []];
+            $row['taxonomy_display'] = ['category' => $category->only(['id', 'slug']), 'tags' => [$tag->only(['id', 'slug'])]];
+            $tag->update(['is_active' => false]);
+            try {
+                DB::transaction(fn () => $candidate->publish($row, $candidate->read($row, true), $context));
+                $this->fail('The guard accepted an inactive staging tag.');
+            } catch (DomainException $exception) {
+                $this->assertSame('traditional_article_target_tag_unavailable', $exception->getMessage());
+            }
+            $tag->update(['is_active' => true]);
+        }
         $sourceBefore = $source->getAttributes();
         $englishBefore = $english->getAttributes();
         DB::transaction(function () use ($candidate, $row, $context): void {
@@ -1435,9 +1456,12 @@ final class ArticlePublicApiTest extends TestCase
             $this->assertTrue($before['missing']);
             $this->assertTrue($candidate->publish($row, $before, $context));
         });
-        $this->getJson('/api/v0.5/articles/'.$source->slug.'?org_id=0&locale=zh-TW')
+        $published = $this->getJson('/api/v0.5/articles/'.$source->slug.'?org_id=0&locale=zh-TW')
             ->assertOk()->assertJsonPath('article.locale', 'zh-TW')
             ->assertJsonPath('article.content_md', '## 繁體正文')->assertJsonPath('article.is_indexable', false);
+        if ($useStagingTaxonomy) {
+            $published->assertJsonPath('article.category.slug', 'career-exploration')->assertJsonPath('article.tags.0.slug', 'riasec');
+        }
         DB::transaction(function () use ($candidate, $row): void {
             $candidate->restore($row, $candidate->read($row, true));
             $this->assertTrue($candidate->read($row, true)['retained_draft']);

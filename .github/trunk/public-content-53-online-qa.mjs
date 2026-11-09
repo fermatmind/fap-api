@@ -479,8 +479,13 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_QUALIFICATION_${row.page_id}`);
     if (row.new_traditional_article === true && (!['is_indexable','sitemap_eligible','llms_eligible'].every(key=>native[key] === false)
-      || native.translation_group_id !== row.source_identity.translation_group_id || native.source_article_id !== row.source_identity.source_article_id
+      || native.translation_group_id !== row.source_identity.translation_group_id
+      || native.source_article_id !== (environment === 'staging' ? row.staging_source_article_id : row.source_identity.source_article_id)
       || !Number.isInteger(native.published_revision_id))) throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_QUALIFICATION_${row.page_id}`);
+    if (row.traditional_article_batch && (native.category?.id !== row.taxonomy_display.category.id
+      || native.category?.slug !== row.taxonomy_display.category.slug
+      || !equal((native.tags ?? []).map(tag=>[tag.id,tag.slug]).sort(),row.taxonomy_display.tags.map(tag=>[tag.id,tag.slug]).sort())))
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_TAXONOMY_${row.page_id}`);
     if (row.new_article === true && (!['is_indexable','sitemap_eligible','llms_eligible'].every(key=>native[key] === true)
       || native.translation_group_id !== row.source_identity.translation_group_id || !Number.isInteger(native.published_revision_id))) throw new Error(`PUBLIC_CONTENT_53_NEW_ARTICLE_QUALIFICATION_${row.page_id}`);
     if(!before || !equal(projection(row,data),row.snapshot)

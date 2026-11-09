@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Services\ContentPromotion;
 
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleMaterialDecisionService;
 use App\Support\ArticleSourceTargetSnapshot;
@@ -18,9 +20,40 @@ final class TraditionalArticlePublication
 {
     public const SCHEMA = 'fermatmind.traditional_article.v1';
 
+    public const BATCH_SCHEMA = 'fermatmind.traditional_article_batch.v1';
+
     public static function package(string $bytes, string $reviewBytes, string $environment): array
     {
         $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+
+        return ['candidates' => [self::candidate($package, $reviewBytes, $environment)]];
+    }
+
+    public static function batch(string $bytes, string $reviewBytes, string $environment): array
+    {
+        $batch = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $reviews = json_decode($reviewBytes, true, 64, JSON_THROW_ON_ERROR);
+        $packages = $batch['articles'] ?? [];
+        if (($batch['schema'] ?? null) !== self::BATCH_SCHEMA || ($reviews['schema'] ?? null) !== self::BATCH_SCHEMA.'.review'
+            || ! array_is_list($packages) || count($packages) < 2 || count($packages) > 12
+            || count($reviews['articles'] ?? []) !== count($packages)) {
+            throw new DomainException('traditional_article_batch_invalid');
+        }
+
+        $rows = [];
+        foreach ($packages as $package) {
+            $slug = $package['mapping']['target_identity']['slug'] ?? '';
+            if (isset($rows[$slug]) || ! is_string($reviews['articles'][$slug] ?? null)) {
+                throw new DomainException('traditional_article_batch_identity_invalid');
+            }
+            $rows[$slug] = self::candidate($package, $reviews['articles'][$slug], $environment, true);
+        }
+
+        return ['candidates' => array_values($rows)];
+    }
+
+    private static function candidate(array $package, string $reviewBytes, string $environment, bool $batch = false): array
+    {
         $review = json_decode($reviewBytes, true, 64, JSON_THROW_ON_ERROR);
         $mapping = $package['mapping'] ?? [];
         $proofs = $package['source_expectations'] ?? [];
@@ -43,7 +76,7 @@ final class TraditionalArticlePublication
             'related_test_slug', 'author_name', 'cover_image_alt'];
         if (array_diff(array_keys($article), $allowedArticle) !== []
             || ($proofs['production']['source']['id'] ?? null) !== $identity['source_article_id']
-            || ($proofs['staging']['source']['id'] ?? null) !== $identity['source_article_id']) {
+            || (! $batch && ($proofs['staging']['source']['id'] ?? null) !== $identity['source_article_id'])) {
             throw new DomainException('traditional_article_package_protected_fields');
         }
 
@@ -79,13 +112,37 @@ final class TraditionalArticlePublication
             }
         }
 
-        return ['candidates' => [[
+        $stagingTaxonomy = $package['staging_source_taxonomy'] ?? null;
+        if ($batch) {
+            if ($stagingTaxonomy !== ['category_id' => null, 'tag_ids' => []]
+                || ! array_key_exists('cover_image_alt', $proofs['staging']['source']['snapshot_sha256'])
+                || $proofs['staging']['source']['snapshot_sha256']['cover_image_alt'] !== null) {
+                throw new DomainException('traditional_article_batch_staging_source_invalid');
+            }
+            foreach ($proofs as $name => $proof) {
+                $sourceHashes = $proof['source']['snapshot_sha256'];
+                foreach (['title', 'excerpt', 'content_md', 'author_name', 'seo_title', 'seo_description', 'og_title', 'og_description', 'cover_image_alt'] as $field) {
+                    if ($name === 'staging' && $field === 'cover_image_alt') {
+                        continue;
+                    }
+                    $path = '/article/'.(str_starts_with($field, 'seo_') || str_starts_with($field, 'og_') ? 'seo_meta/' : '').$field;
+                    if (($sourceHashes[$field] ?? null) !== ($review['fields'][$path]['sourceSha256'] ?? null)) {
+                        throw new DomainException('traditional_article_batch_review_source_drift');
+                    }
+                }
+            }
+        }
+
+        return [
             'page_id' => 'TRADITIONAL-ARTICLE-'.$slug,
             'kind' => 'article',
             'identity' => ['org_id' => 0, 'slug' => $slug, 'locale' => 'zh-TW'],
             'new_traditional_article' => true,
+            'traditional_article_batch' => $batch,
             'before' => [], 'staging_before' => [],
-            'source_identity' => $identity,
+            'source_identity' => array_replace($identity, ['source_article_id' => $proofs[$environment]['source']['id']]),
+            'staging_source_article_id' => $proofs['staging']['source']['id'],
+            'staging_source_taxonomy' => $batch && $environment === 'staging' ? $stagingTaxonomy : null,
             'source_expectations' => $proofs[$environment],
             'allow_staging_prepared_root' => $environment === 'staging',
             'article_metadata' => $article,
@@ -96,7 +153,7 @@ final class TraditionalArticlePublication
                 'seo_text' => ['seo_title' => $revision['seo_title'], 'seo_description' => $revision['seo_description'],
                     'og_title' => $seo['og_title'], 'og_description' => $seo['og_description'], 'og_image_url' => $seo['og_image_url']],
             ],
-        ]]];
+        ];
     }
 
     public function read(array $row, bool $lock): array
@@ -159,13 +216,18 @@ final class TraditionalArticlePublication
             ->orderBy('tag_id')->lockForUpdate()->pluck('tag_id')->map(fn ($id): int => (int) $id)->all();
         $expectedTags = array_column($row['taxonomy_display']['tags'], 'id');
         sort($expectedTags);
-        if ($tags !== $expectedTags || $source->category_id !== $row['taxonomy_display']['category']['id']) {
+        $category = $row['taxonomy_display']['category'];
+        $expectedSource = $row['staging_source_taxonomy'] ?? ['category_id' => $category['id'], 'tag_ids' => $expectedTags];
+        if ($tags !== $expectedSource['tag_ids'] || $source->category_id !== $expectedSource['category_id']) {
             throw new DomainException('traditional_article_taxonomy_changed');
+        }
+        if (isset($row['staging_source_taxonomy'])) {
+            $this->assertTargetTaxonomy($row['taxonomy_display']);
         }
 
         $target = $current['missing'] ? new Article : Article::query()->withoutGlobalScopes()->findOrFail($current['target_id']);
         $articleCopy = $row['identity'] + $copy + $row['article_metadata'] + [
-            'category_id' => $source->category_id, 'reading_minutes' => $source->reading_minutes,
+            'category_id' => $category['id'], 'reading_minutes' => $source->reading_minutes,
             'source_locale' => $source->locale, 'source_article_id' => $source->id, 'translated_from_article_id' => $source->id,
             'translation_group_id' => $source->translation_group_id, 'translated_from_version_hash' => $source->source_version_hash,
             'is_indexable' => false, 'sitemap_eligible' => false, 'llms_eligible' => false,
@@ -184,7 +246,7 @@ final class TraditionalArticlePublication
             'lifecycle_state' => Article::LIFECYCLE_ACTIVE, 'published_at' => now(), 'is_public' => true,
         ])->save();
         if ($current['missing']) {
-            foreach ($tags as $tag) {
+            foreach ($expectedTags as $tag) {
                 DB::table('article_tag_map')->insert(['org_id' => 0, 'article_id' => $target->id, 'tag_id' => $tag]);
             }
         }
@@ -234,6 +296,21 @@ final class TraditionalArticlePublication
         }
 
         return $revision;
+    }
+
+    private function assertTargetTaxonomy(array $taxonomy): void
+    {
+        $category = $taxonomy['category'];
+        if (! ArticleCategory::query()->withoutGlobalScopes()->where('org_id', 0)->whereKey($category['id'])
+            ->where('slug', $category['slug'])->where('is_active', true)->lockForUpdate()->first()) {
+            throw new DomainException('traditional_article_target_category_unavailable');
+        }
+        foreach ($taxonomy['tags'] as $tag) {
+            if (! ArticleTag::query()->withoutGlobalScopes()->where('org_id', 0)->whereKey($tag['id'])
+                ->where('slug', $tag['slug'])->where('is_active', true)->lockForUpdate()->first()) {
+                throw new DomainException('traditional_article_target_tag_unavailable');
+            }
+        }
     }
 
     public function restore(array $row, array $published): void
