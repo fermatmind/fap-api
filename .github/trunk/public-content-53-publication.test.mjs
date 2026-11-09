@@ -1563,3 +1563,24 @@ test('Traditional MBTI reading guides preserve preference codes, report scales a
   });
  }
 });
+
+test('Traditional Enneagram and career guides preserve admissions context and restored staging identities',()=>{
+ const selection='traditional-article-enneagram-career-guides';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,6);
+ const revisions={production:[[1053,1054],[1155,1157],[987,996],[986,1142],[1005,1006],[1168,1169]],staging:[[789,705],[713,714],[65,672],[64,668],[38,70],[843,null]]};
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates;
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english?.published_revision_id??null]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection?.faq.length??0),[6,5,8,0,5,0]);
+  assert.deepEqual(rows.map(row=>row.editorial_package_v1?.cta_slots.length??0),[1,2,2,2,0,0]);
+  assert.match(rows[0].snapshot.content_md,/25×（原始強度＋2）/u);
+  assert.match(rows[2].snapshot.content_md,/6 月 22 日至 28 日/u);
+  assert.match(rows[3].snapshot.content_md,/專業組.*調劑/su);
+  assert.match(rows[4].snapshot.content_md,/偏好清晰度/u);
+  assert.match(rows[5].snapshot.content_md,/12÷20＝60%.*12÷40＝30%/su);
+  assert.equal(rows[5].source_expectations.source.id,environment==='staging'?291:295);
+  assert.equal(rows[5].source_expectations.unpublished_english_slug,environment==='staging'?'mbti-vs-enneagram-reading-results':undefined);
+ }
+});

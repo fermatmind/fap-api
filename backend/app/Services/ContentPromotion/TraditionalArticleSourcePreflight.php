@@ -50,6 +50,14 @@ final class TraditionalArticleSourcePreflight
             $priorSource->cover_image_alt = null;
             $sourceHashMatches = hash_equals((string) $source->source_version_hash, $priorSource->computeSourceVersionHash());
         }
+        $preparedProjectionHash = $proof['source']['prepared_root_projection_hash'] ?? null;
+        $preparedRevisionHash = $proof['source']['prepared_revision_source_hash'] ?? null;
+        if (! $sourceHashMatches && $allowStagingChineseProjection && $preparedRoot
+            && is_string($preparedProjectionHash) && is_string($preparedRevisionHash)
+            && hash_equals((string) $source->source_version_hash, $preparedRevisionHash)) {
+            // The exact prepared root and its published revision are both bound to the package.
+            $sourceHashMatches = hash_equals($preparedProjectionHash, $source->computeSourceVersionHash());
+        }
         if ((! $source->isSourceArticle() && ! $preparedRoot)
             || (int) $source->working_revision_id !== (int) $source->published_revision_id
             || ! $sourceHashMatches) {
@@ -157,11 +165,11 @@ final class TraditionalArticleSourcePreflight
             ->whereKey($article->published_revision_id)->where('org_id', 0)->where('article_id', $article->id)
             ->when($lock, fn ($query) => $query->lockForUpdate())->sole();
         $sourceId = (int) ($source?->id ?? $article->id);
-        // Prepared staging roots can retain the import hash on their published revision.
+        // A staging projection can retain an earlier source hash on its published revision.
         // Require an exact package binding and still verify the current root hash and all published fields.
         $expectedRevisionHash = $article->source_version_hash;
         if ($allowPreparedRevisionHash && $source === null
-            && $article->translation_status === Article::TRANSLATION_STATUS_APPROVED
+            && ($article->isSourceArticle() || $article->translation_status === Article::TRANSLATION_STATUS_APPROVED)
             && $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED
             && array_key_exists('prepared_revision_source_hash', $expected)) {
             $expectedRevisionHash = $expected['prepared_revision_source_hash'];

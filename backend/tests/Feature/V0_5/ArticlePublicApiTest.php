@@ -1818,8 +1818,24 @@ final class ArticlePublicApiTest extends TestCase
             $sourceRevision->forceFill(['source_version_hash' => null])->saveQuietly();
             $bound['source']['prepared_revision_source_hash'] = null;
             $this->assertSame($source->id, $guard->assertSource($bound, allowStagingPreparedRoot: true)->id);
+            $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_SOURCE])->saveQuietly();
+            $sourceRevision->forceFill(['source_version_hash' => $importHash])->saveQuietly();
+            $bound['source']['prepared_revision_source_hash'] = $importHash;
+            $this->assertSame($source->id, $guard->assertSource($bound, allowStagingPreparedRoot: true)->id);
+
+            $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_APPROVED, 'content_html' => '<p>Legacy rendering</p>'])->saveQuietly();
             $sourceRevision->forceFill(['source_version_hash' => $currentHash])->saveQuietly();
-            $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_SOURCE, 'cover_image_alt' => '已發佈封面說明'])->saveQuietly();
+            $bound['source']['prepared_revision_source_hash'] = $currentHash;
+            $bound['source']['prepared_root_projection_hash'] = $source->computeSourceVersionHash();
+            DB::transaction(fn () => $this->assertSame($source->id, $guard->assertSource($bound, true, true)->id));
+            $source->forceFill(['content_html' => '<p>Different rendering</p>'])->saveQuietly();
+            try {
+                $guard->assertSource($bound, allowStagingPreparedRoot: true);
+                $this->fail('The guard accepted a changed prepared root.');
+            } catch (DomainException $exception) {
+                $this->assertSame('traditional_article_source_working_state_changed', $exception->getMessage());
+            }
+            $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_SOURCE, 'content_html' => null, 'cover_image_alt' => '已發佈封面說明'])->saveQuietly();
             $withCover = $projected;
             $withCover['source']['snapshot_sha256']['cover_image_alt'] = hash('sha256', $source->cover_image_alt);
             $this->assertSame($source->id, $guard->assertSource($withCover, allowStagingPreparedRoot: true)->id);

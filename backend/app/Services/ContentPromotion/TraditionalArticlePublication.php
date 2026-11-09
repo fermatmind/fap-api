@@ -203,6 +203,12 @@ final class TraditionalArticlePublication
                                 || preg_match('/\A[a-f0-9]{64}\z/', $record['prepared_revision_source_hash']) !== 1)))) {
                     throw new DomainException('traditional_article_source_proof_invalid');
                 }
+                if (array_key_exists('prepared_root_projection_hash', $record)
+                    && (! isset($record['prepared_revision_source_hash'])
+                        || ! is_string($record['prepared_root_projection_hash'])
+                        || preg_match('/\A[a-f0-9]{64}\z/', $record['prepared_root_projection_hash']) !== 1)) {
+                    throw new DomainException('traditional_article_source_proof_invalid');
+                }
                 if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $recordSlug) !== 1
                     || ($englishSource && (! is_int($record['id'] ?? null) || $record['id'] < 1
                         || ! is_int($record['published_revision_id'] ?? null) || $record['published_revision_id'] < 1))
