@@ -1715,6 +1715,26 @@ final class ArticlePublicApiTest extends TestCase
                 unset($hash);
             }
             DB::transaction(fn () => $this->assertSame($source->id, $guard->assertSource($projected, true, true)->id));
+            $sourceRevision = ArticleTranslationRevision::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($source->published_revision_id);
+            $currentHash = $sourceRevision->source_version_hash;
+            $importHash = hash('sha256', 'Prepared staging import');
+            $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_APPROVED])->saveQuietly();
+            $sourceRevision->forceFill(['source_version_hash' => $importHash])->saveQuietly();
+            $bound = $projected;
+            $bound['source']['prepared_revision_source_hash'] = $importHash;
+            DB::transaction(fn () => $this->assertSame($source->id, $guard->assertSource($bound, true, true)->id));
+            $wrong = $bound;
+            $wrong['source']['prepared_revision_source_hash'] = $currentHash;
+            foreach ([[$projected, true], [$wrong, true], [$bound, false]] as [$candidateProof, $staging]) {
+                try {
+                    $guard->assertSource($candidateProof, allowStagingPreparedRoot: $staging);
+                    $this->fail('The guard accepted an unbound or non-staging prepared revision.');
+                } catch (DomainException $exception) {
+                    $this->assertSame('traditional_article_source_revision_changed', $exception->getMessage());
+                }
+            }
+            $sourceRevision->forceFill(['source_version_hash' => $currentHash])->saveQuietly();
+            $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_SOURCE])->saveQuietly();
             $seo->updateQuietly(['seo_title' => $rawSeoTitle]);
 
             $noEnglish = $proof;

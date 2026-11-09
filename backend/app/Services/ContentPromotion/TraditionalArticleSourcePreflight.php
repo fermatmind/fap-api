@@ -27,7 +27,8 @@ final class TraditionalArticleSourcePreflight
             throw new DomainException('traditional_article_source_locale_invalid');
         }
         $publishedProjection = ($proof['source_snapshot_kind'] ?? null) === 'published_projection';
-        $source = $this->readArticle($proof['source'], $sourceLocale, null, $lock, $publishedProjection || $sourceLocale === 'en');
+        $source = $this->readArticle($proof['source'], $sourceLocale, null, $lock, $publishedProjection || $sourceLocale === 'en',
+            $allowStagingPreparedRoot && $publishedProjection && $sourceLocale === 'zh-CN');
         // Staging can hold a published root copied from the prepared workflow.
         // readArticle has already checked null parents, source locale and the exact public revision.
         $preparedRoot = $allowStagingPreparedRoot
@@ -110,7 +111,7 @@ final class TraditionalArticleSourcePreflight
             ->when($lock, fn ($query) => $query->lockForUpdate())->first(['id']) !== null;
     }
 
-    private function readArticle(array $expected, string $locale, ?Article $source, bool $lock, bool $publishedProjection = false): Article
+    private function readArticle(array $expected, string $locale, ?Article $source, bool $lock, bool $publishedProjection = false, bool $allowPreparedRevisionHash = false): Article
     {
         $sourceLocale = $source?->locale ?? $locale;
         $article = Article::query()->withoutGlobalScopes()->withTrashed()
@@ -133,11 +134,20 @@ final class TraditionalArticleSourcePreflight
             ->whereKey($article->published_revision_id)->where('org_id', 0)->where('article_id', $article->id)
             ->when($lock, fn ($query) => $query->lockForUpdate())->sole();
         $sourceId = (int) ($source?->id ?? $article->id);
+        // Prepared staging roots can retain the import hash on their published revision.
+        // Require an exact package binding and still verify the current root hash and all published fields.
+        $expectedRevisionHash = $article->source_version_hash;
+        if ($allowPreparedRevisionHash && $source === null
+            && $article->translation_status === Article::TRANSLATION_STATUS_APPROVED
+            && $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED
+            && isset($expected['prepared_revision_source_hash'])) {
+            $expectedRevisionHash = $expected['prepared_revision_source_hash'];
+        }
         if (! $revision->isPubliclyReadableForArticle($article)
             || $revision->locale !== $article->locale || $revision->source_locale !== $sourceLocale
             || $revision->translation_group_id !== $article->translation_group_id
             || (int) $revision->source_article_id !== $sourceId
-            || ($source === null && $revision->source_version_hash !== $article->source_version_hash)) {
+            || ($source === null && $revision->source_version_hash !== $expectedRevisionHash)) {
             throw new DomainException('traditional_article_source_revision_changed');
         }
 

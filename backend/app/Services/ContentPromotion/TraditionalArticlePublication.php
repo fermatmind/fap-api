@@ -186,6 +186,12 @@ final class TraditionalArticlePublication
                 $record = $proof[$role] ?? [];
                 $recordSlug = $record['slug'] ?? '';
                 $recordGroup = $record['translation_group_id'] ?? '';
+                if (array_key_exists('prepared_revision_source_hash', $record)
+                    && ($name !== 'staging' || $role !== 'source' || $sourceLocale !== 'zh-CN' || ! $projectedBatch
+                        || ! is_string($record['prepared_revision_source_hash'])
+                        || preg_match('/\A[a-f0-9]{64}\z/', $record['prepared_revision_source_hash']) !== 1)) {
+                    throw new DomainException('traditional_article_source_proof_invalid');
+                }
                 if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $recordSlug) !== 1
                     || ($englishSource && (! is_int($record['id'] ?? null) || $record['id'] < 1
                         || ! is_int($record['published_revision_id'] ?? null) || $record['published_revision_id'] < 1))
