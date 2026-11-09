@@ -27,15 +27,24 @@ final class TraditionalArticleSourcePreflight
             throw new DomainException('traditional_article_source_locale_invalid');
         }
         $publishedProjection = ($proof['source_snapshot_kind'] ?? null) === 'published_projection';
+        $allowStagingChineseProjection = $allowStagingPreparedRoot && $publishedProjection && $sourceLocale === 'zh-CN';
         $source = $this->readArticle($proof['source'], $sourceLocale, null, $lock, $publishedProjection || $sourceLocale === 'en',
-            $allowStagingPreparedRoot && $publishedProjection && $sourceLocale === 'zh-CN');
+            $allowStagingChineseProjection);
         // Staging can hold a published root copied from the prepared workflow.
         // readArticle has already checked null parents, source locale and the exact public revision.
         $preparedRoot = $allowStagingPreparedRoot
             && $source->translation_status === Article::TRANSLATION_STATUS_APPROVED;
+        $sourceHashMatches = hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash());
+        if (! $sourceHashMatches && $allowStagingChineseProjection && $source->isSourceArticle()) {
+            // Some staging roots received public image alt text after the source hash was recorded.
+            // readArticle has already bound the actual alt text to the reviewed projection.
+            $priorSource = clone $source;
+            $priorSource->cover_image_alt = null;
+            $sourceHashMatches = hash_equals((string) $source->source_version_hash, $priorSource->computeSourceVersionHash());
+        }
         if ((! $source->isSourceArticle() && ! $preparedRoot)
             || (int) $source->working_revision_id !== (int) $source->published_revision_id
-            || ! hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash())) {
+            || ! $sourceHashMatches) {
             throw new DomainException('traditional_article_source_working_state_changed');
         }
 
@@ -74,7 +83,13 @@ final class TraditionalArticleSourcePreflight
             $this->assertStagingEnglishAbsent($source, $proof['unpublished_english_slug'] ?? null, $allowStagingPreparedRoot, $lock);
         } else {
             $englishParent = TraditionalArticlePublication::englishSourceId($proof);
-            $this->readArticle($english, 'en', $englishParent === null ? null : $source, $lock, $publishedProjection);
+            $englishArticle = $this->readArticle($english, 'en', $englishParent === null ? null : $source, $lock, $publishedProjection);
+            if (($proof['english_relationship'] ?? null) === 'reviewed_published_english') {
+                $pair = collect(app(ArticleReviewedCounterpartService::class)->resolve($source))->keyBy('locale');
+                if ($pair->get('zh-CN')?->id !== $source->id || $pair->get('en')?->id !== $englishArticle->id) {
+                    throw new DomainException('traditional_article_reviewed_english_pair_changed');
+                }
+            }
         }
 
         return $source;
@@ -140,7 +155,7 @@ final class TraditionalArticleSourcePreflight
         if ($allowPreparedRevisionHash && $source === null
             && $article->translation_status === Article::TRANSLATION_STATUS_APPROVED
             && $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED
-            && isset($expected['prepared_revision_source_hash'])) {
+            && array_key_exists('prepared_revision_source_hash', $expected)) {
             $expectedRevisionHash = $expected['prepared_revision_source_hash'];
         }
         if (! $revision->isPubliclyReadableForArticle($article)

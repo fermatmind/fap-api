@@ -188,8 +188,9 @@ final class TraditionalArticlePublication
                 $recordGroup = $record['translation_group_id'] ?? '';
                 if (array_key_exists('prepared_revision_source_hash', $record)
                     && ($name !== 'staging' || $role !== 'source' || $sourceLocale !== 'zh-CN' || ! $projectedBatch
-                        || ! is_string($record['prepared_revision_source_hash'])
-                        || preg_match('/\A[a-f0-9]{64}\z/', $record['prepared_revision_source_hash']) !== 1)) {
+                        || ($record['prepared_revision_source_hash'] !== null
+                            && (! is_string($record['prepared_revision_source_hash'])
+                                || preg_match('/\A[a-f0-9]{64}\z/', $record['prepared_revision_source_hash']) !== 1)))) {
                     throw new DomainException('traditional_article_source_proof_invalid');
                 }
                 if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $recordSlug) !== 1
@@ -342,7 +343,8 @@ final class TraditionalArticlePublication
         $english = $proof['existing_english'];
         $relationship = $proof['english_relationship'] ?? 'same_group_source_sibling';
 
-        if ($relationship === 'independent_published_english' && ($english['source_locale'] ?? null) === 'en'
+        if (in_array($relationship, ['independent_published_english', 'reviewed_published_english'], true)
+            && ($english['source_locale'] ?? null) === 'en'
             && array_key_exists('source_article_id', $english) && $english['source_article_id'] === null) {
             return null;
         }

@@ -1313,3 +1313,28 @@ test('Traditional interpretation batch binds all twelve reviewed sources to the 
   assert.ok(faqRows.every(row=>row.editorial_package_v1.cta_slots.length===0));
  }
 });
+
+test('Traditional cross-group articles require the reviewed production pair and keep both CTA labels',()=>{
+ const selection='traditional-article-cross-group';
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,12);
+ for (const env of ['staging','production']) {
+  const rows=readCandidateRows(root,binding.package_sha256,env).candidates;
+  const paired=rows.slice(0,2), standard=rows.slice(2);
+  assert.deepEqual(paired.map(row=>[row.source_expectations.source.id,row.source_expectations.existing_english.id]),[[78,79],[36,35]]);
+  assert.deepEqual(standard.map(row=>row.source_expectations.source.published_revision_id),env==='staging'?[405,385,391,398,413,407,416,418,412,656]:[1065,1123,910,1132,915,702,909,917,912,913]);
+  assert.deepEqual(standard.map(row=>row.source_expectations.existing_english?.id??null),env==='staging'?[null,null,null,null,null,null,null,null,null,null]:[237,239,228,225,250,246,227,252,242,247]);
+  for (const row of paired) {
+   assert.notEqual(row.source_expectations.source.translation_group_id,row.source_expectations.existing_english.translation_group_id);
+   assert.equal(row.source_expectations.english_relationship,env==='production'?'reviewed_published_english':'independent_published_english');
+   const {faq,ctas}=row.snapshot.editorial_projection;
+   assert.equal(ctas.length,2);
+   const fixture={...row,snapshot:{content_md:'繁體文章',editorial_projection:{faq,ctas}}};
+   const html='<html lang="zh-TW"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="https://fermatmind.com'+pathFor(row)+'"></head><body><main><h1>繁體文章</h1>'+faq.map(({question})=>'<p>'+question+'</p>').join('')+ctas.map(({label,href})=>'<a href="'+href+'">'+label+'</a>').join('')+'</main></body></html>';
+   assert.doesNotThrow(()=>assertDom(fixture,html,{missing:true},env));
+   assert.throws(()=>assertDom(fixture,html.replace(ctas[1].label,'缺少原本按鈕'),{missing:true},env),/TRADITIONAL_ARTICLE_EDITORIAL_DOM/);
+  }
+ }
+});

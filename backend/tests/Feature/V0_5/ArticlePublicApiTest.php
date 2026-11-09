@@ -673,6 +673,49 @@ final class ArticlePublicApiTest extends TestCase
         $this->getJson('/api/v0.5/articles/'.$traditional->slug.'?locale=zh-TW')->assertNotFound();
     }
 
+    public function test_traditional_preflight_requires_the_exact_reviewed_cross_group_pair(): void
+    {
+        $source = $this->createArticle(['slug' => 'cross-group-source', 'locale' => 'zh-CN']);
+        $english = $this->createArticle(['slug' => 'reviewed-english', 'locale' => 'en']);
+        $other = $this->createArticle(['slug' => 'other-english', 'locale' => 'en']);
+        $source->forceFill(['working_revision_id' => $source->published_revision_id])->saveQuietly();
+
+        $counterparts = app(\App\Services\Cms\ArticleReviewedCounterpartService::class);
+        $binding = $counterparts->createBinding([$source, $english]);
+        foreach ([$source, $english, $other] as $article) {
+            $this->createSeoMeta($article, [
+                'canonical_url' => $counterparts->canonical($article),
+                'schema_json' => $article === $other ? [] : ['editorial_package_v1' => ['hreflang_gate_v1' => [
+                    'enabled' => true, 'policy' => 'reciprocal_counterparts_verified', 'counterpart_binding_v1' => $binding,
+                ]]],
+            ]);
+        }
+        $proofFor = function (Article $article): array {
+            $payload = $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale='.$article->locale)->assertOk()->json('article');
+
+            return $article->only(['id', 'slug', 'locale', 'published_revision_id', 'translation_group_id', 'is_indexable', 'sitemap_eligible']) + [
+                'hreflang_gate' => $payload['seo_meta']['hreflang_gate_v1'] ?? null,
+                'snapshot_sha256' => array_map(
+                    static fn (?string $value): ?string => $value === null ? null : hash('sha256', $value),
+                    array_intersect_key($payload, array_flip(['title', 'excerpt', 'content_md', 'author_name', 'cover_image_alt']))
+                        + array_intersect_key($payload['seo_meta'], array_flip(['seo_title', 'seo_description', 'og_title', 'og_description'])),
+                ),
+            ];
+        };
+        $proof = [
+            'source' => $proofFor($source),
+            'existing_english' => $proofFor($english) + ['source_locale' => 'en', 'source_article_id' => null],
+            'english_relationship' => 'reviewed_published_english',
+            'source_snapshot_kind' => 'published_projection',
+        ];
+        $guard = app(TraditionalArticleSourcePreflight::class);
+        DB::transaction(fn () => $this->assertSame($source->id, $guard->assertSource($proof, true)->id));
+
+        $proof['existing_english'] = $proofFor($other) + ['source_locale' => 'en', 'source_article_id' => null];
+        $this->expectExceptionMessage('traditional_article_reviewed_english_pair_changed');
+        DB::transaction(fn () => $guard->assertSource($proof, true));
+    }
+
     public function test_reader_links_existing_independent_roots_in_the_same_group(): void
     {
         $group = 'legacy-reader-group';
@@ -1733,8 +1776,24 @@ final class ArticlePublicApiTest extends TestCase
                     $this->assertSame('traditional_article_source_revision_changed', $exception->getMessage());
                 }
             }
+            $sourceRevision->forceFill(['source_version_hash' => null])->saveQuietly();
+            $bound['source']['prepared_revision_source_hash'] = null;
+            $this->assertSame($source->id, $guard->assertSource($bound, allowStagingPreparedRoot: true)->id);
             $sourceRevision->forceFill(['source_version_hash' => $currentHash])->saveQuietly();
-            $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_SOURCE])->saveQuietly();
+            $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_SOURCE, 'cover_image_alt' => '已發佈封面說明'])->saveQuietly();
+            $withCover = $projected;
+            $withCover['source']['snapshot_sha256']['cover_image_alt'] = hash('sha256', $source->cover_image_alt);
+            $this->assertSame($source->id, $guard->assertSource($withCover, allowStagingPreparedRoot: true)->id);
+            foreach ([[$withCover, false, 'traditional_article_source_working_state_changed'],
+                [$projected, true, 'traditional_article_source_payload_changed']] as [$candidateProof, $staging, $message]) {
+                try {
+                    $guard->assertSource($candidateProof, allowStagingPreparedRoot: $staging);
+                    $this->fail('The guard accepted a changed or non-staging source cover.');
+                } catch (DomainException $exception) {
+                    $this->assertSame($message, $exception->getMessage());
+                }
+            }
+            $source->forceFill(['cover_image_alt' => null])->saveQuietly();
             $seo->updateQuietly(['seo_title' => $rawSeoTitle]);
 
             $noEnglish = $proof;
