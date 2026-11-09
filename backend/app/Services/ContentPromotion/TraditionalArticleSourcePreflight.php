@@ -42,8 +42,12 @@ final class TraditionalArticleSourcePreflight
         }
 
         $english = $proof['existing_english'];
-        $englishParent = TraditionalArticlePublication::englishSourceId($proof);
-        $this->readArticle($english, 'en', $englishParent === null ? null : $source, $lock);
+        if ($english === null) {
+            $this->assertStagingEnglishAbsent($source, $proof['unpublished_english_slug'] ?? null, $allowStagingPreparedRoot, $lock);
+        } else {
+            $englishParent = TraditionalArticlePublication::englishSourceId($proof);
+            $this->readArticle($english, 'en', $englishParent === null ? null : $source, $lock);
+        }
 
         return $source;
     }
@@ -56,6 +60,22 @@ final class TraditionalArticleSourcePreflight
 
         if (ArticleSourceTargetSnapshot::capture($source, $lock, 'zh-TW') !== []) {
             throw new DomainException('traditional_article_target_already_exists');
+        }
+    }
+
+    private function assertStagingEnglishAbsent(Article $source, ?string $slug, bool $staging, bool $lock): void
+    {
+        if (! $staging || $slug === null || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1) {
+            throw new DomainException('traditional_article_staging_english_absence_invalid');
+        }
+
+        $existing = Article::query()->withoutGlobalScopes()->where('org_id', 0)->where('locale', 'en')
+            ->whereNull('deleted_at')->published()
+            ->where(static fn ($query) => $query->whereIn('slug', [$source->slug, $slug])
+                ->orWhere('source_article_id', $source->id)->orWhere('translation_group_id', $source->translation_group_id))
+            ->when($lock, fn ($query) => $query->lockForUpdate())->first(['id']);
+        if ($existing !== null) {
+            throw new DomainException('traditional_article_staging_english_now_published');
         }
     }
 

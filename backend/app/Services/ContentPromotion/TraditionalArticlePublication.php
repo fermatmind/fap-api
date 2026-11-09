@@ -126,8 +126,15 @@ final class TraditionalArticlePublication
             }
         }
         foreach ($proofs as $name => $proof) {
-            foreach (['source', 'existing_english'] as $role) {
-                $origin = $mapping['environment_source_preflight'][$name][$role] ?? [];
+            $origins = $mapping['environment_source_preflight'][$name] ?? [];
+            $englishAbsent = array_key_exists('existing_english', $proof) && $proof['existing_english'] === null;
+            if ($englishAbsent && ($name !== 'staging' || ! array_key_exists('existing_english', $origins)
+                || $origins['existing_english'] !== null || ! is_string($proof['unpublished_english_slug'] ?? null)
+                || $proof['unpublished_english_slug'] !== ($proofs['production']['existing_english']['slug'] ?? null))) {
+                throw new DomainException('traditional_article_staging_english_absence_invalid');
+            }
+            foreach ($englishAbsent ? ['source'] : ['source', 'existing_english'] as $role) {
+                $origin = $origins[$role] ?? [];
                 $record = $proof[$role] ?? [];
                 $recordSlug = $record['slug'] ?? '';
                 $recordGroup = $record['translation_group_id'] ?? '';
@@ -145,7 +152,9 @@ final class TraditionalArticlePublication
                     throw new DomainException('traditional_article_source_proof_invalid');
                 }
             }
-            self::englishSourceId($proof);
+            if (! $englishAbsent) {
+                self::englishSourceId($proof);
+            }
         }
 
         $stagingTaxonomy = $package['staging_source_taxonomy'] ?? null;

@@ -1434,6 +1434,27 @@ final class ArticlePublicApiTest extends TestCase
         TraditionalArticlePublication::package(json_encode($package, JSON_THROW_ON_ERROR), $review, 'staging');
     }
 
+    public function test_traditional_article_package_binds_staging_english_absence_to_the_production_slug(): void
+    {
+        $root = base_path('content_assets/public_content_53/');
+        $package = json_decode(file_get_contents($root.'traditional-article.json'), true, flags: JSON_THROW_ON_ERROR);
+        $review = file_get_contents($root.'traditional-article-review.json');
+        $package['mapping']['environment_source_preflight']['staging']['existing_english'] = null;
+        $proof = &$package['source_expectations']['staging'];
+        $proof['existing_english'] = null;
+        $proof['unpublished_english_slug'] = $package['source_expectations']['production']['existing_english']['slug'];
+
+        $encode = static fn (array $candidate): string => json_encode($candidate, JSON_THROW_ON_ERROR);
+        $row = TraditionalArticlePublication::package($encode($package), $review, 'staging')['candidates'][0];
+        $this->assertNull($row['source_expectations']['existing_english']);
+        $production = TraditionalArticlePublication::package($encode($package), $review, 'production')['candidates'][0];
+        $this->assertSame($proof['unpublished_english_slug'], $production['source_expectations']['existing_english']['slug']);
+
+        $proof['unpublished_english_slug'] = 'different-english-slug';
+        $this->expectExceptionMessage('traditional_article_staging_english_absence_invalid');
+        TraditionalArticlePublication::package($encode($package), $review, 'staging');
+    }
+
     #[DataProvider('traditionalArticleTaxonomyCases')]
     public function test_traditional_article_preflight_locks_native_source_and_rejects_source_drift_or_target_collision(bool $useStagingTaxonomy): void
     {
@@ -1474,6 +1495,30 @@ final class ArticlePublicApiTest extends TestCase
         });
 
         if ($useStagingTaxonomy) {
+            $noEnglish = $proof;
+            $noEnglish['existing_english'] = null;
+            $noEnglish['unpublished_english_slug'] = 'independent-english-version';
+            foreach ([false => 'traditional_article_staging_english_absence_invalid', true => 'traditional_article_staging_english_now_published'] as $staging => $message) {
+                try {
+                    $guard->assertSource($noEnglish, allowStagingPreparedRoot: (bool) $staging);
+                    $this->fail('The guard accepted an undeclared absence.');
+                } catch (DomainException $exception) {
+                    $this->assertSame($message, $exception->getMessage());
+                }
+            }
+            $english->forceFill(['is_public' => false])->saveQuietly();
+            DB::transaction(fn () => $this->assertSame($source->id, $guard->assertSource($noEnglish, true, true)->id));
+            $independent = $this->createArticle(['slug' => $noEnglish['unpublished_english_slug'], 'locale' => 'en']);
+            try {
+                $guard->assertSource($noEnglish, allowStagingPreparedRoot: true);
+                $this->fail('The guard accepted a newly published independent English version.');
+            } catch (DomainException $exception) {
+                $this->assertSame('traditional_article_staging_english_now_published', $exception->getMessage());
+            }
+            $independent->delete();
+            $english->forceFill(['is_public' => true])->saveQuietly();
+            $english->refresh();
+
             $withoutSeo = $proof;
             $withoutSeo['existing_english']['seo_present'] = false;
             try {
