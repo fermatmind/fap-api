@@ -58,7 +58,7 @@ class EmailOutboxService
         $token = 'claim_'.(string) Str::uuid();
         $tokenHash = hash('sha256', $token);
         $expiresAt = now()->addMinutes(15);
-        $locale = $this->isTaiwanRecoveryMailLocale('report_claim', $preferredLocale)
+        $locale = $this->isTaiwanMailLocale('report_claim', $preferredLocale)
             ? 'zh-TW'
             : $this->resolveRequestedLocale($attemptId, $preferredLocale);
         $subject = $this->defaultSubjectForTemplate('report_claim', $locale);
@@ -449,7 +449,7 @@ class EmailOutboxService
             ];
         }
 
-        $locale = $this->isTaiwanRecoveryMailLocale(self::RESULT_ACCESS_LINK_TEMPLATE, $preferredLocale)
+        $locale = $this->isTaiwanMailLocale(self::RESULT_ACCESS_LINK_TEMPLATE, $preferredLocale)
             ? 'zh-TW'
             : $this->resolveRequestedLocale($attemptId, $preferredLocale);
         $subject = $this->defaultSubjectForTemplate(self::RESULT_ACCESS_LINK_TEMPLATE, $locale);
@@ -741,7 +741,18 @@ class EmailOutboxService
             return ['ok' => true, 'queued' => false, 'reason' => 'existing_subscriber_template'];
         }
 
-        $locale = $this->normalizeLocale((string) ($preferredLocale ?? ($subscriber->locale ?? '')));
+        $eventAt = match ($templateKey) {
+            'preferences_updated' => $subscriber->last_preferences_changed_at,
+            'unsubscribe_confirmation' => $subscriber->unsubscribed_at,
+            default => null,
+        };
+        if ($preferredLocale === null && $eventAt !== null
+            && ($lastContext[$templateKey.'_zh_tw_at'] ?? null) === $eventAt->toIso8601String()) {
+            $preferredLocale = 'zh-TW';
+        }
+        $locale = $this->isTaiwanMailLocale($templateKey, $preferredLocale)
+            ? 'zh-TW'
+            : $this->normalizeLocale((string) ($preferredLocale ?? ($subscriber->locale ?? '')));
         if ($attemptId !== null && $preferredLocale === null) {
             $locale = $this->resolveRequestedLocale($attemptId, null);
         }
@@ -927,7 +938,7 @@ class EmailOutboxService
         $payload = $this->decodePayloadFromRow($row);
         $templateKey = $this->resolveTemplateKeyFromRow($row, $payload);
         $requestedLocale = (string) ($row->locale ?? ($payload['locale'] ?? 'en'));
-        $locale = $this->isTaiwanRecoveryMailLocale($templateKey, $requestedLocale)
+        $locale = $this->isTaiwanMailLocale($templateKey, $requestedLocale)
             ? 'zh-TW'
             : $this->normalizeLocale($requestedLocale);
         $subject = $this->resolveSubjectFromRow($row, $payload, $templateKey, $locale);
@@ -1650,7 +1661,7 @@ class EmailOutboxService
 
     private function resolveEmailViewName(string $templateKey, string $locale): string
     {
-        $lang = $this->isTaiwanRecoveryMailLocale($templateKey, $locale)
+        $lang = $this->isTaiwanMailLocale($templateKey, $locale)
             ? 'zh-TW'
             : ($this->normalizeLocale($locale) === 'zh-CN' ? 'zh' : 'en');
         $supported = [
@@ -1770,7 +1781,7 @@ class EmailOutboxService
             : '/en/help';
 
         $orderLookupUrl = $this->frontendUrl($frontendBaseUrl, '/orders/lookup', $query);
-        $emailPath = $this->isTaiwanRecoveryMailLocale($templateKey, $locale) ? '/zh-TW/email' : '/email';
+        $emailPath = $this->isTaiwanMailLocale($templateKey, $locale) ? '/zh-TW/email' : '/email';
         $emailPreferencesUrl = $this->frontendUrl($frontendBaseUrl, $emailPath.'/preferences', ['token' => $preferenceToken] + $query);
         $emailUnsubscribeUrl = $this->frontendUrl($frontendBaseUrl, $emailPath.'/unsubscribe', ['token' => $preferenceToken] + $query);
         $helpUrl = $this->frontendUrl($frontendBaseUrl, $helpPath, $query);
@@ -2277,9 +2288,9 @@ class EmailOutboxService
         return $this->piiCipher->encrypt($encoded);
     }
 
-    private function isTaiwanRecoveryMailLocale(string $templateKey, ?string $locale): bool
+    private function isTaiwanMailLocale(string $templateKey, ?string $locale): bool
     {
-        return in_array($templateKey, ['report_claim', self::RESULT_ACCESS_LINK_TEMPLATE], true)
+        return in_array($templateKey, ['report_claim', self::RESULT_ACCESS_LINK_TEMPLATE, 'preferences_updated', 'unsubscribe_confirmation'], true)
             && strtolower(str_replace('_', '-', trim($locale ?? ''))) === 'zh-tw';
     }
 
@@ -2349,10 +2360,10 @@ class EmailOutboxService
             return $lang === 'zh' ? '客服联系信息' : 'Support contact details';
         }
         if ($templateKey === 'preferences_updated') {
-            return $lang === 'zh' ? '邮件偏好已更新' : 'Your email preferences were updated';
+            return $locale === 'zh-TW' ? '電子郵件偏好已更新' : ($lang === 'zh' ? '邮件偏好已更新' : 'Your email preferences were updated');
         }
         if ($templateKey === 'unsubscribe_confirmation') {
-            return $lang === 'zh' ? '你已退订邮件' : 'You have been unsubscribed from emails';
+            return $locale === 'zh-TW' ? '你已取消訂閱電子郵件' : ($lang === 'zh' ? '你已退订邮件' : 'You have been unsubscribed from emails');
         }
         if ($templateKey === 'post_purchase_followup') {
             return $lang === 'zh' ? '你的报告已准备好查看' : 'Your report is ready to view';

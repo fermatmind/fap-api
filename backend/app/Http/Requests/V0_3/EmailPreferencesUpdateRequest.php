@@ -27,6 +27,7 @@ final class EmailPreferencesUpdateRequest extends FormRequest
     {
         return [
             'token' => ['required', 'string', 'max:4096'],
+            'confirmation_locale' => ['sometimes', 'string', 'in:zh-TW'],
             'marketing_updates' => ['required', 'boolean'],
             'report_recovery' => ['required', 'boolean'],
             'product_updates' => ['required', 'boolean'],

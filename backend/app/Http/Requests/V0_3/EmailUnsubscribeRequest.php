@@ -25,6 +25,7 @@ final class EmailUnsubscribeRequest extends FormRequest
     {
         return [
             'token' => ['required', 'string', 'max:4096'],
+            'confirmation_locale' => ['sometimes', 'string', 'in:zh-TW'],
             'reason' => ['nullable', 'string', 'max:128'],
         ];
     }

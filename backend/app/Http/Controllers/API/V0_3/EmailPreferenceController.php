@@ -69,7 +69,8 @@ final class EmailPreferenceController extends Controller
         $payload = $request->validated();
         $result = $preferences->unsubscribeByToken(
             (string) ($payload['token'] ?? ''),
-            (string) ($payload['reason'] ?? 'user_request')
+            (string) ($payload['reason'] ?? 'user_request'),
+            $payload['confirmation_locale'] ?? null
         );
 
         if (! ($result['ok'] ?? false)) {

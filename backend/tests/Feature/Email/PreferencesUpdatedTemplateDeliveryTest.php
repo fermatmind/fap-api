@@ -6,6 +6,7 @@ namespace Tests\Feature\Email;
 
 use App\Services\Email\EmailCaptureService;
 use App\Services\Email\EmailOutboxService;
+use App\Services\Email\EmailPreferenceService;
 use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -76,6 +77,44 @@ final class PreferencesUpdatedTemplateDeliveryTest extends TestCase
         $this->assertStringContainsString('https://app.example.test/email/preferences?token=', $html);
         $this->assertStringContainsString('https://app.example.test/email/unsubscribe?token=', $html);
         $this->assertStringContainsString('https://app.example.test/orders/lookup?', $html);
+    }
+
+    #[DataProvider('confirmationEvents')]
+    public function test_taiwan_confirmation_locale_survives_the_scheduled_outbox(string $path, array $input, string $template, string $subject): void
+    {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'fap.runtime.FAP_BASE_URL' => 'https://app.example.test',
+            'mail.default' => 'array',
+        ]);
+        $this->flushArrayTransport();
+        $token = app(EmailPreferenceService::class)->issueTokenForEmail('taiwan-confirmation@example.com', ['locale' => 'en']);
+        $payload = ['token' => $token, 'confirmation_locale' => 'zh-TW'] + $input;
+
+        $this->postJson('/api/v0.3/email/'.$path, array_replace($payload, ['confirmation_locale' => 'fr']))
+            ->assertUnprocessable()->assertJsonValidationErrors('confirmation_locale');
+        $this->postJson('/api/v0.3/email/'.$path, $payload)->assertOk()->assertJsonPath('ok', true);
+        $this->assertSame(0, DB::table('email_outbox')->count());
+
+        $this->artisan('email:lifecycle-rollout')->assertExitCode(0);
+        $this->assertDatabaseHas('email_outbox', ['template' => $template, 'locale' => 'zh-TW', 'subject' => $subject]);
+        $this->artisan('email:outbox-send --limit=10')
+            ->expectsOutput('Mailer array: sent 1, blocked 0, failed 0.')
+            ->assertExitCode(0);
+        $html = (string) Mail::mailer('array')->getSymfonyTransport()->messages()->first()->getOriginalMessage()->getHtmlBody();
+        $this->assertStringContainsString('lang="zh-TW"', $html);
+        $this->assertStringContainsString($subject, $html);
+        $this->assertStringContainsString('https://app.example.test/zh-TW/email/preferences?token=', $html);
+        $this->assertStringContainsString('https://app.example.test/zh-TW/email/unsubscribe?token=', $html);
+    }
+
+    public static function confirmationEvents(): array
+    {
+        return [
+            'update' => ['preferences', ['report_recovery' => true, 'product_updates' => true], 'preferences_updated', '電子郵件偏好已更新'],
+            'unsubscribe' => ['unsubscribe', [], 'unsubscribe_confirmation', '你已取消訂閱電子郵件'],
+            'all preferences disabled' => ['preferences', [], 'unsubscribe_confirmation', '你已取消訂閱電子郵件'],
+        ];
     }
 
     /**

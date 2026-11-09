@@ -8,6 +8,7 @@ use App\Models\EmailPreference;
 use App\Models\EmailSubscriber;
 use App\Models\EmailSuppression;
 use App\Support\PiiCipher;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Str;
 
 class EmailPreferenceService
@@ -258,6 +259,10 @@ class EmailPreferenceService
 
             if ($preferencesChanged) {
                 $subscriber->last_preferences_changed_at = $timestamp;
+                $this->recordConfirmationLocale($subscriber, 'preferences_updated', $preferences['confirmation_locale'] ?? null, $timestamp);
+            }
+            if ($unsubscribedAtChanged) {
+                $this->recordConfirmationLocale($subscriber, 'unsubscribe_confirmation', $preferences['confirmation_locale'] ?? null, $nextUnsubscribedAt);
             }
 
             $subscriber->unsubscribed_at = $nextUnsubscribedAt;
@@ -272,10 +277,25 @@ class EmailPreferenceService
         ];
     }
 
+    private function recordConfirmationLocale(EmailSubscriber $subscriber, string $template, ?string $locale, ?CarbonInterface $eventAt): void
+    {
+        $context = (array) $subscriber->last_context_json;
+        $key = $template.'_zh_tw_at';
+        if ($locale === 'zh-TW' && $eventAt !== null) {
+            $context[$key] = $eventAt->toIso8601String();
+        } else {
+            unset($context[$key]);
+        }
+
+        if ($context !== (array) $subscriber->last_context_json) {
+            $subscriber->last_context_json = $context;
+        }
+    }
+
     /**
      * @return array{ok:bool,status:int,error_code?:string,status_text?:string}
      */
-    public function unsubscribeByToken(string $token, ?string $reason = null): array
+    public function unsubscribeByToken(string $token, ?string $reason = null, ?string $confirmationLocale = null): array
     {
         $resolved = $this->resolveByToken($token);
         if (! ($resolved['ok'] ?? false)) {
@@ -326,6 +346,10 @@ class EmailPreferenceService
             }
             if ($preferencesChanged || $marketingConsentChanged || $transactionalRecoveryChanged || $subscriber->unsubscribed_at === null) {
                 $subscriber->last_preferences_changed_at = $timestamp;
+                $this->recordConfirmationLocale($subscriber, 'preferences_updated', $confirmationLocale, $timestamp);
+            }
+            if ($subscriber->unsubscribed_at === null) {
+                $this->recordConfirmationLocale($subscriber, 'unsubscribe_confirmation', $confirmationLocale, $nextUnsubscribedAt);
             }
             $subscriber->unsubscribed_at = $nextUnsubscribedAt;
             $subscriber->status = $status;
