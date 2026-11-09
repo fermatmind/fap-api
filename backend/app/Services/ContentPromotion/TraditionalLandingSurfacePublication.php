@@ -60,6 +60,7 @@ final class TraditionalLandingSurfacePublication
                         'kind' => 'surface',
                         'identity' => ['org_id' => 0, 'slug' => $key, 'locale' => 'zh-TW'],
                         'new_traditional_landing' => true,
+                        'traditional_landing_indexable' => in_array($key, ['home', 'tests'], true),
                         'before' => [],
                         'staging_before' => [],
                         'staging_snapshot' => $package['environments']['staging'][$key]['snapshot'],
@@ -146,12 +147,13 @@ final class TraditionalLandingSurfacePublication
     {
         $source = $state['source'];
         if ($source === null || $source['status'] !== LandingSurface::STATUS_PUBLISHED || ! $source['is_public']
+            || ($row['traditional_landing_indexable'] && ! $source['is_indexable'])
             || ! $this->same($source['copy'], $row['source_snapshot'])) {
             throw new DomainException('public_content_53_traditional_landing_source_drift');
         }
 
         $target = $state['target'];
-        if ($target !== null && ! $state['retained_draft'] && ! $this->isPublishedTarget($target, $row['snapshot'])) {
+        if ($target !== null && ! $state['retained_draft'] && ! $this->isPublishedTarget($target, $row)) {
             throw new DomainException('public_content_53_traditional_landing_target_collision');
         }
     }
@@ -165,7 +167,7 @@ final class TraditionalLandingSurfacePublication
         }
         $this->assertBaseline($row, $current);
         if ($current['retained_draft']) {
-            $this->setVisibility($current['target']['id'], true);
+            $this->setVisibility($current['target']['id'], true, $row['traditional_landing_indexable']);
         } elseif ($current['target'] !== null) {
             return false;
         } else {
@@ -173,7 +175,7 @@ final class TraditionalLandingSurfacePublication
         }
 
         $after = $this->read($row, true);
-        if (! $this->isPublishedTarget($after['target'], $row['snapshot'])
+        if (! $this->isPublishedTarget($after['target'], $row)
             || ! $this->same($before['source'], $after['source'])) {
             throw new DomainException('public_content_53_traditional_landing_readback_drift');
         }
@@ -194,7 +196,7 @@ final class TraditionalLandingSurfacePublication
             'locale' => 'zh-TW',
             'status' => LandingSurface::STATUS_PUBLISHED,
             'is_public' => true,
-            'is_indexable' => false,
+            'is_indexable' => $row['traditional_landing_indexable'],
             'published_at' => now(),
             'scheduled_at' => null,
         ]);
@@ -211,7 +213,7 @@ final class TraditionalLandingSurfacePublication
         $current = $this->read($row, true);
         $target = $current['target'];
         if ($target === null || ! $this->same($target, $after['target'])
-            || ! $this->isPublishedTarget($target, $row['snapshot'])) {
+            || ! $this->isPublishedTarget($target, $row)) {
             throw new DomainException('public_content_53_traditional_landing_rollback_conflict');
         }
 
@@ -222,12 +224,12 @@ final class TraditionalLandingSurfacePublication
         }
     }
 
-    private function setVisibility(int $id, bool $public): void
+    private function setVisibility(int $id, bool $public, bool $indexable = false): void
     {
         LandingSurface::query()->withoutGlobalScopes()->findOrFail($id)->forceFill([
             'status' => $public ? LandingSurface::STATUS_PUBLISHED : LandingSurface::STATUS_DRAFT,
             'is_public' => $public,
-            'is_indexable' => false,
+            'is_indexable' => $public && $indexable,
         ])->saveOrFail();
     }
 
@@ -282,11 +284,11 @@ final class TraditionalLandingSurfacePublication
             && $target['published_at'] !== null && $this->same($target['copy'], $copy);
     }
 
-    private function isPublishedTarget(?array $target, array $copy): bool
+    private function isPublishedTarget(?array $target, array $row): bool
     {
         return $target !== null && $target['status'] === LandingSurface::STATUS_PUBLISHED
-            && $target['is_public'] && ! $target['is_indexable'] && $target['scheduled_at'] === null
-            && $this->same($target['copy'], $copy);
+            && $target['is_public'] && $target['is_indexable'] === $row['traditional_landing_indexable']
+            && $target['scheduled_at'] === null && $this->same($target['copy'], $row['snapshot']);
     }
 
     private function same(array $left, ?array $right): bool

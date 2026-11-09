@@ -34,18 +34,22 @@ final class TraditionalLandingSurfacePublicationTest extends TestCase
                 self::assertFalse($native->publish($row, $after));
 
                 $key = $row['identity']['slug'];
+                $indexable = in_array($key, ['home', 'tests'], true);
                 $this->getJson('/api/v0.5/landing-surfaces/'.$key.'?locale=zh-TW')
                     ->assertOk()->assertJsonPath('surface.payload_json.hero.title', '探索職業方向')
-                    ->assertJsonPath('surface.is_indexable', false);
+                    ->assertJsonPath('surface.is_indexable', $indexable);
 
                 $native->restore($row, $before, $after);
                 $draft = $native->read($row, true);
                 self::assertTrue($draft['retained_draft']);
+                self::assertFalse($draft['target']['is_indexable']);
                 self::assertSame($after['target']['id'], $draft['target']['id']);
                 $this->getJson('/api/v0.5/landing-surfaces/'.$key.'?locale=zh-TW')->assertNotFound();
 
                 self::assertTrue($native->publish($row, $draft));
-                self::assertSame($after['target']['id'], $native->read($row, true)['target']['id']);
+                $republished = $native->read($row, true)['target'];
+                self::assertSame($after['target']['id'], $republished['id']);
+                self::assertSame($indexable, $republished['is_indexable']);
             }
         });
 
@@ -75,6 +79,19 @@ final class TraditionalLandingSurfacePublicationTest extends TestCase
             self::assertSame('public_content_53_traditional_landing_source_drift', $error->getMessage());
         }
         self::assertSame(0, LandingSurface::query()->withoutGlobalScopes()->where('locale', 'zh-TW')->count());
+    }
+
+    public function test_pilot_indexability_requires_an_indexable_source(): void
+    {
+        $row = $this->rows()[0];
+        $this->seedSource($row);
+        LandingSurface::query()->withoutGlobalScopes()
+            ->where(['locale' => 'zh-CN', 'surface_key' => 'home'])
+            ->update(['is_indexable' => false]);
+
+        $native = app(TraditionalLandingSurfacePublication::class);
+        $this->expectExceptionMessage('public_content_53_traditional_landing_source_drift');
+        DB::transaction(fn () => $native->publish($row, $native->read($row, true)));
     }
 
     public function test_review_binding_does_not_authorize_link_changes(): void

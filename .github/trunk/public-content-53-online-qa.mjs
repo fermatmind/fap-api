@@ -237,11 +237,13 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
       ? ['/zh-TW/tests/category/personality','/zh-TW/tests/category/career','/zh-TW/tests/explore/chiikawa']
       : slug === 'home' ? ['/zh-TW/foundation','/zh-TW/method-boundaries','/zh-TW/about'] : ['/zh-TW/tests'];
     const title = slug === 'home' ? copy.seo.title : copy.seo.title+' | 費馬測試';
+    const noindex = dom.robots.some(value=>/\bnoindex\b/i.test(value));
+    const indexable = row.traditional_landing_indexable === true;
     if (dom.language !== 'zh-TW' || compact(dom.h1_names[0] || dom.h1[0]) !== compact(h1)
       || !equal(dom.title.map(compact),[compact(title)])
       || !equal(dom.description.map(compact),[compact(copy.seo.description)])
       || !equal(dom.canonical,['https://fermatmind.com'+path])
-      || !dom.robots.some(value=>/\bnoindex\b/i.test(value))
+      || (!indexable && !noindex) || (indexable && environment === 'production' && noindex)
       || dom.alternate_entries.some(item=>item.hreflang)
       || readerCopy.some(text=>!body.includes(compact(text)))
       || [...originalLinks,...entryLinks].some(href=>!dom.links.includes(href))) {
@@ -464,7 +466,7 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
     const createdArticle = row.new_article === true && before?.missing === true;
     const createdTraditional = (row.new_traditional_page === true || row.new_traditional_landing === true) && before?.missing === true;
-    if (row.new_traditional_landing && native.is_indexable !== false)
+    if (row.new_traditional_landing && native.is_indexable !== row.traditional_landing_indexable)
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_LANDING_QUALIFICATION_${row.page_id}`);
     if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_QUALIFICATION_${row.page_id}`);
