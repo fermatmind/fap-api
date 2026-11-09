@@ -57,6 +57,33 @@ final class TraditionalLandingSurfacePublicationTest extends TestCase
             ->whereIn('surface_key', TraditionalLandingSurfacePublication::SURFACE_KEYS)->count());
     }
 
+    public function test_frozen_public_copy_matches_the_source_projection_but_preserves_raw_source_blocks(): void
+    {
+        $row = $this->rows()[0];
+        $this->seedSource($row);
+        $source = LandingSurface::query()->withoutGlobalScopes()
+            ->where(['locale' => 'zh-CN', 'surface_key' => 'home'])->firstOrFail();
+        $source->blocks()->firstOrFail()->update([
+            'payload_json' => ['body' => '完整15题', 'items' => [['label' => '原始区块项目']]],
+        ]);
+
+        $public = $this->getJson('/api/v0.5/landing-surfaces/home?locale=zh-CN')
+            ->assertOk()->assertJsonPath('surface.page_blocks.0.payload_json.items', []);
+        $copy = array_intersect_key($public->json('surface'), $row['source_snapshot']);
+        $row['source_snapshot'] = $copy;
+        $row['snapshot']['page_blocks'][0]['payload_json']['items'] = [];
+        $native = app(TraditionalLandingSurfacePublication::class);
+
+        DB::transaction(function () use ($row, $native): void {
+            $before = $native->read($row, true);
+            self::assertTrue($native->publish($row, $before));
+            self::assertSame($before['source'], $native->read($row, true)['source']);
+        });
+        self::assertSame([['label' => '原始区块项目']], $source->blocks()->firstOrFail()->payload_json['items']);
+        $this->getJson('/api/v0.5/landing-surfaces/home?locale=zh-TW')
+            ->assertOk()->assertJsonPath('surface.page_blocks.0.payload_json.items', []);
+    }
+
     public function test_late_source_drift_rolls_back_earlier_creations(): void
     {
         $rows = $this->rows();

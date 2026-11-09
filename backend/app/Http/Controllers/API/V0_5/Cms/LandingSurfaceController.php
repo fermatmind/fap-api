@@ -25,7 +25,7 @@ use Illuminate\Validation\Rule;
 
 final class LandingSurfaceController extends Controller
 {
-    private const RECOMMENDED_ARTICLE_SELECTION_MODE_LATEST = 'latest_published_indexable';
+    private const RECOMMENDED_ARTICLE_SELECTION_MODE_LATEST = PageBlock::LATEST_PUBLISHED_INDEXABLE;
 
     private const TAIWAN_PUBLIC_SURFACES = ['home', 'tests', 'tests_category_personality', 'tests_category_career'];
 
@@ -581,6 +581,10 @@ final class LandingSurfaceController extends Controller
      */
     private function enrichRecommendedArticlesPayload(array $payload, array $articleMap): array
     {
+        if ($articleMap === []) {
+            return PageBlock::publicPayloadWithoutArticles($payload);
+        }
+
         $items = $payload['items'] ?? null;
         if ($this->recommendedArticleSelectionMode($payload) === self::RECOMMENDED_ARTICLE_SELECTION_MODE_LATEST) {
             $payload['items'] = collect($articleMap)

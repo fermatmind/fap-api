@@ -12,6 +12,8 @@ final class PageBlock extends Model
 {
     use HasFactory;
 
+    public const LATEST_PUBLISHED_INDEXABLE = 'latest_published_indexable';
+
     protected $table = 'page_blocks';
 
     protected $fillable = [
@@ -32,6 +34,18 @@ final class PageBlock extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public static function publicPayloadWithoutArticles(mixed $payload): array
+    {
+        $payload = is_array($payload) ? $payload : [];
+        $items = $payload['items'] ?? null;
+        $selectionMode = strtolower(trim((string) ($payload['selection_mode'] ?? '')));
+        if ((is_array($items) && $items !== []) || $selectionMode === self::LATEST_PUBLISHED_INDEXABLE) {
+            $payload['items'] = [];
+        }
+
+        return $payload;
+    }
 
     public function surface(): BelongsTo
     {

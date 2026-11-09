@@ -148,7 +148,7 @@ final class TraditionalLandingSurfacePublication
         $source = $state['source'];
         if ($source === null || $source['status'] !== LandingSurface::STATUS_PUBLISHED || ! $source['is_public']
             || ($row['traditional_landing_indexable'] && ! $source['is_indexable'])
-            || ! $this->same($source['copy'], $row['source_snapshot'])) {
+            || ! $this->same($this->publicSourceCopy($source['copy']), $row['source_snapshot'])) {
             throw new DomainException('public_content_53_traditional_landing_source_drift');
         }
 
@@ -275,6 +275,18 @@ final class TraditionalLandingSurfacePublication
                 ])->all(),
             ],
         ];
+    }
+
+    private function publicSourceCopy(array $copy): array
+    {
+        // Keep raw records in the transaction state and compare the reviewed public projection.
+        $copy['payload_json'] = is_array($copy['payload_json']) ? $copy['payload_json'] : [];
+        foreach ($copy['page_blocks'] as &$block) {
+            $block['payload_json'] = PageBlock::publicPayloadWithoutArticles($block['payload_json']);
+        }
+        unset($block);
+
+        return $copy;
     }
 
     private function isRetainedDraft(?array $target, array $copy): bool
