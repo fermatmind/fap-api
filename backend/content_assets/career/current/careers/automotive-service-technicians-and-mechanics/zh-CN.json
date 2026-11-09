@@ -1278,7 +1278,7 @@
         "status": "pending_mapping"
       },
       "item:automotive-service-technicians-and-mechanics.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:automotive-service-technicians-and-mechanics.path.entry-role-comparison.1": {
         "status": "mapped"
@@ -23126,13 +23126,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "一句话判断：汽车维修技师与机械师不是「换件工」，而是诊断、调整、修理或大修机动车的技术岗位：按检查清单核对皮带与软管与转向与火花塞与制动与燃油系统等关键部件、按厂家性能规格测试与调整修后系统、执行换机油与润滑与调校等日常与计划保养、用电子测试设备排查燃油与点火与排放控制系统故障、拆解并检查部件磨损后修理或更换总成；只想凭感觉换件、不愿为诊断结论与维修质量负责的人不适合。"
+              "汽修的核心是保养、诊断、维修和复检。用MX-12先试自己是否喜欢核对证据、记录差异和交接。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.1",
           "source_refs": [
             "onet",
-            "onet"
+            "auto-mx12"
           ],
           "type": "prose"
         },
@@ -23141,12 +23141,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "继续探索的信号：你能读懂维修手册与电路图并按规程动手拆装，愿意按厂家规格测试与调整并如实记录测量值与判断依据，能在故障现象与原因判断不一致、或涉及高压与气囊与制冷剂等系统时停下来核实，并愿意与客户沟通现象与维修方案与费用。"
+              "如果你愿意把客户描述、故障线索和确认结果分开，并能接受车间环境与带教复核，可以继续了解。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "auto-mx12"
           ],
           "type": "prose"
         },
@@ -23155,14 +23156,15 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先暂停投入的条件：你还没有在任何有监督的条件下完成过一次完整的接车—诊断—维修—测试—交付闭环，或只能靠「喜欢车」说明兴趣；也不要把会开车或会拆装零件当作可以独立诊断与维修高压系统、气囊系统、空调制冷剂或安全件的证明。涉及车辆安全、排放、新能源高压与制冷剂处理的作业必须按适用标准与机构流程执行并留有可追溯的依据；本页不提供诊断、维修或现场作业指令。"
+              "纸面练习只帮助选择方向。看真实岗位时核实谁带教、谁能做专项工作，以及谁负责质检和放行。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "auto-mx12",
+            "mot-repair-2023",
+            "auto-gbt47439",
+            "epa-mvac-regulation"
           ],
           "type": "prose"
         },
@@ -23171,13 +23173,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "学历与权限必须分开核对：O*NET 把 49-3023.00 列为 Job Zone Three（SVP 6.0 至 <7.0），页面公布的学历构成中 32% 为要求高中后证书、30% 为要求低于高中文凭、26% 为要求高中文凭或同等学历；行业要求先前相关工作技能、知识或经验，培训通常为一到两年并可能有受认可的学徒计划。美国侧空调系统维修须由经 EPA 认可的项目培训并认证的人员有偿作业（Clean Air Act Section 609），并另有 ASE 等系列认证（含 A1–A9、L1–L4、ADAS 与电动车相关认证）。中国大陆侧机动车维修经营实行备案管理，维修配件须有可追溯来源、不得使用假冒伪劣配件。学历、行业认证、机构上岗资格与作业授权、特种作业操作证是不同状态，须按雇主、岗位与所在地逐项核验。"
+              "美国2025年全国工资中位50,620美元/年、24.34美元/小时。大陆工资核岗位公告和实际书面条件；行业平均不能当汽修技师月薪。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -23186,13 +23188,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：这是一个以诊断与维修质量与安全规程为核心的技术岗位，核心是接车与故障确认、检查与测量、拆装与修理与大修、按规格测试调整、以及工单与记录，而不是对车的兴趣或会开车的经验。"
+              "先用MX-12核工单编号和复核栏，再标出待核项与交接对象。看看自己是否愿意把这些细节记录清楚。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-mx12"
           ],
           "type": "prose"
         }
@@ -23209,13 +23210,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "汽车维修技师与机械师的工作可分三类：诊断与检查（按检查清单核对皮带、软管、转向系统、火花塞、制动与燃油系统、车轮轴承等关键部件；检查车损并记录发现；审阅工单并与主管讨论；使用电子测试设备排查燃油、点火和排放控制系统故障；用图表与技术手册与经验制定工作程序；拆解单元并用千分尺、卡尺和量规检查部件磨损；试驾车辆并用红外发动机分析仪、压缩压力表和计算机诊断设备测试部件与系统；测试汽车电子计算机组件；诊断灵活燃料车辆的发动机管理系统或相关传感器故障）；维修与大修（执行换机油、润滑和调校等日常与计划保养；修理与更换衬片、替换和调整制动器；修理更换或调整燃油喷射器、化油器部件和汽油滤清器；修理与维护空调、暖风、发动机冷却及电气系统；大修或更换化油器、鼓风机、发电机、分电器、起动机和泵；调校发动机；修理或更换活塞、连杆、齿轮、气门和轴承等部件；拆解修理并重建动力系统与转向系统等故障总成；修理或重建变速箱；重建曲轴和气缸体；更换混合动力电动汽车的火花塞、燃油滤清器、空气滤清器和电池；重新布线点火系统、灯光和仪表板；安装与调整或修理车窗与座椅与车顶的液压或电磁升降机构）；交付与客户沟通（与客户沟通获取问题描述并讨论待执行工作与未来维修需求；估算维修费用；测试并调整维修后的系统以满足制造商的性能规格；保持工作区域清洁）。三类任务都以故障现象与原因不一致、或涉及高压与气囊与制冷剂与安全件时停工核实为前提。"
+              "从接车现象和工单开始，查证故障线索，完成批准的维修并复检。保养、诊断、返工复核在不同门店的占比不一样。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.1",
           "source_refs": [
             "onet",
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -23259,7 +23260,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜86% 每天佩戴常规防护或安全装备，83% 每天在封闭车辆内或操作封闭设备，83% 持续或几乎持续用手处理与控制或感觉物体与工具，76% 每天需要面对面讨论，69% 每天暴露于污染物，68% 每天在环境受控的室内工作，59% 每天在非环境受控的室内工作，52% 每天面临时间压力，51% 每天暴露于分散注意或不适的噪音，41% 每天接触危险设备，39% 每天暴露于轻微烧伤割伤咬伤或蜇伤，38% 每天接触危险条件，35% 每天暴露于极热或极冷温度，30% 从不户外暴露于各种天气。\n主要装备与工具｜举升机与支撑设备、手持与电动工具与砂轮机、千分尺与卡尺与量规、诊断扫描仪与红外发动机分析仪与压缩压力表、空调制冷剂回收与加注设备、个人防护（护目镜、手套、听力保护、安全鞋、呼吸防护）。\n任务节奏｜52% 的工作周超过 40 小时；49% 持续或几乎持续做重复动作，43% 持续或几乎持续站立，40% 持续或几乎持续弯腰或扭身，35% 有超过一半时间跪蹲弯腰或爬行，35% 有超过一半时间行走或跑动，36% 每周一次以上处于狭窄工作空间或别扭姿势。\n协作对象｜与车主与前台接待、车间主管、配件与库存管理人员协作；44% 与他人接触占大部分时间，38% 认为与工作组或团队合作极其重要，27% 认为需要协调或领导他人极其重要。\n竞争与压力｜36% 认为错误的后果极其严重，46% 认为决策对同事或公司的结果是非常重要，42% 有很大的决策自由、36% 对任务与优先级与目标有部分自由，56% 每天需要作出决定。\n合规与安全｜车间作业须符合适用的安全与环保要求；空调系统维修须由经 EPA 认可项目培训并认证的人员有偿作业（Clean Air Act Section 609）；中国大陆侧机动车维修经营实行备案管理，配件须有可追溯来源（参见《机动车维修管理规定》）。\n记录与复盘｜现象与检查与测量与判断与更换件与测试结果需要可追溯；46% 认为精确或准确极其重要，26% 认为重复相同任务极其重要。\n技能与训练｜O*NET 把该职业列为 Job Zone Three（SVP 6.0 至 <7.0）；基本技能以批判性思维、积极倾听、监控、主动学习、口语表达为主；可迁移技能包含修理、故障排除、设备维护、运行监控、复杂问题解决、安装、操作与控制、质量控制分析、设备选择、判断与决策、系统分析、系统评估与时间管理；知识以机械、工程与技术、计算机与电子学、客户与个人服务、英语语言与数学为主；能力包含演绎推理、近距视力、问题敏感性、手指与手动灵巧度、控制精度、归纳推理、臂手稳定性、信息排序、可视化与多肢协调等（详细资料公布Importance，非频率）。\n准入与授权｜学历不等于作业授权，行业认证也不等于可以在任何场所处理高压系统与气囊与安全件；须按机构流程与适用标准执行。\n行业与雇主｜O*NET 行业分布为零售贸易 43%、其他服务业 31%、其他行业 26%；常见雇主为品牌授权服务中心、综合汽修厂、连锁快修门店、事故车修复中心与新能源专修门店。\n补充边界｜O*NET新聘学历需求问卷32%高中后证书、30%低于高中、26%高中或同等，不是在岗新聘学历需求问卷回答。Zone3/SVP6.0至<7.0是职业准备描述，通常一至两年训练，不是每岗固定门槛。BLS EP典型高中后非学位证书、相关经验None、短期在职培训；OOH指出受过相关课程者训练可能较短，未受训者从助理或保养岗位较长带教，也可走有薪学徒路径；各口径不能相互替代。 美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的教育可替代部分经验，替代方案不能叠加。可先考试，经验未满足时只有成绩不获认证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。 美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。 OSHA行业危害PDF所载2011—2016年NAICS8111资料，2016年108起死亡、约22,200起非致命伤病，覆盖汽车维修维护行业，不是本职业当前发生率；列常见引用1910.132/133等，未列1910.138，不能据此宣称已取得全部PPE法规或车型停工恢复步骤。"
+              "工作环境｜86% 每天佩戴常规防护或安全装备，83% 每天在封闭车辆内或操作封闭设备，83% 持续或几乎持续用手处理与控制或感觉物体与工具，76% 每天需要面对面讨论，69% 每天暴露于污染物，68% 每天在环境受控的室内工作，59% 每天在非环境受控的室内工作，52% 每天面临时间压力，51% 每天暴露于分散注意或不适的噪音，41% 每天接触危险设备，39% 每天暴露于轻微烧伤割伤咬伤或蜇伤，38% 每天接触危险条件，35% 每天暴露于极热或极冷温度，30% 从不户外暴露于各种天气。\n主要装备与工具｜举升机与支撑设备、手持与电动工具与砂轮机、千分尺与卡尺与量规、诊断扫描仪与红外发动机分析仪与压缩压力表、空调制冷剂回收与加注设备、个人防护（护目镜、手套、听力保护、安全鞋、呼吸防护）。\n任务节奏｜52% 的工作周超过 40 小时；49% 持续或几乎持续做重复动作，43% 持续或几乎持续站立，40% 持续或几乎持续弯腰或扭身，35% 有超过一半时间跪蹲弯腰或爬行，35% 有超过一半时间行走或跑动，36% 每周一次以上处于狭窄工作空间或别扭姿势。\n协作对象｜与车主与前台接待、车间主管、配件与库存管理人员协作；44% 与他人接触占大部分时间，38% 认为与工作组或团队合作极其重要，27% 认为需要协调或领导他人极其重要。\n竞争与压力｜36% 认为错误的后果极其严重，46% 认为决策对同事或公司的结果是非常重要，42% 有很大的决策自由、36% 对任务与优先级与目标有部分自由，56% 每天需要作出决定。\n合规与安全｜车间作业须符合适用的安全与环保要求；在美国，有偿（包括以物易物）维修或保养机动车空调系统的人员，须经EPA认可项目培训并取得第609条认证。 中国大陆侧机动车维修经营实行备案管理，配件须有可追溯来源（参见《机动车维修管理规定》）。\n记录与复盘｜现象与检查与测量与判断与更换件与测试结果需要可追溯；46% 认为精确或准确极其重要，26% 认为重复相同任务极其重要。\n技能与训练｜O*NET 把该职业列为 Job Zone Three（SVP 6.0 至 <7.0）；基本技能以批判性思维、积极倾听、监控、主动学习、口语表达为主；可迁移技能包含修理、故障排除、设备维护、运行监控、复杂问题解决、安装、操作与控制、质量控制分析、设备选择、判断与决策、系统分析、系统评估与时间管理；知识以机械、工程与技术、计算机与电子学、客户与个人服务、英语语言与数学为主；能力包含演绎推理、近距视力、问题敏感性、手指与手动灵巧度、控制精度、归纳推理、臂手稳定性、信息排序、可视化与多肢协调等（详细资料公布Importance，非频率）。\n准入与授权｜学历不等于作业授权，行业认证也不等于可以在任何场所处理高压系统与气囊与安全件；须按机构流程与适用标准执行。\n行业与雇主｜O*NET 行业分布为零售贸易 43%、其他服务业 31%、其他行业 26%；常见雇主为品牌授权服务中心、综合汽修厂、连锁快修门店、事故车修复中心与新能源专修门店。\n补充边界｜O*NET新聘学历需求问卷32%高中后证书、30%低于高中、26%高中或同等，不代表在岗人员学历构成。Zone3/SVP6.0至<7.0是职业准备描述，通常一至两年训练，不是每岗固定门槛。BLS EP典型高中后非学位证书、相关经验None、短期在职培训；OOH指出受过相关课程者训练可能较短，未受训者从助理或保养岗位较长带教，也可走有薪学徒路径；各口径不能相互替代。 美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的课程或合作项目可按ASE规则折抵，额度按项目核，替代方案不能叠加。多数考试可先参加，满足经验要求后方可获证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。 美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。 OSHA行业危害PDF所载2011—2016年NAICS8111资料，2016年108起死亡、约22,200起非致命伤病，覆盖汽车维修维护行业，不是本职业当前发生率；列常见引用1910.132/133等，未列1910.138，不能据此宣称已取得全部PPE法规或车型停工恢复步骤。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.work-context-block.1",
@@ -23269,7 +23270,8 @@
             "ase-auto-series",
             "ase-work-experience",
             "epa-mvac-regulation",
-            "nbs"
+            "nbs",
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -23324,14 +23326,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国精确职业工资分布。2022职业分类大典PDF276页（正文269页）4-12-01-01汽车维修工包括汽车机械维修、电器维修、检验、美容装潢、车身整形、涂装修复、二手车整备、新能源维修、智能运维、玻璃维修等工种；宽职业任务含发动机、底盘、车身及电器系统检查调整更换修理、设备维护和维修记录。它不等于与美国49-3023.00精确互认或工资分布。 国家统计局2025年居民服务、修理和其他服务业年平均工资：城镇非私营70,226元、私营52,059元；批发零售非私营135,749元、私营69,622元。按用人单位主要活动分类选择行业参考，不以技师职位名称直接分类；不是本职业工资中位数、起薪或城市月薪。 工资总额可包括计时、计件、奖金、津贴补贴和加班工资，不能一概排除提成及浮动报酬，需按款项性质核计入范围。年平均工资非税后到手或门店利润。"
+              "广东技能评价规范列汽车维修工4-12-01-01，机修、电器维修、车身整形和涂装修复是其中的工种示例。范围比美国49-3023宽。大陆全国汽修职业工资分布未核实；国家统计局2025年居民服务、修理和其他服务业城镇非私营70,226元/年、私营52,059元/年，只是行业背景。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "cn-classification-2022",
+            "auto-cn-skill",
             "nbs-wages-2025",
-            "cn-wage-definition"
+            "onet"
           ],
           "type": "prose"
         },
@@ -23340,13 +23342,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "维修与大修作业"
+              "已批准维修与工单"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.4",
           "source_refs": [
             "onet",
-            "onet"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -23370,13 +23372,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按规程拆装与保护周边部件 → 用千分尺与量规检查磨损 → 修理或更换部件 → 按规格装配与加注 → 测试并调整到满足厂家性能规格 → 记录更换件与测量与结论。"
+              "已批准的范围 → 实际完成的工作 → 更换件记录 → 复检结果 → 待核事项 → 实际复核人"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.5",
           "source_refs": [
             "onet",
-            "onet"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -23385,7 +23387,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET宽门类2025年零售43%、其他服务（除公共管理）31%、其他行业26%；BLS细行业列汽车经销商32%、汽车机械电气维修25%、自雇15%、汽车配件附件轮胎零售6%、其他汽车维修4%。分类层级与自雇取整不同，不能直接合并。 O*NET列16类软件技能、9项热门技术；2025年美国职业关联唯一招聘中Safari、Firefox、Edge各2%，Office、Outlook、Excel各1%，Word、SAP、Windows各低于1%。比例是提及招聘数/职业关联招聘数，不是使用率、中国岗位门槛或生成式AI部署。"
+              "O*NET宽门类2025年零售43%、其他服务（除公共管理）31%、其他行业26%；BLS细行业列汽车经销商32%、汽车机械电气维修25%、自雇15%、汽车配件附件轮胎零售6%、其他汽车维修4%。分类层级与自雇取整不同，不能直接合并。 O*NET列16类软件技能、9项热门技术；2025年美国该职业的去重招聘信息中Safari、Firefox、Edge各2%，Office、Outlook、Excel各1%，Word、SAP、Windows各低于1%。比例是提及招聘数/职业关联招聘数，不是使用率、中国岗位门槛或生成式AI部署。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.onet-structured-fields-block.5",
@@ -23416,14 +23418,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "汽车维修技师与机械师以机动车的诊断与维修与大修为主，覆盖机械与电气与电子系统，对诊断结论与维修质量负责；汽车车身与玻璃维修工以钣金与涂装并兼顾玻璃为主；汽车玻璃安装工以挡风玻璃与车窗玻璃拆装与修复为主；公交卡车机械师与柴油发动机专员以商用车辆与柴油动力为主；摩托车机械师以摩托车为主；汽车工程技术员以试验准备与执行与数据采集为主，通常不承担维修签章责任；汽车工程师以车辆与系统设计开发为主；电机与电动工具修理工以电机与电动工具为主。相邻职业共享工具使用与安全常识，但对象、交付与责任不同。"
+              "机修解决在用车辆机械与电气故障；钣喷修复车身和外观；玻璃岗修换挡风玻璃或车窗；商用车和柴油岗的对象不同。新能源高压另核培训及授权。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.7",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "auto-body",
+            "auto-glass",
+            "neighbor-diesel",
+            "auto-gbt47439"
           ],
           "type": "prose"
         },
@@ -23432,13 +23436,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "可诊断、可修好、可复核的维修结果"
+              "乘用车与轻型卡车"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.8",
           "source_refs": [
             "onet",
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -23447,13 +23451,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按规程完成诊断与维修，并留下说明故障现象与客户描述、检查与测量结果、判断依据、更换件与用量、测试与调整结果、以及仍不确定部分的工单，让主管或质检人员能据此判断。"
+              "诊断机械与电气故障，记录维修与复检。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.9",
           "source_refs": [
             "onet",
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -23462,13 +23466,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工单与维修与检验记录"
+              "车身与车架"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-body"
           ],
           "type": "prose"
         },
@@ -23477,13 +23480,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "对象是机动车的机械与电气与电子系统（发动机、变速器与传动、制动、转向与悬架、空调与暖风与冷却、燃油与点火与排放控制、以及车窗座椅升降机构等）；依据是厂家维修手册与规格、适用标准与法规（排放与安全与制冷剂处理）、以及机构的上岗与质检流程。"
+              "整形、修复和翻新车身。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-body"
           ],
           "type": "prose"
         },
@@ -23508,13 +23510,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "接车—诊断—维修—测试—交付"
+              "挡风玻璃与车窗"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-glass"
           ],
           "type": "prose"
         },
@@ -23523,13 +23524,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "接车并确认现象 → 检查与测量并判断故障 → 与客户确认方案与费用 → 按规程拆装与修理或更换 → 按厂家规格测试与调整 → 交付并记录与说明未决事项。"
+              "修复或更换车辆玻璃。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-glass"
           ],
           "type": "prose"
         },
@@ -23538,13 +23538,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "可复核的维修与检验记录"
+              "商用车或各类柴油机"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-diesel"
           ],
           "type": "prose"
         },
@@ -23553,13 +23552,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "现象与客户描述、检查与测量值、判断依据与替换方案、更换件与用量、测试与调整结果、以及仍不确定的部分。"
+              "工作也可涉及车用、船用柴油机。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-diesel"
           ],
           "type": "prose"
         },
@@ -23568,13 +23566,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本人与车间主管（或质检人员）"
+              "技师、质检与经营者"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -23583,13 +23580,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "诊断结论、维修质量与测试调整结果由本人承担；涉及车辆安全件、排放合规、新能源高压系统与气囊与制冷剂处理时，由具相应资质与授权的人员按适用标准与流程作出，依据不明或超出授权范围时必须停止并升级。"
+              "技师记录实际工作。中国大陆经营者依规组织维修和检验，具体谁复核和放行依分工。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -23598,13 +23594,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "学历与准备"
+              "专项培训与授权"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-gbt47439",
+            "auto-mem-catalog"
           ],
           "type": "prose"
         },
@@ -23613,13 +23609,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 49-3023.00 列为 Job Zone Three（SVP 6.0 至 <7.0），该区大多数职业要求职业学校培训、相关在职经验或副学士学位，并要求先前相关工作技能、知识或经验，培训通常为一到两年并可能有受认可的学徒计划；页面公布的学历构成中 32% 为要求高中后证书、30% 为要求低于高中文凭、26% 为要求高中文凭或同等学历。O*NET 另列出 18 项注册学徒职位（如 Automotive Mechanic、Transmission Mechanic、Front-End Mechanic、Brake Repairer 等）与960 个培训项目（多数为汽车机械技术与汽车工程技术方向）。中国大陆侧以机动车维修相关职业技能培训与师傅带教为主，具体要求由用人单位规定。"
+              "是汽修专长方向；按系统与任务核资格与单位指派。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-gbt47439",
+            "auto-mem-catalog"
           ],
           "type": "prose"
         },
@@ -23628,13 +23624,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "不互相替代"
+              "看每天的对象与交付"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.20",
           "source_refs": [
             "onet",
-            "onet"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -23643,13 +23639,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "学历、行业认证（如美国 ASE 的 A1–A9 与 L1–L4 与 ADAS 与电动车相关认证）、EPA 认可项目的空调维修认证、注册学徒经历、机构内部上岗资格与作业授权、特种作业操作证是不同状态：学历不带来作业授权，认证也不等于可以独立处理高压系统、气囊系统或安全件，或在任何场所开展维修作业。"
+              "职位标题相近时，看车辆类型、是否兼岗、谁负责检验。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.21",
           "source_refs": [
             "onet",
-            "onet"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -23658,13 +23654,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "入职前至少核对六项：职业口径与雇主实体（O*NET 49-3023.00 为美国口径；中国大陆须辨认岗位与用人单位）；学历与专业培训；机构内部上岗资格与作业授权范围；诊断与维修与测试的作业规程；空调制冷剂与新能源高压与气囊相关作业的资质要求；以及计酬方式（月薪、工时加提成或计件）。"
+              "问清车型、带教、质检和放行。技能等级、门店备案和个人专项作业资格分开核。大陆新能源维修安全标准 GB/T 47439—2026 已实施，标准本身不授予个人资格。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-table",
+            "mot-repair-2023",
+            "auto-gbt47439",
+            "auto-gbt-scope",
+            "auto-mem-catalog",
+            "epa-mvac-regulation"
           ],
           "type": "prose"
         },
@@ -23716,12 +23716,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧以高中后证书与高中文凭为主（O*NET 页面公布的学历构成中 32% 为要求高中后证书、26% 为要求高中文凭或同等学历，另有 30% 为要求低于高中文凭），多数岗位要求先前相关工作技能与一到两年培训，并设有 18 项注册学徒职位；中国大陆以机动车维修相关职业技能培训与师傅带教为主，具体学历要求由用人单位规定。"
+              "美国BLS典型入门是高中后非学位证书、无相关经验和短期在岗培训。O*NET问卷另记录受访者对新进人员所需教育的回答，不是实际在岗学历。大陆看具体岗位的职业教育与带教。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
+            "ep-table",
             "onet"
           ],
           "type": "prose"
@@ -23745,13 +23745,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "诊断与维修与测试须按机构流程与适用标准执行。美国侧空调系统维修须由经 EPA 认可项目培训并认证的人员有偿作业（Clean Air Act Section 609）；O*NET 认证页面另列出大量行业认证（如 ASE 的 A1–A9、L1–L4、ADAS 与电动车相关认证与分车型认证）。中国大陆侧机动车维修经营实行备案管理，维修配件须有可追溯来源、不得使用假冒伪劣配件（交通运输部《机动车维修管理规定》，2023 年令第 14 号第五次修正）。入职前核对岗前培训与作业授权与质检流程，不能从学历或认证直接推断。"
+              "在美国，有偿（包括以物易物）维修或保养机动车空调系统的人员，须经EPA认可项目培训并取得第609条认证。 中国大陆机动车维修经营实行备案；配件和维修档案依规定记录。入职分别核培训、作业范围和质检分工。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "epa-mvac-regulation",
+            "mot-repair-2023",
+            "auto-gbt47439"
           ],
           "type": "prose"
         },
@@ -23774,13 +23775,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "车间作业须符合适用的安全要求（举升与支撑与车下作业防护、手持与电动工具与砂轮机防护、化学品与制冷剂与废气通风与个人防护、机械与电气危险能量控制、废弃物处理）。O*NET 工作情境显示86% 每天佩戴常规防护或安全装备、83% 每天在封闭车辆内或操作封闭设备、83% 持续用手处理物体与工具、69% 每天暴露于污染物、52% 每天面临时间压力、41% 每天接触危险设备、39% 每天暴露于轻微烧伤割伤咬伤或蜇伤、38% 每天接触危险条件；OSHA 的行业危害资料列出该行业的常见伤害事件（搬举用力过度、被物体撞击、滑倒绊倒与坠落、接触有害物质）与常见罚则条款（危害沟通 1910.1200、眼面与手部防护 1910.132/1910.133/1910.138、呼吸防护 1910.134、急救与冲洗设施 1910.151、机器防护 1910.212/1910.215、电气 1910.303/1910.305）。本页不构成诊断、维修或现场作业指令。"
+              "车间作业须符合适用的安全要求（举升与支撑与车下作业防护、手持与电动工具与砂轮机防护、化学品与制冷剂与废气通风与个人防护、机械与电气危险能量控制、废弃物处理）。O*NET 工作情境显示86% 每天佩戴常规防护或安全装备、83% 每天在封闭车辆内或操作封闭设备、83% 持续用手处理物体与工具、69% 每天暴露于污染物、52% 每天面临时间压力、41% 每天接触危险设备、39% 每天暴露于轻微烧伤割伤咬伤或蜇伤、38% 每天接触危险条件；OSHA 的行业危害资料列出该行业的常见伤害事件（搬举用力过度、被物体撞击、滑倒绊倒与坠落、接触有害物质）与常见罚则条款（危害沟通 1910.1200、一般防护与眼面防护 1910.132/1910.133、呼吸防护 1910.134、急救与冲洗设施 1910.151、机器防护 1910.212/1910.215、电气 1910.303/1910.305）。本页不构成诊断、维修或现场作业指令。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.30",
           "source_refs": [
             "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23864,28 +23865,28 @@
                 "url": "https://www.onetonline.org/link/summary/49-3023.00"
               },
               {
-                "entity": "O*NET 49-3023.00 详细资料（任务与工作活动）",
+                "entity": "O*NET 49-3021.00：汽车车身维修",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/49-3023.00"
+                "url": "https://www.onetonline.org/link/summary/49-3021.00"
               },
               {
-                "entity": "O*NET 49-3023.00 自定义职业档案",
+                "entity": "O*NET 49-3022.00：汽车玻璃维修",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/custom/49-3023.00"
+                "url": "https://www.onetonline.org/link/summary/49-3022.00"
               },
               {
-                "entity": "O*NET 49-3023.00 行业分布",
+                "entity": "O*NET49-3031.00 柴油车辆维修",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/49-3023.00"
+                "url": "https://www.onetonline.org/link/summary/49-3031.00"
               },
               {
-                "entity": "O*NET 49-3023.00 全国工资分位",
+                "entity": "O*NET49-2093.00 运输设备电气电子安装维修",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/49-3023.00"
+                "url": "https://www.onetonline.org/link/summary/49-2093.00"
               }
             ]
           },
@@ -23904,14 +23905,16 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "六个方向都以工具使用与安全常识为底色，但作业对象与系统与责任边界不同；同一段维修经验不能直接换算成另一个方向的上岗资格、认证或作业授权，本页只比较公开口径下的职责差别。"
+              "想修在用乘用车和轻型卡车，先看机修。偏好外观、玻璃或重型车辆，则比较相应岗位。新能源高压按任务核资质和授权。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "auto-body",
+            "auto-glass",
+            "neighbor-diesel",
+            "auto-gbt47439"
           ],
           "type": "prose"
         },
@@ -23920,15 +23923,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "对照依据为 O*NET 49-3023.00 的官方职业描述与 O*NET 页面列出的相关职业清单，以及路由资料标注的相邻职业关系；相邻关系只说明职责邻近，不代表资格、认证或授权可以互换。"
+              "大陆汽车维修工4-12-01-01含机修、电器、车身整形、涂装等工种，范围比美国本页统计口径宽。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
+            "auto-cn-skill",
             "onet"
           ],
           "type": "prose"
@@ -23938,13 +23938,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表把汽车维修技师与机械师与五条相邻方向放在同一组维度上比较：职业方向、核心工作与产出、关键区别，以及每种偏好更适合的选择。"
+              "先比较你每天要处理的对象和最终交付。下面的美国代码用于区分岗位任务，中国大陆用工种和实际岗位说明来核。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.10",
           "source_refs": [
             "onet",
-            "onet"
+            "auto-cn-skill"
           ],
           "type": "prose"
         },
@@ -23953,13 +23953,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "同属机动车维修，但汽车车身与玻璃维修工的工作以钣金与涂装为主、玻璃只是其中一部分；汽车维修技师与机械师以机械与电气系统的诊断与维修与大修为主。"
+              "车身与车架；机械故障交机修。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-body"
           ],
           "type": "prose"
         },
@@ -23968,13 +23967,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做车身钣金与涂装并兼顾玻璃，优先比较汽车车身与玻璃维修工；若你更愿意做机械与电气系统诊断维修，则适合汽车维修技师与机械师。"
+              "更愿意恢复车身形状与外观时比较。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.12",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-body"
           ],
           "type": "prose"
         },
@@ -23983,13 +23981,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "修复车身与车架并做涂装，产出以钣金与涂装质量与检测记录为主。"
+              "车身修复、整形、翻新和相关质量记录。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-body"
           ],
           "type": "prose"
         },
@@ -23998,12 +23995,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "汽车维修技师与机械师和汽车车身与玻璃维修工"
+              "汽车车身维修｜49-3021"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.14",
           "source_refs": [
-            "onet"
+            "auto-body"
           ],
           "type": "prose"
         },
@@ -24012,13 +24009,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "以试验准备与执行与数据采集为主，通常不承担维修签章责任；汽车维修技师与机械师以故障诊断与维修质量负责为主。"
+              "对象为风挡及车窗；无需把玻璃职责并入钣喷。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-glass"
           ],
           "type": "prose"
         },
@@ -24027,13 +24023,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做试验执行与数据采集，优先比较汽车工程技术员；若你更愿意做现场诊断与维修，则适合汽车维修技师与机械师。"
+              "更想专注车辆玻璃时比较。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-glass"
           ],
           "type": "prose"
         },
@@ -24042,13 +24037,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "按规范搭建试验台、执行试验并交付可复核的试验数据与记录。"
+              "交付修复或更换后的车辆玻璃。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-glass"
           ],
           "type": "prose"
         },
@@ -24057,12 +24051,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "汽车维修技师与机械师和汽车工程技术员"
+              "汽车玻璃维修｜49-3022"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.18",
           "source_refs": [
-            "onet"
+            "auto-glass"
           ],
           "type": "prose"
         },
@@ -24071,13 +24065,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "以车辆与系统设计开发为主，对设计假设与验证负责；汽车维修技师与机械师以在用车辆的诊断与维修为主。"
+              "可涵盖车用和船用柴油机，范围不只卡车。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-diesel"
           ],
           "type": "prose"
         },
@@ -24086,13 +24079,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做车辆与系统设计开发，优先比较汽车工程师；若你更愿意做现场诊断与维修，则适合汽车维修技师与机械师。"
+              "更喜欢商用车或柴油动力时比较。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-diesel"
           ],
           "type": "prose"
         },
@@ -24101,13 +24093,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "设计并验证车辆系统，产出以设计文件与验证结论为主。"
+              "公交、卡车或柴油机的维修和检验记录。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.21",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-diesel"
           ],
           "type": "prose"
         },
@@ -24116,12 +24107,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "汽车维修技师与机械师和汽车工程师"
+              "公交卡车与柴油维修｜49-3031"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.22",
           "source_refs": [
-            "onet"
+            "neighbor-diesel"
           ],
           "type": "prose"
         },
@@ -24130,13 +24121,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "对象是商用车辆与柴油动力系统，作业条件与规格差异较大；汽车维修技师与机械师以乘用车的机械与电气系统为主。"
+              "不同车型与系统，需重新核对培训。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-motorcycle"
           ],
           "type": "prose"
         },
@@ -24145,13 +24135,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做商用车辆与柴油动力维修，优先比较公交卡车机械师与柴油发动机专员；若你更愿意做乘用车综合维修，则适合汽车维修技师与机械师。"
+              "更想专做摩托车时比较。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-motorcycle"
           ],
           "type": "prose"
         },
@@ -24160,13 +24149,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "维修商用车辆与柴油动力系统，产出以商用车维修与检验记录为主。"
+              "摩托车维修与核查记录。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-motorcycle"
           ],
           "type": "prose"
         },
@@ -24175,12 +24163,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "汽车维修技师与机械师和公交卡车机械师与柴油发动机专员"
+              "摩托车机械师｜49-3052"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.26",
           "source_refs": [
-            "onet"
+            "neighbor-motorcycle"
           ],
           "type": "prose"
         },
@@ -24189,13 +24177,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "对象是摩托车，结构与规格与乘用车差异较大；汽车维修技师与机械师以乘用车的机械与电气系统为主。"
+              "运输设备电子不等于综合汽修。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-transport-electric"
           ],
           "type": "prose"
         },
@@ -24204,13 +24191,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意专做摩托车维修，优先比较摩托车机械师；若你更愿意做乘用车综合维修，则适合汽车维修技师与机械师。"
+              "更喜欢移动通信、导航或监控系统时比较。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-transport-electric"
           ],
           "type": "prose"
         },
@@ -24219,13 +24205,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "维修摩托车及其系统，产出以摩托车维修与安全检验记录为主。"
+              "安装维护铁路、船艇等运输设备电子系统。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-transport-electric"
           ],
           "type": "prose"
         },
@@ -24234,12 +24219,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "汽车维修技师与机械师和摩托车机械师"
+              "运输设备电气电子｜49-2093"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.30",
           "source_refs": [
-            "onet"
+            "neighbor-transport-electric"
           ],
           "type": "prose"
         },
@@ -24248,13 +24233,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "对象是电机与电动工具，作业以电气与机械检修为主；汽车维修技师与机械师的对象是车辆的机械与电气与电子系统。"
+              "同在车辆维修内，按系统和任务核安全条件。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-gbt47439"
           ],
           "type": "prose"
         },
@@ -24263,13 +24247,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "若你更愿意做电机与电动工具检修，优先比较电机与电动工具修理工；若你更愿意做车辆综合维修，则适合汽车维修技师与机械师。"
+              "愿意学习电驱系统且能明确现场授权时比较。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-gbt47439"
           ],
           "type": "prose"
         },
@@ -24278,13 +24261,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "检修电机与电动工具，产出以检修记录与性能检验为主。"
+              "受指定范围内的新能源系统维修和记录。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-gbt47439"
           ],
           "type": "prose"
         },
@@ -24293,12 +24275,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "汽车维修技师与机械师和电机与电动工具修理工"
+              "新能源高压：维修专长"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.direction-comparison.adjacent-career-comparison-table.34",
           "source_refs": [
-            "onet"
+            "auto-gbt47439"
           ],
           "type": "prose"
         },
@@ -24366,10 +24348,10 @@
                 "url": "https://www.onetonline.org/link/summary/49-3023.00"
               },
               {
-                "entity": "O*NET 49-3023.00 全国工资分位",
+                "entity": "NIST生成式AI风险管理框架",
                 "id": "link-7",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/49-3023.00"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
                 "entity": "O*NET 49-3023.00 培训与教育信息",
@@ -24478,13 +24460,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在固定虚构材料上练熟接车—诊断—维修—测试—交付闭环：给一份虚构车况与客户描述、一份检查清单与测量记录表和一份维修步骤与规格表，按顺序写出故障判断依据、检查与测量值、更换件与用量、测试与调整结果与未决事项的写法，再谈岗位；同时核对目标岗位的上岗资格与作业授权与质检要求，不要把会开车或会拆装零件当作可以独立诊断高压系统或气囊系统的证明。"
+              "用MX-12对照三组工单，核模型是否补写不存在的复核、编号或放行。用虚构资料。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "source-fermatmind-ai-rubric",
+            "auto-mx12"
           ],
           "type": "prose"
         },
@@ -24585,15 +24567,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本轮未取得本职业生成式AI采用率、提效或减员因果测量。手册查询、测量比对、工单估价草稿是编辑试验候选，需逐项测错漏和复核成本。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "未核实生成式AI对汽修岗位或工资的量化影响。工具可辅助检索、整理工单和起草交接，但故障代码只是线索，车型资料、实测值和复检由人员确认。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.ai-impact.ai-impact-table.18",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -24702,7 +24682,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET列16类软件技能、9项热门技术；2025年美国职业关联唯一招聘中Safari、Firefox、Edge各2%，Office、Outlook、Excel各1%，Word、SAP、Windows各低于1%。比例是提及招聘数/职业关联招聘数，不是使用率、中国岗位门槛或生成式AI部署。"
+              "O*NET列16类软件技能、9项热门技术；2025年美国该职业的去重招聘信息中Safari、Firefox、Edge各2%，Office、Outlook、Excel各1%，Word、SAP、Windows各低于1%。比例是提及招聘数/职业关联招聘数，不是使用率、中国岗位门槛或生成式AI部署。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.ai-impact.ai-impact-table.26",
@@ -24773,12 +24753,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 49-3023.00 全国工资分位"
+              "NIST生成式AI风险管理框架"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.ai-impact.ai-impact-table.31",
           "source_refs": [
-            "onet"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -24787,12 +24767,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于本职业口径的时薪与年薪分位；不是收入承诺。"
+              "不估计汽修AI采用、失业或工资变化，不是维修程序。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.ai-impact.ai-impact-table.32",
           "source_refs": [
-            "onet"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -24906,12 +24886,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五卡包含职责、任务、软件、就业预测与行业背景；预测有岗位数量，不能用来解释生成式AI导致的岗位变化。"
+              "O*NET任务与BLS就业描述岗位背景。NIST说明生成式AI的一般风险。两类证据均未测汽修现场采用或节省工时。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.ai-impact.ai-impact-table.40",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep-table",
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -25074,7 +25056,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET列16类软件技能、9项热门技术；2025年美国职业关联唯一招聘中Safari、Firefox、Edge各2%，Office、Outlook、Excel各1%，Word、SAP、Windows各低于1%。比例是提及招聘数/职业关联招聘数，不是使用率、中国岗位门槛或生成式AI部署。"
+              "O*NET列16类软件技能、9项热门技术；2025年美国该职业的去重招聘信息中Safari、Firefox、Edge各2%，Office、Outlook、Excel各1%，Word、SAP、Windows各低于1%。比例是提及招聘数/职业关联招聘数，不是使用率、中国岗位门槛或生成式AI部署。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.ai-impact.ai-impact-table.52",
@@ -25233,13 +25215,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国本职业49-3023.00：2025年就业825,800人，2035年预测866,700人，2025—2035年增长5.0%（取整5%，快于平均），净增40,900人，年均约66,200个空缺，自雇14.6%。空缺包括增长及离职转岗替补，不能当净增或个人录用概率，也未分离生成式AI的就业效应。"
+              "就业预测包含多种因素，没有分离生成式AI影响。职业就业与工资统计不能当作工具采用率或个人替代率。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.ai-impact.ai-impact-table.63",
           "source_refs": [
             "ep-table",
-            "bls-ooh-current"
+            "source-fermatmind-ai-rubric"
           ],
           "type": "prose"
         },
@@ -26353,13 +26335,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2022职业分类大典PDF276页（正文269页）4-12-01-01汽车维修工包括汽车机械维修、电器维修、检验、美容装潢、车身整形、涂装修复、二手车整备、新能源维修、智能运维、玻璃维修等工种；宽职业任务含发动机、底盘、车身及电器系统检查调整更换修理、设备维护和维修记录。它不等于与美国49-3023.00精确互认或工资分布。"
+              "中国大陆汽车维修工4-12-01-01含机修、电器、车身整形与涂装等工种；不能等同于美国SOC 49-3023。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "cn-classification-2022",
-            "mot-repair-2023"
+            "auto-cn-skill",
+            "onet"
           ],
           "type": "prose"
         },
@@ -26488,7 +26470,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆2023年第14号修正《机动车维修管理规定》：第7条经营者工商登记后向县级交通运输主管部门备案；第5条鼓励从业人员取得国家职业资格，不是所有维修工统一强制持某一证。第30条要求配件来源记录、禁假冒伪劣、符合条件的同质配件可用，换下配件交托修方自行处理；第33条维修电子档案上传国家汽车维修健康档案系统，托修方可查询，不能一概禁止合法传输。经营备案不等于个人上岗证。 美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。 美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的教育可替代部分经验，替代方案不能叠加。可先考试，经验未满足时只有成绩不获认证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。"
+              "中国大陆2023年第14号修正《机动车维修管理规定》：第7条经营者工商登记后向县级交通运输主管部门备案；第5条鼓励企业优先选用取得相关国家职业资格的人员，不是所有维修工统一强制持某一证。第30条要求配件来源记录、禁假冒伪劣、符合条件的同质配件可用，换下配件交托修方自行处理；第33条维修电子档案上传国家汽车维修健康档案系统，托修方可查询，不能一概禁止合法传输。经营备案不等于个人上岗证。 美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。 美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的课程或合作项目可按ASE规则折抵，额度按项目核，替代方案不能叠加。多数考试可先参加，满足经验要求后方可获证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.33",
@@ -26549,13 +26531,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "零售贸易"
+              "居民服务、修理和其他服务业"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -26564,7 +26545,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025年居民服务、修理和其他服务业年平均工资：城镇非私营70,226元、私营52,059元；批发零售非私营135,749元、私营69,622元。按用人单位主要活动分类选择行业参考，不以技师职位名称直接分类；不是本职业工资中位数、起薪或城市月薪。"
+              "城镇非私营70,226元/年；私营52,059元/年，2025年该行业平均工资。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.38",
@@ -26578,13 +26559,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "批发和零售业（单位主要活动符合该门类时参考）"
+              "批发和零售业"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -26593,7 +26573,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "批发零售2025非私营135,749、私营69,622元/年；单位实际分类相符才作参考，非汽修职业工资。"
+              "城镇非私营135,749元/年；私营69,622元/年。仅在单位主要活动归该行业时参照。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.40",
@@ -26607,13 +26587,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他行业"
+              "如何比较"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -26622,7 +26601,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未核品牌授权、连锁、综合汽修及新能源专修各形态的全国工资分布；依实际单位活动和合同核对。"
+              "先确认单位和薪酬口径；不将行业均值换成某岗位月薪。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.42",
@@ -26711,13 +26690,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆汽车维修技师与机械师的月薪区间；同名岗位可能采用工时加提成或计件计酬，比较时须把工时结构、加班安排、作业授权与责任范围纳入书面条件。"
+              "两则是历史招聘样本，不代表当前在招、实发收入或市场区间。比较正式报价时问固定工资、工时费、提成、排班及试用期。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "auto-chuxiong",
+            "auto-dayu"
           ],
           "type": "prose"
         },
@@ -26726,12 +26705,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（全国口径）"
+              "中国大陆全国职业工资"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "auto-cn-skill"
           ],
           "type": "prose"
         },
@@ -26740,12 +26719,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与该职业精确对应的全国职业月薪分布。"
+              "未核实可比的汽修技师全国工资分布。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "auto-cn-skill"
           ],
           "type": "prose"
         },
@@ -26754,12 +26733,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "一线城市（北京、上海、广州、深圳）"
+              "云南楚雄｜2026年第1期"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "auto-chuxiong"
           ],
           "type": "prose"
         },
@@ -26768,12 +26747,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可核验的城市级职业收入数据，本页不出示城市排名。"
+              "誉福机修中工列3,000–5,000；该岗位行未注明支付周期。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "auto-chuxiong"
           ],
           "type": "prose"
         },
@@ -26782,12 +26761,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他城市"
+              "江西大余｜2026年9月10日"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "auto-dayu"
           ],
           "type": "prose"
         },
@@ -26796,11 +26775,26 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未有官方或可核验来源支持其他城市的汽车维修技师月薪区间。"
+              "车洁仕机修师傅3,000–8,000元/月，具体面谈。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
+            "auto-dayu"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆汽车维修工4-12-01-01含机修、电器、车身整形与涂装等工种；不能等同于美国SOC 49-3023。"
+            ]
+          },
+          "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.55",
+          "source_refs": [
+            "auto-cn-skill",
             "onet"
           ],
           "type": "prose"
@@ -26810,28 +26804,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2022职业分类大典PDF276页（正文269页）4-12-01-01汽车维修工包括汽车机械维修、电器维修、检验、美容装潢、车身整形、涂装修复、二手车整备、新能源维修、智能运维、玻璃维修等工种；宽职业任务含发动机、底盘、车身及电器系统检查调整更换修理、设备维护和维修记录。它不等于与美国49-3023.00精确互认或工资分布。 中国大陆2023年第14号修正《机动车维修管理规定》：第7条经营者工商登记后向县级交通运输主管部门备案；第5条鼓励从业人员取得国家职业资格，不是所有维修工统一强制持某一证。第30条要求配件来源记录、禁假冒伪劣、符合条件的同质配件可用，换下配件交托修方自行处理；第33条维修电子档案上传国家汽车维修健康档案系统，托修方可查询，不能一概禁止合法传输。经营备案不等于个人上岗证。"
-            ]
-          },
-          "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.55",
-          "source_refs": [
-            "cn-classification-2022",
-            "mot-repair-2023"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-primary-locale",
-          "data": {
-            "paragraphs": [
-              "2022职业分类大典4-12-01-01汽车维修工（PDF276页）｜https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+              "国家统计局2025年城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "cn-classification-2022",
-            "mot-repair-2023"
+            "nbs-wages-2025",
+            "auto-chuxiong",
+            "auto-dayu"
           ],
           "type": "prose"
         },
@@ -27812,13 +27792,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是按规格完成检查与维修与测试并如实记录、能按诊断流程推理故障原因并对照厂家规格判断测量值、能判断安全条件与授权边界并在异常或超出授权时停下来升级；对车的兴趣或会开车的经验本身不足以证明职业胜任。"
+              "先用MX-12看自己是否愿意核对记录并跟进未决项，再用兴趣测评生成问题。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.fit.riasec-fit-block.9",
           "source_refs": [
             "onet",
-            "onet"
+            "auto-mx12"
           ],
           "type": "prose"
         },
@@ -27841,12 +27821,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣画像：O*NET 把该职业的兴趣代码列为 RCI（现实型 + 研究型 + 常规型），并列出机械/电子、体力/手工劳动与工程等领域；这些字段描述职业群体，不构成个人胜任阈值。"
+              "愿意操作工具、查原因，也愿意按工单记录和复核。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet"
+            "onet",
+            "auto-mx12"
           ],
           "type": "prose"
         },
@@ -27869,13 +27850,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码：RCI（现实型 + 研究型 + 常规型）。现实型对应动手拆装与使用工具维修设备与结构；研究型对应研究非生命物体与其损坏形式；常规型对应按程序与规定组织信息与数据与记录。"
+              "O*NET职业兴趣资料：现实型R 100、常规型C 55、研究型I 43。它描述任务兴趣，不是个人分数门槛。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.fit.riasec-fit-block.11",
           "source_refs": [
             "onet",
-            "onet"
+            "auto-mx12"
           ],
           "type": "prose"
         },
@@ -27899,12 +27880,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "RCI（现实型 + 研究型 + 常规型）"
+              "R–C–I"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.fit.riasec-fit-block.12",
           "source_refs": [
-            "onet"
+            "onet",
+            "auto-mx12"
           ],
           "type": "prose"
         },
@@ -28724,25 +28706,25 @@
                 "url": "https://www.onetonline.org/link/summary/49-3023.00"
               },
               {
-                "entity": "O*NET 49-3023.00 详细资料（工作情境）",
+                "entity": "机动车维修管理规定2023第14号修正正文",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/49-3023.00"
+                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202312/t20231204_3961931.html"
               },
               {
-                "entity": "O*NET 49-3023.00 职业摘要（就业与预测字段）",
+                "entity": "国标登记：GB/T 47439—2026",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/49-3023.00"
+                "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=511EBC59685B9318E06397BE0A0AFBD5"
               },
               {
-                "entity": "OSHA汽车维修维护行业历史危害资料",
+                "entity": "应急管理部：特种作业目录",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.osha.gov/sites/default/files/CCAR_2008.pdf"
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/W020260526532904903760.pdf"
               },
               {
-                "entity": "美国EPA：MVAC维修法规要求（含609）",
+                "entity": "EPA机动车空调维修法规要求",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.epa.gov/mvac/regulatory-requirements-mvac-system-servicing"
@@ -28764,14 +28746,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界：本节描述的是职业风险与边界管理，不是对个人或机构的评价；具体的车辆安全与排放与高压系统与制冷剂处理要求、作业许可与认证、配件来源与追溯规范由适用法域、主管部门与机构流程决定。本页依据 O*NET 49-3023.00 的官方职责、任务与工作情境字段，美国 EPA 机动车空调（MVAC）Section 609 要求、OSHA 行业危害资料，以及中国大陆交通运输部《机动车维修管理规定》。"
+              "岗位说明不能替代车间规程。涉及举升、高压、气囊、制冷剂或试车时，先由机构确认人员、设备和授权。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "mot-repair-2023",
+            "auto-gbt47439",
+            "epa-mvac-regulation"
           ],
           "type": "prose"
         },
@@ -28796,15 +28778,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：风险与边界条目依据 O*NET 49-3023.00 的官方职责、任务与工作情境字段（36% 认为错误的后果极其严重、46% 认为精确或准确极其重要、86% 每天佩戴常规防护或安全装备、69% 每天暴露于污染物、41% 每天接触危险设备、38% 每天接触危险条件、39% 每天暴露于轻微烧伤割伤咬伤或蜇伤、83% 每天在封闭车辆内或操作封闭设备），美国 EPA 机动车空调（MVAC）Section 609 培训与认证要求，以及 OSHA《Automotive Service and Collision Industry Hazard Information》所列常见伤害事件与常见罚则条款。"
+              "O*NET 工作情境描述美国职业群体；不用于估计个人事故概率。大陆维修规定、国标和美国空调规定各有适用范围。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.10",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "mot-repair-2023",
+            "auto-gbt47439",
+            "epa-mvac-regulation"
           ],
           "type": "prose"
         },
@@ -28843,13 +28825,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑建议查举升设备说明书、支撑点、检验和真实停工恢复制度；维修规定第23条要求安全教育和遵规，本轮未取得各车型举升完整程序，不凭概览自行恢复作业。"
+              "向雇主核设备检验、带教、谁能操作和谁能叫停；本页不提供车辆举升方法。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.13",
           "source_refs": [
             "mot-repair-2023",
-            "epa-mvac-regulation"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28903,13 +28885,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。 通风、化学品SDS及防护需核实际工艺；行业历史PDF不替代现场评估。"
+              "核场所培训、废弃物流程和设备；美国有偿机动车空调作业适用时核EPA第609条。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.17",
           "source_refs": [
-            "epa-mvac-regulation",
-            "nbs"
+            "mot-repair-2023",
+            "epa-mvac-regulation"
           ],
           "type": "prose"
         },
@@ -28961,14 +28943,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "电气作业按OSHA1910.333相关条件及适用危险能量规则核人员和设备；本轮未取得车型高压、气囊完整隔离验证及恢复程序，不能把概览作操作指令。中国特种作业证须核实际任务目录，不是所有汽修统一电工证。"
+              "按具体系统、车辆和任务核资格与授权。GB/T 47439—2026适用于其规定范围，不能用车载电压称谓代替目录判断。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.21",
           "source_refs": [
-            "osha-electrical-333",
-            "osha-loto-147",
-            "cn-special-work"
+            "auto-gbt47439",
+            "auto-gbt-scope",
+            "auto-mem-catalog"
           ],
           "type": "prose"
         },
@@ -29022,12 +29004,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按诊断流程用实测验证故障原因，说明替换方案与判断依据，不用换件试探代替诊断。"
+              "记录已证实和待复核事项。涉及车辆安全或质检时，按机构流程交给指定人员。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.25",
           "source_refs": [
-            "onet",
+            "mot-repair-2023",
             "onet"
           ],
           "type": "prose"
@@ -29082,13 +29064,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国大陆2023年第14号修正《机动车维修管理规定》：第7条经营者工商登记后向县级交通运输主管部门备案；第5条鼓励从业人员取得国家职业资格，不是所有维修工统一强制持某一证。第30条要求配件来源记录、禁假冒伪劣、符合条件的同质配件可用，换下配件交托修方自行处理；第33条维修电子档案上传国家汽车维修健康档案系统，托修方可查询，不能一概禁止合法传输。经营备案不等于个人上岗证。 废油废液管理见第24条及具体适用规定，不能将全部旧件一概自行丢弃。"
+              "核《机动车维修管理规定》第30条的配件要求和第33条的档案要求。谁记录、谁复核依实际分工。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.29",
           "source_refs": [
-            "mot-repair-2023",
-            "epa-mvac-regulation"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -29142,13 +29123,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "核经营者备案、岗位培训及实际授权；美国MVAC有报酬作业按609，中国职业技能证与特种作业资格按真实任务区分，不据岗位名推统一资格。"
+              "记录未完成和未授权事项；由实际负责检验与放行的人决定。MX-12只练这一类交接。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.33",
           "source_refs": [
             "mot-repair-2023",
-            "epa-mvac-regulation"
+            "auto-mx12"
           ],
           "type": "prose"
         },
@@ -29172,7 +29153,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明该职业的官方职责与任务范围。"
+              "美国职业分类，不直接证明中国岗位序列或作业授权。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.35",
@@ -29186,12 +29167,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明该职业的工作情境与作业条件字段。"
+              "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 实际相关第1—39条及23/24/30/33，未全设备安全程序。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.36",
           "source_refs": [
-            "onet"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -29200,12 +29181,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于2025就业与2025—2035年本职业预测，不用于个人录用概率或AI因果判断。"
+              "标准登记不授予个人作业资格。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "auto-gbt47439"
           ],
           "type": "prose"
         },
@@ -29214,12 +29195,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "OSHA汽车维修维护行业历史伤害与常见引用资料，非本职业当前风险概率。"
+              "按具体任务和适用规则核查，不从岗位名或车载电压称谓推定。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.38",
           "source_refs": [
-            "onet"
+            "auto-mem-catalog"
           ],
           "type": "prose"
         },
@@ -29228,12 +29209,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国EPA机动车空调MVAC服务法规要求｜https://www.epa.gov/mvac/regulatory-requirements-mvac-system-servicing"
+              "美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "epa-mvac-regulation"
           ],
           "type": "prose"
         }
@@ -29268,35 +29249,35 @@
                 "机修助理岗",
                 "在有监督下完成接车记录、举升与拆装辅助、部件清洗与简单更换，按规程提交质检。",
                 "编辑建议向目标机构核对工具使用与规程意识与记录规范程度；机构培训考核、岗位授权和适用法定资格须分别核对，内部考核不替代法定要求。",
-                "提交一份含虚构车况、检查清单与测量记录与判断依据的作业说明，不使用真实企业资料。",
+                "交一份三组编号核对表。",
                 "助理不承担安全件与高压系统的作业决定；相关结论须由有授权的质检人员确认。"
               ],
               [
                 "电工与诊断岗",
                 "使用诊断设备读取数据并排查电气与电控与排放控制系统故障，记录测量与判断依据。",
                 "编辑建议向目标机构核对电路与电控基础、诊断流程与测量与推理能力。",
-                "提交一份含现象描述、测量值与规格对照、判断依据与替换方案的虚构诊断记录。",
+                "说明B为什么不能抄入D的记录。",
                 "诊断结论须经实测验证；不得用故障码或换件试探代替诊断。"
               ],
               [
                 "空调与制冷剂岗",
                 "按规程回收与加注制冷剂，检修空调与暖风系统并检漏与测试。",
                 "美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。",
-                "提交一份含检漏步骤、回收与加注量与压力与温度测量与结论的虚构记录。",
+                "记录本岗位由谁核专项资格和设备。",
                 "美国MVAC回收、设备、人员及排放依适用规则核实；CO2例外有边界，不向其他法域泛化。"
               ],
               [
                 "新能源高压专修岗",
-                "在授权范围内检修高压系统与电池相关部件，执行断电与验证与绝缘测量。",
+                "由满足相应条件的人员，在批准范围内负责指定高压系统维修与记录。",
                 "编辑建议向目标机构核对高压安全训练、规程意识与测量能力。",
-                "提交一份含断电与验证步骤、绝缘与测量记录与授权边界的虚构作业方案。",
+                "列需核的培训、法定要求和授权，不写作业步骤。",
                 "高压与电池安全相关设计与试验须按专门规程与授权执行。"
               ],
               [
                 "快修保养岗",
                 "执行换机油与滤清器与润滑与调校等计划保养，并按检查清单提示后续维修项。",
                 "编辑建议向目标机构核对流程熟练度、细致度与客户沟通能力。",
-                "提交一份含保养项目清单、检查发现与建议维修项的虚构工单。",
+                "写C组缺哪项复核记录。",
                 "保养发现的问题不等于已完成维修；须由客户确认后另行处理。"
               ]
             ]
@@ -29304,8 +29285,11 @@
           "id": "automotive-service-technicians-and-mechanics.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "ep-table",
+            "mot-repair-2023",
+            "auto-gbt47439",
+            "epa-mvac-regulation",
+            "auto-mx12"
           ],
           "title": "岗位方向与起步任务比较",
           "type": "table"
@@ -29318,8 +29302,8 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET新聘学历需求问卷32%高中后证书、30%低于高中、26%高中或同等，不是在岗学历构成。Zone3/SVP6.0至<7.0是职业准备描述，通常一至两年训练，不是每岗固定门槛。BLS EP典型高中后非学位证书、相关经验None、短期在职培训；OOH指出受过相关课程者训练可能较短，未受训者从助理或保养岗位较长带教，也可走有薪学徒路径；各口径不能相互替代。",
-                  "注册学徒、培训与认证目录是查询入口，本轮未重新核18个职位或960项目的当前数量；不将旧计数作为新核证据。美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的教育可替代部分经验，替代方案不能叠加。可先考试，经验未满足时只有成绩不获认证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。",
+                  "O*NET新聘学历需求问卷32%高中后证书、30%低于高中、26%高中或同等，不代表在岗人员学历构成。Zone3/SVP6.0至<7.0是职业准备描述，通常一至两年训练，不是每岗固定门槛。BLS EP典型高中后非学位证书、相关经验None、短期在职培训；OOH指出受过相关课程者训练可能较短，未受训者从助理或保养岗位较长带教，也可走有薪学徒路径；各口径不能相互替代。",
+                  "ASE相关经验：A1–A9两年、L1–L4三年、G1一年（全职或兼职等效）；多数考试可先参加，满足经验才获认证。符合条件的课程或合作项目可按规则折抵，不叠加。",
                   "编辑准备方向：可核对目标机构机动车维修相关课程及带教；当期招生、培养安排、招聘资格与任务授权须分别核实，本轮未取得全国培养路径比例。"
                 ]
               },
@@ -29327,7 +29311,7 @@
                 "id": "clearance",
                 "values": [
                   "诊断与维修与测试须按机构流程与适用标准执行；涉及车辆安全件、排放、高压系统、气囊与制冷剂处理的作业决定须由具资质与授权的人员作出。",
-                  "美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。 中国大陆2023年第14号修正《机动车维修管理规定》：第7条经营者工商登记后向县级交通运输主管部门备案；第5条鼓励从业人员取得国家职业资格，不是所有维修工统一强制持某一证。第30条要求配件来源记录、禁假冒伪劣、符合条件的同质配件可用，换下配件交托修方自行处理；第33条维修电子档案上传国家汽车维修健康档案系统，托修方可查询，不能一概禁止合法传输。经营备案不等于个人上岗证。",
+                  "美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。 中国大陆2023年第14号修正《机动车维修管理规定》：第7条经营者工商登记后向县级交通运输主管部门备案；第5条鼓励企业优先选用取得相关国家职业资格的人员，不是所有维修工统一强制持某一证。第30条要求配件来源记录、禁假冒伪劣、符合条件的同质配件可用，换下配件交托修方自行处理；第33条维修电子档案上传国家汽车维修健康档案系统，托修方可查询，不能一概禁止合法传输。经营备案不等于个人上岗证。",
                   "客户信息与车辆数据与维修影像可能涉及个人信息，信息安全与保密要求因机构而异，须在入职前确认访问范围与合规义务。"
                 ]
               },
@@ -29343,7 +29327,7 @@
                 "id": "tools",
                 "values": [
                   "举升机与支撑设备、手持与电动工具与砂轮机、千分尺与卡尺与量规、诊断扫描仪与红外发动机分析仪与压缩压力表、空调制冷剂回收与加注设备、个人防护（护目镜、手套、听力保护、安全鞋、呼吸防护）。",
-                  "O*NET列16类软件技能、9项热门技术；2025年美国职业关联唯一招聘中Safari、Firefox、Edge各2%，Office、Outlook、Excel各1%，Word、SAP、Windows各低于1%。比例是提及招聘数/职业关联招聘数，不是使用率、中国岗位门槛或生成式AI部署。",
+                  "O*NET列16类软件技能、9项热门技术；2025年美国该职业的去重招聘信息中Safari、Firefox、Edge各2%，Office、Outlook、Excel各1%，Word、SAP、Windows各低于1%。比例是提及招聘数/职业关联招聘数，不是使用率、中国岗位门槛或生成式AI部署。",
                   "把诊断系统与估价与工单工具用于诊断与结算流程前，须确认配件来源与批次可追溯、客户信息保护与人工复核安排。"
                 ]
               }
@@ -29370,42 +29354,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料包：一份车况与客户描述说明、一份检查清单与测量记录表、一份维修步骤与厂家规格表与一份工单模板。",
-                  "全部材料为虚构，不含真实企业作业资料、客户车辆信息、维修影像或内部资料。",
-                  "全部材料与场景为虚构，不得使用真实企业作业资料、客户车辆信息、维修影像或内部资料。"
+                  "三组虚构工单：A组工单和复检记录均为MX-12-A，复核人栏有缩写；B组工单为MX-12-B，随附记录却标MX-12-D；C组工单与记录均为MX-12-C，复核人栏空白。",
+                  "这些就是全部输入，无车型规格、实测数值或维修步骤。",
+                  "填写工单号、记录状态、待核事项和交接对象四列。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "为一份虚构车况写清检查顺序与测量值、故障判断依据与替换方案、维修步骤与更换件与用量、测试与调整结果与未决事项，以及需要复核与需要授权的环节。",
-                  "在 60—90 分钟内完成，允许参考公开的标准与通用维修资料，但不使用真实企业资料。",
-                  "记录中把车况与客户描述、检查与测量值、故障判断依据、更换件与用量、测试与调整结果分开书写，并标注需复核的部分。"
+                  "A：两处编号一致，复核栏有标记，记录齐备。",
+                  "B：工单与附页编号不符，记录待核；不能把D的记录抄给B。",
+                  "C：编号一致，复核栏空白，待授权人员复核。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先核对车况与客户描述与待检项目，再按检查清单测量与推理，最后写明测试结果与未决事项。",
-                  "把现象、测量值、判断依据、维修过程与测试结论分开书写，任何不确定处标注为需复核。",
-                  "完成后请有经验的人复核故障判断与测量与测试结论，并保留修改理由。"
+                  "把B交给原记录人核对归属，把C交给实际负责复核的人。",
+                  "A仅表示这份虚构记录齐备。",
+                  "一句交接例：B的附页编号是D，请确认归属；C缺复核记录，保持待核。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "练习不构成诊断、维修或现场作业指令，也不能替代机构规程与作业授权。",
-                  "不得在练习中处理真实车辆或操作真实举升与高压与制冷剂设备；涉及安全件与高压系统与气囊与制冷剂处理的作业须由有权限人员按规程处理。",
-                  "练习不替代机构规程与作业授权，也不构成任何诊断、维修或现场处置指令。"
+                  "练习不证明车辆修好或允许放行。",
+                  "不接触真实车辆、举升设备、高压、气囊、制冷剂或试车。",
+                  "不使用个人信息、真实工单或车间内部资料。"
                 ]
               }
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "auto-mx12"
           ],
-          "title": "低风险练习材料与任务",
+          "title": "MX-12：三张纸面工单怎么复核",
           "type": "cards"
         },
         {
@@ -29416,37 +29400,38 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "岗位要求核对表：学历与专业培训与实训、注册学徒经历、行业认证（如 ASE 系列）、EPA 空调维修认证、机构上岗资格与作业授权、高压与 ADAS 专项训练、以及安全与防护与废弃物处置培训。",
-                  "每项都注明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。",
-                  "把「学历」「专业培训」「行业认证」「EPA 空调维修认证」「注册学徒经历」「机构上岗资格」「作业授权」「高压与 ADAS 专项训练」分列，避免混为一谈。"
+                  "岗位条件表：对照工种、车型、带教、计酬和谁放行。",
+                  "保留公告日期与缺失项。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请有经验的人复核你的作业说明，重点检查车况与待检项目核对、测量值与规格对照、故障判断依据、更换件与测试调整结果是否逐项写清。",
-                  "把复核意见与修改理由一并保留，作为判断你能否接受现场复核的证据。"
+                  "三组MX-12核对表与两句交接。",
+                  "请人核对B的编号和C的复核栏。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页复盘：写明任务与车况、依据、自己的判断、被修正的部分与仍不确定的部分。",
-                  "把复盘交给同伴与师傅与质检人员复核，并保留复核意见与修改理由。"
+                  "一页复盘：修改了什么，为什么。",
+                  "只记录虚构材料中的证据。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具使用说明：如用诊断或估价或数据处理工具，须注明工具名称与版本、输入与依据与人工修改理由。",
-                  "客户信息与车辆信息与维修影像处理须先取得授权，并记录访问范围、保留期限与销毁约定。"
+                  "若用工具整理，核对它有没有补写不存在的信息。",
+                  "不上传真实工单、车辆或个人资料。"
                 ]
               }
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "auto-mx12",
+            "auto-chuxiong",
+            "auto-dayu"
           ],
           "title": "可提交的准备材料",
           "type": "cards"
@@ -29510,59 +29495,62 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "职业与边界阅读：读 O*NET 49-3023.00 与公开的机动车维修与制冷剂与车间安全资料，写清诊断、维修与大修、测试与调整、交付与记录各自的含义。",
-                  "产出：一页术语与流程对照表，标注每项的来源。"
+                  "读职业职责及两则历史招聘。",
+                  "写下两种岗位分工与一项待问条件。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "接车与确认练习：为虚构车况写清客户描述记录、检查清单与待检项目的确认方式。",
-                  "产出：一份接车与故障确认记录。"
+                  "给MX-12建四列表。",
+                  "填三组工单号与附页号。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "检查与测量练习：为虚构车况写清检查顺序、测量值与规格对照与判断依据。",
-                  "产出：一份检查与诊断记录。"
+                  "标记A、B、C的记录状态。",
+                  "圈出B的编号冲突。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "维修与大修练习：为虚构故障写清拆装顺序、部件磨损判定、更换件与用量与装配要点。",
-                  "产出：一份维修步骤与更换件记录。"
+                  "写B、C的交接。",
+                  "分别找记录人和实际复核人。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "测试与交付练习：为虚构维修写清按规格测试与调整的步骤、结果与异常说明与交付与费用说明。",
-                  "产出：一份测试与交付记录。"
+                  "解释A为什么只是记录齐备。",
+                  "留一句说明：资料齐备不代表车辆获准放行。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "复核式自我质询：请有经验的人挑战你的故障判断与测量与测试结论，记录被修正的内容。",
-                  "产出：一份复核意见与修改说明。"
+                  "请同伴复核，互换一次。",
+                  "保留修改及理由。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "最终复盘：判断继续、暂停还是换方向，并写清依据与仍不确定的部分。",
-                  "产出：一页决定说明，附证据清单。"
+                  "对照真实岗位，决定继续、暂停或比较其他方向。",
+                  "写下下一步培训和授权问题。"
                 ]
               }
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "auto-mx12",
+            "onet",
+            "auto-chuxiong",
+            "auto-dayu"
           ],
-          "title": "七日体验产出",
+          "title": "七天了解岗位：从纸面工单开始",
           "type": "timeline"
         },
         {
@@ -29570,18 +29558,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：你完成了七日练习并发现自己在检查与诊断与维修与测试与记录上可持续投入。",
-              "继续：你能接受超过 40 小时的工作周与时间压力与较重的体力要求，并愿意按规程记录与复核。",
-              "暂停：你只想尽快交车，不愿按诊断流程核对故障原因与实测验证。",
-              "暂停：你把故障码或「故障灯灭了」当作已修好，或在安全件与高压系统上跳过复核。",
-              "换方向：你更愿意做试验执行与数据采集，可比较汽车工程技术员方向。",
-              "换方向：你更愿意做车身钣金与涂装，可比较汽车车身与玻璃维修工方向。",
-              "信息不足：如果你还没有任何有监督的作业或质检经历，先补这两项再判断。"
+              "继续：你愿意核对编号、保留未决项并交给合适的人。",
+              "继续：已核真实岗位的工时、现场环境和带教。",
+              "暂停：你会为了赶进度把待核写成已完成。",
+              "暂停：岗位说不清谁质检、谁试车、谁放行。",
+              "换方向：更喜欢台架试验和数据，比较汽车工程技术员。",
+              "换方向：更喜欢车身整形，比较钣金修复与玻璃专岗。",
+              "资料不足：先找有明确带教和作业范围的正规课程或雇主。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "auto-mx12",
+            "onet",
+            "mot-repair-2023"
           ],
           "title": "七日后的判断",
           "type": "list"
@@ -29614,7 +29604,7 @@
                 "希望进入该职业的人",
                 "BLS典型高中后非学位课程，也有高中入职带教路径；不推多数统一要求。",
                 "按具体岗位核学历；不是一律高中或证书门槛。",
-                "O*NET新聘学历需求问卷32%高中后证书、30%低于高中、26%高中或同等，不是在岗学历构成。Zone3/SVP6.0至<7.0是职业准备描述，通常一至两年训练，不是每岗固定门槛。BLS EP典型高中后非学位证书、相关经验None、短期在职培训；OOH指出受过相关课程者训练可能较短，未受训者从助理或保养岗位较长带教，也可走有薪学徒路径；各口径不能相互替代。",
+                "O*NET新聘学历需求问卷32%高中后证书、30%低于高中、26%高中或同等，不代表在岗人员学历构成。Zone3/SVP6.0至<7.0是职业准备描述，通常一至两年训练，不是每岗固定门槛。BLS EP典型高中后非学位证书、相关经验None、短期在职培训；OOH指出受过相关课程者训练可能较短，未受训者从助理或保养岗位较长带教，也可走有薪学徒路径；各口径不能相互替代。",
                 "按学制完成。",
                 "学历不等于作业授权或认证。"
               ],
@@ -29641,7 +29631,7 @@
                 "希望证明专项能力的人",
                 "作为诊断与维修能力的第三方证明。",
                 "BLS称认证可能被要求或偏好，具体专项岗位和晋升作用依雇主，未核全国统一门槛。",
-                "美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的教育可替代部分经验，替代方案不能叠加。可先考试，经验未满足时只有成绩不获认证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。",
+                "美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的课程或合作项目可按ASE规则折抵，额度按项目核，替代方案不能叠加。多数考试可先参加，满足经验要求后方可获证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。",
                 "按机构安排与证书有效期维护。",
                 "认证不等于机构作业授权或被所有机构认可。"
               ],
@@ -29680,23 +29670,24 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历、专业培训、学徒、行业认证、法定资格和单位授权须分别核对。O*NET新聘学历需求问卷32%高中后证书、30%低于高中、26%高中或同等，不是在岗学历构成。Zone3/SVP6.0至<7.0是职业准备描述，通常一至两年训练，不是每岗固定门槛。BLS EP典型高中后非学位证书、相关经验None、短期在职培训；OOH指出受过相关课程者训练可能较短，未受训者从助理或保养岗位较长带教，也可走有薪学徒路径；各口径不能相互替代。",
-              "美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的教育可替代部分经验，替代方案不能叠加。可先考试，经验未满足时只有成绩不获认证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。 美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。",
-              "2022职业分类大典PDF276页（正文269页）4-12-01-01汽车维修工包括汽车机械维修、电器维修、检验、美容装潢、车身整形、涂装修复、二手车整备、新能源维修、智能运维、玻璃维修等工种；宽职业任务含发动机、底盘、车身及电器系统检查调整更换修理、设备维护和维修记录。它不等于与美国49-3023.00精确互认或工资分布。 中国大陆2023年第14号修正《机动车维修管理规定》：第7条经营者工商登记后向县级交通运输主管部门备案；第5条鼓励从业人员取得国家职业资格，不是所有维修工统一强制持某一证。第30条要求配件来源记录、禁假冒伪劣、符合条件的同质配件可用，换下配件交托修方自行处理；第33条维修电子档案上传国家汽车维修健康档案系统，托修方可查询，不能一概禁止合法传输。经营备案不等于个人上岗证。",
-              "操作建议：入职前把「学历／专业培训／注册学徒经历／行业认证／EPA 空调维修认证／机构上岗资格与作业授权／高压与 ADAS 专项训练／安全与防护培训」分列成一张表，逐项写明来源与资料期；无法核实的项留空并标记为证据不足，不用推测填补。"
+              "美国BLS 49-3023典型入门为高中后非学位证书、无相关职业经历及短期在岗培训。职业课程、有监督入职及学徒均可比较。ASE属行业认证；美国有偿机动车空调维修另核EPA第609条认可的培训、认证与设备要求。",
+              "大陆《机动车维修管理规定》第5条鼓励企业优先选用取得相关国家职业资格的人员；第7条是经营者登记后备案；第12条按经营类别配备人员，相关质量检验人员须持相应车型驾驶证。",
+              "GB/T 47439—2026自2026年8月1日实施，是推荐性国标，涉及新能源汽车高压系统和氢燃料汽车供氢系统维修。按实际任务核适用的培训、法定资格和单位指派；车载电压称谓不能直接换算为特种作业目录中的电工作业资格。",
+              "先试做MX-12的纸面工单复核。看岗位时分开问车型、机修或电诊范围、谁带教、谁质检放行，以及固定工资、工时费和提成怎样结算。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.credential-boundary.1",
           "source_refs": [
-            "bls",
-            "bls-ooh-current",
+            "ep-table",
             "ase-auto-series",
-            "ase-work-experience",
             "epa-mvac-regulation",
-            "cn-classification-2022",
-            "mot-repair-2023"
+            "mot-repair-2023",
+            "auto-gbt47439",
+            "auto-gbt-scope",
+            "auto-mem-catalog",
+            "auto-mx12"
           ],
-          "title": "资格边界",
+          "title": "学历、认证和作业授权分开核",
           "type": "notice"
         },
         {
@@ -29704,18 +29695,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：本轮未取得具体机构招聘公告，不把下列方向作为真实样本或出现频率；编辑检索候选为汽车维修、电气诊断、空调维修、变速箱、快修保养、新能源高压及技术质检方向，实际岗位名称和条件须按当期公告核对。",
-              "核对清单：岗位属于品牌授权服务中心、综合汽修厂、连锁快修门店、事故车修复中心还是新能源专修门店；是否需要上岗资格与作业授权或专项培训与认证；计酬方式（月薪、工时加提成或计件）；以及是否提供危险能量控制与化学品与制冷剂与废弃物处置培训。以上须写入书面条件后再比较。"
+              "誉福机修中工2人；要求2年以上汽车机电维修经验及C1或以上驾照；列3,000–5,000，该行未注明周期。 历史样本；未核实目前是否在招、实发或计酬周期。",
+              "车洁仕机修师傅1人，列3,000–8,000元/月、具体面谈。 历史样本；未核实当前在招，税前后和细项分工未注明。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "auto-chuxiong",
+            "auto-dayu"
           ],
-          "title": "招聘信息核对",
+          "title": "对照两则历史机修招聘",
           "type": "notice"
         },
         {
@@ -29724,28 +29713,28 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 49-3023.00 职业摘要",
+                "entity": "机动车维修管理规定2023第14号修正正文",
                 "id": "link-1",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/49-3023.00"
+                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202312/t20231204_3961931.html"
               },
               {
-                "entity": "O*NET 49-3023.00 详细资料（任务与工作活动）",
+                "entity": "国标登记：GB/T 47439—2026",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/49-3023.00"
+                "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=511EBC59685B9318E06397BE0A0AFBD5"
               },
               {
-                "entity": "O*NET 49-3023.00 培训与教育信息",
+                "entity": "楚雄市：2026年第1期招聘公告",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/49-3023.00"
+                "url": "https://www.cxs.gov.cn/info/6865/876949.htm"
               },
               {
-                "entity": "O*NET 49-3023.00 认证发现",
+                "entity": "大余县：2026年9月10日招聘公告",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/49-3023.00"
+                "url": "https://www.jxdy.gov.cn/dyxxxgk/c145429gg/202609/2d86bb22f2e7460483ed1d2109fc5328.shtml"
               }
             ]
           },
@@ -29763,13 +29752,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：本节描述的是可核对的准备与路径信息，不构成对任何机构、项目或个人的评价，也不提供作业授权、认证或质量判定的建议；具体要求由主管部门与用人单位规定。"
+              "岗位名称、技能等级或带教经历不能代替适用的法定要求和单位授权。先确认谁承担质检、试车及放行。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.career-path-block.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "mot-repair-2023",
+            "auto-gbt47439",
+            "epa-mvac-regulation"
           ],
           "type": "prose"
         },
@@ -29894,14 +29884,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET新聘学历需求问卷32%高中后证书、30%低于高中、26%高中或同等，不是在岗学历构成。Zone3/SVP6.0至<7.0是职业准备描述，通常一至两年训练，不是每岗固定门槛。BLS EP典型高中后非学位证书、相关经验None、短期在职培训；OOH指出受过相关课程者训练可能较短，未受训者从助理或保养岗位较长带教，也可走有薪学徒路径；各口径不能相互替代。"
+              "先试做MX-12的纸面工单复核。看岗位时分开问车型、机修或电诊范围、谁带教、谁质检放行，以及固定工资、工时费和提成怎样结算。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.career-path-block.20",
           "source_refs": [
-            "bls",
             "ep-table",
-            "bls-ooh-current"
+            "mot-repair-2023",
+            "auto-chuxiong",
+            "auto-dayu",
+            "auto-mx12"
           ],
           "type": "prose"
         },
@@ -29910,14 +29902,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历、职业院校或培训机构培训、注册学徒经历、行业认证（如美国 ASE 的 A1–A9 与 L1–L4 与 ADAS 与电动车相关认证）、EPA 认可项目的空调维修认证、机构内部上岗资格与作业授权、以及特种作业操作证是不同状态；学历不带来作业授权，认证也不等于可以独立处理高压系统与气囊与安全件。"
+              "大陆《机动车维修管理规定》第5条鼓励企业优先选用取得相关国家职业资格的人员；第7条是经营者登记后备案；第12条按经营类别配备人员，相关质量检验人员须持相应车型驾驶证。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -29926,14 +29916,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国为报酬（含交换服务）维修机动车空调MVAC，任何制冷剂均须Section609认可培训和认证，并按要求用认可回收设备；回用前须再生处理或回收净化。故意排放禁令有SNAP认可CO2/R744例外，但该例外不取消609人员认证。仅适用于相应美国MVAC场景，非中国通用汽修证或所有空调系统许可。 中国大陆2023年第14号修正《机动车维修管理规定》：第7条经营者工商登记后向县级交通运输主管部门备案；第5条鼓励从业人员取得国家职业资格，不是所有维修工统一强制持某一证。第30条要求配件来源记录、禁假冒伪劣、符合条件的同质配件可用，换下配件交托修方自行处理；第33条维修电子档案上传国家汽车维修健康档案系统，托修方可查询，不能一概禁止合法传输。经营备案不等于个人上岗证。 OSHA行业危害PDF所载2011—2016年NAICS8111资料，2016年108起死亡、约22,200起非致命伤病，覆盖汽车维修维护行业，不是本职业当前发生率；列常见引用1910.132/133等，未列1910.138，不能据此宣称已取得全部PPE法规或车型停工恢复步骤。"
+              "GB/T 47439—2026自2026年8月1日实施，是推荐性国标，涉及新能源汽车高压系统和氢燃料汽车供氢系统维修。按实际任务核适用的培训、法定资格和单位指派；车载电压称谓不能直接换算为特种作业目录中的电工作业资格。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.career-path-block.22",
           "source_refs": [
-            "epa-mvac-regulation",
-            "mot-repair-2023",
-            "nbs"
+            "auto-gbt47439",
+            "auto-gbt-scope",
+            "auto-mem-catalog"
           ],
           "type": "prose"
         },
@@ -29942,13 +29932,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑路径：有监督学习、常见诊断维修、疑难专精或管理培训；年限、晋升、资格和放行权依岗位核实。"
+              "美国BLS 49-3023典型入门为高中后非学位证书、无相关职业经历及短期在岗培训。职业课程、有监督入职及学徒均可比较。ASE属行业认证；美国有偿机动车空调维修另核EPA第609条认可的培训、认证与设备要求。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-table",
+            "ase-auto-series",
+            "epa-mvac-regulation"
           ],
           "type": "prose"
         },
@@ -29957,12 +29948,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明美国该职业的任务与工作活动口径。"
+              "中国大陆《机动车维修管理规定》2023年第14号修正：经营者工商登记后向所在地县级交通运输主管部门备案，按备案项目维修；三类专项包括汽车玻璃安装及修复，一、二类也可承接专项，并非只能三类。第30条要求配件来源记录、不得用假冒伪劣配件，同质配件符合条件可用；换下配件交托修方自行处理。第33条要求维修电子档案并上传国家汽车维修健康档案系统，不能将所有资料概括为禁止外传；个人授权、数据访问及具体操作仍须核实际制度。 实际相关第1—39条及23/24/30/33，未全设备安全程序。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.career-path-block.24",
           "source_refs": [
-            "onet"
+            "mot-repair-2023"
           ],
           "type": "prose"
         },
@@ -29971,12 +29962,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明新聘学历需求问卷和职业准备程度；非在岗学历分布。"
+              "标准登记不授予个人作业资格。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.career-path-block.25",
           "source_refs": [
-            "onet"
+            "auto-gbt47439"
           ],
           "type": "prose"
         },
@@ -29985,12 +29976,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明培训与教育信息入口，不构成上岗资格或认证。"
+              "历史样本；未核实目前是否在招、实发或计酬周期。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "auto-chuxiong"
           ],
           "type": "prose"
         },
@@ -29999,12 +29990,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国本职业认证检索入口；目录不能支持中国职业分类、经营备案或个人作业权。发证条件、有效期及岗位接受情况须核具体项目。"
+              "历史样本；未核实当前在招，税前后和细项分工未注明。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "auto-dayu"
           ],
           "type": "prose"
         },
@@ -30910,28 +30901,28 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS本职业当前就业与预测",
+                "entity": "BLS就业预测表1.2｜49-3023",
                 "id": "link-3",
-                "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/automotive-service-technicians-and-mechanics.htm"
-              },
-              {
-                "entity": "BLS本职业2025—2035预测特征表",
-                "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国家统计局2025年平均工资（行业参考）",
+                "entity": "BLS汽车维修技师与机械师OOH当前页",
+                "id": "link-4",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/automotive-service-technicians-and-mechanics.htm"
+              },
+              {
+                "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
                 "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 49-3023.00 全国工资分位",
+                "entity": "O*NET 49-3023.00 职业摘要",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/49-3023.00"
+                "url": "https://www.onetonline.org/link/summary/49-3023.00"
               },
               {
                 "entity": "汽车车身与玻璃维修工",
@@ -31224,12 +31215,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "已有2025年相关行业及宽岗位工资代理；精确汽修职业工资与就业仍证据不足。"
+              "2025年工资行业参考"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -31238,14 +31229,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2022职业分类大典PDF276页（正文269页）4-12-01-01汽车维修工包括汽车机械维修、电器维修、检验、美容装潢、车身整形、涂装修复、二手车整备、新能源维修、智能运维、玻璃维修等工种；宽职业任务含发动机、底盘、车身及电器系统检查调整更换修理、设备维护和维修记录。它不等于与美国49-3023.00精确互认或工资分布。 国家统计局2025年居民服务、修理和其他服务业年平均工资：城镇非私营70,226元、私营52,059元；批发零售非私营135,749元、私营69,622元。按用人单位主要活动分类选择行业参考，不以技师职位名称直接分类；不是本职业工资中位数、起薪或城市月薪。 中国大陆2023年第14号修正《机动车维修管理规定》：第7条经营者工商登记后向县级交通运输主管部门备案；第5条鼓励从业人员取得国家职业资格，不是所有维修工统一强制持某一证。第30条要求配件来源记录、禁假冒伪劣、符合条件的同质配件可用，换下配件交托修方自行处理；第33条维修电子档案上传国家汽车维修健康档案系统，托修方可查询，不能一概禁止合法传输。经营备案不等于个人上岗证。"
+              "国家统计局2025年居民服务、修理和其他服务业：城镇非私营70,226元/年，私营52,059元/年。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.25",
           "source_refs": [
-            "nbs-wages-2025",
-            "cn-classification-2022",
-            "mot-repair-2023"
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -31254,14 +31243,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业收入分布未取得；匹配行业均值可作参考但不能填精确缺口。"
+              "单位按主要活动划分；这是行业均值，不能填补汽修职业就业或工资缺口。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.26",
           "source_refs": [
-            "nbs-wages-2025",
-            "cn-classification-2022",
-            "mot-repair-2023"
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -31314,12 +31301,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明本职业的就业规模字段。"
+              "预测空缺不是净新增、当前招聘或AI因果估计；典型教育不等雇主统一要求。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet"
+            "ep-table"
           ],
           "type": "prose"
         },
@@ -31328,12 +31315,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于2025就业和2025—2035本职业预测。"
+              "49-3023本职业；就业、工资覆盖和行业层级不同。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.31",
           "source_refs": [
-            "ep-table",
             "bls-ooh-current"
           ],
           "type": "prose"
@@ -31343,14 +31329,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于中国2025行业工资参考及覆盖边界，精确职业缺口保留。"
+              "国家统计局工资总额可包括计时、计件、奖金、津贴补贴和加班工资，不能一概排除提成与浮动报酬；须按款项性质核计入范围。年平均工资非税后到手、门店经营利润或本职业分位。 行业与岗位大类代理，不覆盖个体与自由职业经营利润。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.32",
           "source_refs": [
-            "nbs-wages-2025",
-            "cn-classification-2022",
-            "mot-repair-2023"
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -31359,7 +31343,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于职业身份与官方职责描述。"
+              "美国职业分类，不直接证明中国岗位序列或作业授权。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.33",
@@ -31737,7 +31721,7 @@
           "data": {
             "entries": [
               {
-                "answer": "核心是三类任务：按检查清单核对皮带与软管与转向与火花塞与制动与燃油系统与车轮轴承等关键部件，检查车损并记录发现，审阅工单并与主管讨论，用电子测试设备排查燃油与点火与排放控制系统故障，试驾并用诊断设备测试部件与系统，拆解单元并用千分尺与卡尺与量规检查磨损；执行换机油与润滑与调校等日常与计划保养，修理与更换与调整制动器与燃油喷射器与滤清器，修理与维护空调与暖风与冷却与电气系统，大修或更换化油器与鼓风机与发电机与分电器与起动机与泵，调校发动机，修理或更换活塞与连杆与齿轮与气门与轴承，拆解修理并重建动力系统与转向系统等总成，修理或重建变速箱，更换混动车的火花塞与滤清器与电池；与客户沟通现象与维修需求并估算维修费用，测试并调整修后系统以满足厂家性能规格，保持工作区域清洁。美国侧对应 O*NET 49-3023.00，官方职责为诊断、调整、修理或大修机动车。",
+                "answer": "汽车维修技师主要给乘用车和轻型卡车做保养、查故障、维修和复检，并把结果写进工单。机修侧重机械和电气故障；钣喷、玻璃、商用车和新能源高压维修各有不同分工。",
                 "id": "automotive-service-technicians-and-mechanics.faq.1",
                 "question": "汽车维修技师与机械师每天做什么？",
                 "question_key": "career.faq.automotive-service-technicians-and-mechanics.1"
@@ -31749,7 +31733,7 @@
                 "question_key": "career.faq.automotive-service-technicians-and-mechanics.2"
               },
               {
-                "answer": "更有解释力的信号是：能按规格完成检查与维修与测试并如实记录，能按诊断流程推理故障原因并对照厂家规格判断测量值，能判断安全条件与授权边界并在异常或超出授权时停下来升级；只靠「喜欢车」或「会开车」无法判断。霍兰德兴趣代码为 RCI（现实型 + 研究型 + 常规型），兴趣一致只说明方向接近。",
+                "answer": "更有解释力的信号是：能按规格完成检查与维修与测试并如实记录，能按诊断流程推理故障原因并对照厂家规格判断测量值，能判断安全条件与授权边界并在异常或超出授权时停下来升级；只靠「喜欢车」或「会开车」无法判断。霍兰德兴趣代码为 RCI（现实型 + 常规型 + 研究型），兴趣一致只说明方向接近。",
                 "id": "automotive-service-technicians-and-mechanics.faq.3",
                 "question": "怎样判断自己适不适合做汽车维修技师与机械师？",
                 "question_key": "career.faq.automotive-service-technicians-and-mechanics.3"
@@ -31767,7 +31751,7 @@
                 "question_key": "career.faq.automotive-service-technicians-and-mechanics.5"
               },
               {
-                "answer": "美国侧：O*NET 把 49-3023.00 列为 Job Zone Three（SVP 6.0 至 <7.0），该区大多数职业要求职业学校培训、相关在职经验或副学士学位，并要求先前相关工作技能与一到两年培训（可能有受认可学徒计划）；页面公布的学历构成中 32% 为要求高中后证书、30% 为要求低于高中文凭、26% 为要求高中文凭或同等学历；O*NET 认证页面列出 ASE 系列与分车型与专项认证，空调系统维修须由经 EPA 认可项目培训并认证的人员有偿作业（Clean Air Act Section 609）。中国大陆侧：该职业未在大典中单列，相关作业归入机动车维修经营的维修项目；经营实行备案管理，维修配件须有可追溯来源、不得使用假冒伪劣配件。学历、培训、认证、上岗资格与作业授权不可互相替代。",
+                "answer": "广东技能评价规范列汽车维修工4-12-01-01。经营备案、职业技能等级与特定作业授权是不同事项。美国BLS典型入门为高中后非学位证书及短期在岗培训；有偿机动车空调维修另核EPA第609条。",
                 "id": "automotive-service-technicians-and-mechanics.faq.6",
                 "question": "进入这一职业需要核对哪些资格？",
                 "question_key": "career.faq.automotive-service-technicians-and-mechanics.6"
@@ -31785,13 +31769,13 @@
                 "question_key": "career.faq.automotive-service-technicians-and-mechanics.8"
               },
               {
-                "answer": "官方就业预测为本职业 2024 年在岗约 805,600 人、2024—2034 年增长为「平均（3% 至 4%）」、预测期职位空缺约 70,000（按 O*NET 页面所载口径）；按本页证据口径不并列 BLS 职业展望手册的 2025—2035 数字。预测不等于个人录用概率。转向可比较汽车车身与玻璃维修工、汽车工程技术员、汽车工程师、公交卡车机械师与柴油发动机专员、摩托车机械师、电机与电动工具修理工、运输设备电气电子安装与维修工与汽车玻璃安装工等方向，但资格与作业授权需逐项核对。",
+                "answer": "BLS表1.2预计美国49-3023就业由2025年825,800增至2035年866,700，增长5.0%，净增40,900，年均约66,200个职业空缺。空缺不等于净新增或当前招聘。",
                 "id": "automotive-service-technicians-and-mechanics.faq.9",
                 "question": "职业前景与转向如何判断？",
                 "question_key": "career.faq.automotive-service-technicians-and-mechanics.9"
               },
               {
-                "answer": "美国数字来自 BLS 职业就业与工资统计（OEWS，2025 年，本职业口径，中位年薪 50,620 美元）与 O*NET 展示的 2024—2034 年就业预测；中国大陆未取得与该职业精确对应的全国工资分布，本页保留证据不足标记，不以行业平均或美国数字换算填充。两个市场的统计口径、覆盖人群与资料期不同，不能直接换算。",
+                "answer": "美国工资用2025年5月49-3023全国OEWS分位。中国大陆未核实同口径全国汽修职业工资；用行业年平均或汇率换算都不能得出一份本地工资报价。",
                 "id": "automotive-service-technicians-and-mechanics.faq.10",
                 "question": "美国工资与中国大陆工资为什么不能互相换算？",
                 "question_key": "career.faq.automotive-service-technicians-and-mechanics.10"
@@ -31806,7 +31790,19 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "ep-table",
+            "oews",
+            "cn-classification-2022",
+            "mot-repair-2023",
+            "epa-mvac-regulation",
+            "auto-gbt47439",
+            "auto-gbt-scope",
+            "auto-mem-catalog",
+            "auto-cn-skill",
+            "auto-chuxiong",
+            "auto-dayu",
+            "auto-mx12"
           ],
           "type": "faq"
         },
@@ -31815,7 +31811,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：核O*NET/BLS本职业资料、EPA MVAC法规、OSHA历史行业资料、中国职业大典、2025工资统计及维修经营规定；编辑建议与统计、法规分别标明。"
+              "费马测试职业内容编辑组：核O*NET/BLS本职业资料、EPA MVAC法规、OSHA历史行业资料、广东技能评价规范、2025工资统计及维修经营规定；编辑建议与统计、法规分别标明。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.sources.source-card.1",
@@ -31829,7 +31825,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源含O*NET49-3023详细资料、2025工资和招聘软件信号，BLS当前OOH及2025—2035EP，ASE A系列和经验条件、EPA MVAC服务法规、OSHA历史行业资料、2022职业大典、2025中国工资统计及2023修正维修规定。"
+              "主要来源含O*NET49-3023详细资料、2025工资和招聘软件信号，BLS当前OOH及2025—2035EP，ASE A系列和经验条件、EPA MVAC服务法规、OSHA历史行业资料、广东技能评价规范、2025中国工资统计及2023修正维修规定。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.sources.source-card.2",
@@ -31853,7 +31849,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET2026更新；OEWS2025，EP2025及2025—2035，软件招聘2025。OOH本轮当前可访问并实际阅读；OSHA行业资料2011—2016，职业大典2022，维修规定2023修正，国家统计局工资2025。标准全文、全部车型安全规程及目录实时数量未取得。"
+              "资料期：O*NET2026更新；OEWS2025，EP2025及2025—2035，软件招聘2025。OOH本轮当前可访问并实际阅读；OSHA行业资料2011—2016，广东技能评价规范，维修规定2023修正，国家统计局工资2025。标准全文、全部车型安全规程及目录实时数量未取得。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.sources.source-card.3",
@@ -32000,16 +31996,16 @@
                 "url": "https://www.onetonline.org/link/summary/49-3023.00"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official wage percentiles",
-                  "May2025（OEWS）；访问2026-10-09"
+                  "2025年5月美国全国年薪P10/P25/P50/P75/P90：34,660、38,900、50,620、70,430、81,790美元。",
+                  "中位时薪24.34美元，使用公布时薪。"
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "oews",
-                "limitation": "OEWS有薪员工工资含基本工资、佣金、生产奖金、小费等，排加班溢价、轮班差额及非生产奖金等，不能把计件或提成全部排除。自雇、非公司制企业所有者和合伙人、无酬家庭劳动者不在工资调查内，有薪公司员工不因门店性质自动排除。",
+                "limitation": "职业分位不是起薪、具体工单报酬或中国工资。",
                 "market": "美国",
-                "name": "O*NET 展示的 BLS 2025 年工资分位（49-3023.00）",
+                "name": "O*NET职业工资表｜BLS OEWS 49-3023",
                 "period": "May2025（OEWS）",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
@@ -32099,14 +32095,14 @@
                 "accessed_at": "2026-10-09",
                 "details": [
                   "technology signals",
-                  "2025年美国唯一招聘；访问2026-10-09"
+                  "2025年美国去重招聘信息；访问2026-10-09"
                 ],
                 "evidence_type": "technology signals",
                 "id": "hr",
                 "limitation": "按雇主招聘公告公布出现比例，不代表岗位采用率或自动化程度。",
                 "market": "美国",
                 "name": "O*NET 49-3023.00 技术清单（热门技术信号）",
-                "period": "2025年美国唯一招聘",
+                "period": "2025年美国去重招聘信息",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/49-3023.00"
@@ -32368,20 +32364,19 @@
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "实际PDF276页4-12-01-01及5任务/工种",
-                  "非经营备案分类或精确工资"
+                  "规范总览列机修、电器、车身整形、涂装等汽车维修工工种。"
                 ],
                 "evidence_type": "官方职业分类文件相关条目",
                 "id": "cn-classification-2022",
-                "limitation": "2022职业大典PDF276页4-12-01-01汽车维修工及所列工种描述中国维修任务；与美国49-3023.00任务有交集，但不构成精确分类互认、工资分布、个人资格或作业许可。",
+                "limitation": "用于区分岗位任务，不能推定个人资格。",
                 "market": "中国大陆",
-                "name": "2022职业大典：汽车维修工宽职业及所列工种",
-                "period": "2022年版；访问2026-10-09",
-                "publisher": "政府公开原文，锡林郭勒盟站点",
+                "name": "广东技能评价：汽车维修工",
+                "period": "公开评价规范",
+                "publisher": "广东省人力资源和社会保障厅",
                 "scope": "contextual",
-                "url": "https://www.xlgl.gov.cn/eportal/attachDir/rsj/2025/04/2025042911374480061.pdf"
+                "url": "https://hrss.gd.gov.cn/attachment/0/575/575717/4684169.pdf"
               },
               {
                 "accessed_at": "2026-10-09",
@@ -32496,17 +32491,17 @@
                 "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/automotive-service-technicians-and-mechanics.htm"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "official projections table",
-                  "2025及2025—2035；访问2026-10-09"
+                  "2025年825,800个岗位，2035年预计866,700，净增40,900（5.0%）。",
+                  "预计年均约66,200个空缺。2025年自雇占14.6%；典型入门为高中后非学位证书及短期在岗培训。"
                 ],
                 "evidence_type": "official projections table",
                 "id": "ep-table",
-                "limitation": "49-3023行，人数原表千人，年度空缺非十年净增。",
+                "limitation": "预测空缺不是净新增、当前招聘或AI因果估计；典型教育不等雇主统一要求。",
                 "market": "美国",
-                "name": "BLS2025—2035职业预测特征表",
-                "period": "2025及2025—2035",
+                "name": "BLS就业预测表1.2｜49-3023",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32519,7 +32514,7 @@
                 ],
                 "evidence_type": "official certification requirements",
                 "id": "ase-auto-series",
-                "limitation": "美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的教育可替代部分经验，替代方案不能叠加。可先考试，经验未满足时只有成绩不获认证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。",
+                "limitation": "美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的课程或合作项目可按ASE规则折抵，额度按项目核，替代方案不能叠加。多数考试可先参加，满足经验要求后方可获证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。",
                 "market": "美国",
                 "name": "ASE汽车及轻型卡车A1–A9认证",
                 "period": "当前认证条件",
@@ -32528,14 +32523,14 @@
                 "url": "https://ase.com/tests/a1-a9/"
               },
               {
-                "accessed_at": "2026-10-09",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "official certification requirements",
                   "当前条件；访问2026-10-09"
                 ],
                 "evidence_type": "official certification requirements",
                 "id": "ase-work-experience",
-                "limitation": "美国ASE A1–A9专业认证需通过相应考试并满足2年全职等效相关实操经验；符合条件的教育可替代部分经验，替代方案不能叠加。可先考试，经验未满足时只有成绩不获认证。L1–L4为3年、G1为1年；汽车Master要求A1–A8均持证，A9不是必需，每5年维护相应认证。不是统一实操考试或整车作业许可。",
+                "limitation": "多数考试可先参加；满足相关经验方获认证。符合条件的合作项目可按规则抵扣，部分项目可抵足A1–A9的两年要求。各替代方案不能叠加。",
                 "market": "美国",
                 "name": "ASE工作经验及教育替代条件",
                 "period": "当前条件",
@@ -32609,20 +32604,152 @@
               },
               {
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "诊断与检查｜让判断有依据｜按检查清单核对关键部件，用诊断设备与量具测量，对照厂家规格判断故障范围，记录测量值与判断依据。 — 50/100; weight=1/3; automotive-service-technicians-and-mechanics.profile.responsibilities-block.1[1]",
-                  "维修与大修｜让操作可靠｜按规程拆装与保护周边部件，检查磨损后修理或更换部件，按规格装配与加注，避免以换件替代诊断。 — 0/100; weight=1/3; automotive-service-technicians-and-mechanics.profile.responsibilities-block.1[2]",
-                  "交付与记录｜让过程可追溯｜记录现象与检查与测量与更换件与测试结果，向客户说明已处理与仍待处理的事项与费用。 — 75/100; weight=1/3; automotive-service-technicians-and-mechanics.profile.responsibilities-block.1[4]"
+                  "通用框架讨论模型虚构输出、数据完整性和人员复核。",
+                  "汽修工单场景为编辑示例，厂商资料、实测与授权必须另外核实。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "风险管理框架",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "不估计汽修AI采用、失业或工资变化，不是维修程序。",
+                "name": "NIST生成式AI风险管理框架",
+                "period": "July 2024",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "推荐性国家标准，2026年8月1日实施；规定新能源汽车维修作业安全要求。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "auto-gbt47439",
+                "limitation": "标准登记不授予个人作业资格。",
+                "market": "中国大陆",
+                "name": "国标登记：GB/T 47439—2026",
+                "period": "2026-08-01",
+                "publisher": "国家市场监督管理总局",
+                "scope": "contextual",
+                "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=511EBC59685B9318E06397BE0A0AFBD5"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "涉及新能源车辆高压系统和氢燃料车辆供氢系统维修。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "auto-gbt-scope",
+                "limitation": "发布说明不是车型维修操作手册。",
+                "market": "中国大陆",
+                "name": "市场监管总局：新能源维修安全标准范围",
+                "period": "2026",
+                "publisher": "国家市场监督管理总局",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/xw/sj/art/2026/art_034fe3a706604d9dbb1af89a7833b84d.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "目录按适用作业种类和定义管理；电工作业分类与车载电压术语不同。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "auto-mem-catalog",
+                "limitation": "按具体任务和适用规则核查，不从岗位名或车载电压称谓推定。",
+                "market": "中国大陆",
+                "name": "应急管理部：特种作业目录",
+                "period": "2026-06-01",
+                "publisher": "应急管理部",
+                "scope": "contextual",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202605/W020260526532904903760.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "誉福机修中工2人；要求2年以上汽车机电维修经验及C1或以上驾照；列3,000–5,000，该行未注明周期。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "auto-chuxiong",
+                "limitation": "历史样本；未核实目前是否在招、实发或计酬周期。",
+                "market": "中国大陆",
+                "name": "楚雄市：2026年第1期招聘公告",
+                "period": "2026",
+                "publisher": "楚雄市人民政府",
+                "scope": "contextual",
+                "url": "https://www.cxs.gov.cn/info/6865/876949.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "车洁仕机修师傅1人，列3,000–8,000元/月、具体面谈。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "auto-dayu",
+                "limitation": "历史样本；未核实当前在招，税前后和细项分工未注明。",
+                "market": "中国大陆",
+                "name": "大余县：2026年9月10日招聘公告",
+                "period": "2026-09-10",
+                "publisher": "大余县人民政府",
+                "scope": "contextual",
+                "url": "https://www.jxdy.gov.cn/dyxxxgk/c145429gg/202609/2d86bb22f2e7460483ed1d2109fc5328.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "虚构三组工单，用于核对记录、标记差异和写交接。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "auto-mx12",
+                "limitation": "不含实际维修、厂家规格、车辆或个人资料。",
+                "market": "双语练习",
+                "name": "费马编辑练习：MX-12",
+                "period": "2026-11-09",
+                "publisher": "费马测试编辑部",
+                "scope": "contextual",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "规范总览列机修、电器、车身整形、涂装等汽车维修工工种。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "auto-cn-skill",
+                "limitation": "用于区分岗位任务，不能推定个人资格。",
+                "market": "中国大陆",
+                "name": "广东技能评价：汽车维修工",
+                "period": "公开评价规范",
+                "publisher": "广东省人力资源和社会保障厅",
+                "scope": "contextual",
+                "url": "https://hrss.gd.gov.cn/attachment/0/575/575717/4684169.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "修复和翻新车身、校正车架。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "auto-body",
+                "limitation": "用于区分岗位任务，不能推定个人资格。",
+                "market": "美国",
+                "name": "O*NET 49-3021.00：汽车车身维修",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-3021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "更换或修复挡风玻璃及车窗。"
+                ],
+                "evidence_type": "公开原始资料",
+                "id": "auto-glass",
+                "limitation": "用于区分岗位任务，不能推定个人资格。",
+                "market": "美国",
+                "name": "O*NET 49-3022.00：汽车玻璃维修",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-3022.00"
               }
             ]
           },
@@ -33134,7 +33261,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资分位",
+            "类型": "通用风险管理框架",
             "适用范围": {
               "$item": "automotive-service-technicians-and-mechanics.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -33963,7 +34090,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为汽车维修技师与机械师？教育、资格与职业发展路径",
+        "heading": "怎么入行？先看带教和作业授权",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "automotive-service-technicians-and-mechanics.path.career-path-block.21",
@@ -33994,7 +34121,7 @@
               "entry": "link-1",
               "field": "url"
             },
-            "id": "aata",
+            "id": "mot-repair-2023",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.path.career-path-block.10",
               "block": "path",
@@ -34017,7 +34144,7 @@
               "entry": "link-2",
               "field": "url"
             },
-            "id": "atcb",
+            "id": "auto-gbt47439",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.path.career-path-block.10",
               "block": "path",
@@ -34040,7 +34167,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "onet-training",
+            "id": "auto-chuxiong",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.path.career-path-block.10",
               "block": "path",
@@ -34063,7 +34190,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "cn-mental-health-law",
+            "id": "auto-dayu",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.path.career-path-block.10",
               "block": "path",
@@ -34496,7 +34623,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "汽车维修技师与机械师的工作可以分成哪几类？",
+            "question": "汽车维修技师每天做什么？",
             "table": {
               "rows": [
                 {
@@ -34517,7 +34644,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "安全与单据记录",
+                  "label": "维修与复检记录",
                   "secondary_value": {
                     "$item": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.4",
                     "block": "profile",
@@ -34553,12 +34680,12 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "汽车维修技师与机械师和相邻岗位的边界在哪里？",
+            "question": "机修、钣喷、汽车玻璃和柴油维修有什么区别？",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "核心目的",
+                  "label": "机修",
                   "secondary_value": {
                     "$item": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.8",
                     "block": "profile",
@@ -34574,7 +34701,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "主要对象与依据",
+                  "label": "钣喷",
                   "secondary_value": {
                     "$item": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.10",
                     "block": "profile",
@@ -34590,7 +34717,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "核心过程",
+                  "label": "玻璃",
                   "secondary_value": {
                     "$item": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.12",
                     "block": "profile",
@@ -34606,7 +34733,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "主要产出",
+                  "label": "公交卡车及柴油",
                   "secondary_value": {
                     "$item": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.14",
                     "block": "profile",
@@ -34622,7 +34749,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "责任主体",
+                  "label": "质检分工",
                   "secondary_value": {
                     "$item": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.16",
                     "block": "profile",
@@ -34638,7 +34765,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "权限与批准",
+                  "label": "新能源高压",
                   "secondary_value": {
                     "$item": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.18",
                     "block": "profile",
@@ -34654,7 +34781,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "结论边界",
+                  "label": "按岗位选择",
                   "secondary_value": {
                     "$item": "automotive-service-technicians-and-mechanics.profile.career-quick-answers-block.20",
                     "block": "profile",
@@ -34679,7 +34806,7 @@
               "type": "prose"
             },
             "key": "qa1",
-            "question": "入职前必须逐条核对什么？",
+            "question": "入行前先核什么？",
             "table": {
               "rows": [
                 {
@@ -34837,8 +34964,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "mot-repair-2023",
+              "onet"
             ],
             "id": "scope-referral",
             "mitigation": {
@@ -34853,7 +34980,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "举升与车下作业与坠落风险"
+            "title": "车辆举升和车下工作"
           },
           {
             "affected_roles": {
@@ -34869,8 +34996,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "mot-repair-2023",
+              "epa-mvac-regulation"
             ],
             "id": "crisis-escalation",
             "mitigation": {
@@ -34885,7 +35012,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "化学品与制冷剂与废气暴露"
+            "title": "制冷剂及化学品暴露"
           },
           {
             "affected_roles": {
@@ -34901,8 +35028,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "auto-gbt47439",
+              "auto-mem-catalog"
             ],
             "id": "record-material-privacy",
             "mitigation": {
@@ -34917,7 +35044,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "电气与高压与气囊危险能量"
+            "title": "新能源高压、氢系统和气囊"
           },
           {
             "affected_roles": {
@@ -34933,8 +35060,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "mot-repair-2023",
+              "onet"
             ],
             "id": "material-harm",
             "mitigation": {
@@ -34949,7 +35076,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "诊断误判与以换件替代诊断"
+            "title": "把故障线索当作结论"
           },
           {
             "affected_roles": {
@@ -34965,8 +35092,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "mot-repair-2023",
+              "onet"
             ],
             "id": "record-custody",
             "mitigation": {
@@ -34981,7 +35108,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "配件来源与更换件与旧件管理失控"
+            "title": "配件和维修记录失去追溯"
           },
           {
             "affected_roles": {
@@ -34997,8 +35124,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "mot-repair-2023",
+              "onet"
             ],
             "id": "supervision-referral",
             "mitigation": {
@@ -35013,7 +35140,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "授权越界与作业许可不明"
+            "title": "赶交车而跳过复核"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -35049,7 +35176,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "onet-context",
+            "id": "mot-repair-2023",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.7",
               "block": "risk",
@@ -35072,7 +35199,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "onet-outlook",
+            "id": "auto-gbt47439",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.7",
               "block": "risk",
@@ -35095,7 +35222,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "id": "onet-wage",
+            "id": "auto-mem-catalog",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.7",
               "block": "risk",
@@ -35118,7 +35245,7 @@
               "entry": "link-6",
               "field": "url"
             },
-            "id": "epa609",
+            "id": "epa-mvac-regulation",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.risk.career-risk-cards.7",
               "block": "risk",
@@ -35492,7 +35619,7 @@
           "ui": {
             "ai_heading": "AI 会影响汽车维修技师与机械师的工资吗？",
             "driver_heading": "哪些行业与岗位可能涉及这个职业？",
-            "official_heading": "中国大陆薪资参考（行业代理口径，非本职业工资）",
+            "official_heading": "大陆历史招聘报价与全国数据缺口",
             "scenario_caption": "准备类别、待核岗位方向与核对事项（编辑整理，非招聘分布或薪资统计）",
             "scenario_heading": "汽车维修技师与机械师：中国大陆准备与条件核对（编辑建议）",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35956,7 +36083,7 @@
       },
       "hero": {
         "h1": "汽车维修技师与机械师",
-        "quick_answer": "汽车维修技师与机械师诊断、调整、修理或大修机动车：按检查清单核对关键部件、用诊断设备与量具检查并判断故障范围、按厂家规格修理或更换与装配与加注、测试并调整修后系统，并与客户沟通现象与维修方案与费用；其工作不等于设计开发，也不代替车辆安全件、排放、高压系统、气囊与制冷剂处理相关作业的授权判定，并在故障原因不明、测量超出规格或涉及上述系统时停止升级。",
+        "quick_answer": "汽车维修技师主要给乘用车和轻型卡车做保养、查故障、维修和复检，并把结果写进工单。机修侧重机械和电气故障；钣喷、玻璃、商用车和新能源高压维修各有不同分工。",
         "title": "汽车维修技师与机械师"
       },
       "market_signal_card": {
@@ -36039,7 +36166,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "ep-table",
             "value": {
               "$item": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36084,7 +36211,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep-table",
             "value": {
               "$item": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36129,7 +36256,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "nbs-wages-2025",
             "value": {
               "$item": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36148,7 +36275,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "id": "bls",
+            "id": "ep-table",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.7",
               "block": "market-signals",
@@ -36171,7 +36298,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "id": "ep",
+            "id": "bls-ooh-current",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.7",
               "block": "market-signals",
@@ -36194,7 +36321,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "id": "nbs",
+            "id": "nbs-wages-2025",
             "label": {
               "$link": "automotive-service-technicians-and-mechanics.market-signals.market-signal-card.7",
               "block": "market-signals",
@@ -37578,14 +37705,14 @@
       },
       {
         "derivation": null,
-        "display_value": "50,620美元/年（中位数）",
+        "display_value": "50,620美元/年；24.34美元/小时",
         "fact_id": "us-wage-2025",
         "market": "美国",
         "measure": "年薪中位数（本职业口径）",
         "occupation_scope": "汽车维修技师与机械师",
         "period": "May 2025（OEWS）；访问 2026-09-15",
         "source_refs": [
-          "onet-wages"
+          "oews"
         ]
       },
       {
@@ -37614,38 +37741,38 @@
       },
       {
         "derivation": null,
-        "display_value": "805,600人",
+        "display_value": "825,800",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
+        "measure": "美国本职业就业岗位数",
         "occupation_scope": "汽车维修技师与机械师",
-        "period": "2024 年；访问 2026-09-15",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
         "derivation": null,
-        "display_value": "平均（3% 至 4%）",
+        "display_value": "5.0%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
+        "measure": "美国本职业预测就业变化率",
         "occupation_scope": "汽车维修技师与机械师",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 70,000",
+        "display_value": "预计年均约66,200个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "预测期职位空缺（本职业口径）",
+        "measure": "美国预计年均职业空缺",
         "occupation_scope": "汽车维修技师与机械师",
-        "period": "2024—2034 年；访问 2026-09-15",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
@@ -37818,46 +37945,46 @@
       },
       {
         "derivation": null,
-        "display_value": "805,600人",
+        "display_value": "825,800",
         "fact_id": "us-employment-parent",
         "market": "美国",
-        "measure": "就业规模（本职业口径）",
+        "measure": "美国本职业就业岗位数",
         "occupation_scope": "汽车维修技师与机械师",
-        "period": "2024 年",
+        "period": "2025",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
         "derivation": null,
-        "display_value": "平均（3% 至 4%）",
+        "display_value": "5.0%",
         "fact_id": "us-growth-parent",
         "market": "美国",
-        "measure": "就业增长标签（本职业口径）",
+        "measure": "美国本职业预测就业变化率",
         "occupation_scope": "汽车维修技师与机械师",
-        "period": "2024—2034 年",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约 70,000",
+        "display_value": "预计年均约66,200个",
         "fact_id": "us-openings-parent",
         "market": "美国",
-        "measure": "预测期职位空缺（本职业口径）",
+        "measure": "美国预计年均职业空缺",
         "occupation_scope": "汽车维修技师与机械师",
-        "period": "2024—2034 年",
+        "period": "2025–2035",
         "source_refs": [
-          "ep"
+          "ep-table"
         ]
       },
       {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+0+75)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
+        "derivation": null,
+        "display_value": "未核实职业量化影响",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
+        "measure": "AI证据状态",
         "occupation_scope": "汽车维修技师与机械师",
         "period": "2026-10-18 评估；2026年前后工具能力边界",
         "source_refs": [
@@ -37868,15 +37995,15 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI证据状态"
     },
     "badges": [
-      "O*NET 49-3023.00 · Job Zone Three · 中等准备",
-      "诊断与检查 / 维修与大修 / 测试与交付",
-      "中国大陆无精确职业统计 · 缺口可见标记"
+      "诊断、维修、复检与工单",
+      "区分机修、钣喷与新能源授权",
+      "MX-12：纸面工单复核"
     ],
     "metrics": [
       {
@@ -37889,19 +38016,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国预测就业变化（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国就业岗位（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预测期职位空缺（2024—2034）"
+        "label": "美国预计年均职业空缺"
       },
       {
         "availability": "missing",
@@ -37915,17 +38042,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "汽车维修技师与机械师做什么、需要哪些学历与资格、美国与中国的收入和前景如何、AI 会改变哪些任务，以及车辆安全与高压系统与气囊与制冷剂处理的作业授权边界；保留来源范围与数据缺口。"
+      "text": "了解汽车维修技师怎样诊断和复检，区分机修、钣喷、商用车与新能源维修，查入行和工资口径，并试做一份虚构工单复核。"
     },
     "title": {
       "availability": "available",
-      "text": "汽车维修技师与机械师"
+      "text": "汽车维修技师：日常职责、入行与工资"
     }
   },
-  "source_content_sha256": "1d29a71c4ead59a9151fedf66d1b6b5599ce24b720f3b920ec4749a5147d6cba",
+  "source_content_sha256": "128ec1f037f8f249b4d0f9be8d37e41b544c1047d6be5c74da3911faaea5f890",
   "subject": {
     "canonical_slug": "automotive-service-technicians-and-mechanics",
     "name": "汽车维修技师与机械师",
-    "summary": "汽车维修技师与机械师诊断、调整、修理或大修机动车：按检查清单核对关键部件、用诊断设备与量具检查并判断故障范围、按厂家规格修理或更换与装配与加注、测试并调整修后系统，并与客户沟通现象与维修方案与费用。美国侧对应 O*NET 49-3023.00（Automotive Service Technicians and Mechanics），属 Job Zone Three（SVP 6.0 至 <7.0）；中国大陆统计按行业门类与岗位大类汇总，未单列该职业，本页按证据口径不发布其精确职业工资。"
+    "summary": "汽车维修技师核对车况和工单，诊断机械与电气问题，按厂商资料和授权维修并复检。机修、车身修复、商用车及新能源高压工作各有不同职责和培训要求。"
   }
 }
