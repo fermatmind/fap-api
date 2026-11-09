@@ -17,6 +17,7 @@ const packages = {
   'traditional-article-assessment-guides': ['fermatmind.traditional_article_batch.v1', ['traditional-article-assessment-guides.json','traditional-article-assessment-guides-review.json']],
   'traditional-article-interpretation': ['fermatmind.traditional_article_batch.v1', ['traditional-article-interpretation.json','traditional-article-interpretation-review.json']],
   'traditional-article-cross-group': ['fermatmind.traditional_article_batch.v1', ['traditional-article-cross-group.json','traditional-article-cross-group-review.json']],
+  'traditional-article-reading-research': ['fermatmind.traditional_article_batch.v1', ['traditional-article-reading-research.json','traditional-article-reading-research-review.json']],
   'traditional-article-featured': ['fermatmind.traditional_article_batch.v1', ['traditional-article-featured.json','traditional-article-featured-review.json']],
   'traditional-article-english': ['fermatmind.traditional_article.v1', ['traditional-article-english.json','traditional-article-english-review.json']],
   'traditional-article': ['fermatmind.traditional_article.v1', ['traditional-article.json','traditional-article-review.json']],

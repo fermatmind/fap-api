@@ -35,6 +35,14 @@ final class TraditionalArticleSourcePreflight
         $preparedRoot = $allowStagingPreparedRoot
             && $source->translation_status === Article::TRANSLATION_STATUS_APPROVED;
         $sourceHashMatches = hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash());
+        $legacyCover = $proof['source']['legacy_cover_image_alt'] ?? null;
+        if (! $sourceHashMatches && ! $allowStagingPreparedRoot && $publishedProjection && $sourceLocale === 'zh-CN'
+            && $source->isSourceArticle() && is_string($legacyCover) && $legacyCover !== $source->cover_image_alt) {
+            // Verify the historical hash without changing today's published cover description.
+            $priorSource = clone $source;
+            $priorSource->cover_image_alt = $legacyCover;
+            $sourceHashMatches = hash_equals((string) $source->source_version_hash, $priorSource->computeSourceVersionHash());
+        }
         if (! $sourceHashMatches && $allowStagingChineseProjection && $source->isSourceArticle()) {
             // Some staging roots received public image alt text after the source hash was recorded.
             // readArticle has already bound the actual alt text to the reviewed projection.

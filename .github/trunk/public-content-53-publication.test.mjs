@@ -1338,3 +1338,83 @@ test('Traditional cross-group articles require the reviewed production pair and 
   }
  }
 });
+
+test('Traditional growth guides keep their original default links and all reviewed FAQs',()=>{
+ const selection='traditional-article-reading-research';
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ const paths=['backend/content_assets/public_content_53/'+selection+'.json'];
+ assert.equal(classifyPaths(paths).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,12);
+ const scopes={production:[980,864],staging:[441,694]};
+ for(const [environment,revisions] of Object.entries(scopes)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(0,2);
+  assert.deepEqual(rows.map(row=>row.identity.slug),['mbti-growth-guide','iq-test-growth-guide']);
+  assert.deepEqual(rows.map(row=>row.source_expectations.source.published_revision_id),revisions);
+  assert.deepEqual(rows.map(row=>row.article_metadata.related_test_slug),[null,'iq-test-intelligence-quotient-assessment']);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection.faq.length),[5,5]);
+  for(const row of rows){
+   assert.deepEqual(row.editorial_package_v1.cta_slots,[]);
+   assert.equal(Object.hasOwn(row.snapshot.editorial_projection,'ctas'),false);
+  }
+ }
+});
+
+test('Traditional career exploration binds current cover copy and the historical source proof separately',()=>{
+ const selection='traditional-article-reading-research';
+ const paths=['backend/content_assets/public_content_53/'+selection+'.json'];
+ assert.equal(classifyPaths(paths).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,12);
+ const revisions={production:[[1008,1009],[439,653]],staging:[[746,749],[439,667]]};
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(2,4);
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english.published_revision_id]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection.faq.length),[5,5]);
+  assert.deepEqual(rows.map(row=>row.snapshot.author_name),['Fermat Institute','FermatMind Editorial']);
+  assert.equal(Object.hasOwn(rows[0].source_expectations.source,'legacy_cover_image_alt'),false);
+  const proof=rows[1].source_expectations.source;
+  assert.equal(Object.hasOwn(proof,'legacy_cover_image_alt'),environment==='production');
+  if(environment==='production') assert.notEqual(createHash('sha256').update(proof.legacy_cover_image_alt).digest('hex'),proof.snapshot_sha256.cover_image_alt);
+ }
+});
+
+test('Traditional Big Five comparisons preserve FAQ and original language availability',()=>{
+ const selection='traditional-article-reading-research';
+ const paths=['backend/content_assets/public_content_53/'+selection+'.json'];
+ assert.equal(classifyPaths(paths).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,12);
+ const revisions={production:[[1131,1141],[883,1138]],staging:[[427,null],[717,718]]};
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(4,6);
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english?.published_revision_id??null]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection.faq.length),[3,4]);
+  assert.deepEqual(rows.map(row=>row.snapshot.author_name),['費馬測試編輯部','費馬測試編輯部']);
+  for(const row of rows) assert.deepEqual(row.editorial_package_v1.cta_slots,[]);
+ }
+});
+
+test('Traditional Big Five research reading preserves versions, formulas and default reader actions',()=>{
+ const selection='traditional-article-reading-research';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,12);
+ const revisions={production:[[817,1068],[816,1067],[1094,1095],[1114,1160],[1063,1073],[717,775]],staging:[[654,null],[653,null],[431,null],[650,null],[419,null],[429,null]]};
+ for(const [environment,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,environment).candidates.slice(6,12);
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english?.published_revision_id??null]),expected);
+  for(const [index,row] of rows.entries()){
+   assert.equal(row.snapshot.author_name,'費馬測試編輯部');
+   assert.equal(row.article_metadata.related_test_slug,'big-five-personality-test-ocean-model');
+   if(index===2) assert.match(row.snapshot.content_md,/\[9\]/u);
+   else if(index<4) assert.match(row.snapshot.content_md,/y = 6 − x/u);
+   else if(index===4) assert.match(row.snapshot.content_md,/負荷量恆等性（metric invariance）/u);
+   else {
+    assert.match(row.snapshot.content_md,/遍歷性/u);
+    assert.equal(row.snapshot.editorial_projection.faq.length,4);
+   }
+   assert.match(row.snapshot.content_md,/Unknown/u);
+  }
+ }
+});

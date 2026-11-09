@@ -115,14 +115,16 @@ final class TraditionalArticlePublication
             // These articles use the runtime's default navigation and assessment CTA.
             // Store only reviewed FAQ copy so publishing it leaves those links in place.
             $sourceCtaTargets = $proofs['production']['editorial_cta_targets'] ?? null;
+            $defaultCtaTargets = [
+                ['key' => 'back_to_articles', 'kind' => 'content_continue', 'href' => '/zh/articles'],
+                ['key' => 'topic_hub', 'kind' => 'discover', 'href' => '/zh/topics'],
+            ];
+            if (is_string($article['related_test_slug'] ?? null)) {
+                $defaultCtaTargets[] = ['key' => 'start_test', 'kind' => 'start_test', 'href' => '/zh/tests/'.$article['related_test_slug']];
+            }
             $faqOnly = $projectedBatch && $sourceLocale === 'zh-CN'
                 && $editorial['cta_slots'] === [] && $editorial['answer_surface_v1']['faq_items'] !== []
-                && is_string($article['related_test_slug'] ?? null)
-                && $sourceCtaTargets === [
-                    ['key' => 'back_to_articles', 'kind' => 'content_continue', 'href' => '/zh/articles'],
-                    ['key' => 'topic_hub', 'kind' => 'discover', 'href' => '/zh/topics'],
-                    ['key' => 'start_test', 'kind' => 'start_test', 'href' => '/zh/tests/'.$article['related_test_slug']],
-                ];
+                && $sourceCtaTargets === $defaultCtaTargets;
             if (! $faqOnly && self::ctaTargets($editorial['cta_slots']) !== $sourceCtaTargets) {
                 throw new DomainException('traditional_article_editorial_cta_drift');
             }
@@ -186,6 +188,11 @@ final class TraditionalArticlePublication
                 $record = $proof[$role] ?? [];
                 $recordSlug = $record['slug'] ?? '';
                 $recordGroup = $record['translation_group_id'] ?? '';
+                if (array_key_exists('legacy_cover_image_alt', $record)
+                    && ($name !== 'production' || $role !== 'source' || $sourceLocale !== 'zh-CN' || ! $projectedBatch
+                        || ! is_string($record['legacy_cover_image_alt']) || trim($record['legacy_cover_image_alt']) === '')) {
+                    throw new DomainException('traditional_article_source_proof_invalid');
+                }
                 if (array_key_exists('prepared_revision_source_hash', $record)
                     && ($name !== 'staging' || $role !== 'source' || $sourceLocale !== 'zh-CN' || ! $projectedBatch
                         || ($record['prepared_revision_source_hash'] !== null

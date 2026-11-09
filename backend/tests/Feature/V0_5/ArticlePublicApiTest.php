@@ -1793,7 +1793,24 @@ final class ArticlePublicApiTest extends TestCase
                     $this->assertSame($message, $exception->getMessage());
                 }
             }
-            $source->forceFill(['cover_image_alt' => null])->saveQuietly();
+            $legacyCover = '歷史封面說明';
+            $prior = clone $source;
+            $prior->cover_image_alt = $legacyCover;
+            $legacyHash = $prior->computeSourceVersionHash();
+            $source->forceFill(['source_version_hash' => $legacyHash])->saveQuietly();
+            $sourceRevision->forceFill(['source_version_hash' => $legacyHash])->saveQuietly();
+            $withCover['source']['legacy_cover_image_alt'] = $legacyCover;
+            $this->assertSame($source->id, $guard->assertSource($withCover)->id);
+            $wrongCover = $withCover;
+            $wrongCover['source']['legacy_cover_image_alt'] = '其他舊封面說明';
+            try {
+                $guard->assertSource($wrongCover);
+                $this->fail('The guard accepted a different historical cover.');
+            } catch (DomainException $exception) {
+                $this->assertSame('traditional_article_source_working_state_changed', $exception->getMessage());
+            }
+            $source->forceFill(['cover_image_alt' => null, 'source_version_hash' => $currentHash])->saveQuietly();
+            $sourceRevision->forceFill(['source_version_hash' => $currentHash])->saveQuietly();
             $seo->updateQuietly(['seo_title' => $rawSeoTitle]);
 
             $noEnglish = $proof;
