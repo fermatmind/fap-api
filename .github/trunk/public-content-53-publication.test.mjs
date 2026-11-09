@@ -1016,3 +1016,17 @@ test('Taiwan entrance preserves the indexed pilot and keeps unpublished categori
  for(const changed of [html,production.replace('lang="zh-TW"','lang="zh-CN"'),production.replace('免費測驗','免费测试'),production.replace('/zh-TW/about','/zh/about')])
   assert.throws(()=>assertDom(row,changed,{missing:true},'production'),/TRADITIONAL_LANDING_DOM/);
 });
+
+test('Traditional Article selects the existing publisher and binds the OCEAN source revisions',()=>{
+ const files=['backend/content_assets/public_content_53/traditional-article.json','backend/content_assets/public_content_53/traditional-article-review.json'];
+ assert.equal(selectPublicContentPackage(files),'traditional-article');
+ assert.equal(classifyPaths(files).operations.public_content_53_package,'traditional-article');
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ const binding=inspectPackage(root,'traditional-article');
+ assert.equal(binding.expected_row_count,1);
+ const [row]=readCandidateRows(root,binding.package_sha256).candidates;
+ assert.deepEqual(row.identity,{org_id:0,slug:'ocean-traits-what-the-five-letters-mean',locale:'zh-TW'});
+ assert.equal(row.source_expectations.source.published_revision_id,900);
+ assert.equal(row.source_expectations.existing_english.published_revision_id,903);
+ assert.equal(row.new_traditional_article,true);
+});

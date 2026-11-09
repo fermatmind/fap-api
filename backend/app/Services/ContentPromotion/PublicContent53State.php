@@ -41,6 +41,11 @@ final class PublicContent53State
             });
         }
         foreach ($rows as $row) {
+            if ($row['new_traditional_article'] ?? false) {
+                $state[$row['page_id']] = app(TraditionalArticlePublication::class)->read($row, $lock);
+
+                continue;
+            }
             if ($row['new_traditional_landing'] ?? false) {
                 $state[$row['page_id']] = app(TraditionalLandingSurfacePublication::class)->read($row, $lock);
 
@@ -211,6 +216,12 @@ final class PublicContent53State
             return;
         }
         foreach ($rows as $row) {
+            if ($row['new_traditional_article'] ?? false) {
+                $native = app(TraditionalArticlePublication::class);
+                $native->assertBaseline($native->read($row, false));
+
+                continue;
+            }
             if ($row['new_traditional_landing'] ?? false) {
                 $native = app(TraditionalLandingSurfacePublication::class);
                 $native->assertBaseline($row, $native->read($row, false));
@@ -262,6 +273,11 @@ final class PublicContent53State
     {
         foreach ($rows as $row) {
             $saved = $state[$row['page_id']];
+            if ($row['new_traditional_article'] ?? false) {
+                app(TraditionalArticlePublication::class)->assertBaseline($saved);
+
+                continue;
+            }
             if ($row['new_traditional_landing'] ?? false) {
                 app(TraditionalLandingSurfacePublication::class)->assertBaseline($row, $saved);
 

@@ -84,6 +84,12 @@ final class PublicContent53Writer
         $created = 0;
         foreach ($rows as $row) {
             $saved = $before[$row['page_id']];
+            if ($row['new_traditional_article'] ?? false) {
+                $created += app(TraditionalArticlePublication::class)->publish($row, $saved, $context) ? 1 : 0;
+                $written[$row['page_id']] = true;
+
+                continue;
+            }
             if ($row['new_traditional_landing'] ?? false) {
                 if (app(TraditionalLandingSurfacePublication::class)->publish($row, $saved)) {
                     $written[$row['page_id']] = true;
@@ -206,6 +212,11 @@ final class PublicContent53Writer
         }
         $rows = collect($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'])->keyBy('page_id');
         foreach ($before as $id => $saved) {
+            if ($saved['traditional_article'] ?? false) {
+                app(TraditionalArticlePublication::class)->restore($rows[$id], $after[$id]);
+
+                continue;
+            }
             if ($saved['traditional_landing'] ?? false) {
                 app(TraditionalLandingSurfacePublication::class)->restore($rows[$id], $saved, $after[$id]);
 

@@ -11,7 +11,11 @@ use App\Models\ArticleTag;
 use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Services\ContentPromotion\PromotionContext;
+use App\Services\ContentPromotion\TraditionalArticlePublication;
+use App\Services\ContentPromotion\TraditionalArticleSourcePreflight;
 use App\Services\SEO\SitemapGenerator;
+use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -1323,6 +1327,92 @@ final class ArticlePublicApiTest extends TestCase
         \App\Models\ScaleSlug::withoutGlobalScopes()->updateOrCreate([
             'org_id' => 0, 'slug' => 'holland-career-interest-test-riasec',
         ], ['scale_code' => 'RIASEC', 'is_primary' => true]);
+    }
+
+    public function test_traditional_article_preflight_locks_native_source_and_rejects_source_drift_or_target_collision(): void
+    {
+        $source = $this->createArticle(['locale' => 'zh-CN']);
+        $source->forceFill(['working_revision_id' => $source->published_revision_id])->saveQuietly();
+        $english = $this->createArticle([
+            'slug' => $source->slug,
+            'source_locale' => 'zh-CN',
+            'source_article_id' => $source->id,
+            'translated_from_article_id' => $source->id,
+            'translation_group_id' => $source->translation_group_id,
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+        ]);
+        $proof = [];
+        foreach (['source' => $source, 'existing_english' => $english] as $key => $article) {
+            $seo = $this->createSeoMeta($article);
+            $proof[$key] = [
+                'slug' => $article->slug,
+                'id' => $article->id,
+                'published_revision_id' => $article->published_revision_id,
+                'translation_group_id' => $article->translation_group_id,
+                'is_indexable' => (bool) $article->is_indexable,
+                'sitemap_eligible' => (bool) $article->sitemap_eligible,
+                'hreflang_gate' => null,
+                'snapshot_sha256' => array_map(
+                    static fn (?string $value): ?string => $value === null ? null : hash('sha256', $value),
+                    $article->only(['title', 'excerpt', 'content_md', 'author_name', 'cover_image_alt'])
+                        + $seo->only(['seo_title', 'seo_description', 'og_title', 'og_description']),
+                ),
+            ];
+        }
+
+        $guard = app(TraditionalArticleSourcePreflight::class);
+        DB::transaction(function () use ($guard, $proof, $source): void {
+            $actual = $guard->assertSource($proof, true);
+            $this->assertSame($source->id, $actual->id);
+            $guard->assertTargetVacant($actual, true);
+        });
+
+        $drifted = $proof;
+        $drifted['source']['snapshot_sha256']['title'] = hash('sha256', 'Unexpected source title');
+        try {
+            $guard->assertSource($drifted);
+            $this->fail('The guard accepted a different source title.');
+        } catch (DomainException $exception) {
+            $this->assertSame('traditional_article_source_payload_changed', $exception->getMessage());
+        }
+
+        $candidate = app(TraditionalArticlePublication::class);
+        $sha = str_repeat('a', 64);
+        $context = new PromotionContext('test', $sha, 'W3', 'PUBLIC-CONTENT-53', str_repeat('b', 40),
+            $sha, $sha, '1', 1, $sha, 1, $sha);
+        $row = [
+            'identity' => ['org_id' => 0, 'locale' => 'zh-TW', 'slug' => $source->slug],
+            'source_identity' => ['source_article_id' => $source->id],
+            'source_expectations' => $proof,
+            'package_sha256' => $sha,
+            'page_id' => 'TRADITIONAL-ARTICLE-test',
+            'snapshot' => ['title' => '繁體標題', 'excerpt' => '繁體摘要', 'content_md' => '## 繁體正文',
+                'author_name' => '費馬測試編輯部', 'cover_image_alt' => '封面', 'seo_text' => ['seo_title' => '繁體標題', 'seo_description' => '繁體摘要']],
+            'article_metadata' => [],
+            'taxonomy_display' => ['category' => ['id' => null], 'tags' => []],
+        ];
+        $sourceBefore = $source->getAttributes();
+        $englishBefore = $english->getAttributes();
+        DB::transaction(function () use ($candidate, $row, $context): void {
+            $before = $candidate->read($row, true);
+            $this->assertTrue($before['missing']);
+            $this->assertTrue($candidate->publish($row, $before, $context));
+        });
+        $this->getJson('/api/v0.5/articles/'.$source->slug.'?org_id=0&locale=zh-TW')
+            ->assertOk()->assertJsonPath('article.locale', 'zh-TW')
+            ->assertJsonPath('article.content_md', '## 繁體正文')->assertJsonPath('article.is_indexable', false);
+        DB::transaction(function () use ($candidate, $row): void {
+            $candidate->restore($row, $candidate->read($row, true));
+            $this->assertTrue($candidate->read($row, true)['retained_draft']);
+        });
+        $this->getJson('/api/v0.5/articles/'.$source->slug.'?org_id=0&locale=zh-TW')->assertNotFound();
+        $this->assertSame($sourceBefore, $source->fresh()->getAttributes());
+        $this->assertSame($englishBefore, $english->fresh()->getAttributes());
+
+        $this->createArticle(['locale' => 'zh-TW', 'slug' => $source->slug.'-collision',
+            'translation_group_id' => $source->translation_group_id], withPublishedRevision: false);
+        $this->expectExceptionMessage('target_identity_collision');
+        $guard->assertTargetVacant($source);
     }
 
     private function createArticle(

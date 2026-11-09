@@ -143,6 +143,18 @@ final class PublicContent53Package
                 return self::pricingRefundPackage($this->bytes($root, 'pricing-refund.json'), $this->bytes($root, 'pricing-refund-review.json'), $expectedSha256);
             }
         }
+        if (is_file($root.'/'.self::PACKAGE.'/traditional-article.json')) {
+            $bytes = $this->bytes($root, 'traditional-article.json');
+            $review = $this->bytes($root, 'traditional-article-review.json');
+            $chain = TraditionalArticlePublication::SCHEMA."\ntraditional-article.json\n".hash('sha256', $bytes)
+                ."\ntraditional-article-review.json\n".hash('sha256', $review)."\n";
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                $package = TraditionalArticlePublication::package($bytes, $review, $environment);
+                $package['candidates'][0]['package_sha256'] = $expectedSha256;
+
+                return $package;
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/traditional-entrance.json')) {
             $bytes = $this->bytes($root, 'traditional-entrance.json');
             $review = $this->bytes($root, 'traditional-entrance-review.json');

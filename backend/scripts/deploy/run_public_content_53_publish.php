@@ -88,6 +88,8 @@ try {
         'app/Services/ContentPromotion/PublicContent53Package.php',
         'app/Services/ContentPromotion/PublicContent53State.php',
         'app/Services/ContentPromotion/PublicContent53Writer.php',
+        'app/Services/ContentPromotion/TraditionalArticlePublication.php',
+        'app/Services/ContentPromotion/TraditionalArticleSourcePreflight.php',
         'app/Services/ContentPromotion/TraditionalContentPagePublication.php',
         'app/Services/ContentPromotion/TraditionalLandingSurfacePublication.php',
         'app/Services/Cms/SiblingTranslationWorkflowService.php',

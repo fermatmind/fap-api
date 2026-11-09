@@ -143,7 +143,7 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
       result[row.page_id] = await readMbtiResultCopySample(environment,row,fetcher,renderer);
       continue;
     }
-    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || row.new_traditional_page === true || row.new_traditional_landing === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
+    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
     if (bytes === null) { result[row.page_id]={missing:true};continue; }
     const data=parseApi(bytes);const value=projection(row,data);
     if (!equal(value,environment === 'staging' ? row.staging_before : row.before) && !equal(value,row.snapshot)) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DRIFT_${row.page_id}`);
@@ -254,7 +254,9 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   if (row.kind !== 'surface' && row.snapshot.title && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
   if (['article','guide'].includes(row.kind) && row.snapshot.seo_text) {
     const seo=row.snapshot.seo_text;
-    if (!equal(dom.title.map(compact),[compact(row.kind === 'guide' ? guideDocumentTitle(seo.seo_title) : `${seo.seo_title} | FermatMind`)])
+    const documentTitle = row.kind === 'guide' ? guideDocumentTitle(seo.seo_title)
+      : `${seo.seo_title} | ${row.new_traditional_article ? '費馬測試' : 'FermatMind'}`;
+    if (!equal(dom.title.map(compact),[compact(documentTitle)])
       || !equal(dom.description.map(compact),[compact(seo.seo_description)])
       || !equal(dom.og_title.map(compact),[compact(seo.og_title)])
       || !equal(dom.og_description.map(compact),[compact(seo.og_description)]))
@@ -371,6 +373,12 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
       || !webPage || !breadcrumb || (row.identity.slug === 'about' && !['創始人與博士顧問團隊','劉福威','賈睿璇','李琛'].every(text=>body.includes(compact(text)))))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_SEO_OR_TEAM_${row.page_id}`);
   }
+  if (row.new_traditional_article) {
+    const robots=dom.robots.join(',').toLowerCase().split(',').map(value=>value.trim());
+    if (dom.language !== 'zh-TW' || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)])
+      || !robots.includes('noindex') || robots.includes('index') || dom.alternate_entries.some(entry=>entry.hreflang))
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_SEO_${row.page_id}`);
+  }
   if (newArticle) {
     const languages=dom.alternate_entries.filter(entry=>entry.hreflang).map(entry=>[entry.hreflang,entry.href]).sort();
     const expected=[['en',`https://fermatmind.com/en/articles/${row.identity.slug}`],['zh-CN',`https://fermatmind.com/zh/articles/${row.identity.slug}`],['x-default',`https://fermatmind.com/en/articles/${row.identity.slug}`]].sort();
@@ -400,7 +408,7 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
       throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
   }
   if (dom.canonical.length !== 1 || (!before.missing && (!equal(dom.canonical,before.dom.canonical) || !equal(dom.robots,before.dom.robots)))
-    || (!newArticle && !newTraditionalPage && !initializedStaging && !reviewedHreflang && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
+    || (!row.new_traditional_article && !newArticle && !newTraditionalPage && !initializedStaging && !reviewedHreflang && !equal(dom.alternates,before.dom.alternates))) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
   if (initializedStaging) {
     // The staging Article template deliberately omits hreflang and retains
     // noindex. Bind the missing locale to the observed counterpart policy;
@@ -465,11 +473,14 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     const data=parseApi(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
     const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
     const createdArticle = row.new_article === true && before?.missing === true;
-    const createdTraditional = (row.new_traditional_page === true || row.new_traditional_landing === true) && before?.missing === true;
+    const createdTraditional = (row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true) && before?.missing === true;
     if (row.new_traditional_landing && native.is_indexable !== row.traditional_landing_indexable)
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_LANDING_QUALIFICATION_${row.page_id}`);
     if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_QUALIFICATION_${row.page_id}`);
+    if (row.new_traditional_article === true && (!['is_indexable','sitemap_eligible','llms_eligible'].every(key=>native[key] === false)
+      || native.translation_group_id !== row.source_identity.translation_group_id || native.source_article_id !== row.source_identity.source_article_id
+      || !Number.isInteger(native.published_revision_id))) throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_QUALIFICATION_${row.page_id}`);
     if (row.new_article === true && (!['is_indexable','sitemap_eligible','llms_eligible'].every(key=>native[key] === true)
       || native.translation_group_id !== row.source_identity.translation_group_id || !Number.isInteger(native.published_revision_id))) throw new Error(`PUBLIC_CONTENT_53_NEW_ARTICLE_QUALIFICATION_${row.page_id}`);
     if(!before || !equal(projection(row,data),row.snapshot)

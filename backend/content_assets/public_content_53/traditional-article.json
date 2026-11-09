@@ -1,0 +1,271 @@
+{
+  "schema": "fermatmind.traditional_article.v1",
+  "mapping": {
+    "state": "reviewed_fields_and_public_source_preflight_pending_native_locks",
+    "target_identity": {
+      "org_id": 0,
+      "locale": "zh-TW",
+      "slug": "ocean-traits-what-the-five-letters-mean",
+      "source_locale": "zh-CN",
+      "source_article_id": 175,
+      "translation_group_id": "big5-v2-48b8f86c349fe6a52a5105b8ac745ddcec611d0d"
+    },
+    "review_sha256": "cdb7edde2e4617f5ee55f7497d41307449001adae3f3c559af9f61bbeac83e3f",
+    "environment_source_preflight": {
+      "staging": {
+        "source": {
+          "id": 175,
+          "locale": "zh-CN",
+          "slug": "ocean-traits-what-the-five-letters-mean",
+          "published_revision_id": 747,
+          "translation_group_id": "big5-v2-48b8f86c349fe6a52a5105b8ac745ddcec611d0d",
+          "source_locale": "zh-CN",
+          "source_article_id": null,
+          "is_indexable": true,
+          "sitemap_eligible": true,
+          "public_response_sha256": "1c851b141fc1ac2d33f68e417587ad4f0876e462691b053cfcc36ca553b70a63",
+          "public_body_sha256": "e804d128f59f65bfa234a20e39f05ffcb55b2b1004cb022d80502067ead3758a",
+          "hreflang_gate": {
+            "enabled": false,
+            "policy": "no_hreflang",
+            "reason": "no_verified_public_indexable_english_counterpart"
+          }
+        },
+        "existing_english": {
+          "id": 225,
+          "locale": "en",
+          "slug": "ocean-traits-what-the-five-letters-mean",
+          "published_revision_id": 750,
+          "translation_group_id": "big5-v2-48b8f86c349fe6a52a5105b8ac745ddcec611d0d",
+          "source_locale": "zh-CN",
+          "source_article_id": 175,
+          "is_indexable": true,
+          "sitemap_eligible": true,
+          "public_response_sha256": "c0bd7dfbb46d9d638cf01194990e11f29df354c5473882a7c6f805a119272e36",
+          "public_body_sha256": "61c086b891ea67623f9a9eb6ef45e15a2c650ab121e377f30816cf4c2984751c",
+          "hreflang_gate": null
+        },
+        "reviewed_source_field_deltas": [
+          "/article/author_name"
+        ]
+      },
+      "production": {
+        "source": {
+          "id": 175,
+          "locale": "zh-CN",
+          "slug": "ocean-traits-what-the-five-letters-mean",
+          "published_revision_id": 900,
+          "translation_group_id": "big5-v2-48b8f86c349fe6a52a5105b8ac745ddcec611d0d",
+          "source_locale": "zh-CN",
+          "source_article_id": null,
+          "is_indexable": true,
+          "sitemap_eligible": true,
+          "public_response_sha256": "acb3f1f27b36ed70550a178e8eafefdb86dfbed6887591922ce34ab273c060b1",
+          "public_body_sha256": "e804d128f59f65bfa234a20e39f05ffcb55b2b1004cb022d80502067ead3758a",
+          "hreflang_gate": {
+            "enabled": true,
+            "policy": "reciprocal_counterparts_verified"
+          }
+        },
+        "existing_english": {
+          "id": 243,
+          "locale": "en",
+          "slug": "ocean-traits-what-the-five-letters-mean",
+          "published_revision_id": 903,
+          "translation_group_id": "big5-v2-48b8f86c349fe6a52a5105b8ac745ddcec611d0d",
+          "source_locale": "zh-CN",
+          "source_article_id": 175,
+          "is_indexable": true,
+          "sitemap_eligible": true,
+          "public_response_sha256": "d56e884cdee087799f6420d7e40f360cf32abededaaf5ae4d88b159d38e69892",
+          "public_body_sha256": "61c086b891ea67623f9a9eb6ef45e15a2c650ab121e377f30816cf4c2984751c",
+          "hreflang_gate": {
+            "enabled": true,
+            "policy": "reciprocal_counterparts_verified"
+          }
+        },
+        "reviewed_source_field_deltas": []
+      }
+    },
+    "translation_revision": {
+      "title": "大五人格 OCEAN 是什麼？五個維度與日常例子",
+      "excerpt": "OCEAN 指開放性、盡責性、外向性、宜人性與神經質五個連續維度。通過日常例子理解含義，並區分特質、能力、型別和具體工具的計分方向。",
+      "content_md": "## 快速回答：OCEAN 是哪五個維度？\n\nOCEAN 是開放性、盡責性、外向性、宜人性與神經質五個**寬泛特質維度**的縮寫。它可以幫助整理反覆出現的自我描述；不能把人分成固定類型，也不能證明能力、品格、行為原因或未來結果。\n\n下文行為例子與紀錄表均為編輯撰寫的虛構範例，不是真實個案或研究資料。維度說明與記錄步驟是教育性閱讀建議，不是經過驗證的測量或干預工具。\n\n你在報告裡看到 O、C、E、A、N 五個字母，第一反應也許是：「原來我就是這樣的人。」\n\n更實用的讀法不是問「我高不高」，而是問：**在什麼情境裡，我常怎樣反應？有什麼反例？除了特質，還可能有哪些條件在起作用？**\n\n![五個寬泛人格維度的可觀察的範圍與無法直接推論的結論](https://assets.fermatmind.com/storage/media-library/sources/org-0/media-asset-68-articlebig5zh010bodyv1/source-20260724013543.png)\n\n## 先把五個字母放回正確位置：座標，不是排名\n\n大五研究提供的是一套描述差異的寬泛語言。Goldberg（1990）討論了從特質描述詞中歸納五因素結構的研究路徑；這並不表示五個詞能概括一個人的全部，也不表示某個方向比另一個方向更好。\n\n讀任何一張 OCEAN 結果頁前，先留住三條邊界。\n\n| 需要記住的事 | 容易發生的誤讀 |\n| --- | --- |\n| 廣泛維度容納多種行為 | 一次主動、一次拖延或一次情緒起伏，就能證明整個人格 |\n| 分數方向取決於具體工具 | 高就是好、低就是差 |\n| 自我報告只是一個觀察入口 | 分數已經證明能力、職業適配、關係走向或心理健康狀態 |\n\n如果結果頁沒有交代量表版本、題目、計分方向或參照方式，解釋應當更保守。Berkeley Personality Lab 對 BFI-2 的說明也提示，不同版本、翻譯和計分情境需要分別核對；一種工具的規則不能自動搬到另一種工具上。\n\n## 為什麼一個字母常讓人覺得「有時很像，有時又不像」\n\nOCEAN 說的是域（domain）層面的概括標籤，不是一條單一行為清單。具體工具還可能在廣泛維度下安排更窄的面向；例如 BFI-2 有自己的域與面向結構。Soto 與 John（2017）以及 DeYoung 等人（2007）的研究都說明，廣泛維度和較窄成分之間還可以有不同層級的研究與模型建構。\n\n這不等於所有量表都採用相同面向名稱，更不等於任何一個人會在所有情境中穩定地表現出同一套行為。一個人在工作中偏好熟悉流程，可能是時間、風險或職責使然；這不足以推出他在閱讀、審美或討論新觀點時也一定保守。\n\n所以，五個字母最有價值的用途，是讓觀察更具體，而不是讓結論更大。\n\n## O：開放性——觀察接近新經驗的方式，不是智力或創造力證明\n\n開放性（Openness to Experience）常被用來描述一個人面對新想法、審美體驗、想像或變化時的相對取向。它可以提醒你看見自己怎樣接近陌生事物；不能替你給智力、創造力或人生選擇下結論。\n\n| 可以觀察 | 不能推斷 |\n| --- | --- |\n| 遇到陌生觀點、材料或體驗時，你會先探索、比較還是暫緩 | 你一定更聰明，或一定更有創造力 |\n| 變化到來時，你更需要理由、時間還是實際試用 | 你適合或不適合某個專業、職業或生活道路 |\n| 這種取向是否在工作、興趣、關係中有所不同 | 一次冒險或一次保守選擇代表穩定人格 |\n\n例如，團隊提出一個新工具時，你先問了試用成本、退出條件和替代方案，再決定是否嘗試。這是一條可以回看的行為紀錄。它既可能反映你對新事物的接近方式，也可能只是當時風險較高。把兩種解釋都留下，觀察才不會變成自證。\n\n## C：盡責性——觀察組織與承諾的處理方式，不是價值評定\n\n盡責性（Conscientiousness）常涉及組織、計畫、承諾、細節和任務推進等傾向。它適合幫助回顧過程，但不能把資源差異、工作負荷或工具系統抹掉。\n\n| 可以觀察 | 不能推斷 |\n| --- | --- |\n| 任務到來時，你會不會拆解步驟、設提醒、檢查遺漏 | 你一定更能幹、更值得信任或更有道德 |\n| 截止期靠近時，你怎樣安排順序或調整計畫 | 你一定會獲得學業、收入或職業成功 |\n| 哪些條件下更易遺漏、拖延或反覆檢查 | 一次拖延就是人格缺陷或意志薄弱 |\n\n同樣是「沒有按時完成」，背後可能是目標不清、睡眠不足、任務量失控、資源缺少，或是計畫方式不適合。特質詞可以幫你提出問題，卻不能跳過這些可改變的條件。\n\n## E：外向性——觀察社交參與與活動偏好，不等於社交技能\n\n外向性（Extraversion）常與主動參與、表達意願、活動程度或對社交刺激的偏好有關。它不是「會說話」的同義詞，也不是受歡迎程度的排名。\n\n| 可以觀察 | 不能推斷 |\n| --- | --- |\n| 在熟人小組、陌生會議、公開表達和獨自工作中，你的參與意願如何變化 | 你一定擅長傾聽、談判、領導或建立親密關係 |\n| 社交之後，你通常感到更有活力、沒有變化，還是需要安靜時間 | 安靜就是社交無能，活躍就是更受歡迎 |\n| 你的參與是否受互動對象、任務、文化和權力關係影響 | 你在所有人際情境都應使用同一種方式 |\n\n有人在會議裡先發言，未必已經理解他人的立場；有人偏好一對一溝通，也不等於無法合作。溝通能力仍要回到練習、回饋、關係歷史和具體任務來觀察。\n\n## A：宜人性——觀察合作與分歧的處理方式，不是善惡判斷\n\n宜人性（Agreeableness）通常涉及在互動中對合作、信任、體諒或直接競爭的相對取向。它更適合放進具體分歧中理解，而不是拿來給一個人貼「好相處」或「難相處」的標籤。\n\n| 可以觀察 | 不能推斷 |\n| --- | --- |\n| 意見不同時，你更常協商、質疑、讓步還是先退出 | 你是好人或壞人 |\n| 你如何在合作、表達需要與維護邊界間取捨 | 你一定沒有原則，或一定不在乎別人 |\n| 哪些關係和情境會改變你的處理方式 | 你必然適合或不適合某種領導、銷售或照護角色 |\n\n例如，拒絕一個不合理請求，既可能需要清楚表達，也可能需要保留對關係的尊重。只憑「宜人性高/低」無法判斷這次拒絕是否恰當。更有用的回顧是：我說了什麼？我有沒有說明需要？對方怎樣回應？下次需要補充什麼事實？\n\n## N：神經質與「情緒穩定性」——先核對方向，不能當診斷或抗壓證明\n\nN 通常寫作神經質（Neuroticism），常被用來描述較容易體驗負向情緒或情緒波動的傾向。也有工具採用相反方向的「情緒穩定性」。因此，看到 N 之前先確認：頁面報告的是哪一個名稱？高分指向哪一端？\n\n| 可以觀察 | 不能推斷 |\n| --- | --- |\n| 在壓力、批評或不確定性下，你是否更常感到擔憂、煩躁或自我懷疑 | 你有某種心理障礙，或需要被診斷 |\n| 情緒出現後，你怎樣覺察、暫停、表達或尋求支援 | 你一定抗壓差，或未來一定會失控 |\n| 這些反應是否隨睡眠、關係、工作負荷和近期事件變化 | 一個分數就是情緒健康的完整結論 |\n\n敏感不是缺陷，平靜也不是優越。若困擾持續、強烈或已經影響日常生活，單靠人格內容無法作出判斷，應尋求合格醫療或心理健康專業人士的幫助。\n\n## 用一張紀錄表，讓標籤回到真實情境\n\n如果想從 OCEAN 得到一點實際幫助，一次只選一個維度和一個情境，連續記錄幾次即可。重點不是證明標籤，而是同時留下符合描述的觀察與反例。\n\n| 情境 | 我實際做了什麼 | 還可能有什麼解釋或反例？ |\n| --- | --- | --- |\n| 團隊提出陌生方案 | 我先問了三個問題，再決定試用一週 | 風險當時可控；不能僅據此判斷整體開放性 |\n| 三項任務同時截止 | 我列出順序並設了提醒 | 可能來自工具習慣，也可能因為任務熟悉 |\n| 討論出現不同意見 | 我沉默十分鐘後私下補充 | 可能與會議節奏或權力關係有關，不只關乎外向性或宜人性 |\n\n連續幾週後，你可能發現某種描述確實反覆出現；也可能發現它只在某一角色裡出現。兩種發現都值得保留，因為它們沒有把環境、經驗和選擇空間從故事裡刪除。\n\n## OCEAN 不能替你完成的判斷\n\nOCEAN 不是固定人格型別，不是好壞排序，也不是技能測驗。它不能單獨說明行為原因，不能診斷心理健康問題，不能替代技能評估，也不能單憑五個字母對個人的職業、關係、學業、收入或未來表現作確定預測。一般研究中的統計關聯，不能直接替代對具體工具、用途和個體的驗證。\n\n費馬測試（FermatMind）產品的信度、效度、常模、樣本量、百分位、校準方式與預測用途，需要按具體工具、版本、樣本和用途核對證據；本文的一般研究不能補足這些產品證據。若使用相關工具，請將結果作為教育性自我反思的起點：回到真實情境，尋找反例，並補充來自經驗與可信回饋的資訊，而不要把五個字母當成最終答案。\n\n## 參考來源與站內延伸閱讀\n\n- Goldberg, L. R. (1990). [An Alternative 「Description of Personality」: The Big-Five Factor Structure](https://pubmed.ncbi.nlm.nih.gov/2283588/) —— 支持從特質描述語言討論寬泛五因素結構；不足以支持對個人的固定判定。\n- Soto, C. J., & John, O. P. (2017). [The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power](https://pubmed.ncbi.nlm.nih.gov/27055049/)；參見 [Berkeley Personality Lab 的 BFI 說明](https://www.ocf.berkeley.edu/~johnlab/bfi.html) —— 說明特定工具可有域與較窄層級；不把一種做法等同於所有工具。\n- DeYoung, C. G., Quilty, L. C., & Peterson, J. B. (2007). [Between Facets and Domains: 10 Aspects of the Big Five](https://pubmed.ncbi.nlm.nih.gov/17983306/) —— 支持廣泛維度與較窄成分之間可繼續研究；不足以支持由維度推斷個人技能或未來。\n\n- NIMH：[Caring for Your Mental Health](https://www.nimh.nih.gov/health/topics/caring-for-your-mental-health) —— 支持在困擾持續、加重或影響日常功能時尋求專業幫助的一般建議，不把 N 維度當作診斷。\n\n站內可繼續閱讀：\n\n- [大五人格介紹](/zh/personality/big-five)\n- [大五專題](/zh/topics/big-five)\n- [大五人格測評](/zh/tests/big-five-personality-test-ocean-model)\n\n查閱紀錄：2026-10-01。Goldberg（1990）與 BFI-2 的原始摘要、Berkeley量表說明和NIMH專業求助建議已核對；DeYoung 的方面層級原始摘要此前已核對，並未逐篇核對全文。BFI-2 的名稱和層級不代表所有大五工具或費馬測試採用相同做法。\n",
+      "seo_title": "大五人格五個維度是什麼？OCEAN 含義與例子",
+      "seo_description": "瞭解大五人格 OCEAN 的五個維度：開放性、盡責性、外向性、宜人性與神經質。結合日常例子、分數方向與解讀邊界理解特質，不把維度當作固定類型。"
+    },
+    "article_metadata": {
+      "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-67-articlebig5zh010coverv1/hero_1600x900.jpg",
+      "cover_image_width": 1600,
+      "cover_image_height": 900,
+      "cover_image_variants": {
+        "og": {
+          "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-67-articlebig5zh010coverv1/og_1200x630.jpg",
+          "width": 1200,
+          "height": 630,
+          "mime_type": "image/jpeg"
+        },
+        "card": {
+          "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-67-articlebig5zh010coverv1/card_800x450.jpg",
+          "width": 800,
+          "height": 450,
+          "mime_type": "image/jpeg"
+        },
+        "hero": {
+          "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-67-articlebig5zh010coverv1/hero_1600x900.jpg",
+          "width": 1600,
+          "height": 900,
+          "mime_type": "image/jpeg"
+        },
+        "preload": {
+          "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-67-articlebig5zh010coverv1/preload_64x36.jpg",
+          "width": 64,
+          "height": 36,
+          "mime_type": "image/jpeg"
+        },
+        "thumbnail": {
+          "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-67-articlebig5zh010coverv1/thumbnail_400x225.jpg",
+          "width": 400,
+          "height": 225,
+          "mime_type": "image/jpeg"
+        }
+      },
+      "related_test_slug": "big-five-personality-test-ocean-model",
+      "author_name": "費馬測試編輯部",
+      "cover_image_alt": "OCEAN 五個維度是什麼：含義、範圍與不能推斷的結論文章封面：以情境、行為觀察與證據邊界呈現主題"
+    },
+    "seo_metadata": {
+      "og_title": "大五人格五個維度是什麼？OCEAN 含義與例子",
+      "og_description": "瞭解大五人格 OCEAN 的五個維度：開放性、盡責性、外向性、宜人性與神經質。結合日常例子、分數方向與解讀邊界理解特質，不把維度當作固定類型。",
+      "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-67-articlebig5zh010coverv1/og_1200x630.jpg"
+    },
+    "taxonomy_display": {
+      "category": {
+        "id": 1,
+        "slug": "55e888afb9f3",
+        "label": "人格心理學"
+      },
+      "tags": [
+        {
+          "id": 33,
+          "slug": "6f1758ea7fef",
+          "label": "大五人格"
+        },
+        {
+          "id": 37,
+          "slug": "big-five",
+          "label": "Big Five"
+        },
+        {
+          "id": 38,
+          "slug": "personality-test",
+          "label": "Personality Test"
+        }
+      ]
+    }
+  },
+  "source_expectations": {
+    "staging": {
+      "source": {
+        "id": 175,
+        "slug": "ocean-traits-what-the-five-letters-mean",
+        "published_revision_id": 747,
+        "translation_group_id": "big5-v2-48b8f86c349fe6a52a5105b8ac745ddcec611d0d",
+        "source_locale": "zh-CN",
+        "source_article_id": null,
+        "is_indexable": true,
+        "sitemap_eligible": true,
+        "hreflang_gate": {
+          "enabled": false,
+          "policy": "no_hreflang",
+          "reason": "no_verified_public_indexable_english_counterpart"
+        },
+        "snapshot_sha256": {
+          "title": "6fd2b003cc3adc8177b13cb42cf7cabcaccdbb37299ea3f6d543edf429220db6",
+          "excerpt": "56dc62d44d1d1c5899d23870e5debb815eb9b30d818d444bf38eee4436959144",
+          "content_md": "e804d128f59f65bfa234a20e39f05ffcb55b2b1004cb022d80502067ead3758a",
+          "author_name": null,
+          "cover_image_alt": "9eff2e49ac909e60f0edc98b1293cd66ab5c658e5a9a287fddb3ad483c2112dc",
+          "seo_title": "0e5f5837dc29fc7769e36a943a65dca91fc27fbf7d3ac8396fa223f3e52536b2",
+          "seo_description": "87714337b756871d6901f57ff5984dcb22aa641c7fe8c2c8a0dfe6d166b778c9",
+          "og_title": "0e5f5837dc29fc7769e36a943a65dca91fc27fbf7d3ac8396fa223f3e52536b2",
+          "og_description": "87714337b756871d6901f57ff5984dcb22aa641c7fe8c2c8a0dfe6d166b778c9"
+        }
+      },
+      "existing_english": {
+        "id": 225,
+        "slug": "ocean-traits-what-the-five-letters-mean",
+        "published_revision_id": 750,
+        "translation_group_id": "big5-v2-48b8f86c349fe6a52a5105b8ac745ddcec611d0d",
+        "source_locale": "zh-CN",
+        "source_article_id": 175,
+        "is_indexable": true,
+        "sitemap_eligible": true,
+        "hreflang_gate": null,
+        "snapshot_sha256": {
+          "title": "fde4ad6631a885ee95571ba2ecbcebcc0bb68e0415fcb8ce11a9afc75d6742c6",
+          "excerpt": "87781f6fbcd57931e26631ff2036a5b4f935d295c0ac9e0b12c9774baef0dae6",
+          "content_md": "61c086b891ea67623f9a9eb6ef45e15a2c650ab121e377f30816cf4c2984751c",
+          "author_name": null,
+          "cover_image_alt": "55a07d42fe3b2a2788a4472d9ba82e63c31f85ec80b2a9e19e8170f9d2dbfc25",
+          "seo_title": "2a2feeb14aa1824a4aa2d15baf5019f75e8283083fcc1492205d1c1f362f5e05",
+          "seo_description": "9f61e592bc589c7732c28f2a5559449127a7df8c564ddf3e23ce52a10cd9b631",
+          "og_title": "2a2feeb14aa1824a4aa2d15baf5019f75e8283083fcc1492205d1c1f362f5e05",
+          "og_description": "9f61e592bc589c7732c28f2a5559449127a7df8c564ddf3e23ce52a10cd9b631"
+        }
+      }
+    },
+    "production": {
+      "source": {
+        "id": 175,
+        "slug": "ocean-traits-what-the-five-letters-mean",
+        "published_revision_id": 900,
+        "translation_group_id": "big5-v2-48b8f86c349fe6a52a5105b8ac745ddcec611d0d",
+        "source_locale": "zh-CN",
+        "source_article_id": null,
+        "is_indexable": true,
+        "sitemap_eligible": true,
+        "hreflang_gate": {
+          "enabled": true,
+          "policy": "reciprocal_counterparts_verified"
+        },
+        "snapshot_sha256": {
+          "title": "6fd2b003cc3adc8177b13cb42cf7cabcaccdbb37299ea3f6d543edf429220db6",
+          "excerpt": "56dc62d44d1d1c5899d23870e5debb815eb9b30d818d444bf38eee4436959144",
+          "content_md": "e804d128f59f65bfa234a20e39f05ffcb55b2b1004cb022d80502067ead3758a",
+          "author_name": "a35721cf784957062571e98a7b1aa5ac78a35a4140f744735f02769513ef058d",
+          "cover_image_alt": "9eff2e49ac909e60f0edc98b1293cd66ab5c658e5a9a287fddb3ad483c2112dc",
+          "seo_title": "0e5f5837dc29fc7769e36a943a65dca91fc27fbf7d3ac8396fa223f3e52536b2",
+          "seo_description": "87714337b756871d6901f57ff5984dcb22aa641c7fe8c2c8a0dfe6d166b778c9",
+          "og_title": "0e5f5837dc29fc7769e36a943a65dca91fc27fbf7d3ac8396fa223f3e52536b2",
+          "og_description": "87714337b756871d6901f57ff5984dcb22aa641c7fe8c2c8a0dfe6d166b778c9"
+        }
+      },
+      "existing_english": {
+        "id": 243,
+        "slug": "ocean-traits-what-the-five-letters-mean",
+        "published_revision_id": 903,
+        "translation_group_id": "big5-v2-48b8f86c349fe6a52a5105b8ac745ddcec611d0d",
+        "source_locale": "zh-CN",
+        "source_article_id": 175,
+        "is_indexable": true,
+        "sitemap_eligible": true,
+        "hreflang_gate": {
+          "enabled": true,
+          "policy": "reciprocal_counterparts_verified"
+        },
+        "snapshot_sha256": {
+          "title": "fde4ad6631a885ee95571ba2ecbcebcc0bb68e0415fcb8ce11a9afc75d6742c6",
+          "excerpt": "87781f6fbcd57931e26631ff2036a5b4f935d295c0ac9e0b12c9774baef0dae6",
+          "content_md": "61c086b891ea67623f9a9eb6ef45e15a2c650ab121e377f30816cf4c2984751c",
+          "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+          "cover_image_alt": "f28bc239024ebd5deffb0acb929e8ea37c019e5b7597e780bc667bd7195735dd",
+          "seo_title": "2a2feeb14aa1824a4aa2d15baf5019f75e8283083fcc1492205d1c1f362f5e05",
+          "seo_description": "9f61e592bc589c7732c28f2a5559449127a7df8c564ddf3e23ce52a10cd9b631",
+          "og_title": "2a2feeb14aa1824a4aa2d15baf5019f75e8283083fcc1492205d1c1f362f5e05",
+          "og_description": "9f61e592bc589c7732c28f2a5559449127a7df8c564ddf3e23ce52a10cd9b631"
+        }
+      }
+    }
+  }
+}
