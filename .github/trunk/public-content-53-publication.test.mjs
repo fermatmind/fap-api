@@ -1683,3 +1683,24 @@ test('Traditional admissions checklists require reviewed native visuals in API a
   }
  }
 });
+
+test('Traditional evidence and AI articles keep historical evidence and copyable prompts',()=>{
+ const selection='traditional-article-evidence-and-ai';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,3);
+ const revisions={production:[[1049,1050],[1082,1083],[481,964]],staging:[[840,null],[831,null],[783,784]]};
+ for(const [env,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,env).candidates;
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.published_revision_id,row.source_expectations.existing_english?.published_revision_id??null]),expected);
+  assert.deepEqual(rows.map(row=>row.snapshot.editorial_projection?.faq.length??0),[0,0,5]);
+  assert.match(rows[0].snapshot.content_md,/18:00.*National Careers Service/su);
+  assert.match(rows[1].snapshot.title,/煞車踏板支架斷裂/u);
+  assert.match(rows[1].snapshot.content_md,/11 月 5 日.*100km\/h/su);
+  const content=rows[2].snapshot.content_md;
+  assert.match(content,/E 70%、I 30%.*40 個百分點.*120 分鐘/su);
+  const prompts=[...content.matchAll(/^```text\n([\s\S]*?)^```$/gm)].map(match=>match[1]);
+  assert.equal(prompts.length,2);
+  assert.ok(prompts.every(prompt=>prompt.includes('Unknown') && !/[请这为过对读语给结报]/u.test(prompt)));
+ }
+});

@@ -176,7 +176,7 @@ final class PublicContent53Package
                 return TraditionalLandingSurfacePublication::featuredOrder($bytes, $environment, $directory, $articles);
             }
         }
-        foreach (['traditional-article-batch', 'traditional-article-featured', 'traditional-article-career-eq', 'traditional-article-big-five', 'traditional-article-assessment-guides', 'traditional-article-interpretation', 'traditional-article-cross-group', 'traditional-article-reading-research', 'traditional-article-big-five-application', 'traditional-article-assessment-reading', 'traditional-article-enneagram-career-guides', 'traditional-article-admissions-and-reading', 'traditional-article-relationship-and-guides', 'traditional-article-admissions-checklists'] as $name) {
+        foreach (['traditional-article-batch', 'traditional-article-featured', 'traditional-article-career-eq', 'traditional-article-big-five', 'traditional-article-assessment-guides', 'traditional-article-interpretation', 'traditional-article-cross-group', 'traditional-article-reading-research', 'traditional-article-big-five-application', 'traditional-article-assessment-reading', 'traditional-article-enneagram-career-guides', 'traditional-article-admissions-and-reading', 'traditional-article-relationship-and-guides', 'traditional-article-admissions-checklists', 'traditional-article-evidence-and-ai'] as $name) {
             if (! is_file($root.'/'.self::PACKAGE.'/'.$name.'.json')) {
                 continue;
             }
