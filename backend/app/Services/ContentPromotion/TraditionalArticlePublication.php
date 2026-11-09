@@ -90,7 +90,7 @@ final class TraditionalArticlePublication
             'related_test_slug', 'author_name', 'cover_image_alt'];
         if (array_diff(array_keys($article), $allowedArticle) !== []
             || ($proofs['production']['source']['id'] ?? null) !== $identity['source_article_id']
-            || (! $batch && ($proofs['staging']['source']['id'] ?? null) !== $identity['source_article_id'])) {
+            || (! $batch && $sourceLocale !== 'en' && ($proofs['staging']['source']['id'] ?? null) !== $identity['source_article_id'])) {
             throw new DomainException('traditional_article_package_protected_fields');
         }
 
@@ -168,6 +168,8 @@ final class TraditionalArticlePublication
                 $recordSlug = $record['slug'] ?? '';
                 $recordGroup = $record['translation_group_id'] ?? '';
                 if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $recordSlug) !== 1
+                    || ($englishSource && (! is_int($record['id'] ?? null) || $record['id'] < 1
+                        || ! is_int($record['published_revision_id'] ?? null) || $record['published_revision_id'] < 1))
                     || ($role === 'source' && ((! $independentChinese && $recordSlug !== $slug) || $recordGroup !== $identity['translation_group_id']
                         || ($record['locale'] ?? $sourceLocale) !== $sourceLocale))
                     || $recordSlug !== ($origin['slug'] ?? null)

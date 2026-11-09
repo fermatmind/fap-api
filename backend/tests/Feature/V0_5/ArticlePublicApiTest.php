@@ -1512,6 +1512,13 @@ final class ArticlePublicApiTest extends TestCase
         $rows = TraditionalArticlePublication::package(json_encode($package, JSON_THROW_ON_ERROR), $review, 'production')['candidates'];
         $this->assertSame('en', $rows[0]['source_identity']['source_locale']);
         $this->assertNull($rows[0]['source_expectations']['existing_chinese']);
+        $stageId = $rows[0]['source_identity']['source_article_id'] + 1000;
+        $package['source_expectations']['staging']['source']['id'] = $stageId;
+        $package['mapping']['environment_source_preflight']['staging']['source']['id'] = $stageId;
+        $stage = TraditionalArticlePublication::package(json_encode($package, JSON_THROW_ON_ERROR), $review, 'staging')['candidates'][0];
+        $this->assertSame($stageId, $stage['source_identity']['source_article_id']);
+        $this->assertSame($rows[0]['source_identity']['source_article_id'], $package['mapping']['target_identity']['source_article_id']);
+
         $split = $package;
         $split['mapping']['target_identity']['slug'] .= '-english-source';
         foreach ($split['source_expectations'] as $environment => &$proof) {
