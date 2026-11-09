@@ -411,6 +411,9 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
         || (testSlug && !(dom.link_labels['/en/tests/'+testSlug] ?? []).some(label=>compact(label) === '開始測驗')))
         throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_ENGLISH_READER_LINK');
     }
+    const assessment = row.source_expectations?.source_snapshot_kind === 'published_projection' && row.article_metadata?.related_test_slug;
+    if (assessment && !(dom.link_labels['/zh/tests/'+assessment] ?? []).some(label=>compact(label) === '開始測驗'))
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_ASSESSMENT_LINK_${row.page_id}`);
     const editorial = row.snapshot.editorial_projection;
     if (editorial && (editorial.faq.some(({question})=>!body.includes(compact(question)) && !body.includes(compact(plain(question))))
       || editorial.ctas.some(({href,label})=>!(dom.link_labels[href] ?? []).some(value=>compact(value) === compact(label)))))
@@ -536,8 +539,8 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
         || !equal(data.reader_language_slugs,expected) || !equal(original.reader_language_slugs,expected))
         throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_ENGLISH_READER_PAIR');
     }
-    if (row.traditional_article_batch && (native.category?.id !== row.taxonomy_display.category.id
-      || native.category?.slug !== row.taxonomy_display.category.slug
+    if (row.traditional_article_batch && ((native.category?.id ?? null) !== row.taxonomy_display.category.id
+      || (native.category?.slug ?? null) !== row.taxonomy_display.category.slug
       || !equal((native.tags ?? []).map(tag=>[tag.id,tag.slug]).sort(),row.taxonomy_display.tags.map(tag=>[tag.id,tag.slug]).sort())))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_TAXONOMY_${row.page_id}`);
     if (row.new_article === true && (!['is_indexable','sitemap_eligible','llms_eligible'].every(key=>native[key] === true)

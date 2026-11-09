@@ -1187,3 +1187,26 @@ test('Traditional Article English source verifies reciprocal reader links and re
  };
  await assert.rejects(verifyOnlineCandidates('staging',root,fetcher,undefined,{[row.page_id]:{missing:true}},sha),/TRADITIONAL_ENGLISH_READER_PAIR/);
 });
+
+test('Traditional Article career and EQ batch binds each environment and preserves the public assessment link',()=>{
+ const selection='traditional-article-career-eq';
+ const root=resolve(fileURLToPath(new URL('../../backend',import.meta.url)));
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,4);
+ const production=readCandidateRows(root,binding.package_sha256).candidates;
+ const staging=readCandidateRows(root,binding.package_sha256,'staging').candidates;
+ assert.deepEqual(production.map(row=>row.source_expectations.source.published_revision_id),[898,783,784,1000]);
+ assert.deepEqual(staging.map(row=>row.source_expectations.source.published_revision_id),[745,464,465,466]);
+ assert.deepEqual(production.map(row=>row.taxonomy_display.category.id),[11,1,38,38]);
+ assert.deepEqual(staging.map(row=>row.taxonomy_display.category.id),[11,null,null,null]);
+ assert.notEqual(staging[1].source_identity.translation_group_id,production[1].source_identity.translation_group_id);
+ for (const row of [...staging,...production]) {
+  assert.equal(row.source_expectations.source_snapshot_kind,'published_projection');
+  const href='/zh/tests/'+row.article_metadata.related_test_slug;
+  const fixture={...row,snapshot:{content_md:'繁體文章'}};
+  const html='<html lang="zh-TW"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="https://fermatmind.com'+pathFor(row)+'"></head><body><main><h1>繁體文章</h1><a href="'+href+'">開始測驗</a></main></body></html>';
+  assert.doesNotThrow(()=>assertDom(fixture,html,{missing:true},'production'));
+  assert.throws(()=>assertDom(fixture,html.replace(href,href.replace('/zh/','/en/')),{missing:true},'production'),/TRADITIONAL_ARTICLE_ASSESSMENT_LINK/);
+ }
+});

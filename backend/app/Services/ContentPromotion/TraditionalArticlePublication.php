@@ -73,11 +73,14 @@ final class TraditionalArticlePublication
         $identity = $mapping['target_identity'] ?? [];
         $slug = $identity['slug'] ?? '';
         $sourceLocale = $identity['source_locale'] ?? null;
+        $sourceSnapshotKind = $package['source_snapshot_kind'] ?? null;
+        $projectedBatch = $batch && $sourceSnapshotKind === 'published_projection';
         if (($package['schema'] ?? null) !== self::SCHEMA
             || ($mapping['review_sha256'] ?? null) !== hash('sha256', $reviewBytes)
             || ($review['targetLocale'] ?? null) !== 'zh-TW'
             || ($identity['locale'] ?? null) !== 'zh-TW' || ($identity['org_id'] ?? null) !== 0
             || ! in_array($sourceLocale, ['zh-CN', 'en'], true)
+            || ($sourceSnapshotKind !== null && ! $projectedBatch)
             || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
             || array_keys($proofs) !== ['staging', 'production'] || ! isset($proofs[$environment])) {
             throw new DomainException('traditional_article_package_invalid');
@@ -127,6 +130,9 @@ final class TraditionalArticlePublication
             }
         }
         foreach ($proofs as $name => $proof) {
+            if (array_key_exists('source_snapshot_kind', $proof)) {
+                throw new DomainException('traditional_article_source_proof_invalid');
+            }
             $origins = $mapping['environment_source_preflight'][$name] ?? [];
             $englishSource = $sourceLocale === 'en';
             if ($englishSource && (! array_key_exists('existing_chinese', $proof)
@@ -162,6 +168,7 @@ final class TraditionalArticlePublication
             } elseif (! $englishAbsent && ! $englishSource) {
                 $roles[] = 'existing_english';
             }
+            $requiresTargetGroup = $englishSource || ! $projectedBatch || $name === 'production';
             foreach ($roles as $role) {
                 $origin = $origins[$role] ?? [];
                 $record = $proof[$role] ?? [];
@@ -170,7 +177,8 @@ final class TraditionalArticlePublication
                 if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $recordSlug) !== 1
                     || ($englishSource && (! is_int($record['id'] ?? null) || $record['id'] < 1
                         || ! is_int($record['published_revision_id'] ?? null) || $record['published_revision_id'] < 1))
-                    || ($role === 'source' && ((! $independentChinese && $recordSlug !== $slug) || $recordGroup !== $identity['translation_group_id']
+                    || ($role === 'source' && ((! $independentChinese && $recordSlug !== $slug)
+                        || ($requiresTargetGroup && $recordGroup !== $identity['translation_group_id'])
                         || ($record['locale'] ?? $sourceLocale) !== $sourceLocale))
                     || $recordSlug !== ($origin['slug'] ?? null)
                     || $recordGroup === '' || $recordGroup !== ($origin['translation_group_id'] ?? null)
@@ -190,7 +198,16 @@ final class TraditionalArticlePublication
         }
 
         $stagingTaxonomy = $package['staging_source_taxonomy'] ?? null;
-        if ($batch) {
+        if ($projectedBatch) {
+            $category = $stagingTaxonomy['category_id'] ?? null;
+            $tags = $stagingTaxonomy['tag_ids'] ?? [];
+            if (array_keys($stagingTaxonomy ?? []) !== ['category_id', 'tag_ids']
+                || ($category !== null && (! is_int($category) || $category < 1))
+                || ! array_is_list($tags) || $tags !== array_values(array_unique($tags))
+                || array_filter($tags, fn ($tag): bool => ! is_int($tag) || $tag < 1) !== []) {
+                throw new DomainException('traditional_article_batch_staging_source_invalid');
+            }
+        } elseif ($batch) {
             if ($editorial === null ? ($stagingTaxonomy !== ['category_id' => null, 'tag_ids' => []]
                 || ! array_key_exists('cover_image_alt', $proofs['staging']['source']['snapshot_sha256'])
                 || $proofs['staging']['source']['snapshot_sha256']['cover_image_alt'] !== null)
@@ -204,7 +221,7 @@ final class TraditionalArticlePublication
                 if ($editorial !== null && ! preg_match('/\A[a-f0-9]{64}\z/', $proof['editorial_projection_sha256'] ?? '')) {
                     throw new DomainException('traditional_article_editorial_source_invalid');
                 }
-                if (($editorial !== null || $sourceLocale === 'en') && $name === 'staging') {
+                if (($editorial !== null || $sourceLocale === 'en' || $projectedBatch) && $name === 'staging') {
                     continue;
                 }
                 $sourceHashes = $proof['source']['snapshot_sha256'];
@@ -220,6 +237,11 @@ final class TraditionalArticlePublication
             }
         }
 
+        $taxonomy = $mapping['taxonomy_display'];
+        if ($projectedBatch && $environment === 'staging' && $stagingTaxonomy === ['category_id' => null, 'tag_ids' => []]) {
+            $taxonomy = ['category' => ['id' => null, 'slug' => null], 'tags' => []];
+        }
+
         return [
             'page_id' => 'TRADITIONAL-ARTICLE-'.$slug,
             'kind' => 'article',
@@ -227,14 +249,17 @@ final class TraditionalArticlePublication
             'new_traditional_article' => true,
             'traditional_article_batch' => $batch,
             'before' => [], 'staging_before' => [],
-            'source_identity' => array_replace($identity, ['source_article_id' => $proofs[$environment]['source']['id']]),
+            'source_identity' => array_replace($identity, [
+                'source_article_id' => $proofs[$environment]['source']['id'],
+                'translation_group_id' => $proofs[$environment]['source']['translation_group_id'],
+            ]),
             'staging_source_article_id' => $proofs['staging']['source']['id'],
             'staging_source_taxonomy' => $batch && $environment === 'staging' ? $stagingTaxonomy : null,
-            'source_expectations' => $proofs[$environment],
+            'source_expectations' => $proofs[$environment] + ($projectedBatch ? ['source_snapshot_kind' => $sourceSnapshotKind] : []),
             'allow_staging_prepared_root' => $environment === 'staging',
             'article_metadata' => $article,
             'editorial_package_v1' => $editorial,
-            'taxonomy_display' => $mapping['taxonomy_display'],
+            'taxonomy_display' => $taxonomy,
             'snapshot' => [
                 'title' => $revision['title'], 'excerpt' => $revision['excerpt'], 'content_md' => $revision['content_md'],
                 'author_name' => $article['author_name'], 'cover_image_alt' => $article['cover_image_alt'],
@@ -471,7 +496,7 @@ final class TraditionalArticlePublication
     private function assertTargetTaxonomy(array $taxonomy): void
     {
         $category = $taxonomy['category'];
-        if (! ArticleCategory::query()->withoutGlobalScopes()->where('org_id', 0)->whereKey($category['id'])
+        if ($category['id'] !== null && ! ArticleCategory::query()->withoutGlobalScopes()->where('org_id', 0)->whereKey($category['id'])
             ->where('slug', $category['slug'])->where('is_active', true)->lockForUpdate()->first()) {
             throw new DomainException('traditional_article_target_category_unavailable');
         }

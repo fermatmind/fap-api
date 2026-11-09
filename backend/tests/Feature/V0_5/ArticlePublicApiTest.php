@@ -1659,6 +1659,22 @@ final class ArticlePublicApiTest extends TestCase
         });
 
         if ($useStagingTaxonomy) {
+            $rawSeoTitle = $seo->seo_title;
+            $seo->updateQuietly(['seo_title' => 'Mutable English metadata']);
+            $projected = $proof;
+            $projected['source_snapshot_kind'] = 'published_projection';
+            foreach (['source' => $source, 'existing_english' => $english] as $key => $article) {
+                $public = $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale='.$article->locale)
+                    ->assertOk()->json('article');
+                foreach ($projected[$key]['snapshot_sha256'] as $field => &$hash) {
+                    $value = $public[$field] ?? $public['seo_meta'][$field] ?? null;
+                    $hash = $value === null ? null : hash('sha256', $value);
+                }
+                unset($hash);
+            }
+            DB::transaction(fn () => $this->assertSame($source->id, $guard->assertSource($projected, true, true)->id));
+            $seo->updateQuietly(['seo_title' => $rawSeoTitle]);
+
             $noEnglish = $proof;
             $noEnglish['existing_english'] = null;
             $noEnglish['unpublished_english_slug'] = 'independent-english-version';
