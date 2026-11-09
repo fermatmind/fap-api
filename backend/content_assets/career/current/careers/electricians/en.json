@@ -12,7 +12,7 @@
         "status": "pending_mapping"
       },
       "fact:growth": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -22652,12 +22652,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Choose a public introductory teaching case and annotate its work objects, missing information and questions for a qualified training provider or employer. This page supplies no drawings and does not ask you to devise an operating plan."
+              "Paper exercise, entirely fictional. Document register TRN-07: R1 (May 2) is superseded; R2 (May 4) is draft; R3 (May 5) is approved for this paper exercise. A handover note says “Use R2”. Fault ticket F-14 says “indicator not lit” but has no equipment ID. Which version can you use for the exercise? What two issues should you record and who should review them? Answer key: use R3 for paper review only. Mark the R2 handover note as a version conflict. Record the missing equipment ID as unknown; the symptom does not identify the equipment or prove a fault. Ask the training reviewer to confirm the document and clarify the missing ID. Do not work on equipment, infer a cause or make a safety decision."
             ]
           },
           "id": "actors.display.fit_decision_checklist.how-detail",
           "source_refs": [
-            "onet"
+            "electricians-paper-sample"
           ],
           "type": "prose"
         }
@@ -23662,12 +23662,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "Employment in 2025: 821,000; growth of 9% from 2025 to 2035; average annual openings 72,700, including replacement needs. In 2025: electrical contractors and other wiring installation contractors 66%, self-employed 7%, manufacturing 6%, government 3%, employment services 2%."
+              "Employment in 2025: 821,000 jobs; growth of 9.2% from 2025 to 2035; average annual openings 72,700, including replacement needs. In 2025: electrical contractors and other wiring installation contractors 66%, self-employed 7%, manufacturing 6%, government 3%, employment services 2%."
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "onet",
+            "electrician-ep-2025-35"
           ],
           "type": "prose"
         },
@@ -24301,14 +24302,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The 17% AI Impact Score is an editorial model estimate: drawing/list preparation and fault records receive assistance-level ratings, while on-site installation receives no substitution credit. Equally weighted editorial ratings for three representative tasks: drawing-version and location-list preparation assistance 25, on-site installation 0, and fault-record assistance 25; floor((25+0+25)/3+0.5)=17. fermatmind-ai-impact-v1, 2026-11-08; not measured working time, adoption or unemployment probability. Qualified personnel retain responsibility for actual safety checks and work under applicable procedures."
+              "Use the fictional TRN-07 exercise in Quick Decision to see whether a tool can list document versions and log the conflicting note. Check its output against the register and F-14. Do not infer the missing identifier or a fault cause. Available evidence does not quantify electrician task performance, adoption or job effects. Equipment work and safety decisions follow applicable qualifications and site authorization."
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
             "source-fermatmind-ai-rubric",
             "onet",
-            "osha-333"
+            "osha-333",
+            "electricians-paper-sample",
+            "electricians-ilo-exposure"
           ],
           "type": "prose"
         },
@@ -24407,12 +24410,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Employment in 2025: 821,000; growth of 9% from 2025 to 2035; average annual openings 72,700, including replacement needs; this is not evidence of AI causation."
+              "Employment in 2025: 821,000 jobs; growth of 9.2% from 2025 to 2035; average annual openings 72,700, including replacement needs; this is not evidence of AI causation."
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "bls"
+            "bls",
+            "electrician-ep-2025-35"
           ],
           "type": "prose"
         },
@@ -24585,7 +24589,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "How does learning AI tools help in this occupation?"
+              "Does AI exposure research predict job loss for electricians?"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.3.question",
@@ -24600,7 +24604,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Editorial suggestion: try information retrieval, lists or draft records only for organizing paper materials, and check accuracy and time spent. No electrician adoption or measured productivity evidence was obtained; this does not support operating decisions."
+              "No. Exposure research considers which tasks tools might affect. It does not show whether employers adopt the tools, how accurately they perform the work or whether jobs change. Use a fictional trial to check one specific recordkeeping task."
             ]
           },
           "id": "actors.display.ai_impact_table.questions.3.answer",
@@ -27832,13 +27836,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Identify tasks and information limits in a public teaching case you choose. Record questions, missing conditions and who could clarify them, then decide whether to explore qualified training. A paper exercise does not establish operating competence."
+              "Use TRN-07 in the quick decision section. Record the version conflict and missing equipment ID, then compare your answer with the key. The exercise tests how you handle records and uncertainty; it does not establish electrical operating ability."
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
           "source_refs": [
-            "onet",
-            "bls"
+            "electricians-paper-sample"
           ],
           "type": "prose"
         },
@@ -28732,38 +28735,36 @@
               {
                 "id": "scene",
                 "values": [
-                  "Work sample one: case tasks and information list",
-                  "Annotate only the chosen case’s work objects, supplied information, missing conditions and questions. Do not devise procedures, safety plans or measurement criteria."
+                  "Work sample one: record inventory",
+                  "List R1, R2 and R3 with their dates and statuses."
                 ]
               },
               {
                 "id": "rework",
                 "values": [
-                  "Work sample two: measurement and test records",
-                  "Use only fictional readings in a public teaching case you choose. Record the source, conditions, instrument names and missing information; do not take measurements."
+                  "Work sample two: version decision",
+                  "State which version is valid for paper review and why the R2 handover conflicts."
                 ]
               },
               {
                 "id": "materials",
                 "values": [
-                  "Work sample three: troubleshooting record",
-                  "Clearly document the investigation of a fictional fault as \"symptom—hypothesis—verification—conclusion\"."
+                  "Work sample three: missing data",
+                  "Quote the F-14 symptom and mark the equipment ID unknown. Do not diagnose a fault."
                 ]
               },
               {
                 "id": "reflection",
                 "values": [
-                  "Work sample four: change and retest records",
-                  "Change only a paper diagram, recording the hypothetical change, effects to check and reviewing roles; do not alter a real circuit."
+                  "Work sample four: reviewer handover",
+                  "State the two issues and ask the training reviewer what can be confirmed."
                 ]
               }
             ]
           },
           "id": "actors.path.entry-portfolio.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "electricians-paper-sample"
           ],
           "title": "What work samples can you prepare without project experience?",
           "type": "cards"
@@ -28795,7 +28796,7 @@
                 "Practical review",
                 "Whether you can complete a wiring or testing task according to codes.",
                 "Check workmanship, torque, grounding, and reading records.",
-                "If you do not pass, you must not independently undertake live electrical work or energization."
+                "Passing this review does not authorize independent live electrical work or energization. Follow the applicable qualifications, training, work permits, safety requirements and employer authorization."
               ],
               [
                 "Probation and supervised-training period",
@@ -28875,7 +28876,7 @@
                 "Licensing requirement in most U.S. states",
                 "Depends on jurisdiction: verify workplace rules",
                 "Required in most U.S. states; check state and local rules",
-                "Must pass an examination and meet apprenticeship or experience-duration requirements",
+                "Check the exam, training and experience requirements for the licence level in the target state or locality. Requirements vary.",
                 "Examination, required experience duration, and maintenance costs",
                 "Valid only within its applicable jurisdiction and scope of work"
               ],
@@ -28915,7 +28916,7 @@
           "data": {
             "paragraphs": [
               "Read education, training, certificate, and work-scope requirements in recruitment notices item by item; flexibility in one condition does not mean other conditions can be substituted.",
-              "The work samples and seven-day experience are paper-based career exploration only. Use fictional or public teaching materials; do not handle real equipment, wire circuits, take electrical measurements, or energize equipment.",
+              "The work samples and seven-day plan use the fictional TRN-07 records on this page. Do not handle equipment, wire circuits, take measurements or energize equipment.",
               "This page is not operating guidance or a qualification decision. Actual work must meet the applicable legal qualification, training, and employer-authorization requirements. Employer authorization does not replace legally required certification, and a certificate does not authorize every task.",
               "Exercises on this page use fictional materials and do not represent any real project, equipment, or work conclusion."
             ]
@@ -28985,43 +28986,41 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "Material one: case diagram and provenance",
-                  "Find a diagram version, source and stated conditions in a public teaching case you choose; this page supplies no drawings.",
-                  "List work objects, supplied information and questions without devising an operating plan."
+                  "Document register",
+                  "R1 May 2: superseded; R2 May 4: draft; R3 May 5: approved for this exercise only.",
+                  "Reference: choose R3 for paper review."
                 ]
               },
               {
                 "id": "actors-practice-task",
                 "values": [
-                  "Material two: existing explanations and conditions",
-                  "Find the case’s existing explanations and sources; do not create instrument ranges, measurement methods or acceptance criteria.",
-                  "Record their scope and omissions; mark incomplete information as unknown."
+                  "Handover note",
+                  "The note says “Use R2”.",
+                  "Reference: record a version conflict; the note does not make a draft current."
                 ]
               },
               {
                 "id": "actors-practice-reference",
                 "values": [
-                  "Material three: fictional case readings",
-                  "If the case includes fictional readings, record their units, conditions and existing explanations; this page supplies no sequence of readings or out-of-limit values.",
-                  "Preserve the original data and unknowns; do not infer site conditions or arrange measurements."
+                  "Fault ticket F-14",
+                  "Symptom: indicator not lit. Equipment ID: blank.",
+                  "Reference: preserve the symptom and mark the identifier unknown. Do not infer equipment or cause."
                 ]
               },
               {
                 "id": "actors-practice-boundary",
                 "values": [
-                  "Material four: learning and authority boundaries",
-                  "Record questions for a qualified training provider or employer; do not handle equipment, wire circuits, climb, lift or energize equipment."
+                  "Training review",
+                  "Give the version conflict and missing identifier to the training reviewer. Do not work on equipment or authorize any work."
                 ]
               }
             ]
           },
           "id": "actors.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "electricians-paper-sample"
           ],
-          "title": "What to look for in a public teaching case",
+          "title": "Paper exercise: TRN-07 records and reference answer",
           "type": "cards"
         },
         {
@@ -29032,59 +29031,57 @@
               {
                 "id": "day-1",
                 "values": [
-                  "Day 1: choose a case and record its source",
-                  "Choose a public introductory teaching case and explanation of applicable rules. Record its source, date, scope and questions; this page supplies no drawings or readings."
+                  "Day 1: copy the document register",
+                  "List R1, R2 and R3 and note which is approved for this exercise."
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "Day 2: annotate tasks and questions",
-                  "On the chosen teaching diagram only, annotate the tasks, required qualifications and questions to check; do not devise an operating sequence."
+                  "Day 2: check the handover note",
+                  "Compare “Use R2” with the register. Write the conflict without changing the original note."
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "Day 3: record supplied conditions and fictional readings",
-                  "Extract fictional readings and conditions from that teaching case. Mark absent conditions as unknown; do not take measurements."
+                  "Day 3: check the fault ticket",
+                  "Preserve the F-14 symptom and mark the equipment ID unknown. Do not collect readings."
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "Day 4: note fault explanations and missing evidence",
-                  "List possible explanations and required evidence for a fictional fault on paper only; do not verify it on site."
+                  "Day 4: write a handover",
+                  "Write both issues and the question you would give a training reviewer. Do not suggest a fault or an operating step."
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "Day 5: organize the case record",
-                  "Organize the fictional case record, separating supplied and missing information and identifying who could clarify it."
+                  "Day 5: check your result",
+                  "Cover the answer key, make your version choice again, and compare it with the reference."
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "Day 6: change one assumption on paper",
-                  "Change one assumption on paper and list questions to revisit; do not change equipment or circuits."
+                  "Day 6: add a fictional draft",
+                  "Add R4, marked draft. Record why the new date does not replace R3 in this exercise."
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "Day 7: reflect on next steps",
-                  "Reflect on whether you want to research further, undertake qualified training and respect work boundaries. This is not an ability test or qualification decision."
+                  "Day 7: choose one next task",
+                  "Review your corrections and decide whether to ask a training provider about documentation, supervision or entry requirements."
                 ]
               }
             ]
           },
           "id": "actors.path.seven-day-trial.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "electricians-paper-sample"
           ],
           "title": "Seven days of paper-based career exploration",
           "type": "timeline"
@@ -29094,7 +29091,7 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Can you explain the source, scope and unknowns of the materials?",
+              "Can you explain the TRN-07 version choice, record the conflicting note and preserve the unknown ID?",
               "Can you distinguish occupational tasks, paper exploration and actual operating authority?",
               "Do you want to explore qualified training and check specific requirements with a provider or employer?",
               "What questions remain about physical demands, environment, schedule and safety responsibility? Do not use this exercise to determine physical capacity, ability or hiring eligibility.",
@@ -29421,7 +29418,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Independently install routine circuits, subject to review."
+              "Continue supervised installation and documentation. Work independently only after meeting the applicable qualifications and receiving authorization for the task."
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.next_moves",
@@ -30419,13 +30416,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "47-2111: employment in 2025 of 821,000; growth of 9% from 2025 to 2035; average annual openings of 72,700, including replacement needs. "
+              "BLS projects U.S. electrician employment (47-2111) to rise from 821,000 jobs in 2025 to 896,900 in 2035, up 75,900 jobs or 9.2% (rounded to 9% in the handbook). About 72,700 openings per year include growth and replacements."
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "electrician-ep-2025-35"
           ],
           "type": "prose"
         },
@@ -30434,13 +30432,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS describes building-system upgrades, renewable-energy connections, and electricity demand from AI data centres supporting grid upgrades as qualitative forecast context; 9% is not an estimate of AI causation."
+              "BLS describes building-system upgrades, renewable-energy connections, and electricity demand from AI data centres supporting grid upgrades as qualitative forecast context; 9.2% is not an estimate of AI causation."
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "electrician-ep-2025-35"
           ],
           "type": "prose"
         },
@@ -30464,13 +30463,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Tools change information retrieval and record organization, but the worker remains responsible for on-site voltage verification, fault judgement, and energization confirmation."
+              "Annual openings include growth and replacements for people who transfer or leave. They do not count live vacancies."
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "electrician-ep-2025-35"
           ],
           "type": "prose"
         },
@@ -30479,13 +30477,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Average annual openings of 72,700 include growth and replacement needs, not net additions, current vacancies, or hiring probability."
+              "Use the projection for national context. Compare actual work settings, openings, and training routes locally."
             ]
           },
           "id": "actors.market-signals.market-signal-card.5",
           "source_refs": [
-            "bls",
-            "oews"
+            "electrician-ep-2025-35"
           ],
           "type": "prose"
         },
@@ -31016,12 +31013,13 @@
                 ]
               },
               {
-                "answer": "BLS reports about 821,000 electricians employed in the U.S. in 2025, with 9% projected growth from 2025 to 2035 and about 72,700 openings per year on average, including growth and replacement needs. Annual openings are neither the net increase over ten years nor an individual hiring probability.",
+                "answer": "The United States had about 821,000 electrician jobs in 2025. BLS projects 896,900 in 2035, up 9.2% (rounded to 9% in its handbook). About 72,700 annual openings include replacements; they are not live vacancies.",
                 "id": "actors.faq.5",
                 "question": "What is the U.S. employment outlook?",
                 "question_key": "career.faq.electricians.5",
                 "source_refs": [
-                  "bls"
+                  "bls",
+                  "electrician-ep-2025-35"
                 ]
               },
               {
@@ -31671,21 +31669,19 @@
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Equally weighted editorial ratings for three representative tasks: drawing-version and location-list preparation assistance 25, on-site installation 0, and fault-record assistance 25; floor((25+0+25)/3+0.5)=17. fermatmind-ai-impact-v1, 2026-11-08; not measured working time, adoption or unemployment probability.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Determine wiring and equipment locations from drawings — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.2.task[0]",
-                  "Install conduit, pull wires, and make connections — 0/100; weight=1/3; actors.display.ai_impact_table.tasks.3.task[0]",
-                  "Locate faults and replace components — 25/100; weight=1/3; actors.display.ai_impact_table.tasks.5.task[0]"
+                  "The previous editorial rating was withdrawn because the evidence does not measure complete tasks.",
+                  "Compare drawings and fault logs with originals and leave installations, safety and sign-off to authorized personnel."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "editorial_design",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-11-08",
+                "limitation": "An editorial note, not a measurement of adoption, job loss or task performance.",
+                "name": "FermatMind note on AI evidence for electricians",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "url": null
               },
               {
                 "accessed_at": "2026-11-08",
@@ -31881,6 +31877,51 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/47-4011.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "SOC 47-2111: 821,000 jobs in 2025 and 896,900 projected in 2035, up 75,900 jobs or 9.2%. About 72,700 annual openings include replacements."
+                ],
+                "evidence_type": "primary_source",
+                "id": "electrician-ep-2025-35",
+                "limitation": "A national projection, not live vacancies or a measure of AI effects.",
+                "market": "United States",
+                "name": "BLS employment projections for electricians",
+                "period": "2025–2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Models potential task exposure to generative AI."
+                ],
+                "evidence_type": "primary_source",
+                "id": "electricians-ilo-exposure",
+                "limitation": "Does not measure electrician adoption, job loss or end-to-end performance.",
+                "market": "International",
+                "name": "ILO research on potential exposure to generative AI",
+                "period": "2025",
+                "publisher": "ILO",
+                "scope": "proxy",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Fictional record set TRN-07, three revision statuses and one missing identifier."
+                ],
+                "evidence_type": "editorial_design",
+                "id": "electricians-paper-sample",
+                "limitation": "For paper review only; no real electrical operation, acceptance or work authorization.",
+                "market": "Region-neutral",
+                "name": "FermatMind fictional document version exercise",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "exact",
+                "url": "#career-visual-group-quick-decision"
               }
             ]
           },
@@ -32542,7 +32583,7 @@
             }
           },
           {
-            "source_ref": "bls",
+            "source_ref": "electrician-ep-2025-35",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.3.limit",
               "block": "ai-impact",
@@ -32550,7 +32591,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "electrician-ep-2025-35",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32569,7 +32610,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "electrician-ep-2025-35",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32757,7 +32798,7 @@
             }
           },
           {
-            "source_ref": "source-fermatmind-ai-rubric",
+            "source_ref": "electricians-ilo-exposure",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.3.answer",
               "block": "ai-impact",
@@ -32765,14 +32806,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "source-fermatmind-ai-rubric",
+              "$source": "electricians-ilo-exposure",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "source-fermatmind-ai-rubric",
+              "$source": "electricians-ilo-exposure",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33401,7 +33442,7 @@
                 "type": "prose"
               }
             ],
-            "separator": ""
+            "separator": "\n"
           }
         },
         "schema_version": "career.career_progression.v1",
@@ -33497,6 +33538,12 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.mynextmove.org/profile/summary/47-2111.00",
+            "id": "electricians-us-next-move",
+            "label": "My Next Move: Electricians",
+            "scope": "U.S. occupational exploration; verify specific apprenticeships and licensing separately."
           }
         ],
         "tracks": [
@@ -35034,13 +35081,13 @@
           {
             "fact_ref": "employment",
             "指标": "2025 employment · number in the occupation",
-            "数值": "821,000 people",
+            "数值": "821,000 jobs",
             "说明": "The overall forecast is not attributed to AI; employment stock and average annual openings do not equal net additions or current recruitment."
           },
           {
             "fact_ref": "growth",
             "指标": "2025–2035 overall growth",
-            "数值": "9%",
+            "数值": "9.2%",
             "说明": "The overall forecast is not attributed to AI; employment stock and average annual openings do not equal net additions or current recruitment."
           },
           {
@@ -35108,7 +35155,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "9% (2025–2035, not attributed to AI)",
+        "growth": "9.2% (2025–2035, not attributed to AI)",
         "heading": {
           "$item": "actors.display.career_snapshot_secondary_locale.heading",
           "block": "us-salary",
@@ -35412,7 +35459,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "heading": {
           "$item": "actors.display.market_signal_card.heading",
@@ -35438,8 +35485,9 @@
             },
             "metric": "Employment growth",
             "occupation_scope": "O*NET-SOC 47-2111.00 (Electricians)",
-            "source_id": "bls",
-            "value": "9% (overall forecast)"
+            "source_id": "electrician-ep-2025-35",
+            "source_ref": "electrician-ep-2025-35",
+            "value": "9.2% (overall forecast)"
           },
           {
             "geography": "United States",
@@ -35458,8 +35506,9 @@
             },
             "metric": "Employment size",
             "occupation_scope": "O*NET-SOC 47-2111.00 (Electricians)",
-            "source_id": "bls",
-            "value": "821,000 people"
+            "source_id": "electrician-ep-2025-35",
+            "source_ref": "electrician-ep-2025-35",
+            "value": "821,000 jobs"
           },
           {
             "geography": "United States",
@@ -35478,7 +35527,8 @@
             },
             "metric": "Average annual job openings",
             "occupation_scope": "O*NET-SOC 47-2111.00 (Electricians)",
-            "source_id": "bls",
+            "source_id": "electrician-ep-2025-35",
+            "source_ref": "electrician-ep-2025-35",
             "value": "About 72,700 per year"
           }
         ],
@@ -35575,6 +35625,12 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "id": "electrician-ep-2025-35",
+            "label": "BLS employment projections for electricians",
+            "scope": "A national projection, not live vacancies or a measure of AI effects."
           }
         ],
         "transitions": [
@@ -37148,7 +37204,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI assistance and human review",
       "china-salary": "Mainland China wage reference",
       "direction-comparison": "Occupational path comparison",
       "fit": "Occupational fit guide",
@@ -37215,25 +37271,27 @@
       },
       {
         "derivation": null,
-        "display_value": "Approximately 821,000 people (2025)",
+        "display_value": "Approximately 821,000 jobs (2025)",
         "fact_id": "employment",
         "market": "United States",
-        "measure": "Employment",
+        "measure": "2025 U.S. employment (jobs)",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
         "period": "2025",
         "source_refs": [
+          "electrician-ep-2025-35",
           "bls"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "9% projected growth (2025–2035)",
+        "derivation": "BLS Employment Projections reports 9.2%; the Occupational Outlook Handbook rounds it to 9%.",
+        "display_value": "9.2% projected growth (2025–2035)",
         "fact_id": "growth",
         "market": "United States",
         "measure": "Projected employment growth",
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
         "period": "2025–2035",
         "source_refs": [
+          "electrician-ep-2025-35",
           "bls"
         ]
       },
@@ -37246,6 +37304,7 @@
         "occupation_scope": "Electricians (O*NET-SOC 47-2111.00)",
         "period": "2025–2035",
         "source_refs": [
+          "electrician-ep-2025-35",
           "bls"
         ]
       },
@@ -37298,13 +37357,13 @@
         ]
       },
       {
-        "derivation": "Equally weighted editorial ratings for three representative tasks: drawing-version and location-list preparation assistance 25, on-site installation 0, and fault-record assistance 25; floor((25+0+25)/3+0.5)=17. fermatmind-ai-impact-v1, 2026-11-08; not measured working time, adoption or unemployment probability.",
-        "display_value": "17%",
+        "derivation": "There is no verified measure of end-to-end task performance, adoption or job effects for this occupation.",
+        "display_value": "No verified quantitative estimate",
         "fact_id": "fermatmind-ai-impact-estimate",
         "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
+        "measure": "AI evidence status",
         "occupation_scope": "Electricians",
-        "period": "2026-11-08",
+        "period": "2026-11-09",
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
@@ -37313,15 +37372,15 @@
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI evidence status"
     },
     "badges": [
       "Electrical installation, maintenance, and repair in buildings and facilities · O*NET-SOC 47-2111.00",
       "2025 U.S. wage data · median annual wage USD 63,190 (median hourly wage USD 30.38)",
-      "About 821,000 employed in 2025 · projected growth of 9% from 2025 to 2035 · interest code RC"
+      "About 821,000 jobs in 2025 · projected growth of 9.2% from 2025 to 2035 · interest code RC"
     ],
     "metrics": [
       {
@@ -37340,7 +37399,7 @@
         "availability": "available",
         "fact_ref": "employment",
         "key": "us_employment",
-        "label": "U.S. number employed"
+        "label": "U.S. jobs (2025)"
       },
       {
         "availability": "available",
@@ -37360,14 +37419,14 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Explore electrician duties, apprenticeships and licensing. U.S. figures: $63,190 median pay and 821,000 employed in 2025; 9% projected growth for 2025–2035. Mainland China certification rules are explained separately."
+      "text": "Explore electrician duties, apprenticeships and licensing, with U.S. wages and job projections, and separate certification guidance for mainland China."
     },
     "title": {
       "availability": "available",
       "text": "Electricians: duties, wages, and entry paths"
     }
   },
-  "source_content_sha256": "f3ab7ca162efac825600466f40d34ac35dd224e0e27a6950c4bd76a9a2a78150",
+  "source_content_sha256": "089d99fa1b1f07c6e3196da5542857cc4c59a27b8fb2f5f76da7332a114875aa",
   "subject": {
     "canonical_slug": "electricians",
     "name": "Electricians",
