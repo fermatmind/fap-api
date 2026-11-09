@@ -23,6 +23,7 @@ const packages = {
   'traditional-article-enneagram-career-guides': ['fermatmind.traditional_article_batch.v1', ['traditional-article-enneagram-career-guides.json','traditional-article-enneagram-career-guides-review.json']],
   'traditional-article-admissions-and-reading': ['fermatmind.traditional_article_batch.v1', ['traditional-article-admissions-and-reading.json','traditional-article-admissions-and-reading-review.json']],
   'traditional-article-relationship-and-guides': ['fermatmind.traditional_article_batch.v1', ['traditional-article-relationship-and-guides.json','traditional-article-relationship-and-guides-review.json']],
+  'traditional-article-admissions-checklists': ['fermatmind.traditional_article_batch.v1', ['traditional-article-admissions-checklists.json','traditional-article-admissions-checklists-review.json']],
   'traditional-article-featured': ['fermatmind.traditional_article_batch.v1', ['traditional-article-featured.json','traditional-article-featured-review.json']],
   'traditional-article-english': ['fermatmind.traditional_article.v1', ['traditional-article-english.json','traditional-article-english-review.json']],
   'traditional-article': ['fermatmind.traditional_article.v1', ['traditional-article.json','traditional-article-review.json']],

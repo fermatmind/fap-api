@@ -1655,3 +1655,31 @@ test('Traditional article uses the reviewed visible assessment CTA rather than a
   assert.doesNotThrow(()=>assertDom(iqFixture,iqHtml.replace('</main>','<a href="'+href+'">開始測驗</a></main>'),{missing:true},environment));
  }
 });
+
+test('Traditional admissions checklists require reviewed native visuals in API and reader DOM',()=>{
+ const selection='traditional-article-admissions-checklists';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,3);
+ const revisions={staging:[84,79,90],production:[1150,1148,1149]};
+ for (const [env,expected] of Object.entries(revisions)){
+  const rows=readCandidateRows(root,binding.package_sha256,env).candidates;
+  assert.deepEqual(rows.map(row=>row.source_expectations.source.published_revision_id),expected);
+  for(const row of rows){
+   const {faq,ctas}=row.snapshot.editorial_projection;
+   const {image_url:image}=row.snapshot.body_visual;
+   assert.equal(row.snapshot.body_visual.fallback_authorized,false);
+   assert.ok(image.startsWith('https://assets.fermatmind.com/storage/media-library/'));
+   assert.equal(row.article_metadata.cover_image_variants.editorial_package_v1.body_visual_image_url,image);
+   const article={...row.identity,status:'published',is_public:true,body_visual:row.snapshot.body_visual};
+   assert.deepEqual(projection(row,{ok:true,article}).body_visual,row.snapshot.body_visual);
+   assert.equal(projection(row,{ok:true,article:{...article,body_visual:null}}).body_visual,null);
+   const fixture={...row,snapshot:{content_md:'繁體文章',body_visual:row.snapshot.body_visual,editorial_projection:{faq,ctas}}};
+   const img='<img src="'+image+'" alt="繁體文章插圖">';
+   const html='<html lang="zh-TW"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="https://fermatmind.com'+pathFor(row)+'"></head><body><main><h1>繁體文章</h1><article data-testid="article-detail-content">'+img+'</article>'+faq.map(({question})=>'<p>'+question+'</p>').join('')+ctas.map(({label,href})=>'<a href="'+href+'">'+label+'</a>').join('')+'</main></body></html>';
+   assert.doesNotThrow(()=>assertDom(fixture,html,{missing:true},env));
+   assert.throws(()=>assertDom(fixture,html.replace(img,''),{missing:true},env),/TRADITIONAL_ARTICLE_BODY_VISUAL/);
+   assert.throws(()=>assertDom(fixture,html.replace('alt="繁體文章插圖"','alt=""'),{missing:true},env),/TRADITIONAL_ARTICLE_BODY_VISUAL/);
+  }
+ }
+});

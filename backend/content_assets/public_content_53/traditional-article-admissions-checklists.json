@@ -1,0 +1,1132 @@
+{
+  "schema": "fermatmind.traditional_article_batch.v1",
+  "articles": [
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "hot-major-fit-riasec-course-career-checklist",
+          "source_locale": "zh-CN",
+          "source_article_id": 64,
+          "translation_group_id": "tg_hot_major_fit_riasec_course_career_2026v1"
+        },
+        "review_sha256": "ebd69d87aa3b3e1cf50e8898948865d914786ff0e531ac09b121da28d036e872",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 64,
+              "slug": "hot-major-fit-riasec-course-career-checklist",
+              "locale": "zh-CN",
+              "published_revision_id": 84,
+              "translation_group_id": "tg_hot_major_fit_riasec_course_career_2026v1",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "597e109b0f1992afd8bcf6111b5d4fdc7eb78b358e0d1d477d9b46cd7ea535d4",
+              "public_body_sha256": "d8cc03ccab820823996013110a38d8afcd60fc11df8c1ee3ea9495cb1ae1066e",
+              "hreflang_gate": null
+            },
+            "existing_english": {
+              "id": 65,
+              "slug": "hot-major-fit-riasec-course-career-checklist",
+              "locale": "en",
+              "published_revision_id": 85,
+              "translation_group_id": "tg_hot_major_fit_riasec_course_career_2026v1",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "095cc8f05267917ab1335e90acde29831dbc35f0691bcce1c7e404630cb19159",
+              "public_body_sha256": "78fe777eda7c58036d3a5110764ce234b75d9b347902b2fd82ae36e1ff3e4401",
+              "hreflang_gate": null
+            }
+          },
+          "production": {
+            "source": {
+              "id": 64,
+              "slug": "hot-major-fit-riasec-course-career-checklist",
+              "locale": "zh-CN",
+              "published_revision_id": 1150,
+              "translation_group_id": "tg_hot_major_fit_riasec_course_career_2026v1",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "e267fb5ac2503b2f7ae655bb406c71d759f6faa7ecaf982c6cdf9c23e3bf2cd5",
+              "public_body_sha256": "b510fedfbcdaf12588fce5eba257010d9ddd1d533829c5ce2b53bb702ffd0d4c",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": {
+              "id": 65,
+              "slug": "hot-major-fit-riasec-course-career-checklist",
+              "locale": "en",
+              "published_revision_id": 1156,
+              "translation_group_id": "tg_hot_major_fit_riasec_course_career_2026v1",
+              "source_locale": "zh-CN",
+              "source_article_id": 64,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "34ab5ae4f380d8fdab557bf5de4cbcbe645145982db3e532d83991926e948a70",
+              "public_body_sha256": "d64bb2c8a83d02a1004f8b6a257b7f911c180e549cc40d13316d2bf04d0a4cec",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1600,
+          "cover_image_height": 900,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            },
+            "editorial_package_v1": {
+              "body_visual_asset_key": "article.hot-major-fit-riasec-course-career-checklist.body-visual.v1",
+              "body_visual_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistbody-visualv1/hero_1600x900.jpg",
+              "body_visual_fallback_authorized": false
+            }
+          },
+          "related_test_slug": "holland-career-interest-test-riasec",
+          "author_name": "Fermat Institute",
+          "cover_image_alt": "學生和家長用課程、工作活動和霍蘭德興趣清單判斷熱門專業是否適合自己的決策情境"
+        },
+        "seo_metadata": {
+          "og_title": "熱門專業適合我嗎？課程與工作活動清單",
+          "og_description": "別只看熱門。用課程難點、真實工作活動和霍蘭德/RIASEC興趣，把專業分成保留、待驗證、暫時降低優先順序。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "熱門專業適合我嗎？用課程、工作活動和霍蘭德興趣做高考專業選擇清單",
+          "excerpt": "別只看熱門。用課程難點、真實工作活動和霍蘭德/RIASEC興趣，把專業分成保留、待驗證、暫時降低優先順序。",
+          "content_md": "## 快速答案：熱門專業適合我嗎，先別讓「熱門」替你做決定\n\n高考志願裡，一個專業被家長、同學、短影片和就業榜反覆說「熱門」，它也只能先進待驗證區。真正要查的是三件事：核心能否負擔核心課程，畢業後的日常工作活動你是否願意長期接觸，已有經歷能否提供對這些活動的興趣證據；霍蘭德/RIASEC結果可以作為可選補充。如果課程、活動或現實條件仍不清楚，專業再熱也不要直接保留；先標成「待驗證」，證據不對就暫時降低優先順序。\n\n很多志願踩坑，不是因為學生報了熱門專業，而是把「熱門」當成了免檢通行證。專業名稱、平台熱度、大型企業想像和親戚經驗，都不能替你讀課程表、看培養方案、問在讀學生、做一次低成本任務驗證。\n\n本文只負責一件事：把「熱門專業適合我嗎」拆成一張可執行的證據清單。它不判斷錄取結果，不判斷就業，不承諾薪資，也不替代招生章程、選科要求、省級考試院規則、學校培養方案和真實訪談。\n\n## 先做一個三分鐘初步整理：你怕的是「不熱門」，還是「證據不夠」？\n\n在真正查課程前，先把候選專業放到下面四個格子裡。這個動作很小，但能把家庭爭論從情緒拉回證據。\n\n| 你現在的狀態 | 常見表現 | 先別做什麼 | 立刻補哪條證據 |\n|---|---|---|---|\n| 被熱度推著走 | 只知道「AI/金融/醫學/法學很熱門」 | 直接放進衝穩保 | 找目標院校培養方案，圈出 5 門核心課。 |\n| 被家長期待推著走 | 家裡反覆說穩定、體面、好就業 | 用「聽話」替代判斷 | 查畢業去向和職缺動詞，看日常任務是不是你能接受。 |\n| 被短影片敘事推著走 | 只記得高薪、風口、未來感 | 把單個案例當規律 | 查 3 條真實職缺描述，寫下重複出現的任務。 |\n| 被自己的一句話卡住 | 只說「我喜歡」或「我不喜歡」 | 讓感覺直接決定去留 | 試一個約 30 分鐘的微任務，記錄具體卡點和是否願意再嘗試。把它作為後續調查的線索。 |\n\n如果一個專業只能靠「大家都說好」站住腳，它最多進入待驗證區。真正值得保留的專業，至少要能說清：我知道它學什麼、做什麼、難在哪裡，也知道自己為什麼還願意繼續查。\n\n## 先把「熱門」拆開：它到底熱在哪裡？\n\n家長說「這個專業好就業」，學生聽到的通常是安全感；學生說「這個方向很酷」，家長聽到的可能是衝動。雙方其實都在用很少的資訊下注。\n\n熱門專業至少有五種熱法：\n\n- **熱門產業**：比如 AI、新能源、積體電路、數位經濟，聽起來站在風口上。\n- **熱門職缺**：比如開發、演算法、金融分析、資料營運、產品經理，招募市場裡經常出現。\n- **學校熱**：某個學校的某個專業有平台、師資、實驗室或地域優勢。\n- **家長熱**：穩定、體面、離家近、聽起來不容易失業。\n- **社群媒體熱**：被短影片、論壇、就業榜包裝成「錯過就虧」。\n\n這些訊號都可以記錄，但不能直接下結論。一個方向越熱，越需要把它拆成課程、任務、環境和現實限制，否則你報的不是專業，是想像中的專業。\n\n## 表1：熱門專業訊號與興趣模式分類初篩\n\n| 熱門專業訊號 | 需要理性核查的底層問題 | RIASEC / 工作活動線索 | 決策輸出 |\n|---|---|---|---|\n| 「AI、大數據、智慧科學現在都熱」 | 你能否在連續幾週沒有視覺正回饋的抽象推導、髒資料清洗、模型調參失敗中保持專注，而不是只喜歡「人工智慧」四個字？ | Investigative 偏好強的人更可能願意分析、建模、除錯；如果只喜歡科技外殼，先不要直接保留。 | 先放待驗證：查數學/程式設計/演算法課程，再做一次低成本程式碼或資料任務。 |\n| 「計算機出來進大型企業」 | 你接受的大型企業日常，是寫創新產品，還是在舊系統裡查日誌、修介面、對需求、改 bug、背指標、等排期？ | Realistic、Investigative、Conventional 線索可以提示你調查系統排錯、流程和文件等活動是否有興趣；不能據此判斷承受力或工程能力。 | 能接受工程日常再保留；只接受「高薪想像」則待驗證。 |\n| 「金融、經管以後賺錢」 | 你理解的是資本市場、公司財務、風險管理模型、銷售指標、客戶維護，還是只聽到「收入高」？ | Enterprising 關注資源、影響和結果；Conventional 可提示你了解是否喜歡報表、流程與合規任務；Investigative 可提示你嘗試資料和風險分析。 | 先查職缺鏈路：投資研究、審計、銷售、運營、風險管理不是同一種日常。 |\n| 「醫學、法學、師範穩定體面」 | 你能否接受長週期訓練、資格考試、規章約束、責任壓力、值班/備課/文書留痕，而不只是喜歡社會評價？ | Social 可提示你了解服務和教學；Conventional 可提示你了解規則與程序；Investigative 可提示你了解病例或案例分析。興趣線索不能判斷勝任力。 | 穩定敘事不能免檢：課程和職業路徑都能接受才保留。 |\n| 「新增交叉專業聽起來前沿」 | 培養方案是否清楚？課程由哪個學院主導？實驗室、專案、實習和升學路徑是否能被查到？ | Artistic 與 Investigative 線索可以提示你試做開放問題；是否適應仍取決於課程要求、指導資源和實際表現。 | 資訊不透明先降級，不要用「新」替代證據。 |\n| 「親戚、老師、同學都建議報」 | 他們說的「好」，對應的是哪個城市、哪個學校層次、哪個職缺、哪種家庭資源？是否適用於你？ | 他人經驗不是你的興趣證據。RIASEC 只能幫你問：這些任務你是否願意長期做。 | 無個人證據不得直接保留；至少補一輪課程和訪談。 |\n| 「專業名稱很好聽」 | 名稱背後的必修課是否仍然吸引你？實際是寫程式碼、跑實驗、做報告、背法規、跑客戶，還是整理資料？ | 名稱吸引屬於入口訊號；工作活動耐受才是長期訊號。 | 先看課程模組和畢業去向，不能只看名字。 |\n\n這張表的目的不是打擊熱門專業，而是防止熱門專業跳過審查。你要找的不是「別人都說好」的方向，而是你有證據可以繼續研究的方向。\n\n## 第一層：課程意味著整個修業期間的投入\n\n專業名稱往往負責好聽，課程表負責誠實。\n\n「人工智慧」看起來像未來產業，課程裡可能是線性代數、機率統計、程式設計、資料結構、機器學習、最佳化方法和大量除錯。  \n「金融科技」看起來像金融加技術，實際可能偏數理金融、風險管理建模、資料系統，也可能偏商業分析和監管合規。  \n「新聞傳播」看起來像表達與創意，落到課程可能是採訪、寫作、輿情分析、傳播統計、新媒體運營、廣告策劃和反覆改稿。  \n「法學」看起來穩定體面，現實是長篇文字閱讀、法條體系、案例檢索、資格考試、程序細節和持續輸出。  \n「臨床醫學」看起來有職業確定性，但學習週期、責任壓力、輪轉節奏和長期訓練強度都不能靠熱度抵消。\n\n你需要查的不是「這個專業好不好」，而是：\n\n- 核心課是否連續出現你長期抗拒的內容；\n- 必修課和實作課是否對應你能接受的任務；\n- 培養方案是否由目標院校公開；\n- 轉專業、輔修、推薦免試攻讀研究所、升學、實習和本省本批次適用的調劑限制是否清楚；\n- 課程難度是「可以補」，還是「你根本不願意碰」。\n\n如果課程表已經讓你產生穩定抗拒，不要用「熱門」壓過這個訊號。\n\n## 表2：核心課程模組與日常工作活動核對表\n\n| 課程模組 | 它真正要求你承擔什麼 | 關聯工作活動 | 保留 / 待驗證 / 暫時降低優先順序訊號 |\n|---|---|---|---|\n| 高數、線代、機率統計、最佳化方法 | 反覆處理抽象符號、矩陣、極限、分布、誤差和證明，不一定有即時回饋 | 在資料噪聲、模型誤差和業務約束之間找解釋；把模糊問題拆成可計算結構 | 按截止日期安排可行的試聽或練習，記錄卡點、可獲得的幫助和再次嘗試的意願，再決定是否繼續調查。 |\n| 程式設計、資料結構、演算法、作業系統 | 把問題拆到邊界條件，接受編譯報錯、線上故障、效能瓶頸和文件缺失 | 在缺乏文件的舊系統原始碼中排查邏輯死鎖、介面溢位、許可權異常和歷史包袱 | 能從排錯中獲得滿足感可保留；只喜歡「科技感」不喜歡除錯，待驗證。 |\n| 資料庫、資料分析、機器學習、統計建模 | 清洗髒資料、檢查欄位口徑、處理缺失值、解釋模型偏差 | 拉取多表資料，對齊口徑，寫分析結論給不懂模型的業務方，還要接受結論被反覆追問 | 能忍受枯燥資料衛生工作可保留；只想做「聰明模型」，待驗證。 |\n| 會計、財務、金融、風險管理 | 對賬、讀報表、看現金流、理解風險暴露和監管要求 | 月底關賬、查異常波動、做底稿、解釋指標變化、在規則邊界內給出判斷 | 喜歡結構、數字和規則可保留；只聽到「金融高薪」，待驗證。 |\n| 法學、公共管理、政策分析 | 長篇文字閱讀、條文定位、案例比較、程序意識和證據鏈整理 | 在大量材料中找關鍵事實，寫意見書、合規說明、政策備忘錄或爭議分析 | 能接受文字密度和規則約束可保留；只因體面穩定而報，待驗證。 |\n| 醫學、生命科學、藥學、護理相關課程 | 長週期記憶、實驗記錄、倫理責任、臨床/實驗規範和高強度訓練 | 按流程記錄樣本、複查資料、與患者/團隊溝通，在高責任情境下減少錯誤 | 能承受責任和訓練週期可保留；只看職業確定性，待驗證。 |\n| 新聞傳播、設計、數位媒體、產品體驗 | 採訪、觀察、表達、使用者理解、作品迭代和反覆修改 | 被甲方、使用者、老師或團隊連續回饋後重寫方案；把抽象需求變成內容、介面或傳播動作 | 願意持續產出和修改可保留；只想輕鬆創意，待驗證。 |\n| 土木、機械、自動化、能源、電氣類課程 | 圖紙、實驗、結構、裝置、現場約束和安全規範 | 對照圖紙查誤差，跟裝置、材料、施工現場或測試平台打交道，記錄並修正異常 | 喜歡具體系統和現場問題可保留；只喜歡「工程師」稱號，待驗證。 |\n\n這張表是課程與工作活動的說明性示例，不是對某所院校培養方案的查證，也不能預測四年後的感受。請用目標院校的目前培養方案和實際任務核對，替換不適用的例子。\n\n## 第二層：用霍蘭德/RIASEC看「你願意長期做哪類事」\n\n霍蘭德/RIASEC不應該被用成專業匹配器。它更像一把手電，照的是工作活動偏好。\n\n你可以這樣讀：\n\n- **Realistic**：是否願意和工具、裝置、系統、場地、材料、工程問題打交道？\n- **Investigative**：是否願意分析資料、研究原因、建立模型、驗證假設？\n- **Artistic**：是否需要表達、設計、內容、視覺、敘事和開放問題空間？\n- **Social**：是否願意幫助、教學、諮詢、溝通、支持他人？\n- **Enterprising**：是否喜歡推動資源、影響他人、組織專案、承擔結果壓力？\n- **Conventional**：是否能接受規則、流程、報表、標準、複查和穩定執行？\n\n熱門專業的陷阱在於，它經常只展示名片，不展示任務。RIASEC 的價值就是逼你把名片翻過來，看背面的工作活動。\n\n如果你還沒有做過，可以先完成 [霍蘭德職業興趣測驗](/zh/tests/holland-career-interest-test-riasec)。測驗無法替你選專業，也不能用於錄取、就業或收入判斷；它只是幫助你把模糊興趣改寫成可驗證的問題。\n\n## 把 RIASEC 結果改寫成「要去查的問題」\n\n很多人做完測驗會問：「我的結果適合哪個專業？」這個問法太快，也太危險。更穩的做法，是把每個興趣線索改寫成待驗證問題。\n\n| 如果你的線索更明顯 | 不要直接得出 | 改寫成這個問題 | 可以怎麼驗證 |\n|---|---|---|---|\n| Realistic | 我適合工程類 | 我是否願意長期處理裝置、材料、現場、系統故障和安全規則？ | 看一段實驗/工程專案記錄，問在讀學生實作課強度。 |\n| Investigative | 我適合理科/AI/醫學 | 我是否願意在沒有即時回饋的分析、建模、閱讀和驗證中保持耐心？ | 做一次資料、程式碼、文獻或案例小任務。 |\n| Artistic | 我適合傳媒/設計 | 我是否能接受持續輸出、被回饋推翻、反覆修改和不確定評價？ | 做一頁作品或一段採訪提綱，請別人給具體回饋。 |\n| Social | 我適合教育/醫學/心理相關 | 我是否願意長期面對真實人的情緒、需求、邊界和責任？ | 訪談相關專業學生，重點問疲憊點而不是光環。 |\n| Enterprising | 我適合經管/金融/創業 | 我是否能接受目標壓力、溝通博弈、資源協調和結果回顧？ | 拆一個職缺 JD，看動詞是銷售、分析、談判還是運營。 |\n| Conventional | 我適合會計/法學/管理 | 我是否能接受規則、流程、文書、複查和標準化執行？ | 看課程作業或資格考試內容，判斷是否長期排斥。 |\n\n這樣使用 RIASEC，測試就不會變成「專業答案」。它會變成一組更好的問題，幫你判斷一個熱門專業該保留、待驗證，還是暫時降低優先順序。\n\n## 第三層：把熱門專業放進三欄，不要讓它們全部擠進「保留」\n\n請把每個熱門專業寫進三欄表，而不是在腦子裡憑感覺投票。\n\n| 狀態 | 進入條件 | 不夠條件時怎麼辦 |\n|---|---|---|\n| 保留 | 符合正式報考條件；核心課程沒有穩定抗拒；工作活動有興趣證據；家庭、城市、學費、調劑風險可承受 | 繼續比較學校層次、本批次的投檔單元、轉專業政策和適用的調劑風險。 |\n| 待驗證 | 名稱或就業敘事吸引人，但課程、任務、資源、興趣證據不完整 | 查培養方案，找在讀學生，做一項小任務，補齊證據後再判斷。 |\n| 暫時降低優先順序 | 核心課程長期排斥；工作活動和興趣證據明顯衝突；現實限制無法接受 | 不要因為「大家都報」強行保留。後續證據改變再重新討論。 |\n\n已確認不符合正式報考條件的選項，從目前可報清單移除。資格尚未核實的選項單獨標記，先查省級招生檔案和院校章程。\n\n「暫時降低優先順序」不是否定你，也不是說這個專業差。它只是一個資源分配動作：志願空間有限，不能讓缺證據的熱門專業占滿前排。\n\n## 四類熱門專業的冷靜核對\n\n### 計算機 / 人工智慧：別只看風口，看你能不能忍受工程日常\n\n如果你擔心數學、程式設計和演算法，不要一句「數學不好就別報」結束，也不要一句「AI 熱門就衝」勉強填報。先問：你能不能接受長期除錯、查文件、補數學、看英文資料、處理失敗結果？如果這個問題正卡住你，可以讀 [數學不好還能報計算機/人工智慧嗎？](/zh/articles/math-not-good-computer-ai-major-course-riasec-checklist)。\n\n### 金融 / 經管：別只看收入想像，看你願不願意接觸指標和壓力\n\n金融、會計、經管類方向可能對應投資研究、審計、銷售、運營、風險管理、諮詢、供應鏈、人力資源。它們不是同一種工作。你需要問自己：我是否願意長期處理數字、規則、客戶、報告、指標和不確定市場？\n\n### 法學 / 醫學 / 師範：別只看穩定，看週期和責任\n\n這些方向常被家長稱為「穩」。但穩定背後可能是資格考試、長期培訓、責任壓力、規章體系和密集學習。你要查的不是家長眼中的體面，而是自己是否能接受訓練路徑。\n\n### 新聞傳播 / 設計 / 數位媒體：別只看創意，看反覆修改和真實回饋\n\n表達類專業不是「輕鬆有趣」的代名詞。你可能需要採訪陌生人、改稿、做使用者研究、追熱點、被回饋推翻、持續輸出作品。如果你只是喜歡「看起來有趣」，先做一個小作品再說。\n\n## 如果你和家長因為熱門專業爭起來，先把爭論降級成表格\n\n爭論通常卡在兩句話：\n\n- 家長：這個專業以後好找工作。\n- 學生：我不喜歡。\n\n這兩句話都不夠。更好的說法是：\n\n| 爭論句 | 改成證據問題 | 下一步動作 |\n|---|---|---|\n| 「這個專業熱門，必須報」 | 熱門來自哪些職缺？這些職缺的日常任務是什麼？ | 查招聘描述和畢業去向，不看二手傳言。 |\n| 「我就是不喜歡」 | 不喜歡的是課程、工作活動、學校、城市，還是不了解造成的抗拒？ | 讀培養方案，訪談在讀學生，做一次小任務。 |\n| 「這個專業穩定」 | 穩定來自體制路徑、資格證、產業需求，還是家長期待？ | 查報考限制、升學路徑、執業資格和就業去向。 |\n| 「大家都報這個」 | 你的證據是什麼？ | 沒有個人證據時，最多放待驗證。 |\n\n如果你們爭的是「父母不同意」或「孩子堅持」，可以再讀 [選專業父母不同意怎麼辦](/zh/articles/gaokao-major-choice-parent-conflict-riasec-course-checklist)。那篇處理家庭溝通；本文只處理熱門專業是否值得保留。\n\n## 七天驗證法：先查真實課程與任務\n\n可以把七天安排作為一輪初步調查示例，按資訊可得性和申請截止調整；一次或幾次任務只提供觀察線索，不能單獨判斷長期適應或能力。\n\n1. **第 1 天：查目標院校培養方案。** 標出 5 門核心課。  \n2. **第 2 天：看一節入門課。** 不要只看宣傳片，看真正講概念的課。  \n3. **第 3 天：讀 3 條職缺描述。** 關注動詞：分析、維護、溝通、銷售、研究、撰寫、測試、協調。  \n4. **第 4 天：做一個微任務。** 寫一段程式碼、讀一份案例、做一頁資料分析、完成一次採訪提綱。  \n5. **第 5 天：問一個在讀學生。** 問課程難點、作業強度、調劑和轉專業，不只問「好不好」。  \n6. **第 6 天：核對興趣線索。** 從已有活動經歷或可選的 RIASEC 結果出發，看哪些任務值得繼續體驗。  \n7. **第 7 天：寫狀態理由。** 保留、待驗證、暫時降低優先順序，必須寫一句證據。\n\n這輪記錄能幫你區分對專業名稱的印象與體驗後的反應，再決定還要查什麼。\n\n## 本文負責什麼，不負責什麼\n\n本文負責：\n\n- 幫你拆開熱門專業的外部熱度和內部成本；\n- 幫你用課程、工作活動和 RIASEC 興趣線索做初篩；\n- 幫你把專業放入保留、待驗證、暫時降低優先順序三欄；\n- 幫你避免只靠社群媒體、親戚經驗或高薪敘事做選擇。\n\n本文不負責：\n\n- 判斷錄取結果；\n- 判斷就業；\n- 承諾收入；\n- 判斷職業結果；\n- 替代招生章程、選科要求、省級考試院規則或學校培養方案；\n- 證明某個專業對你一定正確。\n\n如果你還在總覽階段，可以先讀 [高考志願選專業：霍蘭德、MBTI和職業興趣測驗怎麼用](/zh/articles/college-major-choice-holland-mbti-career-test)。如果你想區分職業興趣測驗和性格測驗，可以讀 [職業興趣測驗和性格測驗有什麼區別](/zh/articles/career-interest-vs-personality-test-differences)。\n\n## 結尾行動：用已有證據核對熱門專業\n\n如果你已經有幾個熱門專業候選，不要讓它們直接衝進志願表。可以把已有經歷或可選擇的 [霍蘭德職業興趣測驗](/zh/tests/holland-career-interest-test-riasec) 結果轉成工作活動問題，再回到本文的兩張表：\n\n- 能否負擔核心課程；\n- 日常工作活動是否願意長期接觸；\n- 現實限制是否能接受；\n- 證據是否足夠把它放進「保留」。\n\n測驗只是起點。真正的選擇，要落到課程、任務、規則和現實驗證上。\n\n\n## 給自己一張最後確認單\n\n在把專業放進志願表前，至少寫下這 6 句話。寫不出來，就說明它還沒有從「熱門敘事」變成「個人證據」。\n\n1. 我查過的目標院校培養方案是：________。\n2. 我最能接受的三門核心課是：________。\n3. 我最擔心、還需要補證據的課程或任務是：________。\n4. 這個專業對應的真實工作活動，不只是職缺名稱，而是：________。\n5. 我的活動經歷或可選興趣測驗結果中，值得繼續驗證的線索是：________。\n6. 如果最後把它暫時降低優先順序，我接受的替代方向是：________。\n\n這張確認單不是為了讓你更謹慎到不敢選擇，而是為了避免一個常見錯誤：把熱門專業當作安全感來源，卻沒有檢查它會不會在課程、任務和現實限制上持續消耗你。\n\n## 常見問題\n\n### 熱門專業是不是更值得報？\n\n不一定。熱門只說明外部關注度高，不能說明你能學完、能接受工作活動，也不能保證錄取、就業或收入。熱門專業必須經過課程、工作活動和現實限制核查。\n\n### 霍蘭德職業興趣測驗能判斷熱門專業適不適合我嗎？\n\n不能直接判斷。它可以幫助你觀察自己更願意接觸哪些工作活動和環境，例如資料、系統、工具、人際支持、規則或表達。專業是否保留，還要結合課程、招生限制、學校資源和現實驗證。\n\n### 家長堅持讓我報熱門專業怎麼辦？\n\n不要只說「不喜歡」。把專業放進表格：核心課是什麼、畢業後做什麼、你願不願意長期接觸這些任務、有哪些調劑和轉專業風險。沒有證據的爭論很難結束。\n\n### 如果我不知道自己興趣在哪裡怎麼辦？\n\n先別急著排除所有專業。可以從 RIASEC / 霍蘭德測驗開始，把模糊興趣轉成工作活動問題，再用公開課、課程表、訪談和微任務驗證。\n\n### 專業就業前景重要嗎？\n\n重要，但不能單獨決定。就業前景需要和學校層次、城市、個人能力、產業週期、課程訓練和家庭約束一起看。不要把就業敘事當成保底承諾。\n\n### 一個熱門專業被暫時降低優先順序，是不是說明我能力不行？\n\n不是。暫時降低優先順序只說明目前證據不足或是否適合仍待確認，不是能力診斷。後續如果課程、任務或現實條件的證據改變，可以重新放回待驗證或保留區。",
+          "seo_title": "熱門專業適合我嗎？課程與工作活動清單",
+          "seo_description": "別只看熱門。用課程難點、真實工作活動和霍蘭德/RIASEC興趣，把專業分成保留、待驗證、暫時降低優先順序。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 23,
+            "slug": "gaokao-major-choice-2",
+            "label": "高考志願 / 專業選擇"
+          },
+          "tags": [
+            {
+              "id": 11,
+              "slug": "riasec",
+              "label": "RIASEC"
+            },
+            {
+              "id": 27,
+              "slug": "holland-code",
+              "label": "Holland Code"
+            },
+            {
+              "id": 64,
+              "slug": "career-interest-test",
+              "label": "Career Interest Test"
+            },
+            {
+              "id": 101,
+              "slug": "college-major-choice",
+              "label": "college major choice"
+            },
+            {
+              "id": 102,
+              "slug": "popular-majors",
+              "label": "popular majors"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 23,
+        "tag_ids": [
+          11,
+          27,
+          64,
+          101,
+          102
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 64,
+            "slug": "hot-major-fit-riasec-course-career-checklist",
+            "locale": "zh-CN",
+            "published_revision_id": 84,
+            "translation_group_id": "tg_hot_major_fit_riasec_course_career_2026v1",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": null,
+            "snapshot_sha256": {
+              "title": "85371473e849c4bdf92aa3c607b5b4a3eef79914615e1c53caf867836f96917b",
+              "excerpt": "62ddafe3e9e2957f14c773350d4296ca1cedd2aec1f5b7733eca364073b82d3c",
+              "content_md": "d8cc03ccab820823996013110a38d8afcd60fc11df8c1ee3ea9495cb1ae1066e",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "51ed8228ded5d4e7a0e9f16e60e7db44595df1099eccff386d03ce9d9343b4aa",
+              "seo_title": "ef75b87f6990efb4931956f19c59b7604dc834a8e287eed8e7cbdd9af4d6ffe5",
+              "seo_description": "62ddafe3e9e2957f14c773350d4296ca1cedd2aec1f5b7733eca364073b82d3c",
+              "og_title": "ef75b87f6990efb4931956f19c59b7604dc834a8e287eed8e7cbdd9af4d6ffe5",
+              "og_description": "62ddafe3e9e2957f14c773350d4296ca1cedd2aec1f5b7733eca364073b82d3c"
+            }
+          },
+          "existing_english": {
+            "id": 65,
+            "slug": "hot-major-fit-riasec-course-career-checklist",
+            "locale": "en",
+            "published_revision_id": 85,
+            "translation_group_id": "tg_hot_major_fit_riasec_course_career_2026v1",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": null,
+            "snapshot_sha256": {
+              "title": "04974fc44bb7ce5a7d483f9ece3373afbed9c2c0c6d484027d3056ea33811366",
+              "excerpt": "b18da3ace085b62d8b34208cec8982f5838a920dfc94f028cae04189ab1a78df",
+              "content_md": "78fe777eda7c58036d3a5110764ce234b75d9b347902b2fd82ae36e1ff3e4401",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "51ed8228ded5d4e7a0e9f16e60e7db44595df1099eccff386d03ce9d9343b4aa",
+              "seo_title": "62faa167080aa383351bf6ec78c9ae2f309e396c1f84c0d87fe71ba6be9c1ce7",
+              "seo_description": "b18da3ace085b62d8b34208cec8982f5838a920dfc94f028cae04189ab1a78df",
+              "og_title": "62faa167080aa383351bf6ec78c9ae2f309e396c1f84c0d87fe71ba6be9c1ce7",
+              "og_description": "b18da3ace085b62d8b34208cec8982f5838a920dfc94f028cae04189ab1a78df"
+            }
+          },
+          "english_relationship": "independent_published_english",
+          "editorial_projection_sha256": "db8690bdc6153d674be37f724a98c5c439c5cf65cfac73c80d62f21f21b81b68",
+          "editorial_cta_targets": [
+            {
+              "key": "mid_article_riasec_soft_cta",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            },
+            {
+              "key": "end_article_riasec_primary_cta",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 64,
+            "slug": "hot-major-fit-riasec-course-career-checklist",
+            "locale": "zh-CN",
+            "published_revision_id": 1150,
+            "translation_group_id": "tg_hot_major_fit_riasec_course_career_2026v1",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "85371473e849c4bdf92aa3c607b5b4a3eef79914615e1c53caf867836f96917b",
+              "excerpt": "62ddafe3e9e2957f14c773350d4296ca1cedd2aec1f5b7733eca364073b82d3c",
+              "content_md": "b510fedfbcdaf12588fce5eba257010d9ddd1d533829c5ce2b53bb702ffd0d4c",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "51ed8228ded5d4e7a0e9f16e60e7db44595df1099eccff386d03ce9d9343b4aa",
+              "seo_title": "ef75b87f6990efb4931956f19c59b7604dc834a8e287eed8e7cbdd9af4d6ffe5",
+              "seo_description": "62ddafe3e9e2957f14c773350d4296ca1cedd2aec1f5b7733eca364073b82d3c",
+              "og_title": "ef75b87f6990efb4931956f19c59b7604dc834a8e287eed8e7cbdd9af4d6ffe5",
+              "og_description": "62ddafe3e9e2957f14c773350d4296ca1cedd2aec1f5b7733eca364073b82d3c"
+            }
+          },
+          "existing_english": {
+            "id": 65,
+            "slug": "hot-major-fit-riasec-course-career-checklist",
+            "locale": "en",
+            "published_revision_id": 1156,
+            "translation_group_id": "tg_hot_major_fit_riasec_course_career_2026v1",
+            "source_locale": "zh-CN",
+            "source_article_id": 64,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "4f44cabb975734ff3ca9abc397bd03213e8bb31d12fef0ca6abbb762657c79bf",
+              "excerpt": "54c21c69e0df5b77c95cea7033433b1315aea57a98c67454655eeac451db04b8",
+              "content_md": "d64bb2c8a83d02a1004f8b6a257b7f911c180e549cc40d13316d2bf04d0a4cec",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "67a34bde791b5f8d01449fe96f651145f2e51d5cb5591048920b7aca1c4be91a",
+              "seo_title": "3db4573ffd3d869fc9091f5324ec67a4725846667de0d73abc09b3f5734e9756",
+              "seo_description": "a33b79c382474a5f82c6b298e10fb233b3b5298216a0d47997e3d49c7d21d160",
+              "og_title": "3db4573ffd3d869fc9091f5324ec67a4725846667de0d73abc09b3f5734e9756",
+              "og_description": "a33b79c382474a5f82c6b298e10fb233b3b5298216a0d47997e3d49c7d21d160"
+            }
+          },
+          "editorial_projection_sha256": "d80e3bccaf877cfe348e65da9c834bec99a7e00b2a7612b95c98206812e3745f",
+          "editorial_cta_targets": [
+            {
+              "key": "mid_article_riasec_soft_cta",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            },
+            {
+              "key": "end_article_riasec_primary_cta",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            }
+          ]
+        }
+      },
+      "editorial_package_v1": {
+        "answer_surface_policy": "editor_supplied",
+        "answer_surface_visibility": "below_intro",
+        "answer_surface_v1": {
+          "faq_items": [
+            {
+              "key": "approved_faq_1",
+              "question": "熱門專業是不是更值得報？",
+              "answer": "不一定。熱門只說明外部關注度高，不能說明你能學完、能接受工作活動，也不能保證錄取、就業或收入。熱門專業必須經過課程、工作活動和現實限制核查。"
+            },
+            {
+              "key": "approved_faq_2",
+              "question": "霍蘭德職業興趣測驗能判斷熱門專業適不適合我嗎？",
+              "answer": "不能直接判斷。它可以幫助你觀察自己更願意接觸哪些工作活動和環境，例如資料、系統、工具、人際支持、規則或表達。專業是否保留，還要結合課程、招生限制、學校資源和現實驗證。"
+            },
+            {
+              "key": "approved_faq_3",
+              "question": "家長堅持讓我報熱門專業怎麼辦？",
+              "answer": "不要只說「不喜歡」。把專業放進表格：核心課是什麼、畢業後做什麼、你願不願意長期接觸這些任務、有哪些調劑和轉專業風險。沒有證據的爭論很難結束。"
+            },
+            {
+              "key": "approved_faq_4",
+              "question": "如果我不知道自己興趣在哪裡怎麼辦？",
+              "answer": "先別急著排除所有專業。可以從 RIASEC / 霍蘭德測驗開始，把模糊興趣轉成工作活動問題，再用公開課、課程表、訪談和微任務驗證。"
+            },
+            {
+              "key": "approved_faq_5",
+              "question": "專業就業前景重要嗎？",
+              "answer": "重要，但不能單獨決定。就業前景需要和學校層次、城市、個人能力、產業週期、課程訓練和家庭約束一起看。不要把就業敘事當成保底承諾。"
+            },
+            {
+              "key": "approved_faq_6",
+              "question": "一個熱門專業被暫時降低優先順序，是不是說明我能力不行？",
+              "answer": "不是。暫時降低優先順序只說明目前證據不足或是否適合仍待確認，不是能力診斷。後續如果課程、任務或現實條件的證據改變，可以重新放回待驗證或保留區。"
+            }
+          ]
+        },
+        "cta_slots": [
+          {
+            "key": "mid_article_riasec_soft_cta",
+            "kind": "start_test",
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "label": "先做霍蘭德職業興趣測驗，把熱門專業拆成工作活動問題"
+          },
+          {
+            "key": "end_article_riasec_primary_cta",
+            "kind": "start_test",
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "label": "開始霍蘭德職業興趣測驗"
+          }
+        ]
+      }
+    },
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "math-not-good-computer-ai-major-course-riasec-checklist",
+          "source_locale": "zh-CN",
+          "source_article_id": 59,
+          "translation_group_id": "tg_math_computer_ai_course_riasec_2026v1"
+        },
+        "review_sha256": "94d91b2d03e2ec55514872dfd15bb05f8e26e06192f92713442e8af284b218e5",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 59,
+              "slug": "math-not-good-computer-ai-major-course-riasec-checklist",
+              "locale": "zh-CN",
+              "published_revision_id": 79,
+              "translation_group_id": "tg_math_computer_ai_course_riasec_2026v1",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "4183fd6a4bcb397fc5110ebb40a250a58e1427cea5e103cedb0f4d745171284b",
+              "public_body_sha256": "5d389d9871c7e4630e321068d2bdade6f87c4c85a9f8780de0b28d9f371fab3f",
+              "hreflang_gate": null
+            },
+            "existing_english": {
+              "id": 199,
+              "slug": "math-not-good-computer-ai-major-course-riasec-checklist",
+              "locale": "en",
+              "published_revision_id": 460,
+              "translation_group_id": "tg_math_computer_ai_course_riasec_2026v1",
+              "source_locale": "zh-CN",
+              "source_article_id": 59,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "47d1fb7a5cc607a264c1d54782eaa4d691cb1e89f0979874f080b9ffe3d924f3",
+              "public_body_sha256": "4eb594746709ec9ea75ff7d5476b6d53ccf3d9469d46eb9f454a819bd51a2922",
+              "hreflang_gate": null
+            }
+          },
+          "production": {
+            "source": {
+              "id": 59,
+              "slug": "math-not-good-computer-ai-major-course-riasec-checklist",
+              "locale": "zh-CN",
+              "published_revision_id": 1148,
+              "translation_group_id": "tg_math_computer_ai_course_riasec_2026v1",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "a6ed70aabb00cee443cfbdaf037b14f6ad0e1b224e8b92ab6981007394148556",
+              "public_body_sha256": "d53a4d8fbbd861e54e5dec9dc1397388c9d56d2bd17507731702005bcb5dae35",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": {
+              "id": 199,
+              "slug": "math-not-good-computer-ai-major-course-riasec-checklist",
+              "locale": "en",
+              "published_revision_id": 1153,
+              "translation_group_id": "tg_math_computer_ai_course_riasec_2026v1",
+              "source_locale": "zh-CN",
+              "source_article_id": 59,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "7e2796678ffd2ee15e9ea2d4fba8a0ecc5beb4db705fa84bb6c324e2e863f7aa",
+              "public_body_sha256": "d36b25992c9c8af0415d6845f32b11d3d2b5e817b2362ba97ec6ad3f39924138",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articlemath-not-good-computer-ai-major-course-riasec-checklistcoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1672,
+          "cover_image_height": 941,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlemath-not-good-computer-ai-major-course-riasec-checklistcoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlemath-not-good-computer-ai-major-course-riasec-checklistcoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlemath-not-good-computer-ai-major-course-riasec-checklistcoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlemath-not-good-computer-ai-major-course-riasec-checklistcoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlemath-not-good-computer-ai-major-course-riasec-checklistcoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            },
+            "editorial_package_v1": {
+              "body_visual_asset_key": "article.math-not-good-computer-ai-major-course-riasec-checklist.body-visual.v1",
+              "body_visual_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articlemath-not-good-computer-ai-major-course-riasec-checklistbody-visualv1/hero_1600x900.jpg",
+              "body_visual_fallback_authorized": false
+            }
+          },
+          "related_test_slug": "holland-career-interest-test-riasec",
+          "author_name": "Fermat Institute",
+          "cover_image_alt": "高考志願中學生和家長用課程、數學類型和職業興趣清單判斷計算機與人工智慧專業是否值得驗證"
+        },
+        "seo_metadata": {
+          "og_title": "數學不好還能報計算機/AI嗎？課程和興趣驗證清單",
+          "og_description": "數學不好還能報計算機或人工智慧嗎？先釐清數學上的困難、課程要求和真實工作活動，再用霍蘭德興趣測驗把專業放進保留、待驗證或暫時排除清單。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articlemath-not-good-computer-ai-major-course-riasec-checklistcoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "數學不好還能報計算機/人工智慧嗎？先看課程、工作活動和興趣匹配",
+          "excerpt": "數學不好還能報計算機或人工智慧嗎？先釐清數學上的困難、課程要求和真實工作活動，再用霍蘭德興趣測驗把專業放進保留、待驗證或暫時排除清單。",
+          "content_md": "本文人物情境、任務清單和七天安排均為編輯示例，不是測評驗證研究、能力考試或錄取標準。一次入門任務不能證明能否完成整個專業；每所學校的課程和當年要求須獨立核對。MBTI只可提供自我描述提示，不能確定最佳學習方式或專業適合度。\n\n## 快速答案：數學不好還能報計算機/人工智慧嗎？\n\n先查當年的報考規則。數學成績偏弱本身不足以判斷能否填報。核對本省招生計畫和選科要求，以及目標院校招生章程中適用於該專業的單科或體檢要求。符合條件後，再把計算機或人工智慧放入「待驗證」，核對課程負擔和你願意嘗試的任務。今晚真正要做的，是把一個模糊問題拆成四個證據：你是哪一種數學吃力，目標專業到底學什麼，日常任務是不是能接受，以及做決定前還需要哪些支持和體驗。\n\n很多家庭卡住的不是專業名，而是同一張志願表前的兩種恐懼：孩子怕大學四年被數學和程式碼拖垮，父母怕錯過計算機/AI 這類熱門方向。先不要互相說服，先把下面五件事寫出來。\n\n| 今晚不要先問 | 先寫出來的證據 | 最後落到哪裡 |\n|---|---|---|\n| 數學不好是不是不能報 | 到底是基礎知識有缺口、目前抽象任務吃力，還是限時作答緊張 | 數學風險類型 |\n| 計算機/AI是不是熱門 | 目標學校培養方案裡的核心課 | 課程現實 |\n| 喜歡電腦算不算適合 | 是否願意寫程式碼、調 bug、讀文件、做專案 | 工作活動偏好 |\n| 後續還需要什麼支持 | 入門嘗試中願意繼續接觸什麼、卡在哪裡 | 繼續調查的線索，不是能否補足基礎證明 |\n| 要不要現在排除 | 保留 / 待驗證 / 暫時排除的理由 | 志願清單狀態 |\n\n本文不預測錄取，不保證就業、薪資或職業成功，也不替代省級考試院、高校招生章程、選科要求、培養方案和正式志願填報系統。FermatMind 不是官方志願填報系統，霍蘭德/RIASEC 和 MBTI 只能作為探索工具，不能替你決定專業。\n\n## 這篇文章到底解決什麼問題？\n\n志願表開啟以後，計算機和人工智慧經常不是一個專業選項，而是一場家庭拉扯。\n\n孩子盯著的是大學生活：高等數學會不會不及格，程式碼是不是永遠跑不通，演算法課是不是聽不懂，人工智慧是不是滿屏公式。父母盯著的是機會成本：計算機還算熱門，人工智慧聽起來有未來，不報會不會吃虧，孩子現在害怕是不是只是沒試過。\n\n兩邊都在保護未來，但爭論經常只剩兩句話：\n\n- 孩子說：「我數學不好，肯定不行。」\n- 父母說：「計算機熱門，咬咬牙就行。」\n\n這兩句話都太粗。正確處理方式不是先決定報不報，而是把問題拆成四層：**規則層面能不能報，課程層面能不能學，任務層面願不願意做，現實層面能不能驗證。**\n\n| 飯桌上的爭論 | 真實問題 | 下一步應該查什麼 |\n|---|---|---|\n| 數學不好，計算機肯定學不了 | 哪種數學不好？核心課程是否集中觸發弱點？ | 培養方案、數學課占比、演算法/資料課程要求 |\n| AI 是未來，必須報 | 目標 AI 專業到底學模型、資料、演算法，還是應用開發？ | 課程表、實踐專案、畢業要求 |\n| 喜歡電腦，所以適合計算機 | 喜歡使用電腦，還是願意理解系統和寫程式碼？ | 小程式碼任務、技術文件、專案作業 |\n| 數學不好可以補 | 願不願意補？補的是基礎，還是長期強排斥？ | 7 天補課/驗證記錄 |\n| 先報了再說 | 若核心課程不適應，轉專業是否容易？ | 招生章程、轉專業政策、專業組風險 |\n\n這篇文章只負責幫你做這張判斷表。它不會告訴你「最適合」的專業，也不會把任何測試包裝成專業匹配器。\n\n## 第一層：先問「能不能報」，不是「喜不喜歡」\n\n在討論數學和興趣之前，先把硬條件過一遍。很多家庭跳過這一步，直接吵「要不要衝計算機」，結果發現目標院校專業組、選科要求、體檢限制、單科要求或招生計畫本身就需要先核實。\n\n| 硬條件 | 你要查什麼 | 如果沒查清會怎樣 |\n|---|---|---|\n| 選科要求 | 目標省份、目標院校、目標專業組對物理/化學等科目的要求 | 喜歡也可能不具備填報資格 |\n| 招生計畫 | 目標專業在本省/科類是否招生、計劃數量、專業組包含哪些專業 | 誤以為能報某專業，實際專業組風險更復雜 |\n| 單科要求 | 是否對數學、外語或其他科目有特殊說明 | 忽略硬限制，後續討論無效 |\n| 體檢/色覺/視力限制 | 特定專業是否有體檢或色覺限制 | 可能被限制錄取或後續學習受影響 |\n\n正式填報條件以當年的省級招生計畫和目標院校招生章程為準。不同學校和專業可能要求不同。另記一欄就讀條件，核對學費、城市生活成本和住宿。若計畫入學後轉專業，再查學校公布的申請資格、名額和截止日期，判斷這條備選路徑是否可行。確認可填報後，再判斷課程和任務是否值得繼續了解。\n\n## 第二層：先把「計算機 / AI」拆開\n\n「計算機」和「人工智慧」不是一個巨大的統一專業。不同學校、不同專業名稱、不同培養方案，學習體驗可能相差很大。下面的拆分不是官方分類，也不是推薦名單，只是幫你形成核查問題。正式判斷必須以目標院校招生章程、培養方案和課程大綱為準。\n\n| 方向 | 常見學習重心 | 數學/抽象壓力可能來自 | 更該問的問題 |\n|---|---|---|---|\n| 電腦科學與技術 | 程式設計、資料結構、演算法、系統基礎、網路、資料庫 | 離散數學、演算法複雜度、系統抽象 | 我是否願意理解底層規則，而不只是用軟體？ |\n| 軟體工程 | 需求、開發、測試、協作、工程流程、專案交付 | 演算法基礎、系統設計、專案複雜度 | 我能否接受長期除錯、改需求、協作交付？ |\n| 人工智慧 | 機器學習、資料、模型、機率統計、線性代數、最佳化方法 | 線性代數、機率統計、微積分、模型推導 | 我是否願意面對公式、模型和不確定結果？ |\n| 資料科學 / 大數據 | 資料處理、統計分析、資料庫、視覺化、業務問題 | 機率統計、資料建模、數學解釋 | 我是否願意清理資料、找規律、解釋結論？ |\n| 網路安全 | 網路協議、系統安全、攻防實驗、漏洞分析、規則意識 | 離散數學、密碼學基礎、系統細節 | 我是否喜歡追蹤異常、查規則、做實驗？ |\n| 數位媒體 / 互動 / 產品相關方向 | 前端、設計、使用者體驗、產品邏輯、內容和技術工具 | 程式碼基礎、互動邏輯、部分圖形/技術課程 | 我是否更喜歡「技術 + 表達 + 使用者問題」的混合任務？ |\n\n真正的分歧通常在這裡：有些學生排斥的是「高強度理論和演算法」，但並不排斥技術工具和專案開發；有些學生喜歡「AI 新聞」，但並不願意長期學習模型、統計和程式碼。這兩種情況不能混在一起。\n\n下面的類型是幫助描述目前任務困難的編輯提問，不是能力測驗或心理診斷。七天安排只是蒐集課程和活動線索的示例，不證明能否補足基礎、未來成績或專業適合度；正式規則與截止日期仍需向目前院校與考試機構核實。\n\n## 第三層：「數學不好」也要拆開\n\n同樣是數學不好，風險完全不同。一個計算粗心但願意修錯的人，和一個看到抽象符號就長期厭煩的人，不應該被放進同一個判斷框。\n\n| 數學不好類型 | 常見表現 | 可能影響的大學內容 | 7 天內怎麼驗證 | 不該直接下的結論 |\n|---|---|---|---|---|\n| 計算慢 / 粗心多 | 會做但容易錯，步驟不穩 | 程式設計細節、除錯、演算法實現 | 做一個小程式碼任務，看能否耐心查錯 | 不能直接判定不適合計算機 |\n| 公式記不住 | 靠背誦吃力，換題就慌 | 線性代數、機率、最佳化課程 | 看一節概念型入門課，能否理解影像和直觀含義 | 不能只憑高中記憶判斷大學表現 |\n| 目前抽象任務吃力 | 證明、遞推、符號關係難理解 | 離散數學、演算法、機器學習 | 看一個遞迴/圖論/演算法視覺化內容並複述 | AI/演算法方向需要重點驗證 |\n| 機率統計不熟 | 對分布、期望、相關性、誤差不敏感 | 資料科學、機器學習、實驗分析 | 看一節機率統計入門，做 5 道基礎題 | 資料/AI 方向不能只憑熱度保留 |\n| 函式/極限/變化率理解吃力 | 對變化趨勢、連續性、梯度感弱 | 高等數學、最佳化、模型訓練 | 看導數/梯度直觀解釋，看是否能跟上 | AI/最佳化相關課程要謹慎驗證 |\n| 基礎知識有缺口但願意補 | 某些環節沒學紮實，但不排斥補 | 大一高等數學、線性代數、程式設計 | 連續 7 天每天補 30 分鐘，記錄卡點 | 可以待驗證，不要立刻否定 |\n| 限時作答緊張 | 平時能懂，考試發揮不穩 | 期末考試、限時上機、答辯壓力 | 做一次限時小測，記錄情緒和錯誤 | 問題可能是壓力管理，不只是能力 |\n| 對數學強烈排斥 | 不只是不會，而是持續厭煩 | 數學課、模型課、演算法課、AI 基礎課 | 看課程目錄和 1 節入門課，記錄抗拒程度 | AI/資料/理論方向要非常謹慎 |\n\n關鍵不是「你現在數學分數高不高」，而是：**你是否願意長期修補數學、抽象理解和錯誤回饋。** 如果答案是完全不願意，計算機/AI 不能只因為熱門被保留。\n\n這裡還有一個更現實的判斷：如果你只是某一塊基礎知識有缺口，但願意每天花 30 分鐘補、願意把錯誤原因寫下來，那叫「可驗證風險」；如果你一想到公式、程式碼、報錯和抽象概念就長期抗拒，而且不願意接觸，那叫「核心任務排斥」。前者可以繼續查課程，後者不能靠熱門專業名忽略這些問題。\n\n## 第四層：計算機/AI 的課程現實\n\n你要查的不是一篇網上的「計算機專業介紹」，而是目標學校的培養方案。重點看三件事：課程名、學分/必修比例、先修關係。尤其要看哪些課程是核心課、哪些只是選修課。\n\n| 課程或模組 | 它考驗什麼 | 對「數學不好」的意義 | 預檢動作 |\n|---|---|---|---|\n| 高等數學 | 函式、極限、變化率、抽象計算 | 基礎知識有缺口會很快暴露 | 看一節高等數學入門課，記下第一個聽不懂的點 |\n| 線性代數 | 向量、矩陣、空間、變換 | AI/資料方向常見底層工具 | 看矩陣和向量的直觀解釋 |\n| 機率統計 | 不確定性、分布、抽樣、誤差 | 資料和機器學習方向重點 | 做 5 道基礎機率題，判斷是否願意繼續 |\n| 離散數學 | 邏輯、集合、圖、遞推 | 演算法、網路、安全、理論基礎常見 | 看圖論/遞迴入門，嘗試複述 |\n| 程式設計 | 語法、邏輯、除錯、問題拆解 | 不只是數學，更考驗耐心和修錯 | 做一個 1 小時小任務 |\n| 資料結構與演算法 | 抽象結構、效率、複雜度 | 目前抽象任務吃力的人要重點驗證 | 看棧、佇列、遞迴或搜尋演算法 |\n| 機器學習基礎 | 資料、模型、誤差、最佳化 | AI 方向的核心壓力之一 | 看一節「模型如何訓練」的入門課 |\n| 作業系統/網路/資料庫 | 規則、系統機制、工程細節 | 更偏系統理解和細節耐受 | 看是否喜歡理解系統如何執行 |\n| 專案實踐 | 協作、文件、除錯、交付 | 真實專業體驗常在這裡暴露 | 找一個課程專案說明或作業樣例 |\n\n查完以後，不要只說「課程很多」。你要把課程分成三類：\n\n- **願意學**：看到課程名會想進一步了解；\n- **可以接受**：不興奮，但願意付出；\n- **明顯抗拒**：核心課一齣現就長期排斥。\n\n如果「明顯抗拒」集中在核心必修課，風險就很高。\n\n一個簡單做法是把目標培養方案列印出來，用三種顏色標註：綠色是願意學，黃色是能接受但需要補，紅色是長期排斥。紅色如果只出現在一兩門邊緣課，問題還可以繼續驗證；如果集中在高等數學、線性代數、機率、演算法、機器學習這類核心鏈條上，就不能只用「以後努力」帶過。\n\n<!-- body_visual:math_computer_ai_course_riasec_checklist -->\n\n## 第五層：用工作活動理解專業名稱背後的內容\n\n計算機/AI 不只是數學，也不是只坐在電腦前。它包含一組長期重複的工作活動。你能否接受這些活動，比「我喜不喜歡電腦」更有判斷價值。\n\n| 工作活動 | 真實含義 | 可能對應的 RIASEC 興趣線索 | 自測問題 |\n|---|---|---|---|\n| 程式設計實現 | 把想法變成可執行程式碼 | Realistic / Investigative / Conventional | 我願不願意一行一行查錯？ |\n| 除錯排錯 | 看報錯、復現問題、定位原因 | Investigative / Conventional | 問題沒有馬上解決時，我會繼續追嗎？ |\n| 演算法和建模 | 抽象問題、比較方案、最佳化效率 | Investigative | 我是否享受「為什麼這樣更快/更穩」？ |\n| 資料分析 | 清理資料、找模式、解釋結果 | Investigative / Conventional / Enterprising | 我能不能接受未清理的資料和不確定結論？ |\n| 系統維護 | 理解規則、穩定執行、處理異常 | Realistic / Conventional | 我是否喜歡讓複雜系統變得可控？ |\n| 專案協作 | 需求溝通、版本管理、交付迭代 | Enterprising / Social / Conventional | 我能否接受別人改需求、催進度、改程式碼？ |\n| 產品和使用者理解 | 把技術放進真實使用情境 | Social / Enterprising / Artistic | 我是否在意使用者為什麼需要這個東西？ |\n| 英文文件閱讀 | 查資料、讀框架、看 API | Investigative / Conventional | 我是否願意長期讀半懂不懂的技術資料？ |\n\nRIASEC 的作用不是判斷「你適不適合計算機」，而是把模糊的喜歡/不喜歡轉成具體工作活動問題。如果你想先把興趣變成驗證問題，可以做 [霍蘭德職業興趣測驗](/zh/tests/holland-career-interest-test-riasec)。結果只能作為探索線索，不是專業決策依據。\n\n## 第六層：三個示範案例\n\n下面三個案例不是推薦專業，也不是判斷模板。它們只示範一件事：同樣是「數學不好」，最後可能走向完全不同的驗證路徑。\n\n### 案例 A：數學一般，但願意除錯程式碼和做專案\n\n小林數學不突出，考試常在中等水準。但他願意做小工具。網頁報錯了，他會查文件；程式碼無法正常執行，他會先想「哪裡錯了」，而不是立刻逃走。\n\n數學成績一般本身不能確定報考資格或學習準備程度。可以繼續調查相關方向，同時核對每所目標學校的錄取條件、課程要求和可獲得的支持。短期入門任務只提示下一步要查什麼，不能證明已經具備完成專業學習的能力。\n\n| 驗證點 | 較好訊號 | 風險訊號 |\n|---|---|---|\n| 小程式碼任務 | 能完成，並願意修錯 | 看見報錯就強烈煩躁 |\n| 演算法入門 | 能理解基本思路 | 看到抽象結構就立刻放棄 |\n| 培養方案 | 核心課雖難但可接受 | 核心課大面積抗拒 |\n| 訪談回饋 | 聽到真實壓力後仍願意繼續了解 | 聽完就只想逃避 |\n\n階段判斷：可繼續驗證計算機/軟體工程類方向，但不能跳過目標學校課程核查。\n\n### 案例 B：因為 AI 熱門想報，但強烈排斥抽象數學\n\n小周不是基礎知識有缺口，而是對抽象數學和模型推導長期反感。聽到人工智慧很火會心動，但看到線性代數、機率統計、最佳化、機器學習就明顯抗拒。\n\n這時「AI 是未來」不能覆蓋風險。應核對目標人工智慧專業對數學、統計、模型和演算法的實際要求。目標學校課程設定仍需逐校核實，但如果培養方案裡的核心課集中觸發長期抗拒，至少不能直接保留。\n\n階段判斷：AI 先放「待驗證」或「暫時排除」；同時可驗證偏工程、應用、產品、數位媒體、互動或資訊管理等技術交叉方向。注意，這不是專業推薦，只是驗證路徑。\n\n### 案例 C：喜歡技術工具和產品表達，但不確定是否適合純計算機\n\n小陳喜歡做網頁、剪影片、研究工具、寫產品說明，也願意琢磨使用者為什麼看不懂一個功能。但他對底層系統、演算法競賽和抽象數學興趣一般。\n\n這類學生不一定要在「純計算機」和「完全不碰技術」之間二選一。更合理的是把目標拆開：純計算機、軟體工程、數位媒體技術、互動設計、資訊管理、教育技術、資料視覺化等方向都可能需要不同程度的技術，但課程和工作活動差異很大。\n\n階段判斷：純 AI/理論計算方向謹慎；技術應用、產品、互動、內容技術類方向可待驗證。仍需看具體學校專業設定和培養方案。\n\n## 7 天驗證計畫：不要在想像裡決定\n\n這 7 天不是讓你學會程式設計，也不是讓你補完數學。它只回答一個問題：計算機/AI 是否值得繼續留在志願清單裡。\n\n| 天數 | 動作 | 記錄什麼 | 用來判斷什麼 |\n|---|---|---|---|\n| 第 1 天 | 找 1 個目標學校的培養方案 | 核心課、數學課、實踐課比例 | 課程是否和想像一致 |\n| 第 2 天 | 看一節線性代數/演算法/程式設計入門課 | 哪些聽懂了、在哪一步卡住、還願不願再試 | 找到一個需要再核對的知識點或體驗 |\n| 第 3 天 | 做一個小程式碼任務 | 能否查錯、能否繼續試 | 除錯耐受度 |\n| 第 4 天 | 找一個真實課程作業或專案說明 | 任務形式、交付方式、難點 | 專業學習是否只是想像 |\n| 第 5 天 | 訪談一名在讀學生或從業者 | 最痛苦和最有價值的部分 | 修正短影片和家長口號 |\n| 第 6 天 | 寫三欄清單 | 保留、待驗證、暫時排除的理由 | 把情緒變成證據 |\n| 第 7 天 | 和家長回顧 | 每個結論背後的證據 | 決定是否繼續查院校專業組 |\n\n這輪調查未必得到最終答案。只憑熱度且缺少資料的選項可以繼續待驗證，再用課程、任務和現實條件的證據決定去留。\n\n## 保留 / 待驗證 / 暫時排除：最終放進三欄表\n\n這張表的作用不是替你填志願，而是防止家庭討論重新滑回「熱門」和「害怕」兩個詞。每個專業方向都必須有一句證據，才能進入下一輪。\n\n| 狀態 | 放入條件 | 典型例子 | 下一步 |\n|---|---|---|---|\n| 保留 | 硬條件滿足；核心課程大多可接受；至少完成一個低成本驗證；對工作活動不排斥 | 數學一般但願意除錯程式碼，能完成基礎任務 | 繼續查院校層次、專業組、培養方案 |\n| 待驗證 | 有興趣但證據不足；課程有風險但不確定；家長和學生判斷分歧大 | 想報 AI，但還沒看線性代數/機率/機器學習入門 | 按實際截止日期補課程和任務證據，不強制等待七天 |\n| 暫時排除 | 不符合正式條件；反覆體驗支持核心課程長期抗拒；或工作活動持續明顯排斥 | 強烈排斥數學和程式碼，只因「AI 熱門」想報 | 轉查其他方向或技術交叉方向 |\n\n如果你同時還在處理院校專業組和「不能接受專業」，可以先看 [高考志願要不要服從調劑的專業組清單](/zh/articles/gaokao-major-adjustment-unacceptable-major-checklist)。本篇只處理計算機/AI 是否值得保留，不處理服從調劑規則本身。\n\n## 父母不要說什麼，應該問什麼\n\n計算機/AI 相關爭論很容易變成互相扣帽子。父母說孩子怕吃苦，孩子說父母只看錢。真正能推進決策的不是態度，而是證據。\n\n| 不建議說 | 為什麼沒用 | 更好的問法 |\n|---|---|---|\n| 「計算機熱門，必須報。」 | 熱門不能替代課程和個人承受度 | 這個專業核心課程是什麼？你願意學哪些？ |\n| 「數學不好就別想。」 | 把不同數學問題混成一類 | 你是哪種數學不好？能不能驗證一下？ |\n| 「AI 是未來，不報虧了。」 | 趨勢不能替代適合度和學習過程 | AI 專業到底學什麼？你接受模型和統計嗎？ |\n| 「你就是不努力。」 | 把討論變成人身攻擊 | 哪些任務你願意長期練，哪些持續抗拒？ |\n| 「先報了再說。」 | 忽視專業組、轉專業和課程風險 | 如果不能轉專業，你是否仍能接受？ |\n\n學生也要改變表達方式。不要只說「我不喜歡數學」或「我就是喜歡電腦」。更有用的說法是：\n\n> 我先查這個專業的培養方案，再做一個小任務。如果我能接受課程和任務，就放進保留；如果證據不夠，就待驗證；如果核心課程和工作活動都明顯抗拒，就暫時排除。\n\n如果家庭分歧已經很強，可以參考 [高考志願父母和孩子意見不一致的溝通框架](/zh/articles/gaokao-major-choice-parent-conflict-riasec-course-checklist)。本文仍然只討論數學、課程和計算機/AI 工作活動驗證。\n\n## 本文負責什麼，不負責什麼\n\n本文負責把「數學不好還能不能報計算機/人工智慧」拆成可驗證問題：\n\n- 哪種數學不好？\n- 哪類計算機/AI方向？\n- 哪些課程需要提前看？\n- 哪些工作活動必須先試？\n- 如何決定保留、待驗證或暫時排除？\n\n本文不負責：\n\n- 預測你能否被錄取；\n- 判斷你一定適合某個專業；\n- 保證數學上的困難一定能補上；\n- 預測就業、薪資或職業成功；\n- 替代高校招生章程、培養方案、省級考試院規則或正式志願填報系統；\n- 把 RIASEC 或 MBTI 當成專業選擇引擎。\n\n測驗可以幫助你組織問題，但不能替你做決定。\n\n## 下一步：把興趣結果轉成計算機/AI驗證問題\n\n如果你現在只是覺得「計算機熱門」或「AI 有前途」，先不要急著把它放進最終志願。以下測評可以作為課程和任務調查之外的可選反思：\n\n1. 可以選擇 [霍蘭德職業興趣測驗](/zh/tests/holland-career-interest-test-riasec)，也可以從已有活動經歷提出問題：我願不願意分析、除錯、建模、協作、維護系統？\n2. 如果你還想理解自己的學習和決策偏好，可以再做 [MBTI 性格測驗](/zh/tests/mbti-personality-test-16-personality-types)。但不要把 MBTI 類型直接當成專業推薦。\n\n如果你還沒有建立整體選專業流程，可以先讀 [高考志願選專業：霍蘭德、MBTI 和職業興趣測驗怎麼用](/zh/articles/college-major-choice-holland-mbti-career-test)；如果你是出分後專業太多，可以用 [專業篩選清單](/zh/articles/gaokao-score-major-shortlist-riasec-checklist) 先縮小範圍。\n\n最後把結論寫成一句話：**我會依課程、實際任務及觀察結果，決定把這個方向放進保留、待驗證或暫時排除。**\n\n## 常見問題\n\n### 數學不好還能報計算機嗎？\n\n能否填報，先查目標學校當年招生章程及本省公布的招生計畫、選科要求，並核對所報專業是否有單科成績限制。符合條件後，再用培養方案和核心課程判斷數學學習負擔，記錄自己需要補哪些基礎。如果你願意補基礎、能接受程式設計和除錯任務，部分計算機相關方向仍值得驗證；如果你長期強烈排斥數學、程式碼和抽象問題，就要謹慎。\n\n### 數學不好能學人工智慧嗎？\n\n人工智慧課程可能涉及數學、統計、演算法和模型理解。不同學校課程差異很大，但如果培養方案裡線性代數、機率統計、最佳化、機器學習等課程占比很高，而你對這些內容長期抗拒，AI 方向應至少放入「待驗證」或「暫時排除」。\n\n### 計算機專業到底需要哪些數學？\n\n常見相關內容包括高等數學、線性代數、機率統計、離散數學，以及演算法、資料結構、機器學習中的抽象思維。具體課程以目標學校培養方案為準。不要只聽「計算機要數學」這句話，要查具體課程和學分結構。\n\n### 高中數學不好，大學計算機會不會很痛苦？\n\n可能會，也可能不一定。痛苦程度取決於數學困難的類型、專業方向、學校課程難度、你是否願意補基礎，以及你是否喜歡程式設計、除錯、系統和專案任務。可以先做一次可停止的入門嘗試並記錄體驗；七天只是編輯示例，不足以預測四年的學習體驗。\n\n### 喜歡電腦但不喜歡數學，適合報計算機嗎？\n\n喜歡使用電腦不等於適合學習計算機。你需要驗證的是：是否願意寫程式碼、讀文件、除錯、拆解問題、理解系統規則。如果你更喜歡表達、設計、使用者、內容或工具應用，也可以驗證數位媒體、互動、產品或資訊管理等技術交叉方向。\n\n### AI 專業是不是比計算機更需要數學？\n\n人工智慧專業可能強調數學、統計、演算法和建模，電腦科學也包含數學基礎。兩者的側重取決於院校和課程選擇。應直接比較目標學校兩套培養方案中的必修學分、先修關係，以及線性代數、機率統計、最佳化和機器學習的內容，不能只憑專業名稱判斷誰更需要數學。\n\n### 霍蘭德職業興趣測驗能決定我能不能報計算機嗎？\n\n不能。霍蘭德 / RIASEC 只能幫助你觀察自己更偏好的工作活動和環境，例如分析、操作、組織、表達、服務或影響。它不能預測錄取、課程成績、就業、薪資或職業成功。\n\n### 父母覺得計算機熱門，但孩子沒把握怎麼辦？\n\n不要用「熱門」或「沒把握」直接蓋棺定論。建議把計算機/AI 放進待驗證清單：查培養方案，看一節基礎課，做一個小程式碼任務，訪談一名學生，再決定保留還是暫時排除。",
+          "seo_title": "數學不好還能報計算機/AI嗎？課程和興趣驗證清單",
+          "seo_description": "數學不好還能報計算機或人工智慧嗎？先釐清數學上的困難、課程要求和真實工作活動，再用霍蘭德興趣測驗把專業放進保留、待驗證或暫時排除清單。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 17,
+            "slug": "gaokao-major-choice",
+            "label": "高考志願"
+          },
+          "tags": [
+            {
+              "id": 11,
+              "slug": "riasec",
+              "label": "RIASEC"
+            },
+            {
+              "id": 67,
+              "slug": "f5eadf7d5178",
+              "label": "霍蘭德職業興趣測驗"
+            },
+            {
+              "id": 85,
+              "slug": "9a2a03330565",
+              "label": "高考志願"
+            },
+            {
+              "id": 90,
+              "slug": "8325d8270146",
+              "label": "計算機專業"
+            },
+            {
+              "id": 91,
+              "slug": "63fe855a0040",
+              "label": "人工智慧"
+            },
+            {
+              "id": 92,
+              "slug": "ec85735ee642",
+              "label": "專業選擇"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 17,
+        "tag_ids": [
+          11,
+          67,
+          85,
+          90,
+          91,
+          92
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 59,
+            "slug": "math-not-good-computer-ai-major-course-riasec-checklist",
+            "locale": "zh-CN",
+            "published_revision_id": 79,
+            "translation_group_id": "tg_math_computer_ai_course_riasec_2026v1",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": null,
+            "snapshot_sha256": {
+              "title": "8cb8d7d5b636da6ba42df6884970c9b02e59ae20251cf9260ce36a2802667c6e",
+              "excerpt": "556dca27a8a7bb58a7d8011b4e14c830ef996645b7d429fc2ce750e04faf3986",
+              "content_md": "5d389d9871c7e4630e321068d2bdade6f87c4c85a9f8780de0b28d9f371fab3f",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "e1a81032ee3a5b2f600fe79961f832b9e0c692a9da44c5342b497e171b7745a0",
+              "seo_title": "680247543a8ed45cca0010edc401a8f54f1a3ff8b819045b1c2746ff614519bc",
+              "seo_description": "556dca27a8a7bb58a7d8011b4e14c830ef996645b7d429fc2ce750e04faf3986",
+              "og_title": "680247543a8ed45cca0010edc401a8f54f1a3ff8b819045b1c2746ff614519bc",
+              "og_description": "556dca27a8a7bb58a7d8011b4e14c830ef996645b7d429fc2ce750e04faf3986"
+            }
+          },
+          "existing_english": {
+            "id": 199,
+            "slug": "math-not-good-computer-ai-major-course-riasec-checklist",
+            "locale": "en",
+            "published_revision_id": 460,
+            "translation_group_id": "tg_math_computer_ai_course_riasec_2026v1",
+            "source_locale": "zh-CN",
+            "source_article_id": 59,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": false,
+            "hreflang_gate": null,
+            "snapshot_sha256": {
+              "title": "81af05f7166a0dda61a8f023f896b76203ba0a59df247db345cd042c660fe1ec",
+              "excerpt": "68ffa0665257d9ec559e93f87e5bd50d242d8d5b1fadbd6b898a4f879b3c3c5f",
+              "content_md": "4eb594746709ec9ea75ff7d5476b6d53ccf3d9469d46eb9f454a819bd51a2922",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": null,
+              "seo_title": null,
+              "seo_description": null,
+              "og_title": null,
+              "og_description": null
+            }
+          },
+          "editorial_projection_sha256": "ead67c807ab888d2bfe124eab54c93640d9a373c8419721fc84af3b686f930af",
+          "editorial_cta_targets": [
+            {
+              "key": "math_computer_ai_riasec_primary",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            },
+            {
+              "key": "math_computer_ai_mbti_secondary",
+              "kind": "start_test",
+              "href": "/zh/tests/mbti-personality-test-16-personality-types"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 59,
+            "slug": "math-not-good-computer-ai-major-course-riasec-checklist",
+            "locale": "zh-CN",
+            "published_revision_id": 1148,
+            "translation_group_id": "tg_math_computer_ai_course_riasec_2026v1",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "8cb8d7d5b636da6ba42df6884970c9b02e59ae20251cf9260ce36a2802667c6e",
+              "excerpt": "556dca27a8a7bb58a7d8011b4e14c830ef996645b7d429fc2ce750e04faf3986",
+              "content_md": "d53a4d8fbbd861e54e5dec9dc1397388c9d56d2bd17507731702005bcb5dae35",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "e1a81032ee3a5b2f600fe79961f832b9e0c692a9da44c5342b497e171b7745a0",
+              "seo_title": "680247543a8ed45cca0010edc401a8f54f1a3ff8b819045b1c2746ff614519bc",
+              "seo_description": "556dca27a8a7bb58a7d8011b4e14c830ef996645b7d429fc2ce750e04faf3986",
+              "og_title": "680247543a8ed45cca0010edc401a8f54f1a3ff8b819045b1c2746ff614519bc",
+              "og_description": "556dca27a8a7bb58a7d8011b4e14c830ef996645b7d429fc2ce750e04faf3986"
+            }
+          },
+          "existing_english": {
+            "id": 199,
+            "slug": "math-not-good-computer-ai-major-course-riasec-checklist",
+            "locale": "en",
+            "published_revision_id": 1153,
+            "translation_group_id": "tg_math_computer_ai_course_riasec_2026v1",
+            "source_locale": "zh-CN",
+            "source_article_id": 59,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "81af05f7166a0dda61a8f023f896b76203ba0a59df247db345cd042c660fe1ec",
+              "excerpt": "68ffa0665257d9ec559e93f87e5bd50d242d8d5b1fadbd6b898a4f879b3c3c5f",
+              "content_md": "d36b25992c9c8af0415d6845f32b11d3d2b5e817b2362ba97ec6ad3f39924138",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "4228a1c4794f81058eee6f7fb998a4f9ad9a02b33d2a20991141575764fb9ad9",
+              "seo_title": "cd77a2dfe2261122bf9f0f305bae337d278838346f8ea60658f96014f6b6c937",
+              "seo_description": "290e665fe43dd0d1bab651fa9c52f49757c0aa925db20490d75368155ee2f0ae",
+              "og_title": "cd77a2dfe2261122bf9f0f305bae337d278838346f8ea60658f96014f6b6c937",
+              "og_description": "290e665fe43dd0d1bab651fa9c52f49757c0aa925db20490d75368155ee2f0ae"
+            }
+          },
+          "editorial_projection_sha256": "35e43a5c5e971fb9db777efb747acdc234b7ebad7c4d6d296ff47dc54cad31b7",
+          "editorial_cta_targets": [
+            {
+              "key": "math_computer_ai_riasec_primary",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            },
+            {
+              "key": "math_computer_ai_mbti_secondary",
+              "kind": "start_test",
+              "href": "/zh/tests/mbti-personality-test-16-personality-types"
+            }
+          ]
+        }
+      },
+      "editorial_package_v1": {
+        "answer_surface_policy": "editor_supplied",
+        "answer_surface_visibility": "below_intro",
+        "answer_surface_v1": {
+          "faq_items": [
+            {
+              "key": "approved_faq_1",
+              "question": "數學不好還能報計算機嗎？",
+              "answer": "能否填報，先查當年招生章程、本省招生計畫與選科要求，並核對單科成績限制。符合正式條件後，再用培養方案確認數學負擔，觀察自己是否願意補基礎、寫程式與除錯。這些觀察可以幫助評估方向，無法決定報考資格或預測學習結果。"
+            },
+            {
+              "key": "approved_faq_2",
+              "question": "數學不好能學人工智慧嗎？",
+              "answer": "人工智慧課程可能涉及數學、統計、演算法和模型理解。不同學校課程差異很大，但如果培養方案裡線性代數、機率統計、最佳化、機器學習等課程占比很高，而你對這些內容長期抗拒，AI 方向應至少放入「待驗證」或「暫時排除」。"
+            },
+            {
+              "key": "approved_faq_3",
+              "question": "計算機專業到底需要哪些數學？",
+              "answer": "常見相關內容包括高等數學、線性代數、機率統計、離散數學，以及演算法、資料結構、機器學習中的抽象思維。具體課程以目標學校培養方案為準。不要只聽「計算機要數學」這句話，要查具體課程和學分結構。"
+            },
+            {
+              "key": "approved_faq_4",
+              "question": "高中數學不好，大學計算機會不會很痛苦？",
+              "answer": "可能會，也可能不一定。痛苦程度取決於數學困難的類型、專業方向、學校課程難度、你是否願意補基礎，以及你是否喜歡程式設計、除錯、系統和專案任務。可以先做一次可停止的入門嘗試並記錄體驗；七天只是編輯示例，不足以預測四年的學習體驗。"
+            },
+            {
+              "key": "approved_faq_5",
+              "question": "喜歡電腦但不喜歡數學，適合報計算機嗎？",
+              "answer": "喜歡使用電腦不等於適合學習計算機。你需要驗證的是：是否願意寫程式碼、讀文件、除錯、拆解問題、理解系統規則。如果你更喜歡表達、設計、使用者、內容或工具應用，也可以驗證數位媒體、互動、產品或資訊管理等技術交叉方向。"
+            },
+            {
+              "key": "approved_faq_6",
+              "question": "AI 專業是不是比計算機更需要數學？",
+              "answer": "人工智慧專業可能強調數學、統計、演算法和建模，電腦科學也包含數學基礎。兩者的側重取決於院校和課程選擇。應直接比較目標學校兩套培養方案中的必修學分、先修關係，以及線性代數、機率統計、最佳化和機器學習的內容，不能只憑專業名稱判斷誰更需要數學。"
+            }
+          ]
+        },
+        "cta_slots": [
+          {
+            "key": "math_computer_ai_riasec_primary",
+            "kind": "start_test",
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "label": "先做霍蘭德職業興趣測驗"
+          },
+          {
+            "key": "math_computer_ai_mbti_secondary",
+            "kind": "start_test",
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "用 MBTI 補充理解學習和決策偏好"
+          }
+        ]
+      }
+    },
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "unwanted-major-adjustment-riasec-transfer-plan",
+          "source_locale": "zh-CN",
+          "source_article_id": 70,
+          "translation_group_id": "tg_unwanted_major_riasec_transfer_plan_2026v1"
+        },
+        "review_sha256": "94aeb1c1df7f4232dfe544924289e5e4d90385511c7cb80a199e7e305521aa6c",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 70,
+              "slug": "unwanted-major-adjustment-riasec-transfer-plan",
+              "locale": "zh-CN",
+              "published_revision_id": 90,
+              "translation_group_id": "tg_unwanted_major_riasec_transfer_plan_2026v1",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "45132acd326c17c138d1c99628d1704fbb9e03d780675b9e1c234e972adc071d",
+              "public_body_sha256": "266fdaaa3bb6ea0d62250d9b448971ea6a184e4f250e6c88f7998d51241426a1",
+              "hreflang_gate": null
+            },
+            "existing_english": {
+              "id": 71,
+              "slug": "unwanted-major-adjustment-riasec-transfer-plan",
+              "locale": "en",
+              "published_revision_id": 91,
+              "translation_group_id": "tg_unwanted_major_riasec_transfer_plan_2026v1",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "8efcf2dab1160b0af506d07c6ad253dfc0514c3ab8b3952cf8b04987ffd6b47b",
+              "public_body_sha256": "9024c7c2c78b06fdab58fcd92f5e8160162509cfae633f48d23933aef486b779",
+              "hreflang_gate": null
+            }
+          },
+          "production": {
+            "source": {
+              "id": 70,
+              "slug": "unwanted-major-adjustment-riasec-transfer-plan",
+              "locale": "zh-CN",
+              "published_revision_id": 1149,
+              "translation_group_id": "tg_unwanted_major_riasec_transfer_plan_2026v1",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "90cb70dbf9b9a666c98eaf7151dd0ba4898142a55a425c5db44e07c8aafe2222",
+              "public_body_sha256": "4957c378f6a088094f083d7a0c355645debdb42c084a7025bcdea239ef5057dc",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_english": {
+              "id": 71,
+              "slug": "unwanted-major-adjustment-riasec-transfer-plan",
+              "locale": "en",
+              "published_revision_id": 1158,
+              "translation_group_id": "tg_unwanted_major_riasec_transfer_plan_2026v1",
+              "source_locale": "zh-CN",
+              "source_article_id": 70,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "3042f967e902b20952a4d3fb23cbf91fbe1585ce93cdd7ae1d7d0fea7cbdff73",
+              "public_body_sha256": "3d53b6a6fc26d73d73439715564624fb863aa28ce434afb7e2cb8dd64a48d71d",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articleunwanted-major-adjustment-riasec-transfer-plancoverv4/hero_1600x900.jpg",
+          "cover_image_width": 1600,
+          "cover_image_height": 900,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articleunwanted-major-adjustment-riasec-transfer-plancoverv4/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articleunwanted-major-adjustment-riasec-transfer-plancoverv4/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articleunwanted-major-adjustment-riasec-transfer-plancoverv4/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articleunwanted-major-adjustment-riasec-transfer-plancoverv4/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articleunwanted-major-adjustment-riasec-transfer-plancoverv4/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            },
+            "editorial_package_v1": {
+              "body_visual_asset_key": "article.unwanted-major-adjustment-riasec-transfer-plan.body-visual.v4",
+              "body_visual_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articleunwanted-major-adjustment-riasec-transfer-planbody-visualv4/hero_1600x900.jpg",
+              "body_visual_fallback_authorized": false
+            }
+          },
+          "related_test_slug": "holland-career-interest-test-riasec",
+          "author_name": "Fermat Institute",
+          "cover_image_alt": "學生核對被調劑專業的課程、轉專業規則、工作活動和霍蘭德興趣補救清單"
+        },
+        "seo_metadata": {
+          "og_title": "被調劑到不喜歡的專業怎麼辦？轉專業補救清單",
+          "og_description": "錄取到不喜歡的專業先別急著復讀。用課程、轉專業政策、霍蘭德興趣和銜接目標所需的技能判斷：可接受、需驗證，還是規劃替代路徑。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articleunwanted-major-adjustment-riasec-transfer-plancoverv4/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "被調劑到不喜歡的專業怎麼辦？課程、轉專業和霍蘭德補救清單",
+          "excerpt": "錄取到不喜歡的專業先別急著復讀。用課程、轉專業政策、霍蘭德興趣和銜接目標所需的技能判斷：可接受、需驗證，還是規劃替代路徑。",
+          "content_md": "## 被調劑到不喜歡的專業，先別急著復讀：先查四項關鍵資訊\n\n看到錄取結果那一刻，如果專業不是你想要的，一時可能很慌：接下來四年還有其他選擇嗎？以後是不是只能走一條自己不想走的路？家長可能說「先進去再說」，群聊裡有人勸你復讀，也有人說「能上就不錯了」。\n\n**被調劑到不喜歡的專業怎麼辦**，第一步不是馬上決定復讀、勉強就讀還是轉專業。先查四項關鍵資訊：這個專業的核心課程是否真的無法承受，自己是否符合學校當期轉專業條件、什麼時候能申請，未來工作活動是否和你的興趣長期衝突，以及能不能透過輔修、專案、報考研究所、實習或銜接目標所需的技能找到其他可行方向。最後只給目前專業三個狀態：**可接受、需驗證、儘早規劃替代路徑**。\n\n## 先別急著否定：調劑後先做 4 個核查\n\n被調劑後的痛苦是真實的，但它不能直接等同於「這個專業一定不能讀」。專業名、網路上勸人別讀的貼文、親戚經驗、就業榜，都只是碎片。真正能推進判斷的，是課程、政策、任務和備選路線。\n\n| 核查項 | 你真正要判斷的問題 | 需要拿到的證據 | 下一步做法 |\n|---|---|---|---|\n| 課程現實 | 你排斥的是專業名字，還是四年核心課程？ | 培養方案、課程地圖、必修課、實驗與實務訓練、畢業要求、考核方式 | 把最擔心的 5 門課列出來，找課程大綱、教材目錄或公開影片先試讀 |\n| 轉專業規則 | 我的年級、錄取類別或協議是否允許申請？ | 當期正式檔案、申請時間、目標專業名額，以及該路徑適用的成績、考核或補修要求 | 先確認資格與截止，再安排準備工作 |\n| 工作活動 | 你討厭的是上課內容，還是它可能導向的長期工作方式？ | 典型職務 JD、日常任務、工具、合作對象、壓力來源 | 找 2 個職務說明和 1 位在讀學生/從業者訪談 |\n| 替代路徑 | 如果轉不出去，還能不能搭橋到更合適方向？ | 輔修、第二專業、跨專業專案、競賽、實習、報考研究所方向、作品集 | 做一個 12 個月調整路線圖，不把希望押在一次轉專業上 |\n\n這一輪核查只解決一件事：把「我不喜歡」翻譯成可以查、可以問、可以驗證的證據。沒有證據前，不要把目前專業直接判死刑；證據連續指向衝突時，也不要用「先熬著」拖過行動期限。\n\n## 先分清：你是在填報前風險，還是已經進入錄取後補救\n\n這篇文章不重複討論「要不要服從調劑」。如果還沒填志願，先按本省、本批次的投檔單元核對調劑範圍，看其中是否有完全不能接受的專業；如果已經被調劑，問題變成：怎麼評估目前專業還能不能讀、能不能轉、能不能補救。\n\n| 階段 | 主要問題 | 最容易犯的錯 | 正確動作 |\n|---|---|---|---|\n| 填報前 | 本批次是否適用調劑？調劑範圍內有完全不能接受的專業嗎？ | 只看學校名和投檔穩定性 | 按省級規則核查實際投檔單元和調劑範圍 |\n| 錄取後 / 調劑後 | 目前專業還能不能變成可用路徑？ | 把專業名等同於四年命運 | 查課程、政策、工作活動和替代路徑 |\n| 入學初期 | 第一學期是否要押注轉專業？ | 只聽學長一句「能轉/很難轉」 | 按正式政策先核資格與截止，再準備所選路徑需要的材料或考核 |\n| 第一學年末 | 繼續、轉出還是搭橋？ | 憑某次不及格或情緒低谷做決定 | 用成績、課程體驗、專案回饋和政策適用的申請時程做判斷 |\n\n若已錄取但尚未入學，先核對院校報到截止。考慮復讀時，另查本省下一次高考的報名時間、資格，以及報到或保留入學資格是否影響報名。不要把這些決定留到觀察完一學期。\n\n如果你還在填報前，可以先看 [服從調劑與不能接受專業清單](/zh/articles/gaokao-major-adjustment-unacceptable-major-checklist)。如果你已經被調劑，這篇文章只處理後手方案。\n\n## 目前專業還能不能讀：先放進決策表\n\n家庭爭論容易卡在兩句話：學生說「不喜歡」，家長說「先讀著」。兩者都需要補充具體原因和證據。你需要把目前專業拆成可驗證訊號。\n\n| 情況 / 訊號 | 可能意味著什麼 | 要核查什麼 | 下一步做法 |\n|---|---|---|---|\n| 只是聽到專業名就排斥 | 可能是資訊不足，也可能是價值觀衝突 | 專業方向、課程模組、培養分流、畢業去向 | 不按專業名否定，先查培養方案和課程地圖 |\n| 核心課程長期抗拒 | 學習成本可能持續存在 | 最核心 5–8 門課、是否連續出現、是否有補基礎路徑 | 用一週試聽、做練習題或閱讀測試耐受度 |\n| 對對應工作活動完全無興趣 | 可能不是課程問題，而是長期任務不匹配 | 職務日常、工具、協作方式、是否長期面對人/資料/規則/設備 | 用 RIASEC 結果轉成工作活動問題 |\n| 轉專業申請時程嚴格 | 不能把轉專業當預設出口 | 績點、排名、目標專業要求、歷年名額、補修成本 | 準備 A 路線和 B 路線，不只盯一個視窗 |\n| 家庭只強調「穩定」或「就業好」 | 家庭在看風險，不一定是在否定你 | 就業說法是否有來源，是否適用於你的學校、城市和方向 | 把「穩定」拆成課程、行業、城市、家庭預算和心理承受度 |\n| 能找到交叉方向 | 目前專業可能不是終點，而是跳板 | 目標方向需要哪些課程、專案、證書、作品集或導師資源 | 建立「目前專業 + 目標技能」的銜接目標所需的技能 |\n\n判斷線很清楚：沒有查課程、政策和工作活動前，不要說「這個專業毀了」；如果課程與任務已經多次驗證為強衝突，就不要讓自己只靠忍耐讀完四年。\n\n## 用 RIASEC 看「不喜歡」到底指向什麼工作活動\n\n霍蘭德/RIASEC 職業興趣測驗不能替你決定專業，也不能保證轉專業成功。它更適合做一件具體的事：把「我不喜歡這個專業」拆成「我不願長期接觸哪些工作活動」。\n\n| RIASEC 維度 | 可以幫你觀察什麼 | 放到目前專業裡怎麼問 | 不能怎麼用 |\n|---|---|---|---|\n| R 現實型 | 工具、設備、實際操作、工程、現場、具體系統 | 這個專業是否長期有實驗、操作、設備、工藝、實務訓練、現場任務？我是否願意反覆動手處理具體問題？ | 不能把它當成工科適合度結論 |\n| I 研究型 | 分析、推理、資料、原理、模型、問題拆解 | 我能否接受長期讀論文、做實驗、看資料、推公式、查原因？ | 不能證明你成績一定好 |\n| A 藝術型 | 表達、創作、設計、內容、開放式問題 | 這個專業是否有表達、設計、寫作、策劃、產品體驗或開放式任務空間？ | 不能把興趣直接等同於就業方向 |\n| S 社會型 | 教學、幫助、諮詢、溝通、服務他人 | 未來任務是否長期面對人、解釋資訊、支持他人？我是否能接受情緒勞動和溝通壓力？ | 不能保證人際關係順利 |\n| E 企業型 | 推動、影響、組織、談判、資源協調 | 這個方向是否需要專案推進、客戶溝通、商業判斷、資源整合？我是否願意承擔結果壓力？ | 不能預測領導力或收入 |\n| C 常規型 | 規則、流程、表格、稽核、資料管理、精確執行 | 課程和工作是否要求長期處理規範、檔案、報表、稽核、流程？我是否能承受重複和細節？ | 不能說明你只能做穩定工作 |\n\n如果你還沒做過測驗，可以先做 [霍蘭德職業興趣測驗](/zh/tests/holland-career-interest-test-riasec)，拿到 RIASEC 傾向後再回到這張表。重點不是讓測試替你決定，而是讓它幫你把「不喜歡」變成更精確的驗證問題。\n\n<!-- body_visual:unwanted_major_adjustment_recovery_plan -->\n\n## 四年調整路線圖：不要把全部希望寄託在「轉專業」三個字上\n\n轉專業是路徑之一，但不是唯一齣口。真正穩的補救方案通常是多條線並行：政策線、課程線、技能線、專案線、溝通線。你需要給自己留備份。\n\n以下時間點只是規劃示例，不代表各校統一申請時程；應先核實實際截止日期，再安排觀察和準備，必要時立即行動。\n\n| 時間點 | 主要任務 | 你要準備的證據 | 可能路徑 | 風險提醒 |\n|---|---|---|---|---|\n| 第一個月 | 摸清目前專業和學校規則 | 培養方案、轉專業政策、課程表、輔導員/導師建議 | 暫讀觀察、準備轉專業、規劃輔修 | 不要只聽群聊傳聞；以學校正式檔案為準 |\n| 第一學期 | 驗證課程耐受度和成績可能性 | 作業回饋、考試形式、績點要求、目標專業門檻 | 提升績點、補目標專業基礎課、參加相關專案 | 情緒低谷不等於專業必然失敗 |\n| 第一學年 | 做第一次正式路徑選擇 | 成績排名、轉專業申請時程、輔修申請、專案經歷 | 申請轉專業、目前專業+輔修、跨領域報考準備 | 轉專業失敗必須有 B 計劃 |\n| 大二到大四 | 建立可用於其他領域的能力 | 實習、作品集、證書、競賽、研究助理、專案經驗 | 銜接目標所需的技能、跨專業報考研究所、就業方向重構 | 不要等到畢業前才承認不適合 |\n\n如果你現在最想說「我一秒都不想讀」，也要先問：你要逃離的是課程、學校、城市、同學氛圍、家庭壓力，還是未來工作活動？不同原因，對應的補救方案完全不同。\n\n## 轉專業與替代路徑準備清單\n\n| 路徑 | 適合什麼情況 | 必備資訊 | 下一步做法 |\n|---|---|---|---|\n| 轉專業 | 目前專業課程和興趣長期衝突，且目標專業政策可行 | 年級、錄取類別或協議限制、申請時程、該路徑適用的績點/排名或考核條件、補修要求 | 確認自己能申請，再按目標專業要求準備 |\n| 輔修 / 第二專業 | 目前專業能讀，但想補目標方向能力 | 可輔修專業、課程容量、學位/證書說明 | 查學校教務處正式檔案 |\n| 跨專業報考研究所 | 本科專業可作為跳板，但未來想換方向 | 目標專業考試科目、複試要求、本科背景限制 | 先做 1 門目標科目的學習測試 |\n| 銜接目標所需的技能 | 專業不理想，但能透過專案進入目標方向 | 目標職務 JD、核心技能、作品集或專案要求 | 做一個 30 天小專案 |\n| 實習 / 專案驗證 | 不確定自己是否真的討厭這個方向 | 校內專案、老師課題、社團、企業實習 | 用真實任務替代想像判斷 |\n| 諮詢輔導員/導師 | 資訊不足、政策複雜、心理壓力大 | 問題清單、已查資料、備選路徑 | 帶證據去問，不要只說「我不喜歡」 |\n\n## 和家長、輔導員溝通前，先準備這些證據\n\n如果你只說「我不喜歡」，對方很容易回你：「你還沒讀怎麼知道？」這句話刺耳，但它也提醒你：溝通需要證據，不是只靠情緒強度。\n\n| 要準備的證據 | 為什麼重要 | 可以怎麼表達 |\n|---|---|---|\n| 課程證據 | 證明你不是只憑專業名反感 | 「我查了培養方案，核心課程裡這幾門是長期主線，我準備先試聽/補基礎。」 |\n| 政策證據 | 防止轉專業討論變成空話 | 「學校規定轉專業在第幾學期，要求績點/排名/考核，我已經列出來。」 |\n| 興趣證據 | 把「不喜歡」變成工作活動差異 | 「我不是討厭學習，而是對這個專業對應的長期任務缺乏興趣。RIASEC 結果可以作為參考，但不是決定依據。」 |\n| 替代路徑證據 | 證明你有計劃，不是在逃避 | 「如果轉不出去，我會走輔修/專案/報考研究所/銜接目標所需的技能路線，先做一個月驗證。」 |\n| 風險證據 | 讓家長看到你在比較成本 | 「復讀、轉專業、勉強就讀、跨專業補救都有風險，我想先把各自成本列清楚。」 |\n\n家長真正擔心的往往不是「你不聽話」，而是你沒有 B 計劃。你真正需要證明的也不是「我討厭這個專業」，而是「我知道風險在哪裡，也知道下一步怎麼驗證」。\n\n## 可接受、需驗證、儘早規劃替代路徑\n\n把目前專業放進下面三欄，不要讓它長期停留在情緒區。\n\n| 狀態 | 判斷標準 | 下一步 |\n|---|---|---|\n| 可接受 | 核心課程不排斥；硬性政策可承受；能找到與興趣有關的細分方向 | 繼續讀，同時建立專案、實習、輔修或技能增強路徑 |\n| 需驗證 | 不了解課程和工作活動；只是討厭名字；對轉專業政策不清楚 | 先查學校目前申請截止日期。有即將截止的申請就及時行動，時間允許時再用 2–4 週安排試聽、訪談和小任務 |\n| 儘早規劃替代路徑 | 核心課程長期強烈排斥；已核實可行的替代路徑及其條件；目標方向有明確準備方案 | 按可行路線準備所需材料、課程或考核 |\n\n## 兩個典型情境：不要只按專業名做決定\n\n下面兩個例子不是結論模板，而是示範怎麼把情緒翻譯成證據。\n\n| 情境 | 第一反應 | 真正要查的證據 | 更穩的下一步 |\n|---|---|---|---|\n| 想讀計算機，卻被調到偏工程或材料方向 | 「我離網際網路越來越遠了」 | 這個專業是否有程式設計、建模、自動化、資料處理、實驗設備或工程專案；學校是否允許選修計算機基礎課 | 先查課程表，再做一個 30 天小專案，驗證能不能走「目前專業 + 程式設計/資料/工程工具」的銜接目標所需的技能 |\n| 想讀偏人文社科，卻被調到管理、經濟或資訊類專業 | 「這不是我喜歡的表達和溝通方向」 | 專業裡是否有調查研究、使用者研究、公共溝通、組織管理、資料分析、產品或內容相關任務 | 找到課程中的表達/研究/協作空間，再判斷是保留、輔修，還是準備轉向更合適的方向 |\n\n真正有用的不是「這個專業聽起來像不像我」，而是：它的課程和任務裡，有沒有一部分能成為你的跳板；如果沒有，最早的可行的替代時程在哪裡。\n\n## 本文負責什麼，不負責什麼\n\n本文負責幫你把被調劑後的混亂感拆成可執行問題：課程能不能讀、轉專業能否提出申請、RIASEC 興趣和工作活動是否衝突、是否存在替代路徑。\n\n本文不負責估算錄取結果、轉專業成功率、就業收入、未來職業成功，也不替代各省級考試院、學校招生章程、學校教務處政策、輔導員和專業老師的正式資訊。FermatMind 不是正式志願填報平台，霍蘭德/RIASEC 也不是專業判決器。\n\n## 常見問題\n\n### 被調劑到不喜歡的專業一定要復讀嗎？\n\n不一定。先查報到截止、下一次高考報名資格和時間，再比較課程、轉專業條件、家庭成本和替代路徑。復讀是高成本選擇，不應只因為看到專業名不喜歡就立即決定，也不能因為「能上就不錯了」而完全不處理風險。\n\n### 霍蘭德職業興趣測驗能決定我要不要轉專業嗎？\n\n不能。霍蘭德/RIASEC 只能幫助你觀察興趣和工作活動偏好，不能決定轉專業，也不能保證某個專業適合你。它更適合用來提出驗證問題。\n\n### 大學轉專業前最應該查什麼？\n\n先查正式政策：本人年級、錄取類別或協議是否限制申請，申請截止和可轉入範圍，以及相應路徑是否要求績點、排名、考核或補修課程。不要只聽學長姐一句「很容易」或「根本不可能」。\n\n### 如果專業不喜歡但就業看起來不錯怎麼辦？\n\n先把「就業不錯」拆開：哪些職務、哪些城市、哪些學校層次、哪些技能要求、哪些日常任務。一個方向有市場，不等於你一定能承受它的課程和工作方式。\n\n### RIASEC 結果和目前專業不一致怎麼辦？\n\n先不要直接判定「必須轉」。把不一致拆成課程、工作活動和環境偏好。如果課程還能讀，且能找到銜接目標所需的技能或交叉方向，目前專業可能仍可作為過渡路徑；如果核心任務長期衝突，再準備替代路徑。\n\n### 已經入學後才發現不適合，還來得及補救嗎？\n\n是否仍有補救路徑，要看目前學校政策、申請時程、課程基礎和個人成本。可以先查這些條件，再安排成績、專案、輔修、轉專業或銜接目標所需的技能準備；不要假定觀察一學期後仍能申請。",
+          "seo_title": "被調劑到不喜歡的專業怎麼辦？轉專業補救清單",
+          "seo_description": "錄取到不喜歡的專業先別急著復讀。用課程、轉專業政策、霍蘭德興趣和銜接目標所需的技能判斷：可接受、需驗證，還是規劃替代路徑。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 23,
+            "slug": "gaokao-major-choice-2",
+            "label": "高考志願 / 專業選擇"
+          },
+          "tags": [
+            {
+              "id": 11,
+              "slug": "riasec",
+              "label": "RIASEC"
+            },
+            {
+              "id": 85,
+              "slug": "9a2a03330565",
+              "label": "高考志願"
+            },
+            {
+              "id": 92,
+              "slug": "ec85735ee642",
+              "label": "專業選擇"
+            },
+            {
+              "id": 111,
+              "slug": "d693fe735121",
+              "label": "服從調劑"
+            },
+            {
+              "id": 112,
+              "slug": "3578cb03669c",
+              "label": "轉專業"
+            },
+            {
+              "id": 113,
+              "slug": "85eb71602cbe",
+              "label": "霍蘭德職業興趣"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 23,
+        "tag_ids": [
+          11,
+          85,
+          92,
+          111,
+          112,
+          113
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 70,
+            "slug": "unwanted-major-adjustment-riasec-transfer-plan",
+            "locale": "zh-CN",
+            "published_revision_id": 90,
+            "translation_group_id": "tg_unwanted_major_riasec_transfer_plan_2026v1",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": null,
+            "snapshot_sha256": {
+              "title": "659780593b98c269847bb6702d6d3d5be61803f237e8ec685a061b176c2cac6b",
+              "excerpt": "e31322810805d9fc5babb09a061a5f98bc40fe7b168771aff85c1db6f84d4cfa",
+              "content_md": "266fdaaa3bb6ea0d62250d9b448971ea6a184e4f250e6c88f7998d51241426a1",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "a4e6a9cc38ed2b5674c2d876a9995e9e1b9aeb838d8d127041eb2d2b6a7849d8",
+              "seo_title": "e5b723167c7c41186cc6311532450a0832240644be9b004efbeb002dc950ae0c",
+              "seo_description": "e31322810805d9fc5babb09a061a5f98bc40fe7b168771aff85c1db6f84d4cfa",
+              "og_title": "e5b723167c7c41186cc6311532450a0832240644be9b004efbeb002dc950ae0c",
+              "og_description": "e31322810805d9fc5babb09a061a5f98bc40fe7b168771aff85c1db6f84d4cfa"
+            }
+          },
+          "existing_english": {
+            "id": 71,
+            "slug": "unwanted-major-adjustment-riasec-transfer-plan",
+            "locale": "en",
+            "published_revision_id": 91,
+            "translation_group_id": "tg_unwanted_major_riasec_transfer_plan_2026v1",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": null,
+            "snapshot_sha256": {
+              "title": "4ab759384c24db2dfca884711298bbeefdef6c7da27550ad5f5e726e335f69b1",
+              "excerpt": "f0fb8dd83d92755349025f76a07168b389968934dd00834cd4f17ceacde5503d",
+              "content_md": "9024c7c2c78b06fdab58fcd92f5e8160162509cfae633f48d23933aef486b779",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "a4e6a9cc38ed2b5674c2d876a9995e9e1b9aeb838d8d127041eb2d2b6a7849d8",
+              "seo_title": "58143abd86e5c7a6e730afe11ead04b9b9dd3c5b5d48774382ba0ffb0d6d8dc7",
+              "seo_description": "f0fb8dd83d92755349025f76a07168b389968934dd00834cd4f17ceacde5503d",
+              "og_title": "58143abd86e5c7a6e730afe11ead04b9b9dd3c5b5d48774382ba0ffb0d6d8dc7",
+              "og_description": "f0fb8dd83d92755349025f76a07168b389968934dd00834cd4f17ceacde5503d"
+            }
+          },
+          "english_relationship": "independent_published_english",
+          "editorial_projection_sha256": "efb3702a8457015acfca68e3cc82a6c646f716025422e814e00c0e87b6e60fe5",
+          "editorial_cta_targets": [
+            {
+              "key": "article_cta_1",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            },
+            {
+              "key": "article_cta_2",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 70,
+            "slug": "unwanted-major-adjustment-riasec-transfer-plan",
+            "locale": "zh-CN",
+            "published_revision_id": 1149,
+            "translation_group_id": "tg_unwanted_major_riasec_transfer_plan_2026v1",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "659780593b98c269847bb6702d6d3d5be61803f237e8ec685a061b176c2cac6b",
+              "excerpt": "e31322810805d9fc5babb09a061a5f98bc40fe7b168771aff85c1db6f84d4cfa",
+              "content_md": "4957c378f6a088094f083d7a0c355645debdb42c084a7025bcdea239ef5057dc",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "a4e6a9cc38ed2b5674c2d876a9995e9e1b9aeb838d8d127041eb2d2b6a7849d8",
+              "seo_title": "e5b723167c7c41186cc6311532450a0832240644be9b004efbeb002dc950ae0c",
+              "seo_description": "e31322810805d9fc5babb09a061a5f98bc40fe7b168771aff85c1db6f84d4cfa",
+              "og_title": "e5b723167c7c41186cc6311532450a0832240644be9b004efbeb002dc950ae0c",
+              "og_description": "e31322810805d9fc5babb09a061a5f98bc40fe7b168771aff85c1db6f84d4cfa"
+            }
+          },
+          "existing_english": {
+            "id": 71,
+            "slug": "unwanted-major-adjustment-riasec-transfer-plan",
+            "locale": "en",
+            "published_revision_id": 1158,
+            "translation_group_id": "tg_unwanted_major_riasec_transfer_plan_2026v1",
+            "source_locale": "zh-CN",
+            "source_article_id": 70,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "13e339d4a5d0162faf7ea56ceb011af359d5b00f658d727197650aa250c319bc",
+              "excerpt": "620e5c5aebc1cfd57c6d190ac84afcbb36444c571101fbeb0d4fa2dd4818e8b3",
+              "content_md": "3d53b6a6fc26d73d73439715564624fb863aa28ce434afb7e2cb8dd64a48d71d",
+              "author_name": "9b98b431460ce04656510ae3159263f276912baae4b82e0daddd53a57a90c3f9",
+              "cover_image_alt": "363a083531a60bc7c7dfbc0a19d8c34d3b5cfff1e361a5afe5e57423a4160fde",
+              "seo_title": "5e4e818987b127ec122929d315db7edc8353323eaf769b902e18e2fa53c54c18",
+              "seo_description": "4661c5edc82a775ee7c815360ff66c891695b076968ea2d5769b647178b64682",
+              "og_title": "5e4e818987b127ec122929d315db7edc8353323eaf769b902e18e2fa53c54c18",
+              "og_description": "4661c5edc82a775ee7c815360ff66c891695b076968ea2d5769b647178b64682"
+            }
+          },
+          "editorial_projection_sha256": "faf950fb2ebb194031a6fbb9717ba444b571ccf055559bac95620330cb3eb605",
+          "editorial_cta_targets": [
+            {
+              "key": "article_cta_1",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            },
+            {
+              "key": "article_cta_2",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            }
+          ]
+        }
+      },
+      "editorial_package_v1": {
+        "answer_surface_policy": "editor_supplied",
+        "answer_surface_visibility": "below_intro",
+        "answer_surface_v1": {
+          "faq_items": [
+            {
+              "key": "approved_faq_1",
+              "question": "被調劑到不喜歡的專業一定要復讀嗎？",
+              "answer": "不一定。先查報到截止時間、下一次高考的報名資格與時間，再比較課程、轉專業條件、家庭成本和替代路徑。復讀需要投入不少時間與費用，先查清楚這些條件，再決定是否納入比較。"
+            },
+            {
+              "key": "approved_faq_2",
+              "question": "霍蘭德職業興趣測驗能決定我要不要轉專業嗎？",
+              "answer": "不能。霍蘭德/RIASEC 只能幫助你觀察興趣和工作活動偏好，不能決定轉專業，也不能保證某個專業適合你。它更適合用來提出驗證問題。"
+            },
+            {
+              "key": "approved_faq_3",
+              "question": "大學轉專業前最應該查什麼？",
+              "answer": "先查正式規則。確認年級、錄取類別或協議是否限制申請，再查申請截止時間、可轉入範圍，以及適用的績點、排名、考核或補修要求。以學校當期的正式公告為準。"
+            },
+            {
+              "key": "approved_faq_4",
+              "question": "如果專業不喜歡但就業看起來不錯怎麼辦？",
+              "answer": "先把「就業不錯」拆開：哪些職務、哪些城市、哪些學校層次、哪些技能要求、哪些日常任務。一個方向有市場，不等於你一定能承受它的課程和工作方式。"
+            },
+            {
+              "key": "approved_faq_5",
+              "question": "RIASEC 結果和目前專業不一致怎麼辦？",
+              "answer": "先不要直接判定「必須轉」。把不一致拆成課程、工作活動和環境偏好。如果課程還能讀，且能找到銜接目標所需的技能或交叉方向，目前專業可能仍可作為過渡路徑；如果核心任務長期衝突，再準備替代路徑。"
+            },
+            {
+              "key": "approved_faq_6",
+              "question": "已經入學後才發現不適合，還來得及補救嗎？",
+              "answer": "是否仍有補救路徑，要看目前學校政策、申請時程、課程基礎和個人成本。可以先查這些條件，再安排成績、專案、輔修、轉專業或銜接目標所需的技能準備；不要假定觀察一學期後仍能申請。"
+            }
+          ]
+        },
+        "cta_slots": [
+          {
+            "key": "article_cta_1",
+            "kind": "start_test",
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "label": "先做霍蘭德職業興趣測驗，把不喜歡拆成可驗證問題"
+          },
+          {
+            "key": "article_cta_2",
+            "kind": "start_test",
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "label": "開始霍蘭德職業興趣測驗，再回到清單做判斷"
+          }
+        ]
+      }
+    }
+  ]
+}
