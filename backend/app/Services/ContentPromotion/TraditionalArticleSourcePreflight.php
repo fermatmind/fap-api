@@ -8,6 +8,7 @@ use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleReviewedCounterpartService;
 use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\CanonicalTranslationPayloadHash;
 use DomainException;
@@ -46,8 +47,20 @@ final class TraditionalArticleSourcePreflight
         }
 
         if ($sourceLocale === 'en') {
-            if (! array_key_exists('existing_chinese', $proof) || $proof['existing_chinese'] !== null
-                || $this->hasPublishedCounterpart($source, 'zh-CN', [$source->slug], $lock)) {
+            if (! array_key_exists('existing_chinese', $proof)) {
+                throw new DomainException('traditional_article_english_source_chinese_counterpart');
+            }
+            $independentChinese = $proof['existing_chinese'];
+            if ($independentChinese !== null) {
+                $chinese = $this->readArticle($independentChinese, 'zh-CN', null, $lock, publishedProjection: true);
+                $counterparts = app(ArticleReviewedCounterpartService::class);
+                if ($chinese->slug !== $source->slug || $chinese->translation_group_id === $source->translation_group_id
+                    || $chinese->content_md === $source->content_md
+                    || $counterparts->binding($source) !== null || $counterparts->binding($chinese) !== null) {
+                    throw new DomainException('traditional_article_english_source_chinese_counterpart');
+                }
+            }
+            if ($this->hasPublishedCounterpart($source, 'zh-CN', $independentChinese === null ? [$source->slug] : [], $lock)) {
                 throw new DomainException('traditional_article_english_source_chinese_counterpart');
             }
 
@@ -65,13 +78,13 @@ final class TraditionalArticleSourcePreflight
         return $source;
     }
 
-    public function assertTargetVacant(Article $source, bool $lock = false): void
+    public function assertTargetVacant(Article $source, bool $lock = false, ?string $targetSlug = null): void
     {
         if ($lock && DB::transactionLevel() < 1) {
             throw new DomainException('traditional_article_source_transaction_required');
         }
 
-        if (ArticleSourceTargetSnapshot::capture($source, $lock, 'zh-TW') !== []) {
+        if (ArticleSourceTargetSnapshot::capture($source, $lock, 'zh-TW', $targetSlug) !== []) {
             throw new DomainException('traditional_article_target_already_exists');
         }
     }

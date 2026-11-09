@@ -129,8 +129,11 @@ final class TraditionalArticlePublication
         foreach ($proofs as $name => $proof) {
             $origins = $mapping['environment_source_preflight'][$name] ?? [];
             $englishSource = $sourceLocale === 'en';
-            if ($englishSource && (! array_key_exists('existing_chinese', $proof) || $proof['existing_chinese'] !== null
-                || ! array_key_exists('existing_chinese', $origins) || $origins['existing_chinese'] !== null
+            if ($englishSource && (! array_key_exists('existing_chinese', $proof)
+                || ! array_key_exists('existing_chinese', $origins)
+                || is_array($proof['existing_chinese']) !== is_array($origins['existing_chinese'])
+                || ($proof['existing_chinese'] !== null && ! is_array($proof['existing_chinese']))
+                || ($origins['existing_chinese'] !== null && ! is_array($origins['existing_chinese']))
                 || array_key_exists('existing_english', $proof) || array_key_exists('existing_english', $origins)
                 || ($proof['source']['locale'] ?? null) !== 'en' || ($proof['source']['source_locale'] ?? null) !== 'en'
                 || ($proof['source']['source_article_id'] ?? null) !== null)) {
@@ -142,13 +145,30 @@ final class TraditionalArticlePublication
                 || $proof['unpublished_english_slug'] !== ($proofs['production']['existing_english']['slug'] ?? null))) {
                 throw new DomainException('traditional_article_staging_english_absence_invalid');
             }
-            foreach ($englishAbsent || $englishSource ? ['source'] : ['source', 'existing_english'] as $role) {
+            $independentChinese = $englishSource && $proof['existing_chinese'] !== null;
+            $sourceSlug = $proof['source']['slug'] ?? '';
+            if ($independentChinese && ($slug !== $sourceSlug.'-english-source'
+                || ($proof['existing_chinese']['slug'] ?? null) !== $sourceSlug
+                || ($proof['existing_chinese']['translation_group_id'] ?? null) === $identity['translation_group_id']
+                || ($proof['existing_chinese']['locale'] ?? null) !== 'zh-CN'
+                || ($proof['existing_chinese']['source_locale'] ?? null) !== 'zh-CN'
+                || ($proof['existing_chinese']['source_article_id'] ?? null) !== null
+                || ($proof['existing_chinese']['snapshot_sha256']['content_md'] ?? null) === ($proof['source']['snapshot_sha256']['content_md'] ?? null))) {
+                throw new DomainException('traditional_article_independent_chinese_proof_invalid');
+            }
+            $roles = ['source'];
+            if ($independentChinese) {
+                $roles[] = 'existing_chinese';
+            } elseif (! $englishAbsent && ! $englishSource) {
+                $roles[] = 'existing_english';
+            }
+            foreach ($roles as $role) {
                 $origin = $origins[$role] ?? [];
                 $record = $proof[$role] ?? [];
                 $recordSlug = $record['slug'] ?? '';
                 $recordGroup = $record['translation_group_id'] ?? '';
                 if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $recordSlug) !== 1
-                    || ($role === 'source' && ($recordSlug !== $slug || $recordGroup !== $identity['translation_group_id']
+                    || ($role === 'source' && ((! $independentChinese && $recordSlug !== $slug) || $recordGroup !== $identity['translation_group_id']
                         || ($record['locale'] ?? $sourceLocale) !== $sourceLocale))
                     || $recordSlug !== ($origin['slug'] ?? null)
                     || $recordGroup === '' || $recordGroup !== ($origin['translation_group_id'] ?? null)
@@ -297,10 +317,18 @@ final class TraditionalArticlePublication
         $source = $guard->assertSource($row['source_expectations'], $lock, ($row['allow_staging_prepared_root'] ?? false) === true);
         $target = Article::query()->withoutGlobalScopes()->withTrashed()
             ->where($row['identity'])->when($lock, fn ($query) => $query->lockForUpdate())->first();
+        $targetSlug = $row['identity']['slug'];
+        $expectedSlug = $source->slug;
+        if ($source->locale === 'en' && isset($row['source_expectations']['existing_chinese'])) {
+            $expectedSlug .= '-english-source';
+        }
+        if ($targetSlug !== $expectedSlug) {
+            throw new DomainException('traditional_article_target_collision');
+        }
         if ($target === null) {
-            $guard->assertTargetVacant($source, $lock);
+            $guard->assertTargetVacant($source, $lock, $targetSlug);
         } else {
-            $targets = ArticleSourceTargetSnapshot::capture($source, $lock, 'zh-TW');
+            $targets = ArticleSourceTargetSnapshot::capture($source, $lock, 'zh-TW', $targetSlug);
             if (count($targets) !== 1 || $targets[0]['article_id'] !== $target->id) {
                 throw new DomainException('traditional_article_target_collision');
             }
