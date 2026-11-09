@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\SEO;
 
 use App\Console\Commands\PersonalityBigFiveLegacyAliasesPurge;
+use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Models\ContentPage;
 use App\Models\PersonalityPublicContentAsset;
@@ -349,7 +350,7 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         self::assertSame($before, $this->databaseFingerprint());
     }
 
-    public function test_sitemap_keeps_only_104_canonical_big_five_paths(): void
+    public function test_sitemap_keeps_only_canonical_big_five_paths_for_published_locales(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         $this->seedBoundary(includeAliases: false);
@@ -451,15 +452,24 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
             ->pluck('loc')
             ->filter(static fn (mixed $path): bool => is_string($path) && str_contains($path, '/personality/big-five'))
             ->values();
+        $canonicalPaths = BigFiveCanonicalRouteCatalog::canonicalPaths();
+        self::assertCount(104, $canonicalPaths);
+        if (app(PersonalityCurrentPageReader::class)->hasLocale('zh-TW')) {
+            $traditionalPaths = array_map(
+                static fn (array $entry): string => '/zh-TW/'.substr($entry['path'], strlen('/zh/')),
+                BigFiveCanonicalRouteCatalog::canonicalEntries('zh-CN'),
+            );
+            self::assertCount(52, $traditionalPaths);
+            $canonicalPaths = array_merge($canonicalPaths, $traditionalPaths);
+        }
+
         $expectedPaths = array_map(
             static fn (string $path): string => 'https://fermatmind.com'.$path,
-            BigFiveCanonicalRouteCatalog::canonicalPaths(),
+            $canonicalPaths,
         );
         sort($expectedPaths, SORT_STRING);
 
         self::assertSame($expectedPaths, $paths->all());
-        self::assertCount(104, $paths);
-        self::assertCount(104, BigFiveCanonicalRouteCatalog::canonicalPaths());
         self::assertFalse(BigFiveCanonicalRouteCatalog::isCanonicalPath('/zh/personality/big-five/methodology'));
         self::assertFalse(BigFiveCanonicalRouteCatalog::isCanonicalPath('/zh/personality/big-five/source-review-policy'));
         self::assertNotContains('https://fermatmind.com/zh/personality/big-five/methodology', $paths->all());
@@ -546,7 +556,10 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
             ->filter(static fn (mixed $path): bool => is_string($path) && str_contains($path, '/personality/big-five'))
             ->values();
         self::assertNotContains('https://fermatmind.com'.$depublishedPath, $depublishedSitemapPaths->all());
-        self::assertCount(103, $depublishedSitemapPaths);
+        self::assertSame(
+            array_values(array_diff($expectedPaths, ['https://fermatmind.com'.$depublishedPath])),
+            $depublishedSitemapPaths->all(),
+        );
     }
 
     /** @return array{PersonalityPublicContentAsset,PersonalityPublicContentAsset} */
