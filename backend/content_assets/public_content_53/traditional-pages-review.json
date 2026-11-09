@@ -1,6 +1,6 @@
 {
   "schema": "fermatmind.traditional_content_page.v1.review",
-  "candidate_sha256": "b9e2a5c509eae0d160175cc780adb2dfcccaf9acd4f0f0b35a60e0986f6a7fec",
+  "candidate_sha256": "2dd68074b49d9bd35b6fb884adec992ae6ba31f9977a71555b92c488e1c2ff8b",
   "verdict": "PASS",
   "pages": {
     "TRADITIONAL-about": {
@@ -82,6 +82,60 @@
       "target_sha256": "6b5b35752c024400790a00c4ae168dd606986fea3719bf587940a6dcfd58eb0f",
       "staging_source_sha256": "8329d419ce6daed9d233e22ebb1f61e361de2978a3a73ef1b1d4568ed550a877",
       "staging_target_sha256": "6b5b35752c024400790a00c4ae168dd606986fea3719bf587940a6dcfd58eb0f"
+    },
+    "TRADITIONAL-common-misconceptions": {
+      "source_sha256": "97f4755c5ec3e50c0cf14819c8bab31bc4ced470f1871540def37d975bf13c93",
+      "target_sha256": "bb5c50701797c072b8705c1cc952d4d19595b32f77ed4b5a5bdc69d7008f027d",
+      "staging_source_sha256": "e3e8ecec1a9ee53c8fc79ff7fba72449d22bc071641ba6e046449b172a1890c5",
+      "staging_target_sha256": "f1a1de22d3933d2e29938d3356a7b7dd4610ef4805dd74779bf37904bdf2c959"
+    },
+    "TRADITIONAL-data-privacy": {
+      "source_sha256": "a6e9442c0930fcd364df09a94f13ac23f5fc22660ca32d9a018dd0061e7d92f5",
+      "target_sha256": "dc8d93f5cb8c650adf17e27037121299efb4a1153454e03845aeeb709b1cbece",
+      "staging_source_sha256": "2eded8a277cde73600a45ac007ed6bd7a8a51f77cfd9264b2870a71916ecf502",
+      "staging_target_sha256": "2b9a1aa147fab23b2d7876b7d20b0864d19a159201e2149a249583091902d7b8"
+    },
+    "TRADITIONAL-help-data-deletion": {
+      "source_sha256": "ab57f854f06e43dffc6ad2afeca40836caccdd2d533fcda6f3d30d8fe9bdb2c5",
+      "target_sha256": "b2939b6b4dc423dce15387c0e351a7e294349839ceae79fb991f76a048d61c18",
+      "staging_source_sha256": "ab57f854f06e43dffc6ad2afeca40836caccdd2d533fcda6f3d30d8fe9bdb2c5",
+      "staging_target_sha256": "b2939b6b4dc423dce15387c0e351a7e294349839ceae79fb991f76a048d61c18"
+    },
+    "TRADITIONAL-help-payment-refund": {
+      "source_sha256": "993bc79eb1e3a17d10719716dccab7b84490197fe6746d1e4bc7df23e0e8a72a",
+      "target_sha256": "3ccc747d6527a1d91d6ea7b55f99f8e4cd761b60cfd33cac9fc4bf04a5dbfffe",
+      "staging_source_sha256": "993bc79eb1e3a17d10719716dccab7b84490197fe6746d1e4bc7df23e0e8a72a",
+      "staging_target_sha256": "3ccc747d6527a1d91d6ea7b55f99f8e4cd761b60cfd33cac9fc4bf04a5dbfffe"
+    },
+    "TRADITIONAL-help-privacy-data": {
+      "source_sha256": "376d0370df7f0be929722ce2eed78e9096d843d3bc1751cd1b04896ee7eae67d",
+      "target_sha256": "8b26fe96fc66a98c0590dd442c199514d9b1fb0124f6bc330aa27b9434fdf5ab",
+      "staging_source_sha256": "376d0370df7f0be929722ce2eed78e9096d843d3bc1751cd1b04896ee7eae67d",
+      "staging_target_sha256": "8b26fe96fc66a98c0590dd442c199514d9b1fb0124f6bc330aa27b9434fdf5ab"
+    },
+    "TRADITIONAL-help-result-recovery": {
+      "source_sha256": "926899cc713e9f7cf77707a51c7c91c0d6ecd12ff9e83ba8cfc5f000ebb4ca7d",
+      "target_sha256": "ca98e130bca547a52b8103997c26843251b4f7e84962f2cfa429f842b9a6e254",
+      "staging_source_sha256": "926899cc713e9f7cf77707a51c7c91c0d6ecd12ff9e83ba8cfc5f000ebb4ca7d",
+      "staging_target_sha256": "ca98e130bca547a52b8103997c26843251b4f7e84962f2cfa429f842b9a6e254"
+    },
+    "TRADITIONAL-help-unlock-failure": {
+      "source_sha256": "65b070273125e994a2c8d7166abb8491c734842f0c3cfebf6261a8de838ef0df",
+      "target_sha256": "a4f80657563ab91869d5c2720209e3f6961db41d1331c0c26267c5cd8de95c4a",
+      "staging_source_sha256": "65b070273125e994a2c8d7166abb8491c734842f0c3cfebf6261a8de838ef0df",
+      "staging_target_sha256": "a4f80657563ab91869d5c2720209e3f6961db41d1331c0c26267c5cd8de95c4a"
+    },
+    "TRADITIONAL-item-design-notes": {
+      "source_sha256": "1a45cfa29cd09639ca91af1be62b8745cbded6db909c76b449907b185c37a6ca",
+      "target_sha256": "1c842e1d4fd0c6d1f4730b42f0b8aaa1fe5f9601e1b4ba82f76fb2dd0f9f69f3",
+      "staging_source_sha256": "c7d8c73c0f80c485ecc70aff580bf8474ae76b4a80a902ff1c568080422bcb5a",
+      "staging_target_sha256": "830c36d9be23b7820cf84bf2c4892fd9f15c75184a5b36af79ecf544dca1d052"
+    },
+    "TRADITIONAL-reliability-validity": {
+      "source_sha256": "c8278b61ea84465e07d2b5f68b1302f585def8712b6b6d65c28ce9bf14403118",
+      "target_sha256": "e1f2d2ca143624de9f572c2e2eb675abe7727612643c0e27a8ebfc1d39057b47",
+      "staging_source_sha256": "c8278b61ea84465e07d2b5f68b1302f585def8712b6b6d65c28ce9bf14403118",
+      "staging_target_sha256": "e1f2d2ca143624de9f572c2e2eb675abe7727612643c0e27a8ebfc1d39057b47"
     }
   }
 }

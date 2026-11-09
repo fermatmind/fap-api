@@ -616,6 +616,15 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
     let schemas;
     try { schemas=dom.home_jsonld.map(bytes=>JSON.parse(bytes)); }
     catch { throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_SCHEMA_${row.page_id}`); }
+    if (typeof row.protected_fields?.schema_enabled === 'boolean') {
+      const faqSchemas = schemas.filter(node=>node['@type'] === 'FAQPage');
+      const expectedFaq = row.snapshot.faq_items.map(({question,answer})=>({
+        '@type':'Question',name:question,acceptedAnswer:{'@type':'Answer',text:answer},
+      }));
+      if (row.protected_fields.schema_enabled
+        ? faqSchemas.length !== 1 || !equal(faqSchemas[0].mainEntity,expectedFaq)
+        : faqSchemas.length !== 0) throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_SCHEMA_${row.page_id}`);
+    }
     const url='https://fermatmind.com'+pathFor(row);
     const webPage=schemas.some(node=>node['@type'] === 'WebPage' && node.url === url && node.inLanguage === 'zh-TW'
       && node.name === row.snapshot.title && node.description === (row.snapshot.summary ?? ''));
@@ -781,7 +790,9 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     }
     if (row.new_traditional_landing && native.is_indexable !== row.traditional_landing_indexable)
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_LANDING_QUALIFICATION_${row.page_id}`);
-    if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)))
+    if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)
+      || (row.protected_fields && native.support_contact !== row.protected_fields.support_contact)
+      || (typeof row.protected_fields?.schema_enabled === 'boolean' && native.schema_enabled !== row.protected_fields.schema_enabled)))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_QUALIFICATION_${row.page_id}`);
     if (row.new_traditional_topic && (native.is_indexable !== false || data.seo_meta?.robots !== 'noindex,follow'
       || data.seo_meta?.canonical_url !== pathFor(row)))

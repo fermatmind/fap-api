@@ -21,9 +21,11 @@ final class TraditionalContentPagePublication
 
     public const FIELDS = ['title', 'kicker', 'summary', 'seo_title', 'meta_description', 'seo_description', 'content_md', 'headings', 'faq_items'];
 
-    private const SLUGS = ['about', 'brand', 'charter', 'careers', 'privacy', 'terms', 'method-boundaries', 'science', 'help-contact', 'foundation', 'policies', 'help-faq', 'help-about', 'help-team', 'help-used-and-mentioned', 'help-for-business-and-research'];
+    private const SLUGS = ['about', 'brand', 'charter', 'careers', 'privacy', 'terms', 'method-boundaries', 'science', 'help-contact', 'foundation', 'policies', 'help-faq', 'help-about', 'help-team', 'help-used-and-mentioned', 'help-for-business-and-research', 'common-misconceptions', 'data-privacy', 'help-data-deletion', 'help-payment-refund', 'help-privacy-data', 'help-result-recovery', 'help-unlock-failure', 'item-design-notes', 'reliability-validity'];
 
-    private const ENVIRONMENT_SLUGS = ['help-contact', 'foundation', 'policies', 'help-faq', 'help-about', 'help-team', 'help-used-and-mentioned', 'help-for-business-and-research'];
+    private const ENVIRONMENT_SLUGS = ['help-contact', 'foundation', 'policies', 'help-faq', 'help-about', 'help-team', 'help-used-and-mentioned', 'help-for-business-and-research', 'common-misconceptions', 'data-privacy', 'help-data-deletion', 'help-payment-refund', 'help-privacy-data', 'help-result-recovery', 'help-unlock-failure', 'item-design-notes', 'reliability-validity'];
+
+    private const FAQ_SLUGS = ['common-misconceptions', 'data-privacy', 'help-data-deletion', 'help-payment-refund', 'help-privacy-data', 'help-result-recovery', 'help-unlock-failure', 'item-design-notes', 'reliability-validity'];
 
     /** Fixed classifications only: never return SQL, payloads or exception text. */
     public static function failureCode(\Throwable $error): string
@@ -38,7 +40,7 @@ final class TraditionalContentPagePublication
             'traditional_page_environment_invalid', 'traditional_page_contact_binding_invalid',
         ];
         if ($error instanceof DomainException && (in_array($error->getMessage(), $nativeCodes, true)
-            || preg_match('/^traditional_page_source_(?:identity|readiness|review|hold|html|version|path|support_contact|copy_(?:'.implode('|', self::FIELDS).'))_(?:'.implode('|', self::SLUGS).')$/D', $error->getMessage()))) {
+            || preg_match('/^traditional_page_source_(?:identity|readiness|review|hold|html|version|path|support_contact|schema_enabled|copy_(?:'.implode('|', self::FIELDS).'))_(?:'.implode('|', self::SLUGS).')$/D', $error->getMessage()))) {
             return 'public_content_53_'.$error->getMessage();
         }
         if ($error instanceof \App\Services\Cms\CmsTranslationWorkflowException) {
@@ -97,7 +99,7 @@ final class TraditionalContentPagePublication
             if (in_array($slug, self::ENVIRONMENT_SLUGS, true)) {
                 $expectedKeys = [...$expectedKeys, 'staging_source_snapshot', 'staging_snapshot'];
             }
-            if ($slug === 'help-contact') {
+            if ($slug === 'help-contact' || in_array($slug, self::FAQ_SLUGS, true)) {
                 $expectedKeys[] = 'protected_fields';
             }
             sort($keys);
@@ -110,9 +112,17 @@ final class TraditionalContentPagePublication
             }
             $seen[$slug] = true;
             $pageProof = $proof['pages'][$row['page_id']] ?? [];
-            self::assertReviewedCopy($row, $pageProof);
+            self::assertReviewedCopy($row, $pageProof, $slug);
             if (in_array($slug, self::ENVIRONMENT_SLUGS, true)) {
-                self::assertReviewedCopy(['source_snapshot' => $row['staging_source_snapshot'], 'snapshot' => $row['staging_snapshot']], $pageProof, 'staging_');
+                self::assertReviewedCopy(['source_snapshot' => $row['staging_source_snapshot'], 'snapshot' => $row['staging_snapshot']], $pageProof, $slug, 'staging_');
+            }
+            if (in_array($slug, self::FAQ_SLUGS, true)) {
+                $protected = $row['protected_fields'];
+                if (! is_array($protected) || count($protected) !== 2 || ! array_key_exists('support_contact', $protected)
+                    || ($protected['schema_enabled'] ?? null) !== str_starts_with($slug, 'help-')
+                    || ($protected['support_contact'] !== null && (! is_string($protected['support_contact']) || ! filter_var($protected['support_contact'], FILTER_VALIDATE_EMAIL)))) {
+                    throw new DomainException('traditional_page_identity_or_fields_invalid');
+                }
             }
             if ($slug === 'help-contact') {
                 $email = $row['protected_fields']['support_contact'] ?? null;
@@ -144,7 +154,7 @@ final class TraditionalContentPagePublication
         return $row;
     }
 
-    private static function assertReviewedCopy(array $row, array $pageProof, string $proofPrefix = ''): void
+    private static function assertReviewedCopy(array $row, array $pageProof, string $slug, string $proofPrefix = ''): void
     {
         if (! is_array($row['source_snapshot']) || ! is_array($row['snapshot'])
             || array_diff(array_keys($row['source_snapshot']), self::FIELDS) !== []
@@ -155,6 +165,8 @@ final class TraditionalContentPagePublication
             || $row['snapshot']['is_indexable'] !== false) {
             throw new DomainException('traditional_page_identity_or_fields_invalid');
         }
+        $faqAllowed = in_array($slug, self::FAQ_SLUGS, true);
+        $markedFaq = $faqAllowed && str_starts_with($slug, 'help-');
         foreach (['source_snapshot', 'snapshot'] as $field) {
             $copy = $row[$field];
             foreach (array_diff(self::FIELDS, ['headings', 'faq_items']) as $text) {
@@ -165,9 +177,37 @@ final class TraditionalContentPagePublication
             if (trim((string) $copy['title']) === '' || trim((string) $copy['content_md']) === ''
                 || trim((string) $copy['seo_title']) === '' || trim((string) $copy['meta_description']) === ''
                 || ! is_array($copy['headings']) || ! array_is_list($copy['headings'])
-                || array_filter($copy['headings'], static fn ($heading): bool => ! is_string($heading)) !== [] || $copy['faq_items'] !== []
-                || preg_match('/[<>`]|^\s*~{3,}|^\s*\|/m', $copy['content_md']) === 1) {
+                || array_filter($copy['headings'], static fn ($heading): bool => ! is_string($heading)) !== []
+                || ! is_array($copy['faq_items']) || ! array_is_list($copy['faq_items']) || (! $faqAllowed && $copy['faq_items'] !== [])) {
                 throw new DomainException('traditional_page_format_invalid');
+            }
+            $body = $copy['content_md'];
+            $faqBody = $body;
+            if ($markedFaq) {
+                $start = '<!-- help-service-visible-faq:start -->';
+                $end = '<!-- help-service-visible-faq:end -->';
+                if (substr_count($body, $start) !== 1 || substr_count($body, $end) !== 1
+                    || ! preg_match('/^'.preg_quote($start, '/').'\R([\s\S]*?)^'.preg_quote($end, '/').'$/m', $body, $match)
+                    || $copy['faq_items'] === []) {
+                    throw new DomainException('traditional_page_format_invalid');
+                }
+                $faqBody = $match[1];
+                $body = str_replace([$start, $end], '', $body);
+            }
+            if (preg_match('/[<>`]|^\s*~{3,}|^\s*\|/m', $body) === 1) {
+                throw new DomainException('traditional_page_format_invalid');
+            }
+            $faqBlocks = [];
+            foreach ($copy['faq_items'] as $item) {
+                if (! is_array($item) || count($item) !== 2 || ! is_string($item['question'] ?? null) || ! is_string($item['answer'] ?? null)
+                    || trim($item['question']) === '' || trim($item['answer']) === ''
+                    || ! str_contains($faqBody, $item['question']) || ! str_contains($faqBody, $item['answer'])) {
+                    throw new DomainException('traditional_page_format_invalid');
+                }
+                $faqBlocks[] = '### '.$item['question']."\n\n".$item['answer'];
+            }
+            if ($markedFaq && trim($faqBody) !== implode("\n\n", $faqBlocks)) {
+                throw new DomainException('traditional_page_structure_changed');
             }
         }
         if (self::markdownLinkTargets($row['source_snapshot']['content_md']) !== self::markdownLinkTargets($row['snapshot']['content_md'])) {
@@ -176,11 +216,18 @@ final class TraditionalContentPagePublication
         foreach (array_diff(self::FIELDS, ['faq_items']) as $field) {
             $sourceText = is_array($row['source_snapshot'][$field]) ? implode("\n", $row['source_snapshot'][$field]) : (string) $row['source_snapshot'][$field];
             $targetText = is_array($row['snapshot'][$field]) ? implode("\n", $row['snapshot'][$field]) : (string) $row['snapshot'][$field];
-            $tokens = '~https?://[^\s<>）)]+|(?<![A-Za-z0-9_./:@?=&%#-])/[A-Za-z][A-Za-z0-9-]*(?:[/?#][A-Za-z0-9._\x7e:/?#@!$&\x27*+,;=%-]*)?|\{\{[^}]*\}\}|\$?\{[^}]*\}|%\d*\$?[sdif]|\d+(?:[.,:/-]\d+)*~u';
-            preg_match_all($tokens, $sourceText, $sourceTokens);
-            preg_match_all($tokens, $targetText, $targetTokens);
-            if ($sourceTokens[0] !== $targetTokens[0]) {
-                throw new DomainException('traditional_page_protected_tokens_changed');
+            self::assertProtectedTokens($sourceText, $targetText);
+        }
+        if (count($row['source_snapshot']['faq_items']) !== count($row['snapshot']['faq_items'])) {
+            throw new DomainException('traditional_page_structure_changed');
+        }
+        foreach ($row['source_snapshot']['faq_items'] as $index => $item) {
+            foreach (['question', 'answer'] as $field) {
+                $target = $row['snapshot']['faq_items'][$index][$field];
+                if (self::markdownLinkTargets($item[$field]) !== self::markdownLinkTargets($target)) {
+                    throw new DomainException('traditional_page_link_targets_changed');
+                }
+                self::assertProtectedTokens($item[$field], $target);
             }
         }
         preg_match_all('/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/m', $row['source_snapshot']['content_md'], $sourceStructure);
@@ -191,6 +238,16 @@ final class TraditionalContentPagePublication
         if (($pageProof[$proofPrefix.'source_sha256'] ?? null) !== self::hash($row['source_snapshot'])
             || ($pageProof[$proofPrefix.'target_sha256'] ?? null) !== self::hash($row['snapshot'])) {
             throw new DomainException('traditional_page_review_binding_invalid');
+        }
+    }
+
+    private static function assertProtectedTokens(string $source, string $target): void
+    {
+        $tokens = '~https?://[^\s<>）)]+|(?<![A-Za-z0-9_./:@?=&%#-])/[A-Za-z][A-Za-z0-9-]*(?:[/?#][A-Za-z0-9._\x7e:/?#@!$&\x27*+,;=%-]*)?|[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}|\{\{[^}]*\}\}|\$?\{[^}]*\}|%\d*\$?[sdif]|\d+(?:[.,:/-]\d+)*~u';
+        preg_match_all($tokens, $source, $sourceTokens);
+        preg_match_all($tokens, $target, $targetTokens);
+        if ($sourceTokens[0] !== $targetTokens[0]) {
+            throw new DomainException('traditional_page_protected_tokens_changed');
         }
     }
 
@@ -256,8 +313,11 @@ final class TraditionalContentPagePublication
         if (in_array($row['identity']['slug'], self::ENVIRONMENT_SLUGS, true)) {
             $checks['path'] = preg_replace('#^/(?:en|zh)(?=/|$)#', '', (string) $source->path) === substr(self::targetPath($source->slug), 6);
         }
-        if ($row['identity']['slug'] === 'help-contact') {
+        if (isset($row['protected_fields'])) {
             $checks['support_contact'] = $source->support_contact === $row['protected_fields']['support_contact'];
+            if (array_key_exists('schema_enabled', $row['protected_fields'])) {
+                $checks['schema_enabled'] = (bool) $source->schema_enabled === $row['protected_fields']['schema_enabled'];
+            }
         }
         $copy = $this->copy($source);
         foreach (self::FIELDS as $field) {
@@ -278,7 +338,8 @@ final class TraditionalContentPagePublication
             || (int) $target->source_content_id !== (int) $source->id || $target->source_locale !== 'zh-CN'
             || $target->translation_group_id !== $source->translation_group_id
             || $target->path !== self::targetPath($source->slug) || $target->canonical_path !== self::targetPath($source->slug)
-            || ($source->slug === 'help-contact' && $target->support_contact !== $row['protected_fields']['support_contact'])
+            || (isset($row['protected_fields']) && $target->support_contact !== $row['protected_fields']['support_contact'])
+            || (isset($row['protected_fields']['schema_enabled']) && (bool) $target->schema_enabled !== $row['protected_fields']['schema_enabled'])
             || $revisions[0]['authority_source_package'] !== self::AUTHORITY
             || (int) $revisions[0]['org_id'] !== 0 || $revisions[0]['locale'] !== 'zh-TW'
             || (int) $revisions[0]['source_content_id'] !== (int) $source->id
