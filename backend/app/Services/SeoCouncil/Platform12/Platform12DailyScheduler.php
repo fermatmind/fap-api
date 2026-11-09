@@ -40,7 +40,9 @@ final readonly class Platform12DailyScheduler
         }
         // External acquisition has its own bounded lock and backoff. Keep it
         // outside the evaluation lease and its 120-second software budget.
-        if (app()->environment('production')) {
+        if (app()->environment('production')
+            && config('seo_agent_evidence.competitive.m3_refresh.external_read_enabled') === true
+            && config('seo_agent_evidence.competitive.m3_refresh.evidence_write_enabled') === true) {
             try {
                 // Refresh eligibility is independent of the daily evaluation slot.
                 // A consumed HOLD must not suppress retries after acquisition backoff.

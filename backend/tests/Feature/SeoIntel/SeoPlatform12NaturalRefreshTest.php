@@ -126,6 +126,7 @@ final class SeoPlatform12NaturalRefreshTest extends TestCase
     public function test_natural_refresh_remains_eligible_after_terminal_daily_hold_without_another_evaluation(): void
     {
         $reader = $this->schedulerFixture();
+        config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => true, 'evidence_write_enabled' => true]);
         $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T22:19:00Z'));
         $control = app(Platform12RuntimeControl::class);
         $control->change(false, [Platform12DailyMissionSet::IDS[2]]);
@@ -151,9 +152,26 @@ final class SeoPlatform12NaturalRefreshTest extends TestCase
         $this->travelBack();
     }
 
+    public function test_m3_still_commits_a_daily_result_with_competitive_refresh_disabled(): void
+    {
+        $reader = $this->schedulerFixture();
+        config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => true, 'evidence_write_enabled' => false]);
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T22:29:00Z'));
+        app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[2]]);
+        \Illuminate\Support\Facades\Process::fake();
+
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T22:30:00Z'));
+        $result = app(\App\Services\SeoCouncil\Platform12\Platform12DailyScheduler::class)->tick();
+        $this->assertSame('TERMINAL_COMMITTED', $result['status'], json_encode($result));
+        $this->assertSame('HOLD', $result['mission_verdict']);
+        $this->assertSame(1, $reader->reads);
+        \Illuminate\Support\Facades\Process::assertNothingRan();
+    }
+
     public function test_natural_refresh_never_runs_without_authorized_m3_or_after_pause(): void
     {
         $this->schedulerFixture();
+        config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => true, 'evidence_write_enabled' => true]);
         $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T22:31:00Z'));
         $control = app(Platform12RuntimeControl::class);
         $control->change(false, [Platform12DailyMissionSet::IDS[0]]);

@@ -272,6 +272,15 @@ final readonly class Platform12SystemHealthReadService
                 $health['data_freshness'] = ['state' => $state === 'HOLD' && isset($output['gsc']) ? 'HOLD' : ($state === 'READY' && isset($output['gsc']) ? 'READY' : ($stale ? 'STALE' : 'UNAVAILABLE')), 'time' => $observedAt];
             }
             if ($index === 2) {
+                $reasons = $output['reason_codes'] ?? [];
+                $evidenceOnlyHold = ($output['state'] ?? null) === 'HOLD'
+                    && is_array($reasons) && $reasons !== []
+                    && array_diff($reasons, ['CURRENT_EVIDENCE_REFERENCE_HOLD', 'STALE_EVIDENCE_HOLD']) === [];
+                $items[array_key_last($items)]['internal_security_result'] = match ($state) {
+                    'READY', 'STALE' => $state,
+                    'HOLD' => $evidenceOnlyHold ? 'READY' : $this->safeCode($output['state']),
+                    default => 'UNAVAILABLE',
+                };
                 foreach (['policy', 'tool', 'schema', 'registry'] as $dimension) {
                     $value = $dimension === 'registry' ? array_intersect_key($output['drift'] ?? [], array_flip(['role', 'binding', 'prompt'])) : [$output['drift'][$dimension] ?? null];
                     $expected = $dimension === 'registry' ? 3 : 1;
@@ -329,7 +338,16 @@ final readonly class Platform12SystemHealthReadService
                 'evidence_expiry' => data_get($output, 'evidence_freshness.total_count'),
                 default => null,
             };
-            $items[] = ['label_key' => 'seo-council.sources.'.$source['id'], 'state' => $observed === null ? 'UNAVAILABLE' : ($count === 0 ? 'VALID_ZERO' : 'AVAILABLE'),
+            $freshness = $output['evidence_freshness'] ?? [];
+            $state = match (true) {
+                $observed === null => 'UNAVAILABLE',
+                $source['id'] === 'evidence_expiry' && ($count === null
+                    || ($freshness['current_reference_state'] ?? 'VALID') !== 'VALID') => 'UNAVAILABLE',
+                $source['id'] === 'evidence_expiry' && ($freshness['expired_count'] ?? 0) > 0 => 'STALE',
+                $count === 0 => 'VALID_ZERO',
+                default => 'AVAILABLE',
+            };
+            $items[] = ['label_key' => 'seo-council.sources.'.$source['id'], 'state' => $state,
                 'observed_at' => Platform12OperationsTime::iso($observed), 'read_at' => Platform12OperationsTime::iso($read),
                 'hash' => preg_match('/^[a-f0-9]{64}$/D', (string) ($source['hash'] ?? '')) === 1 ? $source['hash'] : 'unavailable'];
         }

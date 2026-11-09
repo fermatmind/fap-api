@@ -45,6 +45,9 @@
                     <small><code>{{ $mission['reason_code'] }}</code> · {{ __($mission['problem_key']) }}</small>
                     <small>{{ __('seo-council.impact') }}：{{ __($mission['impact_key']) }}</small>
                     <small>{{ __('seo-council.recommendation') }}：{{ __($mission['recommendation_key']) }}</small>
+                    @if (isset($mission['internal_security_result']))
+                        <small>{{ __('seo-council.internal_security_result') }} · <code>{{ $mission['internal_security_result'] }}</code></small>
+                    @endif
                     @foreach ($mission['source_checks'] as $source)
                         <small>
                             {{ __($source['label_key']) }} · {{ $source['state'] }} · {{ __('seo-council.source_observed_at') }}:

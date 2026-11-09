@@ -97,10 +97,10 @@ echo json_encode($result);
 PHP;
         try {
             $cases = [
-                'production-default' => ['production', false, false, true, true],
+                'production-default' => ['production', false, false, false, false],
                 'production-disabled' => ['production', 'false', 'false', false, false],
-                'production-read-disabled' => ['production', 'false', false, false, true],
-                'production-write-disabled' => ['production', false, 'false', true, false],
+                'production-read-disabled' => ['production', 'false', 'true', false, true],
+                'production-write-disabled' => ['production', 'true', 'false', true, false],
                 'production-explicit-enabled' => ['production', 'true', 'true', true, true],
                 'staging-default' => ['staging', false, false, false, false],
                 'testing-default' => ['testing', false, false, false, false],

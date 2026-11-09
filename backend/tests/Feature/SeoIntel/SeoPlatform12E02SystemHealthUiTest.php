@@ -167,6 +167,43 @@ final class SeoPlatform12E02SystemHealthUiTest extends TestCase
         }
     }
 
+    public function test_m3_shows_competitive_freshness_separately_from_internal_security(): void
+    {
+        CarbonImmutable::setTestNow('2026-11-09T00:00:00Z');
+        $db = DB::connection('seo_intel');
+        $sources = [['id' => 'evidence_expiry', 'observed_at' => '2026-11-08T22:30:00Z', 'hash' => str_repeat('d', 64)]];
+        foreach ([
+            ['HOLD', ['CURRENT_EVIDENCE_REFERENCE_HOLD', 'STALE_EVIDENCE_HOLD'], 'UNAVAILABLE', 'READY', 'UNAVAILABLE'],
+            ['HOLD', ['STALE_EVIDENCE_HOLD'], 'VALID', 'READY', 'STALE'],
+            ['HOLD', ['STALE_EVIDENCE_HOLD', 'AUTHORITY_HASH_DRIFT_HOLD'], 'VALID', 'HOLD', 'STALE'],
+            ['DENY', ['PRIVATE_NEGATIVE_SET_LEAK'], 'UNAVAILABLE', 'DENY', 'UNAVAILABLE'],
+        ] as [$result, $reasons, $reference, $security, $sourceState]) {
+            $db->table('seo_council_run_receipts')->delete();
+            $db->table('seo_council_schedule_deliveries')->delete();
+            $this->dailyReceipt('HELD', $result, '2026-11-08T22:30:00Z', missionIndex: 2, evaluation: [
+                'reason_codes' => $reasons,
+                'evidence_freshness' => ['total_count' => 69, 'expired_count' => 68, 'current_reference_state' => $reference],
+            ], sources: $sources);
+            $snapshot = app(Platform12SystemHealthReadService::class)->snapshot($this->runtime());
+            $item = $snapshot['daily_missions']['items'][2];
+            $this->assertSame($result, $item['business_result']);
+            $this->assertSame($reasons[0], $item['reason_code']);
+            $this->assertSame($security, $item['internal_security_result']);
+            $this->assertSame($sourceState, $item['source_checks'][0]['state']);
+            foreach (['en', 'zh_CN'] as $locale) {
+                app()->setLocale($locale);
+                $html = view('filament.ops.components.ops-system-health-workspace', compact('snapshot'))->render();
+                $this->assertStringContainsString(__('seo-council.internal_security_result').' · <code>'.$security.'</code>', $html);
+                $this->assertStringContainsString(__('seo-council.sources.evidence_expiry').' · '.$sourceState, $html);
+                $this->assertStringNotContainsString('seo-council.reasons.', $html);
+            }
+        }
+
+        CarbonImmutable::setTestNow('2026-11-10T01:00:00Z');
+        $item = app(Platform12SystemHealthReadService::class)->snapshot($this->runtime())['daily_missions']['items'][2];
+        $this->assertSame('STALE', $item['internal_security_result']);
+    }
+
     public function test_gate_combinations_do_not_reassign_business_results(): void
     {
         $cases = [
@@ -375,14 +412,14 @@ final class SeoPlatform12E02SystemHealthUiTest extends TestCase
                     'source_accepted' => true, 'end_to_end_accepted' => true, 'reason' => 'READY'], $overrides))];
     }
 
-    private function dailyReceipt(string $status, string $result, string $evaluated): void
+    private function dailyReceipt(string $status, string $result, string $evaluated, int $missionIndex = 1, array $evaluation = [], array $sources = []): void
     {
         $this->insertDelivery($status, now()->utc());
         $db = DB::connection('seo_intel');
-        $id = Platform12DailyMissionSet::IDS[1];
+        $id = Platform12DailyMissionSet::IDS[$missionIndex];
         $receipt = ['request_hash' => str_repeat('b', 64), 'receipt_id' => str_repeat('c', 64), 'status' => $status === 'CLOSED' ? 'DAILY_MISSION_READY' : 'DAILY_MISSION_HOLD',
-            'route_plan' => [['kind' => 'scheduled_delivery', 'mission_id' => $id, 'scheduled_for' => now()->utc()->format('Y-m-d\TH:i:s\Z'), 'trigger_mode' => 'controlled_acceptance', 'source_refs' => [], 'source_gaps' => []],
-                ['kind' => 'daily_evaluation', 'output' => ['state' => $result, 'evaluated_at' => $evaluated]]]];
+            'route_plan' => [['kind' => 'scheduled_delivery', 'mission_id' => $id, 'scheduled_for' => now()->utc()->format('Y-m-d\TH:i:s\Z'), 'trigger_mode' => 'controlled_acceptance', 'source_refs' => $sources, 'source_gaps' => []],
+                ['kind' => 'daily_evaluation', 'output' => ['state' => $result, 'evaluated_at' => $evaluated, ...$evaluation]]]];
         $receipt['receipt_hash'] = app(SeoRegistryHasher::class)->hashWithout($receipt, 'receipt_hash');
         $db->table('seo_council_schedule_deliveries')->update(['mission_id' => $id, 'terminal_receipt_reference' => $receipt['receipt_id'], 'terminal_receipt_hash' => $receipt['receipt_hash']]);
         $row = array_fill_keys(['run_id', 'request_hash', 'catalog_hash', 'policy_hash', 'binding_hash', 'evidence_hash', 'capability_hash'], str_repeat('a', 64));
