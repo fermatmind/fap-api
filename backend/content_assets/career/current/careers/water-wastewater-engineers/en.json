@@ -5,9 +5,6 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -14942,14 +14939,8 @@
         "status": "mapped"
       },
       "hero.china_pay.derivation": {
-        "ref": {
-          "id": "china-pay-gap",
-          "path": [
-            "derivation"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "hero.china_pay.display_value": {
         "ref": {
@@ -23717,7 +23708,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "Keep the W26 inputs and conversions, the R0, Person A's wording revision, Person B's recalculation, and the unknowns list. Observe whether you would rather keep verifying data, learn engineering fundamentals, or lean toward management and coordination, then choose learning and feedback opportunities based on the target position."
+              "Open “Entering the field, certificates, and career development” in the contents and look for “W26: Given daily loads.” Calculate R0, handle A and B separately, then check the reference."
             ]
           },
           "id": "water-wastewater-engineers.display.fit_decision_checklist.how-detail",
@@ -24771,7 +24762,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "A historical 2025 campus recruitment sample at China Water Affairs, with no salary amount listed"
+              "Two 2026 job tables from Chongqing design and water employers."
             ]
           },
           "id": "water-wastewater-engineers.display.onet_structured_fields_block.employer",
@@ -25370,13 +25361,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "First verify the engineering task, then distinguish AI text assistance from professional models and design responsibility."
+              "Design roles deliver proposals, calculations and drawings. Plant operators monitor equipment, collect and test samples, and log readings and operational data during their shifts. Duties vary by plant type and size. Check the employer’s responsibilities, training and authorization."
             ]
           },
           "id": "water-wastewater-engineers.display.adjacent_career_comparison_table.transition",
           "source_refs": [
             "onet",
-            "editorial"
+            "plant-operator-ooh"
           ],
           "type": "prose"
         }
@@ -25555,7 +25546,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "How are AI report assistance and professional engineering responsibility kept separate?"
+              "How do I check assumptions and units in an AI draft?"
             ]
           },
           "id": "water-wastewater-engineers.display.ai_impact_table.heading",
@@ -25570,7 +25561,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: distinguish generative text, professional hydraulic models, and facility control. W26 checks only the given load and the scope of the expression, and real water quality, engineering design, and operation still require professional validation. This page has not obtained a task-level effect score or a replacement rate, so a separate editorial estimate is shown. AI Impact Score 58% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Use fictional inputs to practice documenting assumptions. Validate hydraulic models, engineering designs and facility control separately. W26 checks only the supplied load and wording. Measured adoption, task effects and replacement rates for this occupation were not established."
             ]
           },
           "id": "water-wastewater-engineers.display.ai_impact_table.answer",
@@ -26324,7 +26315,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "1000×200÷1000=200kg/day, retaining the conversion."
+              "Keep each conversion step and its units; check your result in the W26 reference."
             ]
           },
           "id": "water-wastewater-engineers.display.ai_impact_table.tasks.2.human-control",
@@ -27313,14 +27304,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: on 2026-10-03 the historical 2025 campus recruitment pages of China Water Affairs and the 2025 class recruitment of Beijing Drainage were read, but no comparable nationwide wage distribution for Chinese water and wastewater engineers was obtained. The full text of the MOHRSS enterprise compensation entry searched the same day could not be retrieved; it cannot be asserted that no survey exists. China Water Affairs does not list a water supply and drainage amount, and Beijing Drainage's page header of 8000–10000 yuan does not state a period or per-position correspondence, so it is not used to fill in a monthly salary for this occupation."
+              "NBS 2025 mean annual gross wages for urban units: electricity, heat, gas and water production and supply, CNY 160,897 (non-private) and CNY 66,451 (private); water conservancy, environment and public facilities management, CNY 70,172 and CNY 49,527, respectively. These are industry figures for employees in urban units. No comparable nationwide wage distribution for this occupation was obtained; do not use them as design-role wages or divide them by 12 for a monthly offer."
             ]
           },
           "id": "water-wastewater-engineers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
+            "nbs",
             "employer",
-            "r2-pay-3",
-            "editorial"
+            "r2-pay-3"
           ],
           "type": "prose"
         },
@@ -27361,7 +27352,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 China Water Affairs campus recruitment lists operations-track positions such as water supply and drainage engineer, with application requirements of being a new graduate and in the top 50% of the class, and a master's degree preferred; it does not list a specific amount for engineers. The 2025 Beijing Drainage campus recruitment materials are a multi-position recruitment and do not serve as a detailed wage sample."
+              "On July 24, 2026, the institute announced 10 water and drainage design posts: graduate recruitment in Chongqing (2, master’s or higher) and Nanjing (3, bachelor’s or higher); experienced recruitment in Chongqing (4) and Kunming (1), each requiring at least a bachelor’s and three years of relevant experience. On June 12, 2026, the consulting subsidiary listed two graduate recruitment drainage designer posts in Chongqing’s Liangjiang New Area. It specified a master’s or higher in the listed fields and an undergraduate degree in water supply and drainage science and engineering."
             ]
           },
           "id": "water-wastewater-engineers.china-salary.career-snapshot-primary-locale.4",
@@ -27377,7 +27368,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "All materials are historical 2025 recruitment; the page still being accessible does not mean it is currently open. Position conditions, pay periods, and the actual recruitment status should be checked in a new notice, and no national demand rate is calculated."
+              "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
             ]
           },
           "id": "water-wastewater-engineers.china-salary.career-snapshot-primary-locale.5",
@@ -27393,7 +27384,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese position income: historical materials and the nationwide gap"
+              "Mainland China pay: industry context and employer examples"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.heading",
@@ -27409,7 +27400,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The China Water Affairs 2025 campus recruitment posting page lists no monthly salary, annual salary, or net amount for water supply and drainage engineers."
+              "The attachment lists site surveys, design development, documentation and coordination, with deliverables submitted to the project lead. Travel or on-site service may be needed. The notice and job table do not state a fixed wage."
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.quote-limits",
@@ -27423,7 +27414,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The Beijing Drainage campus recruitment page header of 8000–10000 yuan has no period or per-position correspondence, and this page does not treat it as an engineer monthly salary or a national distribution."
+              "The attachment also lists hydraulic calculations, network balancing, travel or site assignments, construction drawings and field support. It asks for design and consulting coordination experience; the notice and job table do not give a fixed wage."
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.missing-pay",
@@ -27437,7 +27428,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The China Water Affairs operations track lists different positions such as water supply and drainage engineer, water plant operations, and wastewater treatment. Being a 2025 new graduate and in the top 50% of the class are stated basic requirements; a master's degree or above is a preference and must not be written as required for all positions. No headcounts or salaries are listed per position."
+              "On July 24, 2026, the institute announced 10 water and drainage design posts: graduate recruitment in Chongqing (2, master’s or higher) and Nanjing (3, bachelor’s or higher); experienced recruitment in Chongqing (4) and Kunming (1), each requiring at least a bachelor’s and three years of relevant experience."
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.featured",
@@ -27451,7 +27442,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Being a 2025 new graduate and in the top 50% of the class are application requirements; a master's degree or above is listed as a preference and is not written as required for all positions."
+              "The attachment lists site surveys, design development, documentation and coordination, with deliverables submitted to the project lead. Travel or on-site service may be needed. The notice and job table do not state a fixed wage."
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.background",
@@ -27465,7 +27456,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 Beijing Drainage group water supply and drainage and environmental engineering track explicitly requires a bachelor's degree or above, listing majors such as water supply and drainage, municipal engineering, environmental engineering, and environmental science, with tasks including water plant and pipe network process operations management and technical research and development. The page header total of 40 people covers multiple majors and positions and cannot all be counted as water supply and drainage engineers; the group's and each subsidiary's task conditions are verified separately."
+              "On June 12, 2026, the consulting subsidiary listed two graduate recruitment drainage designer posts in Chongqing’s Liangjiang New Area. It specified a master’s or higher in the listed fields and an undergraduate degree in water supply and drainage science and engineering."
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.theater",
@@ -27479,7 +27470,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The two historical campus recruitment postings do not represent nationwide engineer income, and no uniform pay band or city ranking is set based on them."
+              "These are industry figures for employees in urban units. No comparable nationwide wage distribution for this occupation was obtained; do not use them as design-role wages or divide them by 12 for a monthly offer."
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.national",
@@ -27526,7 +27517,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no per-position headcount, corresponding pay period, or current open status for the water supply and drainage engineers in the above historical campus recruitment was obtained. China Water Affairs lists no amount; the Beijing page header of 8000–10000 yuan cannot be taken as a monthly salary for this occupation. The disclosed related major, education, and tasks are employer category conditions, not a unified national threshold; the US civil data is listed separately as a proxy scope."
+              "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay. These are industry figures for employees in urban units. No comparable nationwide wage distribution for this occupation was obtained; do not use them as design-role wages or divide them by 12 for a monthly offer."
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.boundary",
@@ -27768,7 +27759,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The federal government excluding the postal service figure of 117790 USD / year is an industry median for the civil engineers parent occupation, not a separate water and wastewater engineer wage or Chinese government position compensation."
+              "The state government excluding education and hospitals figure of 102440 USD / year is an industry median for the civil engineers parent occupation, not a separate water and wastewater engineer wage or Chinese government position compensation."
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_secondary_locale.industry.theater",
@@ -27940,7 +27931,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "In W26, 1000m³/day multiplied by 200mg/L must be converted into kg/day: 1m³ = 1000L and 1kg = 1000000mg, so the product divided by 1000 gives 200kg/day. Explain every step and check the order of magnitude; do not omit the units and write only 200. The real water quality composition and treatment conditions are not provided, and memorizing the formula cannot fill them in."
+              "Use W26 to check how flow and concentration convert to a daily load. Explain the order of magnitude and inputs without supplying missing effluent or treatment conditions."
             ]
           },
           "id": "water-wastewater-engineers.fit.personality-fit-block.2",
@@ -27955,7 +27946,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Person A only withdraws \"the effluent meets standards and it can operate\", and the R0 values stay the same; Person B independently changes Q to 1500m³/day with the concentration still 200, which must give 300kg/day. When feedback is vague, first ask whether the inputs or the wording are being changed, keep the old version and the reasons, and do not change the concentration to match a conclusion."
+              "Ask whether feedback changes wording or inputs, then handle A and B separately. Keep the original and reasons for each change. Do not change the concentration to fit a conclusion."
             ]
           },
           "id": "water-wastewater-engineers.fit.personality-fit-block.3",
@@ -27970,7 +27961,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "If an application is unsuccessful, first verify the major, education, practice, and truthful materials, and keep unreported reasons as unknown. The historical China Water Affairs campus recruitment is a new-graduate entry point and cannot substitute for all engineering position conditions; deliverables also do not equal registration. Choose one preparation item you can build up, and do not invent project responsibility or employer evaluations."
+              "Check the specific post’s degree, subject and experience. Keep the reasons for an unsuccessful application unknown without feedback. A paper exercise does not replace engineering practice or registration."
             ]
           },
           "id": "water-wastewater-engineers.fit.personality-fit-block.4",
@@ -28135,7 +28126,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the occupational profile, qualifications, and recruitment reviewed do not provide validation that personality or cognitive scores predict hiring, income, or design performance in this occupation in China. Beijing Drainage listing a MAP test name is not equivalent to public validity evidence. This is not psychological diagnosis, hiring scoring, or engineering ability certification, and no MBTI, Enneagram, IQ, or EQ cutoff is set; editorial observation, qualifications, and employer conditions are verified separately."
+              "No validation was found that personality or cognitive scores predict hiring, pay or design performance for this occupation. Use assessments for exploration; do not set MBTI, Enneagram, IQ or EQ cutoffs."
             ]
           },
           "id": "water-wastewater-engineers.display.personality_fit_block.boundary",
@@ -28615,7 +28606,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Explain 1000×200÷1000=200kg/day."
+              "Write one reproducible line for flow, concentration, conversion and result."
             ]
           },
           "id": "water-wastewater-engineers.display.personality_fit_block.assessments.iq.signals.1",
@@ -28630,7 +28621,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Under Person B's Q1500, the result is 300kg/day with the concentration unchanged."
+              "Change only the input specified for B and explain what stays constant."
             ]
           },
           "id": "water-wastewater-engineers.display.personality_fit_block.assessments.iq.signals.2",
@@ -29337,7 +29328,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "The scope of the historical water utility campus recruitment, not nationwide or currently open."
+              "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
             ]
           },
           "id": "water-wastewater-engineers.display.personality_fit_block.source.employer",
@@ -29514,7 +29505,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "List your major, education, and project contributions truthfully, and do not guess the reasons for missing feedback; historical campus recruitment does not guarantee current openings, so choose professional preparation you can build up."
+              "Report your subject, degree and project contribution accurately. Keep reasons unknown without feedback. Use the job examples to select one preparation step."
             ]
           },
           "id": "water-wastewater-engineers.display.career_risk_cards.audition-feedback.mitigation",
@@ -29563,7 +29554,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Compiled from detailed tasks, the parent occupation environment, historical campus recruitment, the Chinese responsible-professional notice, and NIST methods; it is not an accident rate or a personal score. The signing notice and its annex state that the responsible professional for the relevant water supply and drainage engineering signs and seals the responsibility column of design documents, which is not an entry threshold for all junior staff."
+              "Risk examples draw on task descriptions, the parent occupation, vacancy tables, the housing ministry notice and NIST. The authorized lead signs applicable designs. These examples do not measure accident rates or individual competence."
             ]
           },
           "id": "water-wastewater-engineers.display.career_risk_cards.evidence-scope",
@@ -29961,7 +29952,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Historical China Water Affairs campus recruitment; no engineer amount listed."
+              "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
             ]
           },
           "id": "water-wastewater-engineers.display.career_risk_cards.source.employer",
@@ -30025,7 +30016,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the China Water Affairs 2025 campus recruitment posting page lists operations positions such as water supply and drainage engineer, with being a new graduate and in the top 50% of the class as application requirements and a master's degree as a preference, and does not disclose an engineer amount. The period of the Beijing Drainage 2025 multi-position campus recruitment page header amount and its per-position correspondence are unclear, so it is not treated as a detailed wage; the two historical materials cannot be counted as current openings or national demand."
+              "On July 24, 2026, the institute announced 10 water and drainage design posts: graduate recruitment in Chongqing (2, master’s or higher) and Nanjing (3, bachelor’s or higher); experienced recruitment in Chongqing (4) and Kunming (1), each requiring at least a bachelor’s and three years of relevant experience. On June 12, 2026, the consulting subsidiary listed two graduate recruitment drainage designer posts in Chongqing’s Liangjiang New Area. It specified a master’s or higher in the listed fields and an undergraduate degree in water supply and drainage science and engineering. These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
             ]
           },
           "id": "water-wastewater-engineers.path.recruitment-sample.1",
@@ -30076,18 +30067,18 @@
                 "Training and responsible-professional qualifications are different."
               ],
               [
-                "Historical China Water Affairs campus recruitment",
-                "The operations track lists water supply and drainage engineer and other positions.",
-                "2025 new graduate and ranking requirements, with a master's degree preferred.",
-                "Verify the major and location for the new position, and do not fabricate practice.",
-                "The historical entry does not disclose wages per position and does not mean current recruitment."
+                "Municipal Design Institute of Chongqing Design Group",
+                "Water and drainage design, site surveys and documentation",
+                "Check graduate and experienced criteria by location",
+                "List actual coursework, drawing exercises and your contribution",
+                "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
               ],
               [
-                "Historical Beijing Drainage campus recruitment",
-                "Group recruitment materials for multiple majors and positions.",
-                "The page header gives the bachelor's degree requirement and total headcount, without splitting out this occupation's headcount.",
-                "Verify tasks per position; the amount and period must be confirmed.",
-                "A mixed campus recruitment is not a detailed wage sample."
+                "Chongqing Water Group Public Engineering Consulting Co.",
+                "Drainage design, hydraulics and field support",
+                "Two graduate posts, master’s or higher; see job table for major and experience",
+                "Use fictional inputs to show unit checking; omit client materials",
+                "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
               ]
             ]
           },
@@ -30112,21 +30103,21 @@
                 "id": "employer-0",
                 "values": [
                   "Historical employer materials",
-                  "The China Water Affairs 2025 campus recruitment lists water supply and drainage and other positions; the application conditions are new graduate status and class ranking, with a master's degree preferred. The separate mixed Beijing Drainage campus recruitment does not split out engineer headcounts or wages and is not generalized nationwide."
+                  "On July 24, 2026, the institute announced 10 water and drainage design posts: graduate recruitment in Chongqing (2, master’s or higher) and Nanjing (3, bachelor’s or higher); experienced recruitment in Chongqing (4) and Kunming (1), each requiring at least a bachelor’s and three years of relevant experience. On June 12, 2026, the consulting subsidiary listed two graduate recruitment drainage designer posts in Chongqing’s Liangjiang New Area. It specified a master’s or higher in the listed fields and an undergraduate degree in water supply and drainage science and engineering. These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
                 ]
               },
               {
                 "id": "employer-1",
                 "values": [
                   "Editorial suggestion: verify units",
-                  "The original W26 values Q1000m³/day and C200mg/L give a load of Q×C÷1000=200kg/day; the conversion basis and unknowns are listed separately."
+                  "Use the given flow and concentration, show conversions and list the unknowns."
                 ]
               },
               {
                 "id": "employer-2",
                 "values": [
                   "Editorial suggestion: version scope",
-                  "Person A does not change the values and withdraws the compliance and operation conclusions; Person B's independent Q1500 gives 300kg/day. Mark it as fictional paper work, and do not pose as a model, design, or operations output."
+                  "For A, revise wording only. Calculate B separately. Label the exercise fictional and preserve both versions."
                 ]
               },
               {
@@ -30162,14 +30153,14 @@
                 "id": "rework",
                 "values": [
                   "R0 load table",
-                  "Retain 1000×200÷1000=200kg/day, explain that mg/day is wrong, and do not let paper arithmetic pose as design."
+                  "Keep the calculation and its units, and mark the error in the draft."
                 ]
               },
               {
                 "id": "materials",
                 "values": [
                   "Person A's revision and Person B's independent table",
-                  "Person A's values are unchanged and the compliance and operation conclusions are withdrawn; Person B's Q1500 gives 300kg/day. Keep the inputs and reasons, and do not call it a real before-and-after effect."
+                  "Keep A’s edit, B’s recalculation and the reasons for each. These are not real before-and-after results."
                 ]
               },
               {
@@ -30215,13 +30206,13 @@
               [
                 "Load calculation",
                 "Calculate 1000×200÷1000.",
-                "200kg/day, with units at every step.",
+                "The result has units and can be reproduced from the given inputs.",
                 "Does not prove removal efficiency or effluent compliance."
               ],
               [
                 "Revision from feedback",
                 "Person A changes wording; Person B independently changes Q to 1500.",
-                "Person A's R0 is unchanged; Person B gives 300kg/day.",
+                "A keeps the original value; B uses the separate inputs.",
                 "Not treated as a real before-and-after operating experiment."
               ],
               [
@@ -30378,7 +30369,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The historical 2025 China Water Affairs campus recruitment is a new-graduate entry with ranking application requirements and a master's degree preference; it lists no water supply and drainage amount or per-position headcount, and deliverables do not substitute for the major and education."
+              "On July 24, 2026, the institute announced 10 water and drainage design posts: graduate recruitment in Chongqing (2, master’s or higher) and Nanjing (3, bachelor’s or higher); experienced recruitment in Chongqing (4) and Kunming (1), each requiring at least a bachelor’s and three years of relevant experience. The attachment lists site surveys, design development, documentation and coordination, with deliverables submitted to the project lead. Travel or on-site service may be needed. The notice and job table do not state a fixed wage."
             ]
           },
           "id": "water-wastewater-engineers.path.career-path-block.2",
@@ -30395,7 +30386,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The 2025 Beijing Drainage campus recruitment is multi-position, multi-major material, and the period of the page header amount and its per-position correspondence are unclear; personal qualifications and new recruitment status are verified separately, and it is not treated as a detailed wage or job count."
+              "On June 12, 2026, the consulting subsidiary listed two graduate recruitment drainage designer posts in Chongqing’s Liangjiang New Area. It specified a master’s or higher in the listed fields and an undergraduate degree in water supply and drainage science and engineering. The attachment also lists hydraulic calculations, network balancing, travel or site assignments, construction drawings and field support. It asks for design and consulting coordination experience; the notice and job table do not give a fixed wage."
             ]
           },
           "id": "water-wastewater-engineers.path.career-path-block.3",
@@ -30415,7 +30406,7 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "W26 materials: fictional daily load",
+                  "W26: Given daily loads",
                   "A purely fictional paper scenario; R0 gives a flow Q=1000m³/day and a problem-set pollutant concentration C=200mg/L, and both values are treated as constant inputs for this problem. Calculate only the load; no treatment removal efficiency, effluent data, standards, or equipment conditions are given.",
                   "Conversion: 1m³=1000L and 1kg=1000000mg, so L=Q×C÷1000 with units of kg/day. Draft: \"The daily load is 200mg/day, the effluent already meets standards, and it can operate directly.\""
                 ]
@@ -30424,7 +30415,7 @@
                 "id": "actors-practice-task",
                 "values": [
                   "Task: calculation and independent feedback",
-                  "Calculate R0 and correct the wrong unit; Person A only withdraws the unsupported effluent and operation conclusions, Q and C must not change, and the 200kg/day and unknowns list are retained.",
+                  "Calculate R0 and correct the draft’s unit. In A, withdraw only the unsupported compliance and operation claims. Keep your calculated load, the original Q and C, and the list of unknowns.",
                   "Person B is an independent new condition: Q=1500m³/day, C still 200mg/L, and the formula unchanged. Calculate Person B separately, do not write it as an actual retrofit or before-and-after operating trial, and do not add removal efficiency or equipment parameters."
                 ]
               },
@@ -30477,7 +30468,7 @@
                 "id": "day-3",
                 "values": [
                   "Day 3 | Calculate R0",
-                  "Produce the 200kg/day table, correct the mg/day error, and explain that it cannot support compliance or operation."
+                  "Complete the R0 load table, correct the draft unit and explain why it cannot establish compliance or authorization to operate."
                 ]
               },
               {
@@ -30491,7 +30482,7 @@
                 "id": "day-5",
                 "values": [
                   "Day 5 | Calculate Person B independently",
-                  "Q1500 and C200 give 300kg/day; the independent table is not a real before-and-after trial."
+                  "Calculate B with its independent inputs and keep that version. Do not treat it as a before-and-after test."
                 ]
               },
               {
@@ -30523,7 +30514,7 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "Can you explain R0 as 200kg/day and Person B as 300kg/day, with the unit conversion consistent with the inputs?",
+              "Can you reproduce R0 and B using the supplied data and explain what changes or stays the same?",
               "Can you distinguish Person A's wording change from Person B's change of Q, without calling it an actual operating or retrofit effect?",
               "Was the omission in the unit conversion, the multiplication and division, the inputs, or the compliance extrapolation? Leave one repeatable improvement point and give no engineering competence score.",
               "Do you label the fictional inputs, the unknown effluent standards, and your own paper contribution, without posing as a design project or sampling?",
@@ -30604,7 +30595,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The two Chinese historical campus recruitment materials:"
+              "Two mainland China vacancy notices and their job tables:"
             ]
           },
           "id": "water-wastewater-engineers.display.career_path_block.locale.summary",
@@ -31444,7 +31435,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Historical campus recruitment is not currently open."
+              "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
             ]
           },
           "id": "water-wastewater-engineers.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -31714,7 +31705,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Historical 2025 China Water Affairs campus recruitment conditions, not a current engineer offer."
+              "The attachment lists site surveys, design development, documentation and coordination, with deliverables submitted to the project lead. Travel or on-site service may be needed. The notice and job table do not state a fixed wage."
             ]
           },
           "id": "water-wastewater-engineers.display.career_path_block.source.employer",
@@ -31742,7 +31733,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The historical mixed Beijing Drainage campus recruitment; not a detailed wage sample."
+              "The attachment also lists hydraulic calculations, network balancing, travel or site assignments, construction drawings and field support. It asks for design and consulting coordination experience; the notice and job table do not give a fixed wage."
             ]
           },
           "id": "water-wastewater-engineers.display.career_path_block.source.r2-pay-3",
@@ -31821,7 +31812,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: the historical 2025 campus recruitment read for China Water Affairs and Beijing Drainage supports only the position materials at that time, and no current national recruitment sample for this occupation was obtained; the two materials are not used to compute a demand trend, national demand volume, or detailed wage."
+              "On July 24, 2026, the institute announced 10 water and drainage design posts: graduate recruitment in Chongqing (2, master’s or higher) and Nanjing (3, bachelor’s or higher); experienced recruitment in Chongqing (4) and Kunming (1), each requiring at least a bachelor’s and three years of relevant experience. On June 12, 2026, the consulting subsidiary listed two graduate recruitment drainage designer posts in Chongqing’s Liangjiang New Area. It specified a master’s or higher in the listed fields and an undergraduate degree in water supply and drainage science and engineering. These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
             ]
           },
           "id": "water-wastewater-engineers.market-signals.market-signal-card.4",
@@ -31904,7 +31895,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The historical China Water Affairs campus recruitment supports the disclosure at that time, whether it is still recruiting has not been confirmed, and it is not counted as national hiring demand."
+              "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
             ]
           },
           "id": "water-wastewater-engineers.display.market_signal_card.outlook.hiring.limit",
@@ -32310,7 +32301,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Historical 2025 water utility campus recruitment; no engineer wage listed."
+              "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
             ]
           },
           "id": "water-wastewater-engineers.display.market_signal_card.source.employer",
@@ -32399,14 +32390,13 @@
                 ]
               },
               {
-                "answer": "No. The 2025 US median of 100840 USD is a civil parent occupation proxy, not a separate water treatment figure or Chinese net pay. The unclear period amount in the Chinese historical campus recruitment is not treated as a detailed monthly salary.",
+                "answer": "No. The U.S. median of $100,840 per year is for civil engineers as a whole. Mainland industry averages do not establish pay for this occupation.",
                 "id": "actors.faq.6",
                 "question": "Can US wages serve as a Chinese budget?",
                 "question_key": "career.faq.water-wastewater-engineers.6",
                 "source_refs": [
-                  "bls-oews",
-                  "employer",
-                  "r2-pay-3"
+                  "oews",
+                  "nbs"
                 ]
               },
               {
@@ -32465,7 +32455,7 @@
           "data": {
             "entries": [
               "US wages, industry, and employment all use the 17-2051 civil parent occupation proxy and are not treated as a detailed 17-2051.02 water treatment distribution.",
-              "The two Chinese historical campus recruitments do not represent a current national sample, and amounts with unclear periods and per-position correspondence are not treated as a detailed monthly salary.",
+              "These are industry figures for employees in urban units. No comparable nationwide wage distribution for this occupation was obtained; do not use them as design-role wages or divide them by 12 for a monthly offer.",
               "US licensure and Chinese examination registration apply separately, and responsible-professional signing on relevant projects is not the same as a junior entry threshold.",
               "The W26 fictional load does not prove effluent compliance or operation, and AI adoption and net effects were not obtained."
             ]
@@ -32497,7 +32487,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Detailed engineering tasks, US civil parent occupation proxy materials, the Chinese responsible-professional provisions, and two historical campus recruitments; their scopes are stated separately, and W26 is an editorial fictional exercise."
+              "O*NET tasks, BLS civil engineer data, NBS industry wages, the housing ministry notice and two employer job tables. W26 is fictional."
             ]
           },
           "id": "water-wastewater-engineers.display.source_card.source",
@@ -32511,7 +32501,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Reviewed and locally revised on 2026-10-03; profile updates, statistical periods, and recruitment years are kept separately"
+              "Sources and job tables reviewed November 9, 2026. Data periods, posting dates and the notice’s effective date are kept separate."
             ]
           },
           "id": "water-wastewater-engineers.display.source_card.updated-at",
@@ -32525,7 +32515,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "For career exploration. The current status of the historical recruitment has not been confirmed and unclear amounts are not filled in; the signing notice was checked only for its text, and W26 does not substitute for engineering qualifications."
+              "For career exploration. Check current vacancy status with the employer. W26 does not authorize engineering work or sign-off."
             ]
           },
           "id": "water-wastewater-engineers.display.source_card.note",
@@ -32680,25 +32670,25 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Under the design qualification standard, the corresponding responsible professional for relevant medium and larger projects must be a registered engineer, no older than 70, and signs, seals, and is responsible in the responsibility column.",
                   "The annex's water supply and drainage major scope covers the relevant medium and larger projects specified by the qualification standard; the corresponding responsible professional signs and seals the responsibility column of the preliminary design, construction drawings, calculation books, and similar documents."
                 ],
                 "evidence_type": "official regulatory text",
                 "id": "cn-rule",
-                "limitation": "The 2026 notice text and the original DOCX annex's water supply and drainage major scope were reviewed; responsible-professional sealing of design documents is not a unified requirement for all junior entrants or a national hiring volume.",
+                "limitation": "For water supply and drainage, use the annex entry for registered public equipment engineers specializing in water supply and drainage. It applies to responsible professionals on the specified medium-sized and larger design projects.",
                 "market": "China",
-                "name": "Public text of the Ministry of Housing and Urban-Rural Development 2026 notice on registered public utility electrical engineer practice",
+                "name": "Housing ministry: Notice on practice by registered public equipment engineers and registered electrical engineers",
                 "period": "Issued 2026-03-25 / implemented 2026-06-01",
-                "publisher": "Ministry of Housing and Urban-Rural Development / Ministry of Commerce regulations database",
+                "publisher": "Ministry of Housing and Urban-Rural Development",
                 "scope": "contextual",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=106514"
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/xzgfxwjk/art/2026/art_2063777831.html"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "W26 original constant fictional load: R0 is 200kg/day, Person A withdraws the unsupported conclusions, and Person B independently gives 300kg/day; the full paper handover was not actually sent or professionally confirmed."
+                  "W26 uses fictional flows and concentrations to distinguish revising wording from recalculation. The reference gives the arithmetic and a simulated handover."
                 ],
                 "evidence_type": "local editorial synthesis",
                 "id": "editor",
@@ -32711,20 +32701,20 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "The operations track lists different positions such as water supply and drainage engineer, water plant operations, and wastewater treatment; being a 2025 new graduate and in the top 50% of the class are application requirements, while a master's degree and similar qualifications are preferences.",
-                  "Insufficient evidence: no water supply and drainage engineer salary amount, per-position headcount, or current open status was disclosed."
+                  "On July 24, 2026, the institute announced 10 water and drainage design posts: graduate recruitment in Chongqing (2, master’s or higher) and Nanjing (3, bachelor’s or higher); experienced recruitment in Chongqing (4) and Kunming (1), each requiring at least a bachelor’s and three years of relevant experience.",
+                  "The attachment lists site surveys, design development, documentation and coordination, with deliverables submitted to the project lead. Travel or on-site service may be needed. The notice and job table do not state a fixed wage."
                 ],
                 "evidence_type": "employer recruitment",
                 "id": "employer",
-                "limitation": "The historical employer material was published through a university and does not detail duties per position; other operations position conditions cannot be applied to engineers or constitute demand statistics.",
-                "market": "China",
-                "name": "China Water Investment Group 2025 campus recruitment posting materials",
-                "period": "Historical posting dated 2025-02-26",
-                "publisher": "China Water Affairs recruitment materials / published by Southeast University",
+                "limitation": "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay.",
+                "market": "Mainland China",
+                "name": "Municipal Design Institute of Chongqing Design Group",
+                "period": "2026-07-24",
+                "publisher": "Municipal Design Institute of Chongqing Design Group",
                 "scope": "recruitment_proxy",
-                "url": "https://law.seu.edu.cn/2025/0226/c12760a519587/page.htm"
+                "url": "https://gzw.cq.gov.cn/gqzp/202607/t20260724_15853409.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32742,20 +32732,20 @@
                 "url": "https://www.onetonline.org/link/summary/11-9121.02"
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Under the design qualification standard, the corresponding responsible professional for relevant medium and larger projects must be a registered engineer, no older than 70, and signs, seals, and is responsible in the responsibility column.",
-                  "The annex's water supply and drainage major scope covers the relevant medium and larger projects specified by the qualification standard; the corresponding responsible professional signs and seals the responsibility column of the preliminary design, construction drawings, calculation books, and similar documents."
+                  "NBS 2025 mean annual gross wages for urban units: electricity, heat, gas and water production and supply, CNY 160,897 (non-private) and CNY 66,451 (private); water conservancy, environment and public facilities management, CNY 70,172 and CNY 49,527, respectively.",
+                  "These are industry figures for employees in urban units. No comparable nationwide wage distribution for this occupation was obtained; do not use them as design-role wages or divide them by 12 for a monthly offer."
                 ],
-                "evidence_type": "official regulatory text",
+                "evidence_type": "Official statistics",
                 "id": "nbs",
-                "limitation": "The 2026 notice text and the original DOCX annex's water supply and drainage major scope were reviewed; responsible-professional sealing of design documents is not a unified requirement for all junior entrants or a national hiring volume.",
+                "limitation": "These are industry figures for employees in urban units. No comparable nationwide wage distribution for this occupation was obtained; do not use them as design-role wages or divide them by 12 for a monthly offer.",
                 "market": "China",
-                "name": "Public text of the Ministry of Housing and Urban-Rural Development 2026 notice on registered public utility electrical engineer practice",
-                "period": "Issued 2026-03-25 / implemented 2026-06-01",
-                "publisher": "Ministry of Housing and Urban-Rural Development / Ministry of Commerce regulations database",
+                "name": "NBS: 2025 average annual wages of employees in urban units",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics of China",
                 "scope": "contextual",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=106514"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32775,7 +32765,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Related bachelor's degree, professional licensure, and project work; industry annual medians are 117790 for federal, 113640 for local, and 100620 USD for engineering services."
+                  "Related bachelor's degree, professional licensure, and project work; industry annual medians are 102440 for state, 113640 for local, and 100620 USD for engineering services."
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "oews",
@@ -32826,43 +32816,43 @@
                 "id": "r2-pay-1",
                 "limitation": "Civil engineers parent occupation percentiles; not a detailed water treatment direction distribution and not seniority grades or personal net pay.",
                 "market": "United States",
-                "name": "O*NET Civil Engineers 17-2051.00 national wage table",
+                "name": "O*NET national wages: civil engineer data shown for Water/Wastewater Engineers",
                 "period": "2025",
                 "publisher": "US Department of Labor O*NET / BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/17-2051.00"
+                "url": "https://www.onetonline.org/link/localwages/17-2051.02"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "The operations track lists different positions such as water supply and drainage engineer, water plant operations, and wastewater treatment; being a 2025 new graduate and in the top 50% of the class are application requirements, while a master's degree and similar qualifications are preferences.",
-                  "Insufficient evidence: no water supply and drainage engineer salary amount, per-position headcount, or current open status was disclosed."
+                  "On July 24, 2026, the institute announced 10 water and drainage design posts: graduate recruitment in Chongqing (2, master’s or higher) and Nanjing (3, bachelor’s or higher); experienced recruitment in Chongqing (4) and Kunming (1), each requiring at least a bachelor’s and three years of relevant experience.",
+                  "The attachment lists site surveys, design development, documentation and coordination, with deliverables submitted to the project lead. Travel or on-site service may be needed. The notice and job table do not state a fixed wage."
                 ],
                 "evidence_type": "employer recruitment",
                 "id": "r2-pay-2",
-                "limitation": "The historical employer material was published through a university and does not detail duties per position; other operations position conditions cannot be applied to engineers or constitute demand statistics.",
-                "market": "China",
-                "name": "China Water Investment Group 2025 campus recruitment posting materials",
-                "period": "Historical posting dated 2025-02-26",
-                "publisher": "China Water Affairs recruitment materials / published by Southeast University",
+                "limitation": "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay.",
+                "market": "Mainland China",
+                "name": "Municipal Design Institute of Chongqing Design Group",
+                "period": "2026-07-24",
+                "publisher": "Municipal Design Institute of Chongqing Design Group",
                 "scope": "recruitment_proxy",
-                "url": "https://law.seu.edu.cn/2025/0226/c12760a519587/page.htm"
+                "url": "https://gzw.cq.gov.cn/gqzp/202607/t20260724_15853409.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "The group's water supply and drainage and environmental engineering track explicitly requires a bachelor's degree or above and a corresponding major, with tasks including process operations management and technical research and development; each subsidiary has its own category conditions.",
-                  "The page header's total of 40 people and 8000–10000 yuan cover mixed positions and do not state the amount's period or per-position matching."
+                  "On June 12, 2026, the consulting subsidiary listed two graduate recruitment drainage designer posts in Chongqing’s Liangjiang New Area. It specified a master’s or higher in the listed fields and an undergraduate degree in water supply and drainage science and engineering.",
+                  "The attachment also lists hydraulic calculations, network balancing, travel or site assignments, construction drawings and field support. It asks for design and consulting coordination experience; the notice and job table do not give a fixed wage."
                 ],
                 "evidence_type": "employer recruitment",
                 "id": "r2-pay-3",
-                "limitation": "A historical 2025-class campus recruitment; the known category conditions are not treated as a national threshold, the mixed total or page header amount is not converted into a water supply and drainage engineer headcount or monthly salary, and the current open status is unknown.",
-                "market": "Beijing, China",
-                "name": "Beijing Drainage Group 2025 campus recruitment posting materials",
-                "period": "Posted 2024-10-22 / 2025 class",
-                "publisher": "Beijing Drainage Group recruitment materials / Hebei University of Technology careers site",
+                "limitation": "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay.",
+                "market": "Mainland China",
+                "name": "Chongqing Water Group Public Engineering Consulting Co.",
+                "period": "2026-06-12",
+                "publisher": "Chongqing Water Group Public Engineering Consulting Co.",
                 "scope": "recruitment_proxy",
-                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/68769.html"
+                "url": "https://gzw.cq.gov.cn/gqzp/202606/t20260612_15751011_wap.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32897,19 +32887,19 @@
                 "url": "https://rsj.beijing.gov.cn/ywsite/bjpta/zcwj/2026zc/202608/P020260810499193004850.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Under the design qualification standard, the corresponding responsible professional for relevant medium and larger projects must be a registered engineer, no older than 70, and signs, seals, and is responsible in the responsibility column."
                 ],
                 "evidence_type": "official regulatory text",
                 "id": "sag-moa",
-                "limitation": "Only the 2026 notice text was checked, not the DOCX annex's complete signing list; this is not a unified requirement for all junior entrants or a national hiring volume.",
+                "limitation": "For water supply and drainage, use the annex entry for registered public equipment engineers specializing in water supply and drainage. It applies to responsible professionals on the specified medium-sized and larger design projects.",
                 "market": "China",
-                "name": "Public text of the Ministry of Housing and Urban-Rural Development 2026 notice on registered public utility electrical engineer practice",
+                "name": "Housing ministry: Notice on practice by registered public equipment engineers and registered electrical engineers",
                 "period": "Issued 2026-03-25 / implemented 2026-06-01",
-                "publisher": "Ministry of Housing and Urban-Rural Development / Ministry of Commerce regulations database",
+                "publisher": "Ministry of Housing and Urban-Rural Development",
                 "scope": "contextual",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=106514"
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/xzgfxwjk/art/2026/art_2063777831.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32942,19 +32932,19 @@
                 "url": "https://www.onetonline.org/link/summary/17-2051.02"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Under the design qualification standard, the corresponding responsible professional for relevant medium and larger projects must be a registered engineer, no older than 70, and signs, seals, and is responsible in the responsibility column."
                 ],
                 "evidence_type": "official regulatory text",
                 "id": "directing",
-                "limitation": "Only the 2026 notice text was checked, not the DOCX annex's complete signing list; this is not a unified requirement for all junior entrants or a national hiring volume.",
+                "limitation": "For water supply and drainage, use the annex entry for registered public equipment engineers specializing in water supply and drainage. It applies to responsible professionals on the specified medium-sized and larger design projects.",
                 "market": "China",
-                "name": "Public text of the Ministry of Housing and Urban-Rural Development 2026 notice on registered public utility electrical engineer practice",
+                "name": "Housing ministry: Notice on practice by registered public equipment engineers and registered electrical engineers",
                 "period": "Issued 2026-03-25 / implemented 2026-06-01",
-                "publisher": "Ministry of Housing and Urban-Rural Development / Ministry of Commerce regulations database",
+                "publisher": "Ministry of Housing and Urban-Rural Development",
                 "scope": "contextual",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=106514"
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/xzgfxwjk/art/2026/art_2063777831.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -33006,7 +32996,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "Related bachelor's degree, professional licensure, and project work; industry annual medians are 117790 for federal, 113640 for local, and 100620 USD for engineering services."
+                  "Related bachelor's degree, professional licensure, and project work; industry annual medians are 102440 for state, 113640 for local, and 100620 USD for engineering services."
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "bls-ooh",
@@ -33027,11 +33017,11 @@
                 "id": "bls-oews",
                 "limitation": "Civil engineers parent occupation percentiles; not a detailed water treatment direction distribution and not seniority grades or personal net pay.",
                 "market": "United States",
-                "name": "O*NET Civil Engineers 17-2051.00 national wage table",
+                "name": "O*NET national wages: civil engineer data shown for Water/Wastewater Engineers",
                 "period": "2025",
                 "publisher": "US Department of Labor O*NET / BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/17-2051.00"
+                "url": "https://www.onetonline.org/link/localwages/17-2051.02"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -33049,24 +33039,24 @@
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "Under the design qualification standard, the corresponding responsible professional for relevant medium and larger projects must be a registered engineer, no older than 70, and signs, seals, and is responsible in the responsibility column."
                 ],
                 "evidence_type": "official regulatory text",
                 "id": "cn-policy",
-                "limitation": "Only the 2026 notice text was checked, not the DOCX annex's complete signing list; this is not a unified requirement for all junior entrants or a national hiring volume.",
+                "limitation": "For water supply and drainage, use the annex entry for registered public equipment engineers specializing in water supply and drainage. It applies to responsible professionals on the specified medium-sized and larger design projects.",
                 "market": "China",
-                "name": "Public text of the Ministry of Housing and Urban-Rural Development 2026 notice on registered public utility electrical engineer practice",
+                "name": "Housing ministry: Notice on practice by registered public equipment engineers and registered electrical engineers",
                 "period": "Issued 2026-03-25 / implemented 2026-06-01",
-                "publisher": "Ministry of Housing and Urban-Rural Development / Ministry of Commerce regulations database",
+                "publisher": "Ministry of Housing and Urban-Rural Development",
                 "scope": "contextual",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=106514"
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/xzgfxwjk/art/2026/art_2063777831.html"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "W26 original constant fictional load: R0 is 200kg/day, Person A withdraws the unsupported conclusions, and Person B independently gives 300kg/day; the full paper handover was not actually sent or professionally confirmed."
+                  "W26 uses fictional flows and concentrations to distinguish revising wording from recalculation. The reference gives the arithmetic and a simulated handover."
                 ],
                 "evidence_type": "local editorial synthesis",
                 "id": "editorial",
@@ -33079,21 +33069,36 @@
                 "url": null
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Process | Methods and facility options | Compare chemical, biological, and other treatment methods, and analyze the applicable constraints. — 50/100; weight=1/3; water-wastewater-engineers.display.responsibilities_block.02[0]",
-                  "Hydraulics | Pipe network and pump station analysis | Carry out hydraulic modeling, pressure loss, and network option analysis. — 75/100; weight=1/3; water-wastewater-engineers.display.responsibilities_block.03[0]",
-                  "Engineering | Design and equipment | Produce treatment facility, pipeline, and equipment designs, and review them against applicable standards. — 50/100; weight=1/3; water-wastewater-engineers.display.responsibilities_block.04[0]"
+                  "Use fictional inputs to practice documenting assumptions. Validate hydraulic models, engineering designs and facility control separately. W26 checks only the supplied load and wording. Measured adoption, task effects and replacement rates for this occupation were not established.",
+                  "Use fictional inputs to practice documenting assumptions. Validate hydraulic models, engineering designs and facility control separately. W26 checks only the supplied load and wording. Measured adoption, task effects and replacement rates for this occupation were not established.",
+                  "Use fictional inputs to practice documenting assumptions. Validate hydraulic models, engineering designs and facility control separately. W26 checks only the supplied load and wording. Measured adoption, task effects and replacement rates for this occupation were not established.",
+                  "Use fictional inputs to practice documenting assumptions. Validate hydraulic models, engineering designs and facility control separately. W26 checks only the supplied load and wording. Measured adoption, task effects and replacement rates for this occupation were not established.",
+                  "Use fictional inputs to practice documenting assumptions. Validate hydraulic models, engineering designs and facility control separately. W26 checks only the supplied load and wording. Measured adoption, task effects and replacement rates for this occupation were not established."
                 ],
                 "evidence_type": "Editorial model estimation method",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
+                "limitation": "Qualitative guidance; no occupational score.",
+                "name": "FermatMind: evidence for AI and engineering tasks",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "Three representative core tasks of this occupation",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Design roles deliver proposals, calculations and drawings. Plant operators monitor equipment, collect and test samples, and log readings and operational data during their shifts. Duties vary by plant type and size. Check the employer’s responsibilities, training and authorization."
+                ],
+                "evidence_type": "Official occupation profile",
+                "id": "plant-operator-ooh",
+                "limitation": "U.S. operator duties; no design authorization or mainland credential equivalence.",
+                "name": "BLS: Water and Wastewater Treatment Plant and System Operators (51-8031)",
+                "period": "2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/production/water-and-wastewater-treatment-plant-and-system-operators.htm"
               }
             ]
           },
@@ -33162,6 +33167,10 @@
           {
             "href": "https://www.onetonline.org/link/summary/11-9199.11",
             "label": "O*NET: Brownfield Redevelopment Specialists and Site Managers"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/production/water-and-wastewater-treatment-plant-and-system-operators.htm",
+            "label": "BLS: Water and Wastewater Treatment Plant and System Operators (51-8031)"
           }
         ],
         "evidence_note": {
@@ -35770,7 +35779,7 @@
               "field": "url",
               "item": "water-wastewater-engineers.source-register.published.1"
             },
-            "id": "bls",
+            "id": "bls-ooh",
             "label": {
               "$source": "bls-ooh",
               "block": "source-register",
@@ -35889,44 +35898,44 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "Material scope",
-              "数值": "Two historical campus recruitments",
-              "说明": "Employer materials published through universities, not a national survey."
+              "指标": "Scope",
+              "数值": "Two dated design vacancy notices",
+              "说明": "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
             },
             {
-              "指标": "China Water Affairs positions",
-              "数值": "Lists water supply and drainage engineers",
-              "说明": "Also lists other operations positions, verified per position."
+              "指标": "Municipal Design Institute of Chongqing Design Group",
+              "数值": "10 water and drainage design posts",
+              "说明": "On July 24, 2026, the institute announced 10 water and drainage design posts: graduate recruitment in Chongqing (2, master’s or higher) and Nanjing (3, bachelor’s or higher); experienced recruitment in Chongqing (4) and Kunming (1), each requiring at least a bachelor’s and three years of relevant experience."
             },
             {
-              "指标": "China Water Affairs wages",
-              "数值": "No amount disclosed",
-              "说明": "No monthly salary, annual salary, or net pay is filled in."
+              "指标": "Chongqing Water Group Public Engineering Consulting Co.",
+              "数值": "2 drainage designer posts",
+              "说明": "On June 12, 2026, the consulting subsidiary listed two graduate recruitment drainage designer posts in Chongqing’s Liangjiang New Area. It specified a master’s or higher in the listed fields and an undergraduate degree in water supply and drainage science and engineering."
             },
             {
-              "指标": "Beijing Drainage materials",
-              "数值": "Multi-position, multi-major campus recruitment",
-              "说明": "The page header amount does not state the period or position correspondence."
+              "指标": "Industry context",
+              "数值": "NBS 2025",
+              "说明": "NBS 2025 mean annual gross wages for urban units: electricity, heat, gas and water production and supply, CNY 160,897 (non-private) and CNY 66,451 (private); water conservancy, environment and public facilities management, CNY 70,172 and CNY 49,527, respectively."
             },
             {
-              "指标": "Amount use",
-              "数值": "Not treated as a detailed wage",
-              "说明": "Must not be written as a water supply and drainage engineer monthly salary of 8000–10000."
+              "指标": "Individual offer",
+              "数值": "Verify with employer",
+              "说明": "These are industry figures for employees in urban units. No comparable nationwide wage distribution for this occupation was obtained; do not use them as design-role wages or divide them by 12 for a monthly offer."
             },
             {
-              "指标": "Sample boundary",
-              "数值": "Historical mixed campus recruitment",
-              "说明": "No national median or open position count is calculated."
+              "指标": "Posting dates",
+              "数值": "2026-06-12 / 2026-07-24",
+              "说明": "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
             },
             {
-              "指标": "Individual pay",
-              "数值": "Verified with the employer",
-              "说明": "Fixed bonuses, travel, period, and tax basis are verified separately."
+              "指标": "Contract terms",
+              "数值": "Check base pay, variable pay and travel",
+              "说明": "Confirm gross pay, pay period, bonus and travel allowance."
             },
             {
               "指标": "Cross-market comparison",
-              "数值": "China and the US kept separate",
-              "说明": "The US parent occupation cannot fill in Chinese amounts."
+              "数值": "Keep China and U.S. data separate",
+              "说明": "These are industry figures for employees in urban units. No comparable nationwide wage distribution for this occupation was obtained; do not use them as design-role wages or divide them by 12 for a monthly offer."
             }
           ],
           "china_ai_row": {
@@ -35938,8 +35947,8 @@
           "china_class_row": "Chinese data type",
           "china_edu_table": [
             {
-              "学历段": "China Water Affairs water supply and drainage engineer",
-              "岗位方向": "No salary amount listed",
+              "学历段": "Municipal Design Institute of Chongqing Design Group",
+              "岗位方向": "Graduate and experienced recruitment",
               "说明": {
                 "$item": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -35948,8 +35957,8 @@
               }
             },
             {
-              "学历段": "China Water Affairs application conditions",
-              "岗位方向": "New graduate and ranking requirements; a master's degree preferred",
+              "学历段": "Municipal Design Institute of Chongqing Design Group",
+              "岗位方向": "Verify location, degree and experience",
               "说明": {
                 "$item": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -35958,8 +35967,8 @@
               }
             },
             {
-              "学历段": "Beijing Drainage mixed campus recruitment",
-              "岗位方向": "The period of the page header amount and its per-position correspondence are unclear",
+              "学历段": "Chongqing Water Group Public Engineering Consulting Co.",
+              "岗位方向": "Drainage designer",
               "说明": {
                 "$item": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.theater",
                 "block": "china-salary",
@@ -36014,7 +36023,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "Historical campus recruitment status",
+          "china_open": "Dated employer examples",
           "china_open_note": {
             "$item": "water-wastewater-engineers.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -36039,7 +36048,7 @@
               }
             },
             {
-              "城市/区间": "China Water Affairs historical 2025 campus recruitment",
+              "城市/区间": "Municipal Design Institute of Chongqing Design Group",
               "月薪参考": {
                 "$join": [
                   {
@@ -36053,7 +36062,7 @@
               }
             },
             {
-              "城市/区间": "Beijing Drainage 2025 mixed campus recruitment",
+              "城市/区间": "Chongqing Water Group Public Engineering Consulting Co.",
               "月薪参考": {
                 "$item": "water-wastewater-engineers.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -36067,7 +36076,7 @@
           "fact_refs": [
             "china-pay-gap"
           ],
-          "sources_note": "See the sources and paths for the two Chinese historical campus recruitment links; amounts with unclear periods are not treated as detailed wages",
+          "sources_note": "See the two notices and job attachments below. Pay context uses NBS 2025 annual industry means.",
           "ui": {
             "ai_heading": "Can AI explain pay cuts for Chinese engineers?",
             "driver_heading": "Which conditions should be verified first when comparing position compensation?",
@@ -36270,7 +36279,7 @@
         "industry_rows": [
           {
             "fact_ref": "industry-primary",
-            "industry": "Federal government excluding the postal service (parent occupation)",
+            "industry": "State government excluding education and hospitals (parent occupation)",
             "median": {
               "$fact": "industry-primary",
               "field": "display_value"
@@ -36515,7 +36524,7 @@
               "type": "prose"
             }
           ],
-          "separator": ""
+          "separator": "\n"
         },
         "suit": {
           "$join": [
@@ -36624,12 +36633,12 @@
             },
             "metric": "Responsible-professional design signing",
             "occupation_scope": "Corresponding medium and larger projects, not occupational statistics",
-            "source_id": "cn-rule",
-            "value": "The registered responsible professional signs, seals, and is responsible"
+            "source_id": "ratify",
+            "value": "The registered water supply and drainage lead signs and seals applicable designs"
           },
           {
-            "geography": "Single-employer historical material from China Water Affairs",
-            "horizon": "Posted 2025-02-26; current status unconfirmed",
+            "geography": "Mainland employer examples: Chongqing, Nanjing and Kunming",
+            "horizon": "June 12 and July 24, 2026",
             "interpretation": {
               "$item": "water-wastewater-engineers.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -36642,10 +36651,10 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "Campus recruitment application conditions",
-            "occupation_scope": "A mixed campus recruitment including water supply and drainage; not a nationally representative sample",
+            "metric": "Two dated design hiring examples",
+            "occupation_scope": "Water and drainage design; graduate and experienced criteria are listed separately",
             "source_id": "employer",
-            "value": "2025 new graduate and ranking requirements, with a master's degree preferred"
+            "value": "10 at the design institute; 2 at the water group subsidiary"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -36741,6 +36750,18 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+            "id": "nbs",
+            "label": "NBS: 2025 average annual wages of employees in urban units",
+            "scope": "These are industry figures for employees in urban units. No comparable nationwide wage distribution for this occupation was obtained; do not use them as design-role wages or divide them by 12 for a monthly offer."
+          },
+          {
+            "href": "https://gzw.cq.gov.cn/gqzp/202606/t20260612_15751011_wap.html",
+            "id": "r2-pay-3",
+            "label": "Chongqing Water Group Public Engineering Consulting Co.",
+            "scope": "These two dated employer examples do not establish current openings, nationwide educational requirements or occupational pay."
           }
         ],
         "transitions": [
@@ -37006,7 +37027,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/en/tests/holland-career-interest-test-riasec",
             "cta_label": "Understand my career interests",
             "evidence_level": {
               "$item": "water-wastewater-engineers.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -37055,7 +37076,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_href": "/en/tests/big-five-personality-test-ocean-model",
             "cta_label": "Understand my Big Five traits",
             "evidence_level": {
               "$item": "water-wastewater-engineers.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -37104,7 +37125,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_href": "/en/tests/mbti-personality-test-16-personality-types",
             "cta_label": "Understand my personality preferences",
             "evidence_level": {
               "$item": "water-wastewater-engineers.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -37153,7 +37174,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
+            "cta_href": "/en/tests/enneagram-personality-test-nine-types",
             "cta_label": "Understand my motivation cues",
             "evidence_level": {
               "$item": "water-wastewater-engineers.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -37202,7 +37223,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "cta_href": "/en/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "Understand my cognitive performance",
             "evidence_level": {
               "$item": "water-wastewater-engineers.display.personality_fit_block.assessments.iq.evidence-level",
@@ -37251,7 +37272,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "cta_href": "/en/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "Understand my communication cues",
             "evidence_level": {
               "$item": "water-wastewater-engineers.display.personality_fit_block.assessments.eq.evidence-level",
@@ -38338,7 +38359,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and engineering tasks",
       "china-salary": "Mainland China salary reference",
       "direction-comparison": "Career direction comparison",
       "fit": "Career fit guide",
@@ -38440,11 +38461,11 @@
         ]
       },
       {
-        "derivation": "The OOH2025 annual median of 117790 USD for civil engineers in the federal government excluding the postal service; it is a parent occupation industry value, not a water treatment sub-direction figure or the wages of all employees in that industry.",
-        "display_value": "Parent occupation 117790 USD / year",
+        "derivation": "The OOH2025 annual median of 102440 USD for civil engineers in the state government excluding education and hospitals; it is a parent occupation industry value, not a water treatment sub-direction figure or the wages of all employees in that industry.",
+        "display_value": "Parent occupation 102440 USD / year",
         "fact_id": "industry-primary",
         "market": "United States",
-        "measure": "Federal government excluding the postal service annual median",
+        "measure": "State government excluding education and hospitals annual median",
         "occupation_scope": "US 17-2051 civil engineers parent occupation proxy, not a separate water treatment direction series",
         "period": "2025",
         "source_refs": [
@@ -38476,37 +38497,25 @@
         ]
       },
       {
-        "derivation": "On 2026-10-03 the historical 2025 China Water Affairs and 2025-class Beijing Drainage recruitments were read, reusing the record from the same batch's same-day MOHRSS enterprise compensation entry search whose full text could not be retrieved. The two campus recruitments do not provide a national distribution for this occupation; the Beijing page header of 8000–10000 yuan has no period or per-position correspondence and cannot support a monthly salary or a national median.",
+        "derivation": null,
         "display_value": "Insufficient evidence: no comparable nationwide wage distribution for this occupation in China was obtained",
         "fact_id": "china-pay-gap",
         "market": "China",
         "measure": "Availability of Chinese wages",
         "occupation_scope": "Gap in nationwide wages for this occupation in China",
-        "period": "Accessed 2026-10-03",
+        "period": "2025 industry data; reviewed November 9, 2026",
         "source_refs": [
-          "editorial"
-        ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Water and wastewater engineers",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "nbs"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and engineering tasks"
     },
     "badges": [
       "O*NET 17-2051.02",
@@ -38550,17 +38559,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Learn about the treatment facility, pipe network, and hydraulic analysis tasks of water and wastewater engineers, distinguish civil engineers parent occupation wages from Chinese historical recruitment, and use a fictional load table to experience checking units, recalculating, and revising reports."
+      "text": "Compare treatment design, pipe network modeling and plant operations. Check China hiring samples, U.S. civil engineer pay, licensure boundaries and the W26 load calculation."
     },
     "title": {
       "availability": "available",
-      "text": "Water and wastewater engineers: duties, wage scope, and engineering preparation"
+      "text": "Water/Wastewater Engineer: Duties, Pay and Licensure"
     }
   },
-  "source_content_sha256": "b1f4c2fdd4bac98f82884b47d6bd3e338711e79f4bafb3cbbbb250b4dae9afb1",
+  "source_content_sha256": "1b2f01009b59376b5d47799939fa001c9a1ed26a8f9935815aa8b00ca11bd339",
   "subject": {
     "canonical_slug": "water-wastewater-engineers",
-    "name": "Water and wastewater engineers",
-    "summary": "Water/wastewater engineers design or supervise water supply, wastewater treatment, and flood control projects, analyze water quality and quantity, carry out hydraulic modeling and pipe network and treatment facility design, and produce options, calculations, environmental documents, and technical reports. Engineering models and text must be based on explicit conditions and undergo professional review; the paper exercise provides no real water plant operating or design instructions."
+    "name": "Water/Wastewater Engineers",
+    "summary": "Water/wastewater engineers design water supply, wastewater treatment facilities and pipe networks. Compare treatment design, hydraulic modeling and plant operations before choosing a role. Real projects require verified inputs, applicable standards and authorized review. U.S. pay and outlook cover the broader civil engineer occupation."
   }
 }

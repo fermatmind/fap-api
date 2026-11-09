@@ -32,9 +32,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -15861,20 +15858,44 @@
         "status": "unfilled"
       },
       "interface.direction_comparison.table.choice_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.choice_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.direction_comparison.table.direction_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.direction_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.direction_comparison.table.distinction_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.distinction_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.direction_comparison.table.work_output_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.work_output_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.fit.assessment_misuse_label": {
         "ref": null,
@@ -23347,15 +23368,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "This page discusses U.S. airline pilots and commercial pilots separately: tasks include preflight preparation, aircraft manipulation and monitoring, communication coordination, and recordkeeping. The former usually fly scheduled fixed-wing routes, while the latter involve non-scheduled fixed-wing aircraft, helicopters, and special operations. The related Chinese occupation is flight crew; licenses and operating qualifications must be checked against the jurisdiction, category, and target crew position, and the ATPL conditions for transport captains must not be applied to all first officers. Paper exercises only observe material-review habits and cannot demonstrate flying ability."
+              "Before paying for training, check medical requirements, ratings, operator training and costs for the jurisdiction, aircraft, and role. A paper exercise cannot establish flight fitness or hiring eligibility."
             ]
           },
           "id": "airline-and-commercial-pilots.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "operations",
-            "privacy",
             "ccar61",
-            "ccar121"
+            "pilot-ecfr61",
+            "pilot-paper"
           ],
           "type": "prose"
         },
@@ -23364,14 +23384,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First check the license, medical examination, and training conditions for the target jurisdiction and position, then use this page's model F full problem statement to organize the D1/D2 calculation tables, error-correction forms, and handover records. Paper exercises can only observe review habits and cannot demonstrate flying ability or operating qualification."
+              "Try Model F in the entry section: compare two versions of fictional data, check the status form’s validity, and write a handoff. It represents no aircraft and cannot be used for flight, loading, or release."
             ]
           },
           "id": "airline-and-commercial-pilots.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "ccar61",
-            "ccar121",
-            "operations"
+            "pilot-paper"
           ],
           "type": "prose"
         },
@@ -23380,14 +23398,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "People more likely to adapt: those who can prepare item by item according to regulations, manuals, and checklists without skipping steps, can maintain attention and precision during long duty periods, can judge and report clearly according to procedures under abnormal conditions and time pressure, can accept irregular schedules, overnight stays away from base, and simulator refresher assessments, and hold a sense of reverence for flight safety responsibility. If someone is unwilling to execute according to regulations, tends to simplify checks based on experience, finds it hard to accept continuing assessment and competition, or is uncomfortable with night and cross-time-zone rotations, the risk is usually greater."
+              "Explore this work if you like checking versions against a list, pausing over conflicting information, and handing questions to a reviewer."
             ]
           },
           "id": "airline-and-commercial-pilots.quick-decision.fit-decision-checklist.3",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "onet2",
+            "pilot-paper"
           ],
           "type": "prose"
         },
@@ -23396,18 +23414,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no wage distribution matching Chinese flight crew and no generative-AI substitution effects were obtained this round. Chinese industry means serve only as background; qualifications must be checked separately against licenses and operating rules, and paper exercises do not demonstrate flying ability. U.S. wages for 2025, month 5 (May): combined median for the two categories USD 210,020; airline 232,140 and commercial 123,220, with percentiles preserved separately. 2025—2035 combined growth 7.3% and average annual openings 16,400; openings are not net new jobs."
+              "Try Model F in the entry section: compare two versions of fictional data, check the status form’s validity, and write a handoff. It represents no aircraft and cannot be used for flight, loading, or release."
             ]
           },
           "id": "airline-and-commercial-pilots.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "ooh",
-            "oews",
-            "commercial-wages",
-            "ep",
-            "nbs",
-            "ccar61",
-            "ccar121"
+            "pilot-paper"
           ],
           "type": "prose"
         },
@@ -23416,15 +23428,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "In one sentence: an aircraft operating position that plans, manipulates, and monitors aircraft under licenses, operator training, and operating rules, completes preparation, flight, and recordkeeping in accordance with regulations, with the captain retaining final command responsibility for flight safety."
+              "Compare scheduled airline operations with other commercial flying. Both require checking records, following procedures and handing work over, while operating rules, aircraft and hiring requirements can differ."
             ]
           },
           "id": "airline-and-commercial-pilots.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "operations",
-            "privacy",
-            "ccar61",
-            "ccar121"
+            "onet",
+            "onet2",
+            "pilot-cn-law"
           ],
           "type": "prose"
         }
@@ -23441,7 +23452,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The tasks of the two pilot categories fall into four categories: preflight preparation (studying weather, notices, and route data, formulating flight plans and fuel plans, completing weight and balance and takeoff performance calculations, inspecting the aircraft and systems according to checklists, and coordinating with the crew and dispatch); flight manipulation and monitoring (manipulates the aircraft through taxi, takeoff, climb, cruise, descent, and landing, monitors engine, hydraulic, electrical, and avionics systems, manages the autopilot and flight management system, and collaborates according to standard operating procedures and crew resource management); communication and coordination (maintains communication with air traffic control and flies according to instructions, coordinates with dispatch, maintenance, and cabin crew, and reports and handles abnormal and emergency situations according to procedures); and recordkeeping and compliance (fills in flight logs and operations records, reports defects and events, participates in refresher training and simulator assessments, and maintains the validity of licenses, medical certificates, and type ratings). Airline pilots focus on scheduled routes and large-aircraft operations, while commercial pilots focus on non-scheduled routes, helicopters, charter, air ambulance, and sightseeing, with the two differing in task mix and operating rules."
+              "The tasks of the two pilot categories fall into four categories: preflight preparation (studying weather, notices, and route data, formulating flight plans and fuel plans, completing weight and balance and takeoff performance calculations, inspecting the aircraft and systems according to checklists, and coordinating with the crew and dispatch); flight manipulation and monitoring (manipulates the aircraft through taxi, takeoff, climb, cruise, descent, and landing, monitors engine, hydraulic, electrical, and avionics systems, manages the autopilot and flight management system, and collaborates according to standard operating procedures and crew resource management); communication and coordination (maintains communication with air traffic control and flies according to instructions, coordinates with dispatch, maintenance, and cabin crew, and reports and handles abnormal and emergency situations according to procedures); and recordkeeping and compliance (fills in flight logs and operations records, reports defects and events, participates in refresher training and simulator assessments, and maintains the validity of licenses, medical certificates, and type ratings). Airline pilots focus on scheduled routes and the assigned crew duties, while commercial pilots focus on non-scheduled routes, helicopters, charter, air ambulance, and sightseeing, with the two differing in task mix and operating rules."
             ]
           },
           "id": "airline-and-commercial-pilots.profile.career-quick-answers-block.1",
@@ -23505,7 +23516,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "The four task categories differ in weight between airline pilots (scheduled flights and large aircraft) and commercial pilots (non-scheduled, helicopters, and special operations); this page presents them separately by basis."
+              "The four task categories differ in weight between airline pilots (scheduled flights, with aircraft types assigned by the operator) and commercial pilots (non-scheduled, helicopters, and special operations); this page presents them separately by basis."
             ]
           },
           "id": "airline-and-commercial-pilots.profile.career-quick-answers-block.2",
@@ -23949,7 +23960,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "Position directions: airline pilot (scheduled flights and large aircraft), commercial pilot (non-scheduled, charter, and special operations), helicopter pilot, or flight instructor."
+              "Position directions: airline pilot (scheduled flights, with aircraft types assigned by the operator), commercial pilot (non-scheduled, charter, and special operations), helicopter pilot, or flight instructor."
             ]
           },
           "id": "airline-and-commercial-pilots.profile.career-quick-answers-block.26",
@@ -24227,13 +24238,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Fly scheduled flights and large transport aircraft, completing route operations and crew coordination according to the operator's operations manual and standard operating procedures."
+              "Fly scheduled passenger or cargo routes, monitor operations, and coordinate crew handoffs. Check aircraft type and responsibilities with the operator."
             ]
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
             "onet",
-            "onet"
+            "ccar121",
+            "pilot-ecfr121"
           ],
           "type": "prose"
         },
@@ -24262,7 +24274,8 @@
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
             "onet2",
-            "ccar61"
+            "onet",
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24276,8 +24289,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
+            "onet2",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24291,8 +24305,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
+            "onet2",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24379,8 +24394,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
+            "pilot-atc",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24394,8 +24410,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
+            "pilot-atc",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24409,8 +24426,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
+            "pilot-atc",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24433,13 +24451,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Oriented toward maintenance and airworthiness management; pilots are oriented toward manipulation and operations, and maintenance release is the responsibility of licensed maintenance personnel."
+              "Aircraft mechanics focus on inspection, troubleshooting, and maintenance records within their authority. Approval for return to service requires separate qualifications and authorization. Pilots focus on flying, monitoring and operational communication."
             ]
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
+            "pilot-mechanics",
             "onet",
-            "onet"
+            "pilot-cn-law"
           ],
           "type": "prose"
         },
@@ -24448,13 +24467,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "People more willing to do aircraft maintenance and airworthiness release."
+              "If you prefer diagnosing faults and performing maintenance, compare aircraft mechanic roles and verify the duties and sign-off authority separately."
             ]
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "pilot-mechanics"
           ],
           "type": "prose"
         },
@@ -24463,13 +24481,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Perform inspection, maintenance, and release of in-service aircraft according to maintenance manuals and regulations."
+              "Inspect, troubleshoot, repair and document aircraft work within assigned authority. Verify separate qualifications and authorization for approval to return to service."
             ]
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "pilot-mechanics",
+            "pilot-cn-law"
           ],
           "type": "prose"
         },
@@ -24497,8 +24515,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
+            "pilot-airportops",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24512,8 +24531,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
+            "pilot-airportops",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24527,8 +24547,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
+            "pilot-airportops",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24823,13 +24844,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this page has not obtained generative-AI actual adoption rates, effect sizes, or job-substitution causal evidence for the two pilot categories, nor reviewable AI task ratings. O*NET lists autopilot and flight management computers, which are existing automation tasks; they cannot be collectively called generative AI. The change judgments below are editorial analysis except where explicit occupational data is cited; BLS employment projections do not prove that AI creates or reduces jobs. AI Impact Score 42% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Use fictional paper records to practice organizing and checking information. Available sources do not establish occupational AI adoption, hours saved, replacement rates, or flight safety effects. Real operations rely on operator-approved procedures, materials, and tools. Do not use this exercise or generated content to make a flight decision."
             ]
           },
           "id": "airline-and-commercial-pilots.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "operations",
-            "ep"
+            "source-fermatmind-ai-rubric",
+            "pilot-cn-law"
           ],
           "type": "prose"
         },
@@ -25543,14 +25564,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "The two are different occupational bases: airline pilots (O*NET 53-2011.00) fly scheduled air-carrier routes and large transport aircraft, usually requiring a bachelor's degree, airline transport pilot license, and type rating, with a median of USD 232,140 per year for 2025, month 5 (May); commercial pilots (53-2012.00) fly non-scheduled routes, helicopters, charter, air ambulance, and sightseeing, usually starting from flight training and a commercial license, with a median of USD 123,220 per year. The two differ in tasks, wages, and entry paths."
+              "O*NET 53-2011.00 usually covers scheduled fixed-wing carrier operations; the operator determines aircraft type. 53-2012.00 covers missions such as charter or specialized flying. Read typical education, certificates, applicable type ratings and operator training separately. U.S. May 2025 median annual pay was $232,140 and $123,220, respectively."
             ]
           },
           "id": "airline-and-commercial-pilots.ai-impact.ai-impact-table.68",
           "source_refs": [
             "onet",
             "onet2",
-            "ooh"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -26803,14 +26825,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scheduled passenger carriers (airlines)"
+              "Air transport operators | Check the position"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -26819,14 +26839,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial check direction: aircraft type, crew position, training, and recent experience for scheduled route operations; no ranking of which direction has the highest requirements."
+              "Check duties, aircraft, training and the contract. A first officer posting does not establish individual pay."
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -26835,14 +26853,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Charter and general aviation operators"
+              "Flight student intake | Separate costs from pay"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "pilot-airchina"
           ],
           "type": "prose"
         },
@@ -26851,14 +26867,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Editorial check direction: the license category, operating rules, and task conditions applicable to non-scheduled, helicopter, or special operations; it cannot be presumed that all positions have more irregular schedules."
+              "Training fees, tuition, and daily expenses in a flight student prospectus are separate from wages. Check who pays each item."
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "pilot-airchina"
           ],
           "type": "prose"
         },
@@ -26867,14 +26881,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Air ambulance and sightseeing operators"
+              "Transport, storage and postal services | Industry context"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26883,14 +26895,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Special operations such as medical ambulance and aerial sightseeing; places high demands on operational standards, risk judgment, and emergency capability."
+              "NBS 2025 average annual gross wages in urban transport, storage and postal services were CNY 133,981 in non-private units and CNY 73,133 in private units. This broad industry covers many jobs and does not estimate pilot wages. No matching national occupational wage distribution for mainland China was verified."
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26913,12 +26923,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese mainland salary reference: what can and cannot be found"
+              "Pilot pay in mainland China: postings and industry context"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "pilot-airchina",
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -26927,12 +26939,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Scenario comparison requires consistency in operator type, aircraft type and operating qualification, flight experience and rank, and overnight arrangements; industry proxies cannot replace written compensation terms."
+              "No national occupational wage distribution for mainland pilots was verified. Keep training costs, recruitment conditions, and wages separate."
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "pilot-airchina",
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -26941,7 +26955,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "When checking your own expectations, first confirm the operator type (scheduled carrier／charter and general aviation／special operations), aircraft type and operating qualification, flight experience and rank (first officer／captain／instructor／check airman), and overnight and shift arrangements; do not use industry proxies in place of written compensation terms."
+              "NBS 2025 average annual gross wages in urban transport, storage and postal services were CNY 133,981 in non-private units and CNY 73,133 in private units. This broad industry covers many jobs and does not estimate pilot wages. No matching national occupational wage distribution for mainland China was verified."
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.46",
@@ -26969,12 +26983,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "National Bureau of Statistics data cover legal-person units in urban areas with 5 or more persons and exclude individual industrial and commercial households and freelancers; wages are pre-tax total wages, including individually paid social insurance, housing fund, and individual income tax. Industry-sector figures do not equal this occupation's wages. Civil aviation pilot compensation is determined by the operator's systems, rank, and flight experience, and differs from the industry-sector statistical basis."
+              "The notices show training intake and hiring of licensed pilots. They do not establish current vacancies, city wages, license equivalence, or job offers."
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "nbs"
+            "pilot-airchina",
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -26983,12 +26998,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Chinese mainland (precise occupation)"
+              "Air China | Flight student intake"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "nbs"
+            "pilot-airchina"
           ],
           "type": "prose"
         },
@@ -26997,12 +27012,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national or by-city wage distribution for the precise occupation of airline and commercial pilots has been obtained"
+              "Air China’s November 2026 prospectus for its 2027 flight student intake describes an airline and university training route and a four-year flight technology degree after admission. The airline pays training costs during study; families pay tuition and daily expenses under the stated arrangements. Graduates must still meet flying requirements. This is a training example, not a first officer wage quote."
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "pilot-airchina"
           ],
           "type": "prose"
         },
@@ -27011,12 +27026,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Reference (industry-sector proxy)"
+              "Colorful Guizhou Airlines | Licensed first officers"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "nbs"
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -27025,12 +27040,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this occupation is not listed separately; the comparable transport, storage, and post sector (non-private) for 2025 is CNY 133,981 per year, for broad-scope reference only"
+              "Colorful Guizhou Airlines’ second 2026 recruitment notice listed seven first officers, requiring at least a bachelor’s degree and a valid CAAC commercial license with airplane, multiengine, and instrument ratings. The notice also describes a flight skills assessment. These are employer-specific conditions, not a nationwide hiring threshold."
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -27039,7 +27054,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Reference (type of unit)"
+              "Mainland China | Broad transport industry"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.53",
@@ -27053,7 +27068,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no wage listed separately for pilots was obtained this round; the CNY 155,491 per year for professional and technical personnel in above-scale enterprises is a group reference and does not prove airline ownership or individual compensation."
+              "NBS 2025 average annual gross wages in urban transport, storage and postal services were CNY 133,981 in non-private units and CNY 73,133 in private units. This broad industry covers many jobs and does not estimate pilot wages. No matching national occupational wage distribution for mainland China was verified."
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.54",
@@ -27390,12 +27405,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "For 2025, month 5 (May): the combined median annual wage for the two categories is USD 210,020; airline pilots USD 232,140, and commercial pilots USD 123,220. The airline five percentiles are USD 106,710／182,280／232,140／384,440／463,830; the commercial five percentiles are USD 58,850／84,540／123,220／190,440／266,620. The median is not a starting salary, and percentiles are not experience levels."
+              "May 2025 U.S. median annual employee wages were $210,020 for parent group 53-2010, $232,140 for airline pilots, copilots and flight engineers (53-2011), and $123,220 for commercial pilots (53-2012). Percentiles are neither starting wages nor take-home amounts. Annual P10/P25/P50/P75/P90 for 53-2011: $106,710/$182,280/$232,140/$384,440/$463,830. For 53-2012: $58,850/$84,540/$123,220/$190,440/$266,620."
             ]
           },
           "id": "airline-and-commercial-pilots.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "oews"
+            "ooh",
+            "oews",
+            "commercial-wages"
           ],
           "type": "prose"
         },
@@ -27502,7 +27519,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Airline pilots in courier and messenger services"
+              "53-2011 | Couriers and express delivery services"
             ]
           },
           "id": "airline-and-commercial-pilots.us-salary.career-snapshot-secondary-locale.34",
@@ -29031,7 +29048,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The four types of risk that most need to be judged in advance are: first, operating procedure risks (skipping checklist and operations manual criteria, over-reliance on automation systems, and insufficient weather and fuel decisions); second, human and coordination risks (crew resource management and communication failures, and improper handling of conflict situations); third, qualification and compliance risks (performing operations with invalid licenses, type ratings, medical certificates, or refresher training); and fourth, occupational health risks (fatigue from night flying, cross-time-zone travel, overnight stays, and irregular schedules). Risks differ by direction: airline pilots are closer to scheduled operating standards and large-aircraft operations, commercial pilots to multi-aircraft-type adaptation and special operations risks, and flight instructors to teaching and demonstration risks."
+              "The four types of risk that most need to be judged in advance are: first, operating procedure risks (skipping checklist and operations manual criteria, over-reliance on automation systems, and insufficient weather and fuel decisions); second, human and coordination risks (crew resource management and communication failures, and improper handling of conflict situations); third, qualification and compliance risks (performing operations with invalid licenses, type ratings, medical certificates, or refresher training); and fourth, occupational health risks (fatigue from night flying, cross-time-zone travel, overnight stays, and irregular schedules). Risks differ by direction: airline pilots are closer to scheduled operations and the assigned crew duties, commercial pilots to multi-aircraft-type adaptation and special operations risks, and flight instructors to teaching and demonstration risks."
             ]
           },
           "id": "airline-and-commercial-pilots.risk.career-risk-cards.9",
@@ -29869,7 +29886,7 @@
                 "Used for non-remunerated flight within the prescribed scope",
                 "Not a uniform prerequisite for all career paths",
                 "17 years of age or older, junior high school education or above, and a Class II/Class I medical certificate; all experience and examination conditions must also be met",
-                "Airplane-category private-license experience ≥ 40 hours (61.129); does not represent total course duration or other category requirements",
+                "Single-engine airplane private-license experience ≥ 40 hours (61.129); does not represent total course duration or other category requirements",
                 "Private license privileges do not equal remunerated commercial operations; no promise of costs or obtaining a license within a few months"
               ],
               [
@@ -29878,7 +29895,7 @@
                 "Perform remunerated flight within the scope of the license",
                 "Must be combined with category, rating, and operator conditions",
                 "18 years of age or older, high school education or above, and a Class I medical certificate; PPL or the 61.91/61.93 special paths; complete experience and examinations",
-                "Airplane-category commercial-license experience ≥ 250 hours (61.159); the itemized requirements and other categories are checked separately",
+                "Single-engine airplane commercial-license experience ≥ 250 hours (61.159); the itemized requirements and other categories are checked separately",
                 "Obtaining a CPL does not equal having operating qualification for a given airline position"
               ],
               [
@@ -29932,16 +29949,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "This occupation's qualifications are managed through license category, type rating, and operating qualification: flight must be performed with the corresponding license and type rating and in a valid medical and refresher training state.",
-              "Air traffic control licenses are oriented toward control instructions, aircraft maintenance licenses toward in-service maintenance release, and airport operations position authorization toward movement-area operations; these are not interchangeable with this occupation; flight seniority used for other positions usually also requires reassessment against the target position's requirements.",
-              "On the Chinese mainland side, related occupations fall under pilots (2-04-01-01), and licenses are divided into private, commercial, multi-crew, and airline transport pilot licenses under the Civil Aviation Airman Certification Rules (CCAR-61).",
-              "Prospective entrants should check the age, education, medical examination, English language, and flight experience requirements in official information, and apply and train through official channels."
+              "Check applicable licenses, ratings, medical and training requirements for the jurisdiction, aircraft, crew position and assignment.",
+              "Flight, air traffic control, maintenance, approval for return to service, and airport operations have separate responsibilities and qualifications.",
+              "CCAR-61-R5 §61.13(a) lists student, sport, private, commercial, multi-crew and airline transport pilot licenses; this guide focuses on the last four. The multi-crew route in §61.175 requires a private license issued under the rule. Commercial license holders entering covered CCAR-121 first officer training must also check the airline transport theory exam and applicable experience or approved-course provisions in §121.417(c).",
+              "U.S. 14 CFR Part 61 distinguishes a commercial certificate from an ATP; §61.160 provides a restricted ATP pathway for eligible applicants. A Part 121 second in command generally needs an ATP and the appropriate type rating; a §61.55 SIC type rating alone is insufficient (§121.436(b)). Part 121 captains, as well as second-in-command pilots in flag or supplemental operations requiring at least three pilots must hold an ATP not subject to §61.167 limitations and the appropriate type rating under §121.436(a). Check that paragraph separately for additional captain experience."
             ]
           },
           "id": "airline-and-commercial-pilots.path.credential-boundary.1",
           "source_refs": [
             "ccar61",
-            "ccar121"
+            "ccar121",
+            "pilot-ecfr61",
+            "pilot-ecfr121"
           ],
           "title": "Explanation of qualification and authorization boundaries",
           "type": "notice"
@@ -29951,16 +29970,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no verifiable, still-valid Chinese pilot recruitment samples were obtained this round, nor matching national/by-city compensation or same-basis license pass rates. The conditions verified in this section come from regulations and U.S. occupational data, and the paper exercises are editorially designed; none are recruitment announcements. Recruitment conditions, costs, and operating qualifications must be obtained in writing from the actual operator or approved training institutions."
+              "Air China’s November 2026 prospectus for its 2027 flight student intake describes an airline and university training route and a four-year flight technology degree after admission. The airline pays training costs during study; families pay tuition and daily expenses under the stated arrangements. Graduates must still meet flying requirements. This is a training example, not a first officer wage quote.",
+              "Colorful Guizhou Airlines’ second 2026 recruitment notice listed seven first officers, requiring at least a bachelor’s degree and a valid CAAC commercial license with airplane, multiengine, and instrument ratings. The notice also describes a flight skills assessment. These are employer-specific conditions, not a nationwide hiring threshold. The posting closed to applications on May 14, 2026.",
+              "Check Air China’s current intake status through its official system. Training costs are separate from flying wages, and hiring conditions are separate from operating authorization."
             ]
           },
           "id": "airline-and-commercial-pilots.path.recruitment-sample.1",
           "source_refs": [
-            "ccar61",
-            "ccar121",
-            "ooh"
+            "pilot-airchina",
+            "pilot-guizhou"
           ],
-          "title": "Recruitment sample explanation",
+          "title": "Mainland China flight student and licensed first officer examples",
           "type": "notice"
         },
         {
@@ -29990,7 +30010,7 @@
                 "entity": "CCAR-121-R8: transport crew licenses and training",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202404/t20240415_223517.html"
+                "url": "https://app.caac.gov.cn/XXGK/XXGK/MHGZ/202404/t20240415_223517.html"
               }
             ]
           },
@@ -30008,15 +30028,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The U.S. side uses OOH typical entry conditions and O*NET occupational descriptions; the Chinese side separately checks CCAR-61-R5 and CCAR-121-R8. Chinese mainland CCAR-61-R5: PPL requires being 17 years of age or older, junior high school education or above, and a valid Class II or Class I medical certificate; CPL requires being 18 years of age or older, high school education or above, and a valid Class I medical certificate, usually preceded by a PPL, with separate state-aircraft experience and foreign-license special paths under Articles 61.91/61.93; MPL requires being 18 years of age or older, bachelor's degree or above, and a valid Class I medical certificate; ATPL requires being 21 years of age or older, high school education or above, and a valid Class I medical certificate, preceded by a CPL with instrument rating or an MPL. Each category must also meet complete training, experience, and examination conditions. The 40 hours is the airplane-category private-license experience requirement under Article 61.129, and the 250 hours is the airplane-category commercial-license experience requirement under Article 61.159; neither can be generalized to all aircraft categories or all training durations. CCAR-121-R8 Article 121.453 additionally requires the captain to hold an ATPL and the corresponding type rating, and the first officer to hold at least a CPL with the corresponding airplane category, multi-engine, and instrument ratings, or an MPL; Article 121.455 has separate operator training requirements. License minimum conditions do not equal having obtained position operating qualification. Insufficient evidence: no national or by-city wage distribution for Chinese pilots, same-basis license pass rate, or valid recruitment samples were obtained this round; this page does not fill them in by proxy."
+              "A license is one layer of qualification. Verify jurisdiction, aircraft category and class, type rating, medical status, operating rules, hiring requirements and training authority."
             ]
           },
           "id": "airline-and-commercial-pilots.path.career-path-block.11",
           "source_refs": [
-            "ooh",
-            "editor",
             "ccar61",
-            "ccar121"
+            "ccar121",
+            "pilot-ecfr61",
+            "pilot-ecfr121"
           ],
           "type": "prose"
         },
@@ -30138,13 +30158,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "When entering the field, first choose the jurisdiction, aircraft category, and target crew position, then check the medical examination, license, experience, examinations, ratings, and operator training. Chinese mainland CCAR-61-R5: PPL requires being 17 years of age or older, junior high school education or above, and a valid Class II or Class I medical certificate; CPL requires being 18 years of age or older, high school education or above, and a valid Class I medical certificate, usually preceded by a PPL, with separate state-aircraft experience and foreign-license special paths under Articles 61.91/61.93; MPL requires being 18 years of age or older, bachelor's degree or above, and a valid Class I medical certificate; ATPL requires being 21 years of age or older, high school education or above, and a valid Class I medical certificate, preceded by a CPL with instrument rating or an MPL. Each category must also meet complete training, experience, and examination conditions. The 40 hours is the airplane-category private-license experience requirement under Article 61.129, and the 250 hours is the airplane-category commercial-license experience requirement under Article 61.159; neither can be generalized to all aircraft categories or all training durations. CCAR-121-R8 Article 121.453 additionally requires the captain to hold an ATPL and the corresponding type rating, and the first officer to hold at least a CPL with the corresponding airplane category, multi-engine, and instrument ratings, or an MPL; Article 121.455 has separate operator training requirements. License minimum conditions do not equal having obtained position operating qualification."
+              "BLS typical entry preparation differs: a bachelor’s degree and less than five years of related experience for 53-2011; a postsecondary nondegree award and no related experience for 53-2012. Both list moderate-term on-the-job training. These profiles are separate from certificates, privileges, and employer selection. Mainland China’s Civil Aviation Law took effect July 1, 2026. CCAR-61-R5 distinguishes commercial and airline transport licenses; medical, exam, and experience requirements depend on the rating sought. For covered transport operations, CCAR-121-R8 §121.453 requires an airline transport license and the appropriate type rating for the captain. First officers need the specified commercial license with airplane, multiengine and instrument ratings, or a multi-crew pilot license. Approved operator training under §121.455 also applies. U.S. 14 CFR Part 61 distinguishes a commercial certificate from an ATP; §61.160 provides a restricted ATP pathway for eligible applicants. A Part 121 second in command generally needs an ATP and the appropriate type rating; a §61.55 SIC type rating alone is insufficient (§121.436(b)). Part 121 captains, as well as second-in-command pilots in flag or supplemental operations requiring at least three pilots must hold an ATP not subject to §61.167 limitations and the appropriate type rating under §121.436(a). Check that paragraph separately for additional captain experience. CCAR-61-R5 examples for airplane single-engine ratings: §61.129(a) lists at least 40 hours for private and §61.159(a) at least 250 hours for commercial, including at least 200 hours in airplanes, each with training and experience breakdowns. Airplane ATP under §61.189(a) lists at least 1,500 hours, with separate categories and credit rules. Check other aircraft or pathways separately. CCAR-61-R5 §61.13(a) lists student, sport, private, commercial, multi-crew and airline transport pilot licenses; this guide focuses on the last four. The multi-crew route in §61.175 requires a private license issued under the rule. Commercial license holders entering covered CCAR-121 first officer training must also check the airline transport theory exam and applicable experience or approved-course provisions in §121.417(c)."
             ]
           },
           "id": "airline-and-commercial-pilots.path.career-path-block.20",
           "source_refs": [
+            "ep",
             "ccar61",
-            "ccar121"
+            "ccar121",
+            "pilot-ecfr61",
+            "pilot-ecfr121"
           ],
           "type": "prose"
         },
@@ -30214,12 +30237,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS OOH: typical U.S. education and entry training; China's minimum license education does not follow the typical U.S. bachelor's condition."
+              "BLS typical entry preparation differs: a bachelor’s degree and less than five years of related experience for 53-2011; a postsecondary nondegree award and no related experience for 53-2012. Both list moderate-term on-the-job training. These profiles are separate from certificates, privileges, and employer selection."
             ]
           },
           "id": "airline-and-commercial-pilots.path.career-path-block.25",
           "source_refs": [
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -30242,13 +30265,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "CCAR-121-R8: captain and first officer license conditions and operator training; for the complete CCAR-61-R5 application conditions, see this page's source register."
+              "Mainland China’s Civil Aviation Law took effect July 1, 2026. CCAR-61-R5 distinguishes commercial and airline transport licenses; medical, exam, and experience requirements depend on the rating sought. For covered transport operations, CCAR-121-R8 §121.453 requires an airline transport license and the appropriate type rating for the captain. First officers need the specified commercial license with airplane, multiengine and instrument ratings, or a multi-crew pilot license. Approved operator training under §121.455 also applies. CCAR-61-R5 examples for airplane single-engine ratings: §61.129(a) lists at least 40 hours for private and §61.159(a) at least 250 hours for commercial, including at least 200 hours in airplanes, each with training and experience breakdowns. Airplane ATP under §61.189(a) lists at least 1,500 hours, with separate categories and credit rules. Check other aircraft or pathways separately."
             ]
           },
           "id": "airline-and-commercial-pilots.path.career-path-block.27",
           "source_refs": [
+            "ccar61",
             "ccar121",
-            "ccar61"
+            "pilot-cn-law"
           ],
           "type": "prose"
         },
@@ -31265,7 +31289,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no national employment projection matching Chinese flight crew was obtained this round; U.S. projections or Chinese industry wages are not used to fill in. BLS 2025—2035 projections: combined 154,900→166,300 persons, growth 7.3%, official net increase 11,300 persons, average annual openings 16,400; airline pilots 104,600→113,300 persons, growth 8.3%, net increase 8,700 persons, average annual openings 11,200; commercial pilots 50,400→53,000 persons, growth 5.2%, net increase 2,600 persons, average annual openings 5,200. Person counts are converted from official thousand-person units; values in the table are rounded separately, and the combined net increase must not be recomputed by subtracting the displayed person counts. Openings include demand from transfers and labor-force exits and cannot be treated as net increases or a guarantee of individual hiring."
+              "U.S. BLS Table 1.2 for 2025–35: parent group 53-2010, 154,900 to 166,300 jobs, +7.3%, official net gain of 11,300 and 16,400 annual openings. For 53-2011: 104,600 to 113,300, +8.3%, net 8,700 and 11,200 annual openings. For 53-2012: 50,400 to 53,000, +5.2%, net 2,600 and 5,200 annual openings. Columns round separately. Openings include growth and replacement and do not count live vacancies."
             ]
           },
           "id": "airline-and-commercial-pilots.market-signals.market-signal-card.8",
@@ -31997,40 +32021,69 @@
           "data": {
             "entries": [
               {
-                "answer": "Before flight, study weather, notices, and route data and formulate flight plans and fuel plans, complete weight and balance and takeoff performance calculations, and inspect the aircraft and systems according to checklists; in flight, manipulate the aircraft according to standard operating procedures and monitor engine, hydraulic, and avionics systems, maintain communication with air traffic control and fly according to instructions, and coordinate with dispatch and cabin crew; after landing, fill in flight logs and operations records, report defects and events, and participate in refresher training and simulator assessments on schedule.",
+                "answer": "Airline pilots usually fly fixed-wing aircraft on scheduled passenger or cargo routes. Commercial pilots may fly charter or other missions. U.S. BLS groups both under 53-2010. The occupation Commercial Pilots (53-2012) is distinct from a commercial pilot certificate. Verify licensing, ratings, operating rules, and operator training for the jurisdiction and role.",
                 "id": "airline-and-commercial-pilots.faq.1",
                 "question": "What do airline and commercial pilots do every day?",
-                "question_key": "career.faq.airline-and-commercial-pilots.daily-work"
+                "question_key": "career.faq.airline-and-commercial-pilots.daily-work",
+                "source_refs": [
+                  "onet",
+                  "onet2"
+                ]
               },
               {
-                "answer": "The two U.S. occupations are counted separately: airline pilots usually fly scheduled fixed-wing routes; commercial pilots involve non-scheduled fixed-wing aircraft, helicopters, charter, air ambulance, or sightseeing. For 2025, month 5 (May), the medians are USD 232,140 and USD 123,220 respectively. Typical U.S. education and license conditions do not directly apply to China; for Chinese transport captain and first officer conditions, see the entry module.",
+                "answer": "Airline pilots usually fly fixed-wing aircraft on scheduled passenger or cargo routes. Commercial pilots may fly charter or other missions. U.S. BLS groups both under 53-2010. The occupation Commercial Pilots (53-2012) is distinct from a commercial pilot certificate. Verify licensing, ratings, operating rules, and operator training for the jurisdiction and role.",
                 "id": "airline-and-commercial-pilots.faq.2",
                 "question": "What is the difference between airline pilots and commercial pilots?",
-                "question_key": "career.faq.airline-and-commercial-pilots.comparison"
+                "question_key": "career.faq.airline-and-commercial-pilots.comparison",
+                "source_refs": [
+                  "onet",
+                  "onet2",
+                  "pilot-ecfr61"
+                ]
               },
               {
-                "answer": "Insufficient evidence: this page has not obtained reviewable causal evidence of generative AI replacing the two pilot categories. Existing autopilot tasks do not mean crew responsibilities are eliminated; current projections also cannot prove the job effect of any AI tool.",
+                "answer": "Use fictional paper records to practice organizing and checking information. Available sources do not establish occupational AI adoption, hours saved, replacement rates, or flight safety effects. Real operations rely on operator-approved procedures, materials, and tools. Do not use this exercise or generated content to make a flight decision.",
                 "id": "airline-and-commercial-pilots.faq.3",
                 "question": "Will this occupation be replaced by AI?",
-                "question_key": "career.faq.airline-and-commercial-pilots.ai"
+                "question_key": "career.faq.airline-and-commercial-pilots.ai",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "Insufficient evidence: no national or by-city wage distribution matching Chinese flight crew was obtained this round. The National Bureau of Statistics 2025 non-private mean of CNY 133,981 per year for transport, storage, and post is group background only and cannot replace the pilot median or individual written compensation.",
+                "answer": "NBS 2025 average annual gross wages in urban transport, storage and postal services were CNY 133,981 in non-private units and CNY 73,133 in private units. This broad industry covers many jobs and does not estimate pilot wages. No matching national occupational wage distribution for mainland China was verified. Air China’s November 2026 prospectus for its 2027 flight student intake describes an airline and university training route and a four-year flight technology degree after admission. The airline pays training costs during study; families pay tuition and daily expenses under the stated arrangements. Graduates must still meet flying requirements. This is a training example, not a first officer wage quote. Colorful Guizhou Airlines’ second 2026 recruitment notice listed seven first officers, requiring at least a bachelor’s degree and a valid CAAC commercial license with airplane, multiengine, and instrument ratings. The notice also describes a flight skills assessment. These are employer-specific conditions, not a nationwide hiring threshold.",
                 "id": "airline-and-commercial-pilots.faq.4",
                 "question": "How should wages in the Chinese mainland be understood?",
-                "question_key": "career.faq.airline-and-commercial-pilots.china-pay"
+                "question_key": "career.faq.airline-and-commercial-pilots.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "pilot-airchina",
+                  "pilot-guizhou"
+                ]
               },
               {
-                "answer": "U.S. combined basis (BLS Occupational Outlook Handbook): for 2025, month 5 (May), the median annual wage is USD 210,020; medians by category: airline pilots USD 232,140 per year and commercial pilots USD 123,220 per year. Airline pilot wage percentiles (O*NET 53-2011.00): the 10th percentile USD 106,710, the 25th percentile USD 182,280, the 75th percentile USD 384,440, and the 90th percentile USD 463,830 per year. Percentiles are positions in a statistical distribution and do not represent starting salaries.",
+                "answer": "May 2025 U.S. median annual employee wages were $210,020 for parent group 53-2010, $232,140 for airline pilots, copilots and flight engineers (53-2011), and $123,220 for commercial pilots (53-2012). Percentiles are neither starting wages nor take-home amounts.",
                 "id": "airline-and-commercial-pilots.faq.5",
                 "question": "What is the wage for this occupation in the United States?",
-                "question_key": "career.faq.airline-and-commercial-pilots.us-pay"
+                "question_key": "career.faq.airline-and-commercial-pilots.us-pay",
+                "source_refs": [
+                  "ooh",
+                  "oews",
+                  "commercial-wages"
+                ]
               },
               {
-                "answer": "First choose the jurisdiction, aircraft category, and crew position, then check the medical examination, license, experience, examinations, and operator training. Chinese mainland CCAR-61-R5: PPL requires being 17 years of age or older, junior high school education or above, and a valid Class II or Class I medical certificate; CPL requires being 18 years of age or older, high school education or above, and a valid Class I medical certificate, usually preceded by a PPL, with separate national-aircraft experience and foreign-license special paths under Articles 61.91/61.93; MPL requires being 18 years of age or older, bachelor's degree or above, and a valid Class I medical certificate; ATPL requires being 21 years of age or older, high school education or above, and a valid Class I medical certificate, preceded by a CPL with instrument rating or an MPL. Each category must also meet complete training, experience, and examination conditions. The 40 hours is the airplane-category private-license experience requirement under Article 61.129, and the 250 hours is the airplane-category commercial-license experience requirement under Article 61.159; neither can be generalized to all aircraft categories or all training durations. CCAR-121-R8 Article 121.453 additionally requires the captain to hold an ATPL and the corresponding type rating, and the first officer to hold at least a CPL with the corresponding airplane category, multi-engine, and instrument ratings, or an MPL; Article 121.455 has separate operator training requirements. License minimum conditions do not equal having obtained position operating qualification.",
+                "answer": "BLS typical entry preparation differs: a bachelor’s degree and less than five years of related experience for 53-2011; a postsecondary nondegree award and no related experience for 53-2012. Both list moderate-term on-the-job training. These profiles are separate from certificates, privileges, and employer selection. Mainland China’s Civil Aviation Law took effect July 1, 2026. CCAR-61-R5 distinguishes commercial and airline transport licenses; medical, exam, and experience requirements depend on the rating sought. For covered transport operations, CCAR-121-R8 §121.453 requires an airline transport license and the appropriate type rating for the captain. First officers need the specified commercial license with airplane, multiengine and instrument ratings, or a multi-crew pilot license. Approved operator training under §121.455 also applies. U.S. 14 CFR Part 61 distinguishes a commercial certificate from an ATP; §61.160 provides a restricted ATP pathway for eligible applicants. A Part 121 second in command generally needs an ATP and the appropriate type rating; a §61.55 SIC type rating alone is insufficient (§121.436(b)). Part 121 captains, as well as second-in-command pilots in flag or supplemental operations requiring at least three pilots must hold an ATP not subject to §61.167 limitations and the appropriate type rating under §121.436(a). Check that paragraph separately for additional captain experience. CCAR-61-R5 §61.13(a) lists student, sport, private, commercial, multi-crew and airline transport pilot licenses; this guide focuses on the last four. The multi-crew route in §61.175 requires a private license issued under the rule. Commercial license holders entering covered CCAR-121 first officer training must also check the airline transport theory exam and applicable experience or approved-course provisions in §121.417(c).",
                 "id": "airline-and-commercial-pilots.faq.6",
                 "question": "How can one become a pilot in this occupation?",
-                "question_key": "career.faq.airline-and-commercial-pilots.education"
+                "question_key": "career.faq.airline-and-commercial-pilots.education",
+                "source_refs": [
+                  "ep",
+                  "ccar61",
+                  "ccar121",
+                  "pilot-ecfr61",
+                  "pilot-ecfr121"
+                ]
               },
               {
                 "answer": "Mainly skipping checklist and operations manual criteria, over-reliance on automation systems, insufficient weather and fuel decisions, crew resource management and communication failures, performing operations with invalid licenses/type ratings/medical certificates or refresher training, and fatigue from night flying, cross-time-zone travel, and overnight stays. Executing step by step according to manuals and checklists, maintaining manual manipulation and situational awareness, coordinating according to crew resource management, maintaining valid licenses and refresher training, and executing flight time and rest limits are the basic control measures; specific provisions are subject to civil aviation administration regulations and the operator's operations manual.",
@@ -32039,10 +32092,13 @@
                 "question_key": "career.faq.airline-and-commercial-pilots.risk"
               },
               {
-                "answer": "BLS 2025—2035 projections: combined 154,900→166,300 persons, growth 7.3%, official net increase 11,300 persons, average annual openings 16,400; airline pilots 104,600→113,300 persons, growth 8.3%, net increase 8,700 persons, average annual openings 11,200; commercial pilots 50,400→53,000 persons, growth 5.2%, net increase 2,600 persons, average annual openings 5,200. Person counts are converted from official thousand-person units; values in the table are rounded separately, and the combined net increase must not be recomputed by subtracting the displayed person counts. Openings include demand from transfers and labor-force exits and cannot be treated as net increases or a guarantee of individual hiring.",
+                "answer": "U.S. BLS Table 1.2 for 2025–35: parent group 53-2010, 154,900 to 166,300 jobs, +7.3%, official net gain of 11,300 and 16,400 annual openings. For 53-2011: 104,600 to 113,300, +8.3%, net 8,700 and 11,200 annual openings. For 53-2012: 50,400 to 53,000, +5.2%, net 2,600 and 5,200 annual openings. Columns round separately. Openings include growth and replacement and do not count live vacancies.",
                 "id": "airline-and-commercial-pilots.faq.8",
                 "question": "What is the employment outlook in the United States?",
-                "question_key": "career.faq.airline-and-commercial-pilots.outlook"
+                "question_key": "career.faq.airline-and-commercial-pilots.outlook",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
                 "answer": "O*NET53-2011 U.S. group survey items: 84% consider precision extremely important, 77% consider error consequences extremely serious, 72% face time pressure every day, 73% have irregular schedules, and 74% work every day in enclosed vehicles or equipment; 57% have a typical work week of fewer than 40 hours, 23% have a 40-hour week, and 20% have a week of more than 40 hours. The survey items are not flight hours or total time away from base, and cannot be generalized to all commercial pilots or Chinese positions.",
@@ -32130,18 +32186,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: no matching Chinese occupational compensation, employment projection, or valid recruitment samples were obtained this round, nor causal research on the effects of generative AI on the wages or jobs of the two pilot categories; no proxy filling is done and it is not presumed that no data exists globally. The U.S. five-percentile table uses airline pilots 53-2011; the commercial 53-2012 percentiles and the two-category combined figures are listed separately, and industry medians are limited by occupation and industry row by row. Employment projections are all for 2025—2035, and openings are not substituted for net increases. China's 2025 industry and unit group means are not pilot wages; Chinese qualifications are checked separately against licenses and operating rules."
+              "O*NET describes the two occupations separately; BLS gives parent and detailed statistics. Consult the separate sources for mainland licensing, transport operations, training intake, hiring, and industry wages. Model F is paper only."
             ]
           },
           "id": "airline-and-commercial-pilots.sources.source-card.4",
           "source_refs": [
-            "oews",
-            "commercial-wages",
-            "ooh",
+            "onet",
+            "onet2",
             "ep",
-            "nbs",
+            "ooh",
             "ccar61",
-            "ccar121"
+            "ccar121",
+            "pilot-airchina",
+            "pilot-guizhou",
+            "nbs",
+            "pilot-paper"
           ],
           "type": "prose"
         }
@@ -32312,9 +32371,9 @@
                 "url": "https://www.onetonline.org/link/localwages/53-2011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "industry_proxy",
+                  "NBS 2025 average annual gross wages in urban transport, storage and postal services were CNY 133,981 in non-private units and CNY 73,133 in private units. This broad industry covers many jobs and does not estimate pilot wages. No matching national occupational wage distribution for mainland China was verified.",
                   "Rechecked 2026-10-03"
                 ],
                 "evidence_type": "industry_proxy",
@@ -32325,7 +32384,7 @@
                 "period": "2025 statistics; published 2026-05-15",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32344,20 +32403,20 @@
                 "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "Rechecked 2026-10-03"
+                  "Mainland China’s Civil Aviation Law took effect July 1, 2026. CCAR-61-R5 distinguishes commercial and airline transport licenses; medical, exam, and experience requirements depend on the rating sought. For covered transport operations, CCAR-121-R8 §121.453 requires an airline transport license and the appropriate type rating for the captain. First officers need the specified commercial license with airplane, multiengine and instrument ratings, or a multi-crew pilot license. Approved operator training under §121.455 also applies. CCAR-61-R5 §61.13(a) lists student, sport, private, commercial, multi-crew and airline transport pilot licenses; this guide focuses on the last four. The multi-crew route in §61.175 requires a private license issued under the rule. Commercial license holders entering covered CCAR-121 first officer training must also check the airline transport theory exam and applicable experience or approved-course provisions in §121.417(c).",
+                  "Verify the rules for the aircraft category, rating and license sought."
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary public source",
                 "id": "ccar61",
-                "limitation": "Application conditions, privileges, and category experience; the corresponding operating rules and operator qualifications must also be checked.",
+                "limitation": "Verify the rules for the aircraft category, rating and license sought.",
                 "market": "Chinese mainland",
-                "name": "Civil Aviation Airman Certification Rules (CCAR-61-R5 consolidated text)",
-                "period": "Revised in 2018; effective 2019-01-01; page validity checked 2026-10-03",
-                "publisher": "Civil Aviation Administration of China",
+                "name": "CAAC CCAR-61-R5: pilot licensing",
+                "period": "2019-01-01",
+                "publisher": "CAAC",
                 "scope": "contextual",
-                "url": "https://pilot.caac.gov.cn/servlet/FileUploadManagerServlet?UUID=661aaa3d-84a2-40b9-8ab7-6ecb4bfebf97&method=noDownload"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201812/t20181219_193580.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32680,20 +32739,20 @@
                 "url": "https://www.onetonline.org/link/localwages/53-2012.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "Rechecked 2026-10-03"
+                  "Mainland China’s Civil Aviation Law took effect July 1, 2026. CCAR-61-R5 distinguishes commercial and airline transport licenses; medical, exam, and experience requirements depend on the rating sought. For covered transport operations, CCAR-121-R8 §121.453 requires an airline transport license and the appropriate type rating for the captain. First officers need the specified commercial license with airplane, multiengine and instrument ratings, or a multi-crew pilot license. Approved operator training under §121.455 also applies. CCAR-61-R5 §61.13(a) lists student, sport, private, commercial, multi-crew and airline transport pilot licenses; this guide focuses on the last four. The multi-crew route in §61.175 requires a private license issued under the rule. Commercial license holders entering covered CCAR-121 first officer training must also check the airline transport theory exam and applicable experience or approved-course provisions in §121.417(c).",
+                  "Applies only to covered transport operations."
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "Primary public source",
                 "id": "ccar121",
-                "limitation": "Article 121.453 distinguishes captain and first officer; Article 121.455 prescribes the corresponding training, and a license is not a separate operating authorization.",
+                "limitation": "Applies only to covered transport operations.",
                 "market": "Chinese mainland",
-                "name": "Operating Certification Rules for Large Aircraft Public Air Transport Carriers (CCAR-121-R8)",
-                "period": "Effective 2024-04-13; validity checked 2026-10-03",
-                "publisher": "Civil Aviation Administration of China",
+                "name": "CAAC CCAR-121-R8: transport operations and crew qualifications",
+                "period": "2024-04-13",
+                "publisher": "CAAC",
                 "scope": "contextual",
-                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202404/t20240415_223517.html"
+                "url": "https://app.caac.gov.cn/XXGK/XXGK/MHGZ/202404/t20240415_223517.html"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32711,21 +32770,148 @@
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Preflight preparation | planning and performance | study weather, notices, and route data; formulate flight plans and fuel plans; and complete weight and balance and takeoff performance calculations. — 75/100; weight=1/3; airline-and-commercial-pilots.profile.responsibilities-block.1[0]",
-                  "Flight manipulation | maneuvers and phases | manipulate the aircraft through taxi, takeoff, climb, cruise, descent, and landing, executing according to standard operating procedures. — 25/100; weight=1/3; airline-and-commercial-pilots.profile.responsibilities-block.1[2]",
-                  "Communication and coordination | control and crew | maintain communication with air traffic control and fly according to instructions, coordinate with dispatch, maintenance, and cabin crew, and divide labor according to crew resource management. — 25/100; weight=1/3; airline-and-commercial-pilots.profile.responsibilities-block.1[4]"
+                  "Use fictional paper records to practice organizing and checking information. Available sources do not establish occupational AI adoption, hours saved, replacement rates, or flight safety effects. Real operations rely on operator-approved procedures, materials, and tools. Do not use this exercise or generated content to make a flight decision.",
+                  "Qualitative editorial note, with no score.",
+                  "Qualitative editorial note, with no score.",
+                  "Qualitative editorial note, with no score.",
+                  "Qualitative editorial note, with no score."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "Primary public source",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "Qualitative editorial note, with no score.",
+                "name": "FermatMind: evidence for AI work tasks",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "#career-visual-group-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Mainland China’s Civil Aviation Law took effect July 1, 2026. CCAR-61-R5 distinguishes commercial and airline transport licenses; medical, exam, and experience requirements depend on the rating sought. For covered transport operations, CCAR-121-R8 §121.453 requires an airline transport license and the appropriate type rating for the captain. First officers need the specified commercial license with airplane, multiengine and instrument ratings, or a multi-crew pilot license. Approved operator training under §121.455 also applies."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "pilot-cn-law",
+                "limitation": "Mainland China legal framework; check the applicable operating rules.",
+                "name": "Civil Aviation Law of China (effective 2026)",
+                "period": "2026-07-01",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "U.S. 14 CFR Part 61 distinguishes a commercial certificate from an ATP; §61.160 provides a restricted ATP pathway for eligible applicants. A Part 121 second in command generally needs an ATP and the appropriate type rating; a §61.55 SIC type rating alone is insufficient (§121.436(b)). Part 121 captains, as well as second-in-command pilots in flag or supplemental operations requiring at least three pilots must hold an ATP not subject to §61.167 limitations and the appropriate type rating under §121.436(a). Check that paragraph separately for additional captain experience."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "pilot-ecfr61",
+                "limitation": "U.S. certificates; does not establish employer hiring.",
+                "name": "eCFR 14 CFR Part 61: U.S. pilot certificates",
+                "period": "2026-11-09",
+                "publisher": "eCFR",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-61"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "U.S. 14 CFR Part 61 distinguishes a commercial certificate from an ATP; §61.160 provides a restricted ATP pathway for eligible applicants. A Part 121 second in command generally needs an ATP and the appropriate type rating; a §61.55 SIC type rating alone is insufficient (§121.436(b)). Part 121 captains, as well as second-in-command pilots in flag or supplemental operations requiring at least three pilots must hold an ATP not subject to §61.167 limitations and the appropriate type rating under §121.436(a). Check that paragraph separately for additional captain experience."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "pilot-ecfr121",
+                "limitation": "Applies only to operations covered by Part 121.",
+                "name": "eCFR 14 CFR §121.436: U.S. transport pilot qualifications",
+                "period": "2026-11-09",
+                "publisher": "eCFR",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-G/part-121/subpart-O/section-121.436"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Air China’s November 2026 prospectus for its 2027 flight student intake describes an airline and university training route and a four-year flight technology degree after admission. The airline pays training costs during study; families pay tuition and daily expenses under the stated arrangements. Graduates must still meet flying requirements. This is a training example, not a first officer wage quote."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "pilot-airchina",
+                "limitation": "Training intake example, not a wage figure.",
+                "name": "Air China: 2027 flight student intake",
+                "period": "2026-11",
+                "publisher": "Air China",
+                "scope": "recruitment_proxy",
+                "url": "https://zhaopin.airchina.com.cn/recruitment/infomation/11/185773.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Colorful Guizhou Airlines’ second 2026 recruitment notice listed seven first officers, requiring at least a bachelor’s degree and a valid CAAC commercial license with airplane, multiengine, and instrument ratings. The notice also describes a flight skills assessment. These are employer-specific conditions, not a nationwide hiring threshold. The posting closed to applications on May 14, 2026."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "pilot-guizhou",
+                "limitation": "Employer-specific posting; not live vacancies or a national threshold.",
+                "name": "Colorful Guizhou Airlines: second 2026 recruitment",
+                "period": "2026",
+                "publisher": "Guizhou Civil Aviation Industry Group",
+                "scope": "recruitment_proxy",
+                "url": "https://www.gz-gcac.com/content/details_182_28380.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Try Model F in the entry section: compare two versions of fictional data, check the status form’s validity, and write a handoff. It represents no aircraft and cannot be used for flight, loading, or release."
+                ],
+                "evidence_type": "Fictional paper exercise",
+                "id": "pilot-paper",
+                "limitation": "Paper only; no operating or safety authority.",
+                "name": "FermatMind: fictional Model F review",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "O*NET Air Traffic Controllers"
+                ],
+                "evidence_type": "Primary public source",
+                "id": "pilot-atc",
+                "limitation": "Adjacent role, not licensing authority for this occupation.",
+                "name": "O*NET Air Traffic Controllers",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-2021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "O*NET Airfield Operations Specialists"
+                ],
+                "evidence_type": "Primary public source",
+                "id": "pilot-airportops",
+                "limitation": "Adjacent role, not licensing authority for this occupation.",
+                "name": "O*NET Airfield Operations Specialists",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-2022.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "O*NET Aircraft Mechanics and Service Technicians"
+                ],
+                "evidence_type": "Primary public source",
+                "id": "pilot-mechanics",
+                "limitation": "Adjacent role, not licensing authority for this occupation.",
+                "name": "O*NET Aircraft Mechanics and Service Technicians",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-3011.00"
               }
             ]
           },
@@ -32852,6 +33038,26 @@
               "entry": "link-5",
               "field": "entity"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/53-2021.00",
+            "label": "O*NET Air Traffic Controllers"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/53-2022.00",
+            "label": "O*NET Airfield Operations Specialists"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/49-3011.00",
+            "label": "O*NET Aircraft Mechanics and Service Technicians"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/53-2011.00",
+            "label": "O*NET OnLine 53-2011.00 Airline Pilots, Copilots, and Flight Engineers occupational summary"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/53-2012.00",
+            "label": "O*NET OnLine 53-2012.00 Commercial Pilots occupational summary"
           }
         ],
         "evidence_note": {
@@ -33479,7 +33685,7 @@
             }
           }
         ],
-        "heading": "Will AI replace airline and commercial pilots?",
+        "heading": "How can I check AI drafts using fictional material?",
         "method_cards": [
           {
             "含义": {
@@ -34180,6 +34386,36 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://zhaopin.airchina.com.cn/recruitment/infomation/11/185773.shtml",
+            "id": "pilot-airchina",
+            "label": "Air China: 2027 flight student intake",
+            "scope": "Training intake example, not a wage figure."
+          },
+          {
+            "href": "https://www.gz-gcac.com/content/details_182_28380.html",
+            "id": "pilot-guizhou",
+            "label": "Colorful Guizhou Airlines: second 2026 recruitment",
+            "scope": "Employer-specific posting; not live vacancies or a national threshold."
+          },
+          {
+            "href": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-61",
+            "id": "pilot-ecfr61",
+            "label": "eCFR 14 CFR Part 61: U.S. pilot certificates",
+            "scope": "U.S. certificates; does not establish employer hiring."
+          },
+          {
+            "href": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-G/part-121/subpart-O/section-121.436",
+            "id": "pilot-ecfr121",
+            "label": "eCFR 14 CFR §121.436: U.S. transport pilot qualifications",
+            "scope": "Applies only to operations covered by Part 121."
+          },
+          {
+            "href": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html",
+            "id": "pilot-cn-law",
+            "label": "Civil Aviation Law of China (effective 2026)",
+            "scope": "Mainland China legal framework; check the applicable operating rules."
           }
         ],
         "tracks": [
@@ -35229,6 +35465,12 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html",
+            "id": "pilot-cn-law",
+            "label": "Civil Aviation Law of China (effective 2026)",
+            "scope": "Mainland China legal framework; check the applicable operating rules."
           }
         ]
       },
@@ -35959,7 +36201,7 @@
           "Conversion boundary",
           "How to understand this position"
         ],
-        "wage_heading": "U.S. airline pilot wage distribution (53-2011)",
+        "wage_heading": "U.S. wage distribution for airline pilots, copilots, and flight engineers (53-2011)",
         "wage_tiers": [
           {
             "equivalent": "Official annual wage, not individual monthly income",
@@ -36056,7 +36298,7 @@
       },
       "hero": {
         "h1": "Airline and Commercial Pilots",
-        "quick_answer": "Airline and commercial pilots plan, manipulate, and monitor aircraft under licenses, operator training, and operating rules: before flight, study weather and notices, formulate flight plans and fuel plans, complete weight and balance and performance calculations, and inspect the aircraft according to checklists; in flight, manipulate according to standard operating procedures and monitor systems, communicate with control and the crew, and handle anomalies; after landing, fill in logs and reports. This page presents the tasks, wages, and paths of airline pilots and commercial pilots separately, and gives U.S. combined-basis and category data; the China side provides only urban unit group wage background.",
+        "quick_answer": "Airline pilots usually fly fixed-wing aircraft on scheduled passenger or cargo routes. Commercial pilots may fly charter or other missions. U.S. BLS groups both under 53-2010. The occupation Commercial Pilots (53-2012) is distinct from a commercial pilot certificate. Verify licensing, ratings, operating rules, and operator training for the jurisdiction and role.",
         "title": "Airline and Commercial Pilots"
       },
       "market_signal_card": {
@@ -37528,6 +37770,10 @@
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
+      "interface.direction_comparison.table.choice_header": "Best-fit choice",
+      "interface.direction_comparison.table.direction_header": "Career direction",
+      "interface.direction_comparison.table.distinction_header": "Key differences",
+      "interface.direction_comparison.table.work_output_header": "Core work and output",
       "interface.fit.directions_heading": "Which direction are you more likely to be suited to?",
       "interface.fit.interest_code_heading": "How to understand interest codes",
       "interface.us_salary.industry.industry_header": "Industry",
@@ -37622,7 +37868,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and work tasks",
       "china-salary": "Chinese mainland salary reference",
       "direction-comparison": "Comparison of occupational directions",
       "fit": "Occupation fit guide",
@@ -37682,7 +37928,7 @@
         "fact_id": "us-wage-2025",
         "market": "United States",
         "measure": "Median annual wage",
-        "occupation_scope": "Airline and Commercial Pilots",
+        "occupation_scope": "U.S. BLS parent group 53-2010 (includes 53-2011 and 53-2012)",
         "period": "2025, month 5 (May)",
         "source_refs": [
           "ooh"
@@ -37718,7 +37964,7 @@
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Employed persons",
-        "occupation_scope": "Airline and Commercial Pilots",
+        "occupation_scope": "U.S. BLS parent group 53-2010 (includes 53-2011 and 53-2012)",
         "period": "2025",
         "source_refs": [
           "ep"
@@ -37730,7 +37976,7 @@
         "fact_id": "us-growth-2025-2035",
         "market": "United States",
         "measure": "Employment growth rate and official net change",
-        "occupation_scope": "Airline and Commercial Pilots",
+        "occupation_scope": "U.S. BLS parent group 53-2010 (includes 53-2011 and 53-2012)",
         "period": "2025—2035",
         "source_refs": [
           "ep"
@@ -37742,7 +37988,7 @@
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Average annual job openings",
-        "occupation_scope": "Airline and Commercial Pilots",
+        "occupation_scope": "U.S. BLS parent group 53-2010 (includes 53-2011 and 53-2012)",
         "period": "2025—2035",
         "source_refs": [
           "ep"
@@ -37753,8 +37999,8 @@
         "display_value": "USD 334,930 per year",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "United States",
-        "measure": "Median annual wage for airline pilots in courier and messenger services",
-        "occupation_scope": "U.S. airline pilots in courier and messenger services (53-2011)",
+        "measure": "53-2011 median annual wage in couriers and express delivery services",
+        "occupation_scope": "U.S. 53-2011 | Couriers and express delivery services",
         "period": "2025, month 5 (May)",
         "source_refs": [
           "ooh"
@@ -37870,11 +38116,11 @@
       },
       {
         "derivation": null,
-        "display_value": "CNY 133,981 per year",
+        "display_value": "Non-private CNY 133,981/year; private CNY 73,133/year",
         "fact_id": "cn-industry-education-2025",
         "market": "Chinese mainland",
-        "measure": "Average annual wage in transport, storage, and post (urban non-private units)",
-        "occupation_scope": "Chinese mainland urban units or above-scale enterprise groups; not a wage listed separately for flight crew",
+        "measure": "2025 mean annual gross wage in urban transport, storage and postal services",
+        "occupation_scope": "Broad industry, not pilot wages",
         "period": "2025; published 2026-05-15",
         "source_refs": [
           "nbs"
@@ -37946,7 +38192,7 @@
         "fact_id": "us-combined-growth",
         "market": "United States",
         "measure": "Combined-basis employment growth and net change",
-        "occupation_scope": "Airline and Commercial Pilots",
+        "occupation_scope": "U.S. BLS parent group 53-2010 (includes 53-2011 and 53-2012)",
         "period": "2025—2035",
         "source_refs": [
           "ep"
@@ -37958,7 +38204,7 @@
         "fact_id": "us-combined-openings",
         "market": "United States",
         "measure": "Combined-basis average annual job openings",
-        "occupation_scope": "Airline and Commercial Pilots",
+        "occupation_scope": "U.S. BLS parent group 53-2010 (includes 53-2011 and 53-2012)",
         "period": "2025—2035",
         "source_refs": [
           "ep"
@@ -37983,7 +38229,7 @@
         "fact_id": "us-wage",
         "market": "United States",
         "measure": "Occupational wage basis (combined median)",
-        "occupation_scope": "Airline and Commercial Pilots",
+        "occupation_scope": "U.S. BLS parent group 53-2010 (includes 53-2011 and 53-2012)",
         "period": "2025, month 5 (May)",
         "source_refs": [
           "ooh"
@@ -38003,14 +38249,14 @@
       },
       {
         "derivation": null,
-        "display_value": "U.S. O*NET new-hire education survey item: 61% chose bachelor's degree (53-2011.00)",
+        "display_value": "BLS typical entry preparation differs: a bachelor’s degree and less than five years of related experience for 53-2011; a postsecondary nondegree award and no related experience for 53-2012. Both list moderate-term on-the-job training. These profiles are separate from certificates, privileges, and employer selection.",
         "fact_id": "credential-boundary",
         "market": "United States",
         "measure": "Entry education and training",
         "occupation_scope": "Airline and Commercial Pilots",
         "period": "Page updated in 2026; rechecked 2026-10-03",
         "source_refs": [
-          "editor"
+          "ep"
         ]
       },
       {
@@ -38024,27 +38270,15 @@
         "source_refs": [
           "ep"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Airline and Commercial Pilots",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and work tasks"
     },
     "badges": [
       "Aircraft operation: licenses and operating qualifications · flight planning and manipulation monitoring · safety and crew coordination",
@@ -38056,25 +38290,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "U.S. median annual wage (combined basis)"
+        "label": "U.S. parent group 53-2010: U.S. median annual wage (combined basis)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "U.S. employment growth (combined basis)"
+        "label": "U.S. parent group 53-2010: U.S. employment growth (combined basis)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "U.S. employed persons (combined basis)"
+        "label": "U.S. parent group 53-2010: U.S. employed persons (combined basis)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "U.S. average annual job openings (combined basis)"
+        "label": "U.S. parent group 53-2010: U.S. average annual job openings (combined basis)"
       },
       {
         "availability": "missing",
@@ -38088,17 +38322,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "Understand the tasks of airline and commercial pilots, the U.S. wage percentiles for the two categories, and the 2025—2035 employment projections; the licenses and transport crew qualifications for Chinese flight crew 2-04-01-01 are checked separately, with a complete fictional paper exercise and data boundaries attached."
+      "text": "Compare airline and commercial pilot duties, licenses and training. See U.S. wages and mainland China training and hiring examples."
     },
     "title": {
       "availability": "available",
-      "text": "Airline and Commercial Pilots: tasks, wages for the two categories, and employment outlook (O*NET 53-2011/53-2012)"
+      "text": "Airline and Commercial Pilots: Duties, Licenses, and Pay"
     }
   },
-  "source_content_sha256": "db58f2226a2c5a135147ac98165d5cf8932992f1b030581059442b1bd133df62",
+  "source_content_sha256": "c978493fe3c49f04a665cb71fc7fa38082dc5820cbefe137797b364ab09012fd",
   "subject": {
     "canonical_slug": "airline-and-commercial-pilots",
     "name": "Airline and Commercial Pilots",
-    "summary": "Airline and commercial pilots plan, manipulate, and monitor aircraft under licenses, operator training, and operating rules; complete preflight preparation, flight manipulation and monitoring, communication coordination, and recordkeeping in accordance with regulations, and accept continuing refresher training; airline pilots fly scheduled flights and large transport aircraft, while commercial pilots fly non-scheduled routes and special operations, with the two differing in tasks, wages, and paths; the captain retains final command responsibility for flight safety."
+    "summary": "Airline pilots usually fly fixed-wing aircraft on scheduled passenger or cargo routes. Commercial pilots may fly charter or other missions. U.S. BLS groups both under 53-2010. The occupation Commercial Pilots (53-2012) is distinct from a commercial pilot certificate. Verify licensing, ratings, operating rules, and operator training for the jurisdiction and role."
   }
 }

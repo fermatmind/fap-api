@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -23311,13 +23308,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本页的判断清单只用于自我提问，不构成录用标准、人格评价或能力结论。铁路列车长与调车场场长的授权与边界差异很大：发出动车指令、编排列车、处理事故与放行确认的权限分属不同角色，任何一条清单都不能替代对目标岗位实际授权与作业规程的核对。"
+              "先核实际班次、户外条件、训练和工作权限；不要凭一份练习或相邻岗位经验独立上岗。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "editor",
-            "onet"
+            "fra-242",
+            "nra-safety"
           ],
           "type": "prose"
         },
@@ -23326,12 +23323,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先观察自己能否把模糊的行车与调车需求拆成股道、车辆、时刻与安全条件，并判断现场能否作业。再用入行模块的虚构材料 T1—T5 做一次完整练习：核对值乘单、股道占用、车号与安全条件，标出待确认与需升级事项；练习只需纸面和文本文件，不需要真实机车、线路或车辆。"
+              "到入行区做 YD-05：按虚构两份车号和封条记录找差异，列待确认项，并写两句交接，不指挥任何作业。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "editor"
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -23340,14 +23337,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "更值得考虑的信号是：你愿意按规程反复确认进路与车号、如实记录异常与未处理项，并能接受动车与放行由授权角色决定。需要慎重的信号是：把一次作业结论当作通用结论，或在未确认进路、未核对车号时就发出动车指令。"
+              "愿逐项核车号和版本，能把不一致说清，并在缺证时让负责人复核。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "editor",
-            "onet",
-            "employer"
+            "msresearch",
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -23356,13 +23352,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本卡结论来自公开职业任务资料与编辑归纳，不是对你个人的测评结果，也不预测就业结果。铁路列车长与调车场场长的实际任务范围取决于雇主、编组站与作业规程；同一中文头衔在不同单位可能对应完全不同的职责与权限。"
+              "到入行区做 YD-05：按虚构两份车号和封条记录找差异，列待确认项，并写两句交接，不指挥任何作业。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "editor",
-            "onet"
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -23371,13 +23366,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "若你愿意把行车组织与班组管理结合起来、按规程判断列车能否移动，这份工作值得进一步了解。判断岗位时先问清三件事：你能否独立完成值乘与调车指挥、谁能批准动车与放行、出现行车异常或事故时向谁升级。"
+              "先比较两种工作：列车乘务组织要跟组员交接，调车场协调更常围绕计划、车列和场内记录。都需要准确复述异常。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         }
@@ -23532,7 +23526,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS现行表1.2为2025—2035预测：53-4031基期38,900人，预测39,200人，官方净增约300人、增长0.9%，年均空缺约3,000个（含替换）。这属于总体就业预测，非AI归因。Hero及独立FAQ保留旧期，不能视为同一期。"
+              "BLS现行表1.2为2025—2035预测：53-4031基期38,900人，预测39,200人，官方净增约300人、增长0.9%，年均空缺约3,000个（含替换）。这属于总体就业预测，非AI归因。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.profile.onet-structured-fields-block.4",
@@ -24032,34 +24026,34 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 空中交通管制员职业档案（53-2021.00）",
+                "entity": "O*NET 机车司机（53-4011.00）",
                 "id": "link-1",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/53-2021.00"
+                "url": "https://www.onetonline.org/link/summary/53-4011.00"
               },
               {
-                "entity": "O*NET 调度员（警消与救护车除外）职业档案（43-5032.00）",
+                "entity": "O*NET 调车场机车操作员（53-4013.00）",
                 "id": "link-2",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/53-4013.00"
+              },
+              {
+                "entity": "O*NET 铁路制动、信号与道岔等岗位（53-4022.00）",
+                "id": "link-3",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/53-4022.00"
+              },
+              {
+                "entity": "O*NET 运输调度员（警消与救护车除外）（43-5032.00）",
+                "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/43-5032.00"
               },
               {
-                "entity": "O*NET 物料搬运机械与车辆操作一线主管职业档案（53-1043.00）",
-                "id": "link-3",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/53-1043.00"
-              },
-              {
-                "entity": "O*NET 运输车辆、设备与系统检查员（航空除外）职业档案（53-6051.07）",
-                "id": "link-4",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/53-6051.07"
-              },
-              {
-                "entity": "O*NET 地铁与有轨电车操作员职业档案（53-4041.00）",
+                "entity": "O*NET 空中交通管制员（53-2021.00）",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/53-4041.00"
+                "url": "https://www.onetonline.org/link/summary/53-2021.00"
               }
             ]
           },
@@ -24068,8 +24062,8 @@
             "facilities",
             "operations",
             "hr",
-            "health",
-            "purchasing-managers"
+            "purchasing-managers",
+            "archivists"
           ],
           "type": "links"
         },
@@ -24078,7 +24072,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "上表比较对象共用同一套运输组织与安全规程基础能力，但责任对象不同：空中交通管制员面向航空交通管制，调度员面向运输调度，一线主管面向物料搬运班组，检查员面向运输设备检查，地铁操作员面向城市轨道载客运行；本职业则面向铁路列车与调车场的行车组织。比较时应看输入、产出与批准权的差别，而不是头衔。"
+              "对照同一件任务：谁实际操纵设备，谁排程，谁协调人员，谁有权确认下一步。列车长和调车场主管的具体分工仍须看单位和岗位。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.8",
@@ -24094,7 +24088,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "上表比较空中交通管制员、调度员（警消与救护车除外）、物料搬运机械与车辆操作一线主管、运输车辆设备与系统检查员（航空除外）、地铁与有轨电车操作员五个相邻职业，依据为各自的官方职业档案；末尾一行是本职业内部的调车场指挥工作方向，依据本职业官方任务资料作编辑归纳。两组材料都不构成中国资格互认，也不说明某一岗位一定要求另一职业的全部能力。"
+              "前五行依据各自的 O*NET 职业档案，末行依据 53-4031.00 的场内协调任务。各档案说明任务差别，不构成资格互认。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.9",
@@ -24112,7 +24106,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "下表比较空中交通管制员、调度员（警消与救护车除外）、物料搬运机械与车辆操作一线主管、运输车辆设备与系统检查员（航空除外）、地铁与有轨电车操作员五个相邻职业；末尾一行是本职业内部的调车场指挥工作方向。各行按核心工作与产出、责任边界和选择条件对照，供核对岗位使用，不代表自动转岗或晋升路径。"
+              "比较机车司机、调车场机车操作员、铁路制动／信号／道岔等岗位、运输调度员和空中交通管制员五个相邻职业。末行为本职业内部的调车场主管方向。逐行核对交付、责任和入行条件。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.10",
@@ -24127,13 +24121,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "责任对象是航空交通管制：需要航空管制与规程知识；运输组织经验可部分迁移，但航空管制与安全间隔须另行学习。"
+              "侧重操纵；列车长侧重协调乘务组。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
             "facilities",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24142,13 +24136,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "更适合对航空交通管制有兴趣的人；把铁路行车经验直接当航空管制资格会低估门槛。"
+              "偏好驾驶时，核司机资格和训练。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.12",
           "source_refs": [
             "facilities",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24157,13 +24151,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "指挥航空器运行与间隔，产出管制与记录。"
+              "驾驶机车并监控其运行。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
             "facilities",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24172,12 +24166,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "空中交通管制员"
+              "机车司机（53-4011.00）"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.14",
           "source_refs": [
-            "facilities"
+            "facilities",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24186,13 +24181,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "责任对象是运输调度：需要调度与协调能力；行车组织经验可迁移，但调度系统与规程须另行学习。"
+              "侧重机车操作；调车场主管侧重计划与作业协调。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
             "operations",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24201,13 +24196,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "更适合愿意做运输调度与协调的人；把行车经验当调度资格会低估范围。"
+              "喜欢设备操作时，先核岗位权限。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
             "operations",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24216,13 +24211,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "编制与执行运输调度计划，协调多方作业，产出调度记录。"
+              "按作业安排在场内操纵或移动车辆。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
             "operations",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24231,12 +24226,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "调度员（警消与救护车除外）"
+              "调车场机车操作员（53-4013.00）"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.18",
           "source_refs": [
-            "operations"
+            "operations",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24245,13 +24241,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "责任对象是物料搬运班组：需要现场管理与设备知识；班组管理经验只是其中一部分。"
+              "聚焦具体设备和任务；53-4031 还涉及乘务或站场协调。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
             "hr",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24260,13 +24256,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "更适合愿意做现场班组管理的人；把行车组织经验当班组管理资格会低估门槛。"
+              "若偏好现场设备任务，核具体设备和培训。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
             "hr",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24275,13 +24271,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "督导物料搬运机械与车辆操作班组，产出作业与安全记录。"
+              "按授权操作相应制动、信号或道岔设备。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.21",
           "source_refs": [
             "hr",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24290,12 +24286,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "物料搬运机械与车辆操作一线主管"
+              "铁路制动、信号与道岔操作等岗位（53-4022.00）"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.22",
           "source_refs": [
-            "hr"
+            "hr",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24304,13 +24301,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "责任对象是运输设备检查：需要设备检查与标准知识；现场经验可迁移，但检查标准与规程须另行学习。"
+              "调度并非列车乘务组织或自动具备调车资格。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
-            "health",
-            "editor"
+            "purchasing-managers",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24319,13 +24316,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "更适合愿意做设备与系统检查的人；把行车经验当检查资格会低估门槛。"
+              "想做排程和协调时核具体行业及许可。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
-            "health",
-            "editor"
+            "purchasing-managers",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24334,13 +24331,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "检查运输车辆、设备与系统并出具结论，产出检查记录。"
+              "根据服务需求安排人员、车辆或设备，维护调度记录。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
-            "health",
-            "onet"
+            "purchasing-managers",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24349,12 +24346,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "运输车辆、设备与系统检查员（航空除外）"
+              "运输调度员（43-5032.00）"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.26",
           "source_refs": [
-            "health"
+            "purchasing-managers",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24363,13 +24361,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "责任对象是城市轨道载客运行：需要载客运行与应急处置能力；行车组织经验可迁移，但载客运行与规章须另行学习。"
+              "航空与铁路各有独立系统、程序和资格。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
-            "editor",
-            "onet"
+            "archivists",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24378,13 +24376,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "更适合对城市轨道载客运行有兴趣的人；把货运行车经验当载客驾驶资格会低估门槛。"
+              "对空中运行感兴趣，另查管制入行条件。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "editor",
-            "employer"
+            "archivists",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24393,13 +24391,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "驾驶地铁或有轨电车载客运行，产出运行与应急处置记录。"
+              "组织空中与机场部分航空器运行，保持间隔。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
-            "editor"
+            "archivists",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24408,12 +24406,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "地铁与有轨电车操作员"
+              "空中交通管制员（53-2021.00）"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.30",
           "source_refs": [
-            "editor"
+            "archivists",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24422,13 +24421,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "责任对象是本职业执行核心的调车场指挥环节：需要编制计划、指挥作业与核对车号能力。"
+              "重点在场内计划与协作，与列车上的乘务组工作不同。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "privacy",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24437,13 +24435,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "更适合愿意做指挥与组织、对行车安全敏感的人；若不承担指挥与组织责任，长期可能受限。"
+              "若喜欢记录与作业协调，先了解雇主具体分工。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "privacy",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24452,13 +24449,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "审核计划与单据、指挥调车与编组、核对车号并记录，产出指挥与行车记录。"
+              "核对计划、车辆组合和记录，协调场内作业组。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet",
-            "privacy"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24467,12 +24463,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "调车场指挥方向"
+              "本页：调车场主管"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.34",
           "source_refs": [
-            "privacy"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24481,7 +24477,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "建议先选一个方向做低成本验证：用该方向的真实任务练一次，再核对目标岗位的授权与作业边界。避免把方向名称当成现成通道。"
+              "先用 YD-05 的虚构记录做纸面核对。涉及真实作业时，先向用人单位确认培训和授权要求，再按规定由具备相应资格的人员带教。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.35",
@@ -24759,16 +24755,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "跨职业研究提供生成式AI潜在任务暴露与雇主预期背景，没有本职业现场采用、效率、岗位或工资效果的测量。本页将记录整理与规程检索列为可评估的辅助任务（编辑分析），行车组织、现场确认和应急指挥仍须遵守岗位授权。 AI影响度 50% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "用虚构记录练习把差异归类、列待确认项，再逐条对照原件。现有资料不提供本职业 AI 采用率、替代率或安全成效。真实调车和行车只按授权人员及适用规程处理。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ilo",
-            "arxiv",
-            "weforum",
-            "editor"
+            "source-fermatmind-ai-rubric",
+            "nra-safety"
           ],
           "type": "prose"
         },
@@ -25589,7 +25582,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 就业预测（无消失年份）"
+              "美国 BLS 2025–2035 年预测表 1.2 的 53-4031 精确行：2025 年 38,900 个岗位，2035 年预计 39,200 个，增 0.9%，净增约 300，年均空缺 3,000（含增长和替补）。空缺为预测，不是当期招聘。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.ai-impact.ai-impact-table.75",
@@ -26450,7 +26443,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业全部就业人员年平均工资（2025 年），是上述岗位类别的合计口径，不能直接当作本职业收入。"
+              "2025 年规模以上企业全部就业人员年平均工资，不能直接当作本职业收入。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.18",
@@ -26536,13 +26529,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得职责、地区、雇主及统计期匹配的中国列车长招聘薪酬原文；不由查阅未取得推断中国不存在公开样本。"
+              "中国铁路哈尔滨局集团 2026 年大专（高职）毕业生招聘计划（二）列 B0101 车务调车操作技能岗位 328 人，分多家站段，列明多个专业及相关课程。附件未列薪资。 天津铁道职业技术学院就业站 2026 年 10 月 30 日公告：大港发电厂铁路项目招调车员 10 人、三班倒，列 5,500 元/月；项目由唐山海港天佑铁路工程承包，毕业后与承包方签劳动合同。该报价只对应这个项目。 两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "editor",
-            "r2-pay-1"
+            "rail-harbin",
+            "rail-dagang"
           ],
           "type": "prose"
         },
@@ -26667,12 +26660,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未取得本职业学历分层的中国招聘证据；这些方向是待核对的编辑建议，不是统一门槛。"
+              "哈尔滨局样本针对大专（高职）毕业生，天津项目列相关专业；两个样本均不建立全国统一学历门槛。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "editor"
+            "rail-harbin",
+            "rail-dagang"
           ],
           "type": "prose"
         },
@@ -26827,13 +26821,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国铁路列车长与调车场场长（本页解释范围）"
+              "大陆薪资｜调车招聘与行业参照"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "cnclass",
-            "editor"
+            "rail-harbin",
+            "rail-dagang",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26842,12 +26837,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "下表按学历背景整理待核对的岗位方向，属于编辑建议。本轮未取得支持中国普遍起点或学历分层要求的招聘原文。"
+              "未核得与本职业精确对应的大陆全国工资分布。下面的调车岗位不等于列车长工资。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "editor"
+            "rail-harbin",
+            "rail-dagang",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26856,13 +26853,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "表格中的学历段与岗位方向属于编辑归纳，用于梳理核对路径；雇主的实际要求以招聘公告原文为准。"
+              "国家统计局 2025 年交通运输、仓储和邮政业城镇单位就业人员税前年平均工资：非私营 133,981 元/年，私营 73,133 元/年。两者是行业工资，不是全国列车长或调车人员工资。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "editor",
-            "r2-pay-1"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26886,13 +26882,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "此处只展示国家统计局的宽口径年平均工资，用于理解不同岗位类别的量级；它不支撑任何雇主报价。"
+              "两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "editor",
-            "r2-pay-2"
+            "rail-harbin",
+            "rail-dagang"
           ],
           "type": "prose"
         },
@@ -26901,12 +26897,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国内地公开招聘样本（本轮未取得）"
+              "哈尔滨局｜调车操作技能岗位"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "r2-pay-1"
+            "rail-harbin"
           ],
           "type": "prose"
         },
@@ -26915,12 +26911,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮未取得职责、单位与作业范围匹配且状态已核实的中国公开招聘薪酬原文；保留缺口，不用相邻层级或行业均值样本替代。"
+              "中国铁路哈尔滨局集团 2026 年大专（高职）毕业生招聘计划（二）列 B0101 车务调车操作技能岗位 328 人，分多家站段，列明多个专业及相关课程。附件未列薪资。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "r2-pay-1"
+            "rail-harbin"
           ],
           "type": "prose"
         },
@@ -26929,12 +26925,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国内地公开招聘样本（本轮未取得）"
+              "天津大港项目｜调车员"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "r2-pay-2"
+            "rail-dagang"
           ],
           "type": "prose"
         },
@@ -26943,12 +26939,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同上：未取得可核验的本职业公开招聘薪酬原文，不引用与铁路行车组织无关的岗位报价。"
+              "天津铁道职业技术学院就业站 2026 年 10 月 30 日公告：大港发电厂铁路项目招调车员 10 人、三班倒，列 5,500 元/月；项目由唐山海港天佑铁路工程承包，毕业后与承包方签劳动合同。该报价只对应这个项目。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "r2-pay-2"
+            "rail-dagang"
           ],
           "type": "prose"
         },
@@ -26957,12 +26953,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国内地公开招聘样本（本轮未取得）"
+              "大陆全国｜交通运输行业"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "r2-pay-3"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26971,12 +26967,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同上：缺少可核验样本时不在本页展示具体报价，避免误导。"
+              "国家统计局 2025 年交通运输、仓储和邮政业城镇单位就业人员税前年平均工资：非私营 133,981 元/年，私营 73,133 元/年。两者是行业工资，不是全国列车长或调车人员工资。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "r2-pay-3"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27015,12 +27011,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "现行BLS 2025—2035总体预测增长0.9%；旧Hero事实未变，见范围冲突说明。"
+              "美国 53-4031 的 2025–2035 预测增幅 0.9%，不同于大陆职业需求。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "editor"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27222,13 +27218,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS现行表1.2基期就业38.9千人；与旧Hero的2024年36,800人不是同一期。；BLS 2025—2035就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "美国 53-4031 基期就业规模。；BLS 表 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27312,14 +27307,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本精确职业2025年工资中位78,000美元/年（37.50美元/小时）。现行BLS预测基期2025年38,900人、2025—2035增长0.9%、年均空缺约3,000个；Hero和独立FAQ仍保留旧期，需区分。"
+              "2025 年 5 月美国 53-4031 受雇者工资中位：78,000 美元/年、37.50 美元/小时。年薪 P10/P25/P50/P75/P90 为 58,740／65,610／78,000／83,820／109,770 美元；分位不代表新人薪资或合同到手。 美国 BLS 2025–2035 年预测表 1.2 的 53-4031 精确行：2025 年 38,900 个岗位，2035 年预计 39,200 个，增 0.9%，净增约 300，年均空缺 3,000（含增长和替补）。空缺为预测，不是当期招聘。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "bls",
             "onet-wages",
-            "editor"
+            "ep"
           ],
           "type": "prose"
         },
@@ -28708,12 +28702,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可交付物比较：值乘与车号记录、编组与封条记录、事故与延误报告；可用 T1—T5 验证。"
+              "先比较乘务交接和场内记录这两类产出，再做 YD-05 核对记录。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.fit.personality-fit-block.55",
           "source_refs": [
-            "editor"
+            "msresearch",
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -28752,12 +28747,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做一次入行练习：用 T1—T5 复核一次虚构车务段的值乘与编组记录并与参考交付对照。"
+              "到入行区做 YD-05：按虚构两份车号和封条记录找差异，列待确认项，并写两句交接，不指挥任何作业。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.fit.personality-fit-block.58",
           "source_refs": [
-            "editor"
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -28956,14 +28951,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "铁路列车长与调车场场长最需要提前判断的是三类边界：一是动车指令、编组与放行的决定权在谁手里；二是行车记录与车号信息能否覆盖、移交或追溯；三是发现行车异常或事故时该由谁决定暂停与升级。"
+              "轮班、噪声、复诵和记录交接随场景变化。遇到车号、封条或记录冲突先暂停提交，由岗位授权人员复核。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "bls",
-            "editor"
+            "msresearch",
+            "nra-safety",
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -29452,7 +29447,7 @@
                 "调车指挥岗",
                 "在带教下指挥调车作业、核对股道与进路。",
                 "能否按规程下达指令并如实记录，被追问时能否说明依据。",
-                "用 T2—T4 练习说明如何指挥与核对。",
+                "用 YD-05 练习按车号核对 P1 和 R1，并说明哪些差异要交给当班负责人确认。",
                 "偏调车指挥，与乘务辅助岗的关注点不同。"
               ],
               [
@@ -29466,7 +29461,7 @@
                 "车辆巡视与核对岗",
                 "协助运行中巡视车辆、核对车号与封条。",
                 "能否按清单巡视并如实记录。",
-                "用练习中的巡视与核对记录说明取舍。",
+                "用 P1、R1 差异表说明哪条记录一致，哪些要交接复核。",
                 "偏巡视与核对，不直接决定开行与放行。"
               ],
               [
@@ -29544,41 +29539,41 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料与设定｜全部为编辑设计的虚构数据",
-                  "你是虚构企业「云岭车务段」的列车长，需要复核值乘单 C-7712 的编组与行车记录并给出开行、整改或复核建议。以下材料与数值完全虚构，不是真实列车、线路或车辆。",
-                  "T1 值乘单与运行图：货运列车 42012 次，编组 42 辆，需在 3 站摘挂；按运行图 06:10 发车；运行区间有一段限速。T2 车辆与编组：其中 1 辆封条号与货运单不符、2 辆装载超限需核实、3 辆为到达中途站待摘，其余正常。T3 人员与乘务：乘务组 3 人，其中 1 人连续值乘接近限时，需核对休息与替补安排。T4 运行与记录：初稿写「全部正常，可开行」；车号与封条核对记录、到发时间记录未填；超限车辆未核实。T5 结论与批准栏：开行建议应列达标项、须整改项、未确认项与批准人；开行栏与调度确认栏为空。"
+                  "题面｜虚构，非运行文件",
+                  "交班清单 P1：车号 X17／封条 S81；X21／S92；X34／S44。值班记录 R1：X17／S81；X21／S29；X43／S44。两份记录都标 14:20。",
+                  "题内规则：车号必须完全一致后再比封条；无相同车号，不能用封条猜是同车；差异待负责人复核，不修改原件。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务",
-                  "逐项核 T1—T5，写出：哪些结果达到要求、哪些须整改、哪些信息不足，以及开行建议应包含的未确认项与批准人。",
-                  "不得新增题面未给的列车、车辆或授权信息；未知项单列。"
+                  "交两样",
+                  "写差异表，记录可确认项、封条冲突、缺记录和多记录。",
+                  "给复核者写两句交接，写上 P1、R1 和需要确认的内容。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考交付",
-                  "达到要求：编组与运行图明确，可按计划组织作业。须整改：1 辆封条号与货运单不符须核实；2 辆超限装载须核实；连续值乘人员须核对休息与替补。须核实：车号与封条核对记录、到发时间与调度许可。",
-                  "开行建议须写明未确认项、开行栏与确认栏为空，并由授权角色批准；列车长只提交建议与记录。"
+                  "参考核对",
+                  "X17 车号和封条一致；X21 车号一致、S92 与 S29 冲突；P1 的 X34 在 R1 缺失，R1 的 X43 在 P1 多出。S44 相同不足以认定 X34 与 X43 同车。",
+                  "交接示例：“14:20 的 P1、R1 中仅 X17 全部一致，X21 封条不一致，X34 与 X43 未匹配。请复核原始记录，暂不更改版本。”"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "边界",
-                  "本练习不涉及真实列车、线路或车辆；实际值乘、编组与开行按单位与运行图执行。若无法判断，允许写「不足以判断」并说明缺少什么证据。"
+                  "纸面练习不涉及真实车辆、信号、轨道、货物或运行指挥。"
                 ]
               }
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.entry-work-sample-data.1",
           "source_refs": [
-            "editor"
+            "rail-paper"
           ],
-          "title": "入行练习：一次完整的办公支持任务（虚构材料）",
+          "title": "YD-05｜核对两份虚构车号与封条记录",
           "type": "cards"
         },
         {
@@ -29589,8 +29584,8 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "值乘单与编组对照包",
-                  "用 T1—T3 填写列车、编组、车号与参数对照表，标出未知项与需澄清问题。",
+                  "P1 与 R1 核对表",
+                  "按车号对照 YD-05 的计划单 P1 和核对单 R1，分别标记一致、封签不同、只在计划中和只在核对单中。",
                   "复核方式：他人仅凭该表即可判断哪一项信息不足及原因。"
                 ]
               },
@@ -29598,24 +29593,24 @@
                 "id": "independent-recheck",
                 "values": [
                   "独立复核说明",
-                  "对 T2、T4 逐项写出车辆与编组状态、规则依据、处置结论。",
-                  "复核方式：结论与原始数据、规则一致，且标明适用范围。"
+                  "合上参考答案，逐项写下车号及 P1、R1 的原始值；答完再用页面参考答案自核。",
+                  "复核方式：结论可以从 P1 和 R1 重新算出；留空的值不自行补写。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "整改与风险记录",
-                  "用 T4 写一份整改记录：事件、影响、待答问题与升级对象；记录可追溯到车号与区段。",
-                  "复核方式：能看出整改范围与下一步。"
+                  "待确认项清单",
+                  "逐项记录封签差异、记录缺失和额外车号，注明需要当班负责人确认的具体问题。",
+                  "复核方式：每项都有车号、两单记录和待答问题。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "开行建议草稿",
-                  "用 T5 写开行建议，列出达标项、须整改项、未确认项与批准人；不出现自行开行或代签。",
-                  "复核方式：建议与证据一致且无越权。"
+                  "两句交接草稿",
+                  "第一句报一致和差异，第二句说请当班负责人核对哪些未确认项；练习不作开行决定。",
+                  "复核方式：能听出下一步由谁核对什么，并能回查题面。"
                 ]
               }
             ]
@@ -29686,57 +29681,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "读材料并写角色边界卡",
-                  "读 T1—T5，写一张角色边界卡：可做（按规程核对与记录）、须复核（编组与开行建议）、禁止动作（未确认进路发车或自行开行）；确认不做真实作业。"
+                  "第 1 天",
+                  "读题内规则及 P1。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "用 T1—T2 完成编组与车辆对照表",
-                  "用 T1—T2 核对列车、编组与车辆状态，标出影响安全的缺陷。"
+                  "第 2 天",
+                  "抄 R1 并核 14:20 时间标记。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "用 T3 整理乘务与安全要求",
-                  "用 T3 列出乘务安排与安全要求并标出每项的适用范围。"
+                  "第 3 天",
+                  "按车号逐项匹配。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "用 T2/T4 逐项判定",
-                  "逐项写出车辆与编组状态、规则依据与结论，标出未处理项与须确认项。"
+                  "第 4 天",
+                  "检查封条、缺项和多项。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "写整改与风险记录",
-                  "用 T4 写一份整改记录：事件、影响、待答问题与升级对象。"
+                  "第 5 天",
+                  "交差异表和两句交接。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "用 T5 写开行建议草稿",
-                  "写出达标项、须整改项、未确认项与批准人；不自行开行。"
+                  "第 6 天",
+                  "按答案自核，改掉一处歧义。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "对照参考并修订",
-                  "对照参考交付修订前六天输出，记录最易遗漏的一步与下一步练习。"
+                  "第 7 天",
+                  "记录是否愿继续做逐项核对和交接。"
                 ]
               }
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.seven-day-trial.1",
           "source_refs": [
-            "editor"
+            "rail-paper"
           ],
           "title": "七天体验：用虚构材料完成一次办公支持闭环",
           "type": "timeline"
@@ -29752,7 +29747,7 @@
               "投入估算：每天 30—60 分钟，以读材料与复算为主，无需购买设备或使用真实线路数据。",
               "若七天中反复卡在同一环节（如单据核对与编排逻辑），把它列为下一步优先练习项。",
               "若无法判断某一步，写「不足以判断」并说明缺少什么证据，不猜测。",
-              "完成后，把输出与真实单位的行车与开行格式对照，观察差额。"
+              "先用题内 P1、R1 和参考答案自核。有同伴时，可请对方用同一材料复核差异表和两句交接。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.seven-day-decision.1",
@@ -29788,7 +29783,7 @@
               [
                 "高中学历（或同等学历）",
                 "希望进入行车组织岗位的求职者",
-                "美国典型最低学历要求，但不保证独立值乘与指挥",
+                "美国典型入行学历；具备该学历并不等于可以独立值乘或指挥",
                 "美国常见要求；官方说明存在其他路径",
                 "按目标雇主公告",
                 "低：通常无需学位",
@@ -29857,7 +29852,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "美国适用conductor须核49 CFR Part 242认证，学历和内部培训不能替代认证。",
+              "BLS 美国 53-4031 典型入行是高中或同等学历、无相关经历要求及中期在岗训练。O*NET Job Zone 1–2 是准备程度分组，不能当作每家单位的培训期或认证标准。 美国 49 CFR Part 242 依据实际职责定义 conductor，适用于受该部分约束的铁路及人员。符合定义者即使岗位名称不同也要核认证；yardmaster 名称本身不能判断是否适用。仅在不属于一般铁路系统的厂内轨道运行等例外按 §242.3 查。 大陆《铁路安全管理条例》第56、58条要求铁路运输企业制定作业程序、加强主要行车工种等人员培训；第57条的考试针对铁路机车车辆驾驶人员。客运列车长、车站行车和调车岗位分别查岗位培训、检查、资格与授权。",
               "适用对象与例外见242.1、242.3、242.7，不从Yardmaster头衔自动判断。",
               "中国条例第五十六至五十八条区分企业制度、驾驶考试与行车工种培训；列车长不一律需要驾驶证。",
               "危险货物作业按第六十九至七十一条及具体岗位规定核对，本轮未取得全部列车长统一危险品证的法源。"
@@ -29865,9 +29860,11 @@
           },
           "id": "railroad-conductors-and-yardmasters.path.credential-boundary.1",
           "source_refs": [
+            "ep",
+            "onet",
             "fra-242",
             "nra-safety",
-            "editor"
+            "cnclass"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29877,18 +29874,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得职责、单位与作业范围匹配且状态已核实的中国公开招聘原文。",
-              "本轮未取得职责、单位与作业范围匹配且状态已核实的中国公开招聘原文；保留缺口，不用相邻层级样本替代。"
+              "中国铁路哈尔滨局集团 2026 年大专（高职）毕业生招聘计划（二）列 B0101 车务调车操作技能岗位 328 人，分多家站段，列明多个专业及相关课程。附件未列薪资。",
+              "天津铁道职业技术学院就业站 2026 年 10 月 30 日公告：大港发电厂铁路项目招调车员 10 人、三班倒，列 5,500 元/月；项目由唐山海港天佑铁路工程承包，毕业后与承包方签劳动合同。该报价只对应这个项目。",
+              "两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "rail-harbin",
+            "rail-dagang"
           ],
-          "title": "招聘样本说明",
+          "title": "大陆两则调车用人样本",
           "type": "notice"
         },
         {
@@ -29936,13 +29932,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本板块为编辑整理的入行与成长路径，不是雇主招聘标准或资格认证；中国要求与授权须以目标公告和单位制度为准。"
+              "大陆职业分类把铁路列车乘务员（4-02-01-02）与铁路车站调车作业员（6-30-02-02）分列；列车长、调车长与调车区长不能按名称自动互认，也不等同于美国 53-4031 组合职业。 大陆《铁路安全管理条例》第56、58条要求铁路运输企业制定作业程序、加强主要行车工种等人员培训；第57条的考试针对铁路机车车辆驾驶人员。客运列车长、车站行车和调车岗位分别查岗位培训、检查、资格与授权。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.career-path-block.11",
           "source_refs": [
-            "editor",
-            "onet"
+            "cnclass",
+            "nra-safety"
           ],
           "type": "prose"
         },
@@ -30067,7 +30063,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国BLS该职业行列典型高中学历、中期在岗培训。编辑建议从受监督的乘务辅助、记录或站场核对任务了解职责；独立conductor任务另核Part 242认证，不能把Job Zone职业组培训概述当个人期限。"
+              "BLS 美国 53-4031 典型入行是高中或同等学历、无相关经历要求及中期在岗训练。O*NET Job Zone 1–2 是准备程度分组，不能当作每家单位的培训期或认证标准。 美国 49 CFR Part 242 依据实际职责定义 conductor，适用于受该部分约束的铁路及人员。符合定义者即使岗位名称不同也要核认证；yardmaster 名称本身不能判断是否适用。仅在不属于一般铁路系统的厂内轨道运行等例外按 §242.3 查。 大陆《铁路安全管理条例》第56、58条要求铁路运输企业制定作业程序、加强主要行车工种等人员培训；第57条的考试针对铁路机车车辆驾驶人员。客运列车长、车站行车和调车岗位分别查岗位培训、检查、资格与授权。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.career-path-block.20",
@@ -30075,7 +30071,7 @@
             "ep",
             "onet",
             "fra-242",
-            "editor"
+            "nra-safety"
           ],
           "type": "prose"
         },
@@ -31172,13 +31168,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS现行2025—2035总体预测：美国53-4031基期38,900人，预测39,200人，增长0.9%，年均空缺约3,000个（含替换）；2025工资中位78,000美元/年。Hero和独立FAQ保留旧期，本页未取得中国精确职业工资。"
+              "美国 BLS 2025–2035 年预测表 1.2 的 53-4031 精确行：2025 年 38,900 个岗位，2035 年预计 39,200 个，增 0.9%，净增约 300，年均空缺 3,000（含增长和替补）。空缺为预测，不是当期招聘。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.market-signals.market-signal-card.8",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31908,10 +31903,14 @@
           "data": {
             "entries": [
               {
-                "answer": "典型闭环是接收指令、核对径路与车号、编制作业计划、指挥调车或组织乘务、运行监控、记录与报告；同时维护行车与编组记录。O*NET 53-4031.00 为美国口径，美国工资按其 OEWS 分位给出，实际按雇主与单位范围核定。",
+                "answer": "美国 O*NET 53-4031.00 把两种工作归在一项：列车长协调客运或货运列车上的乘务组，调车场主管核对列车计划和调车顺序、协调场内作业。两类工作可能交叉；大陆的客运列车长、车站行车与调车工种应分别核职责。",
                 "id": "railroad-conductors-and-yardmasters.faq.1",
                 "question": "铁路列车长与调车场场长每天做什么？",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.daily-work"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.daily-work",
+                "source_refs": [
+                  "msresearch",
+                  "cnclass"
+                ]
               },
               {
                 "answer": "本职业承担指挥、编组与班组组织责任，重点在行车组织与安全；机车工程师与调车工承担机车驾驶与车辆调移，两者的对象与责任不同。",
@@ -31920,40 +31919,60 @@
                 "question_key": "career.faq.railroad-conductors-and-yardmasters.comparison"
               },
               {
-                "answer": "看可观察行为：能否按规程组织作业与核对车号、如实记录异常与未处理项、把问题推动到整改，并接受动车与放行由授权角色决定；可用 T1—T5 练习与 O*NET RCE 兴趣核对，测评与单次表现不能决定任职或适合度。",
+                "answer": "到入行区做 YD-05：按虚构两份车号和封条记录找差异，列待确认项，并写两句交接，不指挥任何作业。",
                 "id": "railroad-conductors-and-yardmasters.faq.3",
                 "question": "怎样判断自己适不适合做铁路列车长与调车场场长？",
                 "question_key": "career.faq.railroad-conductors-and-yardmasters.fit"
               },
               {
-                "answer": "研究支持文档、数据与检索类任务受影响较大，不支持整个职业被替代；ILO、GPTs are GPTs 与 WEF 提供潜在暴露与雇主预期，不能据此计算本职业岗位替代。",
+                "answer": "用虚构记录练习把差异归类、列待确认项，再逐条对照原件。现有资料不提供本职业 AI 采用率、替代率或安全成效。真实调车和行车只按授权人员及适用规程处理。",
                 "id": "railroad-conductors-and-yardmasters.faq.4",
                 "question": "AI 会减少铁路列车长与调车场场长岗位吗？",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.ai-impact"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.ai-impact",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "本轮未取得中国大陆本职业精确职业的全国或城市工资；国家统计局行业与岗位类别平均工资只作统计背景，不用美国值换算。",
+                "answer": "国家统计局 2025 年交通运输、仓储和邮政业城镇单位就业人员税前年平均工资：非私营 133,981 元/年，私营 73,133 元/年。两者是行业工资，不是全国列车长或调车人员工资。 中国铁路哈尔滨局集团 2026 年大专（高职）毕业生招聘计划（二）列 B0101 车务调车操作技能岗位 328 人，分多家站段，列明多个专业及相关课程。附件未列薪资。 天津铁道职业技术学院就业站 2026 年 10 月 30 日公告：大港发电厂铁路项目招调车员 10 人、三班倒，列 5,500 元/月；项目由唐山海港天佑铁路工程承包，毕业后与承包方签劳动合同。该报价只对应这个项目。 两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。",
                 "id": "railroad-conductors-and-yardmasters.faq.5",
                 "question": "中国大陆铁路列车长与调车场场长的工资是多少？",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.china-pay"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "rail-harbin",
+                  "rail-dagang"
+                ]
               },
               {
-                "answer": "美国官方工资页给出本精确职业 2025 年 5 月年工资中位 78,000 美元，是分布中点，不是新人收入。",
+                "answer": "2025 年 5 月美国 53-4031 受雇者工资中位：78,000 美元/年、37.50 美元/小时。年薪 P10/P25/P50/P75/P90 为 58,740／65,610／78,000／83,820／109,770 美元；分位不代表新人薪资或合同到手。",
                 "id": "railroad-conductors-and-yardmasters.faq.6",
                 "question": "美国工资中位数代表新人收入吗？",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.us-pay"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "O*NET 显示 Job Zone 2，典型入职学历为高中文凭（约 86%），通常需要数天至一年在职培训；这是美国典型背景，中国以目标单位公告为准。",
+                "answer": "BLS 美国 53-4031 典型入行是高中或同等学历、无相关经历要求及中期在岗训练。O*NET Job Zone 1–2 是准备程度分组，不能当作每家单位的培训期或认证标准。",
                 "id": "railroad-conductors-and-yardmasters.faq.7",
                 "question": "入行需要什么学历和经验？",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.education-path"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.education-path",
+                "source_refs": [
+                  "ep",
+                  "onet"
+                ]
               },
               {
-                "answer": "美国以高中学历与在职培训为主；中国以学历、专业与经验条件为主，并对行车关键岗位与危险品作业有资格要求。培训证明、录用资格与作业授权是三件事，证书不等于编组或放行权限。",
+                "answer": "美国 49 CFR Part 242 依据实际职责定义 conductor，适用于受该部分约束的铁路及人员。符合定义者即使岗位名称不同也要核认证；yardmaster 名称本身不能判断是否适用。仅在不属于一般铁路系统的厂内轨道运行等例外按 §242.3 查。 大陆《铁路安全管理条例》第56、58条要求铁路运输企业制定作业程序、加强主要行车工种等人员培训；第57条的考试针对铁路机车车辆驾驶人员。客运列车长、车站行车和调车岗位分别查岗位培训、检查、资格与授权。",
                 "id": "railroad-conductors-and-yardmasters.faq.8",
                 "question": "需要考什么证书吗？",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.credentials"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.credentials",
+                "source_refs": [
+                  "fra-242",
+                  "nra-safety",
+                  "cnclass"
+                ]
               },
               {
                 "answer": "主要边界是调车与行车指令不清导致误操作、未确认进路或股道就发出动车指令、车辆装载与隔离不符合规程、应急防护与通报不到位、记录与车号缺失与班组疲劳安排不当；详见风险板块。",
@@ -31962,10 +31981,13 @@
                 "question_key": "career.faq.railroad-conductors-and-yardmasters.risk-boundary"
               },
               {
-                "answer": "美国本职业 2024—2034 预计增长低于平均（1%—2%）、年均空缺约 3,100 个；可向机车工程师、调车场机车工程师与调车工、制动信号道岔操作员、地铁与有轨电车操作员等方向探索，共享能力不代表岗位可互换。",
+                "answer": "美国 BLS 2025–2035 年预测表 1.2 的 53-4031 精确行：2025 年 38,900 个岗位，2035 年预计 39,200 个，增 0.9%，净增约 300，年均空缺 3,000（含增长和替补）。空缺为预测，不是当期招聘。",
                 "id": "railroad-conductors-and-yardmasters.faq.10",
                 "question": "这个职业的前景如何？可以转到哪里？",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.outlook-transition"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.outlook-transition",
+                "source_refs": [
+                  "ep"
+                ]
               }
             ]
           },
@@ -32030,13 +32052,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页中文用于解释美国官方职业范围，不建立中外资格互认；所有虚构练习材料均为编辑设计，不代表雇主标准或单位要求。列车与作业信息不进入公开页面。"
+              "O*NET 分出两种工作场景；BLS 数字只到美国 53-4031。Part 242、大陆条例、两条用人样本和行业平均分别核。YD-05 全部虚构。"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.sources.source-card.4",
           "source_refs": [
-            "editor",
-            "privacy"
+            "msresearch",
+            "ep",
+            "onet-wages",
+            "fra-242",
+            "nra-safety",
+            "rail-harbin",
+            "rail-dagang",
+            "nbs",
+            "rail-paper"
           ],
           "type": "prose"
         }
@@ -32124,9 +32153,9 @@
                 "url": "https://www.onetonline.org/link/summary/53-4031.00"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "OEWS 按受薪雇员汇总工资分布，不含自雇；分位不推算个人收入；BLS 职业展望无本职业独立页，就业与预测取自 BLS 就业预测资料。",
+                  "2025 年 5 月美国 53-4031 受雇者工资中位：78,000 美元/年、37.50 美元/小时。年薪 P10/P25/P50/P75/P90 为 58,740／65,610／78,000／83,820／109,770 美元；分位不代表新人薪资或合同到手。",
                   "发布方、原始链接与适用范围见来源条目。"
                 ],
                 "evidence_type": "official wage statistics",
@@ -32134,15 +32163,15 @@
                 "limitation": "OEWS 按受薪雇员汇总工资分布，不含自雇；分位不推算个人收入；BLS 职业展望无本职业独立页，就业与预测取自 BLS 就业预测资料。",
                 "market": "美国",
                 "name": "BLS 职业就业工资统计：53-4031 Railroad Conductors and Yardmasters（OEWS）",
-                "period": "May 2025；本页核读 2026-09-30",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/current/oes534031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-4031.00"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "预测期就业变化不证明 AI 因果，也不是个人求职结果。",
+                  "美国 BLS 2025–2035 年预测表 1.2 的 53-4031 精确行：2025 年 38,900 个岗位，2035 年预计 39,200 个，增 0.9%，净增约 300，年均空缺 3,000（含增长和替补）。空缺为预测，不是当期招聘。",
                   "发布方、原始链接与适用范围见来源条目。"
                 ],
                 "evidence_type": "official employment projections",
@@ -32150,7 +32179,7 @@
                 "limitation": "预测期就业变化不证明 AI 因果，也不是个人求职结果。",
                 "market": "美国",
                 "name": "BLS 就业预测与职业特征表",
-                "period": "2024—2034",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -32172,9 +32201,9 @@
                 "url": "https://www.bls.gov/oes/tables.htm"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "行业与岗位类别平均工资不是本职业工资，也不覆盖精确职业；不含自雇。",
+                  "国家统计局 2025 年交通运输、仓储和邮政业城镇单位就业人员税前年平均工资：非私营 133,981 元/年，私营 73,133 元/年。两者是行业工资，不是全国列车长或调车人员工资。",
                   "发布方、原始链接与适用范围见来源条目。"
                 ],
                 "evidence_type": "official industry wage statistics",
@@ -32182,26 +32211,26 @@
                 "limitation": "行业与岗位类别平均工资不是本职业工资，也不覆盖精确职业；不含自雇。",
                 "market": "中国大陆",
                 "name": "国家统计局 2025 年城镇单位就业人员年平均工资情况",
-                "period": "2025 年工资统计；发布 2026-05",
+                "period": "2025",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "行车关键岗位实行岗位培训与资格管理，危险品作业有专门要求，具体报考与作业范围按监管与单位规定；不等于编组与放行授权。",
-                  "发布方、原始链接与适用范围见来源条目。"
+                  "大陆职业分类把铁路列车乘务员（4-02-01-02）与铁路车站调车作业员（6-30-02-02）分列；列车长、调车长与调车区长不能按名称自动互认，也不等同于美国 53-4031 组合职业。",
+                  "企业认定范围与分类参照，不是统一上岗许可。"
                 ],
-                "evidence_type": "official qualification catalogue",
+                "evidence_type": "原始公开资料",
                 "id": "cnclass",
-                "limitation": "行车关键岗位实行岗位培训与资格管理，危险品作业有专门要求，具体报考与作业范围按监管与单位规定；不等于编组与放行授权。",
+                "limitation": "企业认定范围与分类参照，不是统一上岗许可。",
                 "market": "中国大陆",
-                "name": "铁路行车关键岗位资格与危险品运输作业相关说明",
-                "period": "现行规则；本页核读 2026-09-30",
-                "publisher": "国家铁路局 / 交通运输部",
+                "name": "重庆人社局：铁路职业技能等级认定范围",
+                "period": "2022-09-05",
+                "publisher": "重庆市人力资源和社会保障局",
                 "scope": "contextual",
-                "url": "https://www.nra.gov.cn/"
+                "url": "https://rlsbj.cq.gov.cn/ywzl/zjzx/jdsq/202209/t20220905_11072504.html"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32396,52 +32425,52 @@
                 "url": "https://www.onetonline.org/link/summary/43-5032.00"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "未取得职责与单位匹配且状态已核实的招聘薪酬原文。",
-                  "发布方、原始链接与适用范围见来源条目。"
+                  "中国铁路哈尔滨局集团 2026 年大专（高职）毕业生招聘计划（二）列 B0101 车务调车操作技能岗位 328 人，分多家站段，列明多个专业及相关课程。附件未列薪资。",
+                  "两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。"
                 ],
-                "evidence_type": "recruitment proxy",
+                "evidence_type": "原始公开资料",
                 "id": "r2-pay-1",
-                "limitation": "未取得职责与单位匹配且状态已核实的招聘薪酬原文。",
+                "limitation": "两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。",
                 "market": "中国大陆",
-                "name": "中国公开招聘薪酬样本（本轮未取得）",
-                "period": "本轮未取得",
-                "publisher": "公开招聘公告",
-                "scope": "中国大陆",
-                "url": null
+                "name": "中国铁路哈尔滨局：2026 年调车技能招聘计划",
+                "period": "2026",
+                "publisher": "中国铁路哈尔滨局集团",
+                "scope": "recruitment_proxy",
+                "url": "https://rczp.china-railway.com.cn/upload/tinymce/202511/20251123/202511232244043_32588.pdf"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "未取得可核验的本职业公开招聘薪酬原文。",
-                  "发布方、原始链接与适用范围见来源条目。"
+                  "天津铁道职业技术学院就业站 2026 年 10 月 30 日公告：大港发电厂铁路项目招调车员 10 人、三班倒，列 5,500 元/月；项目由唐山海港天佑铁路工程承包，毕业后与承包方签劳动合同。该报价只对应这个项目。",
+                  "两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。"
                 ],
-                "evidence_type": "recruitment proxy",
+                "evidence_type": "原始公开资料",
                 "id": "r2-pay-2",
-                "limitation": "未取得可核验的本职业公开招聘薪酬原文。",
+                "limitation": "两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。",
                 "market": "中国大陆",
-                "name": "中国公开招聘薪酬样本（本轮未取得）",
-                "period": "本轮未取得",
-                "publisher": "公开招聘公告",
-                "scope": "中国大陆",
-                "url": null
+                "name": "天津铁道职业技术学院：大港项目调车招聘",
+                "period": "2026-10-30",
+                "publisher": "天津铁道职业技术学院就业站",
+                "scope": "recruitment_proxy",
+                "url": "https://tjtdxy.bysjy.com.cn/detail/online?id=3631969"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "缺少可核验样本，不在本页展示具体报价。",
-                  "发布方、原始链接与适用范围见来源条目。"
+                  "国家统计局 2025 年交通运输、仓储和邮政业城镇单位就业人员税前年平均工资：非私营 133,981 元/年，私营 73,133 元/年。两者是行业工资，不是全国列车长或调车人员工资。",
+                  "行业与岗位类别平均工资不是本职业工资，也不覆盖精确职业；不含自雇。"
                 ],
-                "evidence_type": "recruitment proxy",
+                "evidence_type": "official industry wage statistics",
                 "id": "r2-pay-3",
-                "limitation": "缺少可核验样本，不在本页展示具体报价。",
+                "limitation": "行业与岗位类别平均工资不是本职业工资，也不覆盖精确职业；不含自雇。",
                 "market": "中国大陆",
-                "name": "中国公开招聘薪酬样本（本轮未取得）",
-                "period": "本轮未取得",
-                "publisher": "公开招聘公告",
-                "scope": "中国大陆",
-                "url": null
+                "name": "国家统计局 2025 年城镇单位就业人员年平均工资情况",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32476,9 +32505,9 @@
                 "url": "https://www.onetonline.org/link/details/53-4031.00"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "派生自 BLS OEWS；分位不推算个人收入。",
+                  "2025 年 5 月美国 53-4031 受雇者工资中位：78,000 美元/年、37.50 美元/小时。年薪 P10/P25/P50/P75/P90 为 58,740／65,610／78,000／83,820／109,770 美元；分位不代表新人薪资或合同到手。",
                   "发布方、原始链接与适用范围见来源条目。"
                 ],
                 "evidence_type": "official wage statistics",
@@ -32486,7 +32515,7 @@
                 "limitation": "派生自 BLS OEWS；分位不推算个人收入。",
                 "market": "美国",
                 "name": "O*NET 53-4031.00 全国工资（BLS OEWS 派生）",
-                "period": "2025 工资数据",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-4031.00"
@@ -32508,9 +32537,9 @@
                 "url": "https://www.onetonline.org/link/summary/53-2021.00"
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "适用对象及例外见242.1、242.3、242.7；非所有Yardmaster头衔均自动适用，不授予中国资格。"
+                  "美国 49 CFR Part 242 依据实际职责定义 conductor，适用于受该部分约束的铁路及人员。符合定义者即使岗位名称不同也要核认证；yardmaster 名称本身不能判断是否适用。仅在不属于一般铁路系统的厂内轨道运行等例外按 §242.3 查。"
                 ],
                 "evidence_type": "law",
                 "id": "fra-242",
@@ -32523,9 +32552,9 @@
                 "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-II/part-242"
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "第五十六至五十八条区分企业制度、驾驶人员考试和行车岗位业务安全培训；不证明列车长有统一驾驶执照。"
+                  "大陆《铁路安全管理条例》第56、58条要求铁路运输企业制定作业程序、加强主要行车工种等人员培训；第57条的考试针对铁路机车车辆驾驶人员。客运列车长、车站行车和调车岗位分别查岗位培训、检查、资格与授权。"
                 ],
                 "evidence_type": "law",
                 "id": "nra-safety",
@@ -32538,21 +32567,64 @@
                 "url": "https://source.nra.gov.cn/jglz/sbjg/fgsb/202204/t20220405_292241.shtml"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "计划审核 — 75/100; weight=1/3; railroad-conductors-and-yardmasters.ai-impact.ai-impact-table.99[0]",
-                  "进路与信号核对 — 50/100; weight=1/3; railroad-conductors-and-yardmasters.ai-impact.ai-impact-table.103[0]",
-                  "应急与信息通报 — 25/100; weight=1/3; railroad-conductors-and-yardmasters.ai-impact.ai-impact-table.111[0]"
+                  "用虚构记录练习把差异归类、列待确认项，再逐条对照原件。现有资料不提供本职业 AI 采用率、替代率或安全成效。真实调车和行车只按授权人员及适用规程处理。",
+                  "定性编辑说明，无评分。",
+                  "定性编辑说明，无评分。",
+                  "定性编辑说明，无评分。",
+                  "定性编辑说明，无评分。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "原始公开资料",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "定性编辑说明，无评分。",
+                "name": "费马测试：AI 任务证据口径",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "#career-visual-group-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "中国铁路哈尔滨局集团 2026 年大专（高职）毕业生招聘计划（二）列 B0101 车务调车操作技能岗位 328 人，分多家站段，列明多个专业及相关课程。附件未列薪资。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "rail-harbin",
+                "limitation": "两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。",
+                "name": "中国铁路哈尔滨局：2026 年调车技能招聘计划",
+                "period": "2026",
+                "publisher": "中国铁路哈尔滨局集团",
+                "scope": "recruitment_proxy",
+                "url": "https://rczp.china-railway.com.cn/upload/tinymce/202511/20251123/202511232244043_32588.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "天津铁道职业技术学院就业站 2026 年 10 月 30 日公告：大港发电厂铁路项目招调车员 10 人、三班倒，列 5,500 元/月；项目由唐山海港天佑铁路工程承包，毕业后与承包方签劳动合同。该报价只对应这个项目。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "rail-dagang",
+                "limitation": "两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。",
+                "name": "天津铁道职业技术学院：大港项目调车招聘",
+                "period": "2026-10-30",
+                "publisher": "天津铁道职业技术学院就业站",
+                "scope": "recruitment_proxy",
+                "url": "https://tjtdxy.bysjy.com.cn/detail/online?id=3631969"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "到入行区做 YD-05：按虚构两份车号和封条记录找差异，列待确认项，并写两句交接，不指挥任何作业。"
+                ],
+                "evidence_type": "虚构纸面练习",
+                "id": "rail-paper",
+                "limitation": "纸面记录练习，不涉及信号、设备和运行指挥。",
+                "name": "费马测试：YD-05 虚构车号及封条记录",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -32676,6 +32748,10 @@
               "entry": "link-5",
               "field": "entity"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/53-4031.00",
+            "label": "O*NET 53-4031.00 职业详情（工作情境）"
           }
         ],
         "evidence_note": {
@@ -32684,7 +32760,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "type": "prose"
         },
-        "heading": "铁路列车长的工作方向与相邻职业怎么比较？",
+        "heading": "列车乘务、站场协调与相邻职业怎么比较？",
         "intro": {
           "$item": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.10",
           "block": "direction-comparison",
@@ -33303,7 +33379,7 @@
             }
           }
         ],
-        "heading": "AI 会取代铁路列车长吗？",
+        "heading": "怎样用虚构记录试做 AI 交接草稿？",
         "method_cards": [
           {
             "含义": {
@@ -33890,7 +33966,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为铁路列车长？教育、资格与职业发展路径",
+        "heading": "铁路列车长与调车场主管：怎样入行？",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "railroad-conductors-and-yardmasters.path.career-path-block.21",
@@ -34004,6 +34080,36 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://rczp.china-railway.com.cn/upload/tinymce/202511/20251123/202511232244043_32588.pdf",
+            "id": "rail-harbin",
+            "label": "中国铁路哈尔滨局：2026 年调车技能招聘计划",
+            "scope": "两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。"
+          },
+          {
+            "href": "https://tjtdxy.bysjy.com.cn/detail/online?id=3631969",
+            "id": "rail-dagang",
+            "label": "天津铁道职业技术学院：大港项目调车招聘",
+            "scope": "两份是招聘计划或公告，只说明当时列出的岗位、工资或学历信息。不能据此判断全国工资、当前是否招工、到手收入或能否独立上岗。"
+          },
+          {
+            "href": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-II/part-242",
+            "id": "fra-242",
+            "label": "49 CFR Part 242 — Qualification and Certification of Conductors",
+            "scope": "适用对象及例外见242.1、242.3、242.7；非所有Yardmaster头衔均自动适用，不授予中国资格。"
+          },
+          {
+            "href": "https://source.nra.gov.cn/jglz/sbjg/fgsb/202204/t20220405_292241.shtml",
+            "id": "nra-safety",
+            "label": "铁路安全管理条例",
+            "scope": "第五十六至五十八条区分企业制度、驾驶人员考试和行车岗位业务安全培训；不证明列车长有统一驾驶执照。"
+          },
+          {
+            "href": "https://rlsbj.cq.gov.cn/ywzl/zjzx/jdsq/202209/t20220905_11072504.html",
+            "id": "cnclass",
+            "label": "重庆人社局：铁路职业技能等级认定范围",
+            "scope": "企业认定范围与分类参照，不是统一上岗许可。"
           }
         ],
         "tracks": [
@@ -34748,7 +34854,7 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "heading": "铁路列车长的工作有哪些压力、风险与职业边界？",
+        "heading": "列车乘务和调车场工作的风险与边界",
         "risks": [
           {
             "affected_roles": {
@@ -35862,7 +35968,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "铁路列车长适合什么样的人？"
+        "title": "哪一种铁路现场工作更值得先了解？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -35936,7 +36042,7 @@
           "copy_key": "career.item.market-signal-card",
           "type": "prose"
         },
-        "heading": "铁路列车长的前景如何？可以转向哪些相关职业？",
+        "heading": "铁路列车长与调车场主管：前景与相邻岗位",
         "outlook_evidence": [
           {
             "geography": {
@@ -36927,7 +37033,7 @@
             }
           }
         ],
-        "heading": "做铁路列车长，哪些兴趣、能力与工作方式更重要？",
+        "heading": "列车长和调车场主管需要哪些工作方式？",
         "questions": [
           {
             "answer": {
@@ -37458,7 +37564,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与工作任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37549,37 +37655,36 @@
       },
       {
         "derivation": null,
-        "display_value": "36,800人（2024年）",
+        "display_value": "2025 年约 38,900 个岗位",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数（BLS 就业预测口径）",
         "occupation_scope": "美国铁路列车长与调车场场长（53-4031.00，精确职业）",
-        "period": "2024",
-        "source_refs": [
-          "onet",
-          "bls"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "2024—2034预计增长低于平均（1%—2%）",
-        "fact_id": "us-growth-2025-2035",
-        "market": "美国",
-        "measure": "就业变化率与官方净变化",
-        "occupation_scope": "美国铁路列车长与调车场场长（53-4031.00，精确职业）",
-        "period": "2024—2034",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均约3,100个职位空缺（2024—2034，含替换需求）",
+        "display_value": "0.9%",
+        "fact_id": "us-growth-2025-2035",
+        "market": "美国",
+        "measure": "就业变化率与官方净变化",
+        "occupation_scope": "美国铁路列车长与调车场场长（53-4031.00，精确职业）",
+        "period": "2025–2035",
+        "source_refs": [
+          "ep"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均约 3,000 个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺，含替换需求",
         "occupation_scope": "美国铁路列车长与调车场场长（53-4031.00，精确职业）",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -37727,27 +37832,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "铁路列车长",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与工作任务"
     },
     "badges": [
       "铁路列车长 · 任务核对",
@@ -37759,25 +37852,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数"
+        "label": "美国年薪中位（2025 年 5 月）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业增长（2025–2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均空缺（2025–2035）"
       },
       {
         "availability": "missing",
@@ -37791,17 +37884,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "铁路列车长与调车场场长 53-4031.00 的行车组织、调车指挥、车号核对与记录任务；核对美国 OEWS 精确职业工资分位、BLS 2024—2034 就业预测、中国证据缺口、入行与资格路径，以及可独立完成的纸面值乘与编组核对练习。"
+      "text": "分别了解列车乘务组织与站场调车，核对美国工资、认证和大陆招聘，再试做虚构记录交接。"
     },
     "title": {
       "availability": "available",
-      "text": "铁路列车长与调车场场长"
+      "text": "铁路列车长与调车场主管：工作、入行与工资"
     }
   },
-  "source_content_sha256": "0c9027bf537e2b8bcfba5b1732d1f7466934858598a33d3e909dd153447db921",
+  "source_content_sha256": "1d9a8c6c5de826a210fedbd7f7574ba5ada48871186330ae474de5aa12a14834",
   "subject": {
     "canonical_slug": "railroad-conductors-and-yardmasters",
-    "name": "铁路列车长",
-    "summary": "铁路列车长与调车场场长协调调车机车乘务组、旅客或货运列车乘务组的活动：接收调度关于径路、时刻与货物的指令并传达；指挥调车与车辆改编、核对车号与封条；审核时刻表、调车单与货运单据并制定计划；在运行中巡视车辆并处理异常；在紧急情况下设置警示信号并编制事故与延误报告；组织乘务组完成运输并监督车辆检修。本页采用美国 O*NET 精确职业 Railroad Conductors and Yardmasters（53-4031.00）；中国区未取得可核验的精确职业工资，保留证据不足标记。"
+    "name": "铁路列车长与调车场主管",
+    "summary": "美国 O*NET 53-4031.00 把两种工作归在一项：列车长协调客运或货运列车上的乘务组，调车场主管核对列车计划和调车顺序、协调场内作业。两类工作可能交叉；大陆的客运列车长、车站行车与调车工种应分别核职责。"
   }
 }

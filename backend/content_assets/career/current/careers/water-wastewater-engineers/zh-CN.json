@@ -5,9 +5,6 @@
       "fact:china-pay-gap": {
         "status": "mapped"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:industry-primary": {
         "status": "pending_mapping"
       },
@@ -14942,14 +14939,8 @@
         "status": "mapped"
       },
       "hero.china_pay.derivation": {
-        "ref": {
-          "id": "china-pay-gap",
-          "path": [
-            "derivation"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "hero.china_pay.display_value": {
         "ref": {
@@ -23717,7 +23708,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "保存W26输入与换算、R0、甲文字修订、乙重算和未知清单。观察自己愿意继续核数据、学工程基础还是更倾向管理协调，再据目标岗位选择学习与反馈机会。"
+              "在目录的「入行、证书与职业发展」找到「W26：给定每日负荷」，先算 R0，再分别处理甲和乙，最后查看参考。"
             ]
           },
           "id": "water-wastewater-engineers.display.fit_decision_checklist.how-detail",
@@ -24771,7 +24762,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国水务2025校园招聘历史样本，未列工资金额"
+              "重庆设计集团市政设计研究院与重庆水务集团两份 2026 招聘附件。"
             ]
           },
           "id": "water-wastewater-engineers.display.onet_structured_fields_block.employer",
@@ -25370,13 +25361,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "先核工程任务，再区分AI文字辅助与专业模型及设计责任。"
+              "给排水设计岗交付方案、计算书和图纸。水厂运行岗的班次工作包括监测设备、采样检测并记录读数和运行数据；该分工会随厂型和规模变化。先核雇主职责、培训和权限。"
             ]
           },
           "id": "water-wastewater-engineers.display.adjacent_career_comparison_table.transition",
           "source_refs": [
             "onet",
-            "editorial"
+            "plant-operator-ooh"
           ],
           "type": "prose"
         }
@@ -25555,7 +25546,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI报告辅助与专业工程责任如何分开？"
+              "AI 草稿怎样核对工程假设与单位？"
             ]
           },
           "id": "water-wastewater-engineers.display.ai_impact_table.heading",
@@ -25570,7 +25561,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：区分生成式文字、专业水力模型与设施控制。W26仅核给定负荷和表达范围，真实水质、工程设计和运行仍需专业验证。本页未取得任务级效果评分或替代率，另列编辑估算分数。 AI影响度 58% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可用虚构输入练习整理说明，但水力模型、工程设计及设施控制须分别验证。W26 只核给定负荷和措辞。未取得本职业采用率、效果量或替代率的实测数据。"
             ]
           },
           "id": "water-wastewater-engineers.display.ai_impact_table.answer",
@@ -26324,7 +26315,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "1000×200÷1000=200kg/日，保留换算。"
+              "保留每一步换算和单位，结果到 W26 的参考区自核。"
             ]
           },
           "id": "water-wastewater-engineers.display.ai_impact_table.tasks.2.human-control",
@@ -27313,14 +27304,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：2026-10-03实读中国水务2025和北京排水2025届历史校招，未取得中国水与污水处理工程师全国可比工资分布。本批同日检索的人社部企业薪酬入口全文获取未成功；不能断言不存在调查。中国水务未列给排水金额，北京排水网页头8000—10000元未说明周期或逐岗对应，不据此填本职业月薪。"
+              "国家统计局 2025 年城镇单位税前年平均工资：电力、热力、燃气及水生产和供应业，非私营 160,897 元、私营 66,451 元；水利、环境和公共设施管理业，非私营 70,172 元、私营 49,527 元。 这是相应行业城镇单位就业人员的背景，未取得给排水工程师全国可比工资分布；不可当作设计岗年薪或除以 12 填月薪。"
             ]
           },
           "id": "water-wastewater-engineers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
+            "nbs",
             "employer",
-            "r2-pay-3",
-            "editorial"
+            "r2-pay-3"
           ],
           "type": "prose"
         },
@@ -27361,7 +27352,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国水务2025校招列运营类给排水工程师等岗位，有应届及班级前50%投递要求，硕士等为优先；未列工程师具体金额。北京排水2025校招材料另为多岗位招聘，不作精确工资样本。"
+              "2026 年 7 月 24 日，市政设计院给排水设计岗共 10 个：校招重庆 2 个（硕士及以上）、南京 3 个（本科及以上）；社招重庆 4 个、昆明 1 个，均本科及以上且至少 3 年相关经历。 2026 年 6 月 12 日，水务集团旗下公用工程咨询公司在重庆两江新区校招排水专业设计师 2 人。要求硕士及以上、指定研究生专业，且本科为给排水科学与工程。"
             ]
           },
           "id": "water-wastewater-engineers.china-salary.career-snapshot-primary-locale.4",
@@ -27377,7 +27368,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "材料均为2025届历史招聘，不能从页面仍可打开推当前开放。岗位条件、金额周期及真实在招状态应查新公告，不计算全国需求率。"
+              "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
             ]
           },
           "id": "water-wastewater-engineers.china-salary.career-snapshot-primary-locale.5",
@@ -27393,7 +27384,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国岗位收入：历史资料与全国缺口"
+              "中国岗位收入：行业参照与招聘样本"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.heading",
@@ -27409,7 +27400,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国水务2025校招发布页未列给排水工程师月薪、年薪或到手金额。"
+              "附件列现场踏勘、方案深化、编说明和协调；成果交项目负责人。岗位可涉及出差或驻场，公告及岗位表未列固定工资。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.quote-limits",
@@ -27423,7 +27414,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "北京排水校招网页头8000–10000元没有周期与逐岗对应，本页不把它当工程师月薪或全国分布。"
+              "附件另列水力计算、管网平差、出差或驻场、施工图与现场配合；设计和咨询统筹经历有要求，公告及岗位表未列固定工资。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.missing-pay",
@@ -27437,7 +27428,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国水务运营类列给排水工程师、水厂运行、污水处理等不同岗位。2025应届、班级前50%为公开基本要求；硕士及以上等是优先条件，不能写成全部岗位必须硕士。未逐岗列人数和薪资。"
+              "2026 年 7 月 24 日，市政设计院给排水设计岗共 10 个：校招重庆 2 个（硕士及以上）、南京 3 个（本科及以上）；社招重庆 4 个、昆明 1 个，均本科及以上且至少 3 年相关经历。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.featured",
@@ -27451,7 +27442,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2025应届及班级前50%是投递要求；硕士以上等列优先，不写成所有岗位必须硕士。"
+              "附件列现场踏勘、方案深化、编说明和协调；成果交项目负责人。岗位可涉及出差或驻场，公告及岗位表未列固定工资。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.background",
@@ -27465,7 +27456,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "北京排水2025届集团给排水、环工类明确本科及以上，列给排水、市政、环境工程与环境科学等专业，任务含水厂和管网工艺运行管理、技术研发。网页头总40人涵盖多专业多岗，不能全算给排水工程师；集团与各子公司任务条件分别核。"
+              "2026 年 6 月 12 日，水务集团旗下公用工程咨询公司在重庆两江新区校招排水专业设计师 2 人。要求硕士及以上、指定研究生专业，且本科为给排水科学与工程。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.theater",
@@ -27479,7 +27470,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "两份历史校园招聘发布材料不代表全国工程师收入，不据此设置统一薪档或城市排名。"
+              "这是相应行业城镇单位就业人员的背景，未取得给排水工程师全国可比工资分布；不可当作设计岗年薪或除以 12 填月薪。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.national",
@@ -27526,7 +27517,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得上述历史校招给排水工程师逐岗人数、对应薪酬周期和当前开放状态。中国水务未列金额；北京网页头8000—10000元不能认作本职业月薪。已公开相关专业学历和任务属雇主类别条件，不是全国统一门槛；美国土木资料另列代理范围。"
+              "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。 这是相应行业城镇单位就业人员的背景，未取得给排水工程师全国可比工资分布；不可当作设计岗年薪或除以 12 填月薪。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_primary_locale.boundary",
@@ -27768,7 +27759,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "联邦政府不含邮政117790美元/年为土木工程师母职业行业中位，不是水与污水处理工程师单列工资或中国政府岗位待遇。"
+              "州政府不含教育和医院102440美元/年为土木工程师母职业行业中位，不是水与污水处理工程师单列工资或中国政府岗位待遇。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_secondary_locale.industry.theater",
@@ -27940,7 +27931,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "W26中1000m³/日乘200mg/L需转换为kg/日：1m³=1000L、1kg=1000000mg，故乘积除1000得200kg/日。解释每一步并核数量级，不能略去单位只写200。真实水质组成和处理条件未提供，记住公式也不能补全。"
+              "用 W26 检查流量与浓度的单位如何换算为每日负荷；解释数量级和输入条件，不自行补出水或处理条件。"
             ]
           },
           "id": "water-wastewater-engineers.fit.personality-fit-block.2",
@@ -27955,7 +27946,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "甲只撤回“出水达标、可以运行”，R0数值不变；乙独立Q改1500m³/日、浓度仍200，需得300kg/日。反馈含糊先问改输入还是措辞，保留旧版和原因，不为迎合结论改浓度。"
+              "先分清反馈是在改文字还是改输入，按题分别处理甲和乙。保留原版和修改理由；不要为了结论改浓度。"
             ]
           },
           "id": "water-wastewater-engineers.fit.personality-fit-block.3",
@@ -27970,7 +27961,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "申请未通过先核专业、学历、实践与真实材料，原因无反馈则未知。中国水务历史校招是应届入口，不能替所有工程岗条件；作品也不等于注册。选一项能补的准备，不编项目责任或雇主评价。"
+              "投递先核本岗位的专业、学历和经历。未收到反馈时保留原因未知；纸面作品不能代替工程实践或注册。"
             ]
           },
           "id": "water-wastewater-engineers.fit.personality-fit-block.4",
@@ -28135,7 +28126,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据不足：已读职业档案、资格及招聘没有提供中国本职业人格或认知分数预测录用、收入、设计绩效的验证。北京排水列MAP测验名称不等于公开效度证据。不作心理诊断、招聘评分或工程能力认证，不给MBTI、九型、IQ或EQ设合格线；编辑观察和资格、雇主条件分别核。"
+              "未取得人格或认知分数预测本职业录用、收入或设计绩效的验证。测评只提供探索线索，不设 MBTI、九型、IQ 或 EQ 门槛。"
             ]
           },
           "id": "water-wastewater-engineers.display.personality_fit_block.boundary",
@@ -28615,7 +28606,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "解释1000×200÷1000=200kg/日。"
+              "把流量、浓度、换算及结果写成可复算的一行。"
             ]
           },
           "id": "water-wastewater-engineers.display.personality_fit_block.assessments.iq.signals.1",
@@ -28630,7 +28621,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "乙Q1500下得300kg/日，浓度不变。"
+              "只改乙指定的输入，说明其他输入未变。"
             ]
           },
           "id": "water-wastewater-engineers.display.personality_fit_block.assessments.iq.signals.2",
@@ -29337,7 +29328,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "水务历史校招范围，非全国或当前开放。"
+              "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
             ]
           },
           "id": "water-wastewater-engineers.display.personality_fit_block.source.employer",
@@ -29514,7 +29505,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "真实列专业学历与项目贡献，缺反馈不猜原因；历史校招不保证当前开放，选择可补的专业准备。"
+              "如实列专业、学历与项目贡献；没有反馈时保留原因未知。公开样本只用于选一项可补的专业准备。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_risk_cards.audition-feedback.mitigation",
@@ -29563,7 +29554,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "结合精确任务、母职业环境、历史校招、中国专业负责人通知及NIST方法；非事故率或个人评分。签章通知及其附件说明相关给排水工程专业负责人在设计文件责任栏签字盖章，不是全员初级入职门槛。"
+              "风险依据为具体任务、母职业环境、岗位表、住建部通知及 NIST 方法。执业签章属于适用工程的专业负责人；事故率和个人胜任度均未测量。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_risk_cards.evidence-scope",
@@ -29961,7 +29952,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国水务历史校招，未列工程师金额。"
+              "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_risk_cards.source.employer",
@@ -30025,7 +30016,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：中国水务2025校招发布页列给排水工程师等运营岗位，应届及班级前50%为投递要求、硕士等为优先，未披露工程师金额。北京排水2025届多岗位校招网页头金额周期及逐岗对应不明，不作精确工资；两份历史材料不能计当前在招或全国热度。"
+              "2026 年 7 月 24 日，市政设计院给排水设计岗共 10 个：校招重庆 2 个（硕士及以上）、南京 3 个（本科及以上）；社招重庆 4 个、昆明 1 个，均本科及以上且至少 3 年相关经历。 2026 年 6 月 12 日，水务集团旗下公用工程咨询公司在重庆两江新区校招排水专业设计师 2 人。要求硕士及以上、指定研究生专业，且本科为给排水科学与工程。 这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
             ]
           },
           "id": "water-wastewater-engineers.path.recruitment-sample.1",
@@ -30076,18 +30067,18 @@
                 "训练与专业负责人资格不同。"
               ],
               [
-                "中国水务历史校招",
-                "运营类列给排水工程师及其他岗位。",
-                "2025应届与排名要求，硕士等优先。",
-                "按新岗位核专业地点，不虚构实践。",
-                "历史入口未逐岗披露工资，不代表现招。"
+                "重庆设计集团有限公司市政设计研究院",
+                "给排水设计，踏勘与说明",
+                "校招与社招条件、三地分别查",
+                "列真实课程、图纸练习及本人贡献",
+                "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
               ],
               [
-                "北京排水历史校招",
-                "集团多专业岗位招聘材料。",
-                "网页头本科与总人数，不拆本职业人数。",
-                "核逐岗任务，金额周期须确认。",
-                "混合校招不是精确工资样本。"
+                "重庆水务集团公用工程咨询有限公司",
+                "排水设计，水力与现场配合",
+                "校招 2 人，硕士及以上，专业和经历见岗位表",
+                "用虚构输入展示单位复核，不交真实客户资料",
+                "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
               ]
             ]
           },
@@ -30112,21 +30103,21 @@
                 "id": "employer-0",
                 "values": [
                   "历史雇主资料",
-                  "中国水务2025校招列给排水等多岗；投递应届与排名条件，硕士等优先。北京排水另一混合校招不拆工程师数量或工资，不泛化全国。"
+                  "2026 年 7 月 24 日，市政设计院给排水设计岗共 10 个：校招重庆 2 个（硕士及以上）、南京 3 个（本科及以上）；社招重庆 4 个、昆明 1 个，均本科及以上且至少 3 年相关经历。 2026 年 6 月 12 日，水务集团旗下公用工程咨询公司在重庆两江新区校招排水专业设计师 2 人。要求硕士及以上、指定研究生专业，且本科为给排水科学与工程。 这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
                 ]
               },
               {
                 "id": "employer-1",
                 "values": [
                   "编辑建议：核单位",
-                  "W26原始Q1000m³/日、C200mg/L，负荷Q×C÷1000=200kg/日；换算依据及未知单列。"
+                  "用题内流量和浓度，写出换算过程，列出未知。"
                 ]
               },
               {
                 "id": "employer-2",
                 "values": [
                   "编辑建议：版本范围",
-                  "甲不改数值撤达标运行；乙独立Q1500得300kg/日。标虚构纸面，不冒充模型、设计或运营成果。"
+                  "甲只改表述，乙另算；标虚构纸面并保留版本。"
                 ]
               },
               {
@@ -30162,14 +30153,14 @@
                 "id": "rework",
                 "values": [
                   "R0负荷表",
-                  "保留1000×200÷1000=200kg/日，说明mg/日错误，纸面算术不冒充设计。"
+                  "留计算和单位，标出草稿的错误。"
                 ]
               },
               {
                 "id": "materials",
                 "values": [
                   "甲改稿与乙独立表",
-                  "甲数值不变撤达标运行；乙Q1500得300kg/日。保存输入和原因，不称真实前后效果。"
+                  "保留甲改稿、乙重算和各自理由；两情境不作真实前后效果。"
                 ]
               },
               {
@@ -30215,13 +30206,13 @@
               [
                 "负荷核算",
                 "算1000×200÷1000。",
-                "200kg/日，过程含单位。",
+                "结果有单位，能按给定输入复算。",
                 "不证明去除率或出水达标。"
               ],
               [
                 "反馈修订",
                 "甲改措辞，乙Q独立改1500。",
-                "甲R0不变，乙300kg/日。",
+                "甲保留原数，乙按独立输入重算。",
                 "不当真实运行前后实验。"
               ],
               [
@@ -30378,7 +30369,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国水务2025历史校招为应届入口，有排名投递要求，硕士等优先；未列给排水金额或逐岗人数，作品不替专业与学历。"
+              "2026 年 7 月 24 日，市政设计院给排水设计岗共 10 个：校招重庆 2 个（硕士及以上）、南京 3 个（本科及以上）；社招重庆 4 个、昆明 1 个，均本科及以上且至少 3 年相关经历。 附件列现场踏勘、方案深化、编说明和协调；成果交项目负责人。岗位可涉及出差或驻场，公告及岗位表未列固定工资。"
             ]
           },
           "id": "water-wastewater-engineers.path.career-path-block.2",
@@ -30395,7 +30386,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "北京排水2025校招为多岗多专业资料，网页头金额周期与逐岗对应不明；本人资格和新招聘状态另核，不作精确工资或岗位数量。"
+              "2026 年 6 月 12 日，水务集团旗下公用工程咨询公司在重庆两江新区校招排水专业设计师 2 人。要求硕士及以上、指定研究生专业，且本科为给排水科学与工程。 附件另列水力计算、管网平差、出差或驻场、施工图与现场配合；设计和咨询统筹经历有要求，公告及岗位表未列固定工资。"
             ]
           },
           "id": "water-wastewater-engineers.path.career-path-block.3",
@@ -30415,7 +30406,7 @@
               {
                 "id": "actors-practice-materials",
                 "values": [
-                  "W26材料：虚构每日负荷",
+                  "W26：给定每日负荷",
                   "纯虚构纸面情境，R0给定流量Q=1000m³/日、同一题设污染物浓度C=200mg/L，两值视作本题恒定输入。只算负荷，不给处理去除率、出水数据、标准或设备条件。",
                   "换算：1m³=1000L，1kg=1000000mg，故L=Q×C÷1000，单位kg/日。草稿：“每日负荷是200mg/日，出水已经达标，可以直接运行。”"
                 ]
@@ -30424,7 +30415,7 @@
                 "id": "actors-practice-task",
                 "values": [
                   "任务：核算与独立反馈",
-                  "计算R0并改错单位；甲只撤回不支持的出水和运行结论，Q/C不得改变，保留200kg/日与未知清单。",
+                  "计算 R0 并纠正草稿单位。甲只撤回不受支持的出水达标和运行结论，保留你算得的负荷、原 Q/C 和未知清单。",
                   "乙为独立新条件：Q=1500m³/日，C仍200mg/L，公式不变。另算乙，不写成实际改造或运行前后试验，不补去除率和设备参数。"
                 ]
               },
@@ -30477,7 +30468,7 @@
                 "id": "day-3",
                 "values": [
                   "第3天｜算R0",
-                  "产出200kg/日表，纠正mg/日，说明不能推达标运行。"
+                  "完成 R0 负荷表，纠正草稿单位，解释不能据此认定达标运行。"
                 ]
               },
               {
@@ -30491,7 +30482,7 @@
                 "id": "day-5",
                 "values": [
                   "第5天｜独立算乙",
-                  "Q1500、C200得300kg/日，独立表不作真实前后试验。"
+                  "用乙的独立输入另算并保留版本；不当真实前后试验。"
                 ]
               },
               {
@@ -30523,7 +30514,7 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "能否解释R0为200kg/日及乙300kg/日，单位换算与输入一致？",
+              "能否用题内数据复算 R0 和乙，解释为何输入与单位不同或相同？",
               "能否区分甲改措辞与乙改Q，不称实际运行或改造效果？",
               "漏项在单位换算、乘除、输入还是达标外推？留可重复改进点，不给工程胜任分。",
               "是否标虚构输入、未知出水标准与本人纸面贡献，不冒充设计项目或采样？",
@@ -30604,7 +30595,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "两份中国历史校招资料："
+              "两则中国大陆招聘原公告及岗位表："
             ]
           },
           "id": "water-wastewater-engineers.display.career_path_block.locale.summary",
@@ -31444,7 +31435,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "历史校招非当前开放。"
+              "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -31714,7 +31705,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国水务2025校招历史条件，非当前工程师报价。"
+              "附件列现场踏勘、方案深化、编说明和协调；成果交项目负责人。岗位可涉及出差或驻场，公告及岗位表未列固定工资。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_path_block.source.employer",
@@ -31742,7 +31733,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "北京排水历史混合校招，不作精确工资样本。"
+              "附件另列水力计算、管网平差、出差或驻场、施工图与现场配合；设计和咨询统筹经历有要求，公告及岗位表未列固定工资。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_path_block.source.r2-pay-3",
@@ -31821,7 +31812,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：已读中国水务与北京排水2025届历史校招只支持当时岗位材料，未取得当前全国本职业招聘样本；不据两份材料计热度趋势、全国需求量或精确工资。"
+              "2026 年 7 月 24 日，市政设计院给排水设计岗共 10 个：校招重庆 2 个（硕士及以上）、南京 3 个（本科及以上）；社招重庆 4 个、昆明 1 个，均本科及以上且至少 3 年相关经历。 2026 年 6 月 12 日，水务集团旗下公用工程咨询公司在重庆两江新区校招排水专业设计师 2 人。要求硕士及以上、指定研究生专业，且本科为给排水科学与工程。 这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
             ]
           },
           "id": "water-wastewater-engineers.market-signals.market-signal-card.4",
@@ -31904,7 +31895,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国水务历史校招支持当時披露，当前是否仍招未确认，不算全国招聘热度。"
+              "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
             ]
           },
           "id": "water-wastewater-engineers.display.market_signal_card.outlook.hiring.limit",
@@ -32310,7 +32301,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "水务2025历史校招，未列工程师工资。"
+              "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
             ]
           },
           "id": "water-wastewater-engineers.display.market_signal_card.source.employer",
@@ -32399,14 +32390,13 @@
                 ]
               },
               {
-                "answer": "不能。2025美国中位100840美元属土木母职业代理，非水处理单列或中国到手。中国历史校招不明周期金额不作精确月薪。",
+                "answer": "不能。美国中位 100,840 美元/年属于土木工程师母类；大陆行业年均工资也不能当作本职业薪资。",
                 "id": "actors.faq.6",
                 "question": "美国工资可当中国预算吗？",
                 "question_key": "career.faq.water-wastewater-engineers.6",
                 "source_refs": [
-                  "bls-oews",
-                  "employer",
-                  "r2-pay-3"
+                  "oews",
+                  "nbs"
                 ]
               },
               {
@@ -32465,7 +32455,7 @@
           "data": {
             "entries": [
               "美国工资行业就业均为17-2051土木母职业代理，不作17-2051.02水处理精确分布。",
-              "中国两份历史校招不代表当前全国样本，周期及逐岗对应不明金额不作精确月薪。",
+              "这是相应行业城镇单位就业人员的背景，未取得给排水工程师全国可比工资分布；不可当作设计岗年薪或除以 12 填月薪。",
               "美国许可与中国考试注册分别适用，相关工程负责人签章不等同初级入职门槛。",
               "W26虚构负荷不证出水达标或运行，AI采用与净影响未取得。"
             ]
@@ -32497,7 +32487,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "精确工程任务、美国土木母职业代理资料、中国负责人规定和两份历史校招；范围分别列明，W26为编辑虚构练习。"
+              "O*NET 职业任务、BLS 土木工程师母类、国家统计局行业工资、住建部通知及两家雇主岗位表。W26 为编辑虚构。"
             ]
           },
           "id": "water-wastewater-engineers.display.source_card.source",
@@ -32511,7 +32501,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-03核读与本地修订；档案更新、统计期和招聘年份分别保留"
+              "原件与岗位表核读于 2026-11-09。统计期、招聘日期和执业通知生效日分开标注。"
             ]
           },
           "id": "water-wastewater-engineers.display.source_card.updated-at",
@@ -32525,7 +32515,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "用于职业探索。历史招聘当前状态未确认，不明金额不代填；签章通知只核正文，W26不代工程资格。"
+              "用于职业探索。招聘状态以雇主公告为准，W26 不代真实工程或签章。"
             ]
           },
           "id": "water-wastewater-engineers.display.source_card.note",
@@ -32680,25 +32670,25 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "按设计资质标准相关中型及以上工程相应专业负责人需注册工程师，年龄不超过70周岁，责任栏签字盖章并负责。",
                   "附件给排水专业范围为资质标准规定的相关中型及以上工程；相应负责人对初步设计、施工图、计算书等责任栏签字盖章。"
                 ],
                 "evidence_type": "official regulatory text",
                 "id": "cn-rule",
-                "limitation": "已核2026通知正文及原DOCX附件给排水专业范围；专业负责人设计文件签章责任非所有初级入职统一要求或全国招聘量。",
+                "limitation": "给排水适用注册公用设备工程师（给水排水专业）条目。范围为资质标准规定的相关中型及以上工程设计的专业负责人。",
                 "market": "中国",
-                "name": "住建部2026注册公用设备电气工程师执业通知公开文本",
+                "name": "住建部：注册公用设备、电气工程师执业通知（建市规〔2026〕1号）",
                 "period": "2026-03-25发布／2026-06-01实施",
-                "publisher": "住房城乡建设部／商务部法规库",
+                "publisher": "住房城乡建设部",
                 "scope": "contextual",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=106514"
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/xzgfxwjk/art/2026/art_2063777831.html"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "W26原创恒定虚构负荷：R0为200kg/日，甲撤不支持结论，乙独立300kg/日；完整纸面交接未实际发送或专业确认。"
+                  "W26 采用虚构流量和浓度，区分更正措辞与重算。参考区给出算式及模拟交接。"
                 ],
                 "evidence_type": "local editorial synthesis",
                 "id": "editor",
@@ -32711,20 +32701,20 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "运营类列给排水工程师、水厂运行、污水处理等不同岗位；2025应届及班级前50%，硕士等为优先条件。",
-                  "证据不足：未披露给排水工程师工资金额、逐岗人数或当前开放状态。"
+                  "2026 年 7 月 24 日，市政设计院给排水设计岗共 10 个：校招重庆 2 个（硕士及以上）、南京 3 个（本科及以上）；社招重庆 4 个、昆明 1 个，均本科及以上且至少 3 年相关经历。",
+                  "附件列现场踏勘、方案深化、编说明和协调；成果交项目负责人。岗位可涉及出差或驻场，公告及岗位表未列固定工资。"
                 ],
                 "evidence_type": "employer recruitment",
                 "id": "employer",
-                "limitation": "历史雇主材料经院校发布，未逐岗展开职责；不能将其他运营岗条件套给工程师或构成需求统计。",
-                "market": "中国",
-                "name": "中国水务投资集团2025校园招聘发布材料",
-                "period": "2025-02-26历史发布",
-                "publisher": "中国水务招聘材料／东南大学发布",
+                "limitation": "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。",
+                "market": "中国大陆",
+                "name": "重庆设计集团有限公司市政设计研究院",
+                "period": "2026-07-24",
+                "publisher": "重庆设计集团有限公司市政设计研究院",
                 "scope": "recruitment_proxy",
-                "url": "https://law.seu.edu.cn/2025/0226/c12760a519587/page.htm"
+                "url": "https://gzw.cq.gov.cn/gqzp/202607/t20260724_15853409.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32742,20 +32732,20 @@
                 "url": "https://www.onetonline.org/link/summary/11-9121.02"
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "按设计资质标准相关中型及以上工程相应专业负责人需注册工程师，年龄不超过70周岁，责任栏签字盖章并负责。",
-                  "附件给排水专业范围为资质标准规定的相关中型及以上工程；相应负责人对初步设计、施工图、计算书等责任栏签字盖章。"
+                  "国家统计局 2025 年城镇单位税前年平均工资：电力、热力、燃气及水生产和供应业，非私营 160,897 元、私营 66,451 元；水利、环境和公共设施管理业，非私营 70,172 元、私营 49,527 元。",
+                  "这是相应行业城镇单位就业人员的背景，未取得给排水工程师全国可比工资分布；不可当作设计岗年薪或除以 12 填月薪。"
                 ],
-                "evidence_type": "official regulatory text",
+                "evidence_type": "官方统计",
                 "id": "nbs",
-                "limitation": "已核2026通知正文及原DOCX附件给排水专业范围；专业负责人设计文件签章责任非所有初级入职统一要求或全国招聘量。",
+                "limitation": "这是相应行业城镇单位就业人员的背景，未取得给排水工程师全国可比工资分布；不可当作设计岗年薪或除以 12 填月薪。",
                 "market": "中国",
-                "name": "住建部2026注册公用设备电气工程师执业通知公开文本",
-                "period": "2026-03-25发布／2026-06-01实施",
-                "publisher": "住房城乡建设部／商务部法规库",
+                "name": "国家统计局：2025 年城镇单位就业人员年平均工资",
+                "period": "2025",
+                "publisher": "国家统计局",
                 "scope": "contextual",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=106514"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32775,7 +32765,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "相关本科、专业许可与项目工作；行业年中位联邦117790、地方113640、工程服务100620美元。"
+                  "相关本科、专业许可与项目工作；行业年中位州政府102440、地方113640、工程服务100620美元。"
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "oews",
@@ -32826,43 +32816,43 @@
                 "id": "r2-pay-1",
                 "limitation": "土木工程师母职业分位；非水处理方向精确分布，不是年资等级或个人到手。",
                 "market": "美国",
-                "name": "O*NET土木工程师17-2051.00全国工资表",
+                "name": "O*NET：给排水职业页所列土木工程师全国工资",
                 "period": "2025",
                 "publisher": "美国劳工部O*NET／BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/17-2051.00"
+                "url": "https://www.onetonline.org/link/localwages/17-2051.02"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "运营类列给排水工程师、水厂运行、污水处理等不同岗位；2025应届及班级前50%，硕士等为优先条件。",
-                  "证据不足：未披露给排水工程师工资金额、逐岗人数或当前开放状态。"
+                  "2026 年 7 月 24 日，市政设计院给排水设计岗共 10 个：校招重庆 2 个（硕士及以上）、南京 3 个（本科及以上）；社招重庆 4 个、昆明 1 个，均本科及以上且至少 3 年相关经历。",
+                  "附件列现场踏勘、方案深化、编说明和协调；成果交项目负责人。岗位可涉及出差或驻场，公告及岗位表未列固定工资。"
                 ],
                 "evidence_type": "employer recruitment",
                 "id": "r2-pay-2",
-                "limitation": "历史雇主材料经院校发布，未逐岗展开职责；不能将其他运营岗条件套给工程师或构成需求统计。",
-                "market": "中国",
-                "name": "中国水务投资集团2025校园招聘发布材料",
-                "period": "2025-02-26历史发布",
-                "publisher": "中国水务招聘材料／东南大学发布",
+                "limitation": "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。",
+                "market": "中国大陆",
+                "name": "重庆设计集团有限公司市政设计研究院",
+                "period": "2026-07-24",
+                "publisher": "重庆设计集团有限公司市政设计研究院",
                 "scope": "recruitment_proxy",
-                "url": "https://law.seu.edu.cn/2025/0226/c12760a519587/page.htm"
+                "url": "https://gzw.cq.gov.cn/gqzp/202607/t20260724_15853409.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "集团给排水环工类明确本科以上及对应专业，任务含工艺运行管理与技术研发；各子公司另有分类条件。",
-                  "网页头总40人和8000—10000元覆盖混合岗位，未说明金额周期或逐岗匹配。"
+                  "2026 年 6 月 12 日，水务集团旗下公用工程咨询公司在重庆两江新区校招排水专业设计师 2 人。要求硕士及以上、指定研究生专业，且本科为给排水科学与工程。",
+                  "附件另列水力计算、管网平差、出差或驻场、施工图与现场配合；设计和咨询统筹经历有要求，公告及岗位表未列固定工资。"
                 ],
                 "evidence_type": "employer recruitment",
                 "id": "r2-pay-3",
-                "limitation": "2025届历史校招，已知类别条件不作全国门槛；不将混合总数或页头金额改为给排水工程师人数或月薪；当前开放状态未知。",
-                "market": "中国北京",
-                "name": "北京排水集团2025校园招聘发布材料",
-                "period": "2024-10-22发布／2025届",
-                "publisher": "北京排水集团招聘材料／河北工业大学就业网",
+                "limitation": "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。",
+                "market": "中国大陆",
+                "name": "重庆水务集团公用工程咨询有限公司",
+                "period": "2026-06-12",
+                "publisher": "重庆水务集团公用工程咨询有限公司",
                 "scope": "recruitment_proxy",
-                "url": "https://career.hebut.edu.cn/home/correcruit/content/id/68769.html"
+                "url": "https://gzw.cq.gov.cn/gqzp/202606/t20260612_15751011_wap.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32897,19 +32887,19 @@
                 "url": "https://rsj.beijing.gov.cn/ywsite/bjpta/zcwj/2026zc/202608/P020260810499193004850.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "按设计资质标准相关中型及以上工程相应专业负责人需注册工程师，年龄不超过70周岁，责任栏签字盖章并负责。"
                 ],
                 "evidence_type": "official regulatory text",
                 "id": "sag-moa",
-                "limitation": "只核2026通知正文，未读DOCX附件完整签章目录；非所有初级入职统一要求或全国招聘量。",
+                "limitation": "给排水适用注册公用设备工程师（给水排水专业）条目。范围为资质标准规定的相关中型及以上工程设计的专业负责人。",
                 "market": "中国",
-                "name": "住建部2026注册公用设备电气工程师执业通知公开文本",
+                "name": "住建部：注册公用设备、电气工程师执业通知（建市规〔2026〕1号）",
                 "period": "2026-03-25发布／2026-06-01实施",
-                "publisher": "住房城乡建设部／商务部法规库",
+                "publisher": "住房城乡建设部",
                 "scope": "contextual",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=106514"
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/xzgfxwjk/art/2026/art_2063777831.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32942,19 +32932,19 @@
                 "url": "https://www.onetonline.org/link/summary/17-2051.02"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "按设计资质标准相关中型及以上工程相应专业负责人需注册工程师，年龄不超过70周岁，责任栏签字盖章并负责。"
                 ],
                 "evidence_type": "official regulatory text",
                 "id": "directing",
-                "limitation": "只核2026通知正文，未读DOCX附件完整签章目录；非所有初级入职统一要求或全国招聘量。",
+                "limitation": "给排水适用注册公用设备工程师（给水排水专业）条目。范围为资质标准规定的相关中型及以上工程设计的专业负责人。",
                 "market": "中国",
-                "name": "住建部2026注册公用设备电气工程师执业通知公开文本",
+                "name": "住建部：注册公用设备、电气工程师执业通知（建市规〔2026〕1号）",
                 "period": "2026-03-25发布／2026-06-01实施",
-                "publisher": "住房城乡建设部／商务部法规库",
+                "publisher": "住房城乡建设部",
                 "scope": "contextual",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=106514"
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/xzgfxwjk/art/2026/art_2063777831.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -33006,7 +32996,7 @@
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "相关本科、专业许可与项目工作；行业年中位联邦117790、地方113640、工程服务100620美元。"
+                  "相关本科、专业许可与项目工作；行业年中位州政府102440、地方113640、工程服务100620美元。"
                 ],
                 "evidence_type": "official occupational outlook",
                 "id": "bls-ooh",
@@ -33027,11 +33017,11 @@
                 "id": "bls-oews",
                 "limitation": "土木工程师母职业分位；非水处理方向精确分布，不是年资等级或个人到手。",
                 "market": "美国",
-                "name": "O*NET土木工程师17-2051.00全国工资表",
+                "name": "O*NET：给排水职业页所列土木工程师全国工资",
                 "period": "2025",
                 "publisher": "美国劳工部O*NET／BLS",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/localwages/17-2051.00"
+                "url": "https://www.onetonline.org/link/localwages/17-2051.02"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -33049,24 +33039,24 @@
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
                   "按设计资质标准相关中型及以上工程相应专业负责人需注册工程师，年龄不超过70周岁，责任栏签字盖章并负责。"
                 ],
                 "evidence_type": "official regulatory text",
                 "id": "cn-policy",
-                "limitation": "只核2026通知正文，未读DOCX附件完整签章目录；非所有初级入职统一要求或全国招聘量。",
+                "limitation": "给排水适用注册公用设备工程师（给水排水专业）条目。范围为资质标准规定的相关中型及以上工程设计的专业负责人。",
                 "market": "中国",
-                "name": "住建部2026注册公用设备电气工程师执业通知公开文本",
+                "name": "住建部：注册公用设备、电气工程师执业通知（建市规〔2026〕1号）",
                 "period": "2026-03-25发布／2026-06-01实施",
-                "publisher": "住房城乡建设部／商务部法规库",
+                "publisher": "住房城乡建设部",
                 "scope": "contextual",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=106514"
+                "url": "https://www.mohurd.gov.cn/gongkai/zc/xzgfxwjk/art/2026/art_2063777831.html"
               },
               {
                 "accessed_at": "2026-10-03",
                 "details": [
-                  "W26原创恒定虚构负荷：R0为200kg/日，甲撤不支持结论，乙独立300kg/日；完整纸面交接未实际发送或专业确认。"
+                  "W26 采用虚构流量和浓度，区分更正措辞与重算。参考区给出算式及模拟交接。"
                 ],
                 "evidence_type": "local editorial synthesis",
                 "id": "editorial",
@@ -33079,21 +33069,36 @@
                 "url": null
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "工艺｜方法与设施方案｜比较化学、生物等处理方法，分析适用约束。 — 50/100; weight=1/3; water-wastewater-engineers.display.responsibilities_block.02[0]",
-                  "水力｜管网及泵站分析｜开展水力建模、压力损失和网络方案分析。 — 75/100; weight=1/3; water-wastewater-engineers.display.responsibilities_block.03[0]",
-                  "工程｜设计与设备｜形成处理设施、管道和设备设计，依据适用标准审查。 — 50/100; weight=1/3; water-wastewater-engineers.display.responsibilities_block.04[0]"
+                  "可用虚构输入练习整理说明，但水力模型、工程设计及设施控制须分别验证。W26 只核给定负荷和措辞。未取得本职业采用率、效果量或替代率的实测数据。",
+                  "可用虚构输入练习整理说明，但水力模型、工程设计及设施控制须分别验证。W26 只核给定负荷和措辞。未取得本职业采用率、效果量或替代率的实测数据。",
+                  "可用虚构输入练习整理说明，但水力模型、工程设计及设施控制须分别验证。W26 只核给定负荷和措辞。未取得本职业采用率、效果量或替代率的实测数据。",
+                  "可用虚构输入练习整理说明，但水力模型、工程设计及设施控制须分别验证。W26 只核给定负荷和措辞。未取得本职业采用率、效果量或替代率的实测数据。",
+                  "可用虚构输入练习整理说明，但水力模型、工程设计及设施控制须分别验证。W26 只核给定负荷和措辞。未取得本职业采用率、效果量或替代率的实测数据。"
                 ],
                 "evidence_type": "编辑模型估算方法",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
+                "limitation": "定性说明，无职业评分。",
+                "name": "费马测试：AI 工程任务证据口径",
+                "period": "2026-11-09",
                 "publisher": "FermatMind / 费马测试",
                 "scope": "本职业三项代表核心任务",
                 "url": "#career-ai-assessment-method"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "给排水设计岗交付方案、计算书和图纸。水厂运行岗的班次工作包括监测设备、采样检测并记录读数和运行数据；该分工会随厂型和规模变化。先核雇主职责、培训和权限。"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "plant-operator-ooh",
+                "limitation": "美国操作员职责参照；并非设计授权，也不作中国资格对照。",
+                "name": "BLS：水与污水处理厂及系统操作员（51-8031）",
+                "period": "2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/production/water-and-wastewater-treatment-plant-and-system-operators.htm"
               }
             ]
           },
@@ -33162,6 +33167,10 @@
           {
             "href": "https://www.onetonline.org/link/summary/11-9199.11",
             "label": "O*NET：棕地再开发专家与场地经理"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/production/water-and-wastewater-treatment-plant-and-system-operators.htm",
+            "label": "BLS：水与污水处理厂及系统操作员（51-8031）"
           }
         ],
         "evidence_note": {
@@ -35770,7 +35779,7 @@
               "field": "url",
               "item": "water-wastewater-engineers.source-register.published.1"
             },
-            "id": "bls",
+            "id": "bls-ooh",
             "label": {
               "$source": "bls-ooh",
               "block": "source-register",
@@ -35890,43 +35899,43 @@
           "bls_table": [
             {
               "指标": "材料范围",
-              "数值": "两份历史校园招聘",
-              "说明": "经院校发布雇主材料，非全国调查。"
+              "数值": "两份有日期的设计岗招聘",
+              "说明": "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
             },
             {
-              "指标": "中国水务岗位",
-              "数值": "列给排水工程师",
-              "说明": "亦列其他运营岗，逐岗分别核。"
+              "指标": "重庆设计集团有限公司市政设计研究院",
+              "数值": "给排水设计岗 10 个",
+              "说明": "2026 年 7 月 24 日，市政设计院给排水设计岗共 10 个：校招重庆 2 个（硕士及以上）、南京 3 个（本科及以上）；社招重庆 4 个、昆明 1 个，均本科及以上且至少 3 年相关经历。"
             },
             {
-              "指标": "中国水务工资",
-              "数值": "未披露金额",
-              "说明": "不补月薪、年薪或到手。"
+              "指标": "重庆水务集团公用工程咨询有限公司",
+              "数值": "排水专业设计师 2 人",
+              "说明": "2026 年 6 月 12 日，水务集团旗下公用工程咨询公司在重庆两江新区校招排水专业设计师 2 人。要求硕士及以上、指定研究生专业，且本科为给排水科学与工程。"
             },
             {
-              "指标": "北京排水材料",
-              "数值": "多岗位多专业校招",
-              "说明": "网页头金额未说明周期及岗位对应。"
+              "指标": "行业背景",
+              "数值": "国家统计局 2025 年",
+              "说明": "国家统计局 2025 年城镇单位税前年平均工资：电力、热力、燃气及水生产和供应业，非私营 160,897 元、私营 66,451 元；水利、环境和公共设施管理业，非私营 70,172 元、私营 49,527 元。"
             },
             {
-              "指标": "金额采用",
-              "数值": "不作精确薪资",
-              "说明": "不能写成给排水工程师8000–10000月薪。"
-            },
-            {
-              "指标": "样本边界",
-              "数值": "历史混合校招",
-              "说明": "不计算全国中位或在招数量。"
-            },
-            {
-              "指标": "个人计薪",
+              "指标": "个人工资",
               "数值": "向雇主核对",
-              "说明": "固定奖金出差、周期税口径另核。"
+              "说明": "这是相应行业城镇单位就业人员的背景，未取得给排水工程师全国可比工资分布；不可当作设计岗年薪或除以 12 填月薪。"
+            },
+            {
+              "指标": "样本日期",
+              "数值": "2026-06-12 / 2026-07-24",
+              "说明": "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
+            },
+            {
+              "指标": "合同条款",
+              "数值": "核固定、浮动和出差",
+              "说明": "核税前工资、发薪周期、奖金及出差补助。"
             },
             {
               "指标": "跨市场比较",
               "数值": "中美分开",
-              "说明": "美国母职业不能补中国金额。"
+              "说明": "这是相应行业城镇单位就业人员的背景，未取得给排水工程师全国可比工资分布；不可当作设计岗年薪或除以 12 填月薪。"
             }
           ],
           "china_ai_row": {
@@ -35938,8 +35947,8 @@
           "china_class_row": "中国资料类型",
           "china_edu_table": [
             {
-              "学历段": "中国水务给排水工程师",
-              "岗位方向": "未列工资金额",
+              "学历段": "重庆设计集团有限公司市政设计研究院",
+              "岗位方向": "校招与社招",
               "说明": {
                 "$item": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -35948,8 +35957,8 @@
               }
             },
             {
-              "学历段": "中国水务投递条件",
-              "岗位方向": "应届与排名要求；硕士等优先",
+              "学历段": "重庆设计集团有限公司市政设计研究院",
+              "岗位方向": "地点、学历和经验分别核",
               "说明": {
                 "$item": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -35958,8 +35967,8 @@
               }
             },
             {
-              "学历段": "北京排水混合校招",
-              "岗位方向": "网页头金额周期及逐岗对应不明",
+              "学历段": "重庆水务集团公用工程咨询有限公司",
+              "岗位方向": "排水专业设计师",
               "说明": {
                 "$item": "water-wastewater-engineers.display.career_snapshot_primary_locale.scenario.theater",
                 "block": "china-salary",
@@ -36014,7 +36023,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "历史校招状态",
+          "china_open": "有日期的招聘样本",
           "china_open_note": {
             "$item": "water-wastewater-engineers.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -36039,7 +36048,7 @@
               }
             },
             {
-              "城市/区间": "中国水务2025历史校招",
+              "城市/区间": "重庆设计集团有限公司市政设计研究院",
               "月薪参考": {
                 "$join": [
                   {
@@ -36053,7 +36062,7 @@
               }
             },
             {
-              "城市/区间": "北京排水2025混合校招",
+              "城市/区间": "重庆水务集团公用工程咨询有限公司",
               "月薪参考": {
                 "$item": "water-wastewater-engineers.display.career_snapshot_primary_locale.missing-pay",
                 "block": "china-salary",
@@ -36067,7 +36076,7 @@
           "fact_refs": [
             "china-pay-gap"
           ],
-          "sources_note": "中国两份历史校招链接见来源与路径；不明周期金额不作精确薪资",
+          "sources_note": "两份公告及岗位附件见下方，工资参照为国家统计局 2025 年行业年均值。",
           "ui": {
             "ai_heading": "AI能说明中国工程师降薪吗？",
             "driver_heading": "比较岗位待遇先核哪些条件？",
@@ -36270,7 +36279,7 @@
         "industry_rows": [
           {
             "fact_ref": "industry-primary",
-            "industry": "联邦政府不含邮政（母职业）",
+            "industry": "州政府不含教育和医院（母职业）",
             "median": {
               "$fact": "industry-primary",
               "field": "display_value"
@@ -36624,12 +36633,12 @@
             },
             "metric": "专业负责人设计签章",
             "occupation_scope": "相应中型及以上工程，非职业统计",
-            "source_id": "cn-rule",
-            "value": "注册专业负责人签字盖章并负责"
+            "source_id": "ratify",
+            "value": "给水排水专业负责人按适用范围签字盖章"
           },
           {
-            "geography": "中国水务单雇主历史资料",
-            "horizon": "2025-02-26发布，当前状态未确认",
+            "geography": "大陆雇主样本：重庆、南京、昆明",
+            "horizon": "2026-06-12 与 2026-07-24",
             "interpretation": {
               "$item": "water-wastewater-engineers.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -36642,10 +36651,10 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "校园招聘投递条件",
-            "occupation_scope": "混合校招含给排水，不是全国代表样本",
+            "metric": "两则有日期的设计岗位样本",
+            "occupation_scope": "给排水设计和排水设计；校招、社招条件分列",
             "source_id": "employer",
-            "value": "2025应届与排名要求，硕士等优先"
+            "value": "市政设计院 10 个；水务集团子公司 2 个"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -36741,6 +36750,18 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+            "id": "nbs",
+            "label": "国家统计局：2025 年城镇单位就业人员年平均工资",
+            "scope": "这是相应行业城镇单位就业人员的背景，未取得给排水工程师全国可比工资分布；不可当作设计岗年薪或除以 12 填月薪。"
+          },
+          {
+            "href": "https://gzw.cq.gov.cn/gqzp/202606/t20260612_15751011_wap.html",
+            "id": "r2-pay-3",
+            "label": "重庆水务集团公用工程咨询有限公司",
+            "scope": "这两份有日期的雇主样本不代表当前开放、全国学历门槛或本职业工资。"
           }
         ],
         "transitions": [
@@ -38338,7 +38359,7 @@
       }
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与工程任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -38440,11 +38461,11 @@
         ]
       },
       {
-        "derivation": "OOH2025联邦政府不含邮政的土木工程师年中位117790美元；是母职业行业值，不是水处理子方向或该行业全体雇员工资。",
-        "display_value": "母职业117790美元／年",
+        "derivation": "OOH2025州政府不含教育和医院的土木工程师年中位102440美元；是母职业行业值，不是水处理子方向或该行业全体雇员工资。",
+        "display_value": "母职业102440美元／年",
         "fact_id": "industry-primary",
         "market": "美国",
-        "measure": "联邦政府不含邮政年中位",
+        "measure": "州政府不含教育和医院年中位",
         "occupation_scope": "美国17-2051土木工程师母职业代理，非水处理方向单列",
         "period": "2025",
         "source_refs": [
@@ -38476,37 +38497,25 @@
         ]
       },
       {
-        "derivation": "2026-10-03实读中国水务2025与北京排水2025届历史招聘，并复用本批同日人社部企业薪酬入口检索但全文获取未成功的记录。两份校招不提供本职业全国分布；北京网页头8000—10000元无周期和逐岗对应，不能推月薪或全国中位。",
+        "derivation": null,
         "display_value": "证据不足：未取得中国本职业全国可比工资分布",
         "fact_id": "china-pay-gap",
         "market": "中国",
         "measure": "中国工资可得性",
         "occupation_scope": "中国本职业全国工资缺口",
-        "period": "查阅2026-10-03",
+        "period": "2025 行业统计；2026-11-09 查阅",
         "source_refs": [
-          "editorial"
-        ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((50+75+50)/3+0.5)=58; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "58%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "水与污水处理工程师",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
+          "nbs"
         ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与工程任务"
     },
     "badges": [
       "O*NET 17-2051.02",
@@ -38550,17 +38559,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解水与污水处理工程师的处理设施、管网与水力分析任务，分清土木工程师母职业工资和中国历史招聘，用虚构负荷表体验核单位、重算与报告修订。"
+      "text": "比较给排水工艺、管网与水厂运行；查看大陆招聘样本、注册签章范围和美国土木工程师工资口径，再用 W26 纸面题体验单位核对。"
     },
     "title": {
       "availability": "available",
-      "text": "水与污水处理工程师：职责、工资范围与工程准备"
+      "text": "给排水工程师做什么？岗位、收入与执业资格"
     }
   },
-  "source_content_sha256": "cc3a283211275c3fa92c027218930094f93037719ec2c9e5da8593621e01d641",
+  "source_content_sha256": "e9edc5af1b8ea29ce5a552ca916d62bf0f24a3340965514a006d0da2da62cbea",
   "subject": {
     "canonical_slug": "water-wastewater-engineers",
-    "name": "水与污水处理工程师",
-    "summary": "水与污水处理工程师设计或监督供水、污水处理及防洪相关项目，分析水质和水量，开展水力建模、管网与处理设施设计，形成方案、计算、环境文件和技术报告。工程模型和文字都须基于明确条件，经专业复核；纸面练习不提供真实水厂运行或设计指令。"
+    "name": "给排水工程师（水与污水处理）",
+    "summary": "给排水工程师做供水、污水处理设施和管网设计。选岗位时先分清工艺、管网水力和运行；实际项目需核输入、规范和谁能复核签章。美国工资和就业为土木工程师母类数据。"
   }
 }

@@ -32,9 +32,6 @@
       "fact:employment-projection": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -23347,15 +23344,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本页分开讨论美国航空公司飞行员与商业飞行员：任务包含飞行前准备、航空器操纵与监控、通信协同及记录。前者通常面向定期固定翼航线，后者涉及非定期固定翼、直升机及专项作业。中国相关职业为飞行驾驶员；按法域、类别与目标机组职位核对执照及运行资格，不能把运输机长的ATPL条件套给全部副驾驶。纸面练习仅观察资料复核习惯，不能证明飞行能力。"
+              "投入训练前，先核对目标法域、航空器和岗位的体检、执照等级、运营人训练和费用。纸面练习不能证明飞行能力、健康适任或录用资格。"
             ]
           },
           "id": "airline-and-commercial-pilots.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "operations",
-            "privacy",
             "ccar61",
-            "ccar121"
+            "pilot-ecfr61",
+            "pilot-paper"
           ],
           "type": "prose"
         },
@@ -23364,14 +23360,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "先核目标法域和岗位的执照、体检及训练条件，再按本页模型F完整题面整理D1/D2计算表、纠错单与交接记录。纸面练习只能观察复核习惯，不能证明飞行能力或运行资格。"
+              "试做入行区模型 F：对两版虚构资料复核数字、核对状态单期限，再写交接。模型不对应航空器，不用于飞行、配载或放行。"
             ]
           },
           "id": "airline-and-commercial-pilots.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "ccar61",
-            "ccar121",
-            "operations"
+            "pilot-paper"
           ],
           "type": "prose"
         },
@@ -23380,14 +23374,14 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "更可能适应的人：能按规章、手册与检查单逐项准备而不跳步，能在长时间值守中保持注意力与精确性，能在异常与时间压力下按程序判断并清楚通报，能接受不规律日程、驻外与模拟机复训考核，并对飞行安全责任有敬畏。若不愿按规章执行、倾向凭经验简化检查、难以接受持续考核与竞争，或对夜间与跨时区轮班不适，风险通常更大。"
+              "适合先探索：愿按清单核版本、遇到信息冲突就暂停，并把疑问交给复核者。"
             ]
           },
           "id": "airline-and-commercial-pilots.quick-decision.fit-decision-checklist.3",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "onet2",
+            "pilot-paper"
           ],
           "type": "prose"
         },
@@ -23396,18 +23390,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "证据不足：本次未取得中国飞行驾驶员匹配职业工资分布及生成式AI替代效果。中国行业均值只作背景，资格按执照与运行规则分别核对，纸面练习不证明飞行能力。 美国2025年5月两类合计中位数210,020美元；航空公司232,140、商业123,220，分位分别保留。2025—2035年合计增长7.3%、年均空缺16,400；空缺不是净增。"
+              "试做入行区模型 F：对两版虚构资料复核数字、核对状态单期限，再写交接。模型不对应航空器，不用于飞行、配载或放行。"
             ]
           },
           "id": "airline-and-commercial-pilots.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "ooh",
-            "oews",
-            "commercial-wages",
-            "ep",
-            "nbs",
-            "ccar61",
-            "ccar121"
+            "pilot-paper"
           ],
           "type": "prose"
         },
@@ -23416,15 +23404,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "一句话：在执照、运营人训练与运行规则下规划、操纵并监控航空器，按规章完成准备、飞行与记录，机长对飞行安全保留最终指挥责任的航空器驾驶岗位。"
+              "先比较定期航线与商业飞行任务：都要核对记录、按程序协作并交接，但运营规则、机型和聘任要求可能不同。"
             ]
           },
           "id": "airline-and-commercial-pilots.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "operations",
-            "privacy",
-            "ccar61",
-            "ccar121"
+            "onet",
+            "onet2",
+            "pilot-cn-law"
           ],
           "type": "prose"
         }
@@ -23441,7 +23428,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "两类飞行员的任务可分四类：飞行前准备（研读天气、通告与航路资料，制定飞行计划与油量方案，完成载重与平衡和起飞性能计算，按检查单检查航空器与系统，与机组和签派协调）；飞行操纵与监控（操纵航空器完成滑行、起飞、爬升、巡航、下降与着陆，监控发动机、液压、电气与航电系统，管理自动驾驶与飞行管理系统，按标准操作程序与机组资源管理分工协作）；通信与协同（与空中交通管制保持通信并按指令飞行，与签派、维修和客舱机组协调，在异常与紧急情况下按程序通报与处置）；记录与合规（填写飞行日志与运行记录，报告缺陷与事件，参加复训与模拟机考核，维持执照、体检合格证与机型等级有效）。航空公司飞行员侧重定期航班的航线与大型机运行，商业飞行员侧重非定期航线、直升机、包机、空中救护与游览等，两者的任务组合与运行规则不同。"
+              "两类飞行员的任务可分四类：飞行前准备（研读天气、通告与航路资料，制定飞行计划与油量方案，完成载重与平衡和起飞性能计算，按检查单检查航空器与系统，与机组和签派协调）；飞行操纵与监控（操纵航空器完成滑行、起飞、爬升、巡航、下降与着陆，监控发动机、液压、电气与航电系统，管理自动驾驶与飞行管理系统，按标准操作程序与机组资源管理分工协作）；通信与协同（与空中交通管制保持通信并按指令飞行，与签派、维修和客舱机组协调，在异常与紧急情况下按程序通报与处置）；记录与合规（填写飞行日志与运行记录，报告缺陷与事件，参加复训与模拟机考核，维持执照、体检合格证与机型等级有效）。航空公司飞行员侧重定期航班的运行标准与机组职责，商业飞行员侧重非定期航线、直升机、包机、空中救护与游览等，两者的任务组合与运行规则不同。"
             ]
           },
           "id": "airline-and-commercial-pilots.profile.career-quick-answers-block.1",
@@ -23505,7 +23492,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "四类任务在航空公司飞行员（定期航班与大型机）与商业飞行员（非定期、直升机与专项作业）之间的比重不同，本页按口径分开呈现。"
+              "四类任务在航空公司飞行员（定期航班，机型按运营人安排）与商业飞行员（非定期、直升机与专项作业）之间的比重不同，本页按口径分开呈现。"
             ]
           },
           "id": "airline-and-commercial-pilots.profile.career-quick-answers-block.2",
@@ -23949,7 +23936,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "岗位方向：航空公司飞行员（定期航班与大型机）、商业飞行员（非定期、包机与专项作业）、直升机飞行员，或飞行教员。"
+              "岗位方向：航空公司飞行员（定期航班，机型按运营人安排）、商业飞行员（非定期、包机与专项作业）、直升机飞行员，或飞行教员。"
             ]
           },
           "id": "airline-and-commercial-pilots.profile.career-quick-answers-block.26",
@@ -24227,13 +24214,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "执飞定期航班与大型运输机，按运营人运行手册与标准操作程序完成航线运行与机组协同。"
+              "在定期客货运航线上执行飞行、监控和机组交接，具体机型和职责以运营人为准。"
             ]
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
             "onet",
-            "onet"
+            "ccar121",
+            "pilot-ecfr121"
           ],
           "type": "prose"
         },
@@ -24262,7 +24250,8 @@
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
             "onet2",
-            "ccar61"
+            "onet",
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24276,8 +24265,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
+            "onet2",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24291,8 +24281,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
+            "onet2",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24379,8 +24370,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
+            "pilot-atc",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24394,8 +24386,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
+            "pilot-atc",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24409,8 +24402,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
+            "pilot-atc",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24433,13 +24427,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "面向维修与适航管理；飞行员面向操纵与运行，维修放行由持照维修人员负责。"
+              "机务侧重授权内的检查、排故和维修记录；维修后的签署放行另核资格与授权。飞行员侧重操纵、监控和运行沟通。"
             ]
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
+            "pilot-mechanics",
             "onet",
-            "onet"
+            "pilot-cn-law"
           ],
           "type": "prose"
         },
@@ -24448,13 +24443,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "更愿意做航空器维修与适航放行的人。"
+              "想做故障诊断和维护的读者可比较机务岗位，分别核对维修任务和签署权限。"
             ]
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "pilot-mechanics"
           ],
           "type": "prose"
         },
@@ -24463,13 +24457,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "按维护手册与法规实施在役航空器的检查、维修与放行。"
+              "在工作授权内检查、排故、维修并填写记录；维修后的签署放行另核资格与授权。"
             ]
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "pilot-mechanics",
+            "pilot-cn-law"
           ],
           "type": "prose"
         },
@@ -24497,8 +24491,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
+            "pilot-airportops",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24512,8 +24507,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
+            "pilot-airportops",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24527,8 +24523,9 @@
           },
           "id": "airline-and-commercial-pilots.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
+            "pilot-airportops",
             "onet",
-            "onet"
+            "onet2"
           ],
           "type": "prose"
         },
@@ -24823,13 +24820,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得两类飞行员生成式AI实际采用率、效果量或岗位替代因果证据，也没有可复核的AI任务评分。O*NET列自动驾驶与飞行管理计算机，是既有自动化任务；不能把它们统称生成式AI。下列变化判断除明确职业资料外均为编辑分析，BLS就业预测不证明AI创造或减少岗位。 AI影响度 42% 为编辑估算。三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18. 三项任务、档位和来源见本页FermatMind方法来源记录。"
+              "可以用虚构的纸面材料比较整理和核对动作。现有来源没有给出本职业 AI 采用、节省工时、替代率或真实运行安全效果。真实运行只用运营人批准的流程、资料和工具；不得用练习或生成内容作飞行决定。"
             ]
           },
           "id": "airline-and-commercial-pilots.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "operations",
-            "ep"
+            "source-fermatmind-ai-rubric",
+            "pilot-cn-law"
           ],
           "type": "prose"
         },
@@ -25543,14 +25540,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "两者是不同职业口径：航空公司飞行员（O*NET 53-2011.00）执飞定期航空承运航线与大型运输机，通常需学士学位、航线运输驾驶员执照与机型等级，2025 年 5 月中位数 232,140 美元/年；商业飞行员（53-2012.00）执飞非定期航线、直升机、包机、空中救护与游览等，通常从飞行训练与商业执照起步，中位数 123,220 美元/年。两者任务、工资与入行路径不同。"
+              "O*NET 53-2011.00 通常在定期固定翼承运航线工作，机型由运营人确认；53-2012.00 常见包机或专项任务。按 BLS 和执照规则分别看典型学历、证书、适用型别及运营人训练。美国年薪中位分别为 232,140 与 123,220 美元（2025 年 5 月）。"
             ]
           },
           "id": "airline-and-commercial-pilots.ai-impact.ai-impact-table.68",
           "source_refs": [
             "onet",
             "onet2",
-            "ooh"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -26803,14 +26801,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "定期航班承运人（航空公司）"
+              "航空运输企业｜先核岗位"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -26819,14 +26815,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑核对方向：定期航线运行的机型、机组职位、训练与近期经历；不作各方向要求高低排名。"
+              "持照招聘看岗位职责、机型、训练与合同，副驾驶公告无法推断个人收入。"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -26835,14 +26829,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "包机与通用航空运营人"
+              "飞行学生培养｜费用与工资分开"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "pilot-airchina"
           ],
           "type": "prose"
         },
@@ -26851,14 +26843,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑核对方向：非定期、直升机或专项作业所适用的执照类别、运行规则及任务条件；不能预设所有岗位日程更不规律。"
+              "培养计划里的训练费用、学费和日常费用不是飞行工资；核各自承担方。"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "pilot-airchina"
           ],
           "type": "prose"
         },
@@ -26867,14 +26857,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "空中救护与游览运营人"
+              "交通运输、仓储和邮政业｜行业背景"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26883,14 +26871,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "医疗救护与空中游览等专项运行；对作业规范、风险判断与应急能力要求高。"
+              "国家统计局 2025 年交通运输、仓储和邮政业城镇单位税前年平均工资：非私营 133,981 元/年、私营 73,133 元/年。包含多个行业岗位，不能估算飞行员工资。未核得与本页职业对应的大陆全国工资分布。"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "cnclass",
-            "ccar61",
-            "ccar121"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26913,12 +26899,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆薪资参考：能查到什么、查不到什么"
+              "飞行员薪资｜大陆招聘与行业参照"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "pilot-airchina",
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -26927,12 +26915,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "场景比较需要运营人类型、机型与运行资格、飞行经历与职级以及驻外安排一致；行业代理不能替代书面薪酬条件。"
+              "未核得大陆全国职业工资分布。培养支出、岗位条件和正式工资需分开读。"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "pilot-airchina",
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -26941,7 +26931,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "核对自己的预期时，先确认运营人类型（定期航班承运人／包机与通用航空／专项作业）、机型与运行资格、飞行经历与职级（副驾驶／机长／教员／检查员）以及驻外与轮班安排；不要用行业代理替代书面薪酬条件。"
+              "国家统计局 2025 年交通运输、仓储和邮政业城镇单位税前年平均工资：非私营 133,981 元/年、私营 73,133 元/年。包含多个行业岗位，不能估算飞行员工资。未核得与本页职业对应的大陆全国工资分布。"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.46",
@@ -26969,12 +26959,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局数据覆盖城镇 5 人及以上法人单位，不含个体工商户与自由职业者；工资为税前工资总额，含个人缴纳的社保、公积金与个税。行业门类数字不等于本职业工资。民航飞行员薪酬按运营人制度、职级与飞行经历确定，与行业门类统计口径不同。"
+              "两则公告是培养与持照招聘案例，不能推断当前空缺、城市工资、执照互认或录用。"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "nbs"
+            "pilot-airchina",
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -26983,12 +26974,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（精确职业）"
+              "国航｜飞行学生培养"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "nbs"
+            "pilot-airchina"
           ],
           "type": "prose"
         },
@@ -26997,12 +26988,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得航空公司与商业飞行员精确职业的全国或分城市工资分布"
+              "国航股份 2026 年 11 月发布 2027 年招收飞行学生简章：校企合作，录取后飞行技术本科四年。公告区分公司支付学习期间训练费与家庭承担学费和日常费用；毕业仍须符合飞行条件才接收。它说明培养路径，不是持照副驾驶岗位工资。"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "pilot-airchina"
           ],
           "type": "prose"
         },
@@ -27011,12 +27002,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "参考（行业门类代理）"
+              "多彩贵州航空｜持照副驾驶"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "nbs"
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -27025,12 +27016,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本职业未单列；相近的交通运输、仓储和邮政业（非私营）2025 年为 133,981 元/年，仅作宽口径参考"
+              "多彩贵州航空 2026 年第二批公告列 7 名副驾驶，要求本科及以上、民航局有效商用执照及飞机、多发和仪表等级。公告流程另含飞行技术考核。这是单一航空公司的岗位样本，不能转成全国招录门槛。"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "pilot-guizhou"
           ],
           "type": "prose"
         },
@@ -27039,7 +27030,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "参考（单位类型）"
+              "大陆全国｜交通运输行业参照"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.53",
@@ -27053,7 +27044,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本次未取得飞行驾驶员单列岗位工资；规模以上企业专业技术人员155,491元/年是群体参照，不证明航空公司所有制或个人薪酬。"
+              "国家统计局 2025 年交通运输、仓储和邮政业城镇单位税前年平均工资：非私营 133,981 元/年、私营 73,133 元/年。包含多个行业岗位，不能估算飞行员工资。未核得与本页职业对应的大陆全国工资分布。"
             ]
           },
           "id": "airline-and-commercial-pilots.china-salary.career-snapshot-primary-locale.54",
@@ -27390,12 +27381,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年5月：两类合计年薪中位数210,020美元；航空公司飞行员232,140美元，商业飞行员123,220美元。航空公司五分位106,710／182,280／232,140／384,440／463,830美元；商业飞行员五分位58,850／84,540／123,220／190,440／266,620美元。中位数不是起薪，分位不是经验等级。"
+              "2025 年 5 月，美国受雇者年薪中位：53-2010 母类 210,020 美元，53-2011 航空公司飞行员、副驾驶和飞行工程师 232,140 美元，53-2012 商业飞行员 123,220 美元。分位不是入门薪，也不代表实际合同到手金额。 53-2011 年薪 P10／P25／P50／P75／P90：106,710／182,280／232,140／384,440／463,830 美元。53-2012 对应为 58,850／84,540／123,220／190,440／266,620 美元。"
             ]
           },
           "id": "airline-and-commercial-pilots.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "oews"
+            "ooh",
+            "oews",
+            "commercial-wages"
           ],
           "type": "prose"
         },
@@ -27502,7 +27495,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "快递与信使服务中的航空公司飞行员"
+              "53-2011｜快递与特快递送服务"
             ]
           },
           "id": "airline-and-commercial-pilots.us-salary.career-snapshot-secondary-locale.34",
@@ -29031,7 +29024,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "最需要提前判断的是四类风险：一是运行程序风险（跳过检查单与运行手册判据、过度依赖自动化系统、气象与油量决策不足），二是人为与协同风险（机组资源管理与沟通失效、冲突情境处置不当），三是资格与合规风险（执照、机型等级、体检或复训失效仍执行运行），四是职业健康风险（夜航跨时区、驻外与不规律日程带来的疲劳）。风险随方向不同：航空公司飞行员更贴近定期航班运行标准与大型机运行，商业飞行员更贴近多机型适应与专项作业风险，飞行教员更贴近教学与示范风险。"
+              "最需要提前判断的是四类风险：一是运行程序风险（跳过检查单与运行手册判据、过度依赖自动化系统、气象与油量决策不足），二是人为与协同风险（机组资源管理与沟通失效、冲突情境处置不当），三是资格与合规风险（执照、机型等级、体检或复训失效仍执行运行），四是职业健康风险（夜航跨时区、驻外与不规律日程带来的疲劳）。风险随方向不同：航空公司飞行员更贴近定期航班的运行标准与对应机组职责，商业飞行员更贴近多机型适应与专项作业风险，飞行教员更贴近教学与示范风险。"
             ]
           },
           "id": "airline-and-commercial-pilots.risk.career-risk-cards.9",
@@ -29932,16 +29925,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本职业的资格由执照等级、机型等级与运行资格管理：飞行须持相应执照与机型等级并在有效体检与复训状态下执行运行。",
-              "空中交通管制执照面向管制指挥、航空器维修执照面向在役维修放行、机场运行岗位授权面向飞行区运行，与本职业不通用；飞行资历用于其他岗位通常也需按目标岗位要求重新认定。",
-              "中国大陆侧，相关职业归入飞行驾驶员（2-04-01-01），执照按《民用航空器驾驶员合格审定规则》（CCAR-61 部）分为私用、商用、多人制机组与航线运输驾驶员执照。",
-              "有意入行者应核对官方信息中的年龄、学历、体检、英语与飞行经历要求，并通过官方渠道报名与训练。"
+              "按法域、航空器、机组位置与任务查适用的执照、等级、型别、体检和训练要求。",
+              "飞行、管制、机务维修与签署放行、机场运行各有独立职责及资格。",
+              "CCAR-61-R5 §61.13(a) 列学生、运动、私用、商用、多人制机组和航线运输六类；本页着重后四类。申请多人制机组驾驶员执照须核 §61.175，含按规则颁发的私用驾驶员执照。适用 CCAR-121 的持商照人员进入副驾驶训练，还须按 §121.417(c) 查航线运输驾驶员执照地面理论考试，以及适用经历或批准课程条件。",
+              "美国 14 CFR Part 61 区分商用证书与 ATP；§61.160 对符合条件者设受限 ATP 途径。通常 Part 121 副驾驶须持 ATP 及相应型别，§61.55 的副驾驶型别单独不够（§121.436(b)）。机长以及需三名或以上驾驶员的旗航或补充运行中的副驾驶，按 §121.436(a) 须持不受 §61.167 限制的 ATP 及相应型别等级；该款的额外机长经历要求另核。"
             ]
           },
           "id": "airline-and-commercial-pilots.path.credential-boundary.1",
           "source_refs": [
             "ccar61",
-            "ccar121"
+            "ccar121",
+            "pilot-ecfr61",
+            "pilot-ecfr121"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29951,16 +29946,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本次未取得可核验、仍有效的中国飞行驾驶员招聘样本，也未取得匹配职业的全国/分城市薪酬或同口径执照通过率。本节已核条件来自规章及美国职业资料，纸面练习由编辑设计，均不是招聘公告。招聘条件、费用及运行资格须向实际运营人或获批训练机构取得书面信息。"
+              "国航股份 2026 年 11 月发布 2027 年招收飞行学生简章：校企合作，录取后飞行技术本科四年。公告区分公司支付学习期间训练费与家庭承担学费和日常费用；毕业仍须符合飞行条件才接收。它说明培养路径，不是持照副驾驶岗位工资。",
+              "多彩贵州航空 2026 年第二批公告列 7 名副驾驶，要求本科及以上、民航局有效商用执照及飞机、多发和仪表等级。公告流程另含飞行技术考核。这是单一航空公司的岗位样本，不能转成全国招录门槛。 原公告报名于 2026 年 5 月 14 日截止。",
+              "国航简章的当前招录状态需查官方系统，未作在招判断。培养费用和飞行工资分开；招聘条件也不是运行授权。"
             ]
           },
           "id": "airline-and-commercial-pilots.path.recruitment-sample.1",
           "source_refs": [
-            "ccar61",
-            "ccar121",
-            "ooh"
+            "pilot-airchina",
+            "pilot-guizhou"
           ],
-          "title": "招聘样本说明",
+          "title": "大陆飞行学生与持照副驾驶样本",
           "type": "notice"
         },
         {
@@ -29990,7 +29986,7 @@
                 "entity": "CCAR-121-R8：运输机组执照与训练",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202404/t20240415_223517.html"
+                "url": "https://app.caac.gov.cn/XXGK/XXGK/MHGZ/202404/t20240415_223517.html"
               }
             ]
           },
@@ -30008,15 +30004,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧采用 OOH 典型入门条件与 O*NET 职业描述，中国侧分别核 CCAR-61-R5 与 CCAR-121-R8。中国大陆 CCAR-61-R5：PPL 年满17周岁、初中及以上、有效Ⅱ级或Ⅰ级体检；CPL 年满18周岁、高中及以上、有效Ⅰ级体检，通常持 PPL，另有第61.91/61.93条的国家航空器经历及境外执照特殊路径；MPL 年满18周岁、本科及以上、有效Ⅰ级体检；ATPL 年满21周岁、高中及以上、有效Ⅰ级体检，先持 CPL 与仪表等级或 MPL。各类还须满足完整训练、经历与考试条件。40小时是第61.129条飞机类别私照经历要求，250小时是第61.159条飞机类别商照经历要求，均不能推广为所有航空器类别或全部培训时长。CCAR-121-R8 第121.453条另要求机长持 ATPL 与相应型别等级，副驾驶至少持相应飞机类别、多发及仪表等级的 CPL，或 MPL；第121.455条另有运营人训练要求。执照最低条件不等于已获岗位运行资格。 证据不足：本次未取得中国飞行驾驶员全国或分城市工资分布、同口径执照通过率及有效招聘样本；本页不代填。"
+              "执照只是资格的一层。先核法域、航空器类别与级别、型别、体检、运行规则、雇主要求和训练授权。"
             ]
           },
           "id": "airline-and-commercial-pilots.path.career-path-block.11",
           "source_refs": [
-            "ooh",
-            "editor",
             "ccar61",
-            "ccar121"
+            "ccar121",
+            "pilot-ecfr61",
+            "pilot-ecfr121"
           ],
           "type": "prose"
         },
@@ -30138,13 +30134,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行先选择法域、航空器类别与目标机组职位，再核体检、执照、经历、考试、等级及运营人训练。中国大陆 CCAR-61-R5：PPL 年满17周岁、初中及以上、有效Ⅱ级或Ⅰ级体检；CPL 年满18周岁、高中及以上、有效Ⅰ级体检，通常持 PPL，另有第61.91/61.93条的国家航空器经历及境外执照特殊路径；MPL 年满18周岁、本科及以上、有效Ⅰ级体检；ATPL 年满21周岁、高中及以上、有效Ⅰ级体检，先持 CPL 与仪表等级或 MPL。各类还须满足完整训练、经历与考试条件。40小时是第61.129条飞机类别私照经历要求，250小时是第61.159条飞机类别商照经历要求，均不能推广为所有航空器类别或全部培训时长。CCAR-121-R8 第121.453条另要求机长持 ATPL 与相应型别等级，副驾驶至少持相应飞机类别、多发及仪表等级的 CPL，或 MPL；第121.455条另有运营人训练要求。执照最低条件不等于已获岗位运行资格。"
+              "BLS 典型入行：美国 53-2011 为学士和少于 5 年相关经验；53-2012 为高等教育非学位凭证，无典型相关经验要求；两者均列中期在岗训练。学历统计与驾驶执照、执业权限、雇主筛选分别核对。 大陆《民用航空法》自 2026 年 7 月 1 日施行。CCAR-61-R5 区分商用和航线运输驾驶员执照，按所申请等级核体检、考试和飞行经历。CCAR-121-R8 §121.453 对适用运输运行的机长要求航线运输执照和相应型别；副驾驶至少具备规定的商用执照及飞机、多发、仪表等级，或多人制机组成员执照。§121.455 另有运营人获批训练。 美国 14 CFR Part 61 区分商用证书与 ATP；§61.160 对符合条件者设受限 ATP 途径。通常 Part 121 副驾驶须持 ATP 及相应型别，§61.55 的副驾驶型别单独不够（§121.436(b)）。机长以及需三名或以上驾驶员的旗航或补充运行中的副驾驶，按 §121.436(a) 须持不受 §61.167 限制的 ATP 及相应型别等级；该款的额外机长经历要求另核。 CCAR-61-R5 飞机类别单发等级举例：§61.129(a) 私用至少 40 小时，§61.159(a) 商用至少 250 小时（其中在飞机上至少 200 小时），各有训练和经历分项。飞机类别航线运输按 §61.189(a) 至少 1,500 小时并核对各分项及可计经历。其他航空器或训练路径须另查。 CCAR-61-R5 §61.13(a) 列学生、运动、私用、商用、多人制机组和航线运输六类；本页着重后四类。申请多人制机组驾驶员执照须核 §61.175，含按规则颁发的私用驾驶员执照。适用 CCAR-121 的持商照人员进入副驾驶训练，还须按 §121.417(c) 查航线运输驾驶员执照地面理论考试，以及适用经历或批准课程条件。"
             ]
           },
           "id": "airline-and-commercial-pilots.path.career-path-block.20",
           "source_refs": [
+            "ep",
             "ccar61",
-            "ccar121"
+            "ccar121",
+            "pilot-ecfr61",
+            "pilot-ecfr121"
           ],
           "type": "prose"
         },
@@ -30214,12 +30213,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS OOH：美国典型学历及入门训练；中国最低执照学历不沿用美国典型学士条件。"
+              "BLS 典型入行：美国 53-2011 为学士和少于 5 年相关经验；53-2012 为高等教育非学位凭证，无典型相关经验要求；两者均列中期在岗训练。学历统计与驾驶执照、执业权限、雇主筛选分别核对。"
             ]
           },
           "id": "airline-and-commercial-pilots.path.career-path-block.25",
           "source_refs": [
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -30242,13 +30241,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "CCAR-121-R8：机长、副驾驶执照条件与运营人训练；CCAR-61-R5的完整申请条件另见本页来源登记。"
+              "大陆《民用航空法》自 2026 年 7 月 1 日施行。CCAR-61-R5 区分商用和航线运输驾驶员执照，按所申请等级核体检、考试和飞行经历。CCAR-121-R8 §121.453 对适用运输运行的机长要求航线运输执照和相应型别；副驾驶至少具备规定的商用执照及飞机、多发、仪表等级，或多人制机组成员执照。§121.455 另有运营人获批训练。 CCAR-61-R5 飞机类别单发等级举例：§61.129(a) 私用至少 40 小时，§61.159(a) 商用至少 250 小时（其中在飞机上至少 200 小时），各有训练和经历分项。飞机类别航线运输按 §61.189(a) 至少 1,500 小时并核对各分项及可计经历。其他航空器或训练路径须另查。"
             ]
           },
           "id": "airline-and-commercial-pilots.path.career-path-block.27",
           "source_refs": [
+            "ccar61",
             "ccar121",
-            "ccar61"
+            "pilot-cn-law"
           ],
           "type": "prose"
         },
@@ -31265,7 +31265,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本次未取得中国飞行驾驶员匹配口径的全国就业预测，不用美国预测或中国行业工资代填。 BLS 2025—2035 年预测：合计 154,900→166,300 人、增长 7.3%、官方净增 11,300 人、年均空缺 16,400 个；航空公司飞行员 104,600→113,300 人、增长 8.3%、净增 8,700 人、年均空缺 11,200 个；商业飞行员 50,400→53,000 人、增长 5.2%、净增 2,600 人、年均空缺 5,200 个。人数由官方千人单位转换；表内数值分别取整，不能用显示人数相减重算合计净增。空缺含转职及退出劳动力需求，不能当成净增或个人录用保证。"
+              "美国 BLS 2025–2035 表 1.2：53-2010 母类 154,900→166,300，增长 7.3%，官方净增 11,300，年均空缺 16,400；53-2011 为 104,600→113,300、8.3%、净增 8,700、年均 11,200；53-2012 为 50,400→53,000、5.2%、净增 2,600、年均 5,200。各列分别舍入，空缺含增长与替补，不是实时招聘。"
             ]
           },
           "id": "airline-and-commercial-pilots.market-signals.market-signal-card.8",
@@ -31997,40 +31997,69 @@
           "data": {
             "entries": [
               {
-                "answer": "飞行前研读天气、通告与航路资料并制定飞行计划与油量方案，完成载重平衡与起飞性能计算，按检查单检查航空器与系统；飞行中按标准操作程序操纵航空器并监控发动机、液压与航电系统，与空中交通管制保持通信并按指令飞行，与签派和客舱机组协调；落地后填写飞行日志与运行记录并报告缺陷与事件，并按周期参加复训与模拟机考核。",
+                "answer": "航空公司飞行员通常执行定期固定翼客货运输，商业飞行员可承担包机、空中作业等不同任务。美国 BLS 把两项归入 53-2010；53-2012 是职业分类，不能直接当作一张商用驾驶员执照。实际飞行须按所在法域的执照等级、运行和运营人训练要求核对。",
                 "id": "airline-and-commercial-pilots.faq.1",
                 "question": "航空公司与商业飞行员每天做什么？",
-                "question_key": "career.faq.airline-and-commercial-pilots.daily-work"
+                "question_key": "career.faq.airline-and-commercial-pilots.daily-work",
+                "source_refs": [
+                  "onet",
+                  "onet2"
+                ]
               },
               {
-                "answer": "美国两类职业分别统计：航空公司通常为定期固定翼航线；商业飞行员涉及非定期固定翼、直升机、包机、空中救护或游览。2025年5月中位数分别232,140与123,220美元。美国典型学历及许可条件不直接适用于中国；中国运输机长与副驾驶条件见入行模块。",
+                "answer": "航空公司飞行员通常执行定期固定翼客货运输，商业飞行员可承担包机、空中作业等不同任务。美国 BLS 把两项归入 53-2010；53-2012 是职业分类，不能直接当作一张商用驾驶员执照。实际飞行须按所在法域的执照等级、运行和运营人训练要求核对。",
                 "id": "airline-and-commercial-pilots.faq.2",
                 "question": "航空公司飞行员和商业飞行员有什么区别？",
-                "question_key": "career.faq.airline-and-commercial-pilots.comparison"
+                "question_key": "career.faq.airline-and-commercial-pilots.comparison",
+                "source_refs": [
+                  "onet",
+                  "onet2",
+                  "pilot-ecfr61"
+                ]
               },
               {
-                "answer": "证据不足：本页未取得生成式AI替代两类飞行员的可核因果证据。已有自动驾驶任务不表示取消机组职责；现有预测也不能证明某项AI工具的岗位效果。",
+                "answer": "可以用虚构的纸面材料比较整理和核对动作。现有来源没有给出本职业 AI 采用、节省工时、替代率或真实运行安全效果。真实运行只用运营人批准的流程、资料和工具；不得用练习或生成内容作飞行决定。",
                 "id": "airline-and-commercial-pilots.faq.3",
                 "question": "这个职业会被 AI 取代吗？",
-                "question_key": "career.faq.airline-and-commercial-pilots.ai"
+                "question_key": "career.faq.airline-and-commercial-pilots.ai",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "证据不足：本次未取得中国飞行驾驶员匹配职业的全国或分城市工资分布。国家统计局2025年交通运输、仓储和邮政业非私营均值133,981元/年等仅是群体背景，不能替代飞行员中位数或个人书面待遇。",
+                "answer": "国家统计局 2025 年交通运输、仓储和邮政业城镇单位税前年平均工资：非私营 133,981 元/年、私营 73,133 元/年。包含多个行业岗位，不能估算飞行员工资。未核得与本页职业对应的大陆全国工资分布。 国航股份 2026 年 11 月发布 2027 年招收飞行学生简章：校企合作，录取后飞行技术本科四年。公告区分公司支付学习期间训练费与家庭承担学费和日常费用；毕业仍须符合飞行条件才接收。它说明培养路径，不是持照副驾驶岗位工资。 多彩贵州航空 2026 年第二批公告列 7 名副驾驶，要求本科及以上、民航局有效商用执照及飞机、多发和仪表等级。公告流程另含飞行技术考核。这是单一航空公司的岗位样本，不能转成全国招录门槛。",
                 "id": "airline-and-commercial-pilots.faq.4",
                 "question": "中国大陆的工资怎么理解？",
-                "question_key": "career.faq.airline-and-commercial-pilots.china-pay"
+                "question_key": "career.faq.airline-and-commercial-pilots.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "pilot-airchina",
+                  "pilot-guizhou"
+                ]
               },
               {
-                "answer": "美国合计口径（BLS 职业展望手册）：2025 年 5 月年薪中位数 210,020 美元；分口径中位数：航空公司飞行员 232,140 美元/年、商业飞行员 123,220 美元/年。航空公司飞行员工资分位（O*NET 53-2011.00）：第 10 分位 106,710、第 25 分位 182,280、第 75 分位 384,440、第 90 分位 463,830 美元/年。分位数是统计分布位置，不代表起薪。",
+                "answer": "2025 年 5 月，美国受雇者年薪中位：53-2010 母类 210,020 美元，53-2011 航空公司飞行员、副驾驶和飞行工程师 232,140 美元，53-2012 商业飞行员 123,220 美元。分位不是入门薪，也不代表实际合同到手金额。",
                 "id": "airline-and-commercial-pilots.faq.5",
                 "question": "美国这个职业的工资是多少？",
-                "question_key": "career.faq.airline-and-commercial-pilots.us-pay"
+                "question_key": "career.faq.airline-and-commercial-pilots.us-pay",
+                "source_refs": [
+                  "ooh",
+                  "oews",
+                  "commercial-wages"
+                ]
               },
               {
-                "answer": "先选择法域、航空器类别与机组职位，再核体检、执照、经历、考试及运营人训练。中国大陆 CCAR-61-R5：PPL 年满17周岁、初中及以上、有效Ⅱ级或Ⅰ级体检；CPL 年满18周岁、高中及以上、有效Ⅰ级体检，通常持 PPL，另有第61.91/61.93条的国家航空器经历及境外执照特殊路径；MPL 年满18周岁、本科及以上、有效Ⅰ级体检；ATPL 年满21周岁、高中及以上、有效Ⅰ级体检，先持 CPL 与仪表等级或 MPL。各类还须满足完整训练、经历与考试条件。40小时是第61.129条飞机类别私照经历要求，250小时是第61.159条飞机类别商照经历要求，均不能推广为所有航空器类别或全部培训时长。CCAR-121-R8 第121.453条另要求机长持 ATPL 与相应型别等级，副驾驶至少持相应飞机类别、多发及仪表等级的 CPL，或 MPL；第121.455条另有运营人训练要求。执照最低条件不等于已获岗位运行资格。",
+                "answer": "BLS 典型入行：美国 53-2011 为学士和少于 5 年相关经验；53-2012 为高等教育非学位凭证，无典型相关经验要求；两者均列中期在岗训练。学历统计与驾驶执照、执业权限、雇主筛选分别核对。 大陆《民用航空法》自 2026 年 7 月 1 日施行。CCAR-61-R5 区分商用和航线运输驾驶员执照，按所申请等级核体检、考试和飞行经历。CCAR-121-R8 §121.453 对适用运输运行的机长要求航线运输执照和相应型别；副驾驶至少具备规定的商用执照及飞机、多发、仪表等级，或多人制机组成员执照。§121.455 另有运营人获批训练。 美国 14 CFR Part 61 区分商用证书与 ATP；§61.160 对符合条件者设受限 ATP 途径。通常 Part 121 副驾驶须持 ATP 及相应型别，§61.55 的副驾驶型别单独不够（§121.436(b)）。机长以及需三名或以上驾驶员的旗航或补充运行中的副驾驶，按 §121.436(a) 须持不受 §61.167 限制的 ATP 及相应型别等级；该款的额外机长经历要求另核。 CCAR-61-R5 §61.13(a) 列学生、运动、私用、商用、多人制机组和航线运输六类；本页着重后四类。申请多人制机组驾驶员执照须核 §61.175，含按规则颁发的私用驾驶员执照。适用 CCAR-121 的持商照人员进入副驾驶训练，还须按 §121.417(c) 查航线运输驾驶员执照地面理论考试，以及适用经历或批准课程条件。",
                 "id": "airline-and-commercial-pilots.faq.6",
                 "question": "怎么才能成为这个职业的飞行员？",
-                "question_key": "career.faq.airline-and-commercial-pilots.education"
+                "question_key": "career.faq.airline-and-commercial-pilots.education",
+                "source_refs": [
+                  "ep",
+                  "ccar61",
+                  "ccar121",
+                  "pilot-ecfr61",
+                  "pilot-ecfr121"
+                ]
               },
               {
                 "answer": "主要是跳过检查单与运行手册判据、过度依赖自动化系统、气象与油量决策不足、机组资源管理与沟通失效、执照/机型等级/体检或复训失效仍执行运行，以及夜航跨时区与驻外带来的疲劳。按手册与检查单逐步执行、保持手动操纵与情景意识、按机组资源管理协同、维持执照与复训有效、执行飞行时间与休息限制是基础控制措施；具体规定以民航局规章与运营人运行手册为准。",
@@ -32039,10 +32068,13 @@
                 "question_key": "career.faq.airline-and-commercial-pilots.risk"
               },
               {
-                "answer": "BLS 2025—2035 年预测：合计 154,900→166,300 人、增长 7.3%、官方净增 11,300 人、年均空缺 16,400 个；航空公司飞行员 104,600→113,300 人、增长 8.3%、净增 8,700 人、年均空缺 11,200 个；商业飞行员 50,400→53,000 人、增长 5.2%、净增 2,600 人、年均空缺 5,200 个。人数由官方千人单位转换；表内数值分别取整，不能用显示人数相减重算合计净增。空缺含转职及退出劳动力需求，不能当成净增或个人录用保证。",
+                "answer": "美国 BLS 2025–2035 表 1.2：53-2010 母类 154,900→166,300，增长 7.3%，官方净增 11,300，年均空缺 16,400；53-2011 为 104,600→113,300、8.3%、净增 8,700、年均 11,200；53-2012 为 50,400→53,000、5.2%、净增 2,600、年均 5,200。各列分别舍入，空缺含增长与替补，不是实时招聘。",
                 "id": "airline-and-commercial-pilots.faq.8",
                 "question": "美国就业前景如何？",
-                "question_key": "career.faq.airline-and-commercial-pilots.outlook"
+                "question_key": "career.faq.airline-and-commercial-pilots.outlook",
+                "source_refs": [
+                  "ep"
+                ]
               },
               {
                 "answer": "O*NET53-2011美国群体问项：84%认为精确极其重要、77%认为错误后果极其严重、72%每天面对时间压力、73%日程不规律，74%每天在封闭车辆或设备中工作；57%典型工作周少于40小时、23%为40小时、20%超过40小时。问项不是飞行小时或驻外总时长，也不能推广为全部商业飞行员或中国岗位。",
@@ -32130,18 +32162,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：本次未取得中国匹配职业薪酬、就业预测及有效招聘样本，也未取得生成式AI对两类飞行员工资或岗位的因果研究；不代填、不推定全球不存在资料。 美国五分位表使用航空公司飞行员53-2011；商业53-2012分位与两类合计另列，行业中位数逐行限定职业和行业。就业预测均为2025—2035年，不以空缺替代净增。中国2025年行业及单位群体均值不是飞行员工资；中国资格分别核执照和运行规则。"
+              "O*NET 分列两类职责，BLS 分别给母类和子类统计。大陆执照、运输运行、培养、招聘和行业工资各查原件。模型 F 只用于纸面。"
             ]
           },
           "id": "airline-and-commercial-pilots.sources.source-card.4",
           "source_refs": [
-            "oews",
-            "commercial-wages",
-            "ooh",
+            "onet",
+            "onet2",
             "ep",
-            "nbs",
+            "ooh",
             "ccar61",
-            "ccar121"
+            "ccar121",
+            "pilot-airchina",
+            "pilot-guizhou",
+            "nbs",
+            "pilot-paper"
           ],
           "type": "prose"
         }
@@ -32312,9 +32347,9 @@
                 "url": "https://www.onetonline.org/link/localwages/53-2011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "industry_proxy",
+                  "国家统计局 2025 年交通运输、仓储和邮政业城镇单位税前年平均工资：非私营 133,981 元/年、私营 73,133 元/年。包含多个行业岗位，不能估算飞行员工资。未核得与本页职业对应的大陆全国工资分布。",
                   "复核2026-10-03"
                 ],
                 "evidence_type": "industry_proxy",
@@ -32325,7 +32360,7 @@
                 "period": "2025年统计；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32344,20 +32379,20 @@
                 "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "复核2026-10-03"
+                  "大陆《民用航空法》自 2026 年 7 月 1 日施行。CCAR-61-R5 区分商用和航线运输驾驶员执照，按所申请等级核体检、考试和飞行经历。CCAR-121-R8 §121.453 对适用运输运行的机长要求航线运输执照和相应型别；副驾驶至少具备规定的商用执照及飞机、多发、仪表等级，或多人制机组成员执照。§121.455 另有运营人获批训练。 CCAR-61-R5 §61.13(a) 列学生、运动、私用、商用、多人制机组和航线运输六类；本页着重后四类。申请多人制机组驾驶员执照须核 §61.175，含按规则颁发的私用驾驶员执照。适用 CCAR-121 的持商照人员进入副驾驶训练，还须按 §121.417(c) 查航线运输驾驶员执照地面理论考试，以及适用经历或批准课程条件。",
+                  "适用资格须按航空器类别、等级和执照核对。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "原始公开资料",
                 "id": "ccar61",
-                "limitation": "申请条件、权限与类别经历；另须核对相应运行规则和运营人资格。",
+                "limitation": "适用资格须按航空器类别、等级和执照核对。",
                 "market": "中国大陆",
-                "name": "民用航空器驾驶员合格审定规则（CCAR-61-R5整合文本）",
-                "period": "2018年修订；2019-01-01施行；2026-10-03核页面有效性",
-                "publisher": "中国民用航空局",
+                "name": "民航局：CCAR-61-R5 驾驶员执照",
+                "period": "2019-01-01",
+                "publisher": "CAAC",
                 "scope": "contextual",
-                "url": "https://pilot.caac.gov.cn/servlet/FileUploadManagerServlet?UUID=661aaa3d-84a2-40b9-8ab7-6ecb4bfebf97&method=noDownload"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201812/t20181219_193580.html"
               },
               {
                 "accessed_at": "2026-10-03",
@@ -32680,20 +32715,20 @@
                 "url": "https://www.onetonline.org/link/localwages/53-2012.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "contextual",
-                  "复核2026-10-03"
+                  "大陆《民用航空法》自 2026 年 7 月 1 日施行。CCAR-61-R5 区分商用和航线运输驾驶员执照，按所申请等级核体检、考试和飞行经历。CCAR-121-R8 §121.453 对适用运输运行的机长要求航线运输执照和相应型别；副驾驶至少具备规定的商用执照及飞机、多发、仪表等级，或多人制机组成员执照。§121.455 另有运营人获批训练。 CCAR-61-R5 §61.13(a) 列学生、运动、私用、商用、多人制机组和航线运输六类；本页着重后四类。申请多人制机组驾驶员执照须核 §61.175，含按规则颁发的私用驾驶员执照。适用 CCAR-121 的持商照人员进入副驾驶训练，还须按 §121.417(c) 查航线运输驾驶员执照地面理论考试，以及适用经历或批准课程条件。",
+                  "仅限该规则适用运输运行。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "原始公开资料",
                 "id": "ccar121",
-                "limitation": "第121.453条区分机长、副驾驶；第121.455条规定对应训练，执照不是单独运行授权。",
+                "limitation": "仅限该规则适用运输运行。",
                 "market": "中国大陆",
-                "name": "大型飞机公共航空运输承运人运行合格审定规则（CCAR-121-R8）",
-                "period": "2024-04-13施行；2026-10-03核有效性",
-                "publisher": "中国民用航空局",
+                "name": "民航局：CCAR-121-R8 运输运行与机组资格",
+                "period": "2024-04-13",
+                "publisher": "CAAC",
                 "scope": "contextual",
-                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202404/t20240415_223517.html"
+                "url": "https://app.caac.gov.cn/XXGK/XXGK/MHGZ/202404/t20240415_223517.html"
               },
               {
                 "accessed_at": "2026-10-08",
@@ -32711,21 +32746,148 @@
                 "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "档位：0几乎无影响；25准备或记录辅助；50实质辅助；75大部分信息产出可由AI形成并复核；100所选任务近乎全可由AI完成且可独立验证。",
-                  "飞行前准备｜计划与性能｜研读天气、通告与航路资料，制定飞行计划与油量方案，完成载重平衡与起飞性能计算。 — 75/100; weight=1/3; airline-and-commercial-pilots.profile.responsibilities-block.1[0]",
-                  "飞行操纵｜机动与阶段｜操纵航空器完成滑行、起飞、爬升、巡航、下降与着陆，按标准操作程序执行。 — 25/100; weight=1/3; airline-and-commercial-pilots.profile.responsibilities-block.1[2]",
-                  "通信与协同｜管制与机组｜与空中交通管制保持通信并按指令飞行，与签派、维修和客舱机组协调，按机组资源管理分工。 — 25/100; weight=1/3; airline-and-commercial-pilots.profile.responsibilities-block.1[4]"
+                  "可以用虚构的纸面材料比较整理和核对动作。现有来源没有给出本职业 AI 采用、节省工时、替代率或真实运行安全效果。真实运行只用运营人批准的流程、资料和工具；不得用练习或生成内容作飞行决定。",
+                  "定性编辑说明，无评分。",
+                  "定性编辑说明，无评分。",
+                  "定性编辑说明，无评分。",
+                  "定性编辑说明，无评分。"
                 ],
-                "evidence_type": "编辑模型估算方法",
+                "evidence_type": "原始公开资料",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "依据本页既有职业职责与AI任务分析作档位判断；不代表采用率、实测效果、岗位消失或个人失业概率，也不是斯坦福或其他外部机构官方分数；未使用实际工时权重，不假定未来机器人部署。",
-                "name": "FermatMind AI影响度估算方法 v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "本职业三项代表核心任务",
-                "url": "#career-ai-assessment-method"
+                "limitation": "定性编辑说明，无评分。",
+                "name": "费马测试：AI 工作任务证据口径",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "#career-visual-group-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "大陆《民用航空法》自 2026 年 7 月 1 日施行。CCAR-61-R5 区分商用和航线运输驾驶员执照，按所申请等级核体检、考试和飞行经历。CCAR-121-R8 §121.453 对适用运输运行的机长要求航线运输执照和相应型别；副驾驶至少具备规定的商用执照及飞机、多发、仪表等级，或多人制机组成员执照。§121.455 另有运营人获批训练。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "pilot-cn-law",
+                "limitation": "中国大陆法律框架；具体运行查相应规章。",
+                "name": "中华人民共和国民用航空法（2026 施行）",
+                "period": "2026-07-01",
+                "publisher": "CAAC",
+                "scope": "contextual",
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 14 CFR Part 61 区分商用证书与 ATP；§61.160 对符合条件者设受限 ATP 途径。通常 Part 121 副驾驶须持 ATP 及相应型别，§61.55 的副驾驶型别单独不够（§121.436(b)）。机长以及需三名或以上驾驶员的旗航或补充运行中的副驾驶，按 §121.436(a) 须持不受 §61.167 限制的 ATP 及相应型别等级；该款的额外机长经历要求另核。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "pilot-ecfr61",
+                "limitation": "适用美国证书，不提供雇主录用承诺。",
+                "name": "eCFR 14 CFR Part 61：美国驾驶员证书",
+                "period": "2026-11-09",
+                "publisher": "eCFR",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-61"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "美国 14 CFR Part 61 区分商用证书与 ATP；§61.160 对符合条件者设受限 ATP 途径。通常 Part 121 副驾驶须持 ATP 及相应型别，§61.55 的副驾驶型别单独不够（§121.436(b)）。机长以及需三名或以上驾驶员的旗航或补充运行中的副驾驶，按 §121.436(a) 须持不受 §61.167 限制的 ATP 及相应型别等级；该款的额外机长经历要求另核。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "pilot-ecfr121",
+                "limitation": "仅限适用 Part 121 的运行。",
+                "name": "eCFR 14 CFR §121.436：美国运输运行驾驶员资格",
+                "period": "2026-11-09",
+                "publisher": "eCFR",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-G/part-121/subpart-O/section-121.436"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "国航股份 2026 年 11 月发布 2027 年招收飞行学生简章：校企合作，录取后飞行技术本科四年。公告区分公司支付学习期间训练费与家庭承担学费和日常费用；毕业仍须符合飞行条件才接收。它说明培养路径，不是持照副驾驶岗位工资。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "pilot-airchina",
+                "limitation": "招收培养样本，不是岗位工资。",
+                "name": "中国国航：2027 年招收飞行学生",
+                "period": "2026-11",
+                "publisher": "Air China",
+                "scope": "recruitment_proxy",
+                "url": "https://zhaopin.airchina.com.cn/recruitment/infomation/11/185773.shtml"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "多彩贵州航空 2026 年第二批公告列 7 名副驾驶，要求本科及以上、民航局有效商用执照及飞机、多发和仪表等级。公告流程另含飞行技术考核。这是单一航空公司的岗位样本，不能转成全国招录门槛。 原公告报名于 2026 年 5 月 14 日截止。"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "pilot-guizhou",
+                "limitation": "单一岗位样本，不用于推断实时招工或全国门槛。",
+                "name": "多彩贵州航空：2026 年第二批招聘",
+                "period": "2026",
+                "publisher": "Guizhou Civil Aviation Industry Group",
+                "scope": "recruitment_proxy",
+                "url": "https://www.gz-gcac.com/content/details_182_28380.html"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "试做入行区模型 F：对两版虚构资料复核数字、核对状态单期限，再写交接。模型不对应航空器，不用于飞行、配载或放行。"
+                ],
+                "evidence_type": "虚构纸面练习",
+                "id": "pilot-paper",
+                "limitation": "纸面练习，不是操作或安全依据。",
+                "name": "费马测试：模型 F 虚构复核",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "O*NET 空中交通管制员"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "pilot-atc",
+                "limitation": "相邻职业职责，不是本职业许可。",
+                "name": "O*NET 空中交通管制员",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-2021.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "O*NET 机场运行专员"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "pilot-airportops",
+                "limitation": "相邻职业职责，不是本职业许可。",
+                "name": "O*NET 机场运行专员",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-2022.00"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "O*NET 航空器机械师"
+                ],
+                "evidence_type": "原始公开资料",
+                "id": "pilot-mechanics",
+                "limitation": "相邻职业职责，不是本职业许可。",
+                "name": "O*NET 航空器机械师",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-3011.00"
               }
             ]
           },
@@ -32852,6 +33014,26 @@
               "entry": "link-5",
               "field": "entity"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/53-2021.00",
+            "label": "O*NET 空中交通管制员"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/53-2022.00",
+            "label": "O*NET 机场运行专员"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/49-3011.00",
+            "label": "O*NET 航空器机械师"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/53-2011.00",
+            "label": "O*NET OnLine 53-2011.00 航空公司飞行员、副驾驶与飞行工程师职业摘要"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/53-2012.00",
+            "label": "O*NET OnLine 53-2012.00 商业飞行员职业摘要"
           }
         ],
         "evidence_note": {
@@ -33479,7 +33661,7 @@
             }
           }
         ],
-        "heading": "AI 会取代航空公司与商业飞行员吗？",
+        "heading": "怎样用虚构材料核对 AI 草稿？",
         "method_cards": [
           {
             "含义": {
@@ -34180,6 +34362,36 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://zhaopin.airchina.com.cn/recruitment/infomation/11/185773.shtml",
+            "id": "pilot-airchina",
+            "label": "中国国航：2027 年招收飞行学生",
+            "scope": "招收培养样本，不是岗位工资。"
+          },
+          {
+            "href": "https://www.gz-gcac.com/content/details_182_28380.html",
+            "id": "pilot-guizhou",
+            "label": "多彩贵州航空：2026 年第二批招聘",
+            "scope": "单一岗位样本，不用于推断实时招工或全国门槛。"
+          },
+          {
+            "href": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-61",
+            "id": "pilot-ecfr61",
+            "label": "eCFR 14 CFR Part 61：美国驾驶员证书",
+            "scope": "适用美国证书，不提供雇主录用承诺。"
+          },
+          {
+            "href": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-G/part-121/subpart-O/section-121.436",
+            "id": "pilot-ecfr121",
+            "label": "eCFR 14 CFR §121.436：美国运输运行驾驶员资格",
+            "scope": "仅限适用 Part 121 的运行。"
+          },
+          {
+            "href": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html",
+            "id": "pilot-cn-law",
+            "label": "中华人民共和国民用航空法（2026 施行）",
+            "scope": "中国大陆法律框架；具体运行查相应规章。"
           }
         ],
         "tracks": [
@@ -35229,6 +35441,12 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html",
+            "id": "pilot-cn-law",
+            "label": "中华人民共和国民用航空法（2026 施行）",
+            "scope": "中国大陆法律框架；具体运行查相应规章。"
           }
         ]
       },
@@ -35959,7 +36177,7 @@
           "折算边界",
           "怎样理解这个位置"
         ],
-        "wage_heading": "美国航空公司飞行员工资分布（53-2011）",
+        "wage_heading": "美国 53-2011 航空公司飞行员、副驾驶与飞行工程师工资分布",
         "wage_tiers": [
           {
             "equivalent": "官方年工资，非个人月收入",
@@ -36056,7 +36274,7 @@
       },
       "hero": {
         "h1": "航空公司与商业飞行员",
-        "quick_answer": "航空公司与商业飞行员在执照、运营人训练与运行规则下规划、操纵并监控航空器：飞行前研读天气与通告、制定飞行计划与油量方案、完成载重平衡与性能计算并按检查单检查航空器，飞行中按标准操作程序操纵并监控系统、与管制和机组通信并处置异常，落地后填写日志与报告。本页分开呈现航空公司飞行员与商业飞行员的任务、工资与路径，并给出美国合计口径与分口径数据；中国侧仅提供城镇单位群体工资背景。",
+        "quick_answer": "航空公司飞行员通常执行定期固定翼客货运输，商业飞行员可承担包机、空中作业等不同任务。美国 BLS 把两项归入 53-2010；53-2012 是职业分类，不能直接当作一张商用驾驶员执照。实际飞行须按所在法域的执照等级、运行和运营人训练要求核对。",
         "title": "航空公司与商业飞行员"
       },
       "market_signal_card": {
@@ -37622,7 +37840,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI影响度",
+      "ai-impact": "AI 与工作任务",
       "china-salary": "中国大陆薪资参考",
       "direction-comparison": "职业方向比较",
       "fit": "职业适配指南",
@@ -37682,7 +37900,7 @@
         "fact_id": "us-wage-2025",
         "market": "美国",
         "measure": "年薪中位数",
-        "occupation_scope": "航空公司与商业飞行员",
+        "occupation_scope": "美国 BLS 53-2010 母类（含 53-2011 和 53-2012）",
         "period": "2025年5月",
         "source_refs": [
           "ooh"
@@ -37718,7 +37936,7 @@
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "在岗就业人数",
-        "occupation_scope": "航空公司与商业飞行员",
+        "occupation_scope": "美国 BLS 53-2010 母类（含 53-2011 和 53-2012）",
         "period": "2025年",
         "source_refs": [
           "ep"
@@ -37730,7 +37948,7 @@
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长率与官方净变化",
-        "occupation_scope": "航空公司与商业飞行员",
+        "occupation_scope": "美国 BLS 53-2010 母类（含 53-2011 和 53-2012）",
         "period": "2025—2035年",
         "source_refs": [
           "ep"
@@ -37742,7 +37960,7 @@
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "航空公司与商业飞行员",
+        "occupation_scope": "美国 BLS 53-2010 母类（含 53-2011 和 53-2012）",
         "period": "2025—2035年",
         "source_refs": [
           "ep"
@@ -37753,8 +37971,8 @@
         "display_value": "334,930美元/年",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "快递与信使服务中的航空公司飞行员年工资中位数",
-        "occupation_scope": "美国快递与信使服务中的航空公司飞行员（53-2011）",
+        "measure": "53-2011 快递与特快递送服务行业年薪中位",
+        "occupation_scope": "美国 53-2011｜快递与特快递送服务",
         "period": "2025年5月",
         "source_refs": [
           "ooh"
@@ -37870,11 +38088,11 @@
       },
       {
         "derivation": null,
-        "display_value": "133,981元/年",
+        "display_value": "非私营 133,981 元/年、私营 73,133 元/年",
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆",
-        "measure": "交通运输、仓储和邮政业年平均工资（城镇非私营单位）",
-        "occupation_scope": "中国大陆城镇单位或规模以上企业群体；不是飞行驾驶员单列工资",
+        "measure": "2025 年交通运输、仓储和邮政业城镇单位税前年平均工资",
+        "occupation_scope": "行业，非飞行员工资",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37946,7 +38164,7 @@
         "fact_id": "us-combined-growth",
         "market": "美国",
         "measure": "合计口径就业增长与净变化",
-        "occupation_scope": "航空公司与商业飞行员",
+        "occupation_scope": "美国 BLS 53-2010 母类（含 53-2011 和 53-2012）",
         "period": "2025—2035年",
         "source_refs": [
           "ep"
@@ -37958,7 +38176,7 @@
         "fact_id": "us-combined-openings",
         "market": "美国",
         "measure": "合计口径年均职位空缺",
-        "occupation_scope": "航空公司与商业飞行员",
+        "occupation_scope": "美国 BLS 53-2010 母类（含 53-2011 和 53-2012）",
         "period": "2025—2035年",
         "source_refs": [
           "ep"
@@ -37983,7 +38201,7 @@
         "fact_id": "us-wage",
         "market": "美国",
         "measure": "职业工资口径（合计中位数）",
-        "occupation_scope": "航空公司与商业飞行员",
+        "occupation_scope": "美国 BLS 53-2010 母类（含 53-2011 和 53-2012）",
         "period": "2025年5月",
         "source_refs": [
           "ooh"
@@ -38003,14 +38221,14 @@
       },
       {
         "derivation": null,
-        "display_value": "美国 O*NET 新招人员学历问项：61%选择学士学位（53-2011.00）",
+        "display_value": "BLS 典型入行：美国 53-2011 为学士和少于 5 年相关经验；53-2012 为高等教育非学位凭证，无典型相关经验要求；两者均列中期在岗训练。学历统计与驾驶执照、执业权限、雇主筛选分别核对。",
         "fact_id": "credential-boundary",
         "market": "美国",
         "measure": "入门学历与培训",
         "occupation_scope": "航空公司与商业飞行员",
         "period": "2026年更新页面；复核2026-10-03",
         "source_refs": [
-          "editor"
+          "ep"
         ]
       },
       {
@@ -38024,27 +38242,15 @@
         "source_refs": [
           "ep"
         ]
-      },
-      {
-        "derivation": "三项代表核心任务等权的模型影响指数，非实际工时占比或失业概率。floor((75+25+25)/3+0.5)=42; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "42%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "不限定单一地区；依赖具体组织场景",
-        "measure": "AI影响度（编辑估算）",
-        "occupation_scope": "航空公司与商业飞行员",
-        "period": "2026-10-18 评估；2026年前后工具能力边界",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI影响度"
+      "label": "AI 与工作任务"
     },
     "badges": [
       "航空器驾驶：执照与运行资格 · 飞行计划与操纵监控 · 安全与机组协同",
@@ -38056,25 +38262,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "美国年薪中位数（合计口径）"
+        "label": "美国 53-2010 母类：美国年薪中位数（合计口径）"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（合计口径）"
+        "label": "美国 53-2010 母类：美国就业增长（合计口径）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（合计口径）"
+        "label": "美国 53-2010 母类：美国在岗人数（合计口径）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（合计口径）"
+        "label": "美国 53-2010 母类：美国年均职位空缺（合计口径）"
       },
       {
         "availability": "missing",
@@ -38088,17 +38294,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "了解航空公司与商业飞行员的任务、美国两类工资分位和2025—2035年就业预测；中国飞行驾驶员2-04-01-01的执照与运输机组资格分别核对，附完整虚构纸面练习和数据边界。"
+      "text": "比较航空公司与商业飞行岗位、执照和训练边界，查看美国工资及大陆培养和招聘样本。"
     },
     "title": {
       "availability": "available",
-      "text": "航空公司与商业飞行员：任务、两类工资与就业前景（O*NET 53-2011/53-2012）"
+      "text": "航空公司与商业飞行员：职责、执照与工资"
     }
   },
-  "source_content_sha256": "27daa3a9189e420825977b8000ffb137ca6dec0203f86d61e88d084714f85e2e",
+  "source_content_sha256": "37a5b02100b66bc32309007df84140e537a98209c16d21b95c6bcaca4845dca7",
   "subject": {
     "canonical_slug": "airline-and-commercial-pilots",
     "name": "航空公司与商业飞行员",
-    "summary": "航空公司与商业飞行员在执照、运营人训练与运行规则下规划、操纵并监控航空器，按规章完成飞行前准备、飞行操纵与监控、通信协同与记录并接受持续复训；航空公司飞行员执飞定期航班与大型运输机，商业飞行员执飞非定期航线与专项作业，两类任务、工资与路径不同；机长对飞行安全保留最终指挥责任。"
+    "summary": "航空公司飞行员通常执行定期固定翼客货运输，商业飞行员可承担包机、空中作业等不同任务。美国 BLS 把两项归入 53-2010；53-2012 是职业分类，不能直接当作一张商用驾驶员执照。实际飞行须按所在法域的执照等级、运行和运营人训练要求核对。"
   }
 }

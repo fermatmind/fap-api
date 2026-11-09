@@ -26,9 +26,6 @@
       "fact:cn-urban-nonprivate-2025": {
         "status": "pending_mapping"
       },
-      "fact:fermatmind-ai-impact-estimate": {
-        "status": "pending_mapping"
-      },
       "fact:identity": {
         "status": "pending_mapping"
       },
@@ -15825,20 +15822,44 @@
         "status": "unfilled"
       },
       "interface.direction_comparison.table.choice_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.choice_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.direction_comparison.table.direction_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.direction_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.direction_comparison.table.distinction_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.distinction_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.direction_comparison.table.work_output_header": {
-        "ref": null,
-        "status": "unfilled"
+        "ref": {
+          "path": [
+            "interface",
+            "interface.direction_comparison.table.work_output_header"
+          ],
+          "source": "display"
+        },
+        "status": "mapped"
       },
       "interface.fit.assessment_misuse_label": {
         "ref": null,
@@ -22951,13 +22972,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "The judgment checklist on this page is only for self-questioning and does not constitute hiring criteria, a personality evaluation, or a competence conclusion. The authority and boundaries of railroad conductors and yardmasters vary widely: authority for giving movement instructions, classifying trains, handling accidents, and release confirmation belongs to different roles, and no single checklist can replace checking the target position's actual authorization and operating procedures."
+              "Verify actual shifts, outdoor work, training, and authority. A practice exercise or adjacent experience does not qualify you to work independently."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "editor",
-            "onet"
+            "fra-242",
+            "nra-safety"
           ],
           "type": "prose"
         },
@@ -22966,12 +22987,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "First observe whether you can break a vague train operation and switching requirement into tracks, cars, schedules, and safety conditions, and judge whether the site can be worked. Then use the fictional material T1—T5 from the entry module for one full exercise: check the crew sheet, track occupancy, car numbers, and safety conditions and mark the to-be-confirmed and to-be-escalated items; the exercise needs only paper and a text file, and no real locomotive, line, or car."
+              "Try YD-05 in the entry section: compare two fictional car and seal records, flag items for review, and write a two-sentence handoff. Do not direct any real work."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "editor"
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -22980,14 +23001,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "A signal more worth considering is that you are willing to repeatedly confirm routes and car numbers according to procedures, record anomalies and unhandled items truthfully, and accept that moving the train and release are decided by authorized roles. A signal requiring caution is treating one job's conclusion as a general conclusion, or giving a movement instruction without confirming the route and checking the car numbers."
+              "You like checking car IDs and versions, describing inconsistencies, and asking the responsible reviewer when evidence is missing."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.quick-decision.fit-decision-checklist.3",
           "source_refs": [
-            "editor",
-            "onet",
-            "employer"
+            "msresearch",
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -22996,13 +23016,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "The conclusion on this card comes from public occupational task material and editorial synthesis and is not an assessment result about you personally and does not predict employment outcomes. The actual task scope of railroad conductors and yardmasters depends on the employer, the yard, and the operating procedures; the same Chinese title may correspond to completely different duties and authority at different organizations."
+              "Try YD-05 in the entry section: compare two fictional car and seal records, flag items for review, and write a two-sentence handoff. Do not direct any real work."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "editor",
-            "onet"
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -23011,13 +23030,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "If you are willing to combine train operation organization with crew management and judge according to procedures whether a train can move, this job is worth learning more about. When judging a position, ask three things first: whether you can independently handle crew duty and switching direction, who can approve moving the train and release, and to whom you escalate when a train anomaly or accident occurs."
+              "Compare the two settings. Train crew coordination involves on-board handoffs. Yard coordination more often centers on schedules, car groups, and yard records. Both rely on stating discrepancies clearly."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "editor",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         }
@@ -23172,7 +23190,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "The current BLS table 1.2 gives 2025—2035 projections: 53-4031 base period 38,900 people, projected 39,200, an official net increase of about 300 people and growth of 0.9%, with about 3,000 average annual openings (including replacement). This is a general employment projection, not AI attribution. The hero section and the independent FAQ retain the old period and cannot be treated as the same period."
+              "The current BLS table 1.2 gives 2025—2035 projections: 53-4031 base period 38,900 people, projected 39,200, an official net increase of about 300 people and growth of 0.9%, with about 3,000 average annual openings (including replacement). This is a general employment projection, not AI attribution."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.profile.onet-structured-fields-block.4",
@@ -23672,34 +23690,34 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET Air Traffic Controllers occupational profile (53-2021.00)",
+                "entity": "O*NET 53-4011.00 Locomotive Engineers (adjacent occupation)",
                 "id": "link-1",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/53-2021.00"
+                "url": "https://www.onetonline.org/link/summary/53-4011.00"
               },
               {
-                "entity": "O*NET Dispatchers, Except Police, Fire, and Ambulance occupational profile (43-5032.00)",
+                "entity": "O*NET 53-4013.00 Rail Yard Engineers, Dinkey Operators, and Hostlers (adjacent occupation)",
                 "id": "link-2",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/53-4013.00"
+              },
+              {
+                "entity": "O*NET 53-4022.00 Railroad Brake, Signal, and Switch Operators and Locomotive Firers (adjacent occupation)",
+                "id": "link-3",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/53-4022.00"
+              },
+              {
+                "entity": "O*NET 43-5032.00 Dispatchers, Except Police, Fire, and Ambulance (adjacent occupation)",
+                "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/43-5032.00"
               },
               {
-                "entity": "O*NET First-Line Supervisors of Material-Moving Machine and Vehicle Operators occupational profile (53-1043.00)",
-                "id": "link-3",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/53-1043.00"
-              },
-              {
-                "entity": "O*NET Transportation Vehicle, Equipment and Systems Inspectors, Except Aviation occupational profile (53-6051.07)",
-                "id": "link-4",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/53-6051.07"
-              },
-              {
-                "entity": "O*NET Subway and Streetcar Operators occupational profile (53-4041.00)",
+                "entity": "O*NET 53-2021.00 Air Traffic Controllers (adjacent occupation)",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/53-4041.00"
+                "url": "https://www.onetonline.org/link/summary/53-2021.00"
               }
             ]
           },
@@ -23708,8 +23726,8 @@
             "facilities",
             "operations",
             "hr",
-            "health",
-            "purchasing-managers"
+            "purchasing-managers",
+            "archivists"
           ],
           "type": "links"
         },
@@ -23718,7 +23736,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The comparison subjects in the table above share the same base capabilities of transport organization and safety procedures but have different responsibility subjects: air traffic controllers face aviation traffic control, dispatchers face transport dispatch, first-line supervisors face material-moving crews, inspectors face transport equipment inspection, and subway operators face urban rail passenger operation; this occupation faces train operation organization for railway trains and yards. When comparing, look at differences in inputs, outputs, and approval authority rather than the title."
+              "For the same task, identify who operates the equipment, who schedules it, who coordinates the crew and who can confirm the next step. Check how the employer divides conductor and yardmaster duties."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.8",
@@ -23734,7 +23752,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The table above compares five adjacent occupations — air traffic controllers, dispatchers (except police, fire, and ambulance), first-line supervisors of material-moving machine and vehicle operators, transportation vehicle, equipment and systems inspectors (except aviation), and subway and streetcar operators — based on their respective official occupational profiles; the last row is this occupation's internal yard direction work direction, editorially synthesized from this occupation's official task material. Neither set of material constitutes mutual qualification recognition in China, nor does it show that a position necessarily requires all the abilities\nof another occupation."
+              "The first five rows use the linked O*NET profiles. The last uses yard coordination tasks from 53-4031.00. The profiles document differences in work; they do not establish qualification equivalence."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.9",
@@ -23752,7 +23770,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The table below compares five adjacent occupations — air traffic controllers, dispatchers (except police, fire, and ambulance), first-line supervisors of material-moving machine and vehicle operators, transportation vehicle, equipment and systems inspectors (except aviation), and subway and streetcar operators; the last row is this occupation's internal yard direction work direction. Each row compares core work and outputs, responsibility boundaries, and selection conditions for use in checking positions, and does not represent an automatic role-change or promotion path."
+              "The five adjacent roles are locomotive engineers; rail yard engineers and hostlers; railroad brake, signal and switch operators and locomotive firers; dispatchers other than emergency services; and air traffic controllers. The final row is the yardmaster direction within this occupation. Compare outputs, responsibilities and entry conditions row by row."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.10",
@@ -23767,13 +23785,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The responsibility subject is aviation traffic control: aviation control and procedure knowledge are required; transport organization experience is partly transferable, but aviation control and safety separation must be learned separately."
+              "Focus on driving; conductors coordinate train crews."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
             "facilities",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23782,13 +23800,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Better suited to people interested in aviation traffic control; treating railway train operation experience directly as an aviation control qualification underestimates the threshold."
+              "If you prefer driving, check driver qualifications and training."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.12",
           "source_refs": [
             "facilities",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23797,13 +23815,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Direct aircraft operation and separation, producing control and records."
+              "Drive locomotives and monitor their operation."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
             "facilities",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23812,12 +23830,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Air traffic controllers"
+              "Locomotive engineers (53-4011.00)"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.14",
           "source_refs": [
-            "facilities"
+            "facilities",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23826,13 +23845,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The responsibility subject is transport dispatch: dispatch and coordination ability is required; train operation organization experience is transferable, but dispatch systems and procedures must be learned separately."
+              "Focus on locomotive operation; yardmasters focus on plans and coordination."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
             "operations",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23841,13 +23860,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Better suited to people willing to do transport dispatch and coordination; treating train operation experience as a dispatch qualification underestimates the scope."
+              "If you prefer equipment operation, verify the assignment and authority."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
             "operations",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23856,13 +23875,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Prepare and execute transport dispatch plans, coordinate multiple parties, and produce dispatch records."
+              "Operate or move equipment within the yard under work assignments."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
             "operations",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23871,12 +23890,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Dispatchers (except police, fire, and ambulance)"
+              "Rail yard engineers and hostlers (53-4013.00)"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.18",
           "source_refs": [
-            "operations"
+            "operations",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23885,13 +23905,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The responsibility subject is material-moving crews: site management and equipment knowledge are required; crew management experience is only part of it."
+              "Focus on assigned equipment and tasks; 53-4031 also covers crew or yard coordination."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
             "hr",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23900,13 +23920,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Better suited to people willing to do on-site crew management; treating train operation organization experience as a crew management qualification underestimates the threshold."
+              "If you prefer equipment tasks, check the actual equipment and training."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
             "hr",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23915,13 +23935,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Supervise material-moving machine and vehicle operator crews, producing work and safety records."
+              "Operate assigned brake, signal, or switching equipment within authorization."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.21",
           "source_refs": [
             "hr",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23930,12 +23950,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "First-line supervisors of material-moving machine and vehicle operators"
+              "Railroad brake, signal, and switch operators and locomotive firers (53-4022.00)"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.22",
           "source_refs": [
-            "hr"
+            "hr",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23944,13 +23965,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The responsibility subject is transport equipment inspection: equipment inspection and standards knowledge are required; site experience is transferable, but inspection standards and procedures must be learned separately."
+              "Dispatch is separate from train crew coordination and does not confer switching authority."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
-            "health",
-            "editor"
+            "purchasing-managers",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23959,13 +23980,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Better suited to people willing to do equipment and system inspection; treating train operation experience as an inspection qualification underestimates the threshold."
+              "If you prefer scheduling, check the industry and its requirements."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
-            "health",
-            "editor"
+            "purchasing-managers",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23974,13 +23995,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Inspect transport vehicles, equipment, and systems and issue conclusions, producing inspection records."
+              "Schedule workers, vehicles, or equipment and maintain dispatch records."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
-            "health",
-            "onet"
+            "purchasing-managers",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23989,12 +24010,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Transportation vehicle, equipment and systems inspectors (except aviation)"
+              "Dispatchers except emergency services (43-5032.00)"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.26",
           "source_refs": [
-            "health"
+            "purchasing-managers",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24003,13 +24025,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The responsibility subject is urban rail passenger operation: passenger operation and emergency handling ability are required; train operation organization experience is transferable, but passenger operation and regulations must be learned separately."
+              "Aviation and rail have distinct systems, procedures, and qualifications."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
-            "editor",
-            "onet"
+            "archivists",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24018,13 +24040,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Better suited to people interested in urban rail passenger operation; treating freight train operation experience as a passenger driving qualification underestimates the threshold."
+              "If you prefer aviation, check air traffic control entry requirements."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
-            "editor",
-            "employer"
+            "archivists",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24033,13 +24055,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Drive subways or streetcars for passenger service, producing operation and emergency handling records."
+              "Coordinate aircraft traffic and maintain separation within assigned airspace or airport operations."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
-            "editor"
+            "archivists",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24048,12 +24070,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Subway and streetcar operators"
+              "Air traffic controllers (53-2021.00)"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.30",
           "source_refs": [
-            "editor"
+            "archivists",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24062,13 +24085,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "The responsibility subject is this occupation's core yard direction step: plan preparation, work direction, and car number checking abilities are required."
+              "Focus on yard planning and coordination, distinct from coordinating an on-board crew."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
-            "privacy",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24077,13 +24099,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Better suited to people willing to do direction and organization and sensitive to train safety; if you do not take on direction and organization responsibility, you may be limited in the long term."
+              "If you prefer records and coordination, check how the employer assigns work."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
-            "privacy",
-            "editor"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24092,13 +24113,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Review plans and documents, direct switching and classification, check car numbers, and record, producing direction and train operation records."
+              "Review schedules, car groupings and records; coordinate yard crews."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
-            "onet",
-            "privacy"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24107,12 +24127,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "Yard direction"
+              "This page: yardmaster"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.34",
           "source_refs": [
-            "privacy"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24121,7 +24141,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "It is suggested to first choose one direction for low-cost verification: practice once with that direction's real tasks, then check the target position's authorization and work boundaries. Avoid treating a direction name as a ready-made channel."
+              "Start with the fictional YD-05 records on paper. For actual operations, first verify the employer’s training and authorization requirements and follow its qualified supervision procedures."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.35",
@@ -24399,16 +24419,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "Cross-occupation research provides background on generative AI potential task exposure and employer expectations and has no measurement of on-site adoption, efficiency, job, or wage effects for this occupation. This page lists record organizing and procedure retrieval as evaluable auxiliary tasks (editorial analysis), and train operation organization, on-site confirmation, and emergency direction must still follow position authorization. AI Impact Score 50% is an editorial estimate. Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.The three tasks, ratings and sources are listed in the FermatMind method source record on this page."
+              "Use fictional records to group discrepancies and list items for review, then check against the originals. Available evidence does not establish occupational AI adoption, replacement rates or safety outcomes. Real train movement and switching depend on authorized staff and applicable procedures."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ilo",
-            "arxiv",
-            "weforum",
-            "editor"
+            "source-fermatmind-ai-rubric",
+            "nra-safety"
           ],
           "type": "prose"
         },
@@ -25229,7 +25246,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 employment projections (no disappearance year)"
+              "BLS Table 1.2 for U.S. SOC 53-4031: 38,900 jobs in 2025, projected 39,200 in 2035, up 0.9%, a net gain of about 300 and 3,000 annual openings including growth and replacement. Openings are projections, not live vacancies."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.ai-impact.ai-impact-table.75",
@@ -26090,7 +26107,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Annual average wage for all employees of above-scale enterprises (2025); it is the aggregate of the position categories above and cannot be taken directly as this occupation's income."
+              "The 2025 average annual wage for all employees of above-scale enterprises. It cannot be used as this occupation’s pay."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.18",
@@ -26176,13 +26193,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no Chinese conductor recruitment pay source text matching the duties, region, employer, and statistical period; it is not inferred from an unsuccessful search that no public sample exists in China."
+              "China Railway Harbin Group’s 2026 recruitment plan for vocational college graduates (II) listed 328 B0101 station switching operations places across several stations and operating units, with specified majors and courses. The plan lists no wage figures. A notice on the Tianjin Railway Technical and Vocational College career site dated October 30, 2026, listed ten switching workers for a Dagang power plant railway project, on three rotating shifts at CNY 5,500 per month. Tangshan Haigang Tianyou Railway Engineering is the contractor and employer after graduation. The quote applies to this project only. These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "editor",
-            "r2-pay-1"
+            "rail-harbin",
+            "rail-dagang"
           ],
           "type": "prose"
         },
@@ -26307,12 +26324,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round obtained no Chinese recruitment evidence for this occupation's education tiers; these directions are editorial suggestions pending verification, not a uniform threshold."
+              "The Harbin plan targets vocational college graduates and the Tianjin project lists related majors. Neither establishes a national degree threshold."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "editor"
+            "rail-harbin",
+            "rail-dagang"
           ],
           "type": "prose"
         },
@@ -26467,13 +26485,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "China railroad conductors and yardmasters (this page's explanatory scope)"
+              "Mainland China pay: switching postings and industry context"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "cnclass",
-            "editor"
+            "rail-harbin",
+            "rail-dagang",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26482,12 +26501,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The table below organizes position directions to be checked by education background and is an editorial suggestion. This round obtained no recruitment source text supporting a general Chinese starting point or education tier requirements."
+              "No matching national occupational wage distribution for mainland China was verified. These switching postings do not establish conductor pay."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "editor"
+            "rail-harbin",
+            "rail-dagang",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26496,13 +26517,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The education bands and position directions in the table are editorial synthesis used to organize the checking path; the employer's actual requirements are governed by the original recruitment posting."
+              "NBS 2025 mean annual gross wages for urban transport, storage and postal services employees: CNY 133,981/year in non-private units and CNY 73,133/year in private units. These are broad industry wages, not national conductor or switch worker pay."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "editor",
-            "r2-pay-1"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26526,13 +26546,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Only the National Bureau of Statistics broad-definition annual average wage is shown here to understand the magnitude of different position categories; it does not support any employer quote."
+              "These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "editor",
-            "r2-pay-2"
+            "rail-harbin",
+            "rail-dagang"
           ],
           "type": "prose"
         },
@@ -26541,12 +26561,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China public recruitment sample (not obtained this round)"
+              "Harbin Group | Station switching operations"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "r2-pay-1"
+            "rail-harbin"
           ],
           "type": "prose"
         },
@@ -26555,12 +26575,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "This round obtained no Chinese public recruitment pay source text that matches the duties, organization, and work scope with verified status; the gap is retained and is not replaced by adjacent-level or industry-average samples."
+              "China Railway Harbin Group’s 2026 recruitment plan for vocational college graduates (II) listed 328 B0101 station switching operations places across several stations and operating units, with specified majors and courses. The plan lists no wage figures."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "r2-pay-1"
+            "rail-harbin"
           ],
           "type": "prose"
         },
@@ -26569,12 +26589,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China public recruitment sample (not obtained this round)"
+              "Tianjin Dagang project | Switching worker"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "r2-pay-2"
+            "rail-dagang"
           ],
           "type": "prose"
         },
@@ -26583,12 +26603,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "As above: no verifiable public recruitment pay source text for this occupation was obtained, and postings unrelated to railway train operation organization are not cited."
+              "A notice on the Tianjin Railway Technical and Vocational College career site dated October 30, 2026, listed ten switching workers for a Dagang power plant railway project, on three rotating shifts at CNY 5,500 per month. Tangshan Haigang Tianyou Railway Engineering is the contractor and employer after graduation. The quote applies to this project only."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "r2-pay-2"
+            "rail-dagang"
           ],
           "type": "prose"
         },
@@ -26597,12 +26617,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "Mainland China public recruitment sample (not obtained this round)"
+              "Mainland China | Transport industry"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "r2-pay-3"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26611,12 +26631,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "As above: when verifiable samples are lacking, specific quotes are not shown on this page to avoid misleading."
+              "NBS 2025 mean annual gross wages for urban transport, storage and postal services employees: CNY 133,981/year in non-private units and CNY 73,133/year in private units. These are broad industry wages, not national conductor or switch worker pay."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "r2-pay-3"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26655,12 +26675,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "The current BLS 2025—2035 general projection shows growth of 0.9%; the old hero fact is unchanged, and see the scope conflict note."
+              "U.S. SOC 53-4031 is projected to grow 0.9% in 2025–35. This does not describe mainland demand."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "editor"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26862,13 +26882,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The current BLS table 1.2 base-period employment is 38.9 thousand; this is not the same period as the old hero figure of 36,800 in 2024.; BLS 2025—2035 employment projections｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "U.S. SOC 53-4031 baseline employment. ;BLS Table 1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "railroad-conductors-and-yardmasters.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26952,14 +26971,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "The 2025 median wage for this exact occupation is 78,000 US dollars/year (37.50 US dollars/hour). The current BLS projection base period is 38,900 people in 2025, with 0.9% growth over 2025—2035 and about 3,000 average annual openings; the hero and the independent FAQ still retain the old period and must be distinguished."
+              "May 2025 employee medians for U.S. SOC 53-4031: $78,000 per year and $37.50 per hour. Annual P10/P25/P50/P75/P90: $58,740/$65,610/$78,000/$83,820/$109,770. Percentiles do not represent starting wages or take-home pay. BLS Table 1.2 for U.S. SOC 53-4031: 38,900 jobs in 2025, projected 39,200 in 2035, up 0.9%, a net gain of about 300 and 3,000 annual openings including growth and replacement. Openings are projections, not live vacancies."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "bls",
             "onet-wages",
-            "editor"
+            "ep"
           ],
           "type": "prose"
         },
@@ -28348,12 +28366,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Compare using deliverables: crew and car number records, composition and seal records, and accident and delay reports; T1—T5 can be used for verification."
+              "Compare on-board handoffs and yard records, then try the YD-05 record check."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.fit.personality-fit-block.55",
           "source_refs": [
-            "editor"
+            "msresearch",
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -28392,12 +28411,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Do an entry exercise: use T1—T5 to review the crew duty and classification records of a fictional train operation depot once and compare against the reference deliverable."
+              "Try YD-05 in the entry section: compare two fictional car and seal records, flag items for review, and write a two-sentence handoff. Do not direct any real work."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.fit.personality-fit-block.58",
           "source_refs": [
-            "editor"
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -28596,14 +28615,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "The three boundaries railroad conductors and yardmasters most need to judge in advance are: first, who holds the decision-making authority for movement instructions, classification, and release; second, whether train records and car number information can be covered, handed over, or traced; and third, who decides on pausing and escalating when a train anomaly or accident is found."
+              "Shift work, noise and handoff practices vary. Flag conflicts in car numbers, seals, or records for authorized review before submitting the record."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "bls",
-            "editor"
+            "msresearch",
+            "nra-safety",
+            "rail-paper"
           ],
           "type": "prose"
         },
@@ -29092,7 +29111,7 @@
                 "Switching direction position",
                 "Under mentoring, direct switching work and check tracks and routes.",
                 "Whether you can issue instructions according to procedures and record truthfully, and whether you can explain the basis when questioned.",
-                "Use T2—T4 exercises to explain how to direct and check.",
+                "Use YD-05 to compare P1 and R1 by car number and explain which differences the shift lead needs to confirm.",
                 "Leans toward switching direction, with a different focus from the crew assistance position."
               ],
               [
@@ -29106,7 +29125,7 @@
                 "Car patrol and checking position",
                 "Assist in patrolling cars en route and checking car numbers and seals.",
                 "Whether you can patrol against the checklist and record truthfully.",
-                "Use the patrol and checking records from the exercise to explain the trade-offs.",
+                "Use the P1 and R1 discrepancy table to show which record matches and which items need follow-up.",
                 "Leans toward patrol and checking and does not directly decide running and release."
               ],
               [
@@ -29184,41 +29203,41 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "Materials and setup｜All editorially designed fictional data",
-                  "You are the conductor at the fictional enterprise \"Yunling Train Operations Depot\" and need to review the composition and train records of crew sheet C-7712 and give a running, remediation, or review recommendation. The materials and values below are entirely fictional and are not a real train, line, or car.",
-                  "T1 crew sheet and timetable: freight train 42012 with a composition of 42 cars, requiring pickups and setouts at 3 stations; departure at 06:10 per the timetable; one section of the route has a speed limit. T2 cars and composition: 1 car's seal number does not match the freight document, 2 cars have over-limit loading requiring verification, and 3\ncars are to be set out at intermediate stations; the rest are normal. T3 personnel and crew: the crew has 3 people, 1 of whom is close to the continuous duty time limit, requiring a check of rest and relief arrangements. T4 running and records: the draft says \"all normal, can run\"; the car number and seal check records and the arrival and departure time records are not filled in; the over-limit cars are not verified. T5\nconclusion and approval column: the running recommendation should list the items meeting the standard, the items requiring remediation, the unconfirmed items, and the approver; the running column and the dispatch confirmation column are empty."
+                  "Materials | Fictional, not operational records",
+                  "Handoff list P1: car X17/seal S81, X21/S92, X34/S44. Duty record R1: X17/S81, X21/S29, X43/S44. Both are marked 14:20.",
+                  "Exercise rule: match car IDs exactly before comparing seals. A shared seal value does not establish a car match. Leave discrepancies for review and do not edit the source records."
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "Task",
-                  "Check T1—T5 item by item and write: which results meet the requirements, which require remediation, which lack sufficient information, and the unconfirmed items and approver the running recommendation should include.",
-                  "No train, car, or authorization information not given in the exercise may be added; unknown items are listed separately."
+                  "Submit two items",
+                  "Make a difference table showing the match, seal conflict, missing record, and extra record.",
+                  "Write a two-sentence handoff naming P1, R1, and what the reviewer should confirm."
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "Reference deliverable",
-                  "Meeting the requirements: the composition and timetable are clear and work can be organized as planned. Requiring remediation: the seal number of 1 car not matching the freight document must be verified; the 2 over-limit loading cars must be verified; the continuous duty personnel must have rest and relief checked. Requiring verification: the car number and seal check records, arrival and departure times, and dispatch permission.",
-                  "The running recommendation must state the unconfirmed items and that the running column and confirmation column are empty, and must be approved by an authorized role; the conductor only submits recommendations and records."
+                  "Reference check",
+                  "X17 matches both ID and seal. X21 matches ID but S92 and S29 conflict. P1’s X34 is missing from R1; R1’s X43 is extra. The shared S44 does not establish a car match.",
+                  "Sample: “In the 14:20 P1 and R1 records, only X17 matches completely; X21 has conflicting seals and X34 and X43 are unmatched. Please review the originals before changing either record.”"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "Boundaries",
-                  "This exercise does not involve real trains, lines, or cars; actual duty, classification, and running follow the organization and the timetable. If it cannot be judged, it is acceptable to write \"insufficient to judge\" and state what evidence is missing."
+                  "Scope",
+                  "This paper exercise uses no real cars, signals, tracks, freight, or movement authority."
                 ]
               }
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.entry-work-sample-data.1",
           "source_refs": [
-            "editor"
+            "rail-paper"
           ],
-          "title": "Entry exercise: one complete office support task (fictional material)",
+          "title": "YD-05 | Compare two fictional car and seal records",
           "type": "cards"
         },
         {
@@ -29229,8 +29248,8 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "Crew sheet and composition comparison package",
-                  "Use T1—T3 to fill in the comparison table of train, composition, car numbers, and parameters, marking unknown items and questions needing clarification.",
+                  "P1 and R1 comparison table",
+                  "Compare the YD-05 plan P1 and check record R1 by car number. Mark each match, seal mismatch, plan-only entry, and check-record-only entry.",
                   "Review method: someone else can judge from the table alone which item lacks information and why."
                 ]
               },
@@ -29238,24 +29257,24 @@
                 "id": "independent-recheck",
                 "values": [
                   "Independent review note",
-                  "For T2 and T4, write the car and composition status, the rule basis, and the handling conclusion item by item.",
-                  "Review method: the conclusion is consistent with the original data and rules and states the scope of application."
+                  "With the answer key closed, record each car number and the original values in P1 and R1. Then check your work against the page’s answer key.",
+                  "Review: each result can be reproduced from P1 and R1 without guessing a missing value."
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "Remediation and risk record",
-                  "Use T4 to write a remediation record: the event, impact, pending questions, and escalation target; the record can be traced back to the car number and section.",
-                  "Review method: the remediation scope and next step can be seen."
+                  "Open items log",
+                  "Log the seal mismatch, missing record, and extra car number. For each, write what the shift lead needs to confirm.",
+                  "Review: every item gives the car number, the two records, and the open question."
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "Running recommendation draft",
-                  "Use T5 to write a running recommendation listing the items meeting the standard, the items requiring remediation, the unconfirmed items, and the approver; self-running or signing on behalf of others must not appear.",
-                  "Review method: the recommendation is consistent with the evidence and does not exceed authority."
+                  "Two-sentence handover",
+                  "Report the matches and differences in the first sentence. In the second, name what the shift lead should confirm; the exercise makes no decision to move the train.",
+                  "Review: the listener knows who needs to check what, and can trace it back to the exercise."
                 ]
               }
             ]
@@ -29326,57 +29345,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "Read the material and write a role boundary card",
-                  "Read T1—T5 and write a role boundary card: what may be done (checking and records according to procedures), what requires review (classification and running recommendations), and prohibited actions (departing without confirming the route or running on one's own); confirm that no real work is done."
+                  "Day 1",
+                  "Read the exercise rule and P1."
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "Use T1—T2 to complete the composition and car comparison table",
-                  "Use T1—T2 to check train, composition, and car status and mark the defects affecting safety."
+                  "Day 2",
+                  "Copy R1 and check the timestamp."
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "Use T3 to organize the crew and safety requirements",
-                  "Use T3 to list the crew arrangements and safety requirements and mark each item's scope of application."
+                  "Day 3",
+                  "Match entries by car ID."
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "Judge item by item using T2/T4",
-                  "Write the car and composition status, rule basis, and conclusion item by item, marking unhandled items and items requiring confirmation."
+                  "Day 4",
+                  "Check seals, omissions and extra entries."
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "Write the remediation and risk record",
-                  "Use T4 to write a remediation record: the event, impact, pending questions, and escalation target."
+                  "Day 5",
+                  "Write the difference table and handoff."
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "Use T5 to write a running recommendation draft",
-                  "Write the items meeting the standard, the items requiring remediation, the unconfirmed items, and the approver; do not run on your own."
+                  "Day 6",
+                  "Check the reference and fix any ambiguity."
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "Compare against the reference and revise",
-                  "Compare the first six days' output against the reference deliverable and revise it, recording the step most easily missed and the next practice step."
+                  "Day 7",
+                  "Note whether you want to explore checking records and handing work over."
                 ]
               }
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.seven-day-trial.1",
           "source_refs": [
-            "editor"
+            "rail-paper"
           ],
           "title": "Seven-day experience: complete one office support loop with fictional material",
           "type": "timeline"
@@ -29392,7 +29411,7 @@
               "Investment estimate: 30—60 minutes a day, mainly reading material and recomputing, with no need to buy equipment or use real line data.",
               "If you keep getting stuck at the same step during the seven days (such as document checking and sequencing logic), list it as the next priority practice item.",
               "If a step cannot be judged, write \"insufficient to judge\" and state what evidence is missing, without guessing.",
-              "After completing it, compare your output with a real organization's train operation and running format and observe the differences."
+              "First check your work against P1, R1 and the answer key. If another reader is available, ask them to use the same materials to check the discrepancy table and two-sentence handover."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.seven-day-decision.1",
@@ -29428,7 +29447,7 @@
               [
                 "High school education (or equivalent)",
                 "Job seekers hoping to enter train operation organization positions",
-                "The typical United States minimum education requirement, but it does not guarantee independent duty and direction",
+                "Typical U.S. education for entry; that education alone does not authorize independent duty or direction",
                 "A common United States requirement; the official description notes other paths exist",
                 "According to the target employer's posting",
                 "Low: usually no degree required",
@@ -29497,7 +29516,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Applicable United States conductors require checking 49 CFR Part 242 certification, and education and internal training cannot replace certification.",
+              "BLS lists a high school diploma or equivalent, no related experience, and moderate-term on-the-job training as typical U.S. entry preparation for 53-4031. O*NET Job Zone 1–2 describes a preparation category, not a fixed employer training period or certification standard. U.S. 49 CFR Part 242 applies to covered railroads and people performing duties that meet its definition of conductor, regardless of job title. A yardmaster title alone does not settle coverage. Check exceptions under §242.3, including plant railroads operating only on tracks outside the general railroad system. Mainland China’s Railway Safety Management Regulation, Articles 56 and 58, requires rail operators to establish procedures and train staff in key operating roles. Article 57 concerns examinations for railway vehicle drivers. Verify training, checks, qualifications, and authorization for the specific on-board, station, or switching assignment.",
               "Applicability and exceptions are in 242.1, 242.3, and 242.7 and are not determined automatically from a Yardmaster title.",
               "Articles fifty-six to fifty-eight of the Chinese regulations distinguish enterprise systems, the driving examination, and train operation trade training; conductors do not uniformly require a driving license.",
               "Dangerous goods work is checked against Articles sixty-nine to seventy-one and specific position rules, and this round obtained no legal basis for a uniform dangerous goods certificate for all conductors."
@@ -29505,9 +29524,11 @@
           },
           "id": "railroad-conductors-and-yardmasters.path.credential-boundary.1",
           "source_refs": [
+            "ep",
+            "onet",
             "fra-242",
             "nra-safety",
-            "editor"
+            "cnclass"
           ],
           "title": "Qualification and authorization boundary note",
           "type": "notice"
@@ -29517,18 +29538,17 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "Insufficient evidence: this round obtained no Chinese public recruitment source text matching the duties, organization, and work scope with verified status.",
-              "This round obtained no Chinese public recruitment source text matching the duties, organization, and work scope with verified status; the gap is retained and is not replaced by adjacent-level samples."
+              "China Railway Harbin Group’s 2026 recruitment plan for vocational college graduates (II) listed 328 B0101 station switching operations places across several stations and operating units, with specified majors and courses. The plan lists no wage figures.",
+              "A notice on the Tianjin Railway Technical and Vocational College career site dated October 30, 2026, listed ten switching workers for a Dagang power plant railway project, on three rotating shifts at CNY 5,500 per month. Tangshan Haigang Tianyou Railway Engineering is the contractor and employer after graduation. The quote applies to this project only.",
+              "These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.recruitment-sample.1",
           "source_refs": [
-            "employer",
-            "r2-pay-1",
-            "r2-pay-2",
-            "r2-pay-3"
+            "rail-harbin",
+            "rail-dagang"
           ],
-          "title": "Recruitment sample note",
+          "title": "Two mainland China switching notices",
           "type": "notice"
         },
         {
@@ -29576,13 +29596,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "This section is an editorially compiled entry and growth path and is not an employer recruitment standard or qualification certification; Chinese requirements and authorization are governed by the target posting and organizational systems."
+              "Mainland China lists train service workers (4-02-01-02) and station switching workers (6-30-02-02) separately. Train service leads, switching leads and yard supervisors are not interchangeable by title, and neither classification is a one-to-one match for U.S. SOC 53-4031. Mainland China’s Railway Safety Management Regulation, Articles 56 and 58, requires rail operators to establish procedures and train staff in key operating roles. Article 57 concerns examinations for railway vehicle drivers. Verify training, checks, qualifications, and authorization for the specific on-board, station, or switching assignment."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.career-path-block.11",
           "source_refs": [
-            "editor",
-            "onet"
+            "cnclass",
+            "nra-safety"
           ],
           "type": "prose"
         },
@@ -29707,7 +29727,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "The BLS row for this United States occupation lists a typical high school education and medium-term on-the-job training. The editorial suggestion is to learn the duties from supervised crew assistance, records, or yard checking tasks; independent conductor tasks require separate verification of Part 242 certification, and the Job Zone occupation group training overview must not be treated as an individual duration."
+              "BLS lists a high school diploma or equivalent, no related experience, and moderate-term on-the-job training as typical U.S. entry preparation for 53-4031. O*NET Job Zone 1–2 describes a preparation category, not a fixed employer training period or certification standard. U.S. 49 CFR Part 242 applies to covered railroads and people performing duties that meet its definition of conductor, regardless of job title. A yardmaster title alone does not settle coverage. Check exceptions under §242.3, including plant railroads operating only on tracks outside the general railroad system. Mainland China’s Railway Safety Management Regulation, Articles 56 and 58, requires rail operators to establish procedures and train staff in key operating roles. Article 57 concerns examinations for railway vehicle drivers. Verify training, checks, qualifications, and authorization for the specific on-board, station, or switching assignment."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.path.career-path-block.20",
@@ -29715,7 +29735,7 @@
             "ep",
             "onet",
             "fra-242",
-            "editor"
+            "nra-safety"
           ],
           "type": "prose"
         },
@@ -30812,13 +30832,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "The current BLS 2025—2035 general projection: United States 53-4031 base period 38,900 people, projected 39,200, growth 0.9%, and about 3,000 average annual openings (including replacement); the 2025 median wage is 78,000 US dollars/year. The hero and the independent FAQ retain the old period, and this page obtained no exact Chinese occupational wage."
+              "BLS Table 1.2 for U.S. SOC 53-4031: 38,900 jobs in 2025, projected 39,200 in 2035, up 0.9%, a net gain of about 300 and 3,000 annual openings including growth and replacement. Openings are projections, not live vacancies."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.market-signals.market-signal-card.8",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31548,10 +31567,14 @@
           "data": {
             "entries": [
               {
-                "answer": "The typical loop is receiving instructions, checking routes and car numbers, preparing work plans, directing switching or organizing the crew, monitoring the run, and recording and reporting; train operation and classification records are also maintained. O*NET 53-4031.00 is the United States definition, and United States wages are given by its OEWS percentiles, with actual conditions confirmed against the employer and organizational scope.",
+                "answer": "U.S. O*NET 53-4031.00 groups two work settings: conductors coordinate crews on passenger or freight trains, while yardmasters review schedules and switching sequences and coordinate work in the yard. Duties may overlap. In mainland China, check on-board passenger service, station operations and switching as separate roles.",
                 "id": "railroad-conductors-and-yardmasters.faq.1",
                 "question": "What do railroad conductors and yardmasters do every day?",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.daily-work"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.daily-work",
+                "source_refs": [
+                  "msresearch",
+                  "cnclass"
+                ]
               },
               {
                 "answer": "This occupation bears direction, classification, and crew organization responsibility, with emphasis on train operation organization and safety; locomotive engineers and hostlers bear locomotive driving and car transfer, and the two have different subjects and responsibilities.",
@@ -31560,40 +31583,60 @@
                 "question_key": "career.faq.railroad-conductors-and-yardmasters.comparison"
               },
               {
-                "answer": "Look at observable behaviors: whether you can organize work and check car numbers according to procedures, record anomalies and unhandled items truthfully, push problems toward remediation, and accept that moving the train and release are decided by authorized roles; T1—T5 exercises and the O*NET RCE interest can be used to check, and assessments and a single performance cannot decide employment or fit.",
+                "answer": "Try YD-05 in the entry section: compare two fictional car and seal records, flag items for review, and write a two-sentence handoff. Do not direct any real work.",
                 "id": "railroad-conductors-and-yardmasters.faq.3",
                 "question": "How do you judge whether you suit working as a railroad conductor or yardmaster?",
                 "question_key": "career.faq.railroad-conductors-and-yardmasters.fit"
               },
               {
-                "answer": "Research supports that document, data, and retrieval tasks are relatively strongly affected, but not that the whole occupation is replaced; ILO, GPTs are GPTs, and WEF provide potential exposure and employer expectations, and job replacement for this occupation cannot be calculated from them.",
+                "answer": "Use fictional records to group discrepancies and list items for review, then check against the originals. Available evidence does not establish occupational AI adoption, replacement rates or safety outcomes. Real train movement and switching depend on authorized staff and applicable procedures.",
                 "id": "railroad-conductors-and-yardmasters.faq.4",
                 "question": "Will AI reduce railroad conductor and yardmaster jobs?",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.ai-impact"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.ai-impact",
+                "source_refs": [
+                  "source-fermatmind-ai-rubric"
+                ]
               },
               {
-                "answer": "This round obtained no national or city wage for the exact occupation in mainland China; the National Bureau of Statistics industry and position category average wages serve only as statistical background, and United States values are not converted.",
+                "answer": "NBS 2025 mean annual gross wages for urban transport, storage and postal services employees: CNY 133,981/year in non-private units and CNY 73,133/year in private units. These are broad industry wages, not national conductor or switch worker pay. China Railway Harbin Group’s 2026 recruitment plan for vocational college graduates (II) listed 328 B0101 station switching operations places across several stations and operating units, with specified majors and courses. The plan lists no wage figures. A notice on the Tianjin Railway Technical and Vocational College career site dated October 30, 2026, listed ten switching workers for a Dagang power plant railway project, on three rotating shifts at CNY 5,500 per month. Tangshan Haigang Tianyou Railway Engineering is the contractor and employer after graduation. The quote applies to this project only. These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently.",
                 "id": "railroad-conductors-and-yardmasters.faq.5",
                 "question": "What is the wage for railroad conductors and yardmasters in mainland China?",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.china-pay"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "rail-harbin",
+                  "rail-dagang"
+                ]
               },
               {
-                "answer": "The official United States wage page gives this exact occupation a May 2025 annual wage median of 78,000 US dollars, which is the midpoint of the distribution, not newcomers' income.",
+                "answer": "May 2025 employee medians for U.S. SOC 53-4031: $78,000 per year and $37.50 per hour. Annual P10/P25/P50/P75/P90: $58,740/$65,610/$78,000/$83,820/$109,770. Percentiles do not represent starting wages or take-home pay.",
                 "id": "railroad-conductors-and-yardmasters.faq.6",
                 "question": "Does the United States median wage represent newcomers' income?",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.us-pay"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
               },
               {
-                "answer": "O*NET shows Job Zone 2, with a typical entry education of a high school diploma (about 86%), usually requiring several days to one year of on-the-job training; this is the typical United States background, and China is governed by the target organization's posting.",
+                "answer": "BLS lists a high school diploma or equivalent, no related experience, and moderate-term on-the-job training as typical U.S. entry preparation for 53-4031. O*NET Job Zone 1–2 describes a preparation category, not a fixed employer training period or certification standard.",
                 "id": "railroad-conductors-and-yardmasters.faq.7",
                 "question": "What education and experience are needed to enter?",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.education-path"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.education-path",
+                "source_refs": [
+                  "ep",
+                  "onet"
+                ]
               },
               {
-                "answer": "The United States mainly uses a high school education and on-the-job training; China mainly uses education, major, and experience conditions and has qualification requirements for key train operation positions and dangerous goods work. Training proof, hiring qualifications, and work authorization are three different things, and a certificate does not equal classification or release authority.",
+                "answer": "U.S. 49 CFR Part 242 applies to covered railroads and people performing duties that meet its definition of conductor, regardless of job title. A yardmaster title alone does not settle coverage. Check exceptions under §242.3, including plant railroads operating only on tracks outside the general railroad system. Mainland China’s Railway Safety Management Regulation, Articles 56 and 58, requires rail operators to establish procedures and train staff in key operating roles. Article 57 concerns examinations for railway vehicle drivers. Verify training, checks, qualifications, and authorization for the specific on-board, station, or switching assignment.",
                 "id": "railroad-conductors-and-yardmasters.faq.8",
                 "question": "What certificates are needed?",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.credentials"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.credentials",
+                "source_refs": [
+                  "fra-242",
+                  "nra-safety",
+                  "cnclass"
+                ]
               },
               {
                 "answer": "The main boundaries are misoperation caused by unclear switching and train instructions, giving a movement instruction without confirming the route or track, vehicle loading and isolation not meeting procedures, inadequate emergency protection and notification, missing records and car numbers, and improper crew fatigue arrangements; see the risk section for details.",
@@ -31602,10 +31645,13 @@
                 "question_key": "career.faq.railroad-conductors-and-yardmasters.risk-boundary"
               },
               {
-                "answer": "United States employment for this occupation is projected to grow below average over 2024—2034 (1%—2%), with about 3,100 average annual openings; directions such as locomotive engineer, rail yard engineer and hostler, brake, signal, and switch operator, and subway and streetcar operator can be explored, and shared abilities do not mean the positions are interchangeable.",
+                "answer": "BLS Table 1.2 for U.S. SOC 53-4031: 38,900 jobs in 2025, projected 39,200 in 2035, up 0.9%, a net gain of about 300 and 3,000 annual openings including growth and replacement. Openings are projections, not live vacancies.",
                 "id": "railroad-conductors-and-yardmasters.faq.10",
                 "question": "What are the prospects for this occupation? Where can you move?",
-                "question_key": "career.faq.railroad-conductors-and-yardmasters.outlook-transition"
+                "question_key": "career.faq.railroad-conductors-and-yardmasters.outlook-transition",
+                "source_refs": [
+                  "ep"
+                ]
               }
             ]
           },
@@ -31670,13 +31716,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "The Chinese on this page is used to explain the United States official occupational scope and does not establish mutual recognition of qualifications between China and other countries; all fictional exercise materials are editorial designs and do not represent employer standards or organizational requirements. Train and work information does not enter public pages."
+              "O*NET describes two work settings; BLS figures cover U.S. SOC 53-4031. Check Part 242, mainland rules, the two employer examples, and industry wages separately. YD-05 is fictional."
             ]
           },
           "id": "railroad-conductors-and-yardmasters.sources.source-card.4",
           "source_refs": [
-            "editor",
-            "privacy"
+            "msresearch",
+            "ep",
+            "onet-wages",
+            "fra-242",
+            "nra-safety",
+            "rail-harbin",
+            "rail-dagang",
+            "nbs",
+            "rail-paper"
           ],
           "type": "prose"
         }
@@ -31764,9 +31817,9 @@
                 "url": "https://www.onetonline.org/link/summary/53-4031.00"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "OEWS summarizes the wage distribution for salaried employees and excludes the self-employed; percentiles do not calculate individual income; the BLS Occupational Outlook has no separate page for this occupation, and employment and projections are taken from BLS employment projection material.",
+                  "May 2025 employee medians for U.S. SOC 53-4031: $78,000 per year and $37.50 per hour. Annual P10/P25/P50/P75/P90: $58,740/$65,610/$78,000/$83,820/$109,770. Percentiles do not represent starting wages or take-home pay.",
                   "The publisher, original link, and scope of application are in the source entries."
                 ],
                 "evidence_type": "official wage statistics",
@@ -31774,15 +31827,15 @@
                 "limitation": "OEWS summarizes the wage distribution for salaried employees and excludes the self-employed; percentiles do not calculate individual income; the BLS Occupational Outlook has no separate page for this occupation, and employment and projections are taken from BLS employment projection material.",
                 "market": "United States",
                 "name": "BLS Occupational Employment and Wage Statistics: 53-4031 Railroad Conductors and Yardmasters (OEWS)",
-                "period": "May 2025; this page checked and read 2026-09-30",
+                "period": "2025-05",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/current/oes534031.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-4031.00"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "The projected employment change does not prove AI causation and is not an individual's job-search outcome.",
+                  "BLS Table 1.2 for U.S. SOC 53-4031: 38,900 jobs in 2025, projected 39,200 in 2035, up 0.9%, a net gain of about 300 and 3,000 annual openings including growth and replacement. Openings are projections, not live vacancies.",
                   "The publisher, original link, and scope of application are in the source entries."
                 ],
                 "evidence_type": "official employment projections",
@@ -31790,7 +31843,7 @@
                 "limitation": "The projected employment change does not prove AI causation and is not an individual's job-search outcome.",
                 "market": "United States",
                 "name": "BLS employment projections and occupational characteristics table",
-                "period": "2024—2034",
+                "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -31812,9 +31865,9 @@
                 "url": "https://www.bls.gov/oes/tables.htm"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Industry and position category average wages are not this occupation's wage and do not cover the exact occupation; the self-employed are excluded.",
+                  "NBS 2025 mean annual gross wages for urban transport, storage and postal services employees: CNY 133,981/year in non-private units and CNY 73,133/year in private units. These are broad industry wages, not national conductor or switch worker pay.",
                   "The publisher, original link, and scope of application are in the source entries."
                 ],
                 "evidence_type": "official industry wage statistics",
@@ -31822,26 +31875,26 @@
                 "limitation": "Industry and position category average wages are not this occupation's wage and do not cover the exact occupation; the self-employed are excluded.",
                 "market": "Mainland China",
                 "name": "National Bureau of Statistics 2025 urban unit employee annual average wage situation",
-                "period": "2025 wage statistics; released 2026-05",
+                "period": "2025",
                 "publisher": "National Bureau of Statistics",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Key train operation positions are subject to position training and qualification administration, and dangerous goods work has specific requirements, with the specific application and work scope per regulatory and organizational rules; this does not equal classification and release authority.",
-                  "The publisher, original link, and scope of application are in the source entries."
+                  "Mainland China lists train service workers (4-02-01-02) and station switching workers (6-30-02-02) separately. Train service leads, switching leads and yard supervisors are not interchangeable by title, and neither classification is a one-to-one match for U.S. SOC 53-4031.",
+                  "Employer skill assessment scope and classification; not a universal license."
                 ],
-                "evidence_type": "official qualification catalogue",
+                "evidence_type": "Primary public source",
                 "id": "cnclass",
-                "limitation": "Key train operation positions are subject to position training and qualification administration, and dangerous goods work has specific requirements, with the specific application and work scope per regulatory and organizational rules; this does not equal classification and release authority.",
+                "limitation": "Employer skill assessment scope and classification; not a universal license.",
                 "market": "Mainland China",
-                "name": "Notes on key railway train operation position qualifications and dangerous goods transport operations",
-                "period": "Current rules; this page checked and read 2026-09-30",
-                "publisher": "National Railway Administration / Ministry of Transport",
+                "name": "Chongqing human resources authority: railway skill assessment scope",
+                "period": "2022-09-05",
+                "publisher": "Chongqing Human Resources and Social Security Bureau",
                 "scope": "contextual",
-                "url": "https://www.nra.gov.cn/"
+                "url": "https://rlsbj.cq.gov.cn/ywzl/zjzx/jdsq/202209/t20220905_11072504.html"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32036,52 +32089,52 @@
                 "url": "https://www.onetonline.org/link/summary/43-5032.00"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "No recruitment pay source text matching the duties and organization with verified status was obtained.",
-                  "The publisher, original link, and scope of application are in the source entries."
+                  "China Railway Harbin Group’s 2026 recruitment plan for vocational college graduates (II) listed 328 B0101 station switching operations places across several stations and operating units, with specified majors and courses. The plan lists no wage figures.",
+                  "These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently."
                 ],
-                "evidence_type": "recruitment proxy",
+                "evidence_type": "Primary public source",
                 "id": "r2-pay-1",
-                "limitation": "No recruitment pay source text matching the duties and organization with verified status was obtained.",
+                "limitation": "These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently.",
                 "market": "Mainland China",
-                "name": "China public recruitment pay sample (not obtained this round)",
-                "period": "Not obtained this round",
-                "publisher": "Public recruitment postings",
-                "scope": "Mainland China",
-                "url": null
+                "name": "China Railway Harbin: 2026 switching operations recruitment plan",
+                "period": "2026",
+                "publisher": "China Railway Harbin Group",
+                "scope": "recruitment_proxy",
+                "url": "https://rczp.china-railway.com.cn/upload/tinymce/202511/20251123/202511232244043_32588.pdf"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "No verifiable public recruitment pay source text for this occupation was obtained.",
-                  "The publisher, original link, and scope of application are in the source entries."
+                  "A notice on the Tianjin Railway Technical and Vocational College career site dated October 30, 2026, listed ten switching workers for a Dagang power plant railway project, on three rotating shifts at CNY 5,500 per month. Tangshan Haigang Tianyou Railway Engineering is the contractor and employer after graduation. The quote applies to this project only.",
+                  "These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently."
                 ],
-                "evidence_type": "recruitment proxy",
+                "evidence_type": "Primary public source",
                 "id": "r2-pay-2",
-                "limitation": "No verifiable public recruitment pay source text for this occupation was obtained.",
+                "limitation": "These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently.",
                 "market": "Mainland China",
-                "name": "China public recruitment pay sample (not obtained this round)",
-                "period": "Not obtained this round",
-                "publisher": "Public recruitment postings",
-                "scope": "Mainland China",
-                "url": null
+                "name": "Tianjin Railway Technical and Vocational College: Dagang switching jobs",
+                "period": "2026-10-30",
+                "publisher": "Tianjin Railway Technical and Vocational College career site",
+                "scope": "recruitment_proxy",
+                "url": "https://tjtdxy.bysjy.com.cn/detail/online?id=3631969"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Verifiable samples are lacking, so specific quotes are not shown on this page.",
-                  "The publisher, original link, and scope of application are in the source entries."
+                  "NBS 2025 mean annual gross wages for urban transport, storage and postal services employees: CNY 133,981/year in non-private units and CNY 73,133/year in private units. These are broad industry wages, not national conductor or switch worker pay.",
+                  "Industry and position category average wages are not this occupation's wage and do not cover the exact occupation; the self-employed are excluded."
                 ],
-                "evidence_type": "recruitment proxy",
+                "evidence_type": "official industry wage statistics",
                 "id": "r2-pay-3",
-                "limitation": "Verifiable samples are lacking, so specific quotes are not shown on this page.",
+                "limitation": "Industry and position category average wages are not this occupation's wage and do not cover the exact occupation; the self-employed are excluded.",
                 "market": "Mainland China",
-                "name": "China public recruitment pay sample (not obtained this round)",
-                "period": "Not obtained this round",
-                "publisher": "Public recruitment postings",
-                "scope": "Mainland China",
-                "url": null
+                "name": "National Bureau of Statistics 2025 urban unit employee annual average wage situation",
+                "period": "2025",
+                "publisher": "National Bureau of Statistics",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32116,9 +32169,9 @@
                 "url": "https://www.onetonline.org/link/details/53-4031.00"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Derived from BLS OEWS; percentiles do not calculate individual income.",
+                  "May 2025 employee medians for U.S. SOC 53-4031: $78,000 per year and $37.50 per hour. Annual P10/P25/P50/P75/P90: $58,740/$65,610/$78,000/$83,820/$109,770. Percentiles do not represent starting wages or take-home pay.",
                   "The publisher, original link, and scope of application are in the source entries."
                 ],
                 "evidence_type": "official wage statistics",
@@ -32126,7 +32179,7 @@
                 "limitation": "Derived from BLS OEWS; percentiles do not calculate individual income.",
                 "market": "United States",
                 "name": "O*NET 53-4031.00 national wages (derived from BLS OEWS)",
-                "period": "2025 wage data",
+                "period": "2025-05",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-4031.00"
@@ -32148,9 +32201,9 @@
                 "url": "https://www.onetonline.org/link/summary/53-2021.00"
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Applicability and exceptions are in 242.1, 242.3, and 242.7; not all Yardmaster titles automatically apply, and this does not grant Chinese qualifications."
+                  "U.S. 49 CFR Part 242 applies to covered railroads and people performing duties that meet its definition of conductor, regardless of job title. A yardmaster title alone does not settle coverage. Check exceptions under §242.3, including plant railroads operating only on tracks outside the general railroad system."
                 ],
                 "evidence_type": "law",
                 "id": "fra-242",
@@ -32163,9 +32216,9 @@
                 "url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-II/part-242"
               },
               {
-                "accessed_at": "2026-10-12",
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Articles fifty-six to fifty-eight distinguish enterprise systems, the driver examination, and business and safety training for train operation positions; this does not prove that conductors have a uniform driving license."
+                  "Mainland China’s Railway Safety Management Regulation, Articles 56 and 58, requires rail operators to establish procedures and train staff in key operating roles. Article 57 concerns examinations for railway vehicle drivers. Verify training, checks, qualifications, and authorization for the specific on-board, station, or switching assignment."
                 ],
                 "evidence_type": "law",
                 "id": "nra-safety",
@@ -32178,21 +32231,64 @@
                 "url": "https://source.nra.gov.cn/jglz/sbjg/fgsb/202204/t20220405_292241.shtml"
               },
               {
+                "accessed_at": "2026-11-09",
                 "details": [
-                  "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-                  "Anchors: 0 negligible; 25 preparation or record assistance; 50 substantial assistance; 75 most information output can be formed by AI with review; 100 almost all of the selected task can be done by AI and independently verified.",
-                  "Plan review — 75/100; weight=1/3; railroad-conductors-and-yardmasters.ai-impact.ai-impact-table.99[0]",
-                  "Route and signal check — 50/100; weight=1/3; railroad-conductors-and-yardmasters.ai-impact.ai-impact-table.103[0]",
-                  "Emergency and information notification — 25/100; weight=1/3; railroad-conductors-and-yardmasters.ai-impact.ai-impact-table.111[0]"
+                  "Use fictional records to group discrepancies and list items for review, then check against the originals. Available evidence does not establish occupational AI adoption, replacement rates or safety outcomes. Real train movement and switching depend on authorized staff and applicable procedures.",
+                  "Qualitative editorial note with no score.",
+                  "Qualitative editorial note with no score.",
+                  "Qualitative editorial note with no score.",
+                  "Qualitative editorial note with no score."
                 ],
-                "evidence_type": "Editorial model estimation method",
+                "evidence_type": "Primary public source",
                 "id": "source-fermatmind-ai-rubric",
-                "limitation": "Editorial ratings use the existing occupational responsibilities and AI task analysis on this page. They are not adoption rates, measured effects, job-disappearance or personal-unemployment probabilities, or official scores from Stanford or another external institution. No measured time weights or future robot deployment are assumed.",
-                "name": "FermatMind AI Impact Score estimation method v1",
-                "period": "2026-10-18",
-                "publisher": "FermatMind / 费马测试",
-                "scope": "Three representative core tasks of this occupation",
-                "url": "#career-ai-assessment-method"
+                "limitation": "Qualitative editorial note with no score.",
+                "name": "FermatMind: evidence for AI task claims",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "#career-visual-group-ai-impact"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "China Railway Harbin Group’s 2026 recruitment plan for vocational college graduates (II) listed 328 B0101 station switching operations places across several stations and operating units, with specified majors and courses. The plan lists no wage figures."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "rail-harbin",
+                "limitation": "These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently.",
+                "name": "China Railway Harbin: 2026 switching operations recruitment plan",
+                "period": "2026",
+                "publisher": "China Railway Harbin Group",
+                "scope": "recruitment_proxy",
+                "url": "https://rczp.china-railway.com.cn/upload/tinymce/202511/20251123/202511232244043_32588.pdf"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "A notice on the Tianjin Railway Technical and Vocational College career site dated October 30, 2026, listed ten switching workers for a Dagang power plant railway project, on three rotating shifts at CNY 5,500 per month. Tangshan Haigang Tianyou Railway Engineering is the contractor and employer after graduation. The quote applies to this project only."
+                ],
+                "evidence_type": "Primary public source",
+                "id": "rail-dagang",
+                "limitation": "These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently.",
+                "name": "Tianjin Railway Technical and Vocational College: Dagang switching jobs",
+                "period": "2026-10-30",
+                "publisher": "Tianjin Railway Technical and Vocational College career site",
+                "scope": "recruitment_proxy",
+                "url": "https://tjtdxy.bysjy.com.cn/detail/online?id=3631969"
+              },
+              {
+                "accessed_at": "2026-11-09",
+                "details": [
+                  "Try YD-05 in the entry section: compare two fictional car and seal records, flag items for review, and write a two-sentence handoff. Do not direct any real work."
+                ],
+                "evidence_type": "Fictional paper exercise",
+                "id": "rail-paper",
+                "limitation": "Paper exercise; no signals, equipment or movement instructions.",
+                "name": "FermatMind: fictional YD-05 car and seal records",
+                "period": "2026-11-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -32316,6 +32412,10 @@
               "entry": "link-5",
               "field": "entity"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/53-4031.00",
+            "label": "O*NET 53-4031.00 occupational details (work context)"
           }
         ],
         "evidence_note": {
@@ -32324,7 +32424,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "type": "prose"
         },
-        "heading": "How do the work directions of railroad conductors compare with adjacent occupations?",
+        "heading": "How do train crew coordination, yard work, and adjacent roles compare?",
         "intro": {
           "$item": "railroad-conductors-and-yardmasters.direction-comparison.adjacent-career-comparison-table.10",
           "block": "direction-comparison",
@@ -32943,7 +33043,7 @@
             }
           }
         ],
-        "heading": "Will AI replace railroad conductors?",
+        "heading": "How can I check an AI handoff draft with fictional records?",
         "method_cards": [
           {
             "含义": {
@@ -33530,7 +33630,7 @@
           "type": "prose"
         },
         "entry_heading": "How new graduates or career changers can verify and enter the field",
-        "heading": "How to become a railroad conductor: education, qualifications, and career development paths",
+        "heading": "How do you enter railroad conductor or yardmaster work?",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "railroad-conductors-and-yardmasters.path.career-path-block.21",
@@ -33644,6 +33744,36 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://rczp.china-railway.com.cn/upload/tinymce/202511/20251123/202511232244043_32588.pdf",
+            "id": "rail-harbin",
+            "label": "China Railway Harbin: 2026 switching operations recruitment plan",
+            "scope": "These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently."
+          },
+          {
+            "href": "https://tjtdxy.bysjy.com.cn/detail/online?id=3631969",
+            "id": "rail-dagang",
+            "label": "Tianjin Railway Technical and Vocational College: Dagang switching jobs",
+            "scope": "These dated plans and postings describe listed conditions. They do not establish national wages, current hiring, take-home pay, or authorization to work independently."
+          },
+          {
+            "href": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-II/part-242",
+            "id": "fra-242",
+            "label": "49 CFR Part 242 — Qualification and Certification of Conductors",
+            "scope": "Applicability and exceptions are in 242.1, 242.3, and 242.7; not all Yardmaster titles automatically apply, and this does not grant Chinese qualifications."
+          },
+          {
+            "href": "https://source.nra.gov.cn/jglz/sbjg/fgsb/202204/t20220405_292241.shtml",
+            "id": "nra-safety",
+            "label": "Railway Safety Management Regulations",
+            "scope": "Articles fifty-six to fifty-eight distinguish enterprise systems, the driver examination, and business and safety training for train operation positions; this does not prove that conductors have a uniform driving license."
+          },
+          {
+            "href": "https://rlsbj.cq.gov.cn/ywzl/zjzx/jdsq/202209/t20220905_11072504.html",
+            "id": "cnclass",
+            "label": "Chongqing human resources authority: railway skill assessment scope",
+            "scope": "Employer skill assessment scope and classification; not a universal license."
           }
         ],
         "tracks": [
@@ -34388,7 +34518,7 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "heading": "What pressures, risks, and occupational boundaries does the work of railroad conductors involve?",
+        "heading": "Risks and boundaries in train crew and yard work",
         "risks": [
           {
             "affected_roles": {
@@ -35502,7 +35632,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "What kind of people are suited to railroad conductors?"
+        "title": "Which railroad setting should I explore first?"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -35576,7 +35706,7 @@
           "copy_key": "career.item.market-signal-card",
           "type": "prose"
         },
-        "heading": "What are the prospects for railroad conductors? Which related occupations can you move to?",
+        "heading": "Railroad conductors and yardmasters: outlook and adjacent roles",
         "outlook_evidence": [
           {
             "geography": {
@@ -36567,7 +36697,7 @@
             }
           }
         ],
-        "heading": "Which interests, abilities, and ways of working matter more for railroad conductors?",
+        "heading": "Which work habits matter for conductors and yardmasters?",
         "questions": [
           {
             "answer": {
@@ -37004,6 +37134,10 @@
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
+      "interface.direction_comparison.table.choice_header": "Best-fit choice",
+      "interface.direction_comparison.table.direction_header": "Career direction",
+      "interface.direction_comparison.table.distinction_header": "Key differences",
+      "interface.direction_comparison.table.work_output_header": "Core work and output",
       "interface.fit.directions_heading": "Which railway transport direction are you more likely suited to?",
       "interface.fit.interest_code_heading": "How to read an interest code",
       "interface.us_salary.industry.industry_header": "Industry",
@@ -37098,7 +37232,7 @@
       "field": "url"
     },
     "section_titles": {
-      "ai-impact": "AI Impact Score",
+      "ai-impact": "AI and work tasks",
       "china-salary": "Mainland China pay reference",
       "direction-comparison": "Occupational direction comparison",
       "fit": "Occupational fit guide",
@@ -37189,37 +37323,36 @@
       },
       {
         "derivation": null,
-        "display_value": "36,800 people (2024)",
+        "display_value": "About 38,900 jobs in 2025",
         "fact_id": "us-employment-2025",
         "market": "United States",
         "measure": "Employment (BLS employment projection definition)",
         "occupation_scope": "United States railroad conductors and yardmasters (53-4031.00, exact occupation)",
-        "period": "2024",
-        "source_refs": [
-          "onet",
-          "bls"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "2024—2034 projected growth below average (1%—2%)",
-        "fact_id": "us-growth-2025-2035",
-        "market": "United States",
-        "measure": "Employment change rate and official net change",
-        "occupation_scope": "United States railroad conductors and yardmasters (53-4031.00, exact occupation)",
-        "period": "2024—2034",
+        "period": "2025",
         "source_refs": [
           "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "About 3,100 job openings per year (2024—2034, including replacement need)",
+        "display_value": "0.9%",
+        "fact_id": "us-growth-2025-2035",
+        "market": "United States",
+        "measure": "Employment change rate and official net change",
+        "occupation_scope": "United States railroad conductors and yardmasters (53-4031.00, exact occupation)",
+        "period": "2025–2035",
+        "source_refs": [
+          "ep"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "About 3,000 per year",
         "fact_id": "us-openings-2025-2035",
         "market": "United States",
         "measure": "Average annual job openings, including replacement need",
         "occupation_scope": "United States railroad conductors and yardmasters (53-4031.00, exact occupation)",
-        "period": "2024—2034",
+        "period": "2025–2035",
         "source_refs": [
           "ep"
         ]
@@ -37367,27 +37500,15 @@
         "source_refs": [
           "nbs"
         ]
-      },
-      {
-        "derivation": "Model impact index for three equally weighted representative core tasks; not a measured share of working time or a job-loss probability. floor((75+50+25)/3+0.5)=50; fermatmind-ai-impact-v1; 2026-10-18.",
-        "display_value": "50%",
-        "fact_id": "fermatmind-ai-impact-estimate",
-        "market": "Not region-specific; depends on organizational context",
-        "measure": "AI Impact Score (editorial estimate)",
-        "occupation_scope": "Railroad conductors",
-        "period": "Assessed 2026-10-18; tool capabilities around 2026",
-        "source_refs": [
-          "source-fermatmind-ai-rubric"
-        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "available",
-      "fact_ref": "fermatmind-ai-impact-estimate",
+      "availability": "missing",
+      "fact_ref": null,
       "key": "ai",
-      "label": "AI Impact Score"
+      "label": "AI and work tasks"
     },
     "badges": [
       "Railroad conductor · task check",
@@ -37399,25 +37520,25 @@
         "availability": "available",
         "fact_ref": "us-wage-2025",
         "key": "us_pay",
-        "label": "United States median annual wage"
+        "label": "U.S. median annual wage (May 2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "United States employment growth"
+        "label": "U.S. employment growth (2025–35)"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "United States employed persons"
+        "label": "U.S. employment (2025)"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "United States average annual job openings"
+        "label": "U.S. annual openings (2025–35)"
       },
       {
         "availability": "missing",
@@ -37431,17 +37552,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "The train operation organization, switching direction, car number checking, and record tasks of railroad conductors and yardmasters 53-4031.00; checking the United States OEWS exact occupational wage percentiles, the BLS 2024—2034 employment projections, the Chinese evidence gap, entry and qualification paths, and independently completable paper duty and classification checking exercises."
+      "text": "Compare train crew and yard coordination, U.S. wages and certification, mainland job notices, and a fictional record handoff."
     },
     "title": {
       "availability": "available",
-      "text": "Railroad Conductors and Yardmasters"
+      "text": "Railroad Conductors and Yardmasters: Work, Training, and Pay"
     }
   },
-  "source_content_sha256": "03c98e8ad030ba63817269f0e9685e8b574f52fb47a84d2f56860e2cee92e178",
+  "source_content_sha256": "7c4b69fb599d54d1ca824367989c98c566162602c74a7d4cdff3e79c9c796436",
   "subject": {
     "canonical_slug": "railroad-conductors-and-yardmasters",
-    "name": "Railroad conductors",
-    "summary": "Railroad conductors and yardmasters coordinate the activities of switch engine crews and passenger or freight train crews: they receive and relay dispatch instructions about routes, schedules, and cargo; direct switching and car classification and check car numbers and seals; review timetables, switch lists, and freight documents and make plans; patrol cars en route and handle anomalies; in emergencies set warning signals and prepare accident and delay reports; and organize the crew to complete transport and oversee car repair. This page uses the United States O*NET\n exact occupation Railroad Conductors and Yardmasters (53-4031.00); no verifiable exact occupational wage was obtained for the China section, and the insufficient-evidence marker is retained."
+    "name": "Railroad Conductors and Yardmasters",
+    "summary": "U.S. O*NET 53-4031.00 groups two work settings: conductors coordinate crews on passenger or freight trains, while yardmasters review schedules and switching sequences and coordinate work in the yard. Duties may overlap. In mainland China, check on-board passenger service, station operations and switching as separate roles."
   }
 }
