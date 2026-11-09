@@ -99,7 +99,7 @@ final class ArticleReviewedCounterpartService
             return [];
         }
         $sourceLocale = match (true) {
-            $article->locale === 'zh-TW' && $article->source_locale === 'en',
+            $article->locale !== 'en' && $article->source_locale === 'en',
             $englishRoot && $legacyChinese->isEmpty() => 'en',
             default => 'zh-CN',
         };
@@ -123,7 +123,7 @@ final class ArticleReviewedCounterpartService
         $source = $members->firstWhere('id', $sourceId);
         if ($source?->locale !== $sourceLocale || ! $this->readableForNavigation($source)
             || ($sourceLocale === 'en' && ($this->binding($source) !== null
-                || ($article->locale === 'zh-TW' && $this->legacyGroupRoots($source, 'zh-CN')->isNotEmpty())))) {
+                || ($article->locale !== 'en' && $this->legacyGroupRoots($source, 'zh-CN')->isNotEmpty())))) {
             return [];
         }
 
@@ -140,7 +140,12 @@ final class ArticleReviewedCounterpartService
         }
 
         $destinations = collect([$source, $traditional->sole()]);
-        if ($sourceLocale === 'zh-CN') {
+        if ($sourceLocale === 'en') {
+            $chinese = $siblings->where('locale', 'zh-CN');
+            if ($chinese->count() === 1 && $this->binding($chinese->sole()) === null) {
+                $destinations->push($chinese->sole());
+            }
+        } else {
             $reviewed ??= $this->resolve($source);
             $english = $reviewed === null
                 ? $siblings->where('locale', 'en')

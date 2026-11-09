@@ -448,17 +448,19 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_SEO_${row.page_id}`);
     if (row.snapshot.body_visual && !dom.article_images.includes(row.snapshot.body_visual.image_url))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_BODY_VISUAL_${row.page_id}`);
-    if (row.source_identity?.source_locale === 'en') {
-      const sourcePath='/en/articles/'+row.source_expectations.source.slug;
-      const testSlug=row.article_metadata?.related_test_slug;
-      if (!(dom.link_labels[sourcePath] ?? []).some(label=>compact(label) === 'English')
-        || (testSlug && !(dom.link_labels['/en/tests/'+testSlug] ?? []).some(label=>compact(label) === '開始測驗')))
-        throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_ENGLISH_READER_LINK');
-    }
-    if (row.source_expectations?.source_snapshot_kind === 'published_projection' && !row.editorial_package_v1?.cta_slots?.length) {
-      // A related-test identifier can be present without a published CTA.
+    const englishSource = row.source_identity?.source_locale === 'en';
+    const source = row.source_expectations?.source;
+    const chinese = row.source_expectations?.existing_chinese;
+    const linkedChinese = englishSource && chinese?.source_article_id === source.id;
+    if (englishSource && (
+      !(dom.link_labels['/en/articles/'+source.slug] ?? []).some(label=>compact(label) === 'English')
+      || (linkedChinese && !(dom.link_labels['/zh/articles/'+chinese.slug] ?? []).some(label=>compact(label) === '简体中文'))
+    )) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_ENGLISH_READER_LINK');
+    if ((englishSource || row.source_expectations?.source_snapshot_kind === 'published_projection') && !row.editorial_package_v1?.cta_slots?.length) {
+      // Older packages lack the reviewed visible CTA projection.
       const related = row.article_metadata?.related_test_slug;
-      const assessments = row.reviewed_default_assessment_ctas ?? (related ? ['/zh/tests/'+related] : []);
+      const segment = englishSource && !linkedChinese ? 'en' : 'zh';
+      const assessments = row.reviewed_default_assessment_ctas ?? (related ? ['/'+segment+'/tests/'+related] : []);
       if (assessments.some(href=>!(dom.link_labels[href] ?? []).some(label=>compact(label) === '開始測驗')))
         throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_ARTICLE_ASSESSMENT_LINK_${row.page_id}`);
     }
@@ -604,6 +606,14 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
       const source=row.source_expectations.source;
       const original=parseApi(await read(api+'/api/v0.5/articles/'+source.slug+'?locale=en&org_id=0',fetcher));
       const expected={en:source.slug,'zh-TW':row.identity.slug};
+      const chinese=row.source_expectations.existing_chinese;
+      if (chinese?.source_article_id===source.id) {
+        expected['zh-CN']=chinese.slug;
+        const sibling=parseApi(await read(api+'/api/v0.5/articles/'+chinese.slug+'?locale=zh-CN&org_id=0',fetcher));
+        if (sibling.ok !== true || sibling.article?.id !== chinese.id || sibling.article.locale !== 'zh-CN'
+          || sibling.article.published_revision_id !== chinese.published_revision_id || !equal(sibling.reader_language_slugs,expected))
+          throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_ENGLISH_READER_PAIR');
+      }
       if (native.source_locale !== 'en' || original.ok !== true || original.article?.id !== source.id
         || original.article.locale !== 'en' || original.article.published_revision_id !== source.published_revision_id
         || !equal(data.reader_language_slugs,expected) || !equal(original.reader_language_slugs,expected))

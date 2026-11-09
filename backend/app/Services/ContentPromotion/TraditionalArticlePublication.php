@@ -113,8 +113,9 @@ final class TraditionalArticlePublication
         }
         if ($editorial !== null) {
             // Published article projections can expose up to nine FAQ blocks.
-            $faqLimit = $projectedBatch && $sourceLocale === 'zh-CN' ? 9 : 6;
-            $reviewed += self::editorialReviewFields($editorial, $sourceLocale, $faqLimit);
+            $copyLocale = self::usesChineseSourceCopy($proofs['production']) ? 'zh-CN' : $sourceLocale;
+            $faqLimit = $projectedBatch && $copyLocale === 'zh-CN' ? 9 : 6;
+            $reviewed += self::editorialReviewFields($editorial, $copyLocale, $faqLimit);
             // These articles use the runtime's default navigation and assessment CTA.
             // Store only reviewed FAQ copy so publishing it leaves those links in place.
             $sourceCtaTargets = $proofs['production']['editorial_cta_targets'] ?? null;
@@ -168,8 +169,17 @@ final class TraditionalArticlePublication
                 || $proof['unpublished_english_slug'] !== ($proofs['production']['existing_english']['slug'] ?? null))) {
                 throw new DomainException('traditional_article_staging_english_absence_invalid');
             }
-            $independentChinese = $englishSource && $proof['existing_chinese'] !== null;
+            $hasChinese = $englishSource && $proof['existing_chinese'] !== null;
+            $relatedChinese = $hasChinese && self::usesChineseSourceCopy($proof);
+            $independentChinese = $hasChinese && ! $relatedChinese;
             $sourceSlug = $proof['source']['slug'] ?? '';
+            if ($relatedChinese !== self::usesChineseSourceCopy($proofs['production'])
+                || ($relatedChinese && (($proof['existing_chinese']['slug'] ?? null) !== $sourceSlug
+                    || ($proof['existing_chinese']['translation_group_id'] ?? null) !== $identity['translation_group_id']
+                    || ($proof['existing_chinese']['locale'] ?? null) !== 'zh-CN'
+                    || ($proof['existing_chinese']['source_locale'] ?? null) !== 'en'))) {
+                throw new DomainException('traditional_article_chinese_source_lineage_invalid');
+            }
             if ($independentChinese && ($slug !== $sourceSlug.'-english-source'
                 || ($proof['existing_chinese']['slug'] ?? null) !== $sourceSlug
                 || ($proof['existing_chinese']['translation_group_id'] ?? null) === $identity['translation_group_id']
@@ -180,7 +190,7 @@ final class TraditionalArticlePublication
                 throw new DomainException('traditional_article_independent_chinese_proof_invalid');
             }
             $roles = ['source'];
-            if ($independentChinese) {
+            if ($hasChinese) {
                 $roles[] = 'existing_chinese';
             } elseif (! $englishAbsent && ! $englishSource) {
                 $roles[] = 'existing_english';
@@ -265,7 +275,8 @@ final class TraditionalArticlePublication
                 if (($editorial !== null || $sourceLocale === 'en' || $projectedBatch) && $name === 'staging') {
                     continue;
                 }
-                $sourceHashes = $proof['source']['snapshot_sha256'];
+                $copySource = self::usesChineseSourceCopy($proof) ? $proof['existing_chinese'] : $proof['source'];
+                $sourceHashes = $copySource['snapshot_sha256'];
                 foreach (['title', 'excerpt', 'content_md', 'author_name', 'seo_title', 'seo_description', 'og_title', 'og_description', 'cover_image_alt'] as $field) {
                     if ($name === 'staging' && $field === 'cover_image_alt') {
                         continue;
@@ -384,6 +395,15 @@ final class TraditionalArticlePublication
         return $fields;
     }
 
+    /** A published Simplified child can supply copy while its English root retains ownership. */
+    public static function usesChineseSourceCopy(array $proof): bool
+    {
+        $parent = $proof['existing_chinese']['source_article_id'] ?? null;
+
+        return ($proof['source']['locale'] ?? null) === 'en' && is_int($parent) && $parent > 0
+            && $parent === ($proof['source']['id'] ?? null);
+    }
+
     public static function englishSourceId(array $proof): ?int
     {
         $source = $proof['source'];
@@ -414,7 +434,8 @@ final class TraditionalArticlePublication
             ->where($row['identity'])->when($lock, fn ($query) => $query->lockForUpdate())->first();
         $targetSlug = $row['identity']['slug'];
         $expectedSlug = $source->slug;
-        if ($source->locale === 'en' && isset($row['source_expectations']['existing_chinese'])) {
+        if ($source->locale === 'en' && isset($row['source_expectations']['existing_chinese'])
+            && ! self::usesChineseSourceCopy($row['source_expectations'])) {
             $expectedSlug .= '-english-source';
         }
         if ($targetSlug !== $expectedSlug) {
@@ -470,13 +491,16 @@ final class TraditionalArticlePublication
         $copy = $row['snapshot'];
         $seo = $copy['seo_text'];
         unset($copy['seo_text'], $copy['editorial_projection'], $copy['body_visual']);
-        $tags = DB::table('article_tag_map')->where('article_id', $source->id)->where('org_id', 0)
+        $taxonomySource = self::usesChineseSourceCopy($row['source_expectations'])
+            ? Article::query()->withoutGlobalScopes()->findOrFail($row['source_expectations']['existing_chinese']['id'])
+            : $source;
+        $tags = DB::table('article_tag_map')->where('article_id', $taxonomySource->id)->where('org_id', 0)
             ->orderBy('tag_id')->lockForUpdate()->pluck('tag_id')->map(fn ($id): int => (int) $id)->all();
         $expectedTags = array_column($row['taxonomy_display']['tags'], 'id');
         sort($expectedTags);
         $category = $row['taxonomy_display']['category'];
         $expectedSource = $row['staging_source_taxonomy'] ?? ['category_id' => $category['id'], 'tag_ids' => $expectedTags];
-        if ($tags !== $expectedSource['tag_ids'] || $source->category_id !== $expectedSource['category_id']) {
+        if ($tags !== $expectedSource['tag_ids'] || $taxonomySource->category_id !== $expectedSource['category_id']) {
             throw new DomainException('traditional_article_taxonomy_changed');
         }
         if (isset($row['staging_source_taxonomy'])) {
@@ -523,7 +547,11 @@ final class TraditionalArticlePublication
             'authority_source_package' => PublicContent53Package::PACKAGE, 'authority_asset_key' => $row['page_id'],
             'authority_package_sha256' => $context->packageSha256, 'authority_source_hash' => $current['source_state_sha256'],
             'authority_metadata_json' => ['source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId,
-                'approval_kind' => 'verified_automated_exact_package'],
+                'approval_kind' => 'verified_automated_exact_package',
+                ...($taxonomySource->id === $source->id ? [] : ['published_copy_source_v1' => [
+                    'locale' => $taxonomySource->locale, 'article_id' => $taxonomySource->id,
+                    'published_revision_id' => $taxonomySource->published_revision_id,
+                ]])],
             'approved_at' => now(), 'published_at' => now(),
         ]);
         if (! $current['missing']) {

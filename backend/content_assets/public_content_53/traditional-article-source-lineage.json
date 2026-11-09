@@ -1,0 +1,1447 @@
+{
+  "schema": "fermatmind.traditional_article_batch.v1",
+  "articles": [
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "career-experiment-kit",
+          "source_locale": "en",
+          "source_article_id": 284,
+          "translation_group_id": "d2bcbf50-aa59-448d-bbf9-b5ea5fa41fed"
+        },
+        "review_sha256": "4e9475e518ce1f72aed964e8933d7e6137ff1d5a510f166399553d564327fd2f",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 285,
+              "slug": "career-experiment-kit",
+              "locale": "en",
+              "published_revision_id": 837,
+              "translation_group_id": "d2bcbf50-aa59-448d-bbf9-b5ea5fa41fed",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "f972846c69ca2552c10c1c09510648745560a505257af8501cf3636f41af4058",
+              "public_body_sha256": "d5c5bd53234c8ee0674b2f1edb8a7c98c71191ec4e26183c64c00bbe42efc1b9",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            },
+            "existing_chinese": null
+          },
+          "production": {
+            "source": {
+              "id": 284,
+              "slug": "career-experiment-kit",
+              "locale": "en",
+              "published_revision_id": 969,
+              "translation_group_id": "d2bcbf50-aa59-448d-bbf9-b5ea5fa41fed",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "a5c2605a2f07f22f4c7323565b0dbf559ed016f7335874d8e3d7b02619bd4d8e",
+              "public_body_sha256": "d5c5bd53234c8ee0674b2f1edb8a7c98c71191ec4e26183c64c00bbe42efc1b9",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            },
+            "existing_chinese": null
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1672,
+          "cover_image_height": 941,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            }
+          },
+          "related_test_slug": "holland-career-interest-test-riasec",
+          "author_name": "費馬測試編輯部",
+          "cover_image_alt": "插圖中的讀者比較戶外與辦公室活動，思考接下來想探索什麼。"
+        },
+        "seo_metadata": {
+          "og_title": "職涯實驗工具包：20 分鐘設計活動",
+          "og_description": "試做紙卡架或採用純草圖路線。使用參與者指南、帶領腳本及活動紀錄，無須測評、登入、提供電子郵件或購買。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-131-articlecareer-interests-valuescoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "職涯實驗工具包：20 分鐘紙卡架活動",
+          "excerpt": "獨自或在帶領者協助下進行一次小型設計探索。包含 20 分鐘活動指南、替代做法、活動紀錄和明確標示的合成示例。",
+          "content_md": "**英文原版 · EN36 v2 · 2026 年 10 月 25 日**\n\n試做一項小型設計活動，記下發生的事，再決定是否繼續探索。你不需要做測評、提供電子郵件、建立帳號、付費或使用 AI。準備與閱讀不計入可選的 20 分鐘活動時間。這份工具包不會為你指定職涯，也不會替你評分。\n\n先閱讀參與者指南。如果你負責帶領活動，也請閱讀帶領者指南。可以用文字編輯器填寫活動紀錄，也可以把各個標題抄到紙上。合成示例只用來展示格式，不能當作真實參與者的證據。使用權及解讀範圍請參考「來源與使用方式」。\n\n完整的公開閱讀版將五個部分放在一起。你可以把活動筆記的標題複製到本機文件，或使用瀏覽器的「列印／儲存為 PDF」，再確認保留下來的內容。此頁不會蒐集或儲存你的回答。列印版是閱讀資料，並無新增問卷的功能，也無法取代既有的 C2 職涯探索工作表。\n\n\n## 職涯實驗工具包：參與者指南\n\n**英文原版 · EN36 v2 · 2026 年 10 月 25 日**\n\n### 你要在 20 分鐘內嘗試的任務\n\n試做設計工作的一小部分：提出一個實際問題、畫出備選方案的草圖、製作紙卡架、觀察情況，再修改其中一項設計。最後記下你願意再試哪些部分，或哪些部分不想再試。即使模型沒達成目標，也可以留下完整的探索紀錄。這項活動沒有測評、職涯推薦或衡量能力的功能。\n\n你不需要測評結果、三字母代碼、帳號、電子郵件、AI 工具或付費購買。如果你願意，可以獨自完成，無須找其他人參與。任何步驟都可以停止或跳過，無須解釋原因。20 分鐘是投入時間的上限，並無速度要求。準備工作不計入活動時間。\n\n### 開始前的準備\n\n準備廢紙或薄卡紙、一支鉛筆、一把尺，以及十張相同的小卡片或十張大小相同的廢紙。只使用手邊已有的材料，用手摺紙。請勿使用刀具、加熱或電動設備，也不要拿真實客戶的專案來練習。找一張平穩、淨空的桌子。虛構的任務要求是在邊長 10 公分的正方形範圍內放下十張卡片，並能在抽出一張時不把其他卡片一起帶出。這個範圍是練習條件，並非產品標準。如果使用替代材料，請註明，因為它的表現可能和硬卡片不同。\n\n把下方「你的活動紀錄」的標題複製到文字編輯器，或抄到紙上。不要加入姓名、電子郵件、私人報告連結或他人的資料。這篇文章沒有填寫欄位，也不會儲存你的筆記。請在編輯器裡儲存文字檔，或保留紙本紀錄。如果需要離線閱讀版本，可以使用瀏覽器的「列印／儲存為 PDF」，並確認輸出結果。\n\n指南提到「畫圖」或「畫草圖」時，你也可以用文字或口述描述兩種設計和 A／B 版。若有人自願協助，可以請對方記下你的選擇，並註明這項協助。\n\n**沒有材料，或手部動作有困難？** 可以採用純草圖路線：畫出兩個版本，標記實際測試需要確認的事項。你可以口述觀察結果，請自願協助的人記下，無須提供私人資料。請註明採用的路線及所接受的協助。純草圖路線的觀察屬於預測，尚未經實物測試。如果兩種方式都不適合，可以停止並記下「未嘗試」。這項紀錄無法說明你適不適合某個職業。\n\n### 依照這份時間表進行\n\n| 經過時間 | 要做的事 | 要留下的紀錄 |\n| --- | --- | --- |\n| 0–2 分鐘 | 選擇實物或純草圖路線。讀完任務說明，挑一個問題：抽出一張卡時，卡架會移動、帶出另一張卡，還是翻倒？寫下問題和預測。 | 問題、路線、材料及初始假設 |\n| 2–4 分鐘 | 畫出兩種結構不同的做法，例如摺出較寬的底座，或加一道擋板。標記每種做法可能如何處理問題，再選出一種。 | 兩張有標示的草圖，以及選擇的一個理由 |\n| 4–9 分鐘 | 做出一個簡單模型，若採替代路線，就畫出更詳細的草圖。標出假設的 10 公分界線。更動前保留第一版草圖或說明。 | A 版實物或草圖 |\n| 9–12 分鐘 | 實物路線：放入十張卡，抽出一張，記下哪些東西移動，再把十張卡放回原位，讓配置回到起始狀態。總共做三次。不要在兩次之間悄悄調整設計。草圖路線：標出需要做的三項檢查，寫下「未做實物測試」。 | 三次實際觀察，或三項明確標註尚未驗證的預測 |\n| 12–15 分鐘 | 改變一個主要因素，例如底座寬度或一道擋板，並標為 B 版。實物路線：盡可能用相同的卡片、桌面及抽取方式，重做三次，每次先恢復起始配置，並記下條件差異。草圖路線：畫出或描述修改，沿用同樣三項檢查，預測 B 版可能有何不同，每項預測都要標註尚未驗證。 | 一項明確的變更，以及三次重複觀察或三項尚未驗證的檢查 |\n| 15–18 分鐘 | 完成紀錄，把實際發生的事與你對它的解釋分開。你願意主動繼續哪個部分：探查問題、想像替代做法、調整設計，或今天都不想繼續？把投入程度、挫折或獲得的協助記作情境資訊，不拿來評分。 | 比較、限制與繼續的意願 |\n| 18–20 分鐘 | 決定繼續、換任務、暫停或停止。如果選擇下一步，請設定時間或材料上限及停止條件。你也可以寫下「沒有下一步」，然後暫停或停止。如果有幫助，可記下一項尚未解決的問題。離開前，確認本機紀錄可讀。 | 決定；可選填下一步、上限及停止條件 |\n\n到 20 分鐘就停止製作模型。若有步驟尚未完成，標記為「未完成」。活動結束後可以自行補完收尾紀錄，但要把增加的時間計入實際用時，不要記成剛好 20 分鐘完成。不要為了做完而趕工、捏造測試次數或購買材料。若感到不舒服或挫折，也可以提前停止。日後是否再做，由你決定。\n\n### 怎樣才算有用的完成紀錄？\n\n完成一次**實物路線活動**，會留下一個問題、兩種畫出或描述的設計、A 版、最初三次的觀察紀錄、一項修改因素、再做三次的紀錄，以及簡短的決定紀錄。卡架無須符合任務要求。若有任何項目缺漏，請標記為部分完成。\n\n完成一次**純草圖活動**，會留下一個問題、兩種畫出或描述的設計、選定的 A 版、三項預定檢查、B 版的一項變更、沿用那三項檢查對 B 版做出的預測，以及決定紀錄。這些紀錄尚未經過實物測試。只做了一部分或中途停止，也可以藉此辨識障礙，無須把它看成個人的失敗。\n\n「三次都沒有翻倒」只表示在這些條件下沒有觀察到翻倒。如果底座加寬的同時也改變了抽卡方式，就無法把差異單獨歸因於寬度。「我想繼續研究摺法」只描述你對這次活動的反應，無法當作穩定的興趣分數。故事中想像出來的朋友也無法提供真實使用者的回饋。\n\n### 決定接下來要做什麼\n\n- **繼續：** 如果仍對修改的問題感興趣，可以改天用現有材料再做一次紙上修改，時間上限由你決定。\n- **換任務：** 如果比起製作，你更喜歡畫備選方案，可以試一項短時間的草圖任務。如果兩者都不感興趣，就換一項活動，無須再做測評。\n- **暫停或停止：** 若活動讓你不舒服、材料不足以公平嘗試，或練習的代價超過你願意投入的程度，記下這些情況後就可以停止。\n\n如果需要一份更完整的探索紀錄，可以沿用現有的[費馬測試職涯探索工作表](https://fermatmind.com/en/holland-test/pdf-download)。把問題和任務填到「Task to try」，草圖或觀察填到「Work sample or feedback to collect」，決定填到「Next step and review date」。這是選用資源，這份工具包本身可離線使用。若你沒有測評結果，把測評、分數和代碼欄位留白，只填行動規劃。進行這項活動或記錄下一步，都無須先做測評。重新整理或離開該頁面可能會遺失輸入內容，請先另存並確認紀錄。\n\n[現有的 IAR 探索文章](https://fermatmind.com/en/articles/iar-holland-code-career-exploration)包含這項卡架活動的原始內容、另一項較長的房間配置練習，以及職業閱讀連結。這些都是 20 分鐘活動之外的選用資源。請勿比較這些條件或時間不同的任務來替職業排名。\n\n### 適用範圍與使用權\n\n這是一項虛構的教育練習，不能用於專業產品測試、工程、施工、診斷或作為招募證據，也無法證明職涯適配程度。這項活動無法確認資格、預測薪資、提供匹配百分比或替職業排名。如果日後探索真實職業，請另行查證當地的工作任務、入門要求及費用。你無須提供個人測評結果，也不會有個人結果被傳送出去。\n\n你可以閱讀、跟著活動做，並保留自己的筆記。「來源與使用方式」說明了使用範圍。這份工具包未授予開放授權或第三方資料的權利。你無須把紀錄分享給作者或帶領者。\n\n## 職涯實驗工具包：帶領者指南\n\n**英文原版 · EN36 v2 · 2026 年 10 月 25 日**\n\n### 你要協助參與者做什麼？\n\n協助參與者完成一次小規模的探查、設計與修改，再讓他們自己決定是否繼續探索這項活動。不要評估天分、指定 IAR 代碼，或暗示結果可用來選擇工業設計或建築。原型是否成功，以及參與者是否想繼續，應分開記錄。這項活動尚未驗證為有效的介入方法或測評。\n\n請搭配參與者指南使用。本工具包沒有經獨立觀察的參與者試做紀錄，下面的例子是合成示例。複製或改作前，請先閱讀「來源與使用方式」。\n\n### 準備工作不計入 20 分鐘\n\n1. 先閱讀一遍參與者指南。準備廢紙或薄卡紙、鉛筆、尺，以及十張相同的卡片或大小相同的紙片。在一張備用紙上標出邊長 10 公分的正方形。請勿購買器材或使用有危險的工具。\n2. 讓參與者可以從本文或本機閱讀副本取得參與者指南和完成紀錄。有需要可以讓裝置離線。不要要求提供電子郵件、測評結果、三字母代碼或帳號。本文不會儲存參與者的紀錄。\n3. 先詢問哪種方式合適：實物、純草圖、接受協助，或不參加。可以放大文字、暫停讓參與者閱讀，或請自願協助的人代為記錄口述內容。若需要較長的閱讀時間，請給足時間並記下實際用時。不要按速度評分，也不要把調整過的活動記成剛好 20 分鐘完成。\n4. 先說明參與者可以拒絕回饋或停止活動。不要蒐集可辨識身分的資料、私人報告、答題紙或錄音錄影。紀錄由參與者自己保留。提供的示例全部是虛構項目，不能當作參與者證據。\n\n### 開場說明（0–2 分鐘）\n\n「今天你可以試做一小段設計探查和修改，不需要測評結果。即使模型沒有成功，也可能留下有用的紀錄。這項活動不會評斷能力或替你選職涯。你可以只用草圖、請人協助，也可以停止。紀錄可以自己留著，我們不需要你的姓名或電子郵件。你想用哪種方式？」\n\n讀出虛構的任務說明：「把十張卡片放在邊長 10 公分的正方形範圍內，試著抽出一張，不要把其他卡片一起帶出。」請參與者挑一個問題並寫下預測。不要對此做人格解讀。\n\n### 帶領活動\n\n| 經過時間 | 可以說什麼或確認什麼 | 遇到狀況時怎麼處理 |\n| --- | --- | --- |\n| 2–4 | 「畫出兩種不同的做法。每種做法想改變什麼？」 | 草圖簡單一點或用口述都可以。記下接受的協助；不要替參與者畫出精緻方案，再當成對方獨立完成的作品。 |\n| 4–9 | 「選一種做法，做出簡單的第一版。」 | 如果無法安全或自在地做出模型，就改用純草圖路線並記下這項變更。不要捏造實物測試結果。 |\n| 9–12 | 「試著抽三次。每次都把十張卡放回去，恢復原本的配置。描述哪些東西移動，不必打分。」 | 若配置改變，請記下來。若時間只夠做一次，其餘兩次請標記為未做。 |\n| 12–15 | 「只改一項因素。重做同樣三項檢查，或者標記計畫中的檢查尚未驗證。」 | 如果改了兩項因素，請保留實際紀錄，說明時也要註明限制。不要為了讓結果看起來單純而重做整場活動。 |\n| 15–18 | 「發生了什麼？你覺得可能的原因是什麼？還有其他可能嗎？你會選擇再做哪一部分？」 | 保留「不知道」「都不想」和不符合預期的經歷。卡架成功並不能證明參與者有某項職業能力。 |\n| 18–20 | 「你想繼續、換任務、暫停還是停止？有什麼小小的下一步？你會在什麼情況下停下？」 | 到約定的界線就停止活動。如實記下未完成的工作。協助參與者保留可讀的紀錄，不要要求對方交一份副本。 |\n\n在第 4、9、12、15 和 18 分鐘做中性的時間提醒，讓參與者知道活動進度，無須催促。第 20 分鐘結束製作與修改。若曾暫停或調整安排，請記下實際經過時間。不要刪掉只做了一部分的嘗試，讓紀錄看起來像已完整做完。\n\n### 提供回饋時，保留實際證據\n\n獨自檢查就足夠。是否邀請其他人參與，由參與者決定。其他人也必須自願同意參與特定的低風險嘗試。若沒有其他人參與，請將證據標記為「僅自行檢查」。若有人自願提供回饋，可以問「你抽卡時，有什麼東西移動，或哪一步比較困難？」，避免問「這個人擅不擅長設計？」。保留任何引述前，先取得對方同意。不要拍攝或上傳他人的作品或個人資料。\n\n虛構情境可以示範紀錄格式，回饋也必須標記為合成內容。請勿把附帶的示例改稱為真實參與者的作品。不要把帶領者的觀察當成經過測量的特質，也不要回填到測評分數。\n\n### 和參與者一起核對完成情況\n\n採用實物路線時，確認是否留下問題、兩種做法、最初的實物、最初三次嘗試、一項有明確名稱的變更、三次重做的結果、限制及下一步決定。採用純草圖路線時，確認是否留下問題、兩種畫出或描述的做法、選定的 A 版、三項明確標記為尚未驗證的檢查、B 版變更、沿用同樣三項檢查對 B 版做出的預測，以及決定。缺漏只表示部分完成，不能用來判斷能力低。即使作品沒達到任務要求，活動仍可能完整完成。\n\n收尾時可以問：「如果你想繼續，有什麼願意進一步查證的事？在花時間或金錢上課以前，你最想先釐清哪個疑問？」把「停止」視為完整的決定。不要建議購買課程，也不要聲稱這項活動能證明工作適配程度。\n\n參與者可以自行選擇是否把自己的任務、作品和下一步填到現有的 C2 工作表。不要另外製作工作表或要求參與者註冊。下載或儲存紀錄，都無法證明有人採用、感到滿意或在職涯上受益。\n\n### 活動結束後\n\n如果另行取得同意而留下紀錄，只保留最低限度的內容。一份有用的去識別化紀錄會區分所用路線、接受的協助、實際用時、完成／部分完成／停止、具體困難，以及可選填的下一步決定。紀錄不得包含姓名、測評識別碼、電子郵件、私人連結或原始答案。不要用本指南建立新的資料蒐集計畫。附帶的例子只是合成流程示範，實際獨立完成和重複使用仍未經驗證。\n\n## 你的活動紀錄：請複製下列標題\n\n```text\n職涯實驗工具包：單次活動紀錄\nEN36 v2 • 英文原版 • 無須提供姓名、電子郵件或測評結果\n請自行保留紀錄。這是一份簡短的活動筆記，\n無法取代現有包含 25 個欄位的職涯探索工作表。\n\n路線：實物／純草圖／途中更換路線／未嘗試\n接受的協助或調整（選填）：\n實際用時／暫停情況（不按速度評分）：\n\n我的問題與初始假設\n我想確認抽出一張卡時的哪個情況？\n實際檢查前，我的預測：\n材料／替代材料，以及虛構任務的 10 公分限制：\n\n兩種做法與 A 版\n做法 1（在紙上畫草圖，或用文字描述）：\n做法 2（在紙上畫草圖，或用文字描述）：\n選用的做法及理由：\nA 版作品的位置（只描述本機位置，勿附私人網址）：\n\n初步檢查：每次都放回十張卡，恢復起始配置\n1. 觀察結果，或「未做實物測試」的預測：\n2. 觀察結果，或「未做實物測試」的預測：\n3. 觀察結果，或「未做實物測試」的預測：\n條件、遭遇的中斷，或尚未完成的檢查：\n\n一項變更與 B 版\n改變的主要因素：\nB 版作品的位置或描述：\n重做第 1 次的觀察結果，或對 B 版尚未驗證的預測：\n重做第 2 次的觀察結果，或對 B 版尚未驗證的預測：\n重做第 3 次的觀察結果，或對 B 版尚未驗證的預測：\n變動的其他條件／比較的限制：\n\n反思\n觀察到的差異（或無明顯差異）：\n可能的解釋（請與觀察結果分開寫）：\n其他可能的解釋／仍不清楚的事：\n如果要再做，我願意自願再做哪一部分？\n哪些地方困難、乏味、不舒服，或對我有幫助？\n證據：僅自行檢查／合成示例／經同意取得的實際回饋\n若有實際回饋，只記下對方同意的具體內容，否則留白：\n\n收尾\n活動狀態：實物路線完成／純草圖路線完成／部分完成／已停止\n缺漏的步驟與原因（無須揭露個人細節）：\n決定：繼續／換任務／暫停／停止\n若有選定，寫下一項下一步：\n時間或材料上限（無須購買）：\n停止或更換做法的條件：\n可選填回顧日期，或寫「未安排」：\n我是否保留了可讀的本機副本？是／否／不想保留\n\n模型失敗時仍可能完成活動；缺少紀錄才表示未完成。\n草圖無法證明實物表現。興趣不代表能力或工作適配程度。\n這項活動不會產出分數、排名或職涯分派。\n```\n\n## 合成流程示例：不作為參與者證據\n\n**EN36 v2 · 作者編寫的示例 · 未做實物測試**\n\n這份虛構紀錄用來檢查指南能否讓讀者分清作品、觀察和決定。分鐘數是腳本分配的時間，並非測得的人類操作時間。下方的卡片表現和繼續意願都未經實際觀察。示例不涉及真人、測評結果、私人報告或第三方回饋。\n\n### 主要路線：模型沒成功，活動仍可完整記錄\n\n- **0–2：** 虛構的參與者選擇實物路線，使用廢卡紙和十張相同大小的紙片。問題：「拿出一張紙片時，底座會移動嗎？」預測：較寬的底座可能較不容易移動。註明替代材料：紙片的表現可能不同於硬卡片。\n- **2–4：** A 草圖是一個窄底座的直立摺疊結構，另一張草圖則畫了擋邊。參與者選 A，想先檢查底座移動的情況。擋板草圖只是備案紀錄，並未做第二項測試。\n- **4–9：** A 版被描述為放在標線內的直立摺疊結構。A 版作品紀錄包括標註過的草圖和虛構模型的描述，沒有宣稱拍過照片或做出實物。\n- **9–12，虛構結果：** 第 1 次：底座滑動。恢復起始配置後第 2 次：一次抽出兩張紙片。再恢復起始配置後第 3 次：底座滑動。每次都把十張紙片放回去。這些是示範項目，並非實驗資料。\n- **12–15：** B 版只加寬底座，仍在虛構的界線範圍內。每次恢復起始配置後，依序記下三項虛構結果：沒有明顯滑動、沒有明顯滑動但抽出兩張紙片、沒有明顯滑動。紀錄也註明抽取力道未經測量，無法只憑這些結果判定寬度的因果影響。\n- **15–18：** 「B 版的三次紀錄都沒看到底座移動，但有一次仍沒達到抽取要求。接下來，我想研究擋板。我還不知道硬卡片或反覆使用時會如何。」這是虛構的個人描述，沒有評分。\n- **18–20：** 狀態：腳本中的實物路線紀錄已完整，未驗證曾做過實物活動。決定：改天用現有材料試另一種擋板，最多花十分鐘。若不舒服，或反覆倒塌以致無法取得有用的觀察，就停止。回顧日期：未安排。示例中的文字紀錄留在本機，未傳送給外部收件者。\n\n這裡的作品是兩份草圖、A／B 版和六項假設觀察的文字描述。它們展示如何記錄，無法說明實物的表現。是否符合實物任務要求，並不決定活動是否完整。真實活動必須留下實際作品和觀察，才能稱為完成實物路線。\n\n### 替代路線與未順利完成的情境\n\n| 虛構情境 | 如何依照指南進行 | 如實記錄並結束 |\n| --- | --- | --- |\n| 沒有卡片，或用手摺紙不舒服 | 計時前選擇純草圖路線，畫出或描述兩種做法，標出一項變更，列出三項檢查和對 B 版的預測 | 記錄「純草圖路線完成，未做實物測試」。不要捏造抽取觀察；若替代路線也不舒服，就停止。 |\n| 第 9 分鐘還沒有做好模型 | 保留粗略作品並描述障礙，若自在可改用草圖 | 註明更換路線和任何缺漏的實物嘗試。標為部分完成；達到純草圖路線要求時，才標為純草圖完成。 |\n| 第 15 分鐘只重做了一次 | 不要把這次結果複製到其他兩列 | 記下「第 2/3 次未完成」，用最後幾分鐘寫下限制及下一步決定。實物路線為部分完成。 |\n| 協助者建議同時加寬底座和更動擋板 | 記下兩項變更與所受協助 | 無法藉由比較分辨單一因素的作用。保留實際經過，避免把接受協助說成獨立完成。 |\n| 兩個版本都沒讓參與者想繼續 | 保留「今天都不想繼續」 | 暫停或停止都是有效決定。單憑這次活動，無法排除任何職業。 |\n| 沒有其他人可以參與 | 採用獨自進行的路線 | 標記「僅自行檢查」。想像的回饋不能當成實際使用者回饋。 |\n| C2 網站無法使用，或裝置離線 | 使用提供的文字筆記或把標題抄到紙上 | 離線完成；活動仍無須帳號、測評或線上工具。 |\n| 尚未另存紀錄，就重新整理獨立的 C2 工作表 | C2 的欄位內容可能遺失 | 若遺失就如實記下，別宣稱會自動儲存。把這次活動筆記另存成文字檔，或留在紙本上。 |\n\n這些示例只用來檢查說明和分支涵蓋情況。它們無法證明英文讀者可以在 20 分鐘內獨立做完，也無法證明教育工作者無須另外釐清就能帶領活動，或參與者日後會再次使用或從中受益。\n\n## 來源、使用方式與限制\n\n**英文原版 · EN36 v2 · 2026 年 10 月 25 日**\n\n### 來源與本工具包新增的內容\n\n[費馬測試的 IAR 探索文章](https://fermatmind.com/en/articles/iar-holland-code-career-exploration)已於 2026 年 10 月 25 日查閱，文中將紙卡架列為編輯部原創活動。它提供十張卡片與 10 公分範圍的虛構任務、兩種做法、三項檢查、一次修改和重複檢查。本工具包將活動調整為聚焦一個問題、可選擇在 20 分鐘內進行的練習，加入帶領者提示、替代路線及活動紀錄，並保留小型虛構試作的限制。原文另外的房間配置練習是這次計時以外的選用延伸，這裡也未轉載原文的職業描述或來源表格。\n\n現有的[職涯探索工作表](https://fermatmind.com/en/holland-test/pdf-download)已於 2026 年 10 月 25 日查閱，可用來記錄較完整的下一步計畫。其 25 個欄位、TXT／Markdown 匯出、列印和空白 PDF 都是既有資源，可自行選用。若沒有測評結果，把測評、分數與代碼欄位留白，只填行動規劃。本工具包沒有新增帳號、匯出、自動儲存或長期儲存功能。\n\n原文章的 O*NET 和 BLS 連結用於支持其職業示例。本工具包未轉載這些來源的文字、圖片或標誌，也未聲稱獲其背書。這裡沒有新增職業事實、薪資、入門要求或排名。活動腳本、虛構示例和活動筆記標題均屬費馬測試的編輯內容。外部連結本身無法授予第三方內容的重製權。\n\n### 使用方式與隱私\n\n你可以閱讀並依照這項活動進行、保留自己的筆記，以及分享公開連結。帶領者可以用提示協助自願參與的人。參與完全自願，無須做測評、建立帳號、提供電子郵件、付費或公開紀錄。參與者可以暫停、拒絕回饋或停止，無須說明原因。\n\n本工具包未授予創用 CC、公有領域或其他開放再散布授權。資料公開可見，並不因此取得使用第三方文字、圖片或品牌的權利。超出一般個人閱讀和列印範圍的複製、改作或再散布，需要取得適當許可。分享連結無須複製內容。本文未聲稱被 MERLOT 收錄、獲機構認可或受到專業背書。\n\n參與者掌控自己的紀錄。帶領者不應要求提供副本、可辨識資料、私人結果連結、照片或錄音錄影。日後若要蒐集或另作他用，需針對特定目的另外取得自願同意。本工具包沒有建立資料蒐集計畫。\n\n### 解讀與證據\n\n這是一項虛構的教育探索活動，並不適用於專業產品測試或標準化測量。尺寸、檢查項目和時間安排都是編輯設計。活動無法測量興趣或能力，也不能確認職涯適配程度、資格或職業排名。原型做得成功無法證明天分，試作結果不理想也無法證明不適合。請勿將它用於篩選、評分、施工或專業簽核。\n\n隨附流程完全是合成示例，沒有觀察實物表現、參與者回饋或實際用時。參與者能否獨立完成、真實所需時間、使用者實際的可近用性、是否會重複採用，以及是否對職涯有益，均尚未驗證。編輯審查、文件檢查或瀏覽器檢查，無法證明這些結果。",
+          "seo_title": "職涯實驗工具包：20 分鐘設計活動",
+          "seo_description": "試做紙卡架或採用純草圖路線。使用參與者指南、帶領腳本及活動紀錄，無須測評、登入、提供電子郵件或購買。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 30,
+            "slug": "career-planning",
+            "label": "職涯規劃"
+          },
+          "tags": [
+            {
+              "id": 71,
+              "slug": "career-exploration",
+              "label": "職涯探索"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 30,
+        "tag_ids": [
+          71
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 285,
+            "slug": "career-experiment-kit",
+            "locale": "en",
+            "published_revision_id": 837,
+            "translation_group_id": "d2bcbf50-aa59-448d-bbf9-b5ea5fa41fed",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "becfe5beabcfebf1c5ea6c4db592f196411babe3fd41f3f09421faa4d0b70c9e",
+              "excerpt": "b4344e21d2d24266bfa053ce74a3840800fcd126ad7a9ed2b17aa7db5e186f44",
+              "content_md": "d5c5bd53234c8ee0674b2f1edb8a7c98c71191ec4e26183c64c00bbe42efc1b9",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "f7bfb77c82be289022d921faaa452f550a9793f171fdcf5ae5e3cd7435012454",
+              "seo_title": "37c5a22c5f1abea59091393d98e7c81312366bb0839259e47ce2a1ea75bb8d48",
+              "seo_description": "cde4634bbcaedf79829a8235a5da841cfabed0595fc632c52515db9956cf4024",
+              "og_title": "37c5a22c5f1abea59091393d98e7c81312366bb0839259e47ce2a1ea75bb8d48",
+              "og_description": "cde4634bbcaedf79829a8235a5da841cfabed0595fc632c52515db9956cf4024"
+            }
+          },
+          "existing_chinese": null,
+          "editorial_projection_sha256": "64fc984093ad3e3feb64aa8535836ed0ad7540c72c8035c2a8601d6ce5c80fd8",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/en/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/en/topics"
+            },
+            {
+              "key": "start_test",
+              "kind": "start_test",
+              "href": "/en/tests/holland-career-interest-test-riasec"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 284,
+            "slug": "career-experiment-kit",
+            "locale": "en",
+            "published_revision_id": 969,
+            "translation_group_id": "d2bcbf50-aa59-448d-bbf9-b5ea5fa41fed",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "becfe5beabcfebf1c5ea6c4db592f196411babe3fd41f3f09421faa4d0b70c9e",
+              "excerpt": "b4344e21d2d24266bfa053ce74a3840800fcd126ad7a9ed2b17aa7db5e186f44",
+              "content_md": "d5c5bd53234c8ee0674b2f1edb8a7c98c71191ec4e26183c64c00bbe42efc1b9",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "f7bfb77c82be289022d921faaa452f550a9793f171fdcf5ae5e3cd7435012454",
+              "seo_title": "37c5a22c5f1abea59091393d98e7c81312366bb0839259e47ce2a1ea75bb8d48",
+              "seo_description": "cde4634bbcaedf79829a8235a5da841cfabed0595fc632c52515db9956cf4024",
+              "og_title": "37c5a22c5f1abea59091393d98e7c81312366bb0839259e47ce2a1ea75bb8d48",
+              "og_description": "cde4634bbcaedf79829a8235a5da841cfabed0595fc632c52515db9956cf4024"
+            }
+          },
+          "existing_chinese": null,
+          "editorial_projection_sha256": "64fc984093ad3e3feb64aa8535836ed0ad7540c72c8035c2a8601d6ce5c80fd8",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/en/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/en/topics"
+            },
+            {
+              "key": "start_test",
+              "kind": "start_test",
+              "href": "/en/tests/holland-career-interest-test-riasec"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "truity-typefinder-vs-fermatmind",
+          "source_locale": "en",
+          "source_article_id": 274,
+          "translation_group_id": "fd4904d4-7c6e-40f9-908c-d107b82f3bd5"
+        },
+        "review_sha256": "8009f0e22ba15f107cbbab947c86d53cec98873809f432e6848b81d472d52d3d",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 282,
+              "slug": "truity-typefinder-vs-fermatmind",
+              "locale": "en",
+              "published_revision_id": 834,
+              "translation_group_id": "fd4904d4-7c6e-40f9-908c-d107b82f3bd5",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "af2bfa8696391fd8089644ee614d579a3c19c7d132ac8717c1c37b88239d98ba",
+              "public_body_sha256": "d1dc1ba00815f189783b8e5c1033ebcbe96b350ff0889ea7751e10de36b2a777",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            },
+            "existing_chinese": null
+          },
+          "production": {
+            "source": {
+              "id": 274,
+              "slug": "truity-typefinder-vs-fermatmind",
+              "locale": "en",
+              "published_revision_id": 1024,
+              "translation_group_id": "fd4904d4-7c6e-40f9-908c-d107b82f3bd5",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "0233a5efc70cc95898832d4a80179d699db00bac79136f1d2c88194a8ee753e4",
+              "public_body_sha256": "d1dc1ba00815f189783b8e5c1033ebcbe96b350ff0889ea7751e10de36b2a777",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            },
+            "existing_chinese": null
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1672,
+          "cover_image_height": 941,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            }
+          },
+          "related_test_slug": "mbti-personality-test-16-personality-types",
+          "author_name": "FermatMind",
+          "cover_image_alt": "一位讀者比較簡要的人格結果與較詳細的報告，決定要作答或升級。"
+        },
+        "seo_metadata": {
+          "og_title": "Truity TypeFinder 與費馬測試：免費結果比較",
+          "og_description": "比較 Truity TypeFinder 和費馬測試的免費結果、題數、報告細節及適用對象。購買報告或重測前，先確認自己的需求。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "Truity TypeFinder 與費馬測試：免費結果和報告有何不同？",
+          "excerpt": "比較 Truity TypeFinder 與費馬測試的免費結果範圍、問卷長度、報告細節和用途，了解再次測評或購買報告前該確認哪些事。",
+          "content_md": "你可以免費作答 Truity 的 TypeFinder，並查看簡要結果。如需更完整的報告，可以另外付費購買。費馬測試目前提供兩套 MBTI 風格問卷，作答及查看結果都免費。選擇時，可以先想清楚自己想取得什麼資訊、希望怎麼閱讀，以及某份報告值不值得購買。\n\n**利益揭露：** 本文由費馬測試發布，費馬測試也是文中其中一項工具的營運方。我們在 2026 年 10 月 20 日查閱了公開產品資訊及 Truity 的公開報告範例。比較依據是公開文件，並未進行兩份問卷的直接效度比較。我們沒有購買當時的 Truity 報告，也未確定哪套問卷測量人格更準確。\n\n## 「免費」包含哪些內容？\n\n在 Truity，作答和查看免費結果都無須註冊帳號或付費。擴充報告可另外選購。如果免費資訊已能回答你的問題，就可以停在這一步。[Truity 的免費結果說明](https://truity.zendesk.com/hc/en-us/articles/360046239054-Hey-I-thought-this-test-was-free)。\n\n費馬測試目前的英文方案中，兩套問卷都提供類型結果、四組核心偏好的解釋，以及後續探索建議，無須付費解鎖報告。這是費馬測試目前提供的內容，與 Truity 的報告各有不同。[費馬測試英文測評頁](https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types)。\n\n| 比較項目 | Truity TypeFinder 人格測評 | 費馬測試 MBTI 風格問卷 |\n|---|---|---|\n| 題數與預估時間 | 消費者常見問題：130 題，約 10–15 分鐘 | 93 題，約 10 分鐘；或 144 題，約 15 分鐘 |\n| 免費範圍 | 作答及查看簡要結果 | 作答、類型結果、核心偏好解釋和探索建議 |\n| 更完整的報告 | 可選購付費升級 | 目前英文方案無須付費解鎖報告 |\n| 語言 | Truity 說明中心目前表示，測評僅提供英文 | 提供英文和中文版本 |\n| 工具身分 | Truity 自有的 TypeFinder 測評 | 費馬測試自有問卷 |\n\nTruity 的數字來自其[消費者測評常見問題](https://www.truity.com/test/type-finder-personality-test-new)，目前支援的語言見其[語言說明頁](https://truity.zendesk.com/hc/en-us/articles/360047423033-Are-your-tests-available-in-other-languages)。兩項工具都並非官方 MBTI 測評。\n\n開始前還有一項版本資訊值得確認。Truity 另一份[TypeFinder 選擇指南](https://www.truity.com/page/which-typefinder-test-should-i-use)仍列出 Individuals 版為 150 題、需時 20–30 分鐘，並將它說明為 Personality Test 的另一名稱。這與消費者常見問題所列資訊不同，原因尚未確認。上表採用該消費者頁面對應入口的數字，請留意實際開始時顯示的資訊。\n\n題數和預估時間說明的是作答安排，無法據此判定準確度高低。\n\n## Truity 較完整的報告可能在哪些地方有幫助？\n\nTruity 將其 Personality Test（也稱 TypeFinder for Individuals）描述為涵蓋四個維度和 23 個較細的面向。較完整的報告會解讀這些面向，以及個人風格、人際關係、工作風格和成長策略。Workplace、Career Planning 和 Basic 各有不同的內容，不能把它們的說明合併成對單一報告的承諾。[Truity 的測評指南](https://truity.zendesk.com/hc/en-us/articles/360047017113-TypeFinder-Assessments-includes-the-Workplace-and-Career-Planning-versions)。\n\n值得問的是，這些較細的說明能否幫你理解自己想弄清楚的事。\n\n例如，你在熟悉的討論中很容易開口，卻偏好安靜的環境，也需要不少獨處時間。只用外向或內向來形容，可能不夠完整。如果報告能把互動的不同面向分開說明，你就能檢視更具體的描述。這是一個舉例說明的情境，並非測評結果，也無法據此主張面向能判定你的真實類型。\n\n決定之前，可以先看 Truity 的[公開 ENFJ 報告範例](https://www.truity.com/sites/default/files/fillpdf/sample_typefinder_personality_test_report.pdf)。這份 18 頁的範例包含維度與面向的細分、類型描述比較，以及解讀內容。這份範例的日期是 2022 年 3 月 14 日，因此可用來了解曾公開的樣式，現售報告的格式仍應以實際產品為準。\n\n選幾段有實質內容的章節來看，再考慮篇幅。看看它能否區分你在意的行為、說清楚混合的表現，並提出你真的願意檢視的方向。\n\n如果這正是你想要的細節，Truity 的報告值得考慮。購買前請確認目前的方案與價格。報告是否值得購買，要看它能否回答你在意的問題。\n\n## 哪些情況下費馬測試可能已經夠用？\n\n如果你想免費取得 16 型人格結果及核心偏好說明，或需要在英文與中文問卷之間選擇，可以考慮費馬測試。\n\n時間較少時可選短版。如果有餘裕仔細考慮更多描述，可選長版。題數較多無法單獨證明長版更適合你。更換問卷版本也會改變比較條件。\n\n我們的[完整報告閱讀指南](/en/articles/mbti-full-report-career-relationship-communication)會說明如何解讀費馬測試的偏好位置、處理接近中點的結果，並把描述轉成實際問題。如果你主要想弄懂已經拿到的結果，可以先讀這份指南。\n\n費馬測試和 Truity 的付費報告各有自己的內容。選擇費馬測試，就會作答另一家提供者的問卷並閱讀其結果。如果你想看的是 Truity 對 23 個面向的特定解讀，另一套測評無法提供相同的分析。\n\n## 依照問題選擇下一步\n\n**「我想先了解四字母框架，暫時不買報告。」**  \n任何一家的公開免費範圍都可能足夠。選一套你讀得順、能專心作答的問卷。先看實際提供的內容，再決定還缺不缺資訊。\n\n**「我已經有 Truity 的簡要結果，想在同一項工具裡看更多細節。」**  \n先查看它的報告範例和目前的升級說明。再做一次其他測評，無法擴充既有的 TypeFinder 結果。如果升級版的細分能回答你尚未解決的問題，就可以考慮升級。\n\n**「我可能需要中途暫停。」**  \nTruity 的說明提供儲存並稍後繼續的流程：作答前先登入，再使用畫面底部的 Save。這和查看免費結果是否須註冊是兩回事。[Truity 的儲存說明](https://truity.zendesk.com/hc/en-us/articles/360046102594-Do-I-have-to-complete-a-test-all-at-once)。離開尚未完成的問卷之前，先確認相關操作方式。\n\n**「我想保留或列印已完成的結果。」**  \nTruity 表示，你可以在測評完成後建立帳號，日後登入查看已儲存的結果。Truity 表示不會透過電子郵件寄送結果。若結果未儲存到帳號，日後可能無法再查看，因此別只依賴原本的瀏覽器。其[結果查閱說明](https://truity.zendesk.com/hc/en-us/articles/360046229293-How-do-I-access-my-test-results)列出相關限制。[列印說明](https://truity.zendesk.com/hc/en-us/articles/360046427114-How-do-I-print-my-test-results)適用於升級後的完整結果：在接近末尾處選擇 **Get Report**，即可在新分頁開啟可列印版本。免費簡要結果是否有這項功能，以及是否能下載個人 PDF，請勿自行假定。上述公開說明已於 2026 年 10 月 29 日重新查閱，我們沒有購買或檢視非公開的升級版報告。\n\n**「我的課程、專業人員或工作坊要求使用官方 MBTI 測評。」**  \n請確認要求的是哪一項工具。這裡比較的兩項工具皆無法取代官方測評。[Myers & Briggs Foundation 的官方工具指南](https://www.myersbriggs.org/my-mbti-personality-type/take-the-mbti-instrument/)列出官方途徑。\n\n**「我想釐清兩份結果為何不同。」**  \n保留每份結果，並記下提供者、語言和版本。字母相同無法證明量尺等同，字母不同也無法判定哪一項工具才對。把描述與你的經驗對照即可，別把數字取平均。我們的[結果閱讀指南](/en/articles/mbti-narrative-portrait)提供一種方法，讓你檢視符合描述的情境與反例。\n\n你手上的資訊可能已經足以採取下一步。購買報告或再做測評前，先說清楚你希望它回答什麼問題。如果你想了解 Truity 特有的面向細節，就進一步查閱那份報告。如果你想免費開始探索自己的偏好，可以[比較費馬測試目前的版本](/en/tests/mbti-personality-test-16-personality-types)。如果你已理解手上的結果，可以先在對話、讀書或工作中試一個相關的小改變，再考慮要不要繼續收集標籤。",
+          "seo_title": "Truity TypeFinder 與費馬測試：免費結果比較",
+          "seo_description": "比較 Truity TypeFinder 和費馬測試的免費結果、題數、報告細節及適用對象。購買報告或重測前，先確認自己的需求。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 20,
+            "slug": "personality-tests",
+            "label": "人格測評"
+          },
+          "tags": [
+            {
+              "id": 18,
+              "slug": "mbti",
+              "label": "MBTI"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 20,
+        "tag_ids": [
+          18
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 282,
+            "slug": "truity-typefinder-vs-fermatmind",
+            "locale": "en",
+            "published_revision_id": 834,
+            "translation_group_id": "fd4904d4-7c6e-40f9-908c-d107b82f3bd5",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "89867458a8b8b418f8bec43d697f2d96a58e57c655315e780bcfa4dc00a04198",
+              "excerpt": "90d6640d6707681683df18e70e6a7dd43bffddf83e60d1a9ddda1c150abc88b7",
+              "content_md": "d1dc1ba00815f189783b8e5c1033ebcbe96b350ff0889ea7751e10de36b2a777",
+              "author_name": "582d1fb5fcccf36a92e73344c58b1487fd8cee6461c0df55da7431d3ad792fb6",
+              "cover_image_alt": "0d6fe9c41e7108e2b5360b75bde86236968a4cba477ba239e6fc64ca46c242d3",
+              "seo_title": "70088da8114cf20f1ad8390f51a871431cf9943684ca883ace61f02dda178ca5",
+              "seo_description": "a09aefdecfe2a554c8663165ec3fbfb5aa9df39146570fae6e34a7b51eff565f",
+              "og_title": "70088da8114cf20f1ad8390f51a871431cf9943684ca883ace61f02dda178ca5",
+              "og_description": "a09aefdecfe2a554c8663165ec3fbfb5aa9df39146570fae6e34a7b51eff565f"
+            }
+          },
+          "existing_chinese": null,
+          "editorial_projection_sha256": "f0437d3fb1c8fb2442dfdb2bdd6e3c1d93d0cce2179076d488d1fcc47d589236",
+          "editorial_cta_targets": [
+            {
+              "key": "article_cta_1",
+              "kind": "start_test",
+              "href": "/en/tests/mbti-personality-test-16-personality-types"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 274,
+            "slug": "truity-typefinder-vs-fermatmind",
+            "locale": "en",
+            "published_revision_id": 1024,
+            "translation_group_id": "fd4904d4-7c6e-40f9-908c-d107b82f3bd5",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "89867458a8b8b418f8bec43d697f2d96a58e57c655315e780bcfa4dc00a04198",
+              "excerpt": "90d6640d6707681683df18e70e6a7dd43bffddf83e60d1a9ddda1c150abc88b7",
+              "content_md": "d1dc1ba00815f189783b8e5c1033ebcbe96b350ff0889ea7751e10de36b2a777",
+              "author_name": "582d1fb5fcccf36a92e73344c58b1487fd8cee6461c0df55da7431d3ad792fb6",
+              "cover_image_alt": "0d6fe9c41e7108e2b5360b75bde86236968a4cba477ba239e6fc64ca46c242d3",
+              "seo_title": "70088da8114cf20f1ad8390f51a871431cf9943684ca883ace61f02dda178ca5",
+              "seo_description": "a09aefdecfe2a554c8663165ec3fbfb5aa9df39146570fae6e34a7b51eff565f",
+              "og_title": "70088da8114cf20f1ad8390f51a871431cf9943684ca883ace61f02dda178ca5",
+              "og_description": "a09aefdecfe2a554c8663165ec3fbfb5aa9df39146570fae6e34a7b51eff565f"
+            }
+          },
+          "existing_chinese": null,
+          "editorial_projection_sha256": "f0437d3fb1c8fb2442dfdb2bdd6e3c1d93d0cce2179076d488d1fcc47d589236",
+          "editorial_cta_targets": [
+            {
+              "key": "article_cta_1",
+              "kind": "start_test",
+              "href": "/en/tests/mbti-personality-test-16-personality-types"
+            }
+          ]
+        }
+      },
+      "editorial_package_v1": {
+        "answer_surface_policy": "editor_supplied",
+        "answer_surface_visibility": "below_intro",
+        "answer_surface_v1": {
+          "faq_items": [
+            {
+              "key": "article_faq_0",
+              "question": "Truity 的 TypeFinder 免費嗎？",
+              "answer": "消費者版 TypeFinder Personality Test 可免費作答，並提供簡要結果。更完整的報告是可選購的付費升級。"
+            },
+            {
+              "key": "article_faq_1",
+              "question": "查看 TypeFinder 的免費結果需要帳號嗎？",
+              "answer": "不用。Truity 表示，作答和查看免費結果皆無須註冊。儲存尚未完成的問卷另有流程，依其說明須在開始前登入，並使用 Save。"
+            },
+            {
+              "key": "article_faq_2",
+              "question": "TypeFinder 和費馬測試都是官方 MBTI 測評嗎？",
+              "answer": "都不是。TypeFinder 是 Truity 的測評，費馬測試則提供自有的 MBTI 風格問卷。若有官方測評的要求，兩者均無法取代官方 MBTI 工具。"
+            }
+          ]
+        },
+        "cta_slots": [
+          {
+            "key": "article_cta_1",
+            "kind": "start_test",
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "label": "比較費馬測試目前的版本"
+          }
+        ]
+      }
+    },
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "a-levels-t-levels-apprenticeship-choose-at-16-england",
+          "source_locale": "en",
+          "source_article_id": 264,
+          "translation_group_id": "b278a940-dea3-4c81-9e57-f4a36a1cae73"
+        },
+        "review_sha256": "3677b16bd6f21c071ea36ae412702084edca96bccced8bad52fd3998f3d6aa69",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 280,
+              "slug": "a-levels-t-levels-apprenticeship-choose-at-16-england",
+              "locale": "en",
+              "published_revision_id": 832,
+              "translation_group_id": "b278a940-dea3-4c81-9e57-f4a36a1cae73",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "5c8ccf950253df995501c2a4df19b0b93f9971d245b83db40bf3e06ed391fa49",
+              "public_body_sha256": "db3a06860b513b555d1a9b076895a2ec8f0e0d630e663552a574275740ca08ac",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_chinese": {
+              "id": 294,
+              "slug": "a-levels-t-levels-apprenticeship-choose-at-16-england",
+              "locale": "zh-CN",
+              "published_revision_id": 846,
+              "translation_group_id": "b278a940-dea3-4c81-9e57-f4a36a1cae73",
+              "source_locale": "en",
+              "source_article_id": 280,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "885650d8339063dc2566c384ed00c9cde93d7e287794a4b406f1de94171a319c",
+              "public_body_sha256": "b35d2049f4ac2dd0cecfd89690657124b22fd9342009689a0749d0af6fe076a1",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          },
+          "production": {
+            "source": {
+              "id": 264,
+              "slug": "a-levels-t-levels-apprenticeship-choose-at-16-england",
+              "locale": "en",
+              "published_revision_id": 848,
+              "translation_group_id": "b278a940-dea3-4c81-9e57-f4a36a1cae73",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "5e2cbd22ce6d78cb2ce2361bb1f1c6c2e66e972ac208fdc987acb021d372e73d",
+              "public_body_sha256": "db3a06860b513b555d1a9b076895a2ec8f0e0d630e663552a574275740ca08ac",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            },
+            "existing_chinese": {
+              "id": 265,
+              "slug": "a-levels-t-levels-apprenticeship-choose-at-16-england",
+              "locale": "zh-CN",
+              "published_revision_id": 849,
+              "translation_group_id": "b278a940-dea3-4c81-9e57-f4a36a1cae73",
+              "source_locale": "en",
+              "source_article_id": 264,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "21ad002425ab5e5232e66922170b78d4e4807d3a1f034eb8bd5b4414f68cdb80",
+              "public_body_sha256": "b35d2049f4ac2dd0cecfd89690657124b22fd9342009689a0749d0af6fe076a1",
+              "hreflang_gate": {
+                "enabled": true,
+                "policy": "reciprocal_counterparts_verified"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1600,
+          "cover_image_height": 900,
+          "cover_image_variants": {
+            "og": {
+              "alt": "一名年轻人与一名成年人使用笔记、决策表和活动卡片比较学习选项。",
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "alt": "一名年轻人与一名成年人使用笔记、决策表和活动卡片比较学习选项。",
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "alt": "一名年轻人与一名成年人使用笔记、决策表和活动卡片比较学习选项。",
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "alt": "一名年轻人与一名成年人使用笔记、决策表和活动卡片比较学习选项。",
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "alt": "一名年轻人与一名成年人使用笔记、决策表和活动卡片比较学习选项。",
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            }
+          },
+          "related_test_slug": null,
+          "author_name": "FermatMind",
+          "cover_image_alt": "一名年輕人和一名成年人用筆記、決策表與活動卡比較學習選項。"
+        },
+        "seo_metadata": {
+          "og_title": "A levels、T Levels 還是學徒制？英格蘭 16 歲後的選擇",
+          "og_description": "比較英格蘭的 A levels、T Levels 與學徒制。選擇前，先核對入學或聘用條件、實習與工作安排、升學選項及轉換方向的成本。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/articlehot-major-fit-riasec-course-career-checklistcoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "英格蘭 16 歲後怎麼選？比較 A levels、T Levels 與學徒制",
+          "excerpt": "比較英格蘭的 A levels、T Levels 與學徒制。選擇前，先核對入學或聘用條件、實習與工作安排、升學選項及轉換方向的成本。",
+          "content_md": "選擇路徑時，要比較你實際會學習什麼或在工作中做什麼、自己能滿足哪些條件，以及希望這條路徑支持的下一步。\n\n選擇 A levels，核心是學科組合；選擇 T Level，核心是技術職業領域及課程中的職業專業方向；選擇學徒制，核心是具體職缺及其配套訓練。一條路徑總體上可能很吸引人，但實際開設的課程或招募職缺未必適合你。\n\n本指南適用於英格蘭。你必須繼續接受教育或訓練，直到年滿 18 歲，但這並不要求你一直留在學校。除了全日制教育和學徒制，另一種選擇是每週工作或從事志願服務至少 20 小時，同時參加非全日制教育或訓練。因此，本文比較的三條路徑只是更廣泛選擇中的一部分。[National Careers Service：離校後的選擇](https://nationalcareers.service.gov.uk/careers-advice/career-choices-at-16)，查核日期：2026 年 10 月 14 日。\n\n## A levels、T Levels 和學徒制分別是什麼？\n\n| 問題 | A levels | T Level | 學徒制 |\n| --- | --- | --- | --- |\n| 你在選擇什麼？ | 通常是由三門學術學科組成的組合。 | 技術職業領域中的兩年制課程，包含一個職業專業方向。 | 僱主公布的招募職缺，以及相應的學徒制標準。 |\n| 在哪裡學習？ | 在學校、sixth form 或學院，學習你所選的學科。 | 主要在學校或學院學習，並參加必修的產業實習。 | 在受僱工作中，接受與職務相關的訓練和學習。 |\n| 首先應考察什麼？ | 學科內容、各學科的入學條件，以及未來可能申請課程的要求。 | 技術資格、專門方向、實習安排，以及相關的後續發展選擇。 | 實際職責、學徒制級別、訓練安排，以及僱主的錄用要求。 |\n| 什麼使這個選項適合你的條件？ | 有實際開設的學科組合，你能滿足其入學條件，也願意學習。 | 有實際開設的課程，你能承擔其學習和實習要求。 | 有合適的招募職缺、獲得錄用，並且能持續適應其工作條件。 |\n\n上述路徑結構來自 [Skills for Careers：A levels](https://www.skillsforcareers.education.gov.uk/pages/training-choice/a-levels)、[DfE：T Levels 簡介](https://www.gov.uk/government/publications/introduction-of-t-levels/introduction-of-t-levels) 和 [GOV.UK：學徒制如何運作](https://www.gov.uk/become-apprentice)，查核日期：2026 年 10 月 14 日。表中的比較問題是實用提示，用於把這些路徑結構應用到你自己的選項上。\n\n## A levels：選擇學科組合，而不只是路徑名稱\n\n大多數學生學習三門 A level 學科，也可以更多或更少。每完成一門 A level，就取得一項 Level 3 資格。Skills for Careers 給出的通常入學指引是：至少五門 GCSE 成績達到 4–9，且希望繼續學習的學科達到 6。請向各學校或學院核實確切條件；這項指引不能證明你有資格進入某個具體學科或獲得某個名額。[Skills for Careers：A levels](https://www.skillsforcareers.education.gov.uk/pages/training-choice/a-levels)，查核日期：2026 年 10 月 14 日。\n\n如果你希望繼續學習多門學科，或未來某個課程要求特定學科組合，A levels 值得考慮。真正有用的問題是：這些學科能否支援你可能的下一步，以及你是否願意深入學習其內容。\n\n「保留更多選擇」需要有具體含義。一個能滿足某學位課程要求的組合，可能缺少另一個課程所要求的學科。做選擇前，檢視你現實中可能申請的課程的入學要求。然後確認學校或學院是否開設該組合，以及課表是否允許同時修讀。\n\n請對方提供教學大綱、考核作業示例，以及預期的自主學習要求。喜歡某門 GCSE 學科是有用的依據，但你還需要了解繼續學習它意味著什麼。\n\n完成 A levels 後，可能的路徑包括高等教育、更高級別的學徒制、就業或面向離校生的培養方案。這些是後續發展可能性，並非選擇 A levels 就能確保的結果。[Skills for Careers：A levels 之後的發展](https://www.skillsforcareers.education.gov.uk/pages/training-choice/a-levels)，查核日期：2026 年 10 月 14 日。\n\n## T Levels：投入一個技術領域，同時保留大量學院學習\n\nT Level 是兩年制課程，學習量大致相當於三門 A levels。它結合實踐和知識學習，並包含產業實習。教學仍以課堂學習為主，因此選擇 T Level 仍意味著要在學校或學院投入大量學習。[DfE：T Levels 簡介](https://www.gov.uk/government/publications/introduction-of-t-levels/introduction-of-t-levels)，查核日期：2026 年 10 月 14 日。\n\n如果你對想進入的技術職業領域已經有較清晰的方向，並希望先學習，再進入就業、學徒制或繼續深造，這條路徑值得考慮。要考察具體的技術資格和職業專業方向：對某個行業有廣泛興趣，並不意味著其中每門課程都適合你。\n\n產業實習的通常最低要求是 315 小時。2026–27 年補助指南規定，Early Years Educator 專門方向為 750 小時，Dental Nursing 為 600 小時。「約 45 天」只是對通常最低要求的近似描述，並非每門課程固定的實習時間表。請向課程提供單位詢問適用哪項要求、如何安排實習，以及交通和出勤具體意味著什麼。[DfE：2026–27 年 T Level 補助指南，產業實習](https://www.gov.uk/government/publications/t-level-funding/t-levels-funding-guide-2026-to-2027)，查核日期：2026 年 10 月 14 日。\n\nSkills for Careers 將 T Levels 的適用對象描述為居住在英格蘭、年齡為 16–19 歲的學習者。學校和學院自行設定 GCSE 入學要求。該資格屬於 Level 3，可能的後續發展包括相關就業、更高級別的學徒制或高等教育。在依賴這種一般可能性之前，請核實你希望進入的具體去向。[Skills for Careers：T Levels](https://www.skillsforcareers.education.gov.uk/pages/training-choice/t-levels)，查核日期：2026 年 10 月 14 日。\n\n英語和數學要求也需要仔細理解。尚未取得 GCSE 成績 4 的 T Level 學生，必須繼續努力達到英語和數學的相應水平。不過，通過 T Level 課程並不要求這兩門學科取得 GCSE 成績 4 或 Level 2 功能技能資格。課程提供單位的錄取條件是另一個問題。[DfE：T Level 課程結構](https://www.gov.uk/government/publications/introduction-of-t-levels/introduction-of-t-levels)，查核日期：2026 年 10 月 14 日。\n\n## 學徒制：把職缺和訓練放在一起比較\n\n學徒制將受僱工作與訓練、學習相結合。你會領取工資、享有帶薪休假，並發展與職務相關的技能。開始學徒制時，你必須年滿 16 歲、居住在英格蘭，且不在接受全日制教育。你可以在仍然就讀學校時申請。[GOV.UK：學徒制如何運作](https://www.gov.uk/become-apprentice)，查核日期：2026 年 10 月 14 日。\n\n如果你希望進入某個具體職業，並已準備好承擔受僱工作的責任，學徒制值得考慮。要比較你將履行的職責、可獲得的指導，以及訓練計畫。熟悉的僱主名稱或吸引人的職位名稱，並不能讓你充分了解日常工作。\n\n請核實級別。Foundation 和 intermediate 學徒制屬於 Level 2；advanced 學徒制屬於 Level 3。Higher 和 degree 學徒制處於更高的級別。因此，「學徒制」並不代表單一資格級別，也不能證明它與某個 A level 組合或 T Level 等同。請詢問適用哪項標準，以及除了完成學徒制之外，還包含哪些資格（如有）。[GOV.UK：學徒制級別](https://www.gov.uk/become-apprentice)，查核日期：2026 年 10 月 14 日。\n\n有些招募職缺要求特定資格，包括 GCSE 英語或數學。這些要求應列在申請說明中。它們與英語、數學的完成要求不同：在訓練開始時年齡為 16–18 歲、且沒有合適等同資格的學習者，必須取得規定的英語和數學資格，才能完成學徒制。請向訓練提供單位詢問，你現有的資格滿足哪些要求，以及還需要完成哪些學習和取得哪些成績。[Skills for Careers：學徒制申請要求](https://www.skillsforcareers.education.gov.uk/pages/training-choice/apprenticeships) 和 [DfE：學徒制英語和數學指南](https://www.gov.uk/government/publications/english-and-maths-requirements-in-apprenticeship-standards-at-level-2-and-above/english-and-maths-requirements-in-apprenticeships-guidance)，查核日期：2026 年 10 月 14 日。\n\n請詢問訓練如何安排在帶薪工作時間內。工作職務以外的訓練通常在學徒正常的帶薪工作時間內進行，內容不屬於日常工作職責。在這些時間以外開展的例外訓練，需要取得同意並給予補償。對於從 2025 年 8 月 1 日起開始的學徒制，每項標準都有公布的最低訓練量，並可根據有證據支援的相關既有學習作出調整。因此，用統一的每週「80% 工作、20% 學習」規則來描述目前要求並不充分。最初在該日期之前開始的學習者，仍適用先前政策。[GOV.UK：工作職務以外的訓練指南](https://www.gov.uk/government/publications/apprenticeships-off-the-job-training/apprenticeship-off-the-job-training-guidance--2)，查核日期：2026 年 10 月 14 日。\n\n請索取實際訓練時間表、工資、工作時間、地點、開始日期和預期持續時長。同時詢問完成後會怎樣。繼續受僱是一種可能性，並非這條路徑附帶的保證。[National Careers Service：開始學徒制](https://nationalcareers.service.gov.uk/careers-advice/career-choices-at-16)，查核日期：2026 年 10 月 14 日。\n\n## 資格的學習量和 UCAS 分數不能決定大學是否接受\n\n以下三個問題各有意義：\n\n- **級別：** 這項資格屬於哪個教育級別？\n- **學習量或 UCAS Tariff 點數：** 它代表多少學習量，或如何賦予 UCAS 分數？\n- **接受條件：** 你希望申請的課程是否接受這項資格、學科組合及成績？\n\nT Level 的學習量大致相當於三門 A levels，並不意味著它們有相同的學科內容。一項資格具有 UCAS 分數，並不要求大學接受它。大學和學院自行設定條件，有些使用指定資格和成績要求，而不是 Tariff 總點數。[UCAS：理解 Tariff 分數和入學要求](https://www.ucas.com/applying/before-you-apply/what-and-where-to-study/entry-requirements/calculate-your-ucas-tariff-points)，查核日期：2026 年 10 月 14 日。\n\n對你正在考慮的每個學位課程，都要核實它接受的具體資格、所需學科或專門方向、成績及任何附加條件。如果公開資訊無法回答你的情況，請在做選擇前諮詢招生部門。不要把關於後續發展的一般表述轉化為對個人錄取結果的預測。\n\n## 比較實際限制和改變方向的成本\n\n一條路徑既要適合你的興趣，也要適合你每週的實際安排。比較交通、出勤、自主學習、實習要求或工作時間。就學徒制而言，比較實際工資和工作時間表。對於 T Level，既要調查到學院的行程，也要調查到實習地點的行程。請詢問有哪些學習支援，以及如何實施。\n\n轉換路徑需要單獨核實。對於 A levels，請向學校或學院詢問何時可以換科、需要補上哪些學習內容，以及是否需要重新開始。不要假設另一所機構開設相同組合，或願意接受轉入。\n\n對於 T Levels，課程提供單位在決定能否轉入或是否需要重新開始時，必須考慮課程內容的重合程度，以及距離考核還剩多少時間。一個 T Level 技術資格的學習成果不能計入另一個。補助指南允許某些變更，但並不承諾某位學生一定有轉入名額，或能無成本地改變方向。[DfE：T Level 選擇和轉入](https://www.gov.uk/government/publications/t-level-funding/t-levels-funding-guide-2026-to-2027)，查核日期：2026 年 10 月 14 日。\n\n就學徒制而言，請向僱主和訓練提供單位詢問，改變僱主、職缺或標準，會對你的僱傭關係、已完成的學習和剩餘訓練產生什麼影響。要針對你擬議的變更獲得明確答覆，而不是假設之前的學習或工作會自動得到承認。\n\n## 一個比較示例：一名假設學生，三條路徑\n\n**這是一個假設性的說明示例。** Sam、其個人情況和下述決策均為虛構，用於演示如何比較。沒有任何學校、學院、僱主或大學為這個示例提供答覆或錄取、錄用機會。\n\nSam 16 歲，居住在英格蘭。假設 Sam 的 GCSE 成績為：數學 7、電腦科學 7、物理 6、英語語言 5、歷史 6。Sam 喜歡用數學解決問題、計算機課程和實際故障排查。計算機相關學位是未來可能的目標，但 Sam 對技術支援工作也有興趣，尚未選定職業。\n\n在這個示例中，Sam 的家庭能夠支援其繼續全日制學習。領取工資會是好事，但暫時並非必需。Sam 無法搬遷，並希望到學院、工作地點或實習地點的公共交通單程不超過 45 分鐘。\n\nSam 比較三個待調查的選項：\n\n- 數學、電腦科學和物理的 A level 組合，**前提是有課程提供單位開設這個組合**。\n- 計算機相關技術領域的 T Level，**具體資格和職業專業方向仍待確認**。\n- 涉及技術支援工作的學徒制招募職缺，**前提是能找到合適職缺**，其標準和級別也仍待核實。\n\n這些是擬考慮的選項，並非三個已經可用的名額，也不是已確認 Sam 能進入的路徑。\n\n| 決策因素 | 擬考慮的 A level 組合 | 擬考慮的 T Level | 擬考慮的學徒制 |\n| --- | --- | --- | --- |\n| 學習和工作 | Sam 將繼續學習三門學科。這符合假設中對學術問題求解的興趣，同時允許繼續調查職業。Sam 需要檢視實際學科內容和考核。 | Sam 將通過大量學校或學院學習，以及產業實習，集中學習一個技術領域。專門方向需要與 Sam 想探索的技術活動相符。 | Sam 將通過一份具體的帶薪工作及其訓練學習。日常職責需要包含 Sam 願意做的工作；吸引人的「技術」標籤並不足夠。 |\n| 入學、錄用和資格 | Sam 將把假設的 7、7、6 成績與課程提供單位對三門學科的要求進行比較。課程是否開設、確切入學條件和能否獲得名額仍然未知。每門 A level 都屬於 Level 3。 | 在這個假設背景下，Sam 符合公布的年齡和居住地範圍。課程提供單位的 GCSE 條件、課程是否開設和能否獲得名額仍然未知。T Level 屬於 Level 3。 | 年齡和居住地本身不能保證能開始。Sam 開始時需要不在接受全日制教育、滿足職缺條件並獲得錄用。學徒制級別及包含的資格仍然未知。 |\n| 就業或繼續深造 | Sam 將核實這個組合是否滿足可能申請的計算機相關學位課程要求。還可以繼續調查就業或之後申請學徒制的可能性。任何去向都尚未確認。 | Sam 將對照相關就業、學徒制和學位要求，核實指定資格和專門方向。資格的學習量或 UCAS 分數不能證明會被接受。 | Sam 將核實完成具體標準後可能支援什麼：繼續就業、另一項學徒制或繼續深造。繼續受僱和學位課程接受與否都尚未確定。 |\n| 交通和時間 | Sam 需要課程提供單位的課表，以及實際公共交通行程。課程提供單位距離近，也不能解決學科之間的課表衝突。 | Sam 需要核實到學院和可能實習地點的行程，以及實習小時數和時間安排。僅到學院的通勤可承受並不足夠。 | Sam 需要工作地點、工作時間、訓練地點及時間表、工資和開始日期。需要搬遷的工作不符合 Sam 已說明的限制。 |\n| 改變方向 | Sam 必須詢問換科截止日期、遺漏的學習內容，以及是否可能需要重新開始。尚未確認任何轉入安排。 | 能否轉入取決於課程內容重合程度和考核時間，並可能需要重新開始。一個 T Level 技術資格的學習成果不能計入另一個。 | Sam 必須詢問，改變僱主、職缺或標準會對僱傭關係及已完成學習的認可產生什麼影響。這些安排仍然未知。 |\n\n此處使用的資格結構和一般申請範圍來自 [Skills for Careers：A levels](https://www.skillsforcareers.education.gov.uk/pages/training-choice/a-levels)、[Skills for Careers：T Levels](https://www.skillsforcareers.education.gov.uk/pages/training-choice/t-levels)、[DfE：T Levels 簡介](https://www.gov.uk/government/publications/introduction-of-t-levels/introduction-of-t-levels) 和 [GOV.UK：學徒制](https://www.gov.uk/become-apprentice)，查核日期：2026 年 10 月 14 日。T Level 的轉入限制來自 [2026–27 年補助指南](https://www.gov.uk/government/publications/t-level-funding/t-levels-funding-guide-2026-to-2027)，查核日期：2026 年 10 月 14 日。Sam 的優先考慮因素，以及如何將它們應用到這些路徑結構上，均為示例性的判斷。\n\n### Sam 的暫定決策，以及哪些因素可能改變它\n\n**首先調查的選項：A level 組合。** Sam 喜歡多門學術學科，能夠繼續全日制學習，且尚未選定某個具體職業。這些假設使 Sam 有理由優先調查以學科為核心的學習。這一偏好取決於組合是否開設、能否滿足課程提供單位的條件、是否符合通勤上限，以及是否支援合理的未來課程要求。假設的 GCSE 成績不能證明具備入學資格。\n\n**待調查的備選：T Level。** 如果其實際技術內容比 A level 學科更有吸引力、實習可承受，且後續發展選擇符合 Sam 的目標，它就可能成為首選。在把它作為可行備選之前，Sam 需要了解課程提供單位的入學條件、資格和專門方向、實習安排及相關進路的要求。不應僅僅因為 T Level 的學習量大致相當於三門 A levels 就選擇它。\n\n**學徒制：與具體招募職缺相關的有條件選項。** 如果 Sam 認定招聘中列出的支援職責就是自己現在想開始的工作，並且實際獲得的錄用有合適的工作條件和訓練，這個選項就可能排在兩條學習路徑之前。僅有工資並不能決定選擇：在本示例中，立即獲得收入是可選的，而合適的職缺和可持續的交通是必需的。\n\n對於任何高等教育選項，Sam 都必須核實實際課程接受的資格、學科和成績。具有 UCAS 分數，並不要求大學接受某項資格。[UCAS：Tariff 分數和入學要求](https://www.ucas.com/applying/before-you-apply/what-and-where-to-study/entry-requirements/calculate-your-ucas-tariff-points)，查核日期：2026 年 10 月 14 日。\n\n### Sam 尚未得到答覆的問題和下一步行動\n\nSam 的決策記錄目前**沒有任何已確認的名額、職缺錄用或大學接受結果**。尚待答覆的問題決定了暫定順序能否成立：\n\n1. **詢問 A level 課程提供單位：** 三門學科能否一起修讀？確切的 GCSE 條件是什麼？考核作業涉及什麼？換科截止日期和補課安排是什麼？如果組合未開設，或不能支援 Sam 找出的學位課程，就調整組合或重新考慮路徑。\n2. **詢問 T Level 課程提供單位：** Sam 將學習哪項資格和哪個專門方向？入學條件是什麼？如何安排實習、實習可能在哪裡，以及如果行程超過 Sam 的上限會怎樣？如果實習不切實際，這個選項就不符合 Sam 目前的限制。如果內容和已經核實的後續進路更適合，它就可能取代 A levels 成為首選。\n3. **與僱主和訓練提供單位核實一個實際學徒制招募職缺：** 職責、標準、級別、申請資格、工資、工作時間和訓練計畫分別是什麼？Sam 的英語和數學證書會如何認定？對於新開始的學徒制，該標準適用的最低工作職務以外的訓練量是多少，如何安排在帶薪工作時間內？如果職缺或訓練不合適，不要僅因為有工資就把它當作備選。\n\n職缺的申請條件與完成學徒制所需的英語、數學要求是分開的。訓練提供單位必須確定 Sam 假設持有的證書如何適用。對於從 2025 年 8 月 1 日起開始的學徒制，脫崗要求使用該標準公布的最低訓練量，並考慮相關既有學習。[Skills for Careers：學徒制申請要求](https://www.skillsforcareers.education.gov.uk/pages/training-choice/apprenticeships)、[DfE：英語和數學指南](https://www.gov.uk/government/publications/english-and-maths-requirements-in-apprenticeship-standards-at-level-2-and-above/english-and-maths-requirements-in-apprenticeships-guidance) 和 [GOV.UK：工作職務以外的訓練指南](https://www.gov.uk/government/publications/apprenticeships-off-the-job-training/apprenticeship-off-the-job-training-guidance--2)，查核日期：2026 年 10 月 14 日。\n\nSam 會先尋求關於 A level 組合和 T Level 的答覆，同時檢視合適的學徒制招募職缺。隨後根據課程或訓練提供單位的實際截止日期和條件安排申請及備選。隨著答覆到來，最終選擇可能改變；這個示例展示的是有理由支援的暫定決策，而不是對錄取或就業的預測。\n\n## 一種決策方法：作出有條件的選擇，並落實備選\n\n如果你希望邁出的下一步要求特定學術學科，或你想要一個能支援多個現實去向的學科組合，就優先進一步調查 A levels。\n\n如果你已想到一個技術領域，希望在大量學院學習之外獲得工作場所經驗，並且已核實課程的實習安排和後續進路，就仔細調查 T Level。\n\n如果某個具體職業吸引你、有合適的招募職缺，並且職責、僱傭條件和訓練計畫都適合你，就仔細調查學徒制。\n\n如果目前沒有任何選項可行，就與學校、學院或職業顧問一起重新考慮可用選項。成績低於預期入學門檻時，需要制訂新計畫；這並不意味著這三條路徑中的某一條是你唯一剩下的選擇。National Careers Service 建議保留備選，並在計畫改變時使用可獲得的支援。[National Careers Service：重新考慮你的選擇](https://nationalcareers.service.gov.uk/careers-advice/career-choices-at-16)，查核日期：2026 年 10 月 14 日。\n\n下一步可以具體這樣做：\n\n1. **列出實際選項。** 找出開設的學科組合、具體 T Level 課程或學徒制招募職缺。比較至少兩個可行選項。\n2. **核實申請條件。** 區分已公布的要求、你已經滿足的條件，以及仍待答覆的問題。同時瞭解如果成績與預期不同會怎樣。\n3. **考察學習或工作內容。** 索取學科材料、T Level 教學和實習計畫，或學徒制職責與訓練時間表。\n4. **核實去向和退出、轉向選擇。** 確認相關學位課程是否接受、後續發展要求，以及課程或訓練提供單位關於改變方向的安排。\n5. **確認申請和備選。** 核實截止日期、開始日期，以及在等待成績或學徒制錄用時如何保留另一個選項。\n\n## 常見問題\n\n### 在英格蘭，我必須留在學校直到 18 歲嗎？\n\n不必。在英格蘭，你必須繼續接受教育或訓練，直到年滿 18 歲，但這可以包括學徒制，而不必一直留在學校。另一種選擇是每週工作或從事志願服務至少 20 小時，同時參加非全日制教育或訓練。\n\n來源：[National Careers Service：離校後的選擇](https://nationalcareers.service.gov.uk/careers-advice/career-choices-at-16)，查核日期：2026 年 10 月 14 日。\n\n### 接受三門 A levels 的課程，是否都接受 T Level？\n\n不是。T Level 的學習量大致相當於三門 A levels，但大學和學院自行設定入學要求。具有 UCAS 分數並不能保證被接受。請核實課程是否接受你的具體 T Level，包括任何專門方向和成績條件。\n\n來源：[DfE：T Levels 簡介](https://www.gov.uk/government/publications/introduction-of-t-levels/introduction-of-t-levels) 和 [UCAS：Tariff 分數和入學要求](https://www.ucas.com/applying/before-you-apply/what-and-where-to-study/entry-requirements/calculate-your-ucas-tariff-points)，查核日期：2026 年 10 月 14 日。\n\n### 我能更換 T Level 而不重新開始嗎？\n\n不一定。課程提供單位在決定能否轉入或是否需要重新開始時，必須考慮課程內容的重合程度，以及距離考核還剩多少時間。一個 T Level 技術資格的學習成果不能計入另一個。在假設可以轉入之前，請就你擬議的變更諮詢課程提供單位。\n\n來源：[DfE：2026–27 年 T Level 補助指南，選擇和轉入](https://www.gov.uk/government/publications/t-level-funding/t-levels-funding-guide-2026-to-2027)，查核日期：2026 年 10 月 14 日。\n\n### 開始學徒制前，我需要有英語和數學資格嗎？\n\n申請要求取決於具體招募職缺。有些學徒制要求 GCSE 英語或數學等資格。另外，在訓練開始時年齡為 16–18 歲、且沒有合適等同資格的學徒，必須取得規定的英語和數學資格，才能完成學徒制。請就申請和完成這兩個方面諮詢僱主與訓練提供單位。\n\n來源：[Skills for Careers：學徒制申請要求](https://www.skillsforcareers.education.gov.uk/pages/training-choice/apprenticeships) 和 [DfE：學徒制英語和數學指南](https://www.gov.uk/government/publications/english-and-maths-requirements-in-apprenticeship-standards-at-level-2-and-above/english-and-maths-requirements-in-apprenticeships-guidance)，查核日期：2026 年 10 月 14 日。\n\n如果你仍不確定自己對哪些活動有興趣，費馬測試的 [RIASEC 說明](https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained) 和[職業探索指南](https://fermatmind.com/zh/articles/career-confusion-test-map)可以幫助你反思。用這種反思來考察課程內容和職務內容。它不能證明申請資格、大學是否接受，也不能確定你應該選擇哪條路徑。\n\n如果你想選擇性地反思工作活動，可以探索 [RIASEC 職業興趣測試](/zh/tests/holland-career-interest-test-riasec)。用它形成關於課程內容和職務內容的問題，再對照你正在考慮的實際選項進行核實。測試結果不能替你選擇教育路徑，也不能證明申請資格。",
+          "seo_title": "A levels、T Levels 還是學徒制？英格蘭 16 歲後的選擇",
+          "seo_description": "比較英格蘭的 A levels、T Levels 與學徒制。選擇前，先核對入學或聘用條件、實習與工作安排、升學選項及轉換方向的成本。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 8,
+            "slug": "2f58e8c0559b",
+            "label": "職涯決策"
+          },
+          "tags": [
+            {
+              "id": 182,
+              "slug": "35953137bb9a",
+              "label": "英格蘭"
+            },
+            {
+              "id": 183,
+              "slug": "a486265e82fe",
+              "label": "16 歲後教育"
+            },
+            {
+              "id": 184,
+              "slug": "2f58e8c0559b",
+              "label": "職涯決策"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 8,
+        "tag_ids": [
+          180,
+          181,
+          182
+        ]
+      },
+      "staging_target_tag_ids": {
+        "35953137bb9a": 180,
+        "a486265e82fe": 181,
+        "2f58e8c0559b": 182
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 280,
+            "slug": "a-levels-t-levels-apprenticeship-choose-at-16-england",
+            "locale": "en",
+            "published_revision_id": 832,
+            "translation_group_id": "b278a940-dea3-4c81-9e57-f4a36a1cae73",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "d0f64aa3d05e10576e62d90d38035fefe76b84d40ade064d1ba98779abf955a2",
+              "excerpt": "adf78709cf17b930280d1d0486d5dcb9f30d337148852125917eaf114cf701c5",
+              "content_md": "db3a06860b513b555d1a9b076895a2ec8f0e0d630e663552a574275740ca08ac",
+              "author_name": "582d1fb5fcccf36a92e73344c58b1487fd8cee6461c0df55da7431d3ad792fb6",
+              "cover_image_alt": "6d1785e9b4ca09633003fc05db8b29a56df1b4c25b6eaf93fda589a41c14ce96",
+              "seo_title": "31aee664cfafc64d6bd2e212c39a4a5817f622ed339450ebcae2faf9db8ce5d8",
+              "seo_description": "bb8db880e38d38a679eaa2aedebf50e073a8bc11e389a1feb68a3bf1ed761979",
+              "og_title": "31aee664cfafc64d6bd2e212c39a4a5817f622ed339450ebcae2faf9db8ce5d8",
+              "og_description": "bb8db880e38d38a679eaa2aedebf50e073a8bc11e389a1feb68a3bf1ed761979"
+            }
+          },
+          "existing_chinese": {
+            "id": 294,
+            "slug": "a-levels-t-levels-apprenticeship-choose-at-16-england",
+            "locale": "zh-CN",
+            "published_revision_id": 846,
+            "translation_group_id": "b278a940-dea3-4c81-9e57-f4a36a1cae73",
+            "source_locale": "en",
+            "source_article_id": 280,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "7e2c6e07ede93828b083d91ba5a1fcb9f7e8998126a16491647bdbac3ce39125",
+              "excerpt": "c3e84af7a407492ade2e73a22fcecf8a0afcfc476213f9d6a4bf2ae02e5e32c5",
+              "content_md": "b35d2049f4ac2dd0cecfd89690657124b22fd9342009689a0749d0af6fe076a1",
+              "author_name": "582d1fb5fcccf36a92e73344c58b1487fd8cee6461c0df55da7431d3ad792fb6",
+              "cover_image_alt": "d46d1a621c3cb7e1eef0a277e7bd63cf0d4e057ec301f4a5db0e90e14ad99c57",
+              "seo_title": "3dbb2fd313f6b8d6b0ec1654fa218562d9a46978e776849a911af7729da0d02e",
+              "seo_description": "86bf2a94df8baecdeec8d044a485af4fa285c392938276b60d4cbdf648ee8c5e",
+              "og_title": "3dbb2fd313f6b8d6b0ec1654fa218562d9a46978e776849a911af7729da0d02e",
+              "og_description": "86bf2a94df8baecdeec8d044a485af4fa285c392938276b60d4cbdf648ee8c5e"
+            }
+          },
+          "editorial_projection_sha256": "dddf3ffb7a03095f30d2b405ea6ff3e67f089bf9cb013c87241f825447c45f42",
+          "editorial_cta_targets": [
+            {
+              "key": "article_cta_1",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 264,
+            "slug": "a-levels-t-levels-apprenticeship-choose-at-16-england",
+            "locale": "en",
+            "published_revision_id": 848,
+            "translation_group_id": "b278a940-dea3-4c81-9e57-f4a36a1cae73",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "d0f64aa3d05e10576e62d90d38035fefe76b84d40ade064d1ba98779abf955a2",
+              "excerpt": "adf78709cf17b930280d1d0486d5dcb9f30d337148852125917eaf114cf701c5",
+              "content_md": "db3a06860b513b555d1a9b076895a2ec8f0e0d630e663552a574275740ca08ac",
+              "author_name": "582d1fb5fcccf36a92e73344c58b1487fd8cee6461c0df55da7431d3ad792fb6",
+              "cover_image_alt": "6d1785e9b4ca09633003fc05db8b29a56df1b4c25b6eaf93fda589a41c14ce96",
+              "seo_title": "31aee664cfafc64d6bd2e212c39a4a5817f622ed339450ebcae2faf9db8ce5d8",
+              "seo_description": "bb8db880e38d38a679eaa2aedebf50e073a8bc11e389a1feb68a3bf1ed761979",
+              "og_title": "31aee664cfafc64d6bd2e212c39a4a5817f622ed339450ebcae2faf9db8ce5d8",
+              "og_description": "bb8db880e38d38a679eaa2aedebf50e073a8bc11e389a1feb68a3bf1ed761979"
+            }
+          },
+          "existing_chinese": {
+            "id": 265,
+            "slug": "a-levels-t-levels-apprenticeship-choose-at-16-england",
+            "locale": "zh-CN",
+            "published_revision_id": 849,
+            "translation_group_id": "b278a940-dea3-4c81-9e57-f4a36a1cae73",
+            "source_locale": "en",
+            "source_article_id": 264,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": true,
+              "policy": "reciprocal_counterparts_verified"
+            },
+            "snapshot_sha256": {
+              "title": "7e2c6e07ede93828b083d91ba5a1fcb9f7e8998126a16491647bdbac3ce39125",
+              "excerpt": "c3e84af7a407492ade2e73a22fcecf8a0afcfc476213f9d6a4bf2ae02e5e32c5",
+              "content_md": "b35d2049f4ac2dd0cecfd89690657124b22fd9342009689a0749d0af6fe076a1",
+              "author_name": "582d1fb5fcccf36a92e73344c58b1487fd8cee6461c0df55da7431d3ad792fb6",
+              "cover_image_alt": "d46d1a621c3cb7e1eef0a277e7bd63cf0d4e057ec301f4a5db0e90e14ad99c57",
+              "seo_title": "3dbb2fd313f6b8d6b0ec1654fa218562d9a46978e776849a911af7729da0d02e",
+              "seo_description": "86bf2a94df8baecdeec8d044a485af4fa285c392938276b60d4cbdf648ee8c5e",
+              "og_title": "3dbb2fd313f6b8d6b0ec1654fa218562d9a46978e776849a911af7729da0d02e",
+              "og_description": "86bf2a94df8baecdeec8d044a485af4fa285c392938276b60d4cbdf648ee8c5e"
+            }
+          },
+          "editorial_projection_sha256": "dddf3ffb7a03095f30d2b405ea6ff3e67f089bf9cb013c87241f825447c45f42",
+          "editorial_cta_targets": [
+            {
+              "key": "article_cta_1",
+              "kind": "start_test",
+              "href": "/zh/tests/holland-career-interest-test-riasec"
+            }
+          ]
+        }
+      },
+      "editorial_package_v1": {
+        "answer_surface_policy": "editor_supplied",
+        "answer_surface_visibility": "below_intro",
+        "answer_surface_v1": {
+          "faq_items": []
+        },
+        "cta_slots": [
+          {
+            "key": "article_cta_1",
+            "kind": "start_test",
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "label": "用 RIASEC 探索工作活動"
+          }
+        ]
+      }
+    },
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "free-personality-tests-results-compared",
+          "source_locale": "zh-CN",
+          "source_article_id": 297,
+          "translation_group_id": "0709326a-bc39-483d-acfb-fbd595d5b37a"
+        },
+        "review_sha256": "bb52e2c6cd21b4c9b88c553483e279f89928981005be106ff82dee8847ec64c1",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 292,
+              "slug": "free-personality-tests-results-compared",
+              "locale": "zh-CN",
+              "published_revision_id": 844,
+              "translation_group_id": "0709326a-bc39-483d-acfb-fbd595d5b37a",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "61d193501f3bfc4d30d365000488877a8319eca9685d37e2c64a0e609cb7f95d",
+              "public_body_sha256": "d6bcfe9c07453c1c4b98de7540fd7dc443f50851b763627a711c0aa6bbeaf832",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            },
+            "existing_english": {
+              "id": 284,
+              "slug": "free-personality-tests-results-compared",
+              "locale": "en",
+              "published_revision_id": 836,
+              "translation_group_id": "2f2c7d34-7117-4e4f-972b-04b5a8a69211",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "b954fa7c949ad4ec29ef4f63ea3513f74eb54f012279b0b61da8176d4716f401",
+              "public_body_sha256": "0f61269c0aa46f5d618ab36be08b25874519903c017bfb0a7022c1bc50466b39",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            }
+          },
+          "production": {
+            "source": {
+              "id": 297,
+              "slug": "free-personality-tests-results-compared",
+              "locale": "zh-CN",
+              "published_revision_id": 1176,
+              "translation_group_id": "0709326a-bc39-483d-acfb-fbd595d5b37a",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "623c00305ceb4dede8ef500016d31bb6396ca363567b9fa649c909a56863cae6",
+              "public_body_sha256": "d6bcfe9c07453c1c4b98de7540fd7dc443f50851b763627a711c0aa6bbeaf832",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            },
+            "existing_english": {
+              "id": 283,
+              "slug": "free-personality-tests-results-compared",
+              "locale": "en",
+              "published_revision_id": 1175,
+              "translation_group_id": "2f2c7d34-7117-4e4f-972b-04b5a8a69211",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "b3ff9501928166a25e793e5c7f6e56ab0def1edc3137489ac8fd0d8a8aaec146",
+              "public_body_sha256": "0f61269c0aa46f5d618ab36be08b25874519903c017bfb0a7022c1bc50466b39",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1672,
+          "cover_image_height": 941,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            }
+          },
+          "related_test_slug": "mbti-personality-test-16-personality-types",
+          "author_name": "費馬測試編輯部",
+          "cover_image_alt": "讀者對照簡短的人格結果和更詳細的報告，再決定做哪項測驗"
+        },
+        "seo_metadata": {
+          "og_title": "免費測驗怎麼選？六種工具的結果與適用問題",
+          "og_description": "比較費馬六類測驗的題數、時長、免費結果和適用範圍。用十五種選擇情境決定先做哪一步，再核對儲存與匯出條件。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "免費測驗怎麼選？六種工具的結果與適用問題",
+          "excerpt": "從一個具體問題出發，比較六種測驗的題本、免費結果與邊界。用九組跨測驗情境和六個專項案例決定下一步。",
+          "content_md": "選測驗前，先寫下一件想弄清的事。你是想知道自己願意多做哪些工作活動，還是想回顧一次圖形推理的作答表現？這兩個問題需要的結果不同。先看結果裡有哪些欄位，再決定要不要花時間作答、是否需要儲存，以及下一步用什麼真實資訊驗證。\n\n費馬測試提供下文六種工具。題數、用時和免費範圍來自各工具當前公開說明。可依預估時間安排作答。結果詳情、儲存方式和後續服務以實際所選題本及頁面為準。\n\n## 六種工具分別適合什麼問題\n\n| 你想弄清的事 | 可以先看 | 結果與下一步 |\n| --- | --- | --- |\n| 做決定和處理資訊時，我通常先注意哪一類線索？ | [MBTI 偏好測試](/zh/tests/mbti-personality-test-16-personality-types)，93 題約 10 分鐘，144 題約 15 分鐘 | 費馬自有 MBTI 風格題本的兩版均可免費作答，查看類型、四組偏好和解讀建議。選一個接近中點的偏好，用兩件相似的事核對；分數用於讀當次偏好，甄選和能力判斷需要別的證據。 |\n| 哪些工作活動值得多試幾次？ | [霍蘭德職業興趣測試](/zh/tests/holland-career-interest-test-riasec)，60 題約 8 分鐘，140 題約 18 分鐘 | 免費檢視六維興趣和三碼。先選一項活動試做，再分別記下興趣、實際表現和所需支援。職務條件、技能和資格另查。 |\n| 這次圖形推理表現怎樣，哪種規則值得再練？ | [IQ 矩陣推理測試](/zh/tests/iq-test-intelligence-quotient-assessment)，原創 30 題，約 20 分鐘 | 免費檢視當次成績。先讀答對題數。只有結果顯示有符合條件的參照資料時，再讀 Beta 參考分和模型參考百分位。兩者基於設計參考模型。正式用途需要適用的常模、施測條件和解釋。 |\n| 在不同情境中，某個行為傾向有多常見？ | [大五人格測試](/zh/tests/big-five-personality-test-ocean-model)，90 題約 11 分鐘，120 題約 15 分鐘 | 免費檢視所選版本的五維及其實際提供的側面。選一個具體行為，比較熟悉與不熟悉的場景，再看量尺和參照說明。改寫題本需要本版本的效度證據和適用常模。 |\n| 某個反應背後，我可能想保護什麼？ | [九型人格測試](/zh/tests/enneagram-personality-test-nine-types)，105 題五點自評約 12 分鐘，144 題二選一約 18 分鐘 | 免費檢視九型分布及候選類型。保留兩個動機假設，用實際事件和反例檢驗。兩版數字按各自題本閱讀。 |\n| 在一場具體對話裡，我想練哪一種情緒或關係行為？ | [EQ 自評](/zh/tests/eq-test-emotional-intelligence-assessment)，60 題約 10 分鐘 | 免費檢視自我覺察、情緒調節、同理心與關係管理四維。選一個可以觀察的動作，請對方給予回饋。EQ-60 記錄本次自評，當前驗證證據仍屬初步。表現判斷需要實際行為資料。 |\n\n## 兩種工具都像有用時，怎樣選第一步\n\n| 你在比較 | 先做的一步 |\n| --- | --- |\n| MBTI 與 IQ | 如果想知道自己整理資訊時通常先核細節還是先找模式，回看相關偏好和真實事例。完整提交 30 題後，先看整次答對題數和題組表現，再用獨立例題核對解題規則。 |\n| MBTI 與 EQ | 交接時先約定用文件還是口頭討論。若目標是練習把不滿和具體請求說清楚，選一次對話練一個動作，例如描述影響後問對方怎樣理解。 |\n| RIASEC 與 IQ | 如果你想試試是否喜歡找出並排除故障，選一個安全的實際任務並觀察是否願意反覆做。如果想評估這次圖形作答，檢視該次記錄。 |\n| RIASEC 與九型 | 對指導他人感興趣，可以先試講一個步驟。想理解自己為何特別在意學員認可，回想某次事件，列出至少兩種動機解釋。 |\n| RIASEC 與 EQ | 想了解自己是否願意繼續做客服工作，先體驗一項服務任務。想練回應請求，可以先練複述對方的實際需求，再看對方是否認同。 |\n| IQ 與大五 | 用當次矩陣答題觀察某類規則的解題情況。想了解平時如何組織任務，比較兩個熟悉情境下的做法，結合相關大五維度提出一個可檢驗的假設。 |\n| IQ 與九型 | 卡在鏡射規則，先回頭核對標記與座標。如果擔心批評反覆影響你面對錯誤的反應，回到某次事件核可能的動機。 |\n| 大五與 EQ | 想看跨場景的常見行為，用連續特質和實際事件對照。若目標是改善一次回應，選一個 EQ 自評維度引出的練習，用實際回饋檢驗。 |\n| 九型與 EQ | 對同一次分歧，先問自己當時想守住什麼，再選一句可以練的回應。結束後記錄對方實際怎麼理解，分別看動機假設和溝通行動。 |\n\n另六種選擇已有具體案例：[MBTI 與霍蘭德](/zh/articles/mbti-vs-holland-career-choice)、[MBTI 與大五](/zh/articles/big-five-personality-test-vs-mbti)、[MBTI 與九型](/zh/articles/mbti-vs-enneagram-reading-results)、[大五與職業興趣](/zh/articles/big-five-vs-riasec-personality-traits-and-career-interests)、[大五與九型](/zh/articles/big-five-vs-enneagram-traits-and-motivation-stories)、[工作中的 IQ 與 EQ](/zh/career/guides/iq-eq-balance-at-work)。每種結果都保留原題本和量尺。各工具分數分別閱讀，不相加或換算為能力分或職涯適合度分數。\n\n## 先試讀一個結果，再決定要不要做\n\n如果要比較兩種工作方向，可以先開啟[職業探索工作表](/zh/holland-test/pdf-download)。用公開合成例看三碼和接近的分數怎麼記錄，再在空表寫兩項可試的活動。想判斷偏好百分比能否回答你的問題，可以先讀[兩個 MBTI 教學樣例](/zh/tests/mbti-personality-test-16-personality-types#result-examples)，分別看看偏好差距較明顯與近中點的例子。想練矩陣規則，可以從[三道入門例題和兩組補充練習](/zh/articles/iq-test-tool-guide)做起。示例用於試讀和練習，個人結果以正式作答後的頁面為準。\n\n例如，小周調職後經常在週會前擱置資料。想知道自己是否喜歡資料核查，可以比較整理兩份虛構記錄和向同事說明一處例外時的體驗。若只想解決週會交接，可以在下次會前先發一頁摘要，請收到摘要的同事指出還缺哪些資訊。前一個問題關乎願不願意做這種活動，後一個問題看一次真實交接有沒有改善。做完其中一步，再決定是否還有需要藉助測試回答的問題。\n\n另一個常見情況是兩份結果指向不同的下一步。比如你在職業興趣測試裡喜歡指導他人，但一次情緒自評讓你注意到，公開答疑時容易著急。先安排十分鐘的一對一演示，觀察自己是否還願意備課、教學和回顧。再請對方指出哪一句解釋讓他最容易跟上。把願不願重複這項活動、是否把話講清楚和還需什麼支援分別記下來，下次就有具體證據可比較。\n\n## 免費檢視、儲存和匯出分別確認\n\n1. **先看能讀到什麼。** 記下工具、版本、所需欄位和當前免費說明。只需要一組偏好的解釋時，可以先看教學樣例。\n2. **再看能不能保留。** 作答恢復、結果歷史、文本複製與瀏覽器列印各有自己的條件。開始前到對應入口和結果說明核對，尤其是準備中途離開或跨裝置檢視時。\n3. **記錄下一步。** 保留本次量尺、版本、日期，以及一件可以觀察的真實活動或行為。如果已經能選出下一步，可以先去試一次。\n\n本文由費馬測試編輯部編寫。產品範圍來自上面的費馬公開入口，各框架的解釋和證據範圍見對應方法說明及具體工具的讀分指南。",
+          "seo_title": "免費測驗怎麼選？六種工具的結果與適用問題",
+          "seo_description": "比較費馬六類測驗的題數、時長、免費結果和適用範圍。用十五種選擇情境決定先做哪一步，再核對儲存與匯出條件。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 19,
+            "slug": "personality-assessment",
+            "label": "人格測驗"
+          },
+          "tags": [
+            {
+              "id": 18,
+              "slug": "mbti",
+              "label": "MBTI"
+            },
+            {
+              "id": 34,
+              "slug": "892eefb1a4f4",
+              "label": "人格測驗"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 19,
+        "tag_ids": [
+          18,
+          34
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 292,
+            "slug": "free-personality-tests-results-compared",
+            "locale": "zh-CN",
+            "published_revision_id": 844,
+            "translation_group_id": "0709326a-bc39-483d-acfb-fbd595d5b37a",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "excerpt": "f3b9b0ae83f91f1a55a7ccaf5d56d45a937015d546591b540b9b4fd4289449ea",
+              "content_md": "d6bcfe9c07453c1c4b98de7540fd7dc443f50851b763627a711c0aa6bbeaf832",
+              "author_name": "a35721cf784957062571e98a7b1aa5ac78a35a4140f744735f02769513ef058d",
+              "cover_image_alt": "863448c7bcc47d6675bcdba8e127ddd06db5e1f376d45d9d3dc3245adbb5441a",
+              "seo_title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "seo_description": "28ba14d1f5c59f7fa0333f8673b91775cac4b6b3ee0f9441b75b8d0e08c7fba6",
+              "og_title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "og_description": "28ba14d1f5c59f7fa0333f8673b91775cac4b6b3ee0f9441b75b8d0e08c7fba6"
+            }
+          },
+          "existing_english": {
+            "id": 284,
+            "slug": "free-personality-tests-results-compared",
+            "locale": "en",
+            "published_revision_id": 836,
+            "translation_group_id": "2f2c7d34-7117-4e4f-972b-04b5a8a69211",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "9b3fbb308e690fbe220c506e9b9b351cfdaefccf1982b9702959f1c55a11b0f5",
+              "excerpt": "127f3586ccc7f624e46b90bcb2dd6990f112adf742557ed22805bc32a09b904e",
+              "content_md": "0f61269c0aa46f5d618ab36be08b25874519903c017bfb0a7022c1bc50466b39",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "0d6fe9c41e7108e2b5360b75bde86236968a4cba477ba239e6fc64ca46c242d3",
+              "seo_title": "66d6ea11a0f8f7b750d0a43cf1b3eda553eac491ef6ded81f20ed7d04da528d0",
+              "seo_description": "e5e445af3bfe32fb69e715066736f06ec9ab2428beeaaf44a81961e689296f1b",
+              "og_title": "66d6ea11a0f8f7b750d0a43cf1b3eda553eac491ef6ded81f20ed7d04da528d0",
+              "og_description": "e5e445af3bfe32fb69e715066736f06ec9ab2428beeaaf44a81961e689296f1b"
+            }
+          },
+          "english_relationship": "independent_published_english",
+          "editorial_projection_sha256": "a22d11e320ed0a20bbc5228731b438a49a9fcfc63b249ee8ff6a3514d079ac49",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            },
+            {
+              "key": "start_test",
+              "kind": "start_test",
+              "href": "/zh/tests/mbti-personality-test-16-personality-types"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 297,
+            "slug": "free-personality-tests-results-compared",
+            "locale": "zh-CN",
+            "published_revision_id": 1176,
+            "translation_group_id": "0709326a-bc39-483d-acfb-fbd595d5b37a",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "excerpt": "f3b9b0ae83f91f1a55a7ccaf5d56d45a937015d546591b540b9b4fd4289449ea",
+              "content_md": "d6bcfe9c07453c1c4b98de7540fd7dc443f50851b763627a711c0aa6bbeaf832",
+              "author_name": "a35721cf784957062571e98a7b1aa5ac78a35a4140f744735f02769513ef058d",
+              "cover_image_alt": "863448c7bcc47d6675bcdba8e127ddd06db5e1f376d45d9d3dc3245adbb5441a",
+              "seo_title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "seo_description": "28ba14d1f5c59f7fa0333f8673b91775cac4b6b3ee0f9441b75b8d0e08c7fba6",
+              "og_title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "og_description": "28ba14d1f5c59f7fa0333f8673b91775cac4b6b3ee0f9441b75b8d0e08c7fba6"
+            }
+          },
+          "existing_english": {
+            "id": 283,
+            "slug": "free-personality-tests-results-compared",
+            "locale": "en",
+            "published_revision_id": 1175,
+            "translation_group_id": "2f2c7d34-7117-4e4f-972b-04b5a8a69211",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "9b3fbb308e690fbe220c506e9b9b351cfdaefccf1982b9702959f1c55a11b0f5",
+              "excerpt": "127f3586ccc7f624e46b90bcb2dd6990f112adf742557ed22805bc32a09b904e",
+              "content_md": "0f61269c0aa46f5d618ab36be08b25874519903c017bfb0a7022c1bc50466b39",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "0d6fe9c41e7108e2b5360b75bde86236968a4cba477ba239e6fc64ca46c242d3",
+              "seo_title": "66d6ea11a0f8f7b750d0a43cf1b3eda553eac491ef6ded81f20ed7d04da528d0",
+              "seo_description": "e5e445af3bfe32fb69e715066736f06ec9ab2428beeaaf44a81961e689296f1b",
+              "og_title": "66d6ea11a0f8f7b750d0a43cf1b3eda553eac491ef6ded81f20ed7d04da528d0",
+              "og_description": "e5e445af3bfe32fb69e715066736f06ec9ab2428beeaaf44a81961e689296f1b"
+            }
+          },
+          "english_relationship": "independent_published_english",
+          "editorial_projection_sha256": "a22d11e320ed0a20bbc5228731b438a49a9fcfc63b249ee8ff6a3514d079ac49",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/zh/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/zh/topics"
+            },
+            {
+              "key": "start_test",
+              "kind": "start_test",
+              "href": "/zh/tests/mbti-personality-test-16-personality-types"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "schema": "fermatmind.traditional_article.v1",
+      "source_snapshot_kind": "published_projection",
+      "mapping": {
+        "state": "reviewed_candidate_requires_locked_native_preflight",
+        "target_identity": {
+          "org_id": 0,
+          "locale": "zh-TW",
+          "slug": "free-personality-tests-results-compared-english-source",
+          "source_locale": "en",
+          "source_article_id": 283,
+          "translation_group_id": "2f2c7d34-7117-4e4f-972b-04b5a8a69211"
+        },
+        "review_sha256": "2edbd30235c376fa2861691db1faea713e7b188d673358ae6ab33c1e1ac1dfac",
+        "environment_source_preflight": {
+          "staging": {
+            "source": {
+              "id": 284,
+              "slug": "free-personality-tests-results-compared",
+              "locale": "en",
+              "published_revision_id": 836,
+              "translation_group_id": "2f2c7d34-7117-4e4f-972b-04b5a8a69211",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "b954fa7c949ad4ec29ef4f63ea3513f74eb54f012279b0b61da8176d4716f401",
+              "public_body_sha256": "0f61269c0aa46f5d618ab36be08b25874519903c017bfb0a7022c1bc50466b39",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            },
+            "existing_chinese": {
+              "id": 292,
+              "slug": "free-personality-tests-results-compared",
+              "locale": "zh-CN",
+              "published_revision_id": 844,
+              "translation_group_id": "0709326a-bc39-483d-acfb-fbd595d5b37a",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": false,
+              "sitemap_eligible": false,
+              "public_response_sha256": "61d193501f3bfc4d30d365000488877a8319eca9685d37e2c64a0e609cb7f95d",
+              "public_body_sha256": "d6bcfe9c07453c1c4b98de7540fd7dc443f50851b763627a711c0aa6bbeaf832",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            }
+          },
+          "production": {
+            "source": {
+              "id": 283,
+              "slug": "free-personality-tests-results-compared",
+              "locale": "en",
+              "published_revision_id": 1175,
+              "translation_group_id": "2f2c7d34-7117-4e4f-972b-04b5a8a69211",
+              "source_locale": "en",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "b3ff9501928166a25e793e5c7f6e56ab0def1edc3137489ac8fd0d8a8aaec146",
+              "public_body_sha256": "0f61269c0aa46f5d618ab36be08b25874519903c017bfb0a7022c1bc50466b39",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            },
+            "existing_chinese": {
+              "id": 297,
+              "slug": "free-personality-tests-results-compared",
+              "locale": "zh-CN",
+              "published_revision_id": 1176,
+              "translation_group_id": "0709326a-bc39-483d-acfb-fbd595d5b37a",
+              "source_locale": "zh-CN",
+              "source_article_id": null,
+              "is_indexable": true,
+              "sitemap_eligible": true,
+              "public_response_sha256": "623c00305ceb4dede8ef500016d31bb6396ca363567b9fa649c909a56863cae6",
+              "public_body_sha256": "d6bcfe9c07453c1c4b98de7540fd7dc443f50851b763627a711c0aa6bbeaf832",
+              "hreflang_gate": {
+                "enabled": false,
+                "policy": "no_hreflang",
+                "reason": "no_verified_reciprocal_counterpart"
+              }
+            }
+          }
+        },
+        "article_metadata": {
+          "cover_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/hero_1600x900.jpg",
+          "cover_image_width": 1672,
+          "cover_image_height": 941,
+          "cover_image_variants": {
+            "og": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/og_1200x630.jpg",
+              "width": 1200,
+              "height": 630,
+              "mime_type": "image/jpeg"
+            },
+            "card": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/card_800x450.jpg",
+              "width": 800,
+              "height": 450,
+              "mime_type": "image/jpeg"
+            },
+            "hero": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/hero_1600x900.jpg",
+              "width": 1600,
+              "height": 900,
+              "mime_type": "image/jpeg"
+            },
+            "preload": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/preload_64x36.jpg",
+              "width": 64,
+              "height": 36,
+              "mime_type": "image/jpeg"
+            },
+            "thumbnail": {
+              "url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/thumbnail_400x225.jpg",
+              "width": 400,
+              "height": 225,
+              "mime_type": "image/jpeg"
+            }
+          },
+          "related_test_slug": null,
+          "author_name": "費馬測試編輯部",
+          "cover_image_alt": "一名讀者比較簡短的人格概覽與較詳細的報告，再決定要做哪套測驗或是否升級。"
+        },
+        "seo_metadata": {
+          "og_title": "免費人格測驗結果：比較後再選擇",
+          "og_description": "比較已公開說明的免費人格測驗結果、模型、儲存和匯出條件。開始另一套測驗前，先選能回答你問題的結果。",
+          "og_image_url": "https://assets.fermatmind.com/storage/media-library/variants/org-0/media-asset-139-articletruity-typefinder-vs-fermatmindcoverv1/og_1200x630.jpg"
+        },
+        "translation_revision": {
+          "title": "免費人格測驗能看到哪些結果？先確認需求再選",
+          "excerpt": "先選你需要的結果，查看公開範例，並分開確認免費範圍、選購報告、儲存和下載條件。",
+          "content_md": "實用的免費測驗，應該讓你取得足以回答自己問題的資訊，過程中也不會突然要求付費。你未必需要長篇報告、PDF，或一個能永久保存結果的帳號。開始前，先決定自己需要哪種結果、確認免費範圍，再想好如何保留結果。\n\n想了解日常習慣，可以看特質分析。想找一套描述偏好與溝通方式的用語，可以參考 16 型描述。想知道哪些工作活動值得探索，職業興趣測驗會更直接。這些結果各有用途，把它們全部蒐集起來，也不一定能更準確地描述你。\n\n**揭露事項：** 費馬測試（FermatMind）發布這篇指南，也經營文中部分工具。產品資訊核對日期為 2026 年 10 月 25 日。本文比較各工具已公開說明的範圍，未重新實測個人報告，也未對準確性排名。功能可能調整，請依各入口的最新說明為準。\n\n## 先確認你的問題需要多完整的結果\n\n一份結果可能足以回答某個問題，卻無法回答另一個。四個字母的類型概覽或許能回答「我的類型代碼代表什麼」，卻不一定能解釋較複雜的偏好組合。五項特質的分析可以呈現傾向，但無法直接告訴你該選哪份工作。\n\n分開檢查以下五件事：\n\n| 你需要什麼 | 作答前要確認什麼 |\n|---|---|\n| 可立即查看的結果 | 免費結果附有解釋，還是只顯示分數或標籤？ |\n| 概覽以外的細節 | 這個版本有提供維度、面向或候選類型嗎？ |\n| 可以中途離開再回來 | 儲存未完成的作答進度需要帳號嗎？ |\n| 能留下的副本 | 提供文字下載、系統產生的報告、瀏覽器列印，還是只有結果連結？ |\n| 一個可行的下一步 | 你能用這份說明處理原本想解決的問題，而不必再做另一套測驗嗎？ |\n\n「免費作答」「免費概覽」「免費延伸報告」和「免費 PDF」是不同的承諾。有選購的付費報告，並不表示業者完全沒有提供免費資訊。同樣地，能開啟結果頁，也不能據此判定每種下載或找回功能都沒有使用條件。\n\n## 按你想回答的問題比較各工具\n\n以下是不同結果形式的例子，並未涵蓋市場上的所有工具。免費範圍以連結所指的業者公開說明為依據，各工具的分數能否互換並未因此得到證明。\n\n| 工具 | 公開說明中的免費結果 | 適合用來 | 使用界線 |\n|---|---|---|---|\n| [16Personalities](https://www.16personalities.com/articles/our-theory) | 無須註冊，可免費查看五個 NERIS 維度上的位置與類型代碼 | 了解該業者如何描述類型 | 字母相同，並不表示它等同於官方 MBTI 工具或其他業者的量表 |\n| [Truity TypeFinder](https://www.truity.com/test/type-finder-personality-test-new) | 簡短概覽，可另購更完整的報告 | 先看 16 型概覽，再決定是否需要該報告的細節 | 完整報告屬於另一項服務，其他業者無法替你解鎖 |\n| [bigfive-test.com](https://bigfive-test.com/faq) | 無須註冊，可免費查看包含五個領域、30 個面向的大五報告 | 閱讀連續特質的分析 | 解讀百分比前，先讀該網站對分數和參照方式的說明 |\n| [費馬測試的人格測驗](/en/tests/mbti-personality-test-16-personality-types) | 各入口說明自家題本的免費結果，實際內容取決於模型與版本 | 依下列入口，探索某個偏好、特質或動機問題 | 不同題本及報告分數單位各自獨立 |\n| [O*NET Interest Profiler](https://www.onetcenter.org/IP.html) | 免費探索職業興趣，並連結美國職業資訊 | 找出值得嘗試的工作活動 | 這是興趣工具，無法診斷人格或證明工作能力 |\n\n有時值得換的是模型，而非同一類測驗的品牌。想了解拖延的人，可能需要區分習慣與任務條件。正在選課的人，可能需要看看自己喜歡哪些活動。更長的類型報告未必能回答這兩個問題。\n\n若要進一步比較兩個 16 型服務，可以閱讀[TypeFinder 與費馬測試比較指南](/en/articles/truity-typefinder-vs-fermatmind)。指南整理了兩家業者的版本差異和報告範圍。有付費選項並不表示你需要再做一套測驗。\n\n## 費馬測試各入口公開了哪些結果\n\n依你的問題選一個相關入口即可：\n\n- **偏好與溝通：** [MBTI 風格測驗入口](/en/tests/mbti-personality-test-16-personality-types)提供 93 題和 144 題版本，包含類型結果、核心偏好解釋與延伸反思。這些是費馬測試自己的題本，官方 MBTI 評量屬於另一套工具。\n- **日常特質傾向：** [大五人格測驗入口](/en/tests/big-five-personality-test-ocean-model)提供 90 題和 120 題版本。題本涵蓋五個領域與 30 個面向，結果的詳細程度取決於版本。領域分數無法補出報告未呈現的面向分數。\n- **動機假設：** [九型人格測驗入口](/en/tests/enneagram-personality-test-nine-types)提供 105 題評定版與 144 題強制選擇版。可以探索分布與候選類型，避免直接比較兩版的數值，或把候選類型當成已確定的身分。\n- **工作活動：** [霍蘭德測驗入口](/en/tests/holland-career-interest-test-riasec)提供 60 題和 140 題版本，有六項興趣分數與三字母代碼。興趣無法證明能力、資格或職涯成就。\n- **情緒自我反思：** [EQ 測驗入口](/en/tests/eq-test-emotional-intelligence-assessment)說明這是 60 題自陳問卷，涵蓋自我覺察、情緒調節、同理心與人際關係管理。它不屬於以作答表現衡量情緒智力能力的測驗。\n\n以上是目前公開說明的結果範圍。本文未承諾這五套測驗都有完整的個人 PDF 可供下載，也未逐一驗證私人報告、帳號或找回流程。請查看你的實際結果頁上提供的操作與版本。\n\n推理練習回答的是另一類問題。若那是你想找的工具，可以看[免費線上 IQ 測驗比較](/en/articles/online-iq-tests-compared)，其中另有使用條件與結果形式的說明。IQ 風格的分數與人格分析是兩種不同的資訊，本文分開處理。\n\n## 兩種工具看起來都有用時，如何選擇\n\n從你想回答的問題出發。同一種情境可以引出兩個問題，卻不必因此做兩種測驗。以下例子以費馬測試對六種工具的公開說明為基礎。\n\n| 如果你在兩者之間選擇 | 從能回應你問題的結果開始 |\n| --- | --- |\n| MBTI 風格偏好與 IQ 推理 | 若想反思自己通常先注意哪類資訊，可以對照相關的偏好組合。若要回顧矩陣作答，查看答對題數，再用一道新的練習題核對規則。 |\n| MBTI 風格偏好與 EQ 自陳 | 交接時，你可能偏好文字摘要。能否清楚說明什麼讓你不舒服、希望對方怎麼做，是另一個問題。可以挑一種具體回應來練習，並請對方提供意見。 |\n| RIASEC 興趣與 IQ 推理 | 如果你喜歡排除故障，想多做一些，就試做一項實際工作活動。若想了解自己在這次推理練習的表現，查看本次答對題數。 |\n| RIASEC 興趣與九型動機 | 想探索自己是否喜歡經常教學，可以試教一小段，記下哪些部分願意再做。若想了解為何某個時刻特別在意學員的肯定，可以回顧當時發生的事，並想想是否有其他可能的動機。 |\n| RIASEC 興趣與 EQ 自陳 | 想知道自己是否喜歡客服工作，可以在低風險環境下試做。若想練習回應請求，可挑一項看得見的行為，例如提出解法前先確認自己是否理解對方。 |\n| IQ 推理與大五特質 | 用矩陣作答回顧你怎麼解這組題。若想了解自己平常多常整理任務，可把相關大五特質與兩個熟悉情境中的例子並列。 |\n| IQ 推理與九型動機 | 如果你卡在鏡射規則，可以用練習圖再核對標記和座標。如果對批評的擔心反覆影響你面對錯誤的方式，選一件具體事件探索當時的動機。 |\n| 大五特質與 EQ 自陳 | 用大五觀察不同日常情境中的傾向。若目標是改變一次談話中的回應方式，EQ 自陳的某個維度可幫你選出一項值得練習和觀察的行為。 |\n| 九型動機與 EQ 自陳 | 發生衝突時，九型可以提示你回想當時想保護什麼。EQ 自陳則可以提示你練習某種回應。兩者都要和實際發生的事情、對方的說法一起核對。 |\n\n如果選擇矩陣練習，可閱讀[30 題推理測驗與計分方式](/en/tests/iq-test-intelligence-quotient-assessment)。若要深入比較，可閱讀[MBTI 與工作興趣](/en/articles/mbti-vs-holland-code-career-choice)、[大五與 MBTI](/en/articles/big-five-personality-test-vs-mbti)、[MBTI 與九型人格](/en/articles/mbti-vs-enneagram-reading-results)、[大五與工作興趣](/en/articles/big-five-vs-riasec-personality-traits-and-career-interests)、[大五特質與九型動機](/en/articles/big-five-vs-enneagram-traits-and-motivation-stories)，或[工作中的推理與情緒技能](/en/career/guides/iq-eq-balance-at-work)。\n\n## 花時間或付費前，先看範例\n\n有用的預覽會呈現標題以外的資訊。看看實際有哪些欄位、說明是否看得懂，以及範例和你實際會收到的產品有何差別。\n\n**較完整的付費報告範例：** Truity 提供[官方 TypeFinder 範例 PDF](https://www.truity.com/sites/default/files/fillpdf/sample_typefinder_personality_test_report.pdf)。可開啟的範例標註日期為 2022 年 3 月，展示當時公開的那份報告，無法代表現在每位付費顧客取得的確切版本，也不等於完整的免費概覽。可用來判斷這類補充解釋是否能回答你的問題。\n\n**特質報告範例：** bigfive-test.com 提供[公開結果範例](https://bigfive-test.com/result/example)，明確標示為虛構資料。可以用來查看領域與面向的版面，不能當成自己的結果，也不能用來比較工具的準確性。\n\n**偏好結果範例：** 費馬測試用[兩組合成的偏好範例](/en/tests/mbti-personality-test-16-personality-types#result-examples)說明如何閱讀偏好百分比。它們並非個人報告、已計分的作答紀錄或你的測驗結果。\n\n**免費行動工作表：** 費馬測試的[職涯探索工作表](/en/holland-test/pdf-download)有明確標示為合成的 RIASEC 範例，也可預覽空白工作表。它不會自動產生個人報告，並非官方 O*NET 問卷，也無法補出缺少的分數。範例中的相近分數和同分結果，說明為什麼值得保留其他可探索的活動方向。\n\n看任何預覽時都可以問：「我能說明其中一個欄位、指出它的分數單位，並說出一個合理的下一步嗎？」如果不能，頁數更多也未必有幫助。購買或重測前，可以先讀指南或業者的方法說明。\n\n## 儲存、列印和分享各有不同條件\n\n**TypeFinder** 的公開 FAQ 區分免費查看與儲存：免費概覽不需帳號，但要儲存作答進度必須登入。說明也提到，測驗後可建立帳號並透過登入重看完成的結果，結果不會透過電子郵件寄送。若要暫停，請保留業者的說明，能免費看結果並不等於日後一定找得回來。\n\n**bigfive-test.com** 的 FAQ 說明，可透過結果連結返回，並用瀏覽器的列印功能儲存 PDF。這是公開說明中的列印方式，本文未測試伺服器產生的下載檔。分享連結前，請把它視為你主動授予對方的存取權。\n\n**費馬測試的職涯工作表** 將填寫內容留在頁面記憶體，離開或重新整理後可能遺失。它支援複製、下載 TXT／Markdown 和本機列印。離開前請先儲存。這些是工作表的功能，各個人測驗報告未必提供同樣選項。\n\n本文未核實其餘選項的所有帳號、匯出及找回條件。如果保留結果是必要條件，請在開始前確認。「本文未核實」表示缺少驗證，並不代表功能不可用。\n\n使用報告也不一定要分享。談話時，寫下一項觀察可能就夠了。送出前請先自行檢查內容，避免夾帶他人的結果，也別假定分享出去的連結仍然保密。\n\n## 實際選擇範例：決定要看哪種結果\n\nAlex 是一名**虛構的成年人**，想知道為什麼例行行政工作一再延後。Alex 已經有一份四字母結果，正在考慮是否另買一份類型報告。\n\n首先要確認，缺少的資訊是否與類型細節有關。如果 Alex 想看的正是原業者對面向的解釋，就可以參考其範例與升級說明。若問題在於不知怎麼開始一項模糊的任務，再多一個類型標籤也未必有幫助。\n\nAlex 改寫問題：「我想分辨自己是不知道第一步要做什麼，還是明知怎麼做卻一直延後。」這時，特質指南加上一項小觀察可能比重測有用。可參考[自律面向的說明](/en/personality/big-five/facets/self-discipline)，區分是否有機會採取行動、開始、持續，以及中斷後重新接續。\n\n如果改成選課問題，Alex 想知道哪些活動值得嘗試，職業興趣測驗和[職涯測驗選擇頁](/en/career/tests)就更直接。下一步可以試做一項小型課堂任務，藉此取得新線索，而無須把人格分數換算成職涯適合度。\n\n這是兩種不同的決定，都無須做完每一套測驗，也無須預先認定付費報告一定比較好或比較差。\n\n## 保留一份有用的結果與背景\n\n開始前，先寫下：\n\n1. **我的問題：** 想釐清的具體情境。\n2. **我想要的結果：** 類型解釋、特質傾向、動機假設、情緒自我反思，或職業興趣。\n3. **免費範圍與限制：** 能看什麼、哪些要另外付費、哪些還未核實。\n4. **我會如何保留：** 可用的連結、帳號、文字或列印方式，以及各自的條件。\n5. **何時可以停下來：** 回答一個問題，或找到一項低風險的可行動作。\n\n完成後，把業者、題本版本、日期和原始分數單位與筆記一起保留。不要將不同業者的百分比平均，也不要用一種工具的特質分數套出另一種工具的類型，或把幾套結果合併成一個準確性或職涯適合度分數。[同時使用大五與 MBTI 的指南](/en/articles/using-big-five-and-mbti-together-without-equating-them)說明了用語相似為何不足以支持換算。\n\n如果結果已足以支持下一步，可以就此停下。釐清一個問題、有根據地決定不買，或做出一項實際改變，都可以是有用的成果。",
+          "seo_title": "免費人格測驗結果：比較後再選擇",
+          "seo_description": "比較已公開說明的免費人格測驗結果、模型、儲存和匯出條件。開始另一套測驗前，先選能回答你問題的結果。"
+        },
+        "taxonomy_display": {
+          "category": {
+            "id": 20,
+            "slug": "personality-tests",
+            "label": "人格測驗"
+          },
+          "tags": [
+            {
+              "id": 38,
+              "slug": "personality-test",
+              "label": "人格測驗"
+            }
+          ]
+        }
+      },
+      "staging_source_taxonomy": {
+        "category_id": 20,
+        "tag_ids": [
+          38
+        ]
+      },
+      "source_expectations": {
+        "staging": {
+          "source": {
+            "id": 284,
+            "slug": "free-personality-tests-results-compared",
+            "locale": "en",
+            "published_revision_id": 836,
+            "translation_group_id": "2f2c7d34-7117-4e4f-972b-04b5a8a69211",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "9b3fbb308e690fbe220c506e9b9b351cfdaefccf1982b9702959f1c55a11b0f5",
+              "excerpt": "127f3586ccc7f624e46b90bcb2dd6990f112adf742557ed22805bc32a09b904e",
+              "content_md": "0f61269c0aa46f5d618ab36be08b25874519903c017bfb0a7022c1bc50466b39",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "0d6fe9c41e7108e2b5360b75bde86236968a4cba477ba239e6fc64ca46c242d3",
+              "seo_title": "66d6ea11a0f8f7b750d0a43cf1b3eda553eac491ef6ded81f20ed7d04da528d0",
+              "seo_description": "e5e445af3bfe32fb69e715066736f06ec9ab2428beeaaf44a81961e689296f1b",
+              "og_title": "66d6ea11a0f8f7b750d0a43cf1b3eda553eac491ef6ded81f20ed7d04da528d0",
+              "og_description": "e5e445af3bfe32fb69e715066736f06ec9ab2428beeaaf44a81961e689296f1b"
+            }
+          },
+          "existing_chinese": {
+            "id": 292,
+            "slug": "free-personality-tests-results-compared",
+            "locale": "zh-CN",
+            "published_revision_id": 844,
+            "translation_group_id": "0709326a-bc39-483d-acfb-fbd595d5b37a",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": false,
+            "sitemap_eligible": false,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "excerpt": "f3b9b0ae83f91f1a55a7ccaf5d56d45a937015d546591b540b9b4fd4289449ea",
+              "content_md": "d6bcfe9c07453c1c4b98de7540fd7dc443f50851b763627a711c0aa6bbeaf832",
+              "author_name": "a35721cf784957062571e98a7b1aa5ac78a35a4140f744735f02769513ef058d",
+              "cover_image_alt": "863448c7bcc47d6675bcdba8e127ddd06db5e1f376d45d9d3dc3245adbb5441a",
+              "seo_title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "seo_description": "28ba14d1f5c59f7fa0333f8673b91775cac4b6b3ee0f9441b75b8d0e08c7fba6",
+              "og_title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "og_description": "28ba14d1f5c59f7fa0333f8673b91775cac4b6b3ee0f9441b75b8d0e08c7fba6"
+            }
+          },
+          "editorial_projection_sha256": "4338872572ee50ac3a8ae559447943aaa1d332b01f676bb388156a59bf8aa42f",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/en/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/en/topics"
+            }
+          ]
+        },
+        "production": {
+          "source": {
+            "id": 283,
+            "slug": "free-personality-tests-results-compared",
+            "locale": "en",
+            "published_revision_id": 1175,
+            "translation_group_id": "2f2c7d34-7117-4e4f-972b-04b5a8a69211",
+            "source_locale": "en",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "9b3fbb308e690fbe220c506e9b9b351cfdaefccf1982b9702959f1c55a11b0f5",
+              "excerpt": "127f3586ccc7f624e46b90bcb2dd6990f112adf742557ed22805bc32a09b904e",
+              "content_md": "0f61269c0aa46f5d618ab36be08b25874519903c017bfb0a7022c1bc50466b39",
+              "author_name": "a55424dd67cb3fce4a27a4f290372b649feeee8d86b7219af14cbef55114a9ab",
+              "cover_image_alt": "0d6fe9c41e7108e2b5360b75bde86236968a4cba477ba239e6fc64ca46c242d3",
+              "seo_title": "66d6ea11a0f8f7b750d0a43cf1b3eda553eac491ef6ded81f20ed7d04da528d0",
+              "seo_description": "e5e445af3bfe32fb69e715066736f06ec9ab2428beeaaf44a81961e689296f1b",
+              "og_title": "66d6ea11a0f8f7b750d0a43cf1b3eda553eac491ef6ded81f20ed7d04da528d0",
+              "og_description": "e5e445af3bfe32fb69e715066736f06ec9ab2428beeaaf44a81961e689296f1b"
+            }
+          },
+          "existing_chinese": {
+            "id": 297,
+            "slug": "free-personality-tests-results-compared",
+            "locale": "zh-CN",
+            "published_revision_id": 1176,
+            "translation_group_id": "0709326a-bc39-483d-acfb-fbd595d5b37a",
+            "source_locale": "zh-CN",
+            "source_article_id": null,
+            "is_indexable": true,
+            "sitemap_eligible": true,
+            "seo_present": true,
+            "hreflang_gate": {
+              "enabled": false,
+              "policy": "no_hreflang",
+              "reason": "no_verified_reciprocal_counterpart"
+            },
+            "snapshot_sha256": {
+              "title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "excerpt": "f3b9b0ae83f91f1a55a7ccaf5d56d45a937015d546591b540b9b4fd4289449ea",
+              "content_md": "d6bcfe9c07453c1c4b98de7540fd7dc443f50851b763627a711c0aa6bbeaf832",
+              "author_name": "a35721cf784957062571e98a7b1aa5ac78a35a4140f744735f02769513ef058d",
+              "cover_image_alt": "863448c7bcc47d6675bcdba8e127ddd06db5e1f376d45d9d3dc3245adbb5441a",
+              "seo_title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "seo_description": "28ba14d1f5c59f7fa0333f8673b91775cac4b6b3ee0f9441b75b8d0e08c7fba6",
+              "og_title": "a11f39d1630f80d577318b8d6a6d1acde77f395f5f90a3b3cc22fe2f7d7aebd5",
+              "og_description": "28ba14d1f5c59f7fa0333f8673b91775cac4b6b3ee0f9441b75b8d0e08c7fba6"
+            }
+          },
+          "editorial_projection_sha256": "4338872572ee50ac3a8ae559447943aaa1d332b01f676bb388156a59bf8aa42f",
+          "editorial_cta_targets": [
+            {
+              "key": "back_to_articles",
+              "kind": "content_continue",
+              "href": "/en/articles"
+            },
+            {
+              "key": "topic_hub",
+              "kind": "discover",
+              "href": "/en/topics"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

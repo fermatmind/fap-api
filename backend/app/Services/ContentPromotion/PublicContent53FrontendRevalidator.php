@@ -23,7 +23,11 @@ final class PublicContent53FrontendRevalidator
                 continue;
             }
             $proof = $row['source_expectations'];
-            foreach (['source' => $row['source_identity']['source_locale'], 'existing_english' => 'en'] as $role => $locale) {
+            $locales = ['source' => $row['source_identity']['source_locale'], 'existing_english' => 'en'];
+            if (TraditionalArticlePublication::usesChineseSourceCopy($proof)) {
+                $locales['existing_chinese'] = 'zh-CN';
+            }
+            foreach ($locales as $role => $locale) {
                 $original = $proof[$role] ?? null;
                 if ($original !== null) {
                     $originals[$original['id']] = ['kind' => 'article', 'identity' => [

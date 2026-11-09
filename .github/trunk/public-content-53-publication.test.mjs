@@ -1176,8 +1176,20 @@ test('Traditional Article English source verifies reciprocal reader links and re
  const fixture={...row,snapshot:{content_md:'繁體正文'}};
  const html='<html lang="zh-TW"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="https://fermatmind.com'+pathFor(row)+'"></head><body><main><h1>繁體正文</h1><a href="'+sourcePath+'">English</a><a href="'+testPath+'">開始測驗</a></main></body></html>';
  assert.doesNotThrow(()=>assertDom(fixture,html,{missing:true},'staging'));
- assert.throws(()=>assertDom(fixture,html.replace(testPath,testPath.replace('/en/','/zh/')),{missing:true},'staging'),/TRADITIONAL_ENGLISH_READER_LINK/);
+ assert.throws(()=>assertDom(fixture,html.replace(testPath,testPath.replace('/en/','/zh/')),{missing:true},'staging'),/TRADITIONAL_ARTICLE_ASSESSMENT_LINK/);
  assert.throws(()=>assertDom(fixture,html.replace(sourcePath,'/en/articles/other'),{missing:true},'staging'),/TRADITIONAL_ENGLISH_READER_LINK/);
+ const chinese={id:77,source_article_id:source.id,slug:'simplified-source'};
+ const linked={...fixture,source_expectations:{...fixture.source_expectations,existing_chinese:chinese}};
+ const linkedHtml=html.replace(testPath,testPath.replace('/en/','/zh/'))
+  .replace('</main>','<a href="/zh/articles/'+chinese.slug+'">简体中文</a></main>');
+ assert.doesNotThrow(()=>assertDom(linked,linkedHtml,{missing:true},'staging'));
+ const reviewedCta={href:testPath,label:'比較目前的版本'};
+ const editorial={...fixture,editorial_package_v1:{cta_slots:[reviewedCta]},
+  snapshot:{...fixture.snapshot,editorial_projection:{faq:[],ctas:[reviewedCta]}}};
+ const editorialHtml=html.replace('開始測驗',reviewedCta.label);
+ assert.doesNotThrow(()=>assertDom(editorial,editorialHtml,{missing:true},'staging'));
+ assert.throws(()=>assertDom(editorial,html,{missing:true},'staging'),/TRADITIONAL_ARTICLE_EDITORIAL_DOM/);
+ assert.throws(()=>assertDom(linked,linkedHtml.replace('简体中文','其他语言'),{missing:true},'staging'),/TRADITIONAL_ENGLISH_READER_LINK/);
  const links={en:source.slug,'zh-TW':row.identity.slug};
  const fetcher=async url=>{
   const original=new URL(url).searchParams.get('locale')==='en';
@@ -1702,5 +1714,31 @@ test('Traditional evidence and AI articles keep historical evidence and copyable
   const prompts=[...content.matchAll(/^```text\n([\s\S]*?)^```$/gm)].map(match=>match[1]);
   assert.equal(prompts.length,2);
   assert.ok(prompts.every(prompt=>prompt.includes('Unknown') && !/[请这为过对读语给结报]/u.test(prompt)));
+ }
+});
+
+test('Traditional lineage batch retains English roots, Chinese copy and independent same-slug readers',()=>{
+ const selection='traditional-article-source-lineage';
+ assert.equal(classifyPaths(['backend/content_assets/public_content_53/'+selection+'.json']).operations.public_content_53_package,selection);
+ const binding=inspectPackage(root,selection);
+ assert.equal(binding.expected_row_count,5);
+ for(const [env,expected] of Object.entries({
+  staging:[[285,null],[282,null],[280,294],[292,284],[284,292]],
+  production:[[284,null],[274,null],[264,265],[297,283],[283,297]],
+ })){
+  const rows=readCandidateRows(root,binding.package_sha256,env).candidates;
+  assert.deepEqual(rows.map(row=>[row.source_expectations.source.id,
+   (row.source_expectations.existing_chinese??row.source_expectations.existing_english)?.id??null]),expected);
+  const [career,truity,admissions,chinese,english]=rows;
+  assert.deepEqual(rows.map(row=>row.source_identity.source_locale),['en','en','en','zh-CN','en']);
+  assert.equal(truity.snapshot.editorial_projection.faq.length,3);
+  assert.equal(career.snapshot.editorial_projection,undefined);
+  assert.equal(admissions.source_expectations.existing_chinese.source_article_id,admissions.source_expectations.source.id);
+  assert.equal(admissions.source_expectations.existing_chinese.translation_group_id,admissions.source_expectations.source.translation_group_id);
+  assert.match(admissions.snapshot.title,/英格蘭/u);
+  assert.equal(chinese.identity.slug,'free-personality-tests-results-compared');
+  assert.equal(english.identity.slug,chinese.identity.slug+'-english-source');
+  assert.notEqual(chinese.source_identity.translation_group_id,english.source_identity.translation_group_id);
+  assert.notEqual(chinese.snapshot.content_md,english.snapshot.content_md);
  }
 });

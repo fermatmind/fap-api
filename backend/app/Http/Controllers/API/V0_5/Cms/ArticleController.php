@@ -682,9 +682,14 @@ class ArticleController extends Controller
             return $locale;
         }
 
-        // Traditional articles retain the verified source's assessment route.
-        return $article->source_article_id && $article->source_article_id === $article->translated_from_article_id
-            && in_array($article->source_locale, ['zh-CN', 'en'], true) ? $article->source_locale : null;
+        if (! $article->source_article_id || $article->source_article_id !== $article->translated_from_article_id
+            || ! in_array($article->source_locale, ['zh-CN', 'en'], true)) {
+            return null;
+        }
+
+        // The immutable revision can bind a Simplified copy source while retaining its English root.
+        return data_get($article->publishedRevision?->authority_metadata_json, 'published_copy_source_v1.locale') === 'zh-CN'
+            ? 'zh-CN' : $article->source_locale;
     }
 
     /**

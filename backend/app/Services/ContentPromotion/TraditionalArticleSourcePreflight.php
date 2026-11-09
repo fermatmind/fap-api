@@ -66,8 +66,12 @@ final class TraditionalArticleSourcePreflight
             throw new DomainException('traditional_article_source_working_state_changed');
         }
 
+        $relatedChinese = TraditionalArticlePublication::usesChineseSourceCopy($proof);
+        $copySource = $relatedChinese
+            ? $this->readArticle($proof['existing_chinese'], 'zh-CN', $source, $lock, publishedProjection: true)
+            : $source;
         if (isset($proof['editorial_projection_sha256'])) {
-            $response = app(ArticleController::class)->publicDetailProjection($source);
+            $response = app(ArticleController::class)->publicDetailProjection($copySource);
             $editorial = TraditionalArticlePublication::editorialProjection($response);
             if (CanonicalTranslationPayloadHash::hash($editorial) !== $proof['editorial_projection_sha256']
                 || TraditionalArticlePublication::ctaTargets($editorial['ctas']) !== ($proof['editorial_cta_targets'] ?? null)) {
@@ -79,8 +83,14 @@ final class TraditionalArticleSourcePreflight
             if (! array_key_exists('existing_chinese', $proof)) {
                 throw new DomainException('traditional_article_english_source_chinese_counterpart');
             }
-            $independentChinese = $proof['existing_chinese'];
-            if ($independentChinese !== null) {
+            $independentChinese = $relatedChinese ? null : $proof['existing_chinese'];
+            if ($relatedChinese) {
+                $counterparts = app(ArticleReviewedCounterpartService::class);
+                if ($copySource->slug !== $source->slug || $copySource->translation_group_id !== $source->translation_group_id
+                    || $counterparts->binding($source) !== null || $counterparts->binding($copySource) !== null) {
+                    throw new DomainException('traditional_article_chinese_source_lineage_invalid');
+                }
+            } elseif ($independentChinese !== null) {
                 $chinese = $this->readArticle($independentChinese, 'zh-CN', null, $lock, publishedProjection: true);
                 $counterparts = app(ArticleReviewedCounterpartService::class);
                 if ($chinese->slug !== $source->slug || $chinese->translation_group_id === $source->translation_group_id
@@ -89,7 +99,8 @@ final class TraditionalArticleSourcePreflight
                     throw new DomainException('traditional_article_english_source_chinese_counterpart');
                 }
             }
-            if ($this->hasPublishedCounterpart($source, 'zh-CN', $independentChinese === null ? [$source->slug] : [], $lock)) {
+            if ($this->hasPublishedCounterpart($source, 'zh-CN', $independentChinese === null ? [$source->slug] : [], $lock,
+                $relatedChinese ? (int) $copySource->id : null)) {
                 throw new DomainException('traditional_article_english_source_chinese_counterpart');
             }
 
@@ -135,10 +146,11 @@ final class TraditionalArticleSourcePreflight
         }
     }
 
-    private function hasPublishedCounterpart(Article $source, string $locale, array $slugs, bool $lock): bool
+    private function hasPublishedCounterpart(Article $source, string $locale, array $slugs, bool $lock, ?int $exceptId = null): bool
     {
         return Article::query()->withoutGlobalScopes()->where('org_id', 0)->where('locale', $locale)
             ->whereNull('deleted_at')->published()
+            ->when($exceptId !== null, fn ($query) => $query->whereKeyNot($exceptId))
             ->where(static fn ($query) => $query->whereIn('slug', $slugs)
                 ->orWhere('source_article_id', $source->id)->orWhere('translation_group_id', $source->translation_group_id))
             ->when($lock, fn ($query) => $query->lockForUpdate())->first(['id']) !== null;
