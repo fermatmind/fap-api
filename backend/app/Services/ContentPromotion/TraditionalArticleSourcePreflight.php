@@ -19,7 +19,7 @@ final class TraditionalArticleSourcePreflight
             throw new DomainException('traditional_article_source_transaction_required');
         }
 
-        $source = $this->readArticle($proof['source'], null, $lock);
+        $source = $this->readArticle($proof['source'], 'zh-CN', null, $lock);
         // Staging can hold a published root copied from the prepared workflow.
         // readArticle has already checked null parents, source locale and the exact public revision.
         $preparedRoot = $allowStagingPreparedRoot
@@ -30,7 +30,9 @@ final class TraditionalArticleSourcePreflight
             throw new DomainException('traditional_article_source_working_state_changed');
         }
 
-        $this->readArticle($proof['existing_english'], $source, $lock);
+        $english = $proof['existing_english'];
+        $englishParent = TraditionalArticlePublication::englishSourceId($proof);
+        $this->readArticle($english, 'en', $englishParent === null ? null : $source, $lock);
 
         return $source;
     }
@@ -46,10 +48,11 @@ final class TraditionalArticleSourcePreflight
         }
     }
 
-    private function readArticle(array $expected, ?Article $source, bool $lock): Article
+    private function readArticle(array $expected, string $locale, ?Article $source, bool $lock): Article
     {
+        $sourceLocale = $source?->locale ?? $locale;
         $article = Article::query()->withoutGlobalScopes()->withTrashed()
-            ->where('org_id', 0)->where('locale', $source === null ? 'zh-CN' : 'en')->where('slug', $expected['slug'])
+            ->where('org_id', 0)->where('locale', $locale)->where('slug', $expected['slug'])
             ->when($lock, fn ($query) => $query->lockForUpdate())->sole();
 
         if ($article->trashed() || $article->lifecycle_state !== 'active'
@@ -57,7 +60,7 @@ final class TraditionalArticleSourcePreflight
             || (int) $article->id !== $expected['id']
             || (int) $article->published_revision_id !== $expected['published_revision_id']
             || $article->translation_group_id !== $expected['translation_group_id']
-            || $article->source_locale !== 'zh-CN' || $article->source_article_id !== $source?->id
+            || $article->source_locale !== $sourceLocale || $article->source_article_id !== $source?->id
             || $article->translated_from_article_id !== $source?->id
             || (bool) $article->is_indexable !== $expected['is_indexable']
             || (bool) $article->sitemap_eligible !== $expected['sitemap_eligible']) {
@@ -69,16 +72,20 @@ final class TraditionalArticleSourcePreflight
             ->when($lock, fn ($query) => $query->lockForUpdate())->sole();
         $sourceId = (int) ($source?->id ?? $article->id);
         if (! $revision->isPubliclyReadableForArticle($article)
-            || $revision->locale !== $article->locale || $revision->source_locale !== 'zh-CN'
+            || $revision->locale !== $article->locale || $revision->source_locale !== $sourceLocale
             || $revision->translation_group_id !== $article->translation_group_id
             || (int) $revision->source_article_id !== $sourceId
             || ($source === null && $revision->source_version_hash !== $article->source_version_hash)) {
             throw new DomainException('traditional_article_source_revision_changed');
         }
 
-        $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('org_id', 0)
+        $seoRows = ArticleSeoMeta::query()->withoutGlobalScopes()->where('org_id', 0)
             ->where('article_id', $article->id)->where('locale', $article->locale)
-            ->when($lock, fn ($query) => $query->lockForUpdate())->sole();
+            ->when($lock, fn ($query) => $query->lockForUpdate())->limit(2)->get();
+        if ($seoRows->count() !== (($expected['seo_present'] ?? true) === false ? 0 : 1)) {
+            throw new DomainException('traditional_article_source_seo_state_changed');
+        }
+        $seo = $seoRows->first();
 
         $snapshot = [
             'title' => $revision->title,
@@ -86,10 +93,11 @@ final class TraditionalArticleSourcePreflight
             'content_md' => $revision->content_md,
             'author_name' => $article->author_name,
             'cover_image_alt' => $article->cover_image_alt,
-            ...$seo->only(['seo_title', 'seo_description', 'og_title', 'og_description']),
+            ...($seo?->only(['seo_title', 'seo_description', 'og_title', 'og_description'])
+                ?? array_fill_keys(['seo_title', 'seo_description', 'og_title', 'og_description'], null)),
         ];
 
-        $gate = data_get($seo->schema_json, 'editorial_package_v1.hreflang_gate_v1');
+        $gate = data_get($seo?->schema_json, 'editorial_package_v1.hreflang_gate_v1');
         $gate = is_array($gate) ? array_intersect_key($gate, array_flip(['enabled', 'policy', 'reason'])) : null;
         $snapshot = array_map(static fn (?string $value): ?string => $value === null ? null : hash('sha256', $value), $snapshot);
         $expectedSnapshot = $expected['snapshot_sha256'];

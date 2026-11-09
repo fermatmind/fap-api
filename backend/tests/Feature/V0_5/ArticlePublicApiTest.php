@@ -1412,6 +1412,28 @@ final class ArticlePublicApiTest extends TestCase
         return ['same as source' => [false], 'staging with an unclassified source' => [true]];
     }
 
+    public function test_traditional_article_package_binds_an_independent_english_root_with_its_own_slug(): void
+    {
+        $root = base_path('content_assets/public_content_53/');
+        $package = json_decode(file_get_contents($root.'traditional-article.json'), true, flags: JSON_THROW_ON_ERROR);
+        $review = file_get_contents($root.'traditional-article-review.json');
+        $origin = &$package['mapping']['environment_source_preflight']['staging']['existing_english'];
+        $proof = &$package['source_expectations']['staging'];
+        $proof['english_relationship'] = 'independent_published_english';
+        $peer = ['slug' => 'different-english-slug', 'translation_group_id' => 'independent-english-root',
+            'source_locale' => 'en', 'source_article_id' => null];
+        $proof['existing_english'] = array_replace($proof['existing_english'], $peer);
+        $origin = array_replace($origin, $peer);
+        $result = TraditionalArticlePublication::package(json_encode($package, JSON_THROW_ON_ERROR), $review, 'staging');
+        $this->assertSame('different-english-slug', $result['candidates'][0]['source_expectations']['existing_english']['slug']);
+        $this->assertNull(TraditionalArticlePublication::englishSourceId($result['candidates'][0]['source_expectations']));
+
+        $proof['existing_english']['source_article_id'] = $proof['source']['id'];
+        $origin['source_article_id'] = $proof['source']['id'];
+        $this->expectExceptionMessage('traditional_article_english_relationship_invalid');
+        TraditionalArticlePublication::package(json_encode($package, JSON_THROW_ON_ERROR), $review, 'staging');
+    }
+
     #[DataProvider('traditionalArticleTaxonomyCases')]
     public function test_traditional_article_preflight_locks_native_source_and_rejects_source_drift_or_target_collision(bool $useStagingTaxonomy): void
     {
@@ -1450,6 +1472,23 @@ final class ArticlePublicApiTest extends TestCase
             $this->assertSame($source->id, $actual->id);
             $guard->assertTargetVacant($actual, true);
         });
+
+        if ($useStagingTaxonomy) {
+            $withoutSeo = $proof;
+            $withoutSeo['existing_english']['seo_present'] = false;
+            try {
+                $guard->assertSource($withoutSeo);
+                $this->fail('The guard accepted a changed English SEO record.');
+            } catch (DomainException $exception) {
+                $this->assertSame('traditional_article_source_seo_state_changed', $exception->getMessage());
+            }
+            $seo->delete();
+            foreach (['seo_title', 'seo_description', 'og_title', 'og_description'] as $field) {
+                $withoutSeo['existing_english']['snapshot_sha256'][$field] = null;
+            }
+            $this->assertSame($source->id, $guard->assertSource($withoutSeo)->id);
+            $proof = $withoutSeo;
+        }
 
         $drifted = $proof;
         $drifted['source']['snapshot_sha256']['title'] = hash('sha256', 'Unexpected source title');

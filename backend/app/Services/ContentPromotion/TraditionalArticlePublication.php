@@ -116,13 +116,23 @@ final class TraditionalArticlePublication
             foreach (['source', 'existing_english'] as $role) {
                 $origin = $mapping['environment_source_preflight'][$name][$role] ?? [];
                 $record = $proof[$role] ?? [];
-                if (($record['slug'] ?? null) !== $slug || ($record['translation_group_id'] ?? null) !== $identity['translation_group_id']
+                $recordSlug = $record['slug'] ?? '';
+                $recordGroup = $record['translation_group_id'] ?? '';
+                if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $recordSlug) !== 1
+                    || ($role === 'source' && ($recordSlug !== $slug || $recordGroup !== $identity['translation_group_id']))
+                    || $recordSlug !== ($origin['slug'] ?? null)
+                    || $recordGroup === '' || $recordGroup !== ($origin['translation_group_id'] ?? null)
+                    || ($record['locale'] ?? ($role === 'source' ? 'zh-CN' : 'en')) !== ($origin['locale'] ?? null)
+                    || ($record['source_locale'] ?? null) !== ($origin['source_locale'] ?? null)
+                    || ($record['source_article_id'] ?? null) !== ($origin['source_article_id'] ?? null)
+                    || (($record['seo_present'] ?? true) === false && ($name !== 'staging' || $role !== 'existing_english'))
                     || ($record['id'] ?? null) !== ($origin['id'] ?? null)
                     || ($record['published_revision_id'] ?? null) !== ($origin['published_revision_id'] ?? null)
                     || ($record['snapshot_sha256']['content_md'] ?? null) !== ($origin['public_body_sha256'] ?? null)) {
                     throw new DomainException('traditional_article_source_proof_invalid');
                 }
             }
+            self::englishSourceId($proof);
         }
 
         $stagingTaxonomy = $package['staging_source_taxonomy'] ?? null;
@@ -167,6 +177,27 @@ final class TraditionalArticlePublication
                     'og_title' => $seo['og_title'], 'og_description' => $seo['og_description'], 'og_image_url' => $seo['og_image_url']],
             ],
         ];
+    }
+
+    public static function englishSourceId(array $proof): ?int
+    {
+        $source = $proof['source'];
+        $english = $proof['existing_english'];
+        $relationship = $proof['english_relationship'] ?? 'same_group_source_sibling';
+
+        if ($relationship === 'independent_published_english' && ($english['source_locale'] ?? null) === 'en'
+            && array_key_exists('source_article_id', $english) && $english['source_article_id'] === null) {
+            return null;
+        }
+
+        if ($relationship !== 'same_group_source_sibling'
+            || ($english['source_locale'] ?? 'zh-CN') !== 'zh-CN'
+            || (array_key_exists('source_article_id', $english) && $english['source_article_id'] !== $source['id'])
+            || $english['translation_group_id'] !== $source['translation_group_id']) {
+            throw new DomainException('traditional_article_english_relationship_invalid');
+        }
+
+        return $source['id'];
     }
 
     public function read(array $row, bool $lock): array
