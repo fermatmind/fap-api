@@ -23,6 +23,7 @@ class CareerGuide extends Model
     public const SUPPORTED_LOCALES = [
         'en',
         'zh-CN',
+        'zh-TW',
     ];
 
     protected $table = 'career_guides';

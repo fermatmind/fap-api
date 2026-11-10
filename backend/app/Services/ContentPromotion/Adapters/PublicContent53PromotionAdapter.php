@@ -265,7 +265,7 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
             'indexability_mutation_count' => 0, 'sitemap_mutation_count' => 0, 'llms_mutation_count' => 0, 'search_mutation_count' => 0, 'deploy_mutation_count' => 0,
         ]) + ['target_state_sha256' => $this->states->hash($state)];
         if ($published > 0 && $written > 0
-            && array_filter($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'], static fn ($row): bool => ($row['new_traditional_page'] ?? false) === true || ($row['new_traditional_landing'] ?? false) === true)) {
+            && array_filter($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'], static fn ($row): bool => ($row['new_traditional_page'] ?? false) === true || ($row['new_traditional_landing'] ?? false) === true || ($row['new_traditional_guide'] ?? false) === true)) {
             $result['created_count'] = $created;
             $result['updated_count'] = $written - $created;
         }

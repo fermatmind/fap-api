@@ -304,7 +304,11 @@ final class CareerGuideService
 
     private function normalizeLocale(string $locale): string
     {
-        return trim($locale) === 'zh-CN' ? 'zh-CN' : 'en';
+        return match (trim($locale)) {
+            'zh-CN' => 'zh-CN',
+            'zh-TW' => 'zh-TW',
+            default => 'en',
+        };
     }
 
     private function normalizeSlug(string $slug): string

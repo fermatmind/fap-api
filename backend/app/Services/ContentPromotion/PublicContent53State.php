@@ -41,6 +41,11 @@ final class PublicContent53State
             });
         }
         foreach ($rows as $row) {
+            if ($row['new_traditional_guide'] ?? false) {
+                $state[$row['page_id']] = $this->traditionalGuideState($row, $lock);
+
+                continue;
+            }
             if (isset($row['staging_article_original'])) {
                 $state[$row['page_id']] = app(StagingArticleOriginals::class)->read($row, $lock);
 
@@ -244,6 +249,11 @@ final class PublicContent53State
 
                 continue;
             }
+            if ($row['new_traditional_guide'] ?? false) {
+                $this->traditionalGuideState($row, false);
+
+                continue;
+            }
             if ($row['new_traditional_article'] ?? false) {
                 $native = app(TraditionalArticlePublication::class);
                 $native->assertBaseline($native->read($row, false));
@@ -301,6 +311,9 @@ final class PublicContent53State
     {
         foreach ($rows as $row) {
             $saved = $state[$row['page_id']];
+            if ($row['new_traditional_guide'] ?? false) {
+                continue; // read() already verified the native source and target under the transaction lock.
+            }
             if (isset($row['staging_article_original'])) {
                 app(StagingArticleOriginals::class)->assertBaseline($row, $saved);
 
@@ -437,6 +450,14 @@ final class PublicContent53State
 
                 continue;
             }
+            if ($row['new_traditional_guide'] ?? false) {
+                $current = $this->traditionalGuideState($row, false);
+                if ($current !== $state[$row['page_id']] || $current['target']['visibility'] !== 'published') {
+                    throw new DomainException('public_content_53_public_readback_drift');
+                }
+
+                continue;
+            }
             if ($this->hash($this->projection($row)) !== $this->hash($row['snapshot'])) {
                 throw new DomainException('public_content_53_public_readback_drift');
             }
@@ -450,6 +471,20 @@ final class PublicContent53State
     public function hash(array $value): string
     {
         return hash('sha256', PromotionContextFactory::canonicalJson($value));
+    }
+
+    private function traditionalGuideState(array $row, bool $lock): array
+    {
+        $source = app(TraditionalCareerGuideSource::class)->read($row['identity']['slug'], $row['source_expectation'], $lock);
+        $target = app(TraditionalCareerGuideTarget::class)->read($row, $lock);
+
+        return [
+            'table' => 'career_guides',
+            'missing' => $target['visibility'] === 'missing',
+            'retained_draft' => $target['visibility'] === 'draft',
+            'source' => $source,
+            'target' => $target,
+        ];
     }
 
     private function assertBlogFeaturedSelection(array $row, array $saved): void

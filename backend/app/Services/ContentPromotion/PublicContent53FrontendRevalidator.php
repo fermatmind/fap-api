@@ -44,7 +44,7 @@ final class PublicContent53FrontendRevalidator
             $requests[] = ['kind' => 'discovery', 'identity' => ['locale' => 'en', 'slug' => 'articles']];
         }
         foreach ($requests as $row) {
-            if ($row['new_traditional_article'] ?? false) {
+            if (($row['new_traditional_article'] ?? false) || ($row['new_traditional_guide'] ?? false)) {
                 // The zh-TW page uses no-store. Its original readers are handled above.
                 continue;
             }

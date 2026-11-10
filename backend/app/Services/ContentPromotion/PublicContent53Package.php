@@ -238,6 +238,16 @@ final class PublicContent53Package
                 return $package;
             }
         }
+        if (is_file($root.'/'.self::PACKAGE.'/traditional-career-guides.json')) {
+            $schema = 'fermatmind.traditional_career_guides.v1';
+            $bytes = $this->bytes($root, 'traditional-career-guides.json');
+            $review = $this->bytes($root, 'traditional-career-guides-review.json');
+            $chain = $schema."\ntraditional-career-guides.json\n".hash('sha256', $bytes)
+                ."\ntraditional-career-guides-review.json\n".hash('sha256', $review)."\n";
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return $this->readTraditionalCareerGuides($bytes, $review, $schema, $environment, $expectedSha256);
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/zh-reading-links.json')) {
             $chain = "fermatmind.public_content_zh_reading_links.v1\n";
             foreach (['zh-reading-links.json', 'zh-reading-links-review.json'] as $name) {
@@ -429,6 +439,57 @@ final class PublicContent53Package
         }
 
         return ['candidates' => $package['candidates'], 'package_sha256' => $expectedSha256];
+    }
+
+    private function readTraditionalCareerGuides(string $bytes, string $review, string $schema, string $environment, string $sha): array
+    {
+        $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+        $proof = json_decode($review, true, 64, JSON_THROW_ON_ERROR);
+        $rows = $package['candidates'] ?? [];
+        if (($package['schema'] ?? null) !== $schema || ! array_is_list($rows) || count($rows) !== 20
+            || ($proof['schema'] ?? null) !== $schema.'.review' || ($proof['verdict'] ?? null) !== 'PASS'
+            || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
+            || count($proof['pages'] ?? []) !== count($rows)) {
+            throw new DomainException('public_content_53_traditional_guide_review_invalid');
+        }
+        $candidates = [];
+        foreach ($rows as $row) {
+            $identity = $row['identity'] ?? [];
+            $slug = $identity['slug'] ?? '';
+            $id = 'TRADITIONAL-GUIDE-'.$slug;
+            $draft = $row['native_draft'] ?? [];
+            if (! preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $slug) || isset($candidates[$id])
+                || $identity !== ['org_id' => 0, 'slug' => $slug, 'locale' => 'zh-TW']
+                || ($row['page_id'] ?? null) !== $id || ($row['kind'] ?? null) !== 'guide'
+                || ($proof['pages'][$id] ?? null) !== 'PASS'
+                || ($draft['slug'] ?? null) !== $slug || ($draft['locale'] ?? null) !== 'zh-TW'
+                || ($draft['status'] ?? null) !== 'draft' || ($draft['is_public'] ?? null) !== false
+                || ($draft['is_indexable'] ?? null) !== false) {
+                throw new DomainException('public_content_53_traditional_guide_identity_invalid');
+            }
+            foreach (['production', 'staging'] as $name) {
+                $source = $row['sources'][$name] ?? [];
+                if (($source['guide']['guideCode'] ?? null) !== ($draft['guide_code'] ?? null)
+                    || ! is_int($source['guide']['sourceId'] ?? null)
+                    || array_column($source['articles'] ?? [], 'slug') !== array_column($draft['related_articles'] ?? [], 'slug')) {
+                    throw new DomainException('public_content_53_traditional_guide_source_invalid');
+                }
+            }
+            $snapshot = array_intersect_key($draft, array_flip(['title', 'excerpt', 'body_md']));
+            // The native guide importer trims the authored Markdown at the storage boundary.
+            $snapshot['body_md'] = trim($snapshot['body_md']);
+            $snapshot['seo_text'] = array_intersect_key($draft['seo_meta'], array_flip([
+                'seo_title', 'seo_description', 'og_title', 'og_description', 'twitter_title', 'twitter_description',
+            ]));
+            $candidates[$id] = [
+                'page_id' => $id, 'kind' => 'guide', 'identity' => $identity,
+                'new_traditional_guide' => true, 'snapshot' => $snapshot,
+                'native_draft' => $draft, 'source_expectation' => $row['sources'][$environment],
+                'source_identity' => ['guide_code' => $draft['guide_code']],
+            ];
+        }
+
+        return ['candidates' => array_values($candidates), 'package_sha256' => $sha];
     }
 
     /** Small batches within the selected English guide set, using the native guide writer. */

@@ -33,6 +33,7 @@ const packages = {
   'traditional-article': ['fermatmind.traditional_article.v1', ['traditional-article.json','traditional-article-review.json']],
   'traditional-entrance': ['fermatmind.traditional_landing_surfaces.v1', ['traditional-entrance.json','traditional-entrance-review.json']],
   'traditional-pages': ['fermatmind.traditional_content_page.v1', ['traditional-pages.json','traditional-pages-review.json']],
+  'traditional-career-guides': ['fermatmind.traditional_career_guides.v1', ['traditional-career-guides.json','traditional-career-guides-review.json']],
   'zh-reading-links': ['fermatmind.public_content_zh_reading_links.v1', ['zh-reading-links.json','zh-reading-links-review.json']],
   'directory-card-copy': ['fermatmind.tests_directory_card_copy.v1', ['directory-card-copy.json','directory-card-copy-review.json']],
   'mbti-four-leaf-copy': ['fermatmind.mbti_english_four_leaf_copy.v1', ['mbti-four-leaf-copy.json','mbti-four-leaf-copy-review.json']],
@@ -65,6 +66,10 @@ export function packageDigest(backendRoot, selection = process.env.PUBLIC_CONTEN
   return sha(schema+'\n'+names.map(name=>`${name}\n${sha(readFileSync(resolve(backendRoot,packagePath,name)))}\n`).join(''));
 }
 export const executorPaths = [
+  "app/CareerCms/Baseline/CareerGuideBaselineImporter.php",
+  "app/CareerCms/Baseline/CareerGuideBaselineNormalizer.php",
+  "app/Services/ContentPromotion/TraditionalCareerGuideSource.php",
+  "app/Services/ContentPromotion/TraditionalCareerGuideTarget.php",
   "app/Console/Commands/ContentPromoteExactPackage.php",
   "app/Filament/Ops/Resources/CareerGuideResource/Support/CareerGuideWorkspace.php",
   "app/Http/Controllers/API/V0_5/Cms/ArticleController.php",

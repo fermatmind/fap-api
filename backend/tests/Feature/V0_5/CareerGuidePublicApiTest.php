@@ -120,9 +120,52 @@ final class CareerGuidePublicApiTest extends TestCase
             ->assertJsonPath('items.0.title', 'Tenant Guide');
     }
 
+    public function test_traditional_reader_requires_the_exact_locale_and_preserves_draft_visibility(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+        $path = '/api/v0.5/career-guides/iq-eq-balance-at-work';
+        $this->createGuide([
+            'guide_code' => 'iq-eq-balance-at-work',
+            'slug' => 'iq-eq-balance-at-work',
+            'locale' => 'zh-CN',
+            'status' => CareerGuide::STATUS_PUBLISHED,
+            'is_public' => true,
+        ]);
+        $this->getJson($path.'?locale=zh-TW')->assertNotFound();
+
+        $guide = $this->createGuide([
+            'guide_code' => 'iq-eq-balance-at-work',
+            'slug' => 'iq-eq-balance-at-work',
+            'locale' => 'zh-TW',
+            'title' => '工作中的 IQ 與 EQ',
+            'body_md' => '# 繁體正文',
+            'status' => CareerGuide::STATUS_DRAFT,
+            'is_public' => true,
+            'is_indexable' => false,
+        ]);
+        $this->getJson($path.'?locale=zh-TW')->assertNotFound();
+
+        $guide->update(['status' => CareerGuide::STATUS_PUBLISHED]);
+        $this->getJson('/api/v0.5/career-guides?locale=zh-TW')
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 1)
+            ->assertJsonPath('items.0.locale', 'zh-TW');
+        $this->getJson($path.'?locale=zh-TW')
+            ->assertOk()
+            ->assertJsonPath('guide.title', '工作中的 IQ 與 EQ')
+            ->assertJsonPath('guide.body_md', '# 繁體正文')
+            ->assertJsonPath('answer_surface_v1.next_step_blocks.0.title', '開始 EQ 自評')
+            ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/zh/tests/eq-test-emotional-intelligence-assessment');
+        $this->getJson($path.'/seo?locale=zh-TW')
+            ->assertOk()
+            ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/zh-TW/career/guides/iq-eq-balance-at-work')
+            ->assertJsonPath('meta.robots', 'noindex,follow')
+            ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex');
+    }
+
     public function test_planning_guides_offer_localized_actions_without_a_default_test(): void
     {
-        foreach (['zh-CN' => 'zh', 'en' => 'en'] as $locale => $segment) {
+        foreach (['zh-CN' => 'zh', 'en' => 'en', 'zh-TW' => 'zh-TW'] as $locale => $segment) {
             foreach ([
                 'how-to-find-right-career-direction' => '/career',
                 'career-transition-playbook' => '/career/guides',
@@ -133,14 +176,16 @@ final class CareerGuidePublicApiTest extends TestCase
                     'locale' => $locale,
                     'status' => CareerGuide::STATUS_PUBLISHED,
                     'is_public' => true,
+                    'is_indexable' => $locale !== 'zh-TW',
                     'published_at' => now()->subDay(),
                 ]);
 
+                $targetSegment = $locale === 'zh-TW' && $path === '/career' ? 'zh' : $segment;
                 $response = $this->getJson('/api/v0.5/career-guides/'.$slug.'?locale='.$locale)
                     ->assertOk()
                     ->assertJsonPath('landing_surface_v1.start_test_target', null)
-                    ->assertJsonPath('landing_surface_v1.content_continue_target', '/'.$segment.$path)
-                    ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/'.$segment.$path)
+                    ->assertJsonPath('landing_surface_v1.content_continue_target', '/'.$targetSegment.$path)
+                    ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/'.$targetSegment.$path)
                     ->assertJsonPath('answer_surface_v1.next_step_blocks.0.kind', 'content_continue');
 
                 $this->assertStringNotContainsString('/tests/', json_encode($response->json('answer_surface_v1.next_step_blocks')));

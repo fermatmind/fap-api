@@ -164,7 +164,9 @@ final class CareerGuideController extends Controller
      */
     private function buildLandingSurface(CareerGuide $guide, string $locale): array
     {
-        $segment = $this->frontendLocaleSegment($locale);
+        $segment = $this->careerGuideSeoService->mapBackendLocaleToFrontendSegment($locale);
+        // Core assessments and the career directory still use their established Chinese routes.
+        $productSegment = $locale === 'zh-TW' ? 'zh' : $segment;
         $relatedJobs = $this->careerGuideService->relatedJobsPayload($guide);
         $relatedArticles = $this->careerGuideService->relatedArticlesPayload($guide);
         $relatedProfiles = $this->careerGuideService->relatedPersonalityProfilesPayload($guide);
@@ -172,23 +174,19 @@ final class CareerGuideController extends Controller
         $planningNextStep = (int) $guide->org_id === 0 ? match ($guide->slug) {
             'how-to-find-right-career-direction' => [
                 'key' => 'explore_occupations',
-                'label' => $locale === 'zh-CN'
-                    ? '查看真实职业任务与入行要求'
-                    : 'Browse real job tasks and entry requirements',
-                'href' => '/'.$segment.'/career',
+                'label' => $this->actionLabel($locale, '查看真实职业任务与入行要求', '檢視真實職業任務與入行要求', 'Browse real job tasks and entry requirements'),
+                'href' => '/'.$productSegment.'/career',
                 'kind' => 'content_continue',
             ],
             'career-transition-playbook' => [
                 'key' => 'plan_transition',
-                'label' => $locale === 'zh-CN'
-                    ? '比较职业路径，安排一次小规模转型验证'
-                    : 'Compare career paths and plan one small transition experiment',
+                'label' => $this->actionLabel($locale, '比较职业路径，安排一次小规模转型验证', '比較職業路徑，安排一次小規模轉型驗證', 'Compare career paths and plan one small transition experiment'),
                 'href' => '/'.$segment.'/career/guides',
                 'kind' => 'content_continue',
             ],
             default => null,
         } : null;
-        $testTarget = $planningNextStep !== null ? null : '/'.$segment.'/tests/'.($isIqEqGuide
+        $testTarget = $planningNextStep !== null ? null : '/'.$productSegment.'/tests/'.($isIqEqGuide
             ? 'eq-test-emotional-intelligence-assessment'
             : 'mbti-personality-test-16-personality-types');
 
@@ -217,23 +215,23 @@ final class CareerGuideController extends Controller
                 $planningNextStep ?? [
                     'key' => 'start_test',
                     'label' => $isIqEqGuide
-                        ? ($locale === 'zh-CN' ? '开始 EQ 自评' : 'Take the EQ self-report')
-                        : ($locale === 'zh-CN' ? '开始测试' : 'Take the test'),
+                        ? ($this->actionLabel($locale, '开始 EQ 自评', '開始 EQ 自評', 'Take the EQ self-report'))
+                        : ($this->actionLabel($locale, '开始测试', '開始測驗', 'Take the test')),
                     'href' => $testTarget,
                     'kind' => 'start_test',
                 ],
                 $isIqEqGuide
                     ? [
                         'key' => 'iq_beta_test',
-                        'label' => $locale === 'zh-CN' ? '探索 IQ Beta 推理测试' : 'Explore the IQ Beta reasoning test',
-                        'href' => '/'.$segment.'/tests/iq-test-intelligence-quotient-assessment',
+                        'label' => $this->actionLabel($locale, '探索 IQ Beta 推理测试', '探索 IQ Beta 推理測驗', 'Explore the IQ Beta reasoning test'),
+                        'href' => '/'.$productSegment.'/tests/iq-test-intelligence-quotient-assessment',
                         'kind' => 'start_test',
                     ]
                     : null,
                 ($relatedJobs[0]['slug'] ?? null) !== null
                     ? [
                         'key' => 'related_job',
-                        'label' => $locale === 'zh-CN' ? '查看相关职业' : 'View related job',
+                        'label' => $this->actionLabel($locale, '查看相关职业', '查看相關職業', 'View related job'),
                         'href' => '/'.$segment.'/career/jobs/'.rawurlencode((string) $relatedJobs[0]['slug']),
                         'kind' => 'content_continue',
                     ]
@@ -241,7 +239,7 @@ final class CareerGuideController extends Controller
                 ($relatedProfiles[0]['slug'] ?? null) !== null
                     ? [
                         'key' => 'related_personality',
-                        'label' => $locale === 'zh-CN' ? '查看人格画像' : 'View personality profile',
+                        'label' => $this->actionLabel($locale, '查看人格画像', '查看人格描述', 'View personality profile'),
                         'href' => '/'.$segment.'/personality/'.rawurlencode((string) $relatedProfiles[0]['slug']),
                         'kind' => 'discover',
                     ]
@@ -340,9 +338,13 @@ final class CareerGuideController extends Controller
         ]);
     }
 
-    private function frontendLocaleSegment(string $locale): string
+    private function actionLabel(string $locale, string $simplified, string $traditional, string $english): string
     {
-        return $locale === 'zh-CN' ? 'zh' : 'en';
+        return match ($locale) {
+            'zh-CN' => $simplified,
+            'zh-TW' => $traditional,
+            default => $english,
+        };
     }
 
     /**
@@ -352,7 +354,7 @@ final class CareerGuideController extends Controller
     {
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
-            'locale' => ['required', 'in:en,zh-CN'],
+            'locale' => ['required', 'in:'.implode(',', CareerGuide::SUPPORTED_LOCALES)],
             'category' => ['nullable', 'string', 'max:128'],
             'page' => ['nullable', 'integer', 'min:1'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
@@ -380,7 +382,7 @@ final class CareerGuideController extends Controller
     {
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
-            'locale' => ['required', 'in:en,zh-CN'],
+            'locale' => ['required', 'in:'.implode(',', CareerGuide::SUPPORTED_LOCALES)],
         ]);
 
         if ($validator->fails()) {

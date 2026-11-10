@@ -917,6 +917,29 @@ test('selected English guide batch selects only its reviewed identities and nati
 });
 
 
+test('Traditional career guides bind the same twenty candidates to the two original-source states',()=>{
+ const name='traditional-career-guides';
+ const files=['traditional-career-guides.json','traditional-career-guides-review.json']
+   .map(file=>'backend/content_assets/public_content_53/'+file);
+ const binding=inspectPackage(root,name);
+ const production=readCandidateRows(root,binding.package_sha256,'production').candidates;
+ const staging=readCandidateRows(root,binding.package_sha256,'staging').candidates;
+ assert.equal(classifyPaths(files).operations.public_content_53_package,name);
+ assert.equal(binding.expected_row_count,20);
+ assert.deepEqual(production.map(row=>row.snapshot),staging.map(row=>row.snapshot));
+ assert.equal(production.filter((row,index)=>row.source_expectation.guide.authoredHashes.body_md
+   !==staging[index].source_expectation.guide.authoredHashes.body_md).length,6);
+ for(const row of production){
+  assert.equal(row.identity.locale,'zh-TW');
+  assert.equal(row.native_draft.is_indexable,false);
+  const guide={...row.identity,...row.snapshot,guide_code:row.source_identity.guide_code,is_public:true};
+  const data={ok:true,guide,seo_meta:row.snapshot.seo_text};
+  assert.deepEqual(projection(row,data),row.snapshot);
+  assert.throws(()=>projection(row,{...data,guide:{...guide,locale:'zh-CN'}}),/IDENTITY_DRIFT/);
+ }
+});
+
+
 test('English guide diagnostics cover exactly the 17 selected identities without exposing unsafe text',async()=>{
  const slugs=["annual-career-review-system","big5-for-career-decisions","build-five-year-career-roadmap","build-portfolio-for-career-switch","career-growth-with-manager","career-risk-management","cross-industry-move-strategy","first-90-days-in-new-role","from-mbti-to-job-fit","how-to-choose-college-major","improve-workplace-competitiveness","interview-strategy-by-role","leader-track-vs-expert-track","networking-that-actually-works","personal-brand-for-professionals","prevent-burnout-while-growing","salary-negotiation-framework"];
  const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123'},binding:{package_sha256:'b'.repeat(64),executor_release_sha256:'c'.repeat(64)}};

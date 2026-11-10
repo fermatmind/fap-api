@@ -9,11 +9,11 @@ const equal = (a,b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical
 const compact = x => String(x ?? '').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'');
 // Mirror fap-web's resolveCareerGuideMetadataTitle: a CMS-owned brand suffix
 // is normalized once instead of receiving the locale layout suffix again.
-const guideDocumentTitle = sourceTitle => {
+const guideDocumentTitle = (sourceTitle, layoutBrand = 'FermatMind') => {
   const title=sourceTitle.trim();
   return /[|｜]\s*(?:FermatMind|费马测试)\s*$/i.test(title)
     ? title.replace(/(?:\s*[|｜]\s*(?:FermatMind|费马测试))+\s*$/i,' | FermatMind')
-    : `${sourceTitle} | FermatMind`;
+    : `${sourceTitle} | ${layoutBrand}`;
 };
 const plain = x => /^\s*```[\w-]*\s*$/.test(x) ? '' : x.replace(/!\[[^\]]*\]\([^)]*\)/g,'').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1')
   .replace(/^\s*\[\^([0-9A-Za-z-]+)\]:\s*/,'$1 ').replace(/\[\^([0-9A-Za-z-]+)\]/g,'$1')
@@ -351,7 +351,7 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
       result[row.page_id] = await readMbtiResultCopySample(environment,row,fetcher,renderer);
       continue;
     }
-    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
+    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true || row.new_traditional_guide === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
     if (bytes === null) { result[row.page_id]={missing:true};continue; }
     const data=parseApi(bytes);const value=projection(row,data);
     if (!equal(value,environment === 'staging' ? row.staging_before : row.before) && !equal(value,row.snapshot)) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DRIFT_${row.page_id}`);
@@ -484,7 +484,7 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
     // The Traditional page then adds its layout brand only to the document title.
     const publicTitle = title => row.new_traditional_article && row.identity.slug.startsWith('big-five-')
       ? (title.trim().replace(/(?:\s*\|\s*FermatMind)+\s*$/iu, '').trim() || title.trim()) : title;
-    const documentTitle = row.kind === 'guide' ? guideDocumentTitle(seo.seo_title)
+    const documentTitle = row.kind === 'guide' ? guideDocumentTitle(seo.seo_title,row.new_traditional_guide ? '費馬測試' : 'FermatMind')
       : `${publicTitle(seo.seo_title)} | ${row.new_traditional_article ? '費馬測試' : 'FermatMind'}`;
     if (!equal(dom.title.map(compact),[compact(documentTitle)])
       || !equal(dom.description.map(compact),[compact(seo.seo_description)])
@@ -589,6 +589,15 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   const initializedStaging = environment === 'staging' && row.page_id === 'PAGE-60' && before.missing === true && row.staging_bootstrap;
   const newArticle = row.new_article === true;
   const newTraditionalPage = row.new_traditional_page === true;
+  if (row.new_traditional_guide) {
+    const robots=dom.robots.join(',').toLowerCase().split(',').map(value=>value.trim());
+    if (dom.language !== 'zh-TW' || !equal(dom.canonical,['https://fermatmind.com'+pathFor(row)])
+      || !robots.includes('noindex') || robots.includes('index') || dom.alternate_entries.some(entry=>entry.hreflang)
+      || !dom.links.includes('/zh-TW/career/guides')
+      || !dom.links.includes('/zh/career/guides/'+row.identity.slug) || !dom.links.includes('/en/career/guides/'+row.identity.slug))
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_GUIDE_SEO_OR_LINK_${row.page_id}`);
+    return;
+  }
   if (newTraditionalPage) {
     const robots=dom.robots.join(',').toLowerCase().split(',').map(value=>value.trim());
     let schemas;
@@ -748,7 +757,7 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     const data=parseApi(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
     const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
     const createdArticle = row.new_article === true && before?.missing === true;
-    const createdTraditional = (row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true) && before?.missing === true;
+    const createdTraditional = (row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true || row.new_traditional_guide === true) && before?.missing === true;
     if (row.featured_targets) {
       const archive=parseApi(await read(api+'/api/v0.5/articles?locale=zh-TW&org_id=0&include_blog=1',fetcher)).blog_v1;
       const fields=['id','slug','published_revision_id'];
@@ -761,6 +770,10 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_LANDING_QUALIFICATION_${row.page_id}`);
     if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_QUALIFICATION_${row.page_id}`);
+    if (row.new_traditional_guide && (native.is_indexable !== false
+      || !equal(data.related_articles?.map(article=>[article.id,article.slug,article.locale]),
+        row.source_expectation.articles.map(article=>[article.id,article.slug,'zh-TW']))))
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_GUIDE_QUALIFICATION_${row.page_id}`);
     if (row.new_traditional_article === true && (!['is_indexable','sitemap_eligible','llms_eligible'].every(key=>native[key] === false)
       || native.translation_group_id !== row.source_identity.translation_group_id
       || native.source_article_id !== (environment === 'staging' ? row.staging_source_article_id : row.source_identity.source_article_id)
@@ -804,6 +817,20 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
       }
       catch(error) {last=error?.message?.startsWith('PUBLIC_CONTENT_53_') ? error : new Error(`PUBLIC_CONTENT_53_BROWSER_FAILED_${row.page_id}`);if(Date.now()>=deadline) throw last;await new Promise(resolve=>setTimeout(resolve,10000));}
     }
+  }
+  const guideRows=rows.filter(row=>row.new_traditional_guide);
+  if (guideRows.length) {
+    const path='/zh-TW/career/guides';
+    const index=parseApi(await read(api+'/api/v0.5/career-guides?locale=zh-TW&org_id=0&per_page=100',fetcher));
+    const expected=guideRows.map(row=>row.identity.slug).sort();
+    const dom=domOf(await read(web+path,fetcher,false,{'User-Agent':'facebookexternalhit/1.1'}));
+    if (index.ok !== true || index.pagination?.total !== expected.length
+      || !equal(index.items?.map(item=>item.slug).sort(),expected)
+      || index.items.some(item=>item.locale !== 'zh-TW')
+      || dom.language !== 'zh-TW' || !dom.robots.some(value=>/\bnoindex\b/i.test(value))
+      || !equal(dom.canonical,['https://fermatmind.com'+path])
+      || expected.some(slug=>!dom.links.includes(path+'/'+slug)))
+      throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_GUIDE_DIRECTORY');
   }
   const newRows=rows.filter(row=>row.new_article);
   if (newRows.length && environment === 'production') {

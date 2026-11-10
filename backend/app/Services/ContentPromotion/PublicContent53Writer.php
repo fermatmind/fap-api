@@ -104,6 +104,14 @@ final class PublicContent53Writer
         $created = 0;
         foreach ($rows as $row) {
             $saved = $before[$row['page_id']];
+            if ($row['new_traditional_guide'] ?? false) {
+                if (app(TraditionalCareerGuideTarget::class)->publish($row, $saved['target'])) {
+                    $written[$row['page_id']] = true;
+                    $created += $saved['missing'] ? 1 : 0;
+                }
+
+                continue;
+            }
             if ($row['new_traditional_article'] ?? false) {
                 $created += app(TraditionalArticlePublication::class)->publish($row, $saved, $context) ? 1 : 0;
                 $written[$row['page_id']] = true;
@@ -157,6 +165,13 @@ final class PublicContent53Writer
         $after = $this->states->read($context->packageSha256, true);
         foreach ($before as $id => $saved) {
             if ($saved['table'] !== 'career_guides') {
+                continue;
+            }
+            if (isset($saved['target'])) {
+                if ($after[$id]['source'] !== $saved['source']) {
+                    throw new DomainException('public_content_53_guide_protected_state_changed');
+                }
+
                 continue;
             }
             $protected = $after[$id];
@@ -232,6 +247,11 @@ final class PublicContent53Writer
         }
         $rows = collect($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'])->keyBy('page_id');
         foreach ($before as $id => $saved) {
+            if ($rows[$id]['new_traditional_guide'] ?? false) {
+                app(TraditionalCareerGuideTarget::class)->restore($rows[$id], $saved['target'], $after[$id]['target']);
+
+                continue;
+            }
             if (isset($rows[$id]['staging_article_original'])) {
                 app(StagingArticleOriginals::class)->restore($rows[$id]);
 

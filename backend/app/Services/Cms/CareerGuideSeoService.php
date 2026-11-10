@@ -15,10 +15,7 @@ use RuntimeException;
 
 final class CareerGuideSeoService
 {
-    public const SUPPORTED_LOCALES = [
-        'en',
-        'zh-CN',
-    ];
+    public const SUPPORTED_LOCALES = CareerGuide::SUPPORTED_LOCALES;
 
     public function __construct(
         private readonly CareerArticleStructuredDataBuilder $careerArticleStructuredDataBuilder,
@@ -158,7 +155,7 @@ final class CareerGuideSeoService
     {
         $baseUrl = CanonicalFrontendUrl::fromConfig();
         $resolvedSlug = strtolower(trim((string) ($slug ?? $guide->slug)));
-        $resolvedLocale = $this->normalizeLocale((string) ($locale ?? $guide->locale));
+        $resolvedLocale = (string) ($locale ?? $guide->locale);
 
         if ($baseUrl === '' || $resolvedSlug === '') {
             return null;
@@ -172,7 +169,11 @@ final class CareerGuideSeoService
 
     public function mapBackendLocaleToFrontendSegment(string $locale): string
     {
-        return $this->normalizeLocale($locale) === 'zh-CN' ? 'zh' : 'en';
+        return match (trim($locale)) {
+            'zh-CN' => 'zh',
+            'zh-TW' => 'zh-TW',
+            default => 'en',
+        };
     }
 
     /**
@@ -199,7 +200,7 @@ final class CareerGuideSeoService
                 continue;
             }
 
-            $locale = $this->normalizeLocale((string) $variant->locale);
+            $locale = (string) $variant->locale;
             $canonical = $this->buildCanonicalUrl($guide, $locale, (string) $variant->slug);
             if ($canonical === null) {
                 continue;
@@ -243,11 +244,6 @@ final class CareerGuideSeoService
     {
         return $this->fallbackText($seoMeta?->robots)
             ?? ((bool) $guide->is_indexable ? 'index,follow' : 'noindex,follow');
-    }
-
-    private function normalizeLocale(string $locale): string
-    {
-        return trim($locale) === 'zh-CN' ? 'zh-CN' : 'en';
     }
 
     private function extractDescription(string $bodyMarkdown): string
