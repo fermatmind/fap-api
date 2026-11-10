@@ -621,6 +621,38 @@ class SitemapGeneratorTest extends TestCase
         }
     }
 
+    public function test_traditional_article_discovery_requires_published_eligibility_and_native_archive(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $this->createArticle(['locale' => 'zh-TW', 'slug' => 'eligible-detail']);
+        $this->createArticle(['locale' => 'zh-TW', 'slug' => 'held-detail', 'is_indexable' => false]);
+        $this->createArticle(['locale' => 'zh-TW', 'slug' => 'sitemap-only-detail', 'llms_eligible' => false]);
+        app(PublicCareerAuthorityResponseCache::class)->warm();
+
+        $generator = app(SitemapGenerator::class);
+        $archive = 'https://fermatmind.com/zh-TW/articles';
+        $sitemap = array_column($generator->generateSitemapUrls(), 'loc');
+        $llms = array_column($generator->generateLlmsUrls(), 'loc');
+        self::assertContains($archive.'/eligible-detail', $sitemap);
+        self::assertContains($archive.'/eligible-detail', $llms);
+        self::assertContains($archive.'/sitemap-only-detail', $sitemap);
+        self::assertNotContains($archive.'/sitemap-only-detail', $llms);
+        foreach ([$sitemap, $llms] as $urls) {
+            self::assertNotContains($archive.'/held-detail', $urls);
+            self::assertNotContains($archive, $urls);
+        }
+
+        $surface = LandingSurface::withoutGlobalScopes()->create([
+            'org_id' => 0, 'surface_key' => 'articles_index', 'locale' => 'zh-TW',
+            'title' => '文章', 'description' => '全部文章', 'status' => 'published',
+            'is_public' => true, 'is_indexable' => false, 'published_at' => now()->subDay(),
+            'payload_json' => ['blog_v1' => ['schema_version' => 1, 'categories' => [], 'featured_article_ids' => []]],
+        ]);
+        self::assertNotContains($archive, array_column($generator->generateSitemapUrls(), 'loc'));
+        $surface->forceFill(['is_indexable' => true])->save();
+        self::assertContains($archive, array_column($generator->generateSitemapUrls(), 'loc'));
+    }
+
     public function test_generate_includes_only_indexable_global_article_urls_with_locale_aware_paths(): void
     {
         config([

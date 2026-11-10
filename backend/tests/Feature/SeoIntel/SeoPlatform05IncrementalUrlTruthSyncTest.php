@@ -478,6 +478,50 @@ final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
         self::assertSame('seo_intel', config('seo_intel.connection'));
     }
 
+    public function test_scoped_traditional_article_sync_registers_only_eligible_authority_and_retires_on_hold(): void
+    {
+        $this->prepareSchema();
+        Bus::fake([SyncPublicAuthorityUrlTruth::class]);
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false,
+            'seo_council.connection' => 'seo_intel', 'seo_intel.public_canonical_host' => 'https://fermatmind.com']);
+        $article = \App\Models\Article::create([
+            'org_id' => 0, 'slug' => 'traditional-article', 'locale' => 'zh-TW',
+            'title' => '繁體文章', 'content_md' => '已發布正文', 'status' => 'published',
+            'is_public' => true, 'is_indexable' => false, 'sitemap_eligible' => true, 'llms_eligible' => true,
+        ]);
+        $revision = \App\Models\ArticleTranslationRevision::create([
+            'org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $article->id,
+            'translation_group_id' => $article->translation_group_id, 'locale' => 'zh-TW', 'source_locale' => 'zh-TW',
+            'revision_number' => 1, 'revision_status' => 'published', 'title' => '繁體文章',
+            'content_md' => '已發布正文',
+        ]);
+        $article->forceFill(['published_revision_id' => $revision->id])->saveQuietly();
+        $canonical = 'https://fermatmind.com/zh-TW/articles/traditional-article';
+        $seo = \App\Models\ArticleSeoMeta::create([
+            'org_id' => 0, 'article_id' => $article->id, 'locale' => 'zh-TW',
+            'canonical_url' => $canonical, 'robots' => 'noindex,follow', 'is_indexable' => false,
+        ]);
+        Bus::assertDispatched(SyncPublicAuthorityUrlTruth::class, fn ($job) => $job->locale === 'zh-TW' && $job->scopedWrite);
+        self::assertFalse(IncrementalUrlTruthSyncService::supportsIdentityLocale('career_guide', 'zh-TW'));
+
+        $service = app(IncrementalUrlTruthSyncService::class);
+        $job = new SyncPublicAuthorityUrlTruth('article', (string) $article->id, 'zh-TW', 'current-event', 'authority_revision', true);
+        $urls = DB::connection('seo_intel')->table('seo_urls')->where('locale', 'zh-TW');
+        $job->handle($service);
+        self::assertFalse($urls->exists());
+
+        $article->forceFill(['is_indexable' => true])->saveQuietly();
+        $seo->forceFill(['robots' => 'index,follow', 'is_indexable' => true])->save();
+        $job->handle($service);
+        self::assertSame($canonical, $urls->value('canonical_url'));
+        self::assertSame('articles_topics', $urls->value('page_family'));
+        self::assertSame('indexable', $urls->value('indexability_state'));
+
+        $article->forceFill(['is_indexable' => false])->saveQuietly();
+        $job->handle($service);
+        self::assertSame('retired', $urls->value('indexability_state'));
+    }
+
     public function test_scoped_queue_job_reads_current_authority_and_restores_worker_capability(): void
     {
         $this->prepareSchema();

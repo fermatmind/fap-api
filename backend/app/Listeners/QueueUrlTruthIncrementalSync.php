@@ -13,7 +13,7 @@ final class QueueUrlTruthIncrementalSync
     public function handle(PublicAuthorityChanged $event): void
     {
         if (! (bool) config('seo_intel.enabled', false)
-            || ! in_array($event->locale, IncrementalUrlTruthSyncService::SUPPORTED_LOCALES, true)) {
+            || ! IncrementalUrlTruthSyncService::supportsIdentityLocale($event->pageEntityType, $event->locale)) {
             return;
         }
 

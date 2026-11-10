@@ -21,6 +21,7 @@ use App\Services\Scale\ScaleRegistry;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use App\Services\SeoIntel\UrlTruthHandoffArtifact;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
+use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Support\Carbon;
 
 final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
@@ -42,7 +43,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
     /** Read one Article without scanning unrelated authority families. @return list<UrlTruthInventoryRecord> */
     public function candidatesForArticle(string $entityIdentity, string $locale): array
     {
-        if (preg_match('/\A[1-9][0-9]*\z/', $entityIdentity) !== 1 || ! in_array($locale, ['en', 'zh-CN'], true)) {
+        if (preg_match('/\A[1-9][0-9]*\z/', $entityIdentity) !== 1 || ! in_array($locale, ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES, true)) {
             throw new \InvalidArgumentException('Article URL Truth identity is invalid.');
         }
         $previous = $this->requireComplete;
@@ -176,7 +177,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ->when($locale !== null, static fn ($query) => $query->where('locale', $locale))
                 ->publiclySitemapEligible()
                 ->where('llms_eligible', true)
-                ->whereIn('locale', ['en', 'zh-CN'])
+                ->whereIn('locale', ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES)
                 ->orderBy('locale')
                 ->orderBy('slug')
                 ->get();
@@ -1065,6 +1066,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         $localeSegment = match ((string) $article->locale) {
             'zh-CN', 'zh' => 'zh',
             'en' => 'en',
+            'zh-TW' => 'zh-TW',
             default => null,
         };
 
@@ -1081,6 +1083,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         $localeSegment = match ($locale) {
             'zh-CN', 'zh' => 'zh',
             'en' => 'en',
+            'zh-TW' => 'zh-TW',
             default => null,
         };
 

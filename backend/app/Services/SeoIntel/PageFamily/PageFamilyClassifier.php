@@ -35,7 +35,7 @@ final class PageFamilyClassifier
         $sourceAuthority = strtolower(trim((string) ($authority['source_authority'] ?? '')));
         $authorityStatus = strtolower(trim((string) ($authority['authority_status'] ?? 'published_approved')));
         $indexabilityState = strtolower(trim((string) ($authority['indexability_state'] ?? 'indexable')));
-        $locale = $this->normalizeLocale((string) ($authority['locale'] ?? ''), $path);
+        $locale = $this->normalizeLocale((string) ($authority['locale'] ?? ''), $path, $pageEntityType);
 
         $privateReasons = $this->privateReasons($authority, $path, $pageEntityType, $authorityStatus, $indexabilityState, $registry);
         if ($privateReasons !== []) {
@@ -177,9 +177,12 @@ final class PageFamilyClassifier
         return '/'.ltrim(rtrim($path, '/'), '/');
     }
 
-    private function normalizeLocale(string $locale, string $path): string
+    private function normalizeLocale(string $locale, string $path, string $pageEntityType): string
     {
         $normalized = strtolower(trim($locale));
+        if ($normalized === 'zh-tw' && $pageEntityType === 'article' && str_starts_with($path, '/zh-TW/articles/')) {
+            return 'zh-TW';
+        }
         if (in_array($normalized, ['zh', 'zh-cn', 'zh_cn'], true)) {
             return 'zh-CN';
         }

@@ -29,6 +29,7 @@ use App\Services\Cms\TopicProfileSeoService;
 use App\Services\Enneagram\EnneagramTechnicalNoteService;
 use App\Services\Scale\ScaleDiscoverabilityPolicy;
 use App\Services\Scale\ScaleRegistry;
+use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\CanonicalFrontendUrl;
 use Illuminate\Support\Carbon;
 
@@ -340,7 +341,7 @@ class SitemapGenerator
             ->withoutGlobalScopes()
             ->where('org_id', 0)
             ->publiclySitemapEligible()
-            ->whereIn('locale', ArticleSeoService::SUPPORTED_LOCALES)
+            ->whereIn('locale', ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES)
             ->whereNotNull('slug')
             ->where('slug', '<>', '')
             ->select(['slug', 'locale', 'llms_eligible', 'updated_at', 'published_at'])
@@ -390,7 +391,8 @@ class SitemapGenerator
             // Match the public archive's CMS projection; an unpublished or missing
             // configuration still serves the existing indexable legacy archive.
             $blog = $this->articleBlogService->read(0, (string) $locale, static fn (Article $article): array => []);
-            if ($blog['configuration_state'] === 'invalid'
+            if (($locale === 'zh-TW' && $blog['configuration_state'] !== 'published')
+                || $blog['configuration_state'] === 'invalid'
                 || ($blog['configuration_state'] === 'published' && $blog['is_indexable'] !== true)) {
                 continue;
             }

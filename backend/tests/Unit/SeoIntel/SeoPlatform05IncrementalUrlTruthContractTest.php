@@ -52,17 +52,21 @@ final class SeoPlatform05IncrementalUrlTruthContractTest extends TestCase
         Queue::assertNothingPushed();
     }
 
-    public function test_unsupported_locale_does_not_enter_the_incremental_queue(): void
+    public function test_traditional_locale_only_enters_the_incremental_queue_for_articles(): void
     {
         config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false]);
         Queue::fake();
         $listener = new QueueUrlTruthIncrementalSync;
-        $listener->handle(new PublicAuthorityChanged('article', '42', 'zh-TW', 'revision-a', 'authority_revision'));
+        $listener->handle(new PublicAuthorityChanged('career_guide', '42', 'zh-TW', 'revision-a', 'authority_revision'));
+        $listener->handle(new PublicAuthorityChanged('article', '42', 'zh-HK', 'revision-a', 'authority_revision'));
         Queue::assertNothingPushed();
+
+        $listener->handle(new PublicAuthorityChanged('article', '42', 'zh-TW', 'revision-a', 'authority_revision'));
+        Queue::assertPushed(SyncPublicAuthorityUrlTruth::class, fn ($job) => $job->locale === 'zh-TW' && $job->scopedWrite);
 
         $listener->handle(new PublicAuthorityChanged('article', '42', 'zh-CN', 'revision-b', 'authority_revision'));
         Queue::assertPushed(SyncPublicAuthorityUrlTruth::class, fn ($job) => $job->locale === 'zh-CN' && $job->scopedWrite);
-        Queue::assertPushed(SyncPublicAuthorityUrlTruth::class, 1);
+        Queue::assertPushed(SyncPublicAuthorityUrlTruth::class, 2);
     }
 
     public function test_global_write_stays_closed_while_bounded_events_enqueue_scoped_jobs(): void

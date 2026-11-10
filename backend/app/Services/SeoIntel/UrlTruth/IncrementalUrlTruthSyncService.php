@@ -8,6 +8,7 @@ use App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource;
 use App\Services\SeoIntel\Sources\UrlTruthInventorySource;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use App\Services\SeoIntel\UrlTruthInventoryRecordWriter;
+use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use InvalidArgumentException;
@@ -15,13 +16,19 @@ use RuntimeException;
 
 final class IncrementalUrlTruthSyncService
 {
-    public const SUPPORTED_LOCALES = ['en', 'zh-CN'];
+    private const SUPPORTED_LOCALES = ['en', 'zh-CN'];
 
     public function __construct(
         private readonly UrlTruthInventorySource $authority,
         private readonly EffectivePublicUrlEvaluator $evaluator,
         private readonly UrlTruthInventoryRecordWriter $writer,
     ) {}
+
+    public static function supportsIdentityLocale(string $pageEntityType, string $locale): bool
+    {
+        return in_array($locale, self::SUPPORTED_LOCALES, true)
+            || ($pageEntityType === 'article' && in_array($locale, ArticleSourceTargetSnapshot::TRANSLATION_TARGET_LOCALES, true));
+    }
 
     /** @return array<string,mixed> */
     public function sync(
@@ -36,7 +43,7 @@ final class IncrementalUrlTruthSyncService
         $entityIdentity = trim($entityIdentity);
         $locale = trim($locale);
         $revision = trim($revision);
-        if ($pageEntityType === '' || $entityIdentity === '' || ! in_array($locale, self::SUPPORTED_LOCALES, true) || $revision === '') {
+        if ($pageEntityType === '' || $entityIdentity === '' || ! self::supportsIdentityLocale($pageEntityType, $locale) || $revision === '') {
             throw new InvalidArgumentException('incremental URL Truth identity is invalid.');
         }
         if (! (bool) config('seo_intel.enabled', false) || ! (bool) config('seo_intel.write_enabled', false)) {
