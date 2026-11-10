@@ -41,6 +41,14 @@ final class TopicProfileService
             ->first();
     }
 
+    public function hasTraditionalReader(TopicProfile $profile): bool
+    {
+        return $profile->locale === 'zh-TW' || $this->basePublicQuery((int) $profile->org_id, 'zh-TW')
+            ->forSlug($profile->slug)
+            ->forTopicCode($profile->topic_code)
+            ->exists();
+    }
+
     private function basePublicQuery(int $orgId, string $locale): Builder
     {
         return TopicProfile::query()

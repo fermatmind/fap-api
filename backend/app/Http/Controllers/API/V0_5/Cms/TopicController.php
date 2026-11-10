@@ -104,6 +104,7 @@ final class TopicController extends Controller
         return response()->json([
             'ok' => true,
             'profile' => $this->profileDetailPayload($profile),
+            'traditional_reader_available' => $this->topicProfileService->hasTraditionalReader($profile),
             'sections' => $sections,
             'entry_groups' => $entryGroups,
             'seo_meta' => $this->seoMetaPayload($profile->seoMeta),

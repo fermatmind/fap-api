@@ -41,6 +41,11 @@ final class PublicContent53State
             });
         }
         foreach ($rows as $row) {
+            if ($row['new_traditional_topic'] ?? false) {
+                $state[$row['page_id']] = app(TraditionalTopicPublication::class)->read($row, $lock);
+
+                continue;
+            }
             if ($row['new_traditional_guide'] ?? false) {
                 $state[$row['page_id']] = $this->traditionalGuideState($row, $lock);
 
@@ -249,6 +254,11 @@ final class PublicContent53State
 
                 continue;
             }
+            if ($row['new_traditional_topic'] ?? false) {
+                app(TraditionalTopicPublication::class)->read($row, false);
+
+                continue;
+            }
             if ($row['new_traditional_guide'] ?? false) {
                 $this->traditionalGuideState($row, false);
 
@@ -311,7 +321,7 @@ final class PublicContent53State
     {
         foreach ($rows as $row) {
             $saved = $state[$row['page_id']];
-            if ($row['new_traditional_guide'] ?? false) {
+            if (($row['new_traditional_guide'] ?? false) || ($row['new_traditional_topic'] ?? false)) {
                 continue; // read() already verified the native source and target under the transaction lock.
             }
             if (isset($row['staging_article_original'])) {

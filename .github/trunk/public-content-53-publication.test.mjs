@@ -674,6 +674,19 @@ test('the selected sample package contains exactly three independent bilingual A
  assert.deepEqual(executorPaths,serverPaths);
 });
 
+test('Taiwan topic publishes the native body and exact public reader links with no indexing',()=>{
+ const digest=packageDigest(root,'traditional-topics');
+ const [row]=readCandidateRows(root,digest).candidates;
+ assert.equal(row.new_traditional_topic,true);
+ assert.equal(row.identity.locale,'zh-TW');
+ const path=pathFor(row);
+ const target=row.snapshot.entry_groups.tests[0].url;
+ const html=`<html lang="zh-TW"><head><meta charset="utf-8"><link rel="canonical" href="https://fermatmind.com${path}"><meta name="robots" content="noindex,follow"></head><body><main><h1>${row.snapshot.title}</h1>${row.snapshot.sections.map(section=>`<h2>${section.title}</h2>`).join('')}<a href="/zh-TW/topics">主題總覽</a><a href="/zh/topics/big-five">简体中文</a><a href="/en/topics/big-five">English</a><a href="${target}">開始測驗</a></main></body></html>`;
+ assert.doesNotThrow(()=>assertDom(row,html,{missing:true},'production'));
+ assert.throws(()=>assertDom(row,html.replace('noindex','index'),{missing:true},'production'),/TRADITIONAL_TOPIC_DOM/);
+ assert.throws(()=>assertDom(row,html.replace(target,target.replace('/zh-TW/','/zh/')),{missing:true},'production'),/TRADITIONAL_TOPIC_DOM/);
+});
+
 test('new sample SEO requires exact reciprocal routes, environment robots, schema and visible prose',()=>{
  const source=readCandidateRows(root).candidates[0];
  const row={...source,snapshot:{title:'Code exploration',excerpt:'A sample.',content_md:'## Try a task\n\nKeep the result.',seo_text:{seo_title:'Code exploration',seo_description:'Explore tasks.',og_title:'Code exploration',og_description:'Explore tasks.'}}};

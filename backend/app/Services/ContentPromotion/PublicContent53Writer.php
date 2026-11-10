@@ -104,6 +104,14 @@ final class PublicContent53Writer
         $created = 0;
         foreach ($rows as $row) {
             $saved = $before[$row['page_id']];
+            if ($row['new_traditional_topic'] ?? false) {
+                if (app(TraditionalTopicPublication::class)->publish($row, $saved, $context)) {
+                    $written[$row['page_id']] = true;
+                    $created += $saved['missing'] ? 1 : 0;
+                }
+
+                continue;
+            }
             if ($row['new_traditional_guide'] ?? false) {
                 if (app(TraditionalCareerGuideTarget::class)->publish($row, $saved['target'])) {
                     $written[$row['page_id']] = true;
@@ -247,6 +255,11 @@ final class PublicContent53Writer
         }
         $rows = collect($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'])->keyBy('page_id');
         foreach ($before as $id => $saved) {
+            if ($rows[$id]['new_traditional_topic'] ?? false) {
+                app(TraditionalTopicPublication::class)->restore($rows[$id], $saved, $after[$id], $context);
+
+                continue;
+            }
             if ($rows[$id]['new_traditional_guide'] ?? false) {
                 app(TraditionalCareerGuideTarget::class)->restore($rows[$id], $saved['target'], $after[$id]['target']);
 

@@ -238,6 +238,42 @@ final class PublicContent53Package
                 return $package;
             }
         }
+        if (is_file($root.'/'.self::PACKAGE.'/traditional-topics.json')) {
+            $name = 'traditional-topics.json';
+            $schema = 'fermatmind.traditional_topics.v1';
+            $bytes = $this->bytes($root, $name);
+            if (hash_equals($expectedSha256, hash('sha256', $schema."\n".$name."\n".hash('sha256', $bytes)."\n"))) {
+                $package = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
+                $rows = $package['candidates'] ?? [];
+                if (($package['schema'] ?? null) !== $schema || ! array_is_list($rows) || $rows === []) {
+                    throw new DomainException('traditional_topic_package_invalid');
+                }
+                $candidates = [];
+                foreach ($rows as $row) {
+                    $slug = $row['identity']['slug'] ?? '';
+                    $id = 'TRADITIONAL-TOPIC-'.$slug;
+                    $draft = $row['native_draft'] ?? [];
+                    if (! in_array($slug, ['big-five', 'england-post16-options', 'iq-eq', 'mbti'], true)
+                        || isset($candidates[$id]) || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => $slug, 'locale' => 'zh-TW']
+                        || ! is_int($row['source_ids'][$environment] ?? null) || ($row['source_ids'][$environment] ?? 0) < 1
+                        || ! is_array($row['source_snapshots'][$environment] ?? null) || ! is_array($row['snapshot'] ?? null)
+                        || ($draft['seo_meta']['robots'] ?? null) !== 'noindex,follow'
+                        || ($draft['seo_meta']['canonical_url'] ?? null) !== '/zh-TW/topics/'.$slug
+                        || array_diff(array_keys($draft['profile'] ?? []), ['topic_code', 'title', 'subtitle', 'excerpt', 'hero_kicker', 'hero_quote', 'cover_image_url'])
+                        || ! is_string($draft['profile']['topic_code'] ?? null)
+                        || ! is_array($draft['sections'] ?? null) || ! is_array($draft['entries'] ?? null)) {
+                        throw new DomainException('traditional_topic_package_identity_invalid');
+                    }
+                    $candidates[$id] = [
+                        'page_id' => $id, 'kind' => 'profile', 'identity' => $row['identity'],
+                        'new_traditional_topic' => true, 'native_draft' => $draft, 'snapshot' => $row['snapshot'],
+                        'source_id' => $row['source_ids'][$environment], 'source_snapshot' => $row['source_snapshots'][$environment],
+                    ];
+                }
+
+                return ['candidates' => array_values($candidates), 'package_sha256' => $expectedSha256];
+            }
+        }
         if (is_file($root.'/'.self::PACKAGE.'/traditional-career-guides.json')) {
             $schema = 'fermatmind.traditional_career_guides.v1';
             $bytes = $this->bytes($root, 'traditional-career-guides.json');

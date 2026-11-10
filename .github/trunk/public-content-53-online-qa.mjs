@@ -351,7 +351,7 @@ export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,r
       result[row.page_id] = await readMbtiResultCopySample(environment,row,fetcher,renderer);
       continue;
     }
-    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true || row.new_traditional_guide === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
+    const bytes=await read(api+apiPath(row),fetcher,row.new_article === true || row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true || row.new_traditional_guide === true || row.new_traditional_topic === true || (environment === 'staging' && row.page_id === 'PAGE-60' && !!row.staging_bootstrap));
     if (bytes === null) { result[row.page_id]={missing:true};continue; }
     const data=parseApi(bytes);const value=projection(row,data);
     if (!equal(value,environment === 'staging' ? row.staging_before : row.before) && !equal(value,row.snapshot)) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DRIFT_${row.page_id}`);
@@ -431,6 +431,19 @@ export function assertDom(row,html,before,environment, {articleSsr=false}={}) {
   const reviewedBefore=environment === 'staging' ? (row.staging_before ?? row.before) : row.before;
   const dom=domOf(html,{articleSsr}); const body=compact(dom.body.join(' '));
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
+  if (row.new_traditional_topic) {
+    const path=pathFor(row);
+    if (dom.language !== 'zh-TW' || compact(dom.h1[0]) !== compact(row.snapshot.title)
+      || !equal(dom.canonical,['https://fermatmind.com'+path])
+      || !dom.robots.some(value=>/\bnoindex\b/i.test(value))
+      || dom.alternate_entries.some(entry=>entry.hreflang)
+      || !['/zh-TW/topics','/zh/topics/'+row.identity.slug,'/en/topics/'+row.identity.slug].every(href=>dom.links.includes(href))
+      || Object.values(row.snapshot.entry_groups).flat().some(entry=>!dom.links.includes(entry.url))
+      || row.snapshot.sections.some(section=>section.title && !body.includes(compact(section.title)))) {
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_TOPIC_DOM_${row.page_id}`);
+    }
+    return;
+  }
   if (row.new_traditional_blog) {
     const path=pathFor(row);
     const categories=row.snapshot.payload_json.blog_v1.categories;
@@ -757,7 +770,7 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     const data=parseApi(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
     const createdStaging = environment === 'staging' && row.page_id === 'PAGE-60' && row.staging_bootstrap && before?.missing === true;
     const createdArticle = row.new_article === true && before?.missing === true;
-    const createdTraditional = (row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true || row.new_traditional_guide === true) && before?.missing === true;
+    const createdTraditional = (row.new_traditional_article === true || row.new_traditional_page === true || row.new_traditional_landing === true || row.new_traditional_guide === true || row.new_traditional_topic === true) && before?.missing === true;
     if (row.featured_targets) {
       const archive=parseApi(await read(api+'/api/v0.5/articles?locale=zh-TW&org_id=0&include_blog=1',fetcher)).blog_v1;
       const fields=['id','slug','published_revision_id'];
@@ -770,6 +783,9 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_LANDING_QUALIFICATION_${row.page_id}`);
     if (row.new_traditional_page && (native.is_indexable !== false || native.path !== pathFor(row)))
       throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_PAGE_QUALIFICATION_${row.page_id}`);
+    if (row.new_traditional_topic && (native.is_indexable !== false || data.seo_meta?.robots !== 'noindex,follow'
+      || data.seo_meta?.canonical_url !== pathFor(row)))
+      throw new Error(`PUBLIC_CONTENT_53_TRADITIONAL_TOPIC_QUALIFICATION_${row.page_id}`);
     if (row.new_traditional_guide && (native.is_indexable !== false
       || !equal(data.related_articles?.map(article=>[article.id,article.slug,article.locale]),
         row.source_expectation.articles.map(article=>[article.id,article.slug,'zh-TW']))))
