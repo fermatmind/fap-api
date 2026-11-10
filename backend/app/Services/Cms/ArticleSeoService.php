@@ -727,9 +727,9 @@ final class ArticleSeoService
         $translationGroupId = trim((string) ($article->translation_group_id ?? ''));
 
         $counterparts = app(ArticleReviewedCounterpartService::class);
-        $reviewedPair = $counterparts->resolve($article);
+        $reviewedPair = $counterparts->resolveForSearch($article);
         if ($reviewedPair !== null) {
-            $variants = $reviewedPair !== [] ? $reviewedPair : [$article];
+            $variants = $reviewedPair === [] && $article->locale !== 'zh-TW' ? [$article] : $reviewedPair;
         } elseif ($translationGroupId !== '') {
             $variants = Article::query()
                 ->withoutGlobalScopes()

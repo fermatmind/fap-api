@@ -68,6 +68,53 @@ final class ArticleReviewedCounterpartService
         }
     }
 
+    /** null leaves the legacy group in charge. A stale binding cannot be replaced by a group match. */
+    public function resolveForSearch(Article $article): ?array
+    {
+        $pair = $this->resolve($article);
+        if ($pair === null && $article->locale === 'zh-TW' && $article->source_locale === 'zh-CN') {
+            $source = Article::withoutGlobalScopes()->where('org_id', 0)
+                ->whereKey($article->source_article_id)->where('locale', 'zh-CN')
+                ->with('seoMeta')->first();
+            $pair = $source instanceof Article ? $this->resolve($source) : null;
+        }
+        if ($pair === null || $pair === []) {
+            return $pair;
+        }
+
+        $source = collect($pair)->firstWhere('locale', 'zh-CN');
+        $traditional = $this->traditionalSearchCounterpart($source);
+        if ($article->locale === 'zh-TW' && (int) $traditional?->id !== (int) $article->id) {
+            return [];
+        }
+
+        return $traditional instanceof Article ? [...$pair, $traditional] : $pair;
+    }
+
+    private function traditionalSearchCounterpart(Article $source): ?Article
+    {
+        $group = trim((string) $source->translation_group_id);
+        if ($group === '') {
+            return null;
+        }
+        $targets = Article::withoutGlobalScopes()->where('org_id', 0)
+            ->where('source_article_id', $source->id)->where('source_locale', 'zh-CN')
+            ->where('translation_group_id', $group)->where('locale', 'zh-TW')->publiclyReadable()
+            ->with(['publishedRevision', 'seoMeta'])->limit(2)->get();
+        $target = $targets->count() === 1 ? $targets->sole() : null;
+        if (! $target instanceof Article || ! $this->eligible($target, includeTraditional: true)
+            || (int) $target->publishedRevision->source_article_id !== (int) $source->id
+            || $target->publishedRevision->source_locale !== 'zh-CN'
+            || $target->publishedRevision->translation_group_id !== $group
+            || $this->binding($target) !== null
+            || data_get($target->seoMeta->schema_json, 'editorial_package_v1.hreflang_gate_v1.enabled') !== true
+            || data_get($target->seoMeta->schema_json, 'editorial_package_v1.hreflang_hold')) {
+            return null;
+        }
+
+        return $target;
+    }
+
     public function eligible(Article $article, bool $includeTraditional = false): bool
     {
         $article->loadMissing(['publishedRevision', 'seoMeta']);

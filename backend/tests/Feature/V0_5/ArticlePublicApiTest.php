@@ -673,6 +673,63 @@ final class ArticlePublicApiTest extends TestCase
         $this->getJson('/api/v0.5/articles/'.$traditional->slug.'?locale=zh-TW')->assertNotFound();
     }
 
+    public function test_cross_group_search_alternates_extend_the_reviewed_pair_only_with_eligible_traditional_lineage(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $source = $this->createArticle(['slug' => 'search-source', 'locale' => 'zh-CN', 'translation_group_id' => 'search-source-group']);
+        $english = $this->createArticle(['slug' => 'reviewed-search-peer', 'locale' => 'en', 'translation_group_id' => 'search-peer-group']);
+        $unrelated = $this->createArticle(['slug' => 'search-source', 'locale' => 'en', 'translation_group_id' => 'search-source-group']);
+        $targetIdentity = [
+            'locale' => 'zh-TW', 'source_locale' => 'zh-CN', 'source_article_id' => $source->id,
+            'translation_group_id' => $source->translation_group_id, 'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+        ];
+        $traditional = $this->createArticle($targetIdentity + ['slug' => 'traditional-search-peer']);
+        $counterparts = app(\App\Services\Cms\ArticleReviewedCounterpartService::class);
+        $binding = $counterparts->createBinding([$source, $english]);
+        foreach ([$source, $english] as $member) {
+            $this->createSeoMeta($member, [
+                'canonical_url' => $counterparts->canonical($member),
+                'schema_json' => ['editorial_package_v1' => ['hreflang_gate_v1' => [
+                    'enabled' => true, 'policy' => 'reciprocal_counterparts_verified', 'counterpart_binding_v1' => $binding,
+                ]]],
+            ]);
+        }
+        $seo = $this->createSeoMeta($traditional, [
+            'canonical_url' => $counterparts->canonical($traditional), 'robots' => 'noindex,follow',
+            'schema_json' => ['editorial_package_v1' => ['hreflang_gate_v1' => ['enabled' => true]]],
+        ]);
+
+        $read = fn (Article $member) => $this->getJson('/api/v0.5/articles/'.$member->slug.'/seo?locale='.$member->locale)->assertOk();
+        $assertPair = function () use ($read, $source, $english, $traditional): void {
+            foreach ([$source, $english] as $member) {
+                $read($member)->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', ['en', 'zh-CN']);
+            }
+            $read($traditional)->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', []);
+        };
+        $assertPair();
+
+        $seo->update(['robots' => 'index,follow']);
+        foreach ([$source, $english, $traditional] as $member) {
+            $read($member)->assertJsonPath('meta.article_authority_v1.alternate_eligibility.alternates', [
+                'en' => $counterparts->canonical($english),
+                'zh-CN' => $counterparts->canonical($source),
+                'zh-TW' => $counterparts->canonical($traditional),
+            ]);
+        }
+        $read($unrelated)->assertJsonMissingPath('meta.alternates.zh-TW');
+
+        $duplicate = $this->createArticle($targetIdentity + ['slug' => 'ambiguous-traditional-peer', 'is_indexable' => false]);
+        $assertPair();
+        $duplicate->delete();
+
+        $traditional->publishedRevision->updateQuietly(['source_article_id' => $unrelated->id]);
+        $assertPair();
+        $traditional->publishedRevision->updateQuietly(['source_article_id' => $source->id]);
+        $english->publishedRevision->updateQuietly(['content_md' => 'Changed after the exact pair was reviewed.']);
+        $read($traditional)->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', []);
+        $read($source)->assertJsonMissingPath('meta.alternates.zh-TW');
+    }
+
     public function test_traditional_preflight_requires_the_exact_reviewed_cross_group_pair(): void
     {
         $source = $this->createArticle(['slug' => 'cross-group-source', 'locale' => 'zh-CN']);
