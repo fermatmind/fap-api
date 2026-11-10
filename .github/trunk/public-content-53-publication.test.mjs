@@ -7,7 +7,7 @@ import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { selectPublicContentPackage, packageDigest, executorPaths, inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
-import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
+import { buildExecution, publish, recoveryFailure, recoverPreviousStagingIndex, PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS, TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS } from './public-content-53-publish.mjs';
 import { assertNewArticleDiscovery, assertDom, domOf, pathFor, read, projection, readOnlinePrestate, verifyOnlineCandidates } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 test('support contact selects ten existing bilingual pages with only approved email changes',()=>{
@@ -341,13 +341,15 @@ test('bare internal paths require visible labels on the matching public route an
 
 test('failed SSH exit is classified before JSON parsing and still invokes exact recovery',async()=>{
  const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123',mode:'publish'},binding:{package_sha256:'b'.repeat(64),executor_release_sha256:'c'.repeat(64)}};
- const calls=[];
- await assert.rejects(()=>publish(execution,async request=>{
-  calls.push(request.mode);
-  if(request.mode==='publish')return {status:255,stdout:'private transport bytes'};
-  return {status:0,stdout:JSON.stringify({ok:true,mode:'recover',source_commit:request.source_commit,workflow_run_id:request.workflow_run_id,workflow_run_attempt:1,package_sha256:execution.binding.package_sha256,executor_release_sha256:execution.binding.executor_release_sha256,restored:true,recovery_status:'restored',sanitized:true})};
- }),error=>error.receipt.error_code==='PUBLIC_CONTENT_53_SSH_EXIT_255'&&error.receipt.recovery_completed===true&&!JSON.stringify(error.receipt).includes('private'));
- assert.deepEqual(calls,['publish','recover']);
+ for (const [timedOut, code] of [[false,'PUBLIC_CONTENT_53_SSH_EXIT_255'],[true,'PUBLIC_CONTENT_53_SSH_TIMEOUT']]) {
+  const calls=[];
+  await assert.rejects(()=>publish(execution,async request=>{
+   calls.push(request.mode);
+   if(request.mode==='publish')return {status:255,timedOut,stdout:'private transport bytes'};
+   return {status:0,stdout:JSON.stringify({ok:true,mode:'recover',source_commit:request.source_commit,workflow_run_id:request.workflow_run_id,workflow_run_attempt:1,package_sha256:execution.binding.package_sha256,executor_release_sha256:execution.binding.executor_release_sha256,restored:true,recovery_status:'restored',sanitized:true})};
+  }),error=>error.receipt.error_code===code&&error.receipt.recovery_completed===true&&!JSON.stringify(error.receipt).includes('private'));
+  assert.deepEqual(calls,['publish','recover']);
+ }
 });
 
 
@@ -763,17 +765,73 @@ test('sample discovery requires real archive anchors and cannot pass from serial
 });
 
 
+test('interrupted Traditional index staging restores only the exact prior transaction', async () => {
+ const previous='a'.repeat(40), candidate='b'.repeat(40), run='123';
+ const selection='traditional-article-index';
+ const digest=packageDigest(root,selection);
+ const cohort=readCandidateRows(root,digest,'staging').candidates.map(row=>({loc:row.traditional_article_index.target.canonical}));
+ const temp=mkdtempSync(resolve(tmpdir(),'fm-index-recovery-'));
+ const env={RUNNER_TEMP:temp,PUBLIC_CONTENT_53_PACKAGE_NAME:selection,PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',
+  DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',
+  DEPLOY_SHA:candidate,GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
+ const receipt={schema:'public.content53.publish.v1',ok:false,sanitized:true,source_commit:previous,
+  workflow_run_id:run,workflow_run_attempt:1,package_sha256:digest,transport_started:true,recovery_completed:false,
+  recovery_error_code:'public_content_53_execution_lock_failed',error_code:'PUBLIC_CONTENT_53_SSH_EXIT_255'};
+ let active=cohort;
+ let receiptBody=receipt;
+ const calls=[];
+ const deps={
+  command(program,args) {
+   calls.push([program,...args.slice(0,2)]);
+   if (program==='git') return args[0]==='rev-parse'?candidate:'';
+   if (args[1]==='list') return JSON.stringify([{headSha:previous,attempt:1,status:'completed',conclusion:'failure',databaseId:Number(run)}]);
+   assert.equal(args[4],`public-content-53-staging-${previous}-${run}-1`);
+   writeFileSync(resolve(args.at(-1),'staging.json'),JSON.stringify(receiptBody));
+   return '';
+  },
+  fetcher: async url => new Response(JSON.stringify(url.endsWith('/revision')?{revision:previous}:
+   {ok:true,source:'backend_sitemap_generator',items:active})),
+  async execute(execution,request) {
+   calls.push(['recover',request.source_commit,request.workflow_run_id]);
+   assert.equal(request.mode,'recover');
+   assert.equal(request.package_sha256,digest);
+   active=[];
+   return {status:0,stdout:JSON.stringify({...request,ok:true,restored:true,recovery_status:'restored',sanitized:true})};
+  },
+ };
+ try {
+  await recoverPreviousStagingIndex(env,deps);
+  assert.deepEqual(calls.at(-1),['recover',previous,run]);
+  const recoveryCalls=()=>calls.filter(call=>call[0]==='recover').length;
+  await recoverPreviousStagingIndex(env,deps);
+  assert.equal(recoveryCalls(),1);
+  active=cohort.slice(1);
+  await assert.rejects(recoverPreviousStagingIndex(env,deps),/PREVIOUS_STAGING_STATE_INVALID/);
+  active=cohort;
+  receiptBody={...receipt,recovery_completed:true};
+  await assert.rejects(recoverPreviousStagingIndex(env,deps),/PREVIOUS_STAGING_RECEIPT_INVALID/);
+  await assert.rejects(recoverPreviousStagingIndex({...env,PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'production'},deps),/PREVIOUS_STAGING_SCOPE_INVALID/);
+  assert.equal(recoveryCalls(),1);
+ } finally {
+  rmSync(temp,{recursive:true,force:true});
+ }
+});
+
 test('exact changed paths select a single package through transport, QA and workflow budgets',()=>{
  const env={PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
  for(const [name,file,count] of [['riasec-code-samples','riasec-code-samples.json',6],['career-planning','career-planning.json',3],['guide-amendment','guide-amendment-review.json',1]]) {
   const selected=selectPublicContentPackage(['backend/content_assets/public_content_53/'+file]);
   assert.equal(selected,name);
   const execution=buildExecution({...env,PUBLIC_CONTENT_53_PACKAGE_NAME:selected},root);
+  assert.equal(execution.publishTimeoutMs,PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS);
   assert.equal(execution.binding.package_sha256,packageDigest(root,name));
   assert.equal(execution.request.package_sha256,execution.binding.package_sha256);
   assert.equal(execution.binding.expected_row_count,count);
   assert.equal(readCandidateRows(root,execution.request.package_sha256).candidates.length,count);
  }
+ const indexExecution=buildExecution({...env,PUBLIC_CONTENT_53_PACKAGE_NAME:'traditional-article-index'},root);
+ assert.equal(indexExecution.publishTimeoutMs,TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS);
+ assert.equal(indexExecution.binding.expected_row_count,115);
  assert.equal(selectPublicContentPackage(['backend/app/Services/ContentPromotion/PublicContent53Package.php']),null);
  assert.throws(()=>selectPublicContentPackage(['backend/content_assets/public_content_53/riasec-code-samples.json','backend/content_assets/public_content_53/career-planning.json']),/MULTIPLE_PACKAGES/);
  assert.throws(()=>selectPublicContentPackage(['backend/content_assets/public_content_53/unknown.json']),/SELECTION_UNKNOWN/);

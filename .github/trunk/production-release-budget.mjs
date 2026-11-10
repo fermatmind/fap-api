@@ -9,6 +9,7 @@
 // Both 800s publication/recovery SSH limits remain reserved separately.
 import {readCandidateRows,packageDigest} from './public-content-53-package.mjs';
 import {TRADITIONAL_INDEX_QA_WINDOW_MS} from './public-content-53-online-qa.mjs';
+import {PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS, TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS} from './public-content-53-publish.mjs';
 import {IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS} from './iq-public-scale-publish.mjs';
 import {IQ_CANDIDATE_READ_TIMEOUT_MS, IQ_HTTP_READ_TIMEOUT_MS} from './iq-public-scale-online-qa.mjs';
 
@@ -29,9 +30,11 @@ export function publicContentOnlineRows(rows) {
   return rows.length - adapterOnly || undefined;
 }
 
-// Reserve both 800s transports and two bounded QA windows. A final
-// HTTP/DOM group and two representative browser reads may finish after a window.
-export const TRADITIONAL_INDEX_BUDGET_SECONDS = 1600 + 2 * (TRADITIONAL_INDEX_QA_WINDOW_MS / 1000 + 60) + 160;
+// Reserve both transports and two bounded QA windows. A final HTTP/DOM
+// group and two representative browser reads may finish after a window.
+export const TRADITIONAL_INDEX_BUDGET_SECONDS =
+  (TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS + PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS) / 1000
+  + 2 * (TRADITIONAL_INDEX_QA_WINDOW_MS / 1000 + 60) + 160;
 
 export function requiredSeconds(deployMinutes, operations, publicContentRows = 53, newArticleDiscovery = false) {
   if (![30,35,60].includes(deployMinutes)) throw new Error('DEPLOY_BUDGET_INVALID');

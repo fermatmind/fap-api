@@ -917,6 +917,13 @@ jobs:
             and .ready_for_11H == false and ."11i_handoff_ready" == false
             and .execution_allowed == false and .external_calls == 0 and .production_permissions == 0
           ' seo-competitive-evidence-staging.json >/dev/null
+      - name: Restore an interrupted Traditional index transaction before staging activation
+        if: env.PUBLIC_CONTENT_53_PACKAGE_NAME == 'traditional-article-index'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT: staging
+          CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
+        run: node .github/trunk/public-content-53-publish.mjs recover-previous-staging-index
       - name: Deploy staging and run repository smoke chain
         env:
           GOTENBERG_RESULT_PRINT_TOKEN_SECRET: ${{ secrets.GOTENBERG_RESULT_PRINT_TOKEN_SECRET }}

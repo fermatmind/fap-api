@@ -1,9 +1,12 @@
 import { execFileSync, execFile } from 'node:child_process';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { inspectPackage, workflowSignature, packageDigest } from './public-content-53-package.mjs';
+import { inspectPackage, workflowSignature, packageDigest, readCandidateRows, executorPaths } from './public-content-53-package.mjs';
 import { verifyOnlineCandidates, readOnlinePrestate } from './public-content-53-online-qa.mjs';
+
+export const PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS = 800000;
+export const TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS = 1500000;
 
 const quote = value => `'${String(value).replaceAll("'", "'\\''")}'`;
 export function buildExecution(env, backendRoot) {
@@ -26,11 +29,19 @@ export function buildExecution(env, backendRoot) {
   const identity = env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT === 'staging' ? env.DEPLOY_IDENTITY_FILE_STG : env.DEPLOY_IDENTITY_FILE_PROD;
   if (identity) args.push('-o', 'IdentitiesOnly=yes', '-i', identity);
   args.push('-p', env.DEPLOY_PORT, `${env.DEPLOY_USER}@${env.DEPLOY_HOST}`, command);
-  return { binding, request, args };
+  const publishTimeoutMs = env.PUBLIC_CONTENT_53_PACKAGE_NAME === 'traditional-article-index'
+    ? TRADITIONAL_INDEX_PUBLISH_TIMEOUT_MS
+    : PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS;
+  return { binding, request, args, publishTimeoutMs };
 }
 const transport = (execution, request) => new Promise(resolve => {
-  const child = execFile('ssh', execution.args, { encoding: 'utf8', timeout: 800000, maxBuffer: 262144 },
-    (error, stdout) => resolve({ status: error ? (Number.isInteger(error.code) ? error.code : 1) : 0, stdout }));
+  const timeout = request.mode === 'publish' ? execution.publishTimeoutMs : PUBLIC_CONTENT_53_TRANSPORT_TIMEOUT_MS;
+  const child = execFile('ssh', execution.args, { encoding: 'utf8', timeout, maxBuffer: 262144 },
+    (error, stdout) => resolve({
+      status: error ? (Number.isInteger(error.code) ? error.code : 1) : 0,
+      timedOut: error?.killed === true && error.signal === 'SIGTERM',
+      stdout,
+    }));
   child.stdin.on('error', () => {});
   child.stdin.end(JSON.stringify(request));
 });
@@ -49,6 +60,15 @@ const mbtiQaCodes = new Set(['IDENTITY_INVALID','TRANSPORT_FAILED','API_FAILED',
 const nativeTraditionalCode = value => /^public_content_53_traditional_page_source_(?:identity|readiness|review|hold|html|version|path|support_contact|copy_(?:title|kicker|summary|seo_title|meta_description|seo_description|content_md|headings|faq_items))_(?:about|brand|charter|careers|privacy|terms|method-boundaries|science|help-contact|foundation|policies|help-faq|help-about|help-team|help-used-and-mentioned|help-for-business-and-research)$/.test(value ?? '');
 const safeNativeCode = value => /^public_content_53_[a-z0-9_]+$/.test(value ?? '') || nativeTraditionalCode(value);
 const diagnosticCode = error => (mbtiQaCodes.has(error?.message) || traditionalIndexQaCodes.has(error?.message) || nativeTraditionalCode(error?.message)) ? error.message : /^(?:PUBLIC_CONTENT_53_[A-Z0-9_]+(?:_(?:PAGE-[0-9]{2}|TRADITIONAL-(?:about|brand|charter|careers|privacy|terms|method-boundaries|science|help-contact|foundation|policies|help-faq|help-about|help-team|help-used-and-mentioned|help-for-business-and-research)|RIASEC-(?:RIC|IAR|SAE)-(?:zh-CN|en)|EN-GUIDE-(?:annual-career-review-system|big5-for-career-decisions|build-five-year-career-roadmap|build-portfolio-for-career-switch|career-growth-with-manager|career-risk-management|cross-industry-move-strategy|first-90-days-in-new-role|from-mbti-to-job-fit|how-to-choose-college-major|improve-workplace-competitiveness|interview-strategy-by-role|leader-track-vs-expert-track|networking-that-actually-works|personal-brand-for-professionals|prevent-burnout-while-growing|salary-negotiation-framework))(?:_ITEM_[0-9]{1,4})?)?|public_content_53_[a-z0-9_]+)$/.test(error?.message ?? '') ? error.message : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED';
+function recovered(execution, response, result) {
+  return response.status === 0 && result.ok === true && result.mode === 'recover'
+    && result.source_commit === execution.request.source_commit
+    && result.workflow_run_id === execution.request.workflow_run_id && result.workflow_run_attempt === 1
+    && result.package_sha256 === execution.binding.package_sha256
+    && result.executor_release_sha256 === execution.binding.executor_release_sha256 && result.sanitized === true
+    && ((result.restored === true && result.recovery_status === 'restored') || (result.restored === false && result.recovery_status === 'not_required'));
+}
+
 export async function recoveryFailure(execution, execute = request => transport(execution, request), cause) {
   let completed = false;
   let recoveryCode;
@@ -56,12 +76,7 @@ export async function recoveryFailure(execution, execute = request => transport(
     const response = await execute({ ...execution.request, mode: 'recover' });
     const result = parseResponse(response.stdout);
     if (result.ok === false) recoveryCode = diagnosticCode({ message: result.error_code });
-    completed = response.status === 0 && result.ok === true && result.mode === 'recover'
-      && result.source_commit === execution.request.source_commit
-      && result.workflow_run_id === execution.request.workflow_run_id && result.workflow_run_attempt === 1
-      && result.package_sha256 === execution.binding.package_sha256
-      && result.executor_release_sha256 === execution.binding.executor_release_sha256 && result.sanitized === true
-      && ((result.restored === true && result.recovery_status === 'restored') || (result.restored === false && result.recovery_status === 'not_required'));
+    completed = recovered(execution, response, result);
   } catch { /* Failed recovery keeps the release failed. */ }
   const error = new Error('PUBLIC_CONTENT_53_PUBLICATION_FAILED');
   error.receipt = { schema: 'public.content53.publish.v1', ok: false,
@@ -77,6 +92,7 @@ export async function recoveryFailure(execution, execute = request => transport(
 export async function publish(execution, execute = request => transport(execution, request)) {
   try {
     const response = await execute(execution.request);
+    if (response.timedOut === true) throw new Error('PUBLIC_CONTENT_53_SSH_TIMEOUT');
     // A failed SSH process is not an invalid JSON protocol response. Preserve
     // only its bounded exit status; never expose command, stderr or request bytes.
     if (response.status !== 0) {
@@ -103,6 +119,92 @@ export async function publish(execution, execute = request => transport(executio
     throw await recoveryFailure(execution, execute, cause);
   }
 }
+const readCommand = (program, args) => execFileSync(program, args, {
+  encoding: 'utf8', timeout: 30000, maxBuffer: 262144, stdio: ['ignore', 'pipe', 'pipe'],
+}).trim();
+
+function validateStagingIndexRecoveryReceipt(receipt, execution) {
+  if (execution.binding.environment !== 'staging' || execution.binding.expected_row_count !== 115
+    || receipt.schema !== 'public.content53.publish.v1' || receipt.ok !== false || receipt.sanitized !== true
+    || receipt.source_commit !== execution.request.source_commit
+    || receipt.workflow_run_id !== execution.request.workflow_run_id || receipt.workflow_run_attempt !== 1
+    || receipt.package_sha256 !== execution.binding.package_sha256 || receipt.transport_started !== true
+    || receipt.recovery_completed !== false || receipt.recovery_error_code !== 'public_content_53_execution_lock_failed'
+    || !['PUBLIC_CONTENT_53_SSH_EXIT_255', 'PUBLIC_CONTENT_53_SSH_TIMEOUT'].includes(receipt.error_code)) {
+    throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_RECEIPT_INVALID');
+  }
+}
+
+export async function recoverPreviousStagingIndex(env, {
+  command = readCommand, fetcher = fetch, execute = transport,
+} = {}) {
+  const selection = 'traditional-article-index';
+  if (env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT !== 'staging' || env.PUBLIC_CONTENT_53_PACKAGE_NAME !== selection
+    || env.GITHUB_RUN_ATTEMPT !== '1' || !/^[a-f0-9]{40}$/.test(env.DEPLOY_SHA ?? '')
+    || command('git', ['rev-parse', 'HEAD']) !== env.DEPLOY_SHA) {
+    throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_SCOPE_INVALID');
+  }
+  const backendRoot = resolve('backend');
+  const digest = packageDigest(backendRoot, selection);
+  const expected = readCandidateRows(backendRoot, digest, 'staging').candidates
+    .map(row => new URL(row.traditional_article_index.target.canonical).pathname).sort();
+  const read = async path => {
+    const response = await fetcher('https://staging-api.fermatmind.com' + path, {
+      redirect: 'error', signal: AbortSignal.timeout(20000), headers: {'Cache-Control':'no-cache'},
+    });
+    if (!response.ok) throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_READ_FAILED');
+    return response.json();
+  };
+  const current = async () => (await read('/revision')).revision;
+  const members = async () => {
+    const payload = await read('/api/v0.5/seo/sitemap-source');
+    if (payload.ok !== true || payload.source !== 'backend_sitemap_generator' || !Array.isArray(payload.items))
+      throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_SITEMAP_INVALID');
+    return payload.items.map(item => new URL(item.loc).pathname)
+      .filter(path => /^\/zh-TW\/articles\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(path)).sort();
+  };
+  const previous = await current();
+  const active = await members();
+  if (!active.length) return;
+  if (!/^[a-f0-9]{40}$/.test(previous ?? '') || previous === env.DEPLOY_SHA
+    || JSON.stringify(active) !== JSON.stringify(expected) || await current() !== previous) {
+    throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_STATE_INVALID');
+  }
+  command('git', ['merge-base', '--is-ancestor', previous, env.DEPLOY_SHA]);
+  command('git', ['diff', '--quiet', previous, env.DEPLOY_SHA, '--',
+    ...executorPaths.map(path => 'backend/' + path),
+    'backend/config/content_promotion_release_policy.v2.json',
+    'backend/content_assets/public_content_53/traditional-article-index.json',
+  ]);
+  const runs = JSON.parse(command('gh', ['run', 'list', '--workflow', 'deploy.yml', '--commit', previous,
+    '--branch', 'main', '--event', 'workflow_run', '--status', 'failure', '--limit', '2',
+    '--json', 'databaseId,headSha,attempt,status,conclusion',
+  ]));
+  if (runs.length !== 1 || runs[0].headSha !== previous || runs[0].attempt !== 1
+    || runs[0].status !== 'completed' || runs[0].conclusion !== 'failure'
+    || !Number.isSafeInteger(runs[0].databaseId) || runs[0].databaseId < 1) {
+    throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_RUN_INVALID');
+  }
+  const run = String(runs[0].databaseId);
+  const directory = mkdtempSync(resolve(env.RUNNER_TEMP, 'traditional-index-recovery-'));
+  try {
+    const artifact = 'public-content-53-staging-' + previous + '-' + run + '-1';
+    command('gh', ['run', 'download', run, '--name', artifact, '--dir', directory]);
+    const receipt = JSON.parse(readFileSync(resolve(directory, 'staging.json'), 'utf8'));
+    const execution = buildExecution({...env, DEPLOY_SHA:previous, GITHUB_RUN_ID:run}, backendRoot);
+    validateStagingIndexRecoveryReceipt(receipt, execution);
+    if (await current() !== previous) throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_STATE_INVALID');
+    const response = await execute(execution, {...execution.request, mode:'recover'});
+    const result = parseResponse(response.stdout);
+    if (!recovered(execution, response, result) || result.restored !== true
+      || await current() !== previous || (await members()).length !== 0) {
+      throw new Error('PUBLIC_CONTENT_53_PREVIOUS_STAGING_RECOVERY_FAILED');
+    }
+  } finally {
+    rmSync(directory, {recursive:true, force:true});
+  }
+}
+
 function failedBeforeTransport(env) {
   if (!/^[a-f0-9]{40}$/.test(env.DEPLOY_SHA ?? '') || !/^[1-9][0-9]*$/.test(env.GITHUB_RUN_ID ?? '')
     || env.GITHUB_RUN_ATTEMPT !== '1') throw new Error('PUBLIC_CONTENT_53_WORKFLOW_IDENTITY_INVALID');
@@ -139,5 +241,13 @@ async function cli() {
   }
 }
 if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
-  cli().catch(error => { process.stderr.write(`${error.receipt?.error_code ?? 'PUBLIC_CONTENT_53_PUBLICATION_FAILED'}\n`); process.exitCode = 1; });
+  const recovery = process.argv[2] === 'recover-previous-staging-index';
+  const operation = recovery ? recoverPreviousStagingIndex(process.env) : cli();
+  operation.catch(error => {
+    const code = recovery && /^PUBLIC_CONTENT_53_PREVIOUS_STAGING_[A-Z_]+$/.test(error.message)
+      ? error.message
+      : error.receipt?.error_code ?? (recovery ? 'PUBLIC_CONTENT_53_PREVIOUS_STAGING_RECOVERY_FAILED' : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED');
+    process.stderr.write(`${code}\n`);
+    process.exitCode = 1;
+  });
 }
