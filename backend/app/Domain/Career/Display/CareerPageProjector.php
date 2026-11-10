@@ -80,6 +80,9 @@ final class CareerPageProjector
     /** Normalize navigation only; locale files and their provenance remain unchanged. */
     public function normalizeLinks(array $page): array
     {
+        if (($page['locale'] ?? null) === 'zh-TW') {
+            return $page;
+        }
         $segment = ($page['locale'] ?? null) === 'zh-CN' ? 'zh' : 'en';
         $changes = [];
         $localize = static function (string $href) use ($segment): string {

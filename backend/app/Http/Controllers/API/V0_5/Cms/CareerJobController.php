@@ -116,7 +116,7 @@ final class CareerJobController extends Controller
 
     public function seo(Request $request, string $slug): JsonResponse
     {
-        $validated = $this->validateReadQuery($request);
+        $validated = $this->validateReadQuery($request, allowTraditional: true);
         if ($validated instanceof JsonResponse) {
             return $validated->header('Cache-Control', 'private, no-store');
         }
@@ -351,11 +351,11 @@ final class CareerJobController extends Controller
     /**
      * @return array{org_id:int,locale:string}|JsonResponse
      */
-    private function validateReadQuery(Request $request): array|JsonResponse
+    private function validateReadQuery(Request $request, bool $allowTraditional = false): array|JsonResponse
     {
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
-            'locale' => ['required', 'in:en,zh-CN'],
+            'locale' => ['required', $allowTraditional ? 'in:en,zh-CN,zh-TW' : 'in:en,zh-CN'],
         ]);
 
         if ($validator->fails()) {

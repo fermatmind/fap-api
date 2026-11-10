@@ -24,13 +24,25 @@ final class CareerFilePageReader
 
     public function read(string $slug, string $locale, bool $cacheWrite = true, bool $presenceOnly = false): ?array
     {
-        $locale = in_array(strtolower($locale), ['zh', 'zh-cn'], true) ? 'zh-CN' : $locale;
-        $projection = $this->publication->filePagePublication($slug, $locale);
+        $locale = match (strtolower($locale)) {
+            'zh', 'zh-cn' => 'zh-CN',
+            'zh-tw' => 'zh-TW',
+            default => $locale,
+        };
+        $traditional = $locale === 'zh-TW';
+        // The installed locale file grants translated copy. The existing
+        // publication projection still governs the canonical occupation.
+        $projection = $this->publication->filePagePublication($slug, $traditional ? 'zh-CN' : $locale);
         if (! $this->publication->jobDetailProjectionItemIsPublished($projection)) {
             return null;
         }
+        $authority = $this->content->authority();
+        $hasTraditionalFile = isset($authority['entries'][$slug]['zh-TW']);
+        if ($traditional && ! $hasTraditionalFile) {
+            return null;
+        }
         $entry = $this->pages->fileEntry($slug, $locale);
-        $path = $this->content->authority()['root'].'/'.$entry['path'];
+        $path = $authority['root'].'/'.$entry['path'];
         if (! is_file($path) || is_link($path) || filesize($path) !== $entry['bytes']
             || ! hash_equals($entry['sha256'], hash_file('sha256', $path))) {
             throw new \App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_HASH_MISMATCH');
@@ -87,10 +99,16 @@ final class CareerFilePageReader
             ...array_filter($compatibilityCrosswalks, static fn (array $row): bool => ! in_array($row['source_system'], ['us_soc', 'onet_soc_2019'], true)),
             ...$currentCrosswalks,
         ];
-        $path = '/'.($locale === 'zh-CN' ? 'zh' : 'en').'/career/jobs/'.$slug;
-        $indexable = $this->content->hasPublicBody($slug, $locale);
+        [$segment, $titleKey] = match ($locale) {
+            'zh-CN' => ['zh', 'canonical_zh'],
+            'zh-TW' => ['zh-TW', 'canonical_zh_tw'],
+            default => ['en', 'canonical_en'],
+        };
+        $path = '/'.$segment.'/career/jobs/'.$slug;
+        $indexable = ! $traditional && $this->content->hasPublicBody($slug, $locale);
+        $business = $traditional ? [] : $this->publication->filePageBusiness($slug, $locale);
 
-        return array_merge($this->publication->filePageBusiness($slug, $locale), [
+        return array_merge($business, [
             'bundle_kind' => 'career_job_detail',
             'bundle_version' => CareerPageProjector::VERSION,
             'identity' => [
@@ -100,14 +118,14 @@ final class CareerFilePageReader
                 'family_uuid' => $occupation?->family_id ?? $projection['family_uuid'] ?? null,
                 'parent_uuid' => $occupation?->parent_id,
             ],
-            'titles' => [$locale === 'zh-CN' ? 'canonical_zh' : 'canonical_en' => $page['subject']['name']],
+            'titles' => [$titleKey => $page['subject']['name']],
             'alias_index' => $occupation?->aliases?->map(fn ($alias) => ['alias' => $alias->alias, 'normalized' => $alias->normalized, 'lang' => $alias->lang])->all() ?? [],
             'ontology' => ['crosswalks' => $crosswalks],
-            'locale_policy' => ['requested_locale' => $locale, 'available_locales' => ['en', 'zh-CN']],
+            'locale_policy' => ['requested_locale' => $locale, 'available_locales' => $hasTraditionalFile ? ['en', 'zh-CN', 'zh-TW'] : ['en', 'zh-CN']],
             'seo_contract' => ['canonical_path' => $path, 'canonical_target' => $path,
                 'index_state' => $indexable ? 'indexable' : 'noindex', 'index_eligible' => $indexable,
                 'robots_policy' => $indexable ? 'index,follow' : 'noindex,follow',
-                'reason_codes' => ['runtime_publish_projection', 'release_gate_pass'],
+                'reason_codes' => ['runtime_publish_projection', $traditional ? 'locale_index_hold' : 'release_gate_pass'],
                 'metadata_fingerprint' => $page['source_content_sha256']],
             'career_page' => $page,
         ]);

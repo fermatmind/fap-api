@@ -204,8 +204,13 @@ final class CareerPageDisplayResolver
                 }
             }
         }
+        $localeSegment = match ($content['locale']) {
+            'zh-CN' => 'zh',
+            'zh-TW' => 'zh-TW',
+            default => 'en',
+        };
         if (array_diff(array_keys($items), array_keys($used)) !== []
-            || $result['path'] !== '/'.($content['locale'] === 'zh-CN' ? 'zh' : 'en').'/career/jobs/'.$content['subject']['canonical_slug']) {
+            || $result['path'] !== '/'.$localeSegment.'/career/jobs/'.$content['subject']['canonical_slug']) {
             $this->fail();
         }
 

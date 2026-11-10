@@ -319,6 +319,31 @@ final class CareerContentV3AuthorityPackageTest extends TestCase
         }
     }
 
+    public function test_complete_traditional_locale_keeps_the_same_canonical_inventory(): void
+    {
+        $root = $this->fixture();
+        try {
+            $page = $this->page('zh-TW');
+            $page['subject']['name'] = '演員';
+            $page['source_content_sha256'] = str_repeat('d', 64);
+            $path = $root.'/careers/actors/zh-TW.json';
+            self::write($path, $page);
+            $this->refreshManifest($root, CareerContentV3Contract::LOCALES);
+
+            $loaded = $this->package()->loadRoot($root);
+            self::assertSame(['actors'], $loaded['slugs']);
+            self::assertSame(CareerContentV3Contract::LOCALES, array_keys($loaded['pages']['actors']));
+            self::assertSame('演員', $loaded['pages']['actors']['zh-TW']['subject']['name']);
+
+            unlink($path);
+            $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+            $this->expectExceptionMessage('CURRENT_CONTENT_V3_FILE_MISSING');
+            $this->package()->loadRoot($root);
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
     private function fixture(): string
     {
         $root = tempnam(sys_get_temp_dir(), 'career-v3-package-');
@@ -333,12 +358,12 @@ final class CareerContentV3AuthorityPackageTest extends TestCase
         return $root;
     }
 
-    private function refreshManifest(string $root): void
+    private function refreshManifest(string $root, array $locales = ['en', 'zh-CN']): void
     {
         $files = [];
         $semantic = [];
         $compatibility = [];
-        foreach (['en', 'zh-CN'] as $locale) {
+        foreach ($locales as $locale) {
             $path = 'careers/actors/'.$locale.'.json';
             $bytes = (string) file_get_contents($root.'/'.$path);
             $page = json_decode($bytes, true);
@@ -354,13 +379,14 @@ final class CareerContentV3AuthorityPackageTest extends TestCase
             $semantic[] = $sourceHash;
             $compatibility[] = $projectionHash;
         }
-        $localePages = ['actors|en', 'actors|zh-CN'];
+        $localePages = array_map(static fn (string $locale): string => 'actors|'.$locale, $locales);
+        $localeCount = count($locales);
         $manifest = [
             'aggregate_sha256' => '', 'authority_path' => 'backend/content_assets/career/current',
             'compiler_version' => CareerContentV3AuthorityPackage::COMPILER_VERSION,
             'contract_version' => CareerContentV3AuthorityPackage::CONTRACT_VERSION,
-            'coverage' => ['slugs' => 1, 'locales' => 2, 'locale_pages' => 2, 'files' => 2, 'enhanced_locale_pages' => 0, 'legacy_locale_pages' => 2],
-            'files' => $files, 'locales' => ['en', 'zh-CN'],
+            'coverage' => ['slugs' => 1, 'locales' => $localeCount, 'locale_pages' => $localeCount, 'files' => $localeCount, 'enhanced_locale_pages' => 0, 'legacy_locale_pages' => $localeCount],
+            'files' => $files, 'locales' => $locales,
             'schema_version' => CareerContentV3AuthorityPackage::SCHEMA_VERSION,
             'set_hashes' => [
                 'legacy_projection_aggregate_sha256' => CareerCurrentAuthorityPackage::hashValue($compatibility),

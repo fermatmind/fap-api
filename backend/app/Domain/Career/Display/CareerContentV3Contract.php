@@ -6,6 +6,8 @@ namespace App\Domain\Career\Display;
 
 final class CareerContentV3Contract
 {
+    public const LOCALES = ['en', 'zh-CN', 'zh-TW'];
+
     public const CONTRACT_VERSION = 'career.detail.content.v3';
 
     /** @var list<string> */
@@ -38,7 +40,7 @@ final class CareerContentV3Contract
         ], ['fact_register', 'hero', 'seo', 'display', 'authoring_structure']);
         CareerPageProjector::assertFields($content);
         if (($content['contract_version'] ?? null) !== self::CONTRACT_VERSION
-            || ! in_array($content['locale'] ?? null, CareerCurrentAuthorityPackage::LOCALES, true)
+            || ! in_array($content['locale'] ?? null, self::LOCALES, true)
             || ! in_array($content['content_state'] ?? null, ['enhanced', 'legacy'], true)
             || ! is_string($content['source_content_sha256'] ?? null)
             || preg_match('/\A[a-f0-9]{64}\z/', $content['source_content_sha256']) !== 1) {

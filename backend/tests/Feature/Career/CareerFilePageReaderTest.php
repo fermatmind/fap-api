@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
+use App\Domain\Career\Display\CareerContentV3Contract;
+use App\Domain\Career\Display\CareerContentV3FactResolver;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
 use App\Domain\Career\Display\CareerPageProjector;
 use App\Models\Occupation;
@@ -12,6 +17,7 @@ use App\Services\Career\CareerFilePageReader;
 use App\Support\PublicProjectionCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 final class CareerFilePageReaderTest extends TestCase
@@ -134,6 +140,106 @@ final class CareerFilePageReaderTest extends TestCase
             'en' => '/en/career/jobs/accountants-and-auditors',
             'zh-CN' => '/zh/career/jobs/accountants-and-auditors',
         ], $reader->seo($accountant)['meta']['hreflang']);
+    }
+
+    public function test_bilingual_package_does_not_publish_a_traditional_detail_fallback(): void
+    {
+        $this->publication(true);
+        $reader = app(CareerFilePageReader::class);
+
+        self::assertNull($reader->read('actors', 'zh-TW'));
+        self::assertNull($reader->read('actors', 'zh-tw', presenceOnly: true));
+        self::assertSame(['en', 'zh-CN'], $reader->read('actors', 'zh-CN')['locale_policy']['available_locales']);
+        $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-TW')->assertNotFound();
+        $this->getJson('/api/v0.5/career-jobs/actors/seo?org_id=0&locale=zh-TW')->assertNotFound();
+    }
+
+    public function test_installed_traditional_page_serves_exact_content_with_an_isolated_cache(): void
+    {
+        $backendRoot = sys_get_temp_dir().'/career-trilingual-'.bin2hex(random_bytes(8));
+        try {
+            $reader = $this->traditionalPackage($backendRoot);
+            $package = new CareerContentV3AuthorityPackage(1, 2, 3, CareerCurrentAuthorityPackage::hashValue(['actors']));
+            $this->app->instance(CareerContentV3CanonicalReader::class, $reader);
+            $this->app->instance(CareerPageProjector::class, new CareerPageProjector($reader, $package, new CareerContentV3FactResolver));
+            $this->publication(true);
+
+            $traditionalUri = '/api/v0.5/career/jobs/actors?locale=zh-TW';
+            $traditional = $this->getJson($traditionalUri)->assertOk()
+                ->assertJsonPath('identity.canonical_slug', 'actors')
+                ->assertJsonPath('titles.canonical_zh_tw', '演員')
+                ->assertJsonPath('career_page.locale', 'zh-TW')
+                ->assertJsonPath('career_page.display.path', '/zh-TW/career/jobs/actors')
+                ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow');
+            $simplified = $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN')->assertOk()
+                ->assertJsonPath('career_page.locale', 'zh-CN')
+                ->assertJsonPath('seo_contract.robots_policy', 'index,follow');
+            $this->assertNoStore($traditional);
+            self::assertNotSame(
+                CareerFilePageReader::cacheKey($traditional->json('career_page')),
+                CareerFilePageReader::cacheKey($simplified->json('career_page')),
+            );
+            $this->getJson('/api/v0.5/career-jobs/actors/seo?org_id=0&locale=zh-TW')->assertOk()
+                ->assertJsonPath('meta.canonical', '/zh-TW/career/jobs/actors')
+                ->assertJsonPath('meta.robots', 'noindex,follow')
+                ->assertJsonPath('meta.hreflang', []);
+            $this->getJson($traditionalUri.'&projection_contract=career.detail.presence.v1')->assertOk()
+                ->assertExactJson([
+                    'bundle_kind' => 'career_job_presence',
+                    'bundle_version' => 'career.detail.presence.v1',
+                    'identity' => ['canonical_slug' => 'actors'],
+                ]);
+            $this->publication(false);
+            $this->getJson($traditionalUri)->assertNotFound();
+        } finally {
+            File::deleteDirectory($backendRoot);
+        }
+    }
+
+    private function traditionalPackage(string $backendRoot): CareerContentV3CanonicalReader
+    {
+        $relative = CareerCurrentAuthorityPackage::RELATIVE_PATH;
+        $root = $backendRoot.'/'.$relative;
+        $source = base_path($relative);
+        mkdir($root.'/careers/actors', 0700, true);
+        $locales = CareerContentV3Contract::LOCALES;
+        $files = [];
+        foreach ($locales as $locale) {
+            $path = 'careers/actors/'.$locale.'.json';
+            $bytes = (string) file_get_contents($source.'/careers/actors/'.($locale === 'zh-TW' ? 'zh-CN' : $locale).'.json');
+            $page = json_decode($bytes, true, 512, JSON_THROW_ON_ERROR);
+            if ($locale === 'zh-TW') {
+                $page['locale'] = $locale;
+                $page['subject']['name'] = '演員';
+                $page['display']['path'] = '/zh-TW/career/jobs/actors';
+                unset($page['source_content_sha256']);
+                $page['source_content_sha256'] = CareerCurrentAuthorityPackage::hashValue($page);
+                $bytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($page);
+            }
+            file_put_contents($root.'/'.$path, $bytes);
+            $files[] = ['bytes' => strlen($bytes), 'canonical_slug' => 'actors', 'locale' => $locale, 'path' => $path,
+                'sha256' => hash('sha256', $bytes), 'source_content_sha256' => $page['source_content_sha256']];
+        }
+        $slugHash = CareerCurrentAuthorityPackage::hashValue(['actors']);
+        $manifest = [
+            'authority_path' => 'backend/content_assets/career/current',
+            'compiler_version' => CareerContentV3AuthorityPackage::COMPILER_VERSION,
+            'contract_version' => CareerContentV3AuthorityPackage::CONTRACT_VERSION,
+            'schema_version' => CareerContentV3AuthorityPackage::SCHEMA_VERSION,
+            'source_registry_sha256' => str_repeat('a', 64),
+            'coverage' => ['slugs' => 1, 'locales' => 3, 'locale_pages' => 3, 'files' => 3, 'enhanced_locale_pages' => 3, 'legacy_locale_pages' => 0],
+            'files' => $files,
+            'locales' => $locales,
+            'set_hashes' => [
+                'slug_set_sha256' => $slugHash,
+                'locale_page_set_sha256' => CareerCurrentAuthorityPackage::hashValue(array_map(static fn (string $locale): string => 'actors|'.$locale, $locales)),
+                'source_semantic_aggregate_sha256' => CareerCurrentAuthorityPackage::hashValue(array_column($files, 'source_content_sha256')),
+            ],
+        ];
+        $manifest['aggregate_sha256'] = CareerCurrentAuthorityPackage::hashValue($manifest);
+        file_put_contents($root.'/manifest.json', CareerCurrentAuthorityPackage::encodePrettyCanonical($manifest));
+
+        return new CareerContentV3CanonicalReader(new CareerContentV3AuthorityPackage(1, 2, 3, $slugHash), $backendRoot);
     }
 
     public function test_unpublished_identity_does_not_gain_a_public_page(): void

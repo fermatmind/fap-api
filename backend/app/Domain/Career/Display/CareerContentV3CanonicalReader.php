@@ -271,6 +271,9 @@ class CareerContentV3CanonicalReader
         if (in_array($normalized, ['zh', 'zh-cn'], true)) {
             return 'zh-CN';
         }
+        if ($normalized === 'zh-tw') {
+            return 'zh-TW';
+        }
 
         throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_LOCALE_INVALID');
     }

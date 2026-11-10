@@ -84,14 +84,14 @@ final class CareerContentV3AuthorityPackage
         ksort($entries, SORT_STRING);
         $slugs = array_keys($entries);
         foreach ($entries as $localized) {
-            if (array_keys($localized) !== CareerCurrentAuthorityPackage::LOCALES) {
+            if (array_keys($localized) !== $manifest['locales']) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_LOCALE_PAIR_INVALID');
             }
         }
         $localePageSet = array_keys($localePages);
         sort($localePageSet, SORT_STRING);
         if (count($slugs) !== $this->expectedCareers
-            || count($localePageSet) !== $this->expectedLocalePages
+            || count($localePageSet) !== $manifest['coverage']['locale_pages']
             || ! hash_equals($manifest['set_hashes']['slug_set_sha256'], CareerCurrentAuthorityPackage::hashValue($slugs))
             || ! hash_equals($this->expectedSlugSetSha256, $manifest['set_hashes']['slug_set_sha256'])
             || ! hash_equals($manifest['set_hashes']['locale_page_set_sha256'], CareerCurrentAuthorityPackage::hashValue($localePageSet))
@@ -237,7 +237,7 @@ final class CareerContentV3AuthorityPackage
         ksort($pages, SORT_STRING);
         $sortedSlugs = array_keys($pages);
         foreach ($pages as $slug => $localized) {
-            if (array_keys($localized) !== CareerCurrentAuthorityPackage::LOCALES) {
+            if (array_keys($localized) !== $manifest['locales']) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_LOCALE_PAIR_INVALID');
             }
             if (! isset($slugs[$slug])) {
@@ -249,7 +249,7 @@ final class CareerContentV3AuthorityPackage
         if ($enhanced !== $manifest['coverage']['enhanced_locale_pages']
             || $legacy !== $manifest['coverage']['legacy_locale_pages']
             || count($sortedSlugs) !== $this->expectedCareers
-            || count($localePageSet) !== $this->expectedLocalePages
+            || count($localePageSet) !== $manifest['coverage']['locale_pages']
             || ! hash_equals($manifest['set_hashes']['slug_set_sha256'], CareerCurrentAuthorityPackage::hashValue($sortedSlugs))
             || ! hash_equals($this->expectedSlugSetSha256, $manifest['set_hashes']['slug_set_sha256'])
             || ! hash_equals($manifest['set_hashes']['locale_page_set_sha256'], CareerCurrentAuthorityPackage::hashValue($localePageSet))
@@ -297,10 +297,15 @@ final class CareerContentV3AuthorityPackage
     /** @param array<string,mixed> $manifest */
     private function assertManifest(array $manifest): void
     {
+        $locales = $manifest['locales'] ?? null;
+        if ($locales !== CareerCurrentAuthorityPackage::LOCALES && $locales !== CareerContentV3Contract::LOCALES) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_MANIFEST_INVALID');
+        }
+        $localePageCount = $this->expectedLocalePages + ($locales === CareerContentV3Contract::LOCALES ? $this->expectedCareers : 0);
         $enhanced = $manifest['coverage']['enhanced_locale_pages'] ?? null;
         $legacy = $manifest['coverage']['legacy_locale_pages'] ?? null;
         if (! is_int($legacy) || $legacy < 0
-            || ! is_int($enhanced) || $enhanced < 0 || $enhanced > $this->expectedLocalePages
+            || ! is_int($enhanced) || $enhanced < 0 || $enhanced > $localePageCount
             || ($this->expectedEnhancedLocalePages !== null && $enhanced !== $this->expectedEnhancedLocalePages)) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_MANIFEST_INVALID');
         }
@@ -314,17 +319,16 @@ final class CareerContentV3AuthorityPackage
             || ($manifest['authority_path'] ?? null) !== 'backend/content_assets/career/current'
             || ($manifest['schema_version'] ?? null) !== self::SCHEMA_VERSION
             || ($manifest['compiler_version'] ?? null) !== self::COMPILER_VERSION
-            || ($manifest['locales'] ?? null) !== CareerCurrentAuthorityPackage::LOCALES
             || ($manifest['coverage'] ?? null) != [
                 'slugs' => $this->expectedCareers,
-                'locales' => count(CareerCurrentAuthorityPackage::LOCALES),
-                'locale_pages' => $this->expectedLocalePages,
-                'files' => $this->expectedLocalePages,
+                'locales' => count($locales),
+                'locale_pages' => $localePageCount,
+                'files' => $localePageCount,
                 'enhanced_locale_pages' => $enhanced,
-                'legacy_locale_pages' => $this->expectedLocalePages - $enhanced,
+                'legacy_locale_pages' => $localePageCount - $enhanced,
             ]
             || ! is_array($manifest['files'] ?? null)
-            || count($manifest['files']) !== $this->expectedLocalePages
+            || count($manifest['files']) !== $localePageCount
             || ! $this->hash((string) ($manifest['aggregate_sha256'] ?? ''))
             || ! $this->hash((string) ($manifest['source_registry_sha256'] ?? ''))
             || ! is_array($manifest['set_hashes'] ?? null)) {
@@ -444,7 +448,7 @@ final class CareerContentV3AuthorityPackage
         $locale = $entry['locale'] ?? null;
         $path = $entry['path'] ?? null;
         if (! is_string($slug) || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
-            || ! in_array($locale, CareerCurrentAuthorityPackage::LOCALES, true)
+            || ! in_array($locale, CareerContentV3Contract::LOCALES, true)
             || $path !== 'careers/'.$slug.'/'.$locale.'.json'
             || ! is_int($entry['bytes'] ?? null) || $entry['bytes'] <= 0) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_DECLARATION_INVALID');
