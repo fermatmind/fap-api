@@ -51,9 +51,11 @@ const packages = {
   assets: ['fermatmind.public_content_53.v1', ['assets.json','independent-review.json','enneagram_metrics.en.json','enneagram_public_copy.en.json','riasec_technical_note.en.json']],
 };
 export function selectPublicContentPackage(paths) {
-  const selected=Object.entries(packages).filter(([, [, names]])=>names.some(name=>paths.includes(`backend/${packagePath}/${name}`))).map(([name])=>name);
+  // Keep the reviewed manifest available for verification. Enrollment resumes after full-site zh-TW acceptance.
+  const releasePaths = paths.filter(path => path !== `backend/${packagePath}/traditional-article-index.json`);
+  const selected=Object.entries(packages).filter(([, [, names]])=>names.some(name=>releasePaths.includes(`backend/${packagePath}/${name}`))).map(([name])=>name);
   if (selected.length > 1) throw new Error('PUBLIC_CONTENT_53_MULTIPLE_PACKAGES_REQUIRE_SERIAL_RELEASE');
-  if (!selected.length && paths.some(path=>path.startsWith(`backend/${packagePath}/`))) throw new Error('PUBLIC_CONTENT_53_PACKAGE_SELECTION_UNKNOWN');
+  if (!selected.length && releasePaths.some(path=>path.startsWith(`backend/${packagePath}/`))) throw new Error('PUBLIC_CONTENT_53_PACKAGE_SELECTION_UNKNOWN');
   return selected[0] ?? null;
 }
 export function packageDigest(backendRoot, selection = process.env.PUBLIC_CONTENT_53_PACKAGE_NAME) {

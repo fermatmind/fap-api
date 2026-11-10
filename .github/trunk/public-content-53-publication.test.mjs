@@ -765,6 +765,17 @@ test('sample discovery requires real archive anchors and cannot pass from serial
 });
 
 
+test('deferred Traditional index manifest stays out of automatic publication selection',()=>{
+ const index='backend/content_assets/public_content_53/traditional-article-index.json';
+ const independent='backend/content_assets/public_content_53/support-contact.json';
+ assert.equal(selectPublicContentPackage([index]),null);
+ assert.equal(selectPublicContentPackage([index,independent]),'support-contact');
+ const classification=classifyPaths([index,'backend/app/Services/Career/CareerFilePageReader.php']);
+ assert.equal(classification.operations.public_content_53_publish,false);
+ assert.equal(classification.operations.public_content_53_package,null);
+ assert.equal(classification.operations.public_content_53_checks,true);
+});
+
 test('interrupted Traditional index staging restores only the exact prior transaction', async () => {
  const previous='a'.repeat(40), candidate='b'.repeat(40), run='123';
  const selection='traditional-article-index';
