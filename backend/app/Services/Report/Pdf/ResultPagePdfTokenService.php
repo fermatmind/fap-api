@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Report\Pdf;
 
 use App\Models\Attempt;
+use InvalidArgumentException;
 use RuntimeException;
 
 final class ResultPagePdfTokenService
@@ -16,12 +17,17 @@ final class ResultPagePdfTokenService
         Attempt $attempt,
         array $gate,
         string $locale,
-        ?string $surfaceVersion = null
+        ?string $surfaceVersion = null,
+        ?string $displayLocale = null
     ): string {
         $surfaceVersion = trim((string) ($surfaceVersion ?? ''));
         $surfaceVersion = $surfaceVersion !== ''
             ? $surfaceVersion
             : ReportPdfDocumentService::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION;
+
+        if ($displayLocale !== null && ($displayLocale !== 'zh-TW' || $locale !== 'zh')) {
+            throw new InvalidArgumentException('Unsupported PDF display locale.');
+        }
 
         $payload = [
             'v' => 1,
@@ -31,6 +37,7 @@ final class ResultPagePdfTokenService
             'user_id' => (string) ($attempt->user_id ?? ''),
             'owner_id' => (string) (($attempt->user_id ?? null) ?: ($attempt->anon_id ?? '')),
             'locale' => $locale,
+            ...($displayLocale === null ? [] : ['display_locale' => $displayLocale]),
             'surface' => $surfaceVersion,
             'engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
             'entitlement' => ((bool) ($gate['locked'] ?? true)) ? 'locked' : 'unlocked',
@@ -82,6 +89,8 @@ final class ResultPagePdfTokenService
             || (string) ($payload['typ'] ?? '') !== 'mbti_result_page_pdf'
             || (int) ($payload['org_id'] ?? $orgId) !== max(0, $orgId)
             || (string) ($payload['attempt_id'] ?? '') !== $attemptId
+            || (array_key_exists('display_locale', $payload)
+                && ($payload['display_locale'] !== 'zh-TW' || ($payload['locale'] ?? null) !== 'zh'))
             || (string) ($payload['surface'] ?? '') !== ReportPdfDocumentService::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION
             || (string) ($payload['engine'] ?? '') !== ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE
             || (int) ($payload['exp'] ?? 0) <= now()->getTimestamp()

@@ -26,6 +26,8 @@ final class ReportPdfDocumentService
 
     public const MBTI_RESULT_PAGE_SNAPSHOT_PRINT_ASSET_HASH = 'sha256:845eb8bb158e07c265c33fa90569bee0c6fcd44bdcb9947773f2a0773ebdb72c';
 
+    public const MBTI_TRADITIONAL_RESULT_PAGE_PRINT_ASSET_HASH = 'sha256:bb02dd0fa8083cc6d1476afbd8c4781cfaaff7d3998a37a40ad987f42dc7a973';
+
     public const RESULT_PAGE_EXPORT_ENGINE = 'gotenberg_chromium';
 
     public function __construct(
@@ -50,6 +52,12 @@ final class ReportPdfDocumentService
         return str_ends_with($baseHash, $suffix) ? $baseHash : $baseHash.$suffix;
     }
 
+    public static function supportsTraditionalMbtiResultPagePdf(Attempt $attempt): bool
+    {
+        return strtoupper(trim((string) $attempt->scale_code)) === 'MBTI'
+            && str_starts_with(strtolower(trim((string) $attempt->locale)), 'zh');
+    }
+
     public static function mbtiResultPageExportManifestHash(
         string $baseHash,
         string $locale,
@@ -57,7 +65,7 @@ final class ReportPdfDocumentService
         string $variant
     ): string {
         $baseHash = trim($baseHash) !== '' ? trim($baseHash) : 'nohash';
-        $locale = str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh' : 'en';
+        $locale = $locale === 'zh-TW' ? 'zh-TW' : (str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh' : 'en');
         $entitlement = strtolower(trim($entitlement)) === 'unlocked' ? 'unlocked' : 'locked';
         $variant = strtolower(trim($variant));
         $variant = in_array($variant, ['free', 'full'], true) ? $variant : 'free';
@@ -66,7 +74,7 @@ final class ReportPdfDocumentService
             $baseHash,
             self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
             self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
-            self::sanitizeManifestSegmentValue(self::mbtiResultPageSnapshotPrintAssetHash()),
+            self::sanitizeManifestSegmentValue(self::mbtiResultPageSnapshotPrintAssetHash($locale)),
             self::RESULT_PAGE_EXPORT_ENGINE,
             preg_replace('/[^a-z0-9_.-]+/i', '_', $locale) ?: 'locale',
             $entitlement,
@@ -552,11 +560,16 @@ final class ReportPdfDocumentService
      *   trace_id:string
      * }
      */
-    public function getOrGenerateMbtiResultPageExport(Attempt $attempt, array $gate, ?Result $result = null): array
+    public function getOrGenerateMbtiResultPageExport(Attempt $attempt, array $gate, ?Result $result = null, ?string $displayLocale = null): array
     {
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
         if ($scaleCode !== 'MBTI') {
             throw new \RuntimeException('Result-page PDF export is only available for MBTI attempts.');
+        }
+
+        if ($displayLocale !== null
+            && ($displayLocale !== 'zh-TW' || ! self::supportsTraditionalMbtiResultPagePdf($attempt))) {
+            throw new \InvalidArgumentException('Unsupported PDF display locale.');
         }
 
         if (($gate['generating'] ?? false) || ($gate['snapshot_error'] ?? false)
@@ -573,7 +586,7 @@ final class ReportPdfDocumentService
             && array_diff(\App\Services\Report\ReportAccess::allDefaultModulesOffered('MBTI'), (array) $gate['modules_allowed']) !== []) {
             throw new ResultPagePdfExportException($traceId, 'PDF_CONTENT_UNAVAILABLE', 'Complete report modules are unavailable.');
         }
-        $manifestHash = $this->resolveResultPageExportManifestHash($attempt, $gate, $result);
+        $manifestHash = $this->resolveResultPageExportManifestHash($attempt, $gate, $result, $displayLocale);
         $path = $this->artifactStore->path('MBTI', (string) $attempt->id, $manifestHash, $variant);
 
         $cached = $this->artifactStore->get($path);
@@ -589,13 +602,13 @@ final class ReportPdfDocumentService
                 'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE,
                 'surface_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
                 'render_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
-                'print_asset_hash' => self::mbtiResultPageSnapshotPrintAssetHash(),
+                'print_asset_hash' => self::mbtiResultPageSnapshotPrintAssetHash($displayLocale),
                 'trace_id' => $traceId,
             ];
         }
 
-        $pdfBinary = $this->buildMbtiResultPageExportDocument($attempt, $gate, $traceId);
-        if (! hash_equals($manifestHash, $this->resolveResultPageExportManifestHash($attempt, $gate, $result))) {
+        $pdfBinary = $this->buildMbtiResultPageExportDocument($attempt, $gate, $traceId, $displayLocale);
+        if (! hash_equals($manifestHash, $this->resolveResultPageExportManifestHash($attempt, $gate, $result, $displayLocale))) {
             throw new ResultPagePdfExportException(
                 $traceId, 'pdf_content_revision_changed', 'Published report content changed during PDF generation.'
             );
@@ -613,7 +626,7 @@ final class ReportPdfDocumentService
             'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE,
             'surface_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
             'render_version' => self::MBTI_RESULT_PAGE_SNAPSHOT_RENDER_VERSION,
-            'print_asset_hash' => self::mbtiResultPageSnapshotPrintAssetHash(),
+            'print_asset_hash' => self::mbtiResultPageSnapshotPrintAssetHash($displayLocale),
             'trace_id' => $traceId,
         ];
     }
@@ -621,7 +634,7 @@ final class ReportPdfDocumentService
     /**
      * @param  array<string,mixed>  $gate
      */
-    private function resolveResultPageExportManifestHash(Attempt $attempt, array $gate, ?Result $result = null): string
+    private function resolveResultPageExportManifestHash(Attempt $attempt, array $gate, ?Result $result, ?string $displayLocale = null): string
     {
         $baseHash = $this->baseContentManifestHash($attempt, $result);
         $rawLocale = strtolower(trim((string) ($attempt->locale ?? '')));
@@ -651,11 +664,15 @@ final class ReportPdfDocumentService
         $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $entitlement = ((bool) ($gate['locked'] ?? true)) ? 'locked' : 'unlocked';
 
-        return self::mbtiResultPageExportManifestHash($baseHash, $locale, $entitlement, $variant);
+        return self::mbtiResultPageExportManifestHash($baseHash, $displayLocale ?? $locale, $entitlement, $variant);
     }
 
-    public static function mbtiResultPageSnapshotPrintAssetHash(): string
+    public static function mbtiResultPageSnapshotPrintAssetHash(?string $displayLocale = null): string
     {
+        if ($displayLocale === 'zh-TW') {
+            return self::MBTI_TRADITIONAL_RESULT_PAGE_PRINT_ASSET_HASH;
+        }
+
         $configured = trim((string) config('gotenberg.result_print_asset_hash', ''));
 
         return $configured !== '' ? $configured : self::MBTI_RESULT_PAGE_SNAPSHOT_PRINT_ASSET_HASH;
@@ -844,13 +861,13 @@ final class ReportPdfDocumentService
     /**
      * @param  array<string,mixed>  $gate
      */
-    private function buildMbtiResultPageExportDocument(Attempt $attempt, array $gate, string $traceId): string
+    private function buildMbtiResultPageExportDocument(Attempt $attempt, array $gate, string $traceId, ?string $displayLocale): string
     {
         if (! $this->gotenbergChromiumPdfClient->enabled()) {
             throw new \RuntimeException('Gotenberg result-page PDF engine is disabled.');
         }
 
-        $printUrl = $this->mbtiSnapshotResultPrintUrl($attempt, $gate);
+        $printUrl = $this->mbtiSnapshotResultPrintUrl($attempt, $gate, $displayLocale);
         if ($printUrl === null) {
             throw new \RuntimeException('Gotenberg result-page print URL is not configured.');
         }
@@ -946,7 +963,7 @@ final class ReportPdfDocumentService
     /**
      * @param  array<string,mixed>  $gate
      */
-    private function mbtiSnapshotResultPrintUrl(Attempt $attempt, array $gate): ?string
+    private function mbtiSnapshotResultPrintUrl(Attempt $attempt, array $gate, ?string $displayLocale): ?string
     {
         $baseUrl = rtrim(trim((string) config('gotenberg.result_print_base_url', '')), '/');
         if ($baseUrl === '') {
@@ -967,11 +984,12 @@ final class ReportPdfDocumentService
 
         $url = $baseUrl.'/'.ltrim($path, '/');
         if (self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION !== '') {
-            $pdfToken = $this->resultPagePdfTokenService->issueForMbtiResultPageExport($attempt, $gate, $locale);
+            $pdfToken = $this->resultPagePdfTokenService->issueForMbtiResultPageExport($attempt, $gate, $locale, displayLocale: $displayLocale);
             $separator = str_contains($url, '?') ? '&' : '?';
             $url .= $separator.http_build_query([
                 'pdf' => '1',
                 'surface' => self::MBTI_RESULT_PAGE_SNAPSHOT_SURFACE_VERSION,
+                ...($displayLocale === null ? [] : ['display_locale' => $displayLocale]),
                 'pdf_token' => $pdfToken,
                 'result_access_token' => $pdfToken,
             ], '', '&', PHP_QUERY_RFC3986);

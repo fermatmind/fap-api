@@ -1242,6 +1242,8 @@ class AttemptReadController extends Controller
             'access_state' => $accessState,
             'report_state' => $reportState,
             'pdf_state' => $pdfState,
+            ...(ReportPdfDocumentService::supportsTraditionalMbtiResultPagePdf($attempt)
+                ? ['pdf_display_locales' => ['zh-TW']] : []),
             'reason_code' => $reasonCode !== '' ? $reasonCode : null,
             'projection_version' => $projectionVersion,
             'actions' => $this->reportAccessActions($attempt, $accessState, $reportState, $pdfState),
@@ -3300,12 +3302,24 @@ class AttemptReadController extends Controller
             abort($status, (string) ($gate['message'] ?? 'report generation failed.'));
         }
 
+        $displayLocale = $request->query('display_locale');
+        if ($displayLocale !== null
+            && ($displayLocale !== 'zh-TW' || ! ReportPdfDocumentService::supportsTraditionalMbtiResultPagePdf($attempt))) {
+            return $this->privateNoStoreJson([
+                'ok' => false,
+                'error_code' => 'PDF_DISPLAY_LOCALE_UNAVAILABLE',
+                'message' => 'Requested PDF display locale is unavailable.',
+            ], 422);
+        }
+
         $variant = $this->reportPdfDocumentService->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $locked = (bool) ($gate['locked'] ?? false);
         $date = $attempt->submitted_at?->format('Y-m-d')
             ?? $attempt->created_at?->format('Y-m-d')
             ?? now()->format('Y-m-d');
-        $fileName = sprintf('fermatmind-mbti-result-page-%s.pdf', $date);
+        $fileName = $displayLocale === 'zh-TW'
+            ? sprintf('fermatmind-mbti-result-page-zh-TW-%s.pdf', $date)
+            : sprintf('fermatmind-mbti-result-page-%s.pdf', $date);
         $inline = in_array(strtolower(trim((string) $request->query('inline', '0'))), ['1', 'true', 'yes', 'on'], true);
         $disposition = $inline ? 'inline' : 'attachment';
 
@@ -3323,7 +3337,7 @@ class AttemptReadController extends Controller
         ]);
 
         try {
-            $generated = $this->reportPdfDocumentService->getOrGenerateMbtiResultPageExport($attempt, $gate, $result);
+            $generated = $this->reportPdfDocumentService->getOrGenerateMbtiResultPageExport($attempt, $gate, $result, $displayLocale);
         } catch (\Throwable $e) {
             return $this->resultPagePdfFailureResponse($request, $attempt, $userId, $e);
         }
@@ -3334,6 +3348,7 @@ class AttemptReadController extends Controller
 
         return response($pdfBinary, 200, [
             'Content-Type' => 'application/pdf',
+            ...($displayLocale === null ? [] : ['Content-Language' => $displayLocale]),
             'Content-Disposition' => $disposition.'; filename="'.$fileName.'"',
             'Cache-Control' => 'private, no-store',
             'X-Report-Scale' => 'MBTI',

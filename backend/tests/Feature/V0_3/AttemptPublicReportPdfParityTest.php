@@ -647,6 +647,39 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         Storage::disk('local')->assertExists(
             app(ReportPdfDocumentService::class)->resolveArtifactPath(Attempt::findOrFail($attemptId), 'free')
         );
+
+        $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report-access")
+            ->assertOk()->assertJsonPath('pdf_display_locales.0', 'zh-TW');
+        $traditionalUrl = "/api/v0.3/attempts/{$attemptId}/result-page.pdf?display_locale=zh-TW";
+        $this->withHeaders($headers)->get($traditionalUrl)
+            ->assertOk()
+            ->assertHeader('Content-Language', 'zh-TW')
+            ->assertHeader('X-Pdf-Artifact-Cache', 'MISS')
+            ->assertHeader('X-Report-Locked', (string) $pdf->headers->get('X-Report-Locked'));
+        $this->withHeaders($headers)->get($traditionalUrl)->assertOk()->assertHeader('X-Pdf-Artifact-Cache', 'HIT');
+        $this->withHeaders($headers)->get("/api/v0.3/attempts/{$attemptId}/result-page.pdf")
+            ->assertOk()->assertHeaderMissing('Content-Language')->assertHeader('X-Pdf-Artifact-Cache', 'HIT');
+
+        $this->assertCount(2, Http::recorded());
+        [$traditionalRequest] = Http::recorded()->last();
+        $traditionalParts = collect($traditionalRequest->data())
+            ->mapWithKeys(fn (array $part): array => [(string) ($part['name'] ?? '') => (string) ($part['contents'] ?? '')])
+            ->all();
+        $traditionalPrintUrl = $traditionalParts['url'];
+        $this->assertSame("/zh/result/{$attemptId}/print", parse_url($traditionalPrintUrl, PHP_URL_PATH));
+        parse_str((string) parse_url($traditionalPrintUrl, PHP_URL_QUERY), $traditionalQuery);
+        $this->assertSame('zh-TW', $traditionalQuery['display_locale']);
+        $grant = app(ResultPagePdfTokenService::class)->verifyMbtiResultPageExport($traditionalQuery['result_access_token'], 0, $attemptId);
+        $this->assertSame('zh', $grant['locale'] ?? null);
+        $this->assertSame('zh-TW', $grant['display_locale'] ?? null);
+        $this->assertSame('zh-CN', Attempt::findOrFail($attemptId)->locale);
+
+        $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/result-page.pdf?display_locale=fr")
+            ->assertUnprocessable()->assertJsonPath('error_code', 'PDF_DISPLAY_LOCALE_UNAVAILABLE');
+        Attempt::findOrFail($attemptId)->update(['locale' => 'en']);
+        $this->withHeaders($headers)->getJson($traditionalUrl)
+            ->assertUnprocessable()->assertJsonPath('error_code', 'PDF_DISPLAY_LOCALE_UNAVAILABLE');
+        $this->assertCount(2, Http::recorded());
     }
 
     public function test_mbti_result_page_pdf_token_grants_only_matching_private_print_result_read(): void
