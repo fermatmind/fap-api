@@ -123,23 +123,26 @@ export function analyzeCareerContentOnly({ baseSha, headSha, paths, statuses, re
 
     const beforeManifest = readJson(baseSha, MANIFEST_PATH);
     const afterManifest = readJson(headSha, MANIFEST_PATH);
+    const locales = afterManifest.locales;
+    const localePageCount = same(locales, ['en', 'zh-CN', 'zh-TW']) ? 3138 : 2092;
     if (!same(manifestIdentity(beforeManifest), manifestIdentity(afterManifest))
+      || (!same(locales, ['en', 'zh-CN']) && !same(locales, ['en', 'zh-CN', 'zh-TW']))
       || afterManifest.coverage?.slugs !== 1046
-      || afterManifest.coverage?.locale_pages !== 2092
-      || afterManifest.coverage?.files !== 2092
-      || afterManifest.coverage?.locales !== 2
-      || afterManifest.files?.length !== 2092) {
+      || afterManifest.coverage?.locale_pages !== localePageCount
+      || afterManifest.coverage?.files !== localePageCount
+      || afterManifest.coverage?.locales !== locales.length
+      || afterManifest.files?.length !== localePageCount) {
       return ineligible(baseSha, headSha, 'MANIFEST_IDENTITY_CHANGED');
     }
 
     const beforeIntent = readJson(baseSha, INTENT_PATH);
     const afterIntent = readJson(headSha, INTENT_PATH);
     if (!same(intentIdentity(beforeIntent), intentIdentity(afterIntent))
-      || !same(afterIntent.locales, ['en', 'zh-CN'])
+      || !same(afterIntent.locales, locales)
       || !same(afterIntent.manual_hold_slugs, ['software-developers'])
       || afterIntent.slug_count !== 1046
-      || afterIntent.locale_page_count !== 2092
-      || afterIntent.file_count !== 2092
+      || afterIntent.locale_page_count !== localePageCount
+      || afterIntent.file_count !== localePageCount
       || afterIntent.discoverability !== false
       || afterIntent.search_submission !== false) {
       return ineligible(baseSha, headSha, 'RELEASE_INTENT_IDENTITY_CHANGED');
@@ -192,7 +195,7 @@ export function analyzeCareerContentOnly({ baseSha, headSha, paths, statuses, re
       changed_pages: changedPages,
       invariants: {
         slug_count: 1046,
-        locale_page_count: 2092,
+        locale_page_count: localePageCount,
         aliases_unchanged: true,
         identity_scopes_unchanged: true,
         url_identity_unchanged: true,

@@ -57,7 +57,7 @@ test("production publisher is bound to the preactivation receipt digest", () => 
   assert.match(deploy, /production_parity_receipt="career-current-authority-production-preactivation-parity\.json"/);
   assert.match(deploy, /PRODUCTION_PARITY_RECEIPT_DIGEST="\$\(jq -r \.receipt_digest "\$production_parity_receipt"\)"/);
   assert.ok(deploy.includes("(.validation_scope.canonical_slugs | unique | length) == 1046"));
-  assert.match(deploy, /\.validation_scope\.locale_page_count == 2092/);
+  assert.ok(deploy.includes(".validation_scope.locale_page_count == (1046 * (.validation_scope.locales | length))"));
   assert.match(deploy, /\.parity\.production_preactivation_receipt_digest == env\.PRODUCTION_PARITY_RECEIPT_DIGEST/);
   assert.match(publisher, /CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST/);
   assert.match(publisher, /validation_scope\.canonical_slugs/);
@@ -106,6 +106,13 @@ test("the actual production receipt predicate rejects sampled and incomplete inv
   };
   const accepted = value => spawnSync("jq", [...args, predicate], { input: JSON.stringify(value), encoding: "utf8" }).status === 0;
   assert.equal(accepted(receipt), true);
+  const traditional = structuredClone(receipt);
+  traditional.validation_scope.locales.push("zh-TW");
+  traditional.validation_scope.locale_page_count = 3138;
+  traditional.full_scan.counts = { locale_pages: 3138, verified_files: 3138 };
+  assert.equal(accepted(traditional), true);
+  traditional.full_scan.counts.verified_files = 3137;
+  assert.equal(accepted(traditional), false);
   for (const mutate of [
     r => { r.validation_scope.canonical_slugs = ["accountants-and-auditors"]; r.validation_scope.locale_page_count = 2; },
     r => { r.validation_scope.canonical_slugs[1045] = r.validation_scope.canonical_slugs[0]; },

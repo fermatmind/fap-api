@@ -48,10 +48,11 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         $package = $loader->indexForPublish(dirname(__DIR__, 5));
 
         self::assertSame(1046, $package['summary']['career_count']);
-        self::assertSame(2092, $package['summary']['locale_page_count']);
+        $expectedPages = 1046 * count($package['manifest']['locales']);
+        self::assertSame($expectedPages, $package['summary']['locale_page_count']);
         self::assertSame('content_v3_per_page', $package['summary']['source_format']);
         self::assertSame(CareerContentV3AuthorityPackage::CONTRACT_VERSION, $package['manifest']['contract_version']);
-        self::assertCount(2092, $package['manifest']['files']);
+        self::assertCount($expectedPages, $package['manifest']['files']);
         self::assertSame(
             CareerCurrentAuthorityPackage::declaredAssetsSha256(dirname(__DIR__, 5)),
             $package['manifest']['aggregate_sha256'],
@@ -61,7 +62,7 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             $package['summary']['versionless_projection_sha256'],
         );
         foreach ($package['entries'] as $slug => $localized) {
-            self::assertSame(['en', 'zh-CN'], array_keys($localized));
+            self::assertSame($package['manifest']['locales'], array_keys($localized));
             foreach (array_keys($localized) as $locale) {
                 self::assertSame('career.detail.content.v3', $loader->pageFromPublishIndex($package, $slug, $locale)['contract_version']);
             }
@@ -234,11 +235,11 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         self::assertStringContainsString('.source_merge_sha == $source', $workflow);
         self::assertStringContainsString('.manifest_sha256 == $manifest', $workflow);
         self::assertStringContainsString(
-            '.file_readback.verified_locale_page_count == 2092',
+            '.file_readback.verified_locale_page_count == .package.locale_page_count',
             $workflow,
         );
         self::assertStringContainsString('.file_readback.delivery_mode == "file_authoritative"', $workflow);
-        self::assertStringContainsString('.file_readback.file_hash_match_count == 2092', $workflow);
+        self::assertStringContainsString('.file_readback.file_hash_match_count == .package.locale_page_count', $workflow);
     }
 
     public function test_current_page_contract_rejects_legacy_unknown_and_placeholder_structures(): void

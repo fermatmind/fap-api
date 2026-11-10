@@ -48,6 +48,8 @@ final class CareerCurrentAuthorityReleaseIntent
         }
         $keys = array_keys($intent);
         sort($keys, SORT_STRING);
+        $locales = $intent['locales'] ?? null;
+        $expectedPages = $locales === CareerContentV3Contract::LOCALES ? 3138 : 2092;
         if ($keys !== self::EXPECTED_KEYS
             || ($intent['contract_version'] ?? null) !== self::CONTRACT_VERSION
             || preg_match('/\A[a-f0-9]{40}\z/', (string) ($intent['source_merge_sha'] ?? '')) !== 1
@@ -55,10 +57,10 @@ final class CareerCurrentAuthorityReleaseIntent
             || ! $this->hash($intent['aggregate_sha256'] ?? null)
             || ! $this->hash($intent['versionless_projection_sha256'] ?? null)
             || ! $this->hash($intent['source_registry_sha256'] ?? null)
-            || ($intent['locales'] ?? null) !== CareerCurrentAuthorityPackage::LOCALES
+            || ($locales !== CareerCurrentAuthorityPackage::LOCALES && $locales !== CareerContentV3Contract::LOCALES)
             || ($intent['slug_count'] ?? null) !== 1046
-            || ($intent['locale_page_count'] ?? null) !== 2092
-            || ($intent['file_count'] ?? null) !== 2092
+            || ($intent['locale_page_count'] ?? null) !== $expectedPages
+            || ($intent['file_count'] ?? null) !== $expectedPages
             || ($intent['manual_hold_slugs'] ?? null) !== ['software-developers']
             || ($intent['discoverability'] ?? null) !== false
             || ($intent['search_submission'] ?? null) !== false) {
@@ -75,6 +77,7 @@ final class CareerCurrentAuthorityReleaseIntent
             || ! hash_equals((string) $intent['source_registry_sha256'], (string) ($manifest['source_registry_sha256'] ?? ''))
             || ($summary['career_count'] ?? null) !== $intent['slug_count']
             || ($summary['locale_page_count'] ?? null) !== $intent['locale_page_count']
+            || $manifest['locales'] !== $locales
             || count((array) ($manifest['files'] ?? [])) !== $intent['file_count']) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_RELEASE_INTENT_PACKAGE_MISMATCH');
         }

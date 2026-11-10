@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerCurrentAuthorityParity;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisher;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisherFailure;
@@ -196,6 +197,12 @@ try {
         $emit($receipt);
     }
 
+    $app = require $backendRoot.'/bootstrap/app.php';
+    $app->make(Kernel::class)->bootstrap();
+    $authority = $app->make(CareerContentV3CanonicalReader::class)->authority($backendRoot);
+    $expectedLocales = $authority['manifest']['locales'];
+    $expectedLocalePages = $authority['manifest']['coverage']['locale_pages'];
+
     $productionParityPath = $backendRoot.'/storage/app/release-receipts/career-current-authority-preactivation/'.$releaseSha.'.json';
     $productionParity = is_file($productionParityPath) && ! is_link($productionParityPath)
         ? json_decode((string) file_get_contents($productionParityPath), true, 512, JSON_THROW_ON_ERROR)
@@ -217,11 +224,11 @@ try {
         || ! hash_equals($versionlessProjectionSha256, (string) data_get($productionParity, 'package.projection_digest', ''))
         || ! hash_equals($parityCompilerDigest, (string) data_get($productionParity, 'package.compiler_digest', ''))
         || ! hash_equals($parityCodecDigest, (string) data_get($productionParity, 'package.codec_digest', ''))
-        || data_get($productionParity, 'validation_scope.canonical_slugs') !== app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class)->authority($backendRoot)['slugs']
-        || data_get($productionParity, 'validation_scope.locales') !== ['en', 'zh-CN']
-        || data_get($productionParity, 'validation_scope.locale_page_count') !== 2092
-        || data_get($productionParity, 'full_scan.counts.locale_pages') !== 2092
-        || data_get($productionParity, 'full_scan.counts.verified_files') !== 2092
+        || data_get($productionParity, 'validation_scope.canonical_slugs') !== $authority['slugs']
+        || data_get($productionParity, 'validation_scope.locales') !== $expectedLocales
+        || data_get($productionParity, 'validation_scope.locale_page_count') !== $expectedLocalePages
+        || data_get($productionParity, 'full_scan.counts.locale_pages') !== $expectedLocalePages
+        || data_get($productionParity, 'full_scan.counts.verified_files') !== $expectedLocalePages
         || data_get($productionParity, 'full_scan.delivery_mode') !== 'file_authoritative'
         || data_get($productionParity, 'redis.mode') !== 'readonly'
         || ($productionParity['write_counts'] ?? null) !== $expectedParityWriteCounts
@@ -238,8 +245,6 @@ try {
         $emit($receipt);
     }
 
-    $app = require $backendRoot.'/bootstrap/app.php';
-    $app->make(Kernel::class)->bootstrap();
     /** @var CareerCurrentAuthorityReleaseIntent $releaseIntent */
     $releaseIntent = $app->make(CareerCurrentAuthorityReleaseIntent::class);
     $verifiedIntent = $releaseIntent->verify($backendRoot);
@@ -271,8 +276,9 @@ try {
             (string) ($result['package']['aggregate_sha256'] ?? ''),
         )
         || ($result['package']['career_count'] ?? null) !== 1046
-        || ($result['package']['locale_page_count'] ?? null) !== 2092
-        || ($result['package']['file_count'] ?? null) !== 2092
+        || ($result['package']['locale_page_count'] ?? null) !== $expectedLocalePages
+        || ($result['package']['file_count'] ?? null) !== $expectedLocalePages
+        || ($result['file_readback']['file_hash_match_count'] ?? null) !== $expectedLocalePages
         || preg_match('/\A[0-9a-f]{64}\z/', (string) ($result['package']['versionless_projection_sha256'] ?? '')) !== 1
         || ! hash_equals($versionlessProjectionSha256, (string) ($result['package']['versionless_projection_sha256'] ?? ''))
         || ($result['authority']['target_count'] ?? null) !== 1046
@@ -281,7 +287,7 @@ try {
         || ($changedPages !== null && ($result['authority']['changed_locale_page_count'] ?? null) !== count($changedPages))
         || ($result['manual_hold_verified'] ?? null) !== true
         || ($fullScan && ($result['file_readback']['verified_slug_count'] ?? null) !== 1046)
-        || ($fullScan && ($result['file_readback']['verified_locale_page_count'] ?? null) !== 2092)
+        || ($fullScan && ($result['file_readback']['verified_locale_page_count'] ?? null) !== $expectedLocalePages)
         || ($result['write_counts']['occupation_write_count'] ?? null) !== 0
         || ($result['write_counts']['generation_write_count'] ?? null) !== 0
         || ($result['write_counts']['discoverability_write_count'] ?? null) !== 0

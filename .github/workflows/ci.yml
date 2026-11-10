@@ -406,7 +406,7 @@ jobs:
           coverage: none
           tools: composer:v2
           extensions: mbstring, intl, pdo_sqlite, sqlite3, redis
-      - name: Run fixed slice, deterministic 2092-page package scan, and Redis 6 capacity gate
+      - name: Run fixed slice, deterministic locale package scan, and Redis 6 capacity gate
         if: needs.classify.outputs.publisher_required == 'true'
         working-directory: backend
         env:
@@ -417,20 +417,22 @@ jobs:
           cp -n .env.example .env || true
           php artisan key:generate --force
           bash scripts/ci/verify_career_current_authority_parity.sh > career-current-authority-parity.json
-          jq -e --arg sha "$GITHUB_SHA" '
+          locale_count="$(jq -r '.locales | length' content_assets/career/current/manifest.json)"
+          jq -e --arg sha "$GITHUB_SHA" --argjson locales "$locale_count" '
             .contract_version == "career.current_authority_package_scan.v1"
             and .status == "pass"
             and .mode == "package"
             and .release_sha == $sha
             and .architecture_slice.status == "pass"
-            and .architecture_slice.counts.locale_pages == 4
+            and ($locales == 2 or $locales == 3)
+            and .architecture_slice.counts.locale_pages == (2 * $locales)
             and .full_scan.counts.slugs == 1046
-            and .full_scan.counts.locale_pages == 2092
-            and .full_scan.counts.encoded == 2092
-            and .full_scan.counts.decoded == 2092
-            and (.full_scan.projection_index | length) == 2092
+            and .full_scan.counts.locale_pages == (1046 * $locales)
+            and .full_scan.counts.encoded == .full_scan.counts.locale_pages
+            and .full_scan.counts.decoded == .full_scan.counts.locale_pages
+            and (.full_scan.projection_index | length) == .full_scan.counts.locale_pages
             and (.full_scan.projection_index_sha256 | test("^[0-9a-f]{64}$"))
-            and .redis.disposable_probe_write_count == 6276
+            and .redis.disposable_probe_write_count == (3 * .full_scan.counts.locale_pages)
             and ([.write_counts[]] | all(. == 0))
             and (.receipt_digest | test("^[0-9a-f]{64}$"))
           ' career-current-authority-parity.json >/dev/null

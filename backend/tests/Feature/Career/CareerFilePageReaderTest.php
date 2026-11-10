@@ -144,24 +144,27 @@ final class CareerFilePageReaderTest extends TestCase
 
     public function test_bilingual_package_does_not_publish_a_traditional_detail_fallback(): void
     {
-        $this->publication(true);
-        $reader = app(CareerFilePageReader::class);
+        $backendRoot = sys_get_temp_dir().'/career-bilingual-'.bin2hex(random_bytes(8));
+        try {
+            $this->installLocaleFixture($backendRoot, CareerCurrentAuthorityPackage::LOCALES);
+            $this->publication(true);
+            $reader = app(CareerFilePageReader::class);
 
-        self::assertNull($reader->read('actors', 'zh-TW'));
-        self::assertNull($reader->read('actors', 'zh-tw', presenceOnly: true));
-        self::assertSame(['en', 'zh-CN'], $reader->read('actors', 'zh-CN')['locale_policy']['available_locales']);
-        $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-TW')->assertNotFound();
-        $this->getJson('/api/v0.5/career-jobs/actors/seo?org_id=0&locale=zh-TW')->assertNotFound();
+            self::assertNull($reader->read('actors', 'zh-TW'));
+            self::assertNull($reader->read('actors', 'zh-tw', presenceOnly: true));
+            self::assertSame(['en', 'zh-CN'], $reader->read('actors', 'zh-CN')['locale_policy']['available_locales']);
+            $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-TW')->assertNotFound();
+            $this->getJson('/api/v0.5/career-jobs/actors/seo?org_id=0&locale=zh-TW')->assertNotFound();
+        } finally {
+            File::deleteDirectory($backendRoot);
+        }
     }
 
     public function test_installed_traditional_page_serves_exact_content_with_an_isolated_cache(): void
     {
         $backendRoot = sys_get_temp_dir().'/career-trilingual-'.bin2hex(random_bytes(8));
         try {
-            $reader = $this->traditionalPackage($backendRoot);
-            $package = new CareerContentV3AuthorityPackage(1, 2, 3, CareerCurrentAuthorityPackage::hashValue(['actors']));
-            $this->app->instance(CareerContentV3CanonicalReader::class, $reader);
-            $this->app->instance(CareerPageProjector::class, new CareerPageProjector($reader, $package, new CareerContentV3FactResolver));
+            $this->installLocaleFixture($backendRoot, CareerContentV3Contract::LOCALES);
             $this->publication(true);
 
             $traditionalUri = '/api/v0.5/career/jobs/actors?locale=zh-TW';
@@ -196,13 +199,13 @@ final class CareerFilePageReaderTest extends TestCase
         }
     }
 
-    private function traditionalPackage(string $backendRoot): CareerContentV3CanonicalReader
+    private function installLocaleFixture(string $backendRoot, array $locales): void
     {
         $relative = CareerCurrentAuthorityPackage::RELATIVE_PATH;
         $root = $backendRoot.'/'.$relative;
         $source = base_path($relative);
         mkdir($root.'/careers/actors', 0700, true);
-        $locales = CareerContentV3Contract::LOCALES;
+        $localeCount = count($locales);
         $files = [];
         foreach ($locales as $locale) {
             $path = 'careers/actors/'.$locale.'.json';
@@ -227,7 +230,7 @@ final class CareerFilePageReaderTest extends TestCase
             'contract_version' => CareerContentV3AuthorityPackage::CONTRACT_VERSION,
             'schema_version' => CareerContentV3AuthorityPackage::SCHEMA_VERSION,
             'source_registry_sha256' => str_repeat('a', 64),
-            'coverage' => ['slugs' => 1, 'locales' => 3, 'locale_pages' => 3, 'files' => 3, 'enhanced_locale_pages' => 3, 'legacy_locale_pages' => 0],
+            'coverage' => ['slugs' => 1, 'locales' => $localeCount, 'locale_pages' => $localeCount, 'files' => $localeCount, 'enhanced_locale_pages' => $localeCount, 'legacy_locale_pages' => 0],
             'files' => $files,
             'locales' => $locales,
             'set_hashes' => [
@@ -239,7 +242,10 @@ final class CareerFilePageReaderTest extends TestCase
         $manifest['aggregate_sha256'] = CareerCurrentAuthorityPackage::hashValue($manifest);
         file_put_contents($root.'/manifest.json', CareerCurrentAuthorityPackage::encodePrettyCanonical($manifest));
 
-        return new CareerContentV3CanonicalReader(new CareerContentV3AuthorityPackage(1, 2, 3, $slugHash), $backendRoot);
+        $package = new CareerContentV3AuthorityPackage(1, 2, $localeCount, $slugHash);
+        $reader = new CareerContentV3CanonicalReader($package, $backendRoot);
+        $this->app->instance(CareerContentV3CanonicalReader::class, $reader);
+        $this->app->instance(CareerPageProjector::class, new CareerPageProjector($reader, $package, new CareerContentV3FactResolver));
     }
 
     public function test_unpublished_identity_does_not_gain_a_public_page(): void

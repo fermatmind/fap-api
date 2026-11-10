@@ -177,7 +177,7 @@ test('A08 scoped CI does not duplicate the full Career updater fixture', () => {
   const council = ci.slice(ci.indexOf('  seo-council-orchestration:'), ci.indexOf('  seo-competitive-evidence:'));
   const testList = council.slice(council.indexOf('php artisan test --compact'), council.indexOf('          find app/Services/SeoCouncil'));
   assert.doesNotMatch(testList, /CareerContentV3PageUpdaterTest\.php/);
-  assert.match(ci, /career-publisher-parity:[\s\S]*?fixed slice, deterministic 2092-page package scan/i);
+  assert.match(ci, /career-publisher-parity:[\s\S]*?fixed slice, deterministic locale package scan/i);
 });
 
 test('remote extraction runs the same executable tar validator against generated archives', () => {

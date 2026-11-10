@@ -10,8 +10,8 @@ jq -e '
   .contract_version == "career.current_authority_release_intent.v1"
   and .status == "PASS_CAREER_CURRENT_RELEASE_INTENT"
   and .slug_count == 1046
-  and .locale_page_count == 2092
-  and .file_count == 2092
+  and (.locale_page_count == 2092 or .locale_page_count == 3138)
+  and .file_count == .locale_page_count
   and .database_writes == 0
   and .cache_writes == 0
   and .discoverability_writes == 0

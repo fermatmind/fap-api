@@ -39,7 +39,7 @@ final class CareerCurrentAuthorityPublisher
             foreach ($changedPages as $changedPage) {
                 $slug = strtolower(trim((string) ($changedPage['slug'] ?? '')));
                 $locale = (string) ($changedPage['locale'] ?? '');
-                if (! in_array($locale, CareerCurrentAuthorityPackage::LOCALES, true)
+                if (! in_array($locale, $authority['manifest']['locales'], true)
                     || ! in_array($slug, $authority['slugs'], true)) {
                     throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CHANGED_PAGE_SET_INVALID', null, 'confirmed_zero_write');
                 }
@@ -49,7 +49,7 @@ final class CareerCurrentAuthorityPublisher
         // The preactivation receipt already validated schema and all file bodies.
         // Read back the installed bytes only. Caches neither publish nor veto them.
         foreach ($authority['slugs'] as $slug) {
-            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+            foreach ($authority['manifest']['locales'] as $locale) {
                 $entry = $authority['entries'][$slug][$locale];
                 $path = $authority['root'].'/'.$entry['path'];
                 if (! is_file($path) || is_link($path)

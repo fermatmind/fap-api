@@ -209,8 +209,13 @@ final class CareerPageDisplayResolver
             'zh-TW' => 'zh-TW',
             default => 'en',
         };
+        $slug = $content['subject']['canonical_slug'];
+        $path = '/'.$localeSegment.'/career/jobs/'.$slug;
+        if ($localeSegment === 'zh-TW' && $result['path'] === '/zh/career/jobs/'.$slug) {
+            $result['path'] = $path;
+        }
         if (array_diff(array_keys($items), array_keys($used)) !== []
-            || $result['path'] !== '/'.$localeSegment.'/career/jobs/'.$content['subject']['canonical_slug']) {
+            || $result['path'] !== $path) {
             $this->fail();
         }
 

@@ -20,7 +20,7 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
         $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
 
         self::assertSame('career.current_authority_release_intent.v1', $result['intent']['contract_version']);
-        self::assertSame('2c956887ad9460849fd29cbfacb145e1397993cd', $result['intent']['source_merge_sha']);
+        self::assertMatchesRegularExpression('/\A[a-f0-9]{40}\z/', $result['intent']['source_merge_sha']);
         self::assertSame(hash_file('sha256', $manifestPath), $result['intent']['manifest_sha256']);
         self::assertSame($manifest['aggregate_sha256'], $result['intent']['aggregate_sha256']);
         self::assertSame(
@@ -28,13 +28,13 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
             $result['intent']['versionless_projection_sha256'],
         );
         self::assertSame($manifest['source_registry_sha256'], $result['intent']['source_registry_sha256']);
-        self::assertSame(['en', 'zh-CN'], $result['intent']['locales']);
+        self::assertSame($manifest['locales'], $result['intent']['locales']);
         self::assertSame(['software-developers'], $result['intent']['manual_hold_slugs']);
         self::assertFalse($result['intent']['discoverability']);
         self::assertFalse($result['intent']['search_submission']);
         self::assertSame(1046, $result['package']['slug_count']);
-        self::assertSame(2092, $result['package']['locale_page_count']);
-        self::assertSame(2092, $result['package']['file_count']);
+        self::assertSame(1046 * count($manifest['locales']), $result['package']['locale_page_count']);
+        self::assertSame($result['package']['locale_page_count'], $result['package']['file_count']);
         self::assertSame(
             hash('sha256', sprintf(
                 'career-current-authority|%s|%s|%s',
@@ -76,12 +76,12 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
         self::assertStringContainsString("needs.production.result == 'success'", $workflow);
         self::assertStringContainsString('.classification.operations.career_current_authority_release == true', $workflow);
         self::assertStringContainsString('verify_career_current_authority_release.sh', $workflow);
-        self::assertStringContainsString('and .file_count == 2092', (string) file_get_contents(
+        self::assertStringContainsString('and .file_count == .locale_page_count', (string) file_get_contents(
             $root.'/backend/scripts/ci/verify_career_current_authority_release.sh',
         ));
         self::assertStringContainsString('source_merge_sha == $source', $workflow);
         self::assertStringContainsString('.authority.verified_identity_count == 1046', $workflow);
-        self::assertStringContainsString('.file_readback.file_hash_match_count == 2092', $workflow);
+        self::assertStringContainsString('.file_readback.file_hash_match_count == .package.locale_page_count', $workflow);
         self::assertStringContainsString('automatic_retry_allowed == false', $workflow);
         self::assertStringContainsString(
             "foreach (['package', 'authority', 'file_readback', 'manual_hold_verified', 'idempotent_noop', 'write_counts', 'state_sha256'] as \$key)",
@@ -89,7 +89,7 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
         );
         self::assertStringContainsString('$receipt[$key] = $result[$key];', $publisher);
         self::assertStringContainsString("(\$result['authority']['verified_identity_count'] ?? null) !== 1046", $publisher);
-        self::assertStringContainsString("(\$result['file_readback']['verified_locale_page_count'] ?? null) !== 2092", $publisher);
+        self::assertStringContainsString("(\$result['file_readback']['verified_locale_page_count'] ?? null) !== \$expectedLocalePages", $publisher);
         self::assertStringContainsString(
             "'career-current-authority|'.\$sourceMergeSha.'|'.\$assetsSha256.'|'.\$versionlessProjectionSha256",
             $publisher,

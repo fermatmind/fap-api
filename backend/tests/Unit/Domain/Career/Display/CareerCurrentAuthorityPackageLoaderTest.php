@@ -28,13 +28,14 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
                 $count++;
             }
         }
-        self::assertSame(2092, $count);
+        $expectedPages = 1046 * count($installed['manifest']['locales']);
+        self::assertSame($expectedPages, $count);
 
         self::assertSame('content_v3_per_page', $installed['summary']['source_format']);
         self::assertSame(1046, $installed['summary']['career_count']);
-        self::assertSame(2092, $installed['summary']['locale_page_count']);
+        self::assertSame($expectedPages, $installed['summary']['locale_page_count']);
         self::assertCount(1046, $installed['entries']);
-        self::assertCount(2092, $installed['manifest']['files']);
+        self::assertCount($expectedPages, $installed['manifest']['files']);
         self::assertDirectoryDoesNotExist($backendRoot.'/content_assets/career/current/identity');
     }
 

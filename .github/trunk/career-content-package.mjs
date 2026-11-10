@@ -47,7 +47,8 @@ export function preparePackage({ root, classificationPath, parityPath, output })
   assert(parity.contract_version === 'career.current_authority_package_scan.v1'
     && parity.status === 'pass' && parity.release_sha === change.head_sha, 'PACKAGE_PARITY_INVALID');
   const index = parity.full_scan?.projection_index;
-  assert(Array.isArray(index) && index.length === 2092
+  assert(Array.isArray(index) && [2092, 3138].includes(index.length)
+    && index.length === change.invariants.locale_page_count
     && HEX64.test(parity.full_scan?.projection_index_sha256 ?? ''), 'PACKAGE_PROJECTION_INDEX_INVALID');
   assert(index.every((row) => safePath(row.path) && HEX64.test(row.source_sha256)
     && HEX64.test(row.projection_sha256) && HEX64.test(row.codec_sha256)), 'PACKAGE_PROJECTION_ROW_INVALID');
@@ -178,8 +179,8 @@ export function verifyPackage({ archive, receipt, expected = {} }) {
       && binding.compiler_digest === packageReceipt.compiler_digest
       && binding.codec_digest === packageReceipt.codec_digest, 'PACKAGE_BINDING_RECEIPT_MISMATCH');
     const index = readJson(join(directory, 'projection-index.json'));
-    assert(index.schema_version === PACKAGE_SCHEMA && index.count === 2092
-      && index.pages.length === 2092 && index.sha256 === binding.projection_index_sha256,
+    assert(index.schema_version === PACKAGE_SCHEMA && [2092, 3138].includes(index.count)
+      && index.pages.length === index.count && index.sha256 === binding.projection_index_sha256,
     'PACKAGE_PROJECTION_INDEX_INVALID');
     const changedPagesBytes = readFileSync(join(directory, 'changed-pages.json'));
     assert(hash(changedPagesBytes) === binding.changed_pages_file_sha256,

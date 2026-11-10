@@ -44,7 +44,7 @@ function fixture() {
     operations: { career_content_only: true },
     career_content_change: {
       contract_version: 'fermatmind.career-content-only-change.v1', status: 'eligible', base_sha: base,
-      head_sha: head, candidate_tree_sha: tree, changed_page_count: 1,
+      head_sha: head, candidate_tree_sha: tree, changed_page_count: 1, invariants: { locale_page_count: 2092 },
       changed_page_set_sha256: digest(`${changed.slug}\t${changed.locale}\t${changed.after_sha256}\n`), changed_pages: [changed],
     },
   };

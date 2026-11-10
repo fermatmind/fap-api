@@ -120,7 +120,8 @@ final class CareerCurrentAuthorityParity
     {
         ['authority' => $authority, 'full' => $full, 'releaseSha' => $releaseSha, 'activeSha' => $activeSha] = $validated;
         $this->assertAuthorityShape($authority);
-        if (($full['counts']['verified_files'] ?? null) !== 2092 || ($full['cache_write_count'] ?? null) !== 0) {
+        if (($full['counts']['verified_files'] ?? null) !== $authority['summary']['file_count']
+            || ($full['cache_write_count'] ?? null) !== 0) {
             throw new RuntimeException('CAREER_PARITY_FILE_VALIDATION_INCOMPLETE');
         }
         $redis = $this->redisContract('readonly');
@@ -165,8 +166,8 @@ final class CareerCurrentAuthorityParity
             $receipt['validation_scope'] = [
                 'canonical_slugs' => $slugs,
                 'slug_count' => count($slugs),
-                'locales' => CareerCurrentAuthorityPackage::LOCALES,
-                'locale_page_count' => count($slugs) * count(CareerCurrentAuthorityPackage::LOCALES),
+                'locales' => $authority['manifest']['locales'],
+                'locale_page_count' => $authority['summary']['locale_page_count'],
             ];
         }
         $receipt['receipt_digest'] = CareerCurrentAuthorityPackage::hashValue($receipt);
@@ -180,7 +181,7 @@ final class CareerCurrentAuthorityParity
         $hashes = [];
         $bytes = 0;
         foreach ($authority['slugs'] as $slug) {
-            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+            foreach ($authority['manifest']['locales'] as $locale) {
                 $entry = $authority['entries'][$slug][$locale];
                 $path = $authority['root'].'/'.$entry['path'];
                 if (! is_file($path) || is_link($path) || filesize($path) !== $entry['bytes']
@@ -196,7 +197,7 @@ final class CareerCurrentAuthorityParity
             'status' => 'pass',
             'delivery_mode' => 'file_authoritative',
             'validation_method' => 'ci_validated_installed_bytes',
-            'counts' => ['slugs' => count($authority['slugs']), 'locales' => 2,
+            'counts' => ['slugs' => count($authority['slugs']), 'locales' => count($authority['manifest']['locales']),
                 'locale_pages' => count($hashes), 'verified_files' => count($hashes)],
             'source_semantic_aggregate_sha256' => CareerCurrentAuthorityPackage::hashValue($hashes),
             'installed_bytes' => $bytes,
@@ -205,7 +206,7 @@ final class CareerCurrentAuthorityParity
     }
 
     /**
-     * @param  array{root:string,entries:array<string,array<string,array<string,mixed>>>}  $authority
+     * @param  array{root:string,manifest:array<string,mixed>,entries:array<string,array<string,array<string,mixed>>>}  $authority
      * @param  list<string>  $slugs
      * @return array<string,mixed>
      */
@@ -218,7 +219,7 @@ final class CareerCurrentAuthorityParity
     ): array {
         $hashes = array_fill_keys(['content_v3', 'codec_roundtrip'], []);
         $counts = [
-            'slugs' => count($slugs), 'locales' => count(CareerCurrentAuthorityPackage::LOCALES),
+            'slugs' => count($slugs), 'locales' => count($authority['manifest']['locales']),
             'locale_pages' => 0, 'encoded' => 0, 'decoded' => 0,
         ];
         $states = ['enhanced' => 0, 'legacy' => 0];
@@ -237,7 +238,7 @@ final class CareerCurrentAuthorityParity
         $projectionIndex = [];
         foreach (array_chunk($slugs, 32) as $chunk) {
             foreach ($chunk as $slug) {
-                foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                foreach ($authority['manifest']['locales'] as $locale) {
                     $content = $this->loader->pageFromPublishIndex($authority, $slug, $locale);
                     $payload = $this->pages->project($content);
                     $stored = $this->reader->encode($payload);
@@ -339,7 +340,7 @@ final class CareerCurrentAuthorityParity
     private function assertAuthorityShape(array $authority): void
     {
         if (($authority['summary']['career_count'] ?? null) !== CareerCurrentAuthorityPackage::EXPECTED_CAREERS
-            || ($authority['summary']['locale_page_count'] ?? null) !== CareerCurrentAuthorityPackage::EXPECTED_LOCALE_PAGES
+            || ($authority['summary']['locale_page_count'] ?? null) !== CareerCurrentAuthorityPackage::EXPECTED_CAREERS * count($authority['manifest']['locales'])
             || count((array) ($authority['entries'] ?? [])) !== CareerCurrentAuthorityPackage::EXPECTED_CAREERS
             || array_diff(self::PACKAGE_SLICE_SLUGS, (array) ($authority['slugs'] ?? [])) !== []) {
             throw new RuntimeException('CAREER_PARITY_AUTHORITY_INCOMPLETE');
