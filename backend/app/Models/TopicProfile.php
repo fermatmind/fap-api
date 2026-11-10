@@ -21,6 +21,7 @@ class TopicProfile extends Model
     public const SUPPORTED_LOCALES = [
         'en',
         'zh-CN',
+        'zh-TW',
     ];
 
     protected $table = 'topic_profiles';

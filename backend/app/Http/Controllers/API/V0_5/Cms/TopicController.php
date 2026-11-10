@@ -21,6 +21,7 @@ use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 final class TopicController extends Controller
 {
@@ -208,21 +209,21 @@ final class TopicController extends Controller
             'cta_bundle' => array_values(array_filter([
                 is_array($firstTest) || $personalityTopic ? [
                     'key' => 'start_test',
-                    'label' => trim((string) ($firstTest['cta_label'] ?? '')) ?: ($locale === 'zh-CN' ? '开始测试' : 'Take the test'),
+                    'label' => trim((string) ($firstTest['cta_label'] ?? '')) ?: ($this->topicCopy($locale, '开始测试', '開始測驗', 'Take the test')),
                     'href' => is_array($firstTest) ? trim((string) ($firstTest['url'] ?? '')) : '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
                     'kind' => 'start_test',
                 ] : null,
                 is_array($firstFeatured)
                     ? [
                         'key' => 'continue_public_content',
-                        'label' => trim((string) ($firstFeatured['cta_label'] ?? '')) ?: ($locale === 'zh-CN' ? '继续阅读' : 'Continue reading'),
+                        'label' => trim((string) ($firstFeatured['cta_label'] ?? '')) ?: ($this->topicCopy($locale, '继续阅读', '繼續閱讀', 'Continue reading')),
                         'href' => trim((string) ($firstFeatured['url'] ?? '')),
                         'kind' => 'content_continue',
                     ]
                     : null,
                 $personalityTopic ? [
                     'key' => 'personality_hub',
-                    'label' => $locale === 'zh-CN' ? '人格画像' : 'Personality hub',
+                    'label' => $this->topicCopy($locale, '人格画像', '人格剖析', 'Personality hub'),
                     'href' => '/'.$segment.'/personality',
                     'kind' => 'discover',
                 ] : null,
@@ -345,46 +346,36 @@ final class TopicController extends Controller
         return [
             [
                 'key' => 'career_direction',
-                'title' => $locale === 'zh-CN' ? '职业方向' : 'Career direction',
-                'body' => $locale === 'zh-CN'
-                    ? '把职业推荐内容作为待检验线索，结合岗位任务、兴趣、能力证据与现实条件讨论，不据类型确定适配。'
-                    : 'Start from career recommendations to identify higher-fit roles quickly.',
-                'href' => '/'.$segment.'/career/recommendations',
+                'title' => $this->topicCopy($locale, '职业方向', '職涯方向', 'Career direction'),
+                'body' => $this->topicCopy($locale, '把职业推荐内容作为待检验线索，结合岗位任务、兴趣、能力证据与现实条件讨论，不据类型确定适配。', '把職涯推薦當作待驗證的線索，結合職務內容、興趣、能力證據與現實條件討論，避免只根據類型判斷是否適合。', 'Start from career recommendations to identify higher-fit roles quickly.'),
+                'href' => '/'.($locale === 'zh-TW' ? 'zh' : $segment).'/career/recommendations',
                 'kind' => 'scene_entry',
             ],
             [
                 'key' => 'major_selection',
-                'title' => $locale === 'zh-CN' ? '专业选择' : 'Major selection',
-                'body' => $locale === 'zh-CN'
-                    ? '先核对课程任务、学习兴趣与能力证据；类型描述只能提示讨论问题，不能决定专业方向。'
-                    : 'Build an MBTI frame first, then evaluate majors against the same path.',
+                'title' => $this->topicCopy($locale, '专业选择', '科系選擇', 'Major selection'),
+                'body' => $this->topicCopy($locale, '先核对课程任务、学习兴趣与能力证据；类型描述只能提示讨论问题，不能决定专业方向。', '先核對課程任務、學習興趣與能力證據。類型描述可以提供討論線索，無法決定科系方向。', 'Build an MBTI frame first, then evaluate majors against the same path.'),
                 'href' => '/'.$segment.'/topics/mbti',
                 'kind' => 'scene_entry',
             ],
             [
                 'key' => 'team_collaboration',
-                'title' => $locale === 'zh-CN' ? '团队协作' : 'Team collaboration',
-                'body' => $locale === 'zh-CN'
-                    ? '回到人格类型索引，比较协作风格差异。'
-                    : 'Return to personality types to compare collaboration styles.',
+                'title' => $this->topicCopy($locale, '团队协作', '團隊協作', 'Team collaboration'),
+                'body' => $this->topicCopy($locale, '回到人格类型索引，比较协作风格差异。', '回到人格類型索引，比較協作風格的差異。', 'Return to personality types to compare collaboration styles.'),
                 'href' => '/'.$segment.'/personality',
                 'kind' => 'scene_entry',
             ],
             [
                 'key' => 'relationship_patterns',
-                'title' => $locale === 'zh-CN' ? '关系相处' : 'Relationship patterns',
-                'body' => $locale === 'zh-CN'
-                    ? '从 MBTI 主题页继续阅读关系线索。'
-                    : 'Continue from the MBTI topic hub for relationship pattern cues.',
+                'title' => $this->topicCopy($locale, '关系相处', '關係與相處', 'Relationship patterns'),
+                'body' => $this->topicCopy($locale, '从 MBTI 主题页继续阅读关系线索。', '從 MBTI 主題頁繼續閱讀關係線索。', 'Continue from the MBTI topic hub for relationship pattern cues.'),
                 'href' => '/'.$segment.'/topics/mbti',
                 'kind' => 'scene_entry',
             ],
             [
                 'key' => 'growth_planning',
-                'title' => $locale === 'zh-CN' ? '成长建议' : 'Growth planning',
-                'body' => $locale === 'zh-CN'
-                    ? '先了解测试与使用边界；结果可用于提出自我观察问题，不能保证成长、职业适配或未来表现。'
-                    : 'Start the test directly to unlock personalized growth cues.',
+                'title' => $this->topicCopy($locale, '成长建议', '成長建議', 'Growth planning'),
+                'body' => $this->topicCopy($locale, '先了解测试与使用边界；结果可用于提出自我观察问题，不能保证成长、职业适配或未来表现。', '先了解測驗與使用範圍。結果可以幫助你提出自我觀察的問題，無法保證成長、職涯適配或未來表現。', 'Start the test directly to unlock personalized growth cues.'),
                 'href' => $startTestPath,
                 'kind' => 'scene_entry',
             ],
@@ -405,10 +396,8 @@ final class TopicController extends Controller
             'summary_blocks' => [
                 [
                     'key' => 'hero',
-                    'title' => $locale === 'zh-CN' ? '主题内容聚合' : 'Topic clusters',
-                    'body' => $locale === 'zh-CN'
-                        ? '围绕测试、人格与职业内容组织结构化主题入口。'
-                        : 'Structured topic hubs that connect tests, personality profiles, and career content.',
+                    'title' => $this->topicCopy($locale, '主题内容聚合', '主題內容總覽', 'Topic clusters'),
+                    'body' => $this->topicCopy($locale, '围绕测试、人格与职业内容组织结构化主题入口。', '依測驗、人格和職涯整理主題入口。', 'Structured topic hubs that connect tests, personality profiles, and career content.'),
                     'kind' => 'hero',
                 ],
             ],
@@ -420,18 +409,18 @@ final class TopicController extends Controller
             'cta_bundle' => [
                 [
                     'key' => 'start_test',
-                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                    'label' => $this->topicCopy($locale, '开始测试', '開始測驗', 'Take the test'),
                     'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
                     'kind' => 'start_test',
                 ],
                 [
                     'key' => 'personality_hub',
-                    'label' => $locale === 'zh-CN' ? '人格画像' : 'Personality hub',
+                    'label' => $this->topicCopy($locale, '人格画像', '人格剖析', 'Personality hub'),
                     'href' => '/'.$segment.'/personality',
                     'kind' => 'discover',
                 ],
             ],
-            'indexability_state' => 'indexable',
+            'indexability_state' => $locale === 'zh-TW' ? 'noindex' : 'indexable',
             'attribution_scope' => 'public_topic_landing',
             'surface_family' => 'topic',
             'primary_content_ref' => 'topic:index',
@@ -460,7 +449,7 @@ final class TopicController extends Controller
 
     private function frontendLocaleSegment(string $locale): string
     {
-        return $locale === 'zh-CN' ? 'zh' : 'en';
+        return $this->topicProfileSeoService->mapBackendLocaleToFrontendSegment($locale);
     }
 
     /**
@@ -574,7 +563,7 @@ final class TopicController extends Controller
     {
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
-            'locale' => ['required', 'in:en,zh-CN'],
+            'locale' => ['required', Rule::in(TopicProfile::SUPPORTED_LOCALES)],
             'page' => ['nullable', 'integer', 'min:1'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
         ]);
@@ -600,7 +589,7 @@ final class TopicController extends Controller
     {
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
-            'locale' => ['required', 'in:en,zh-CN'],
+            'locale' => ['required', Rule::in(TopicProfile::SUPPORTED_LOCALES)],
         ]);
 
         if ($validator->fails()) {
@@ -613,6 +602,15 @@ final class TopicController extends Controller
             'org_id' => (int) ($validated['org_id'] ?? 0),
             'locale' => (string) $validated['locale'],
         ];
+    }
+
+    private function topicCopy(string $locale, string $simplified, string $traditional, string $english): string
+    {
+        return match ($locale) {
+            'zh-CN' => $simplified,
+            'zh-TW' => $traditional,
+            default => $english,
+        };
     }
 
     private function invalidArgument(string $message): JsonResponse

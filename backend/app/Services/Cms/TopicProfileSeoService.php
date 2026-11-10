@@ -99,7 +99,11 @@ final class TopicProfileSeoService
 
     public function mapBackendLocaleToFrontendSegment(string $locale): string
     {
-        return $this->normalizeLocale($locale) === 'zh-CN' ? 'zh' : 'en';
+        return match ($this->normalizeLocale($locale)) {
+            'zh-CN' => 'zh',
+            'zh-TW' => 'zh-TW',
+            default => 'en',
+        };
     }
 
     private function publicAlternates(TopicProfile $profile): array
@@ -121,7 +125,9 @@ final class TopicProfileSeoService
 
     private function normalizeLocale(string $locale): string
     {
-        return trim($locale) === 'zh-CN' ? 'zh-CN' : 'en';
+        $normalized = trim($locale);
+
+        return in_array($normalized, TopicProfile::SUPPORTED_LOCALES, true) ? $normalized : 'en';
     }
 
     private function resolveSeoMeta(TopicProfile $profile): ?TopicProfileSeoMeta

@@ -20,6 +20,54 @@ final class TopicsPublicApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_taiwan_topic_reads_only_its_published_locale_and_retains_noindex(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $this->createTopicProfile([
+            'topic_code' => 'mbti',
+            'slug' => 'mbti',
+            'locale' => 'zh-CN',
+            'title' => '简中主题',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+        ]);
+        $this->getJson('/api/v0.5/topics/mbti?locale=zh-TW')->assertNotFound();
+        $this->getJson('/api/v0.5/topics/mbti?locale=zh-Hant')->assertUnprocessable();
+
+        $topic = $this->createTopicProfile([
+            'topic_code' => 'mbti',
+            'slug' => 'mbti',
+            'locale' => 'zh-TW',
+            'title' => '繁體主題',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => false,
+        ]);
+        TopicProfileEntry::query()->create([
+            'profile_id' => $topic->id,
+            'entry_type' => 'custom_link',
+            'group_key' => 'related',
+            'target_key' => '',
+            'target_url_override' => '/zh-TW/career/guides',
+            'title_override' => '職涯指南',
+            'is_enabled' => true,
+        ]);
+        $this->getJson('/api/v0.5/topics/mbti?locale=zh-TW')->assertOk()
+            ->assertJsonPath('profile.id', $topic->id)
+            ->assertJsonPath('profile.locale', 'zh-TW')
+            ->assertJsonPath('profile.title', '繁體主題')
+            ->assertJsonPath('entry_groups.related.0.cta_label', '開啟')
+            ->assertJsonPath('landing_surface_v1.start_test_target', '/zh-TW/tests/mbti-personality-test-16-personality-types');
+        $this->getJson('/api/v0.5/topics?locale=zh-TW')->assertOk()
+            ->assertJsonPath('items.0.title', '繁體主題')
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex');
+        $this->getJson('/api/v0.5/topics/mbti/seo?locale=zh-TW')->assertOk()
+            ->assertJsonPath('meta.canonical', 'https://fermatmind.com/zh-TW/topics/mbti')
+            ->assertJsonPath('meta.robots', 'noindex,follow');
+        $this->getJson('/api/v0.5/topics/mbti/seo?locale=zh-CN')->assertOk()
+            ->assertJsonPath('meta.alternates', ['zh-CN' => 'https://fermatmind.com/zh/topics/mbti']);
+    }
+
     public function test_single_locale_topic_has_only_real_alternates_and_no_unrelated_cta(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);

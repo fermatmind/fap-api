@@ -62,7 +62,7 @@ final class TopicEntryResolverService
             'article' => $this->resolveArticleEntry($profile, $entry, $locale),
             'personality_profile' => $this->resolvePersonalityEntry($profile, $entry, $locale),
             'scale' => $this->resolveScaleEntry($entry, $locale),
-            'custom_link' => $this->resolveCustomLinkEntry($entry),
+            'custom_link' => $this->resolveCustomLinkEntry($entry, $locale === 'zh-TW' ? $locale : null),
             default => null,
         };
     }
@@ -111,7 +111,7 @@ final class TopicEntryResolverService
             $targetLocale
         );
 
-        if (! $personality instanceof PersonalityProfile) {
+        if (! $personality instanceof PersonalityProfile || ($targetLocale === 'zh-TW' && $personality->locale !== $targetLocale)) {
             return null;
         }
 
@@ -170,7 +170,7 @@ final class TopicEntryResolverService
     /**
      * @return array<string, mixed>|null
      */
-    private function resolveCustomLinkEntry(TopicProfileEntry $entry): ?array
+    private function resolveCustomLinkEntry(TopicProfileEntry $entry, ?string $fallbackLocale): ?array
     {
         $url = trim((string) ($entry->target_url_override ?? ''));
         if ($url === '' || ! str_starts_with($url, '/') || str_starts_with($url, '//') || preg_match('/^[a-z][a-z0-9+.-]*:/i', $url)) {
@@ -188,7 +188,7 @@ final class TopicEntryResolverService
             $entry->excerpt_override,
             $url,
             null,
-            $entry->effectiveTargetLocale()
+            $entry->effectiveTargetLocale($fallbackLocale)
         );
     }
 
@@ -227,6 +227,16 @@ final class TopicEntryResolverService
 
     private function defaultBadgeLabel(string $entryType, string $locale): string
     {
+        if ($locale === 'zh-TW') {
+            return match ($entryType) {
+                'article' => '文章',
+                'personality_profile' => '人格',
+                'scale' => '測驗',
+                'custom_link' => '推薦',
+                default => '內容',
+            };
+        }
+
         $zh = $locale === 'zh-CN';
 
         return match ($entryType) {
@@ -240,6 +250,16 @@ final class TopicEntryResolverService
 
     private function defaultCtaLabel(string $entryType, string $locale): string
     {
+        if ($locale === 'zh-TW') {
+            return match ($entryType) {
+                'article' => '閱讀',
+                'personality_profile' => '查看',
+                'scale' => '開始測驗',
+                'custom_link' => '開啟',
+                default => '查看',
+            };
+        }
+
         $zh = $locale === 'zh-CN';
 
         return match ($entryType) {
@@ -253,7 +273,9 @@ final class TopicEntryResolverService
 
     private function normalizeLocale(string $locale): string
     {
-        return trim($locale) === 'zh-CN' ? 'zh-CN' : 'en';
+        $normalized = trim($locale);
+
+        return in_array($normalized, TopicProfile::SUPPORTED_LOCALES, true) ? $normalized : 'en';
     }
 
     private function fallbackText(?string ...$candidates): ?string
