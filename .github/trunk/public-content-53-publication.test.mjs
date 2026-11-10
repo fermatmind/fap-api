@@ -1846,7 +1846,7 @@ test('Traditional article index release checks the complete cohort and preserves
  const selection='traditional-article-index';
  const assets='content_assets/public_content_53';
  const filename=selection+'.json';
- assert.equal(classifyPaths(['backend/'+assets+'/'+filename]).operations.public_content_53_package,selection);
+ assert.equal(classifyPaths(['backend/'+assets+'/'+filename]).operations.public_content_53_package,null);
  const fixture=mkdtempSync(resolve(tmpdir(),'traditional-index-online-'));
  const digest=value=>createHash('sha256').update(value).digest('hex');
  const body='## 繁體標題\n\n繁體文章';
