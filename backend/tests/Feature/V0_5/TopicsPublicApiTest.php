@@ -58,11 +58,18 @@ final class TopicsPublicApiTest extends TestCase
             'title_override' => '職涯指南',
             'is_enabled' => true,
         ]);
+        foreach (['INTJ' => null, 'ZZZZ' => '不存在的類型說明'] as $type => $excerpt) {
+            $topic->entries()->create([
+                'entry_type' => 'personality_profile', 'group_key' => 'personalities', 'target_key' => $type,
+                'title_override' => '繁體類型卡', 'excerpt_override' => $excerpt, 'is_enabled' => true,
+            ]);
+        }
         $this->getJson('/api/v0.5/topics/mbti?locale=zh-TW')->assertOk()
             ->assertJsonPath('profile.id', $topic->id)
             ->assertJsonPath('profile.locale', 'zh-TW')
             ->assertJsonPath('profile.title', '繁體主題')
             ->assertJsonPath('entry_groups.related.0.cta_label', '開啟')
+            ->assertJsonMissingPath('entry_groups.personalities')
             ->assertJsonPath('landing_surface_v1.start_test_target', '/zh-TW/tests/mbti-personality-test-16-personality-types');
         $this->getJson('/api/v0.5/topics?locale=zh-TW')->assertOk()
             ->assertJsonPath('items.0.title', '繁體主題')
@@ -93,7 +100,7 @@ final class TopicsPublicApiTest extends TestCase
         $source->seoMeta()->create(['seo_title' => $original['seo_text']['title'], 'seo_description' => $original['seo_text']['description']]);
         $sortOrder = 0;
         foreach ($original['entry_groups'] as $groupKey => $entries) {
-            foreach ($entries as $entry) {
+            foreach ($entries as $index => $entry) {
                 $source->entries()->create([
                     'entry_type' => $entry['entry_type'], 'group_key' => $groupKey, 'target_key' => $entry['target_key'],
                     'title_override' => $entry['title'], 'excerpt_override' => $entry['excerpt'],
@@ -103,6 +110,21 @@ final class TopicsPublicApiTest extends TestCase
                 ]);
                 if ($entry['entry_type'] === 'scale') {
                     $this->createScaleRegistryRow($entry['target_key'], basename($entry['url']));
+                } elseif ($entry['entry_type'] === 'personality_profile') {
+                    $this->createPersonalityProfile([
+                        'locale' => 'zh-CN', 'type_code' => $entry['target_key'], 'slug' => basename($entry['url']),
+                        'status' => 'published', 'is_public' => true, 'hero_image_url' => $entry['image_url'],
+                    ]);
+                } elseif ($entry['entry_type'] === 'article') {
+                    $this->createArticle([
+                        'locale' => 'zh-CN', 'slug' => $entry['target_key'], 'cover_image_url' => $entry['image_url'],
+                        'status' => 'published', 'is_public' => true,
+                    ]);
+                    $candidateEntry = $row['snapshot']['entry_groups'][$groupKey][$index];
+                    $this->createArticle([
+                        'locale' => 'zh-TW', 'slug' => $candidateEntry['target_key'], 'cover_image_url' => $candidateEntry['image_url'],
+                        'status' => 'published', 'is_public' => true, 'is_indexable' => false,
+                    ]);
                 }
             }
         }

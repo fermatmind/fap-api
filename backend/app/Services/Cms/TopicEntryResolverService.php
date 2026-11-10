@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
+use App\Domain\Personality\Current\PersonalityCurrentPageReader;
 use App\Models\Article;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
@@ -16,6 +17,7 @@ final class TopicEntryResolverService
     public function __construct(
         private readonly PersonalityProfileService $personalityProfileService,
         private readonly TopicProfileSeoService $topicProfileSeoService,
+        private readonly PersonalityCurrentPageReader $personalityCurrentPageReader,
     ) {}
 
     /**
@@ -104,6 +106,20 @@ final class TopicEntryResolverService
     private function resolvePersonalityEntry(TopicProfile $profile, TopicProfileEntry $entry, string $locale): ?array
     {
         $targetLocale = $this->normalizeLocale($entry->effectiveTargetLocale($locale));
+        if ($targetLocale === 'zh-TW' && (int) $profile->org_id === 0) {
+            $slug = strtolower(trim((string) $entry->target_key));
+            if (! preg_match('/^[a-z]{4}$/D', $slug) || blank($entry->title_override) || blank($entry->excerpt_override)) {
+                return null;
+            }
+            $target = $this->personalityCurrentPageReader->payloadOrNull('mbti', 'profile', $slug, $targetLocale)['profile'] ?? null;
+            if (($target['slug'] ?? null) !== $slug || ($target['locale'] ?? null) !== $targetLocale
+                || ($target['status'] ?? null) !== 'published' || ($target['is_public'] ?? null) !== true) {
+                return null;
+            }
+
+            return $this->buildResolvedEntry($entry, null, null, '/zh-TW/personality/'.$slug, $target['hero_image_url'] ?? null, $targetLocale);
+        }
+
         $personality = $this->personalityProfileService->getPublicProfileByType(
             (string) $entry->target_key,
             (int) $profile->org_id,
