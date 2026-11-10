@@ -125,6 +125,14 @@ final class PublicContent53Package
     public function read(string $backendRoot, string $expectedSha256, string $environment = 'production'): array
     {
         $root = realpath($backendRoot);
+        $indexFile = TraditionalArticleIndexPackage::FILE;
+        if (is_file($root.'/'.self::PACKAGE.'/'.$indexFile)) {
+            $bytes = $this->bytes($root, $indexFile);
+            $chain = TraditionalArticleIndexPackage::SCHEMA."\n".$indexFile."\n".hash('sha256', $bytes)."\n";
+            if (hash_equals($expectedSha256, hash('sha256', $chain))) {
+                return TraditionalArticleIndexPackage::read($bytes, $environment);
+            }
+        }
         $stagingOriginals = StagingArticleOriginals::FILE;
         if (is_file($root.'/'.self::PACKAGE.'/'.$stagingOriginals)) {
             $bytes = $this->bytes($root, $stagingOriginals);

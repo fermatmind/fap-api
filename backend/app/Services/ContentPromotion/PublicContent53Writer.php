@@ -88,6 +88,17 @@ final class PublicContent53Writer
             return ['written_count' => $staging ? count($rows) : 0, 'created_count' => $staging ? count(array_filter(array_column($before, 'missing'))) : 0,
                 'state' => $this->states->read($context->packageSha256, true)];
         }
+        if (isset($rows[0]['traditional_article_index'])) {
+            $release = app(TraditionalArticleIndexRelease::class);
+            foreach ($rows as $row) {
+                $release->activate($row['traditional_article_index'], $before[$row['page_id']]['index_members']);
+            }
+            foreach ($rows as $row) {
+                $release->assertActive($row['traditional_article_index'], $before[$row['page_id']]['index_members']);
+            }
+
+            return ['written_count' => count($rows), 'state' => $this->states->read($context->packageSha256, true)];
+        }
         usort($rows, static fn (array $a, array $b): int => ($a['identity']['locale'] === 'en') <=> ($b['identity']['locale'] === 'en'));
         $written = [];
         $created = 0;
@@ -223,6 +234,11 @@ final class PublicContent53Writer
         foreach ($before as $id => $saved) {
             if (isset($rows[$id]['staging_article_original'])) {
                 app(StagingArticleOriginals::class)->restore($rows[$id]);
+
+                continue;
+            }
+            if (isset($rows[$id]['traditional_article_index'])) {
+                app(TraditionalArticleIndexRelease::class)->restore($rows[$id]['traditional_article_index'], $saved['index_members'], $after[$id]['index_members']);
 
                 continue;
             }

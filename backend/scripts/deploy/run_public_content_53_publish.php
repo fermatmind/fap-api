@@ -89,6 +89,8 @@ try {
         'app/Services/ContentPromotion/PublicContent53State.php',
         'app/Services/ContentPromotion/PublicContent53Writer.php',
         'app/Services/ContentPromotion/StagingArticleOriginals.php',
+        'app/Services/ContentPromotion/TraditionalArticleIndexPackage.php',
+        'app/Services/ContentPromotion/TraditionalArticleIndexRelease.php',
         'app/Services/ContentPromotion/TraditionalArticlePublication.php',
         'app/Services/ContentPromotion/TraditionalArticleSourcePreflight.php',
         'app/Services/ContentPromotion/TraditionalContentPagePublication.php',

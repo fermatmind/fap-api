@@ -282,6 +282,11 @@ final class ExactPackagePromotionService
             && $phase === 'publish';
         $riasecSamples = $adapter instanceof \App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter
             && $phase === 'publish' && RiasecCodeSampleArticles::matchesContext($context);
+        $traditionalIndex = $adapter instanceof \App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter
+            && $phase === 'publish' ? TraditionalArticleIndexPackage::mutationCounts($context) : null;
+        if ($traditionalIndex !== null && ! in_array($written, [0, $expected], true)) {
+            throw new DomainException('traditional_article_index_partial_publication');
+        }
         $boundaryCounts = [];
         foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count', 'deploy_mutation_count'] as $boundary) {
             $allowed = $iqArticleLaunch && $written > 0 && in_array($boundary, ['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count'], true) ? 2 : 0;
@@ -290,6 +295,9 @@ final class ExactPackagePromotionService
                     throw new DomainException('riasec_code_sample_partial_publication');
                 }
                 $allowed = 6;
+            }
+            if ($traditionalIndex !== null && $written > 0) {
+                $allowed = $traditionalIndex[$boundary] ?? 0;
             }
             if (! is_int($result[$boundary] ?? null) || $result[$boundary] !== $allowed
                 || ($iqArticleLaunch && ! in_array($written, [0, $expected], true))) {

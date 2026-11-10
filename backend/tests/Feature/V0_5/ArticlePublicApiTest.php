@@ -730,6 +730,142 @@ final class ArticlePublicApiTest extends TestCase
         $read($source)->assertJsonMissingPath('meta.alternates.zh-TW');
     }
 
+    public function test_traditional_index_package_locks_115_distinct_targets_in_both_environments(): void
+    {
+        $identity = static fn (int $id, string $slug, string $locale): array => [
+            'id' => $id, 'published_revision_id' => $id + 2000, 'translation_group_id' => $slug,
+            'slug' => $slug, 'locale' => $locale, 'canonical' => 'https://fermatmind.com/'.$locale.'/articles/'.$slug,
+        ];
+        $manifest = ['schema' => \App\Services\ContentPromotion\TraditionalArticleIndexPackage::SCHEMA, 'environments' => []];
+        foreach (['staging' => 0, 'production' => 400] as $environment => $offset) {
+            for ($i = 1; $i <= 115; $i++) {
+                $slug = 'reviewed-article-'.$i;
+                $manifest['environments'][$environment][] = [
+                    'target' => $identity($offset + $i, $slug, 'zh-TW'),
+                    'peers' => [$identity($offset + $i + 115, $slug, 'en') + ['hreflang_gate' => null]],
+                    'source_locale' => 'en', 'source_id' => $offset + $i + 115, 'llms_eligible' => true,
+                    'body_sha256' => str_repeat('a', 64), 'title_sha256' => str_repeat('b', 64),
+                ];
+            }
+        }
+        $parse = static fn (array $package, string $environment): array => \App\Services\ContentPromotion\TraditionalArticleIndexPackage::read(
+            json_encode($package, JSON_THROW_ON_ERROR), $environment,
+        )['candidates'];
+        self::assertCount(115, $parse($manifest, 'staging'));
+        $production = $parse($manifest, 'production');
+        self::assertCount(115, $production);
+        self::assertSame(401, $production[0]['traditional_article_index']['target']['id']);
+
+        $missing = $manifest;
+        array_pop($missing['environments']['staging']);
+        try {
+            $parse($missing, 'production');
+            self::fail('A missing staging member must reject the entire package.');
+        } catch (\DomainException $exception) {
+            self::assertSame('public_content_53_traditional_index_count_invalid', $exception->getMessage());
+        }
+        $manifest['environments']['staging'][1]['target']['id'] = $manifest['environments']['staging'][0]['target']['id'];
+        $this->expectExceptionMessage('public_content_53_traditional_index_duplicate_identity');
+        $parse($manifest, 'production');
+    }
+
+    public function test_traditional_index_activation_and_rollback_preserve_reviewed_revisions_and_independent_articles(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $counterparts = app(\App\Services\Cms\ArticleReviewedCounterpartService::class);
+        $release = app(\App\Services\ContentPromotion\TraditionalArticleIndexRelease::class);
+        $identity = static fn (Article $article): array => [
+            'id' => $article->id, 'locale' => $article->locale, 'slug' => $article->slug,
+            'published_revision_id' => $article->published_revision_id,
+            'translation_group_id' => $article->translation_group_id,
+            'canonical' => $counterparts->canonical($article),
+        ];
+        $rows = [];
+        $origins = [];
+        foreach (['en', 'zh-CN'] as $locale) {
+            $source = $this->createArticle(['slug' => 'independent-article', 'locale' => $locale, 'translation_group_id' => 'group-'.$locale]);
+            $this->createSeoMeta($source, ['canonical_url' => $counterparts->canonical($source)]);
+            $target = $this->createArticle([
+                'slug' => 'independent-article'.($locale === 'en' ? '-english-source' : ''),
+                'locale' => 'zh-TW', 'translation_group_id' => $source->translation_group_id,
+                'source_locale' => $locale, 'source_article_id' => $source->id,
+                'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+                'is_indexable' => false, 'sitemap_eligible' => false, 'llms_eligible' => false,
+            ], [
+                'content_md' => "# 繁體標題\n\n繁體正文",
+                'authority_source_package' => \App\Services\ContentPromotion\PublicContent53Package::PACKAGE,
+                'authority_metadata_json' => ['approval_kind' => 'verified_automated_exact_package'],
+            ]);
+            $this->createSeoMeta($target, [
+                'canonical_url' => $counterparts->canonical($target), 'is_indexable' => false, 'robots' => 'noindex,follow',
+                'schema_json' => ['editorial_package_v1' => ['answer_surface_policy' => 'editor_supplied']],
+            ]);
+            $rows[] = [
+                'target' => $identity($target), 'peers' => [$identity($source) + ['hreflang_gate' => null]],
+                'source_locale' => $locale, 'source_id' => $source->id, 'llms_eligible' => $locale === 'en',
+                'body_sha256' => hash('sha256', "## 繁體標題\n\n繁體正文"),
+                'title_sha256' => hash('sha256', (string) $target->publishedRevision->title),
+            ];
+            $origins[] = $source;
+        }
+
+        $before = array_map($release->read(...), $rows);
+        try {
+            DB::transaction(function () use ($release, $rows, $before): void {
+                $release->activate($rows[0], $before[0]);
+                $rows[1]['body_sha256'] = str_repeat('a', 64);
+                $release->activate($rows[1], $before[1]);
+            });
+            self::fail('A changed reviewed body must reject the entire transaction.');
+        } catch (\DomainException $exception) {
+            self::assertSame('traditional_article_index_reviewed_body_drift', $exception->getMessage());
+        }
+        self::assertSame($before, array_map($release->read(...), $rows));
+
+        DB::transaction(function () use ($release, $rows, $before): void {
+            foreach ($rows as $index => $row) {
+                $release->activate($row, $before[$index]);
+            }
+            foreach ($rows as $index => $row) {
+                $release->assertActive($row, $before[$index]);
+            }
+        });
+        $after = array_map($release->read(...), $rows);
+        foreach ($origins as $index => $source) {
+            $expected = [$source->locale => $counterparts->canonical($source), 'zh-TW' => $rows[$index]['target']['canonical']];
+            $actual = $this->getJson('/api/v0.5/articles/'.$source->slug.'/seo?locale='.$source->locale)
+                ->assertOk()->json('meta.article_authority_v1.alternate_eligibility.alternates');
+            $this->assertEquals($expected, $actual);
+        }
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+        foreach ($rows as $index => $row) {
+            $release->assertActive($row, $before[$index]);
+        }
+        DB::transaction(function () use ($release, $rows, $before, $after): void {
+            foreach ($rows as $index => $row) {
+                $release->restore($row, $before[$index], $after[$index]);
+                $release->restore($row, $before[$index], $after[$index]);
+            }
+        });
+        self::assertSame($before, array_map($release->read(...), $rows));
+
+        config(['content_promotion.public_content_53_environment' => 'staging']);
+        $origins[1]->forceFill(['is_indexable' => false])->saveQuietly();
+        ArticleSeoMeta::withoutGlobalScopes()->where('article_id', $origins[1]->id)->delete();
+        $stage = $rows[1];
+        $stage['peers'][0]['staging_control'] = ['indexable' => false, 'has_seo' => false, 'canonical_url' => null, 'robots' => null];
+        $stageBefore = $release->read($stage);
+        DB::transaction(function () use ($release, $stage, $stageBefore): void {
+            $release->activate($stage, $stageBefore);
+            $release->assertActive($stage, $stageBefore);
+        });
+        $stageAfter = $release->read($stage);
+        self::assertSame($stageBefore['zh-CN'], $stageAfter['zh-CN']);
+        self::assertTrue($stageAfter['zh-TW']['article']['is_indexable']);
+        DB::transaction(fn () => $release->restore($stage, $stageBefore, $stageAfter));
+        self::assertSame($stageBefore, $release->read($stage));
+    }
+
     public function test_traditional_preflight_requires_the_exact_reviewed_cross_group_pair(): void
     {
         $source = $this->createArticle(['slug' => 'cross-group-source', 'locale' => 'zh-CN']);

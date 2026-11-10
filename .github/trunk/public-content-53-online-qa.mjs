@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readMbtiResultCopySample } from './mbti-result-copy-online-qa.mjs';
 import { execFileSync } from 'node:child_process';
 import { canonical } from './iq-public-scale-package.mjs';
@@ -164,9 +165,170 @@ async function renderPrestate(row,url,renderer) {
     }
   }
 }
+export const TRADITIONAL_INDEX_QA_WINDOW_MS = 600000;
+const traditionalIndexConcurrency = 8;
+const indexDigest = value => createHash('sha256').update(value).digest('hex');
+const hasNoindex = value => /(?:^|[\s,:])(?:noindex|none)(?:$|[\s,;])/i.test(value ?? '');
+const indexApiPath = (identity, seo = false) => '/api/v0.5/articles/'+identity.slug+(seo?'/seo':'')+'?org_id=0&locale='+identity.locale;
+const indexAt = (host, canonical) => host+new URL(canonical).pathname;
+const indexBodyFields = article => ({
+  title: indexDigest(article.title), body: indexDigest(article.content_md),
+  source_id: article.source_article_id, source_locale: article.source_locale,
+  indexable: article.is_indexable, sitemap: article.sitemap_eligible, llms: article.llms_eligible,
+});
+
+function readIndexIdentity(identity, payload) {
+  const article = payload.article;
+  if (payload.ok !== true || !article || article.org_id !== 0 || article.locale !== identity.locale || article.slug !== identity.slug
+    || article.id !== identity.id || article.published_revision_id !== identity.published_revision_id
+    || article.translation_group_id !== identity.translation_group_id || article.status !== 'published' || article.is_public !== true
+    || typeof article.title !== 'string' || typeof article.content_md !== 'string' || !article.content_md.trim()) {
+    throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_IDENTITY');
+  }
+  return article;
+}
+
+function assertIndexHtml(identity, html, expected, stage, header = '') {
+  const dom = domOf(html,{articleSsr:true});
+  const language = identity.locale === 'zh-CN' ? 'zh' : identity.locale;
+  const alternates = dom.alternate_entries.filter(entry=>entry.hreflang && entry.hreflang !== 'x-default');
+  if (dom.language !== language || !equal(dom.canonical,[identity.canonical])
+    || !dom.article_body.some(body=>body.trim()) || (dom.robots.some(hasNoindex) || hasNoindex(header)) !== stage
+    || alternates.length !== Object.keys(expected).length
+    || !equal(Object.fromEntries(alternates.map(entry=>[entry.hreflang,entry.href])),expected)) {
+    throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_HTML');
+  }
+}
+
+async function verifyIndexSitemaps(rows, environment, fetcher, active) {
+  const [api,web] = hosts(environment);
+  const stage = environment === 'staging';
+  const payload = parseApi(await read(api+'/api/v0.5/seo/sitemap-source',fetcher));
+  const source = payload.items?.map(item=>item.loc);
+  const detail = /^\/zh-TW\/articles\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
+  const collect = urls => urls.filter(url=>detail.test(new URL(url).pathname)).sort();
+  const expect = host => active ? rows.map(row=>indexAt(host,row.traditional_article_index.target.canonical)).sort() : [];
+  if (payload.ok !== true || payload.source !== 'backend_sitemap_generator' || !Array.isArray(source)
+    || !equal(collect(source),expect(web))) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SITEMAP');
+  if (stage) {
+    const response = await fetcher(web+'/sitemap.xml',{redirect:'error',signal:AbortSignal.timeout(15000)});
+    if (response.status !== 410) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_STAGING_SITEMAP');
+    return;
+  }
+  const xml = await read(web+'/sitemap.xml',fetcher);
+  if (!/<urlset\b/.test(xml) || !equal(collect([...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1])),expect(web)))
+    throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SITEMAP');
+}
+
+async function traditionalIndexOnline(rows, environment, fetcher, renderer, before) {
+  const [api,web] = hosts(environment);
+  const stage = environment === 'staging';
+  const result = {};
+  const deadline = Date.now()+TRADITIONAL_INDEX_QA_WINDOW_MS;
+  const checkTime = () => {
+    if (Date.now()>=deadline) throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_TIMEOUT');
+  };
+  const verify = async row => {
+    const spec = row.traditional_article_index;
+    const members = [spec.target,...spec.peers];
+    const expected = Object.fromEntries(members.map(identity=>[identity.locale,identity.canonical]));
+    const expectedApi = Object.fromEntries(members.map(identity=>[identity.locale,indexAt(web,identity.canonical)]));
+    const stageOverrides = stage && spec.peers.some(peer=>peer.staging_control);
+    const heldStageLocales = new Set(spec.peers.filter(peer=>stage && peer.staging_control?.indexable === false).map(peer=>peer.locale));
+    const snapshot = {};
+    for (const identity of members) {
+      checkTime();
+      const target = identity.locale === 'zh-TW';
+      const stageControl = stage ? identity.staging_control : null;
+      const article = readIndexIdentity(identity,parseApi(await read(api+indexApiPath(identity),fetcher)));
+      const state = indexBodyFields(article);
+      if (target && (!equal([state.title,state.body,state.source_id,state.source_locale],
+        [spec.title_sha256,spec.body_sha256,spec.source_id,spec.source_locale])
+        || !equal([state.indexable,state.sitemap,state.llms],[!!before,!!before,before?spec.llms_eligible:false]))) {
+        throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_BODY_OR_HOLD');
+      }
+      if (!target && (state.indexable !== (stageControl?.indexable ?? true)
+        || (stageControl && !equal([!!article.seo_meta,article.seo_meta?.canonical_url ?? null,article.seo_meta?.robots ?? null],
+          [stageControl.has_seo,stageControl.canonical_url,stageControl.robots]))
+        || ((!before || stageControl) && !equal(article.seo_meta?.hreflang_gate_v1 ?? null,identity.hreflang_gate))))
+        throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_PEER');
+      snapshot[identity.locale] = state;
+      if (!before) continue;
+      const previous = before[row.page_id]?.[identity.locale];
+      const preserved = target ? {...state,indexable:false,sitemap:false,llms:false} : state;
+      if (!equal(preserved,previous) || (!stageControl && article.seo_meta?.hreflang_gate_v1?.enabled !== true))
+        throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_PROTECTED_STATE');
+      let header = '';
+      const [seoBytes,html] = await Promise.all([
+        read(api+indexApiPath(identity,true),fetcher),
+        read(indexAt(web,identity.canonical),async (...args)=>{
+          const response=await fetcher(...args);
+          header=response.headers.get('x-robots-tag') ?? '';
+          return response;
+        },false,{'User-Agent':'facebookexternalhit/1.1'}),
+      ]);
+      const meta = parseApi(seoBytes).meta;
+      const shouldHold = stageControl ? hasNoindex(stageControl.robots ?? (stageControl.indexable ? '' : 'noindex')) : false;
+      const alternates = meta?.article_authority_v1?.alternate_eligibility?.alternates;
+      const alternatesMatch = stageOverrides
+        ? Array.isArray(alternates) && alternates.length === 0
+          || !!alternates && !Array.isArray(alternates) && Object.entries(alternates).every(([locale,url])=>!heldStageLocales.has(locale) && expectedApi[locale]===url)
+        : equal(alternates,expectedApi);
+      if (meta?.canonical !== expectedApi[identity.locale] || hasNoindex(meta?.robots) !== shouldHold || !alternatesMatch) {
+        throw new Error('PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SEO');
+      }
+      checkTime();
+      assertIndexHtml(identity,html,stage?{}:expected,stage,header);
+    }
+    return snapshot;
+  };
+  for (let start=0; start<rows.length; start+=traditionalIndexConcurrency) {
+    checkTime();
+    const group = rows.slice(start,start+traditionalIndexConcurrency);
+    let pending = group;
+    while (pending.length) {
+      const settled = await Promise.allSettled(pending.map(verify));
+      const retry = [];
+      for (const [i,value] of settled.entries()) {
+        if (value.status === 'fulfilled') result[pending[i].page_id]=value.value;
+        else if (before && value.reason?.message === 'PUBLIC_CONTENT_53_TRADITIONAL_INDEX_HTML' && Date.now()<deadline) retry.push(pending[i]);
+        else throw value.reason;
+      }
+      pending=retry;
+      if (pending.length) await new Promise(resolve=>setTimeout(resolve,5000));
+    }
+  }
+  while (true) {
+    checkTime();
+    try {
+      await verifyIndexSitemaps(rows,environment,fetcher,!!before);
+      break;
+    } catch (error) {
+      if (!before || error?.message !== 'PUBLIC_CONTENT_53_TRADITIONAL_INDEX_SITEMAP' || Date.now()>=deadline) throw error;
+      await new Promise(resolve=>setTimeout(resolve,5000));
+    }
+  }
+  if (!before) return result;
+  const byPeerCount = new Map();
+  for (const row of rows) {
+    const count = row.traditional_article_index.peers.length;
+    if (!byPeerCount.has(count)) byPeerCount.set(count,row.traditional_article_index);
+  }
+  for (const spec of byPeerCount.values()) {
+    checkTime();
+    const expected = Object.fromEntries([spec.target,...spec.peers].map(identity=>[identity.locale,identity.canonical]));
+    const verifyDOM = html=>assertIndexHtml(spec.target,html,stage?{}:expected,stage);
+    verifyDOM(await renderer(indexAt(web,spec.target.canonical),{surface:'public_page',verifyDOM}));
+  }
+  return {environment,api_readback_count:rows.length,dom_readback_count:rows.length,raw_html_readback_count:rows.length,
+    reciprocal_peer_readback_count:rows.reduce((sum,row)=>sum+row.traditional_article_index.peers.length,0),
+    discovery_readback_count:rows.length,browser_readback_count:byPeerCount.size};
+}
+
 export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch,renderer=renderPage,packageSha256) {
   const [api,web] = hosts(environment); const result={};
   const rows = readCandidateRows(backendRoot,packageSha256,environment).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
+  if (rows[0]?.traditional_article_index) return traditionalIndexOnline(rows,environment,fetcher,renderer,null);
   for (const row of rows) {
     if (row.staging_article_original) {
       const bytes=await read(api+apiPath(row),fetcher,environment === 'staging');
@@ -546,6 +708,7 @@ export function assertNewArticleDiscovery(rows,documents,environment='production
 export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fetch,renderer=renderPage,prestate,packageSha256) {
   const [api,web]=hosts(environment);if(!prestate) throw new Error('PUBLIC_CONTENT_53_PRESTATE_REQUIRED');
   const rows = readCandidateRows(backendRoot,packageSha256,environment).candidates.map(row=>environment === 'staging' && row.staging_snapshot ? {...row,snapshot:row.staging_snapshot} : row);
+  if (rows[0]?.traditional_article_index) return traditionalIndexOnline(rows,environment,fetcher,renderer,prestate);
   const originalIds=new Map();
   for (const row of rows) {
     if (row.staging_article_original) {

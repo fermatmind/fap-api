@@ -15,6 +15,7 @@ use App\Services\ContentPromotion\PromotionTargetSet;
 use App\Services\ContentPromotion\PublicContent53Package;
 use App\Services\ContentPromotion\PublicContent53State;
 use App\Services\ContentPromotion\PublicContent53Writer;
+use App\Services\ContentPromotion\TraditionalArticleIndexPackage;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use DomainException;
 use Illuminate\Support\Facades\DB;
@@ -267,6 +268,9 @@ final class PublicContent53PromotionAdapter implements ExactPackagePromotionAdap
             && array_filter($this->package->read(base_path(), $context->packageSha256, (string) config('content_promotion.public_content_53_environment', 'production'))['candidates'], static fn ($row): bool => ($row['new_traditional_page'] ?? false) === true || ($row['new_traditional_landing'] ?? false) === true)) {
             $result['created_count'] = $created;
             $result['updated_count'] = $written - $created;
+        }
+        if ($published > 0 && $written > 0) {
+            $result = array_replace($result, TraditionalArticleIndexPackage::mutationCounts($context) ?? []);
         }
         if ($published > 0 && $written > 0 && \App\Services\ContentPromotion\RiasecCodeSampleArticles::matchesContext($context)) {
             $result['created_count'] = $created;

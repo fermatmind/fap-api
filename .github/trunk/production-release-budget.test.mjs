@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import test from 'node:test';
-import {requiredSeconds, publicContentOnlineRows, IQ_PUBLIC_SCALE_BUDGET_SECONDS,productionPlan,productionJobBudget} from './production-release-budget.mjs';
+import {requiredSeconds, publicContentOnlineRows, IQ_PUBLIC_SCALE_BUDGET_SECONDS,TRADITIONAL_INDEX_BUDGET_SECONDS,productionPlan,productionJobBudget} from './production-release-budget.mjs';
 import {IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS} from './iq-public-scale-publish.mjs';
 import {IQ_CANDIDATE_READ_TIMEOUT_MS, IQ_HTTP_READ_TIMEOUT_MS} from './iq-public-scale-online-qa.mjs';
 import {classifyPaths} from './classify-paths.mjs';
@@ -167,4 +167,14 @@ test('capacity refuses above the hosted limit instead of shrinking any reserve',
   assert.throws(()=>productionJobBudget(21001,true),/EXCEEDS_PLATFORM_LIMIT/);
   assert.throws(()=>productionJobBudget(Infinity),/BUDGET_INVALID/);
   assert.throws(()=>productionJobBudget(0),/BUDGET_INVALID/);
+});
+
+
+test('the exact 115-article Traditional index package fits the existing deploy window',()=>{
+  const operations={public_content_53_publish:true,public_content_53_package:'traditional-article-index'};
+  const plan=productionPlan(operations,{},115);
+  assert.equal(plan.required_seconds,30*60+1800+900+60+TRADITIONAL_INDEX_BUDGET_SECONDS);
+  assert.ok(plan.job_timeout_minutes<=360);
+  assert.throws(()=>productionPlan(operations,{},114),/TRADITIONAL_INDEX_ROW_COUNT_INVALID/);
+  assert.throws(()=>productionPlan({...operations,public_content_53_package:'assets'},{},115),/PRODUCTION_BUDGET_EXCEEDS_PLATFORM_LIMIT/);
 });

@@ -8,6 +8,7 @@
 // 360s cache-settlement loop (including its final bounded browser attempt).
 // Both 800s publication/recovery SSH limits remain reserved separately.
 import {readCandidateRows,packageDigest} from './public-content-53-package.mjs';
+import {TRADITIONAL_INDEX_QA_WINDOW_MS} from './public-content-53-online-qa.mjs';
 import {IQ_PUBLICATION_TRANSPORT_TIMEOUT_MS} from './iq-public-scale-publish.mjs';
 import {IQ_CANDIDATE_READ_TIMEOUT_MS, IQ_HTTP_READ_TIMEOUT_MS} from './iq-public-scale-online-qa.mjs';
 
@@ -28,6 +29,10 @@ export function publicContentOnlineRows(rows) {
   return rows.length - adapterOnly || undefined;
 }
 
+// Reserve both 800s transports and two bounded QA windows. A final
+// HTTP/DOM group and two representative browser reads may finish after a window.
+export const TRADITIONAL_INDEX_BUDGET_SECONDS = 1600 + 2 * (TRADITIONAL_INDEX_QA_WINDOW_MS / 1000 + 60) + 160;
+
 export function requiredSeconds(deployMinutes, operations, publicContentRows = 53, newArticleDiscovery = false) {
   if (![30,35,60].includes(deployMinutes)) throw new Error('DEPLOY_BUDGET_INVALID');
   if (!operations || typeof operations !== 'object' || Array.isArray(operations)) throw new Error('OPERATIONS_INVALID');
@@ -46,7 +51,12 @@ export function requiredSeconds(deployMinutes, operations, publicContentRows = 5
   if (operations.career_current_authority_release && deployMinutes !== 60) throw new Error('CAREER_FORWARD_BUDGET_INVALID');
   if (operations.public_content_53_publish) {
     if (!Number.isSafeInteger(publicContentRows) || publicContentRows < 1) throw new Error('PUBLIC_CONTENT_ROW_COUNT_INVALID');
-    consumers.public_content_53_publish = 1600 + publicContentRows * 600 + (newArticleDiscovery ? 360 : 0);
+    if (operations.public_content_53_package === 'traditional-article-index') {
+      if (publicContentRows !== 115) throw Error('TRADITIONAL_INDEX_ROW_COUNT_INVALID');
+      consumers.public_content_53_publish = TRADITIONAL_INDEX_BUDGET_SECONDS;
+    } else {
+      consumers.public_content_53_publish = 1600 + publicContentRows * 600 + (newArticleDiscovery ? 360 : 0);
+    }
   }
   return deployMinutes*60 + 1800 + 900 + 60 + Object.entries(consumers)
     .reduce((sum,[name,seconds])=>sum+(operations[name] === true ? seconds : 0),0);

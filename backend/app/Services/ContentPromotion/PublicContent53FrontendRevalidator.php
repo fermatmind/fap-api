@@ -6,6 +6,7 @@ namespace App\Services\ContentPromotion;
 
 use App\Models\Article;
 use DomainException;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
 
@@ -16,7 +17,9 @@ final class PublicContent53FrontendRevalidator
     {
         [$endpoint, $secret] = $this->configuration();
         $rateLimitWaited = false;
-        $requests = $rows;
+        $requests = isset($rows[0]['traditional_article_index'])
+            ? $this->traditionalIndexRequests($rows)
+            : $rows;
         $originals = [];
         foreach ($rows as $row) {
             if (! ($row['new_traditional_article'] ?? false)) {
@@ -49,7 +52,10 @@ final class PublicContent53FrontendRevalidator
             $segment = $row['identity']['locale'] === 'zh-TW' ? 'zh-TW' : ($row['identity']['locale'] === 'en' ? 'en' : 'zh');
             $slug = $row['identity']['slug'];
             $tags = [];
-            if ($row['kind'] === 'discovery') {
+            if ($row['kind'] === 'traditional_index_cache') {
+                $paths = $row['paths'];
+                $content = ['type' => 'public_content_53'];
+            } elseif ($row['kind'] === 'discovery') {
                 $paths = ['/en/articles', '/zh/articles', '/sitemap.xml', '/llms.txt', '/llms-full.txt'];
                 $content = ['type' => 'public_content_53'];
             } elseif ($row['kind'] === 'article') {
@@ -121,6 +127,28 @@ final class PublicContent53FrontendRevalidator
                 throw new DomainException('public_content_53_revalidation_failed');
             }
         }
+    }
+
+    private function traditionalIndexRequests(array $rows): array
+    {
+        if (Artisan::call('seo:warm-sitemap-source-cache', ['--refresh-if-changed' => true, '--json' => true]) !== 0) {
+            throw new DomainException('public_content_53_traditional_index_sitemap_refresh_failed');
+        }
+
+        // Traditional detail already uses no-store. Refresh the exact affected
+        // original detail paths and the shared discovery documents.
+        $paths = ['/sitemap.xml', '/llms.txt', '/llms-full.txt'];
+        foreach ($rows as $row) {
+            foreach ($row['traditional_article_index']['peers'] as $peer) {
+                $paths[] = parse_url($peer['canonical'], PHP_URL_PATH);
+            }
+        }
+
+        return array_map(static fn (array $chunk): array => [
+            'kind' => 'traditional_index_cache',
+            'identity' => ['locale' => 'en', 'slug' => 'articles'],
+            'paths' => $chunk,
+        ], array_chunk(array_values(array_unique($paths)), 24));
     }
 
     public function assertConfigured(): void

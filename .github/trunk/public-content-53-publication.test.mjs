@@ -1772,3 +1772,76 @@ test('Traditional article media batch uses verified variants and keeps inline an
   assert.deepEqual([mismatch,tracking,repeat].map(row=>row.snapshot.editorial_projection.faq.length),[6,6,7]);
  }
 });
+
+test('Traditional article index release checks the complete cohort and preserves staging protection',async()=>{
+ const selection='traditional-article-index';
+ const assets='content_assets/public_content_53';
+ const filename=selection+'.json';
+ assert.equal(classifyPaths(['backend/'+assets+'/'+filename]).operations.public_content_53_package,selection);
+ const fixture=mkdtempSync(resolve(tmpdir(),'traditional-index-online-'));
+ const digest=value=>createHash('sha256').update(value).digest('hex');
+ const body='## 繁體標題\n\n繁體文章';
+ const title='繁體文章';
+ const identity=(id,slug,locale)=>({id,slug,locale,published_revision_id:id+1000,translation_group_id:slug,
+  canonical:'https://fermatmind.com/'+(locale==='zh-CN'?'zh':locale)+'/articles/'+slug});
+ const rows=offset=>Array.from({length:115},(_,i)=>{
+  const slug='index-proof-'+(i+1);
+  return {target:identity(offset+i+1,slug,'zh-TW'),peers:[{...identity(offset+i+116,slug,'en'),hreflang_gate:null}],
+   source_id:offset+i+116,source_locale:'en',llms_eligible:true,body_sha256:digest(body),title_sha256:digest(title)};
+ });
+ const manifest={schema:'fermatmind.traditional_article_index.v1',environments:{staging:rows(0),production:rows(400)}};
+ manifest.environments.staging[0].peers[0].staging_control={indexable:false,has_seo:false,canonical_url:null,robots:null};
+ try {
+  symlinkSync(resolve(root,'app'),resolve(fixture,'app'),'dir');
+  mkdirSync(resolve(fixture,assets),{recursive:true});
+  writeFileSync(resolve(fixture,assets,filename),JSON.stringify(manifest));
+  const sha=packageDigest(fixture,selection);
+  for (const environment of ['staging','production']) {
+   const stage=environment==='staging';
+   const host=stage?'https://staging.fermatmind.com':'https://fermatmind.com';
+   const bySlug=new Map(manifest.environments[environment].map(row=>[row.target.slug,row]));
+   const local=identity=>host+new URL(identity.canonical).pathname;
+   const html=(row,locale)=> {
+    const subject=[row.target,...row.peers].find(member=>member.locale===locale);
+    const links=stage?'':[row.target,...row.peers].map(member=>'<link rel="alternate" hreflang="'+member.locale+'" href="'+member.canonical+'">').join('');
+    return '<html lang="'+locale+'"><head><meta charset="utf-8"><meta name="robots" content="'+(stage?'noindex':'index,follow')+'"><link rel="canonical" href="'+subject.canonical+'">'+links+'</head><body><main><article data-testid="article-detail-content"><h1>'+title+'</h1>繁體文章</article></main></body></html>';
+   };
+   const fetcher=(active,{leak=false,wrongAlternate=false}={})=>async url=>{
+    const {pathname,searchParams,hostname}=new URL(url);
+    const urls=active||leak?[...bySlug.values()].map(row=>local(row.target)):[];
+    if (pathname.endsWith('/seo/sitemap-source')) return Response.json({ok:true,source:'backend_sitemap_generator',items:urls.map(loc=>({loc}))});
+    if (pathname==='/sitemap.xml') return stage?new Response(null,{status:410}):new Response('<urlset>'+urls.map(loc=>'<loc>'+loc+'</loc>').join('')+'</urlset>');
+    const match=pathname.match(/\/articles\/([^/]+)(\/seo)?$/);
+    const row=bySlug.get(match[1]);
+    if (!hostname.includes('api.')) return new Response(html(row,pathname.split('/')[1]));
+    const locale=searchParams.get('locale');
+    const members=[row.target,...row.peers];
+    const subject=members.find(member=>member.locale===locale);
+    const control=subject.staging_control;
+    const index=control?.indexable ?? (active||locale!=='zh-TW');
+    if (match[2]) {
+     const alternates=row.peers.some(peer=>peer.staging_control)?{}:Object.fromEntries(members.map(member=>[member.locale,local(member)]));
+     if (wrongAlternate) {
+      if (stage) alternates.fr=local(subject);
+      else delete alternates.en;
+     }
+     return Response.json({meta:{canonical:local(subject),robots:index?'index,follow':'noindex,nofollow',article_authority_v1:{alternate_eligibility:{alternates}}}});
+    }
+    return Response.json({ok:true,article:{...subject,org_id:0,title,content_md:body,status:'published',is_public:true,
+     source_article_id:locale==='zh-TW'?row.source_id:null,source_locale:locale==='zh-TW'?'en':locale,
+     is_indexable:index,sitemap_eligible:index,llms_eligible:index,
+     seo_meta:control?null:active?{hreflang_gate_v1:{enabled:true}}:{}}});
+   };
+   const before=await readOnlinePrestate(environment,fixture,fetcher(false),undefined,sha);
+   assert.equal(Object.keys(before).length,115);
+   if (stage) await assert.rejects(readOnlinePrestate(environment,fixture,fetcher(false,{leak:true}),undefined,sha),/TRADITIONAL_INDEX_SITEMAP/);
+   const renderer=async url=>html(bySlug.get(new URL(url).pathname.split('/').at(-1)),'zh-TW');
+   const accepted=await verifyOnlineCandidates(environment,fixture,fetcher(true),renderer,before,sha);
+   assert.deepEqual([accepted.api_readback_count,accepted.dom_readback_count,accepted.discovery_readback_count,
+    accepted.reciprocal_peer_readback_count,accepted.browser_readback_count],[115,115,115,115,1]);
+   await assert.rejects(verifyOnlineCandidates(environment,fixture,fetcher(true,{wrongAlternate:true}),renderer,before,sha),/TRADITIONAL_INDEX_SEO/);
+  }
+ } finally {
+  rmSync(fixture,{recursive:true,force:true});
+ }
+});

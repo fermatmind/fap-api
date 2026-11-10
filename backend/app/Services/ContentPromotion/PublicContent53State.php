@@ -46,6 +46,14 @@ final class PublicContent53State
 
                 continue;
             }
+            if (isset($row['traditional_article_index'])) {
+                $state[$row['page_id']] = [
+                    'table' => 'articles',
+                    'index_members' => app(TraditionalArticleIndexRelease::class)->read($row['traditional_article_index'], $lock),
+                ];
+
+                continue;
+            }
             if ($row['new_traditional_article'] ?? false) {
                 $state[$row['page_id']] = app(TraditionalArticlePublication::class)->read($row, $lock);
 
@@ -230,6 +238,12 @@ final class PublicContent53State
 
                 continue;
             }
+            if (isset($row['traditional_article_index'])) {
+                $release = app(TraditionalArticleIndexRelease::class);
+                $release->assertHeld($row['traditional_article_index'], $release->read($row['traditional_article_index']));
+
+                continue;
+            }
             if ($row['new_traditional_article'] ?? false) {
                 $native = app(TraditionalArticlePublication::class);
                 $native->assertBaseline($native->read($row, false));
@@ -289,6 +303,11 @@ final class PublicContent53State
             $saved = $state[$row['page_id']];
             if (isset($row['staging_article_original'])) {
                 app(StagingArticleOriginals::class)->assertBaseline($row, $saved);
+
+                continue;
+            }
+            if (isset($row['traditional_article_index'])) {
+                app(TraditionalArticleIndexRelease::class)->assertHeld($row['traditional_article_index'], $saved['index_members']);
 
                 continue;
             }
@@ -413,6 +432,11 @@ final class PublicContent53State
             return;
         }
         foreach ($rows as $row) {
+            if (isset($row['traditional_article_index'])) {
+                app(TraditionalArticleIndexRelease::class)->assertActive($row['traditional_article_index'], $state[$row['page_id']]['index_members']);
+
+                continue;
+            }
             if ($this->hash($this->projection($row)) !== $this->hash($row['snapshot'])) {
                 throw new DomainException('public_content_53_public_readback_drift');
             }

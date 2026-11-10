@@ -32,6 +32,7 @@ use App\Services\ContentPromotion\StagingArticleOriginals;
 use Database\Seeders\ScaleRegistrySeeder;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -58,6 +59,41 @@ final class PublicContent53PublicationTest extends TestCase
     {
         return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->digest(), 'W3', 'PUBLIC-CONTENT-53',
             str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 50, str_repeat('e', 64));
+    }
+
+    public function test_traditional_index_cache_closeout_warms_sitemap_and_batches_exact_original_paths(): void
+    {
+        config(['ops.content_release_observability.hmac_revalidation_url' => 'https://staging.fermatmind.com/api/content-release/revalidate',
+            'ops.content_release_observability.hmac_revalidation_secret' => 'test-only-revalidation-secret']);
+        $warmed = false;
+        Artisan::shouldReceive('call')->once()
+            ->with('seo:warm-sitemap-source-cache', ['--refresh-if-changed' => true, '--json' => true])
+            ->andReturnUsing(function () use (&$warmed): int {
+                $warmed = true;
+
+                return 0;
+            });
+        $expected = ['/sitemap.xml', '/llms.txt', '/llms-full.txt'];
+        $rows = [];
+        foreach (range(1, 115) as $index) {
+            $path = '/en/articles/reviewed-article-'.$index;
+            $expected[] = $path;
+            $rows[] = ['traditional_article_index' => ['peers' => [['canonical' => 'https://fermatmind.com'.$path]]]];
+        }
+        $actual = [];
+        Http::fake(function ($request) use (&$actual, &$warmed) {
+            self::assertTrue($warmed);
+            $payload = json_decode($request->body(), true, flags: JSON_THROW_ON_ERROR);
+            $paths = $payload['cache_signal']['paths'];
+            self::assertLessThanOrEqual(24, count($paths));
+            self::assertSame(['type' => 'public_content_53'], $payload['content']);
+            array_push($actual, ...$paths);
+
+            return Http::response(['ok' => true, 'revalidated_paths' => $paths, 'rejected_paths' => [], 'invalidated_tags' => []]);
+        });
+        app(PublicContent53FrontendRevalidator::class)->revalidate($rows);
+        Http::assertSentCount(5);
+        self::assertSame($expected, $actual);
     }
 
     public function test_staging_originals_restore_and_republish_only_unchanged_owned_drafts(): void
