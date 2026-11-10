@@ -23,6 +23,9 @@
       "fact:us-growth": {
         "status": "pending_mapping"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings": {
         "status": "pending_mapping"
       },
@@ -11330,6 +11333,18 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "U.S. occupational classification: Shipping, Receiving, and Inventory Clerks (O*NET 43-5071.00)",
+        "fact_id": "us-occupational-classification",
+        "market": "United States",
+        "measure": "U.S. occupation classification scope of this page",
+        "occupation_scope": "Shipping, Receiving, and Inventory Clerks",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet-summary"
+        ]
       }
     ]
   },
@@ -11389,7 +11404,7 @@
       "text": "Shipping, Receiving, and Inventory Clerks: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "8dd61f0be71e71128c05bee158ee476b1a959ef91bc7c6421f626be87b6ff9c3",
+  "source_content_sha256": "c12b9909734cd72362c61e96417de8454883e1b09a7835100302ee20d15627ad",
   "subject": {
     "canonical_slug": "material-recording-clerks",
     "name": "Shipping, Receiving, and Inventory Clerks",

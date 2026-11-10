@@ -74,6 +74,9 @@
       "fact:r5-current-openings": {
         "status": "pending_mapping"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -37458,6 +37461,18 @@
         "source_refs": [
           "a26-laiyang"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国职业分类：公交车、卡车与柴油发动机维修人员（O*NET 49-3031.00）",
+        "fact_id": "us-occupational-classification",
+        "market": "美国",
+        "measure": "本页美国职业分类范围",
+        "occupation_scope": "柴油设备维修技师与机械师",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet"
+        ]
       }
     ]
   },
@@ -37517,7 +37532,7 @@
       "text": "柴油设备维修技师与机械师"
     }
   },
-  "source_content_sha256": "244e66c46350e5760aee6ac4e6f7c0f8a4f7161e76e691056be5e70367d23d4e",
+  "source_content_sha256": "f837a5910a91bbdfb749a36e72500a5159b6ed9215618ea4fbd8350608a0f2b5",
   "subject": {
     "canonical_slug": "diesel-service-technicians-and-mechanics",
     "name": "柴油设备维修技师与机械师",

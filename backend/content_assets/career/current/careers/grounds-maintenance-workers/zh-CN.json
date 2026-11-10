@@ -35,6 +35,9 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -38232,6 +38235,18 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国职业分类：园林与场地绿化养护人员（O*NET 37-3011.00）",
+        "fact_id": "us-occupational-classification",
+        "market": "美国",
+        "measure": "本页美国职业分类范围",
+        "occupation_scope": "场地绿化养护工",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet"
+        ]
       }
     ]
   },
@@ -38291,7 +38306,7 @@
       "text": "场地绿化养护工做什么：片区巡查、维护与交接"
     }
   },
-  "source_content_sha256": "d05d3202388df90b4470aa5d747077b43684674fd0de827093dc1c223714791b",
+  "source_content_sha256": "dce41881e2ee4ac26b404c127665f9b40cf525ec1f35eaa79693a378b43a9b0e",
   "subject": {
     "canonical_slug": "grounds-maintenance-workers",
     "name": "场地绿化养护工",

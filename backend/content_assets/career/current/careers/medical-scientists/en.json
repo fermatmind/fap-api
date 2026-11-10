@@ -29,6 +29,9 @@
       "fact:med-wage": {
         "status": "pending_mapping"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "item:medical-scientists.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -16603,6 +16606,19 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "U.S. occupational scope: Epidemiologists 19-1041.00 and Medical Scientists, Except Epidemiologists 19-1042.00",
+        "fact_id": "us-occupational-classification",
+        "market": "United States",
+        "measure": "U.S. occupation classification scope of this page",
+        "occupation_scope": "Medical Scientist",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet-epidemiologists",
+          "onet-medical-scientists"
+        ]
       }
     ]
   },
@@ -16616,7 +16632,8 @@
     "badges": [
       "Research design and experiments",
       "Data and statistical analysis",
-      "Ethics and biosafety compliance"
+      "Ethics and biosafety compliance",
+      "{{fact:us-occupational-classification}}"
     ],
     "metrics": [
       {
@@ -16662,7 +16679,7 @@
       "text": "Medical Scientist: Study Design, Evidence and Translation"
     }
   },
-  "source_content_sha256": "718e686bd2aeb5a2df7f85d021e7f6009e18dd5a75ebd52ccba09cec2c6a2be0",
+  "source_content_sha256": "9f7624e5933415c8fffd0e412ad5142b6be03bd51235f2d7b3a4a37c5bc60951",
   "subject": {
     "canonical_slug": "medical-scientists",
     "name": "Medical Scientist",

@@ -17,6 +17,9 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -32836,6 +32839,51 @@
                 "id": "paper-answer-key",
                 "name": "Paper exercise answer key (FAQ)",
                 "url": "#career-content-sources"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Identifies the member occupation and its official U.S. code."
+                ],
+                "evidence_type": "Official occupation classification",
+                "id": "us-classification-onet-39-3011",
+                "limitation": "Covers the classification of this member occupation.",
+                "market": "United States",
+                "name": "O*NET 39-3011.00 · Gambling Dealers",
+                "period": "O*NET-SOC 2019",
+                "publisher": "O*NET OnLine",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/summary/39-3011.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Identifies the member occupation and its official U.S. code."
+                ],
+                "evidence_type": "Official occupation classification",
+                "id": "us-classification-onet-39-3012",
+                "limitation": "Covers the classification of this member occupation.",
+                "market": "United States",
+                "name": "O*NET 39-3012.00 · Gambling and Sports Book Writers and Runners",
+                "period": "O*NET-SOC 2019",
+                "publisher": "O*NET OnLine",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/summary/39-3012.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "Identifies the member occupation and its official U.S. code."
+                ],
+                "evidence_type": "Official occupation classification",
+                "id": "us-classification-onet-39-3019",
+                "limitation": "Covers the classification of this member occupation.",
+                "market": "United States",
+                "name": "O*NET 39-3019.00 · Gambling Service Workers, All Other",
+                "period": "O*NET-SOC 2019",
+                "publisher": "O*NET OnLine",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/summary/39-3019.00"
               }
             ]
           },
@@ -38065,6 +38113,20 @@
         "source_refs": [
           "onet-wages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "U.S. occupational group (SOC 39-3010): Gambling Dealers 39-3011.00, Gambling and Sports Book Writers and Runners 39-3012.00, and Other Gambling Service Workers 39-3019.00",
+        "fact_id": "us-occupational-classification",
+        "market": "United States",
+        "measure": "U.S. occupation classification scope of this page",
+        "occupation_scope": "Gambling Services Workers",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "us-classification-onet-39-3011",
+          "us-classification-onet-39-3012",
+          "us-classification-onet-39-3019"
+        ]
       }
     ]
   },
@@ -38078,7 +38140,8 @@
     "badges": [
       "Gambling Services Workers",
       "Wages and projections use separate tables",
-      "China occupational wage distribution unavailable"
+      "China occupational wage distribution unavailable",
+      "{{fact:us-occupational-classification}}"
     ],
     "metrics": [
       {
@@ -38124,7 +38187,7 @@
       "text": "Gambling Services Workers: Tasks, Pay and Training"
     }
   },
-  "source_content_sha256": "8cdb5f5d730531880c6bb08f619b182afab533e9702f56c873a61c9340c09acd",
+  "source_content_sha256": "d8ccc9a8f80395a4a65ad1478ba48024bf3b4a395a2c3eb045a8ce545d2580b0",
   "subject": {
     "canonical_slug": "gaming-services-occupations",
     "name": "Gambling Services Workers",

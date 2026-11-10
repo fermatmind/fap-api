@@ -17,6 +17,9 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -33200,6 +33203,51 @@
                 "id": "paper-answer-key",
                 "name": "纸面练习参考解（常见问题）",
                 "url": "#career-content-sources"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "用于核实该成员的美国职业分类和官方代码。"
+                ],
+                "evidence_type": "官方职业分类",
+                "id": "us-classification-onet-39-3011",
+                "limitation": "只说明本成员职业的分类范围。",
+                "market": "美国",
+                "name": "O*NET 39-3011.00 · 博彩荷官",
+                "period": "O*NET-SOC 2019",
+                "publisher": "O*NET OnLine",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/summary/39-3011.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "用于核实该成员的美国职业分类和官方代码。"
+                ],
+                "evidence_type": "官方职业分类",
+                "id": "us-classification-onet-39-3012",
+                "limitation": "只说明本成员职业的分类范围。",
+                "market": "美国",
+                "name": "O*NET 39-3012.00 · 博彩及体育博彩受注人员",
+                "period": "O*NET-SOC 2019",
+                "publisher": "O*NET OnLine",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/summary/39-3012.00"
+              },
+              {
+                "accessed_at": "2026-11-10",
+                "details": [
+                  "用于核实该成员的美国职业分类和官方代码。"
+                ],
+                "evidence_type": "官方职业分类",
+                "id": "us-classification-onet-39-3019",
+                "limitation": "只说明本成员职业的分类范围。",
+                "market": "美国",
+                "name": "O*NET 39-3019.00 · 其他博彩服务人员",
+                "period": "O*NET-SOC 2019",
+                "publisher": "O*NET OnLine",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/summary/39-3019.00"
               }
             ]
           },
@@ -38429,6 +38477,20 @@
         "source_refs": [
           "onet-wages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国职业组（SOC 39-3010）：博彩荷官 39-3011.00、博彩及体育博彩受注人员 39-3012.00、其他博彩服务人员 39-3019.00",
+        "fact_id": "us-occupational-classification",
+        "market": "美国",
+        "measure": "本页美国职业分类范围",
+        "occupation_scope": "博彩服务职业组",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "us-classification-onet-39-3011",
+          "us-classification-onet-39-3012",
+          "us-classification-onet-39-3019"
+        ]
       }
     ]
   },
@@ -38442,7 +38504,8 @@
     "badges": [
       "博彩服务职业组",
       "工资与就业采用不同原表",
-      "中国大陆职业工资分布缺证"
+      "中国大陆职业工资分布缺证",
+      "{{fact:us-occupational-classification}}"
     ],
     "metrics": [
       {
@@ -38488,7 +38551,7 @@
       "text": "博彩服务职业组做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "133789b67c33b4959df510c960da147c1333dfa11ef41419d2cdc6e660a50a3e",
+  "source_content_sha256": "d53eb0a1360cde00e971a82d965b44d54f1e00e19033e0433893fb84fbf17068",
   "subject": {
     "canonical_slug": "gaming-services-occupations",
     "name": "博彩服务职业组",

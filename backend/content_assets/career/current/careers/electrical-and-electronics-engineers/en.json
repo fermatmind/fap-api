@@ -50,6 +50,9 @@
       "fact:us-hourly": {
         "status": "pending_mapping"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -37290,6 +37293,19 @@
         "source_refs": [
           "a29-yuhui"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "U.S. occupational group (SOC 17-2070): Electrical Engineers 17-2071.00 and Electronics Engineers, Except Computer 17-2072.00",
+        "fact_id": "us-occupational-classification",
+        "market": "United States",
+        "measure": "U.S. occupation classification scope of this page",
+        "occupation_scope": "Electrical and Electronics Engineers",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet",
+          "sag"
+        ]
       }
     ]
   },
@@ -37303,7 +37319,8 @@
     "badges": [
       "Designing, developing, and testing electrical and electronic equipment, components, and systems · O*NET-SOC 17-2070 (combined framing)",
       "May 2025 U.S. wage data · combined median annual wage 125,040 USD (hourly 60.12 USD)",
-      "About 297,900 employed in 2025 · 8% growth over 2025—2035 (much faster than average) · interest code RIC"
+      "About 297,900 employed in 2025 · 8% growth over 2025—2035 (much faster than average) · interest code RIC",
+      "{{fact:us-occupational-classification}}"
     ],
     "metrics": [
       {
@@ -37349,7 +37366,7 @@
       "text": "Electrical and Electronics Engineers: duties, pay, and entry paths"
     }
   },
-  "source_content_sha256": "f7a49ab8835725696f3e35c0cab355bfd148b37ad76cf20e202c807078da3a63",
+  "source_content_sha256": "f8fdfef0ccecfd69ba432a675e1f397b1d62f0eb8ec80b8d288218f69da86d89",
   "subject": {
     "canonical_slug": "electrical-and-electronics-engineers",
     "name": "Electrical and Electronics Engineers",

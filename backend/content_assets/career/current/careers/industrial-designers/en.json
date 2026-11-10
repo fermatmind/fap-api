@@ -20,6 +20,9 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -37692,6 +37695,18 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "U.S. occupational classification: Commercial and Industrial Designers (O*NET 27-1021.00)",
+        "fact_id": "us-occupational-classification",
+        "market": "United States",
+        "measure": "U.S. occupation classification scope of this page",
+        "occupation_scope": "Industrial Designer",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet"
+        ]
       }
     ]
   },
@@ -37751,7 +37766,7 @@
       "text": "Industrial Designer: Physical Products, Prototypes and Production"
     }
   },
-  "source_content_sha256": "fe72650d4d4712ee404ef2c24a11ec5053b4729a30387a52165a744e914def06",
+  "source_content_sha256": "1127b930f47eb15479c2e0f71ef24e38caff1a1e91f6e5016c2efd965b205e38",
   "subject": {
     "canonical_slug": "industrial-designers",
     "name": "Industrial Designer",

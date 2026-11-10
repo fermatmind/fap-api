@@ -6,6 +6,7 @@ namespace App\Services\Career;
 
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
+use App\Domain\Career\Display\CareerPageOccupationCrosswalks;
 use App\Domain\Career\Display\CareerPageProjector;
 use App\Models\Occupation;
 use App\Support\PublicProjectionCache;
@@ -76,6 +77,16 @@ final class CareerFilePageReader
         // idempotent link projection on hits without rewriting source or cache.
         $page = $this->pages->normalizeLinks($page);
         $occupation = Occupation::query()->with(['aliases', 'crosswalks'])->where('canonical_slug', $slug)->first();
+        $currentCrosswalks = CareerPageOccupationCrosswalks::resolve($page['content']);
+        $compatibilityCrosswalks = $occupation?->crosswalks?->map(fn ($crosswalk) => [
+            'source_system' => $crosswalk->source_system, 'source_code' => $crosswalk->source_code,
+            'source_title' => $crosswalk->source_title, 'mapping_type' => $crosswalk->mapping_type,
+            'confidence_score' => $crosswalk->confidence_score,
+        ])->all() ?? [];
+        $crosswalks = $currentCrosswalks === null ? $compatibilityCrosswalks : [
+            ...array_filter($compatibilityCrosswalks, static fn (array $row): bool => ! in_array($row['source_system'], ['us_soc', 'onet_soc_2019'], true)),
+            ...$currentCrosswalks,
+        ];
         $path = '/'.($locale === 'zh-CN' ? 'zh' : 'en').'/career/jobs/'.$slug;
         $indexable = $this->content->hasPublicBody($slug, $locale);
 
@@ -91,11 +102,7 @@ final class CareerFilePageReader
             ],
             'titles' => [$locale === 'zh-CN' ? 'canonical_zh' : 'canonical_en' => $page['subject']['name']],
             'alias_index' => $occupation?->aliases?->map(fn ($alias) => ['alias' => $alias->alias, 'normalized' => $alias->normalized, 'lang' => $alias->lang])->all() ?? [],
-            'ontology' => ['crosswalks' => $occupation?->crosswalks?->map(fn ($crosswalk) => [
-                'source_system' => $crosswalk->source_system, 'source_code' => $crosswalk->source_code,
-                'source_title' => $crosswalk->source_title, 'mapping_type' => $crosswalk->mapping_type,
-                'confidence_score' => $crosswalk->confidence_score,
-            ])->all() ?? []],
+            'ontology' => ['crosswalks' => $crosswalks],
             'locale_policy' => ['requested_locale' => $locale, 'available_locales' => ['en', 'zh-CN']],
             'seo_contract' => ['canonical_path' => $path, 'canonical_target' => $path,
                 'index_state' => $indexable ? 'indexable' : 'noindex', 'index_eligible' => $indexable,

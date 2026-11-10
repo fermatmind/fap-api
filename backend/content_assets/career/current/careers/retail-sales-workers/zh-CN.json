@@ -50,6 +50,9 @@
       "fact:us-industry-wage-professional-2025": {
         "status": "pending_mapping"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -37791,6 +37794,19 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国职业范围：零部件销售员 41-2022.00、零售销售员 41-2031.00",
+        "fact_id": "us-occupational-classification",
+        "market": "美国",
+        "measure": "本页美国职业分类范围",
+        "occupation_scope": "零售销售人员",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "facilities",
+          "onet"
+        ]
       }
     ]
   },
@@ -37804,7 +37820,8 @@
     "badges": [
       "顾客需求 · 商品建议",
       "价格与交易 · 售后说明",
-      "BLS组合含零售销售员与零件销售员"
+      "BLS组合含零售销售员与零件销售员",
+      "{{fact:us-occupational-classification}}"
     ],
     "metrics": [
       {
@@ -37850,7 +37867,7 @@
       "text": "零售销售人员"
     }
   },
-  "source_content_sha256": "8ecf70443e5895bc00fec2a9ac09fc8c74b0a246c8a52da1b159f8e4fe7d6597",
+  "source_content_sha256": "a90f539aee8b94d39f43ffe26d5386142bc9302bf66807ad750dbade8a2ce480",
   "subject": {
     "canonical_slug": "retail-sales-workers",
     "name": "零售销售人员",

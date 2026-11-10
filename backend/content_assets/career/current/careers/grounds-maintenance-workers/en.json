@@ -35,6 +35,9 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -37924,6 +37927,18 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "U.S. occupational classification: Landscaping and Groundskeeping Workers (O*NET 37-3011.00)",
+        "fact_id": "us-occupational-classification",
+        "market": "United States",
+        "measure": "U.S. occupation classification scope of this page",
+        "occupation_scope": "Grounds Maintenance Worker",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet"
+        ]
       }
     ]
   },
@@ -37983,7 +37998,7 @@
       "text": "Grounds Maintenance Worker: Site Rounds and Upkeep"
     }
   },
-  "source_content_sha256": "213ae8d9eb62286f5bb5dac2494166c2b965464c9bbfe248635ddcdef3c76ae0",
+  "source_content_sha256": "f6653bf9b187380a6a5eab60d379f974799aa237a4402f410b54d4b07a9086aa",
   "subject": {
     "canonical_slug": "grounds-maintenance-workers",
     "name": "Grounds Maintenance Worker",

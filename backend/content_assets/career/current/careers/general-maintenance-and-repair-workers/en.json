@@ -20,6 +20,9 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -37669,6 +37672,18 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "U.S. occupational classification: Maintenance and Repair Workers, General (O*NET 49-9071.00)",
+        "fact_id": "us-occupational-classification",
+        "market": "United States",
+        "measure": "U.S. occupation classification scope of this page",
+        "occupation_scope": "General Maintenance and Repair Worker",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet"
+        ]
       }
     ]
   },
@@ -37728,7 +37743,7 @@
       "text": "General Maintenance Worker: Building Repairs and Work Orders"
     }
   },
-  "source_content_sha256": "08492ffe5b5b100f20e1a37c1d8d4216836685b9ff3a9d2a5d9aca141a45e39d",
+  "source_content_sha256": "18e57433461e7bd8965991015f2e8df02b14e54975393bcc5460595e0fe4e4d5",
   "subject": {
     "canonical_slug": "general-maintenance-and-repair-workers",
     "name": "General Maintenance and Repair Worker",

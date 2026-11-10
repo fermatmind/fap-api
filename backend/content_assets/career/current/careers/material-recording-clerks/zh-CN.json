@@ -23,6 +23,9 @@
       "fact:us-growth": {
         "status": "pending_mapping"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings": {
         "status": "pending_mapping"
       },
@@ -11330,6 +11333,18 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国职业分类：收发货与库存文员（O*NET 43-5071.00）",
+        "fact_id": "us-occupational-classification",
+        "market": "美国",
+        "measure": "本页美国职业分类范围",
+        "occupation_scope": "收发货与库存文员",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet-summary"
+        ]
       }
     ]
   },
@@ -11389,7 +11404,7 @@
       "text": "收发货与库存文员做什么：任务、工资与入行"
     }
   },
-  "source_content_sha256": "7db77490a5786777c3acca51474680b2abf80a6122df9fbc135148e349a1b698",
+  "source_content_sha256": "9cb67cac6734705461ccd24a54504ddb32b72c86b4c0f0188bca222275aa38b0",
   "subject": {
     "canonical_slug": "material-recording-clerks",
     "name": "收发货与库存文员",

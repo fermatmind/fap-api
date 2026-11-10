@@ -6,6 +6,8 @@ namespace Tests\Feature\Career;
 
 use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
 use App\Domain\Career\Display\CareerPageProjector;
+use App\Models\Occupation;
+use App\Models\OccupationFamily;
 use App\Services\Career\CareerFilePageReader;
 use App\Support\PublicProjectionCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -62,6 +64,60 @@ final class CareerFilePageReaderTest extends TestCase
         self::assertSame('/en/career/jobs/health-educators', $seo['meta']['hreflang']['en']);
         self::assertSame('included', $seo['seo_surface_v1']['sitemap_state']);
         self::assertSame('/en/career/jobs/health-educators', $seo['meta']['canonical']);
+    }
+
+    public function test_current_bilingual_occupation_classification_overrides_stale_crosswalks_and_labels_combinations(): void
+    {
+        $this->publication(true);
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'test-classification', 'title_en' => 'Test classification', 'title_zh' => '测试分类',
+        ]);
+        foreach (['industrial-designers', 'electrical-and-electronics-engineers', 'actors'] as $slug) {
+            $occupation = Occupation::query()->create([
+                'family_id' => $family->id, 'canonical_slug' => $slug, 'canonical_title_en' => $slug,
+                'canonical_title_zh' => '测试职业', 'search_h1_zh' => '测试职业', 'entity_level' => 'market_child',
+                'truth_market' => 'US', 'display_market' => 'US', 'crosswalk_mode' => 'global_standard',
+            ]);
+            $occupation->crosswalks()->create([
+                'source_system' => 'us_soc', 'source_code' => '17-2112', 'source_title' => 'Industrial Engineers',
+                'mapping_type' => 'direct_match', 'confidence_score' => 1,
+            ]);
+        }
+
+        $expected = [
+            'diesel-service-technicians-and-mechanics' => ['49-3031.00'],
+            'electrical-and-electronics-engineers' => ['17-2071.00', '17-2072.00'],
+            'gaming-services-occupations' => ['39-3011.00', '39-3012.00', '39-3019.00'],
+            'general-maintenance-and-repair-workers' => ['49-9071.00'],
+            'grounds-maintenance-workers' => ['37-3011.00'],
+            'industrial-designers' => ['27-1021.00'],
+            'logging-workers' => ['45-4029.00'],
+            'material-recording-clerks' => ['43-5071.00'],
+            'medical-scientists' => ['19-1041.00', '19-1042.00'],
+            'retail-sales-workers' => ['41-2022.00', '41-2031.00'],
+        ];
+        foreach (['en', 'zh-CN'] as $locale) {
+            foreach ($expected as $slug => $codes) {
+                $payload = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale='.$locale.'&projection_contract=career.detail.page.v1')
+                    ->assertOk()->assertJsonPath('identity.canonical_slug', $slug)->json();
+                $rows = collect($payload['ontology']['crosswalks']);
+                $combined = count($codes) > 1;
+                self::assertSame($codes, $rows->where('source_system', 'onet_soc_2019')->pluck('source_code')->all());
+                self::assertSame(array_map(static fn (string $code): string => substr($code, 0, 7), $codes),
+                    $rows->where('source_system', 'us_soc')->pluck('source_code')->all());
+                self::assertSame([$combined ? 'combined_member' : 'direct_match'], $rows->pluck('mapping_type')->unique()->values()->all());
+                if ($combined) {
+                    $scope = collect($payload['career_page']['hero']['badges'])
+                        ->first(static fn (string $badge): bool => str_starts_with($badge, $locale === 'en' ? 'U.S. occupational ' : '美国职业'));
+                    self::assertIsString($scope);
+                    foreach ($codes as $code) {
+                        self::assertStringContainsString($code, $scope);
+                    }
+                }
+            }
+        }
+        $this->getJson('/api/v0.5/career/jobs/actors?locale=en')
+            ->assertOk()->assertJsonPath('ontology.crosswalks.0.source_code', '17-2112');
     }
 
     public function test_body_qualification_preserves_missing_metrics_and_excludes_empty_language_pairs(): void

@@ -25,6 +25,7 @@ final class CareerContentV3Contract
             self::assertBlock($block, $seenBlocks, $seenItems);
         }
         self::assertEvidenceBindings($content);
+        CareerPageOccupationCrosswalks::resolve($content);
         CareerAuthoringStructure::assert($content);
         (new CareerPageDisplayResolver)->resolve($content);
     }

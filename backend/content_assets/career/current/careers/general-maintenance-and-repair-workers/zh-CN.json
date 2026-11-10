@@ -20,6 +20,9 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -38126,6 +38129,18 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国职业分类：综合维护及维修人员（O*NET 49-9071.00）",
+        "fact_id": "us-occupational-classification",
+        "market": "美国",
+        "measure": "本页美国职业分类范围",
+        "occupation_scope": "综合维修工",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet"
+        ]
       }
     ]
   },
@@ -38185,7 +38200,7 @@
       "text": "综合维修工做什么：设施巡检、工单与基础维护"
     }
   },
-  "source_content_sha256": "eea15fbd8ae678a1722e02d78cd80211547bfa800e49928ef6a5569fd289b2f9",
+  "source_content_sha256": "46a1356f7addf05a258e9e420afbff47dfdced36789ef1ad11fdd9c029e438b9",
   "subject": {
     "canonical_slug": "general-maintenance-and-repair-workers",
     "name": "综合维修工",

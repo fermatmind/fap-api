@@ -50,6 +50,9 @@
       "fact:us-industry-wage-professional-2025": {
         "status": "pending_mapping"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -37431,6 +37434,19 @@
         "source_refs": [
           "source-fermatmind-ai-rubric"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "U.S. occupational scope: Parts Salespersons 41-2022.00 and Retail Salespersons 41-2031.00",
+        "fact_id": "us-occupational-classification",
+        "market": "United States",
+        "measure": "U.S. occupation classification scope of this page",
+        "occupation_scope": "Retail Sales Workers",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "facilities",
+          "onet"
+        ]
       }
     ]
   },
@@ -37444,7 +37460,8 @@
     "badges": [
       "Customer needs · product advice",
       "Price and transactions · after-sales explanation",
-      "The BLS group includes retail salespersons and parts salespersons"
+      "The BLS group includes retail salespersons and parts salespersons",
+      "{{fact:us-occupational-classification}}"
     ],
     "metrics": [
       {
@@ -37490,7 +37507,7 @@
       "text": "Retail Sales Workers"
     }
   },
-  "source_content_sha256": "7e1a09a4014019c0551daabee5179c217a40e24b2296bcb150b2c1ea14399802",
+  "source_content_sha256": "c859693272fa1a710cbf900aef5a24d23603063ee2fb3e4dfbd9a875645515fe",
   "subject": {
     "canonical_slug": "retail-sales-workers",
     "name": "Retail Sales Workers",

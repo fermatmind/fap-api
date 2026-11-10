@@ -20,6 +20,9 @@
       "fact:us-growth": {
         "status": "pending_mapping"
       },
+      "fact:us-occupational-classification": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings": {
         "status": "pending_mapping"
       },
@@ -11372,6 +11375,18 @@
         "source_refs": [
           "nbs-wages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "U.S. occupational classification: Logging Workers, All Other (O*NET 45-4029.00)",
+        "fact_id": "us-occupational-classification",
+        "market": "United States",
+        "measure": "U.S. occupation classification scope of this page",
+        "occupation_scope": "Logging Workers, All Other",
+        "period": "O*NET-SOC 2019",
+        "source_refs": [
+          "onet-summary"
+        ]
       }
     ]
   },
@@ -11431,7 +11446,7 @@
       "text": "Logging Workers, All Other: Work, Training, and Pay"
     }
   },
-  "source_content_sha256": "daeda0783db01dfe95852ed8900496bbef7e84a03ade2d642314573c1f4a5e6d",
+  "source_content_sha256": "5d09e21060ac64605950b161bfd892b3bbcc9f0e4255be6df2800b0a88b98800",
   "subject": {
     "canonical_slug": "logging-workers",
     "name": "Logging Workers, All Other",
