@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import test from 'node:test';
 import { productionPlan } from './production-release-budget.mjs';
 
@@ -117,6 +119,58 @@ test('CI builds one deterministic SHA-bound package and deploy stages consume it
   assert.match(workflow, /Download the bound Career content package/);
   assert.match(workflow, /Download the bound production Career content package/);
   assert.match(workflow, /Stream Career Current publisher and validate receipt/);
+});
+
+test('production binds a full Career receipt without passing its changed pages through argv', () => {
+  const publisherStep = workflow.slice(workflow.indexOf('name: Stream Career Current publisher and validate receipt'));
+  const check = publisherStep.match(/tar -xOzf[^\n]+binding\.json[^\n]*\n([\s\S]*?)\n +changed_pages_file_sha256=/)?.[1];
+  assert.ok(check, 'publisher must verify the package binding against the CI receipt');
+
+  const changedPages = Array.from({ length: 1992 }, (_, index) => ({
+    path: `backend/content_assets/career/current/careers/fixture-${index}/en.json`,
+    slug: `fixture-${index}`,
+    locale: 'en',
+    before_sha256: 'a'.repeat(64),
+    after_sha256: 'b'.repeat(64),
+  }));
+  const binding = {
+    head_sha: '1'.repeat(40),
+    base_sha: '2'.repeat(40),
+    candidate_tree_sha: '3'.repeat(40),
+    changed_page_set_sha256: '4'.repeat(64),
+    files: changedPages.map(({ path }) => ({ path })),
+  };
+  const { files, ...identity } = binding;
+  const receipt = JSON.stringify({
+    career_content_change: {
+      ...identity,
+      changed_page_count: changedPages.length,
+      changed_pages: changedPages,
+    },
+  });
+  assert.ok(Buffer.byteLength(receipt) > 128 * 1024, 'receipt must exceed the Linux per-argument limit');
+
+  const dir = mkdtempSync(join(tmpdir(), 'career-publisher-binding-'));
+  try {
+    const receiptPath = join(dir, 'validation.json');
+    const run = (validation, artifact) => {
+      writeFileSync(receiptPath, validation);
+      writeFileSync(join(dir, 'career-content-package-binding.json'), JSON.stringify(artifact));
+      const result = spawnSync('bash', ['-e', '-c', check], {
+        env: { ...process.env, validation_receipt: receiptPath, RUNNER_TEMP: dir },
+      });
+      assert.ifError(result.error);
+      assert.equal(result.signal, null);
+      return result.status;
+    };
+    assert.equal(run(receipt, binding), 0);
+    assert.notEqual(run(receipt, { ...binding, files: files.slice(1) }), 0);
+    assert.notEqual(run(receipt, { ...binding, head_sha: '0'.repeat(40) }), 0);
+    assert.notEqual(run(receipt + '\n' + receipt, binding), 0);
+    assert.notEqual(run('{', binding), 0);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('A08 scoped CI does not duplicate the full Career updater fixture', () => {

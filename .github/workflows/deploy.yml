@@ -2398,8 +2398,10 @@ jobs:
               --tree='${{ needs.policy.outputs.career_package_tree_sha }}' \
               --compiler="$PARITY_COMPILER_DIGEST" --codec="$PARITY_CODEC_DIGEST"
             tar -xOzf "$package_archive" ./binding.json > "$RUNNER_TEMP/career-content-package-binding.json"
-            jq -e --argjson change "$(jq -c .career_content_change "$validation_receipt")" '
-              .head_sha == $change.head_sha
+            jq -e --slurpfile validation "$validation_receipt" '
+              $validation[0].career_content_change as $change
+              | ($validation | length) == 1
+              and .head_sha == $change.head_sha
               and .base_sha == $change.base_sha
               and .candidate_tree_sha == $change.candidate_tree_sha
               and .changed_page_set_sha256 == $change.changed_page_set_sha256
