@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityParity;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisher;
 use App\Domain\Career\Display\CareerCurrentAuthorityPublisherFailure;
